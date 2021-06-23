@@ -5,6 +5,7 @@ Introduction
 
 Getting Started
 1. Installation & Configuration
+	1.1 choosing a database & async runtime
 2. Generating Entities
 	2.1 Entity Structure
 3. Basic CRUD
@@ -12,6 +13,7 @@ Getting Started
 	3.2 INSERT: Model & ActiveModel, insert many
 	3.3 UPDATE: find & save, update many
 	3.4 DELETE: delete one & delete many
+	3.5 Raw SQL query & QueryResult
 4. Relations
 	4.1 one-to-one
 	4.2 one-to-many
