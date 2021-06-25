@@ -1,6 +1,3 @@
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'SeaORM',
@@ -90,11 +87,11 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} SeaQL. Built with 🔥 by 🌊🦀🐚`,
+      copyright: `<br/>Copyright © ${new Date().getFullYear()} SeaQL<br/>Built with 🔥 by 🌊🦀🐚`,
     },
     prism: {
-      theme: lightCodeTheme,
-      darkTheme: darkCodeTheme,
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     hideableSidebar: true,
   },
