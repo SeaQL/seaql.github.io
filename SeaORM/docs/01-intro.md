@@ -33,7 +33,7 @@ Getting Started
 	7.1 Derive macros
 	7.2 Traits and types
 
-# Comparison with Diesel
+## Comparison with Diesel
 
 Diesel          SeaORM
 =====           =====

@@ -96,6 +96,7 @@ module.exports = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
     },
+    hideableSidebar: true,
   },
   presets: [
     [
@@ -103,13 +104,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/docs/',
+          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/docs/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
+          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
