@@ -26,11 +26,11 @@ module.exports = {
           position: 'left',
           label: 'Docs',
         },
-        {
-          to: '/blog',
-          label: 'Blog',
-          position: 'left'
-        },
+        // {
+        //   to: '/blog',
+        //   label: 'Blog',
+        //   position: 'left'
+        // },
         {
           href: 'https://crates.io/crates/sea-orm',
           label: 'Crate',
@@ -104,7 +104,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/docs/',
+          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
