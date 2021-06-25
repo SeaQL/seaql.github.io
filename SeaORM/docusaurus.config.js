@@ -24,9 +24,18 @@ module.exports = {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Doc',
+          label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          to: '/blog',
+          label: 'Blog',
+          position: 'left'
+        },
+        {
+          href: 'https://crates.io/crates/sea-orm',
+          label: 'Crate',
+          position: 'right',
+        },
         {
           href: 'https://github.com/SeaQL/sea-orm',
           label: 'GitHub',
