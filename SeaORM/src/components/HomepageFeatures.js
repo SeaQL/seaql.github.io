@@ -57,7 +57,7 @@ function Feature({Svg, title, description}) {
 
 export default function HomepageFeatures() {
   return (
-    <section className={styles.features}>
+    <section className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
