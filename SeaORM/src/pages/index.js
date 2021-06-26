@@ -12,8 +12,21 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={styles.heroBanner}>
+      <style>{`
+      @media only screen and (max-width: 480px) {
+        #homepageBanner {
+          display: none;
+        }
+      }
+      @media only screen and (min-width: 481px) {
+        #homepageLogo {
+          display: none;
+        }
+      }
+      `}</style>
       <div className="container">
-        <img width="80%" src="/SeaORM/img/SeaORM_banner.png" />
+        <img id="homepageLogo" width="90%" src="/SeaORM/img/SeaQL logo.png" />
+        <img id="homepageBanner" width="90%" src="/SeaORM/img/SeaORM_banner.png" />
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
