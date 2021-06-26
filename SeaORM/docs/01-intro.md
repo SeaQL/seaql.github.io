@@ -40,7 +40,6 @@ Diesel          SeaORM
 Sync            Async
 Static          Dynamic
 Native Driver   Pure Rust
-Macro heavy     Macro free
 =====================
        Relational
       Schema first
