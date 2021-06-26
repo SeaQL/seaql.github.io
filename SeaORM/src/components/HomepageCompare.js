@@ -16,7 +16,6 @@ export default function HomepageCompare() {
                 <br /> Sync            Async
                 <br /> Static          Dynamic
                 <br /> Native Driver   Pure Rust
-                <br /> Macro heavy     Macro free
                 <br /> =====================
                 <br />     Relational
                 <br />     Schema first

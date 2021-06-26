@@ -14,75 +14,80 @@ require("prismjs/components/prism-rust");
 const codeBlocks = [
   {
     title: 'Select',
-    code: `print!("find all cakes: ");
+    code: `// find all models
+let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
 
-let cakes = Cake::find().all(db).await?;
+// find and filter
+let chocolate: Vec<cake::Model> = Cake::find()
+    .filter(cake::Column::Name.contains("chocolate"))
+    .all(db)
+    .await?;
 
-println!();
-for cc in cakes.iter() {
-    println!("{:?}\\n", cc);
-}
+// find one model
+let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
+let cheese: cake::Model = cheese.unwrap();
 
-print!("find all fruits: ");
+// find related models (lazy)
+let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
-let fruits = Fruit::find().all(db).await?;
-
-println!();
-for ff in fruits.iter() {
-    println!("{:?}\\n", ff);
-}`,
+// find related models (eager)
+let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
+    .find_with_related(Fruit)
+    .all(db)
+    .await?;`,
   },
   {
     title: 'Insert',
-    code: `let pear = fruit::ActiveModel {
-    name: Set("pear".to_owned()),
+    code: `let apple = fruit::ActiveModel {
+    name: Set("Apple".to_owned()),
+    ..Default::default() // no need to set primary key
+};
+ 
+let pear = fruit::ActiveModel {
+    name: Set("Pear".to_owned()),
     ..Default::default()
 };
-let res = Fruit::insert(pear).exec(db).await?;
-
-println!();
-println!("Inserted: {:?}\\n", res);`,
+ 
+// insert one
+let res: InsertResult = Fruit::insert(pear).exec(db).await?;
+ 
+println!("InsertResult: {}", res.last_insert_id);
+ 
+// insert many
+Fruit::insert_many(vec![apple, pear]).exec(db).await?;`,
   },
   {
     title: 'Update',
-    code: `let pear = Fruit::find_by_id(res.last_insert_id)
-    .one(db)
-    .await
-    .map_err(|_| ExecErr)?;
+    code: `use sea_orm::sea_query::{Expr, Value};
 
-println!();
-println!("Pear: {:?}\\n", pear);
-
+let pear: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
+ 
 let mut pear: fruit::ActiveModel = pear.unwrap().into();
 pear.name = Set("Sweet pear".to_owned());
-
-let res = Fruit::update(pear).exec(db).await?;
-
-println!();
-println!("Updated: {:?}\\n", res);`,
+ 
+// update one
+let pear: fruit::ActiveModel = Fruit::update(pear).exec(db).await?;
+ 
+// update many: UPDATE "fruit" SET "cake_id" = NULL WHERE "fruit"."name" LIKE '%Apple%'
+Fruit::update_many()
+    .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
+    .filter(fruit::Column::Name.contains("Apple"))
+    .exec(db)
+    .await?;`,
   },
   {
     title: 'Delete',
-    code: `let banana = fruit::ActiveModel {
-    name: Set("Banana".to_owned()),
-    ..Default::default()
-};
-let mut banana = banana.save(db).await?;
-
-println!();
-println!("Inserted: {:?}\\n", banana);
-
-banana.name = Set("Banana Mongo".to_owned());
-
-let banana = banana.save(db).await?;
-
-println!();
-println!("Updated: {:?}\\n", banana);
-
-let result = banana.delete(db).await?;
-
-println!();
-println!("Deleted: {:?}\\n", result);`,
+    code: `let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
+let orange: fruit::ActiveModel = orange.unwrap().into();
+ 
+// delete one
+fruit::Entity::delete(orange).exec(db).await?;
+ 
+// delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE 'Orange'
+fruit::Entity::delete_many()
+    .filter(fruit::Column::Name.contains("Orange"))
+    .exec(db)
+    .await?;`,
   },
 ];
 
@@ -97,7 +102,7 @@ export default function HomepageCompare() {
         <div className="row">
         <div className={clsx('col col--12')}>
             <div className="padding-horiz--md">
-              <h2 className="text--center">Example</h2>
+              <h2 className="text--center">A quick taste of SeaORM</h2>
               <Tabs
                 className={clsx('aa')}
                 defaultValue={codeBlocks[0].title}

@@ -32,15 +32,3 @@ Getting Started
 7. Internal Design
 	7.1 Derive macros
 	7.2 Traits and types
-
-## Comparison with Diesel
-
-Diesel          SeaORM
-=====           =====
-Sync            Async
-Static          Dynamic
-Native Driver   Pure Rust
-=====================
-       Relational
-      Schema first
-     With Cli tools
