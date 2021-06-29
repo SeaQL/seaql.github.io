@@ -95,10 +95,12 @@ let banana = banana.save(db).await?;`,
     title: 'Delete',
     code: `let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
 let orange: fruit::ActiveModel = orange.unwrap().into();
- 
+
 // delete one
 fruit::Entity::delete(orange).exec(db).await?;
- 
+// or simply
+orange.delete(db).await?;
+
 // delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE 'Orange'
 fruit::Entity::delete_many()
     .filter(fruit::Column::Name.contains("Orange"))
