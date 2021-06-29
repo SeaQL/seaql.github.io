@@ -1,6 +1,6 @@
 # Async Programming in Rust
 
-Async programming in Rust is a recent development, only had been stabilized in Rust [`1.39`](https://github.com/rust-lang/rust/releases/tag/1.39.0). The async ecosystem is rapidly evolving too, and SeaORM is some of the first async library built from the ground up with async support in mind.
+Async programming in Rust is a recent development, only had been stabilized in Rust [`1.39`](https://github.com/rust-lang/rust/releases/tag/1.39.0). The async ecosystem is rapidly evolving, and SeaORM is some of the first async crates built from the ground up with async support in mind.
 
 The first thing, [`Future`](https://rust-lang.github.io/async-book/02_execution/02_future.html) trait. `.await` must be called to execute it.
 
