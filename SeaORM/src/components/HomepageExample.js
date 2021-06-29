@@ -76,6 +76,22 @@ Fruit::update_many()
     .await?;`,
   },
   {
+    title: 'Save',
+    code: `let banana = fruit::ActiveModel {
+    id: Unset(None),
+    name: Set("Banana".to_owned()),
+    ..Default::default()
+};
+
+// create, because primary key \`id\` is \`Unset\`
+let mut banana = banana.save(db).await?;
+
+banana.name = Set("Banana Mongo".to_owned());
+
+// update, because primary key \`id\` is \`Set\`
+let banana = banana.save(db).await?;`,
+  },
+  {
     title: 'Delete',
     code: `let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
 let orange: fruit::ActiveModel = orange.unwrap().into();
