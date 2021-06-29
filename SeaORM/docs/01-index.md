@@ -1,45 +1,52 @@
 # Index
 
-Introduction
+## Introduction
+
 1. What is an ORM
-2. Async Programming
+
+2. Async Programming in Rust
+
 3. SeaORM Concepts
 
-Getting Started
+## Getting Started
 
 1. Installation & Configuration
 
-	1.1 choosing a database & async runtime
+	1.1 Choosing a Database & Async Runtime
 
 2. Generating Entities
 
-	2.1 Entity Structure
+	2.1 Using `sea-orm-cli`
+
+	2.2 Entity Structure Dissection
 
 3. Basic CRUD
 
-	3.1 SELECT: find, find_one, filter, sort, paging
+	3.1 SELECT: find, filter, sort, paging
 
 	3.2 INSERT: Model & ActiveModel, insert many
 
 	3.3 UPDATE: find & save, update many
 
-	3.4 DELETE: delete one & delete many
+	3.4 SAVE: insert or update
 
-	3.5 Raw SQL query & QueryResult
+	3.5 DELETE: delete one & delete many
 
-Learn More
+	3.6 Raw SQL query & JSON
+
+## Learn More
 
 4. Relations
 
-	4.1 one-to-one
+	4.1 One to One
 
-	4.2 one-to-many
+	4.2 One to Many
 
-	4.3 many-to-many
+	4.3 Many to Many
 
 5. Writing Tests
 
-	5.1 Mock interface
+	5.1 Mock Interface
 
 	5.2 Using SQLite
 
@@ -57,6 +64,6 @@ Learn More
 
 7. Internal Design
 
-	7.1 Derive macros
+	7.1 Derive Macros
 
-	7.2 Traits and types
+	7.2 Traits and Types

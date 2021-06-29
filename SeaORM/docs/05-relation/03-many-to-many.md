@@ -1,2 +1,2 @@
-# Many-to-many
+# Many to Many
 

@@ -1,2 +1,2 @@
-# Choosing a Database & Async Runtime
+# Database & Async Runtime
 

@@ -1,2 +1,0 @@
-# Raw SQL query & QueryResult
-

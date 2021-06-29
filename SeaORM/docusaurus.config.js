@@ -48,10 +48,10 @@ module.exports = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/index',
+              to: '/docs/introduction/orm',
             },
             {
-              label: 'Installation & Configuration',
+              label: 'Getting Started',
               to: '/docs/install-and-config/database-and-async-runtime',
             },
           ],
