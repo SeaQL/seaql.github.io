@@ -1,8 +1,8 @@
 # Async Programming
 
-Async programming in Rust is a recent development, only had been stabilized in Rust [`1.39`](https://github.com/rust-lang/rust/releases/tag/1.39.0). The async ecosystem is rapidly evolving, and SeaORM is some of the first async crates built from the ground up with async support in mind.
+Async programming in Rust is a recent development, only had been stabilized in Rust [`1.39`](https://github.com/rust-lang/rust/releases/tag/1.39.0). The async ecosystem is rapidly evolving, and SeaORM is some of the first crates built from the ground up with async support in mind.
 
-The first thing, [`Future`](https://rust-lang.github.io/async-book/02_execution/02_future.html) trait. `.await` must be called to execute it.
+The first thing, [`Future`](https://rust-lang.github.io/async-book/02_execution/02_future.html) trait. It's a placeholder to a function that will compute and return some value in the future. It's lazy, meaning `.await` must be called before anything would happen. `Future` allows us to achieve concurrency with little programming effort, e.g. [`future::join_all`](https://docs.rs/futures/latest/futures/future/fn.join_all.html) to execute multiple queries in parallel.
 
 Second, `async` in Rust is [multi-threaded programming](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) with a lot of sugar. A `Future` may move between threads, so any variables used in async bodies must be able to travel between threads, i.e. [`Send`](https://doc.rust-lang.org/nomicon/send-and-sync.html).
 

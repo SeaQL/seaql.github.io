@@ -31,11 +31,11 @@ const FeatureList = [
     ),
   },
   {
-    title: 'API Oriented',
+    title: 'Service Oriented',
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Quickly build search models that help you join, filter, sort and paginate data in APIs.
+        Quickly build services that join, filter, sort and paginate data in APIs.
       </>
     ),
   },
