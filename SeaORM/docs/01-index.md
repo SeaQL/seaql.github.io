@@ -67,3 +67,5 @@
 	7.1 Derive Macros
 
 	7.2 Traits and Types
+
+	7.3 Compare with Diesel
