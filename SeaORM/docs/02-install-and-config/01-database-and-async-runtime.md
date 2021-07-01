@@ -33,6 +33,10 @@ Tip: `Rocket v0.5` uses `tokio`.
 
 ## Extra features
 
-`mock` - mock database for unit testing
+`debug-print` - print every SQL statement to stdout
 
-`with-json` - interoperate with `serde_json`
+`mock` - mock interface for unit testing
+
+`sqlx-json` - interoperate with `sqlx` and `serde_json`
+
+`sqlx-chrono` - interoperate with `sqlx` and `chrono`
