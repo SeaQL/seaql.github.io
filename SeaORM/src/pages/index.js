@@ -25,8 +25,8 @@ function HomepageHeader() {
       }
       `}</style>
       <div className="container">
-        <img id="homepageLogo" width="90%" src="/SeaORM/img/SeaQL logo.png" />
-        <img id="homepageBanner" width="90%" src="/SeaORM/img/SeaORM_banner.png" />
+        <img id="homepageLogo" width="90%" src="/SeaORM/img/SeaORM logo.png" />
+        <img id="homepageBanner" width="90%" src="/SeaORM/img/SeaORM banner.png" />
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
