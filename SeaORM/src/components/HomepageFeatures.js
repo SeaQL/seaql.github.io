@@ -17,7 +17,7 @@ const FeatureList = [
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Built upon SeaQuery, a dynamic query builder, SeaORM allows you to build complex queries without 'fighting the ORM'.
+        Built upon SeaQuery, SeaORM allows you to build complex queries without 'fighting the ORM'.
       </>
     ),
   },

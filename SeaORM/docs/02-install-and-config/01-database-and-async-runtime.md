@@ -26,14 +26,16 @@ You have to choose one from:
 
 Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 
-+ `ASYNC_RUNTIME` can be [`actix`](https://crates.io/crates/actix), [`async-std`](https://crates.io/crates/async-std) and [`tokio`](https://crates.io/crates/tokio)
-+ `TLS_LIB` can either be `native-tls` or `rustls`
++ `ASYNC_RUNTIME` can be [`actix`](https://crates.io/crates/actix), [`async-std`](https://crates.io/crates/async-std) or [`tokio`](https://crates.io/crates/tokio)
++ `TLS_LIB` can either be [`native-tls`](https://crates.io/crates/native-tls) or [`rustls`](https://crates.io/crates/rustls)
 
-Tip: `Rocket v0.5` uses `tokio`.
+Tip 1: [`Rocket`](https://rocket.rs/) uses `tokio`, [`Actix`](https://actix.rs/) uses `actix`, [`Tide`](https://docs.rs/tide) uses `async-std`.
+
+Tip 2: `native-tls` uses platform's native security facilities while `rustls` is a pure Rust impl
 
 ## Extra features
 
-`debug-print` - print every SQL statement to stdout
+`debug-print` - print every SQL statement SeaORM runs to stdout
 
 `mock` - mock interface for unit testing
 
