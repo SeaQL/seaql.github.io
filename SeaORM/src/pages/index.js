@@ -44,7 +44,7 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      description="Description will go into a meta tag in <head />">
+      description="🐚 An async & dynamic ORM for Rust">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

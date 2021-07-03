@@ -115,4 +115,7 @@ module.exports = {
       },
     ],
   ],
+  scripts: [
+    '/sea-ql.js',
+  ],
 };
