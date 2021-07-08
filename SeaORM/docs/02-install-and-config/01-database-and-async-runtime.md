@@ -31,14 +31,16 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 
 Tip 1: [`Rocket`](https://rocket.rs/) uses `tokio`, [`Actix`](https://actix.rs/) uses `actix`, [`Tide`](https://docs.rs/tide) uses `async-std`
 
-Tip 2: `native-tls` uses platform's native security facilities while `rustls` is a pure Rust impl
+Tip 2: `native-tls` uses platform's native security facilities, while `rustls` is a pure Rust implementation
 
 ## Extra features
 
-`debug-print` - print every SQL statement SeaORM runs to stdout
+`debug-print` - print every SQL statement to stdout
 
 `mock` - mock interface for unit testing
 
 `sqlx-json` - interoperate with `sqlx` and `serde_json`
 
 `sqlx-chrono` - interoperate with `sqlx` and `chrono`
+
+`sqlx-decimal` - interoperate with `sqlx` and `rust_decimal`
