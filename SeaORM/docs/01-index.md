@@ -46,9 +46,11 @@
 
 5. Writing Tests
 
-	5.1 Mock Interface
+	5.1 Robust & Correct
 
-	5.2 Using SQLite
+	5.2 Mock Interface
+
+	5.3 Using SQLite
 
 6. Advanced Queries
 
