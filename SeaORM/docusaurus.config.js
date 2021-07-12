@@ -60,16 +60,16 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/',
+              label: 'GitHub',
+              href: 'https://github.com/SeaQL/sea-orm/discussions',
             },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/',
-            },
+            // {
+            //   label: 'Discord',
+            //   href: 'https://discordapp.com/',
+            // },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/',
+              href: 'https://twitter.com/sea_ql',
             },
           ],
         },
@@ -77,12 +77,12 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'About Us',
+              to: '/about-us',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/SeaQL/sea-orm',
+              label: 'Blog',
+              to: '/blog',
             },
           ],
         },
