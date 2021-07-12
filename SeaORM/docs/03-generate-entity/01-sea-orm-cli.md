@@ -3,7 +3,7 @@
 First, install `sea-orm-cli` with `cargo install`.
 
 ```shell
-cargo install sea-orm-cli
+$ cargo install sea-orm-cli
 ```
 
 ## Configuring Environment File
@@ -21,13 +21,13 @@ Use `-h` flag on any CLI command or subcommand for help.
 
 ```shell
 # Show all available commands
-sea-orm-cli -h
+$ sea-orm-cli -h
 
 # Show all subcommand available in `generate` command
-sea-orm-cli generate -h
+$ sea-orm-cli generate -h
 
 # Show how to use `generate entity` subcommand
-sea-orm-cli generate entity -h
+$ sea-orm-cli generate entity -h
 ```
 
 ## Generating Entity Files
@@ -42,10 +42,10 @@ Command options:
 
 ```shell
 # Generate entity files to `src/entity` folder
-sea-orm-cli generate entity -o src/entity
+$ sea-orm-cli generate entity -o src/entity
 
 # Generate entity files with explicit database URI and schema
-sea-orm-cli generate entity \
+$ sea-orm-cli generate entity \
     -u mysql://sea:sea@localhost/bakery \
     -s bakery \
     -o src/entity

@@ -23,23 +23,6 @@ impl EntityName for Entity {
 
 The case-sensitive table name should be returned from the `EntityName::table_name()` method.
 
-### CRUD
-
-- [Select](/docs/basic-crud/select)
-- [Insert](/docs/basic-crud/insert)
-- [Update](/docs/basic-crud/update)
-- [Save](/docs/basic-crud/save)
-- [Delete](/docs/basic-crud/delete)
-
-### DeriveEntity Procedural Macro
-
-Implement
-- `EntityTrait` for `Entity`
-- `Iden` for `Entity`
-- `IdenStatic` for `Entity`
-
-See [here](/docs/internal-design/derive-macro#) for details.
-
 ## Column
 
 An enum represents all columns in this table.
@@ -118,14 +101,6 @@ impl ColumnTrait for Column {
 }
 ```
 
-### DeriveColumn Procedural Macro
-
-Implement
-- `Iden` for `Column`
-- `IdenStatic` for `Column`
-
-See [here](/docs/internal-design/derive-macro#) for details.
-
 ## Primary Key
 
 An enum represents primary key in this table. If `PrimaryKey` enum has more than one variant, then this primary key is a composite primary key.
@@ -140,15 +115,6 @@ pub enum PrimaryKey {
 ### Primary Key is-a Column
 
 Variant in `PrimaryKey` must have a variant with identical name in `Column`. Otherwise, compilation error will be thrown.
-
-### DerivePrimaryKey Procedural Macro
-
-Implement
-- `Iden` for `PrimaryKey`
-- `IdenStatic` for `PrimaryKey`
-- `PrimaryKeyToColumn` for `PrimaryKey`
-
-See [here](/docs/internal-design/derive-macro#) for details.
 
 ## Model
 
@@ -179,17 +145,6 @@ pub struct Model {
     pub name: Option<String>,
 }
 ```
-
-### DeriveActiveModel Procedural Macro
-
-Implement
-- `ActiveModel`
-- `Default` for `ActiveModel`
-- `From<<Entity as EntityTrait>::Model>` for `ActiveModel`
-- `IntoActiveModel<ActiveModel>` for `<Entity as EntityTrait>::Model`
-- `ActiveModelTrait` for `ActiveModel`
-
-See [here](/docs/internal-design/derive-macro#) for details.
 
 ## Active Model
 
