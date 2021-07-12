@@ -2,7 +2,7 @@
 
 First, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
 
-```toml
+```toml title="Cargo.toml"
 sea-orm = { version = "^0", features = [ DATABASE_DRIVER, ASYNC_RUNTIME, "macros" ], default-features = false }
 ```
 
