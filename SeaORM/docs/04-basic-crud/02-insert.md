@@ -32,7 +32,7 @@ let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
 let model: cake::Model = cheese.unwrap();
 assert_eq!(model.name, "Cheese Cake".to_owned());
 
-// Convert into ActiveModel
+// Into ActiveModel
 let active_model: cake::ActiveModel = model.into();
 assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
