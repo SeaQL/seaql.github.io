@@ -1,18 +1,19 @@
 # Select
 
-By default SeaORM will select all columns defined in `Entity`.
+Once you have defined the entity, you are ready to retrieve data from the database. Each row of data in the database corresponds to a `Model`.
 
-> To select custom columns / expressions, read the [custom select section](/docs/advanced-query/custom-select#).
+By default SeaORM will select all columns defined in the `Column` enum.
 
-The select result will always be a `Model`, unless you explicitly specified.
-
-> To get `serde_json` representation from SeaORM select, read the [raw sql & json section](/docs/basic-crud/raw-sql-and-json#).
+> If you want to select custom columns / expressions, read the [custom select section](/docs/advanced-query/custom-select#).
 
 ## Find by Primary Key
 
-It is very common to select model by primary key, so we provide a convenient API for it. We have `Option<cake::Model>` because the model might not be found in database.
+Find a model by its primary key, it can be a single key or composite key. We start by calling the `find_by_id` method on `Entity` which helps you construct the select query and condition automatically. Then, fetch a single model from database with the `one` method.
 
 ```rust
+use super::cake::Entity as Cake;
+use super::cake_filling::Entity as CakeFilling;
+
 // Find by primary key
 let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
 let cheese: cake::Model = cheese.unwrap();
@@ -24,11 +25,9 @@ let vanilla: cake_filling::Model = vanilla.unwrap();
 
 ## Find with Conditions and Orders
 
-Filter and order the select result with `.filter()` and `.order_by_*()` methods respectively.
+In addition to retrieve model by primary key, you can also retrieve one or more models matching specific condition in certain order. The `find` method gives you access to the query builder in SeaORM. It support construction of all common select expressions including where and order by expression, they can be constructed using `filter` and `order_by_*` method respectively.
 
-> Read more about [conditional expression](/docs/advanced-query/conditional-expression#).
-
-> Checkout the API of [order expression](#).
+> Read more about [conditional expression](/docs/advanced-query/conditional-expression#) and [order expression](#).
 
 ```rust
 let chocolate: Vec<cake::Model> = Cake::find()
@@ -40,13 +39,13 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ## Find Related Models
 
-We can use the `.find_related()` method to quickly join and select a foreign table given that we have implemented `Related<Fruit> for Cake`.
+We can use the `find_related` method to quickly join and select a related entity.
 
 > Read more about [table joins](/docs/advanced-query/more-join#).
 
 ### Lazy Loading
 
-Preferable if you want to load related models conditionally, however, you have to take into account the increased database round trips.
+Related models are loaded on demand when you ask for it, preferable if you want to load related models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
 ```rust
 // Find a cake model first
@@ -59,7 +58,7 @@ let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 ### Eager Loading
 
-Minimum overhead on database round trips but only suitable for small to medium sized result.
+All related models are loaded at once, the result is grouped by the first entity and returned in a vector of tuple. This provide minimum overhead on database round trips compared to lazy loading but it is only suitable for small to medium sized result.
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
