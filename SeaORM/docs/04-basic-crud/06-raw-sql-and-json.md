@@ -2,21 +2,22 @@
 
 This section discuss utilities that can be used.
 
-## Get Raw SQL for Debug
-
-Use `.build(QueryBuilder).to_string()` on any CRUD operations to get the database specific raw SQL for debugging purpose.
+## Query Raw SQL
 
 ```rust
-// All query building available in `sea_query`
-use sea_orm::sea_query::{
-    MysqlQueryBuilder,
-    PostgresQueryBuilder,
-    SqliteQueryBuilder,
-};
+
+```
+
+## Get Raw SQL for Debug
+
+Use `build` and `to_string` methods on any CRUD operations to get the database specific raw SQL for debugging purpose.
+
+```rust
+use sea_orm::DatabaseBackend;
 
 assert_eq!(
     cake_filling::Entity::find_by_id((6, 8))
-        .build(MysqlQueryBuilder)
+        .build(DatabaseBackend::MySql)
         .to_string(),
     vec![
         "SELECT `cake_filling`.`cake_id`, `cake_filling`.`filling_id` FROM `cake_filling`",
@@ -28,7 +29,7 @@ assert_eq!(
     fruit::Entity::update_many()
         .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
         .filter(fruit::Column::Name.contains("Apple"))
-        .build(MysqlQueryBuilder)
+        .build(DatabaseBackend::MySql)
         .to_string(),
     "UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'".to_owned()
 );
@@ -36,7 +37,7 @@ assert_eq!(
 assert_eq!(
     fruit::Entity::delete_many()
         .filter(fruit::Column::Name.contains("Orange"))
-        .build(MysqlQueryBuilder)
+        .build(DatabaseBackend::MySql)
         .to_string(),
     "DELETE FROM `fruit` WHERE `fruit`.`name` LIKE '%Orange%'".to_owned()
 );

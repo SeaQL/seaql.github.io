@@ -1,13 +1,13 @@
 # One to One
 
-An one-to-one relationship is the most basic type of database relationship. Let say a `Cake` entity has at most one `Fruit` topping.
+An one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
 
 ## Defining the Relation
 
-On the `Cake` entity, to define the relation
+On the `Cake` entity, to define the relation:
 1. Add a new enum variant `Relation::Fruit` to the `Cake` entity.
-1. Write the definition for this relationship with `Entity::has_one()`.
-1. Implement the `Related<fruit::Entity>`.
+1. Write the definition of it with the `Entity::has_one()` method.
+1. Implement the `Related<fruit::Entity>` trait.
 
 ```rust {9,15,20} title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
@@ -41,10 +41,10 @@ impl Related<super::fruit::Entity> for Entity {
 
 On the `Fruit` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity.
 
-To define the inverse relation
+To define the inverse relation:
 1. Add a new enum variant `Relation::Cake` to the `Fruit` entity.
-1. Write the definition for this relationship, we always define the inverse relation with `Entity::belongs_to()`.
-1. Implement the `Related<cake::Entity>`.
+1. Write the definition of it with the `Entity::belongs_to()` method, we always define the inverse relation using this method.
+1. Implement the `Related<cake::Entity>` trait.
 
 ```rust {10,16,24} title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]

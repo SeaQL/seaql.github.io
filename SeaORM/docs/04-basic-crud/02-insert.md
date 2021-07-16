@@ -4,7 +4,7 @@ Before diving into SeaORM insert we have to introduce `ActiveValue` and `ActiveM
 
 ## ActiveValue
 
-A wrapper struct to capture the changes made to model attributes. It will be used in `ActiveModel` to record the change of attribute values.
+A wrapper struct to capture the changes made to `ActiveModel` attributes.
 
 ```rust
 // Set value
@@ -21,7 +21,7 @@ let _: ActiveValue<i32> = ActiveValue::unchanged(10);
 
 ## Model & ActiveModel
 
-`ActiveModel` is a special kind of `Model`, it has all the attributes of `Model` but all its attribute is wrapped in `ActiveValue` struct.
+An `ActiveModel` has all the attributes of `Model` but all its attributes are wrapped in `ActiveValue` struct.
 
 You will get `Model` from SeaORM select and use it for readonly purpose. If you want to update model attributes and save it back into database, then you need to convert it into `ActiveModel` before updating. Same thing applied to SeaORM insert, only `ActiveModel` can be inserted.
 

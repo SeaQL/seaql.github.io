@@ -1,10 +1,10 @@
 # Many to Many
 
-An many-to-many relationship is formed by three tables, two end tables are related vai an intermediate table. For example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
+An many-to-many relation is formed by three tables, two end tables are related vai an intermediate table. For example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
 
 ## Defining the Relation
 
-On the `Cake` entity, implement `Related<filling::Entity>` join via the inverse of `cake_filling::Relation::Cake` relation, then to `Filling` with `cake_filling::Relation::Filling` relation.
+On the `Cake` entity, implement the `Related<filling::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Cake` relation, then join `to` `Filling` entity  with `cake_filling::Relation::Filling` relation.
 
 ```rust title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
@@ -25,7 +25,7 @@ impl Related<super::filling::Entity> for Entity {
 // ...
 ```
 
-On the `Filling` entity, implement `Related<cake::Entity>` join via the inverse of `cake_filling::Relation::Filling` relation, then to `Cake` with `cake_filling::Relation::Cake` relation.
+On the `Filling` entity, implement the `Related<cake::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Filling` relation, then join `to` `Cake` entity  with `cake_filling::Relation::Cake` relation.
 
 ```rust title="entity/filling.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
@@ -50,9 +50,9 @@ impl Related<super::cake::Entity> for Entity {
 
 On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity and its `filling_id` attribute is referencing the primary key of `Filling` entity.
 
-To define the inverse relation
+To define the inverse relation:
 1. Add two new enum variant `Relation::Cake` and `Relation::Filling` to the `Fruit` entity.
-1. Write the definition for both relations with `Entity::belongs_to()`.
+1. Write the definition of both relations with `Entity::belongs_to()` method.
 
 ```rust title="entity/cake_filling.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]

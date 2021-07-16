@@ -1,16 +1,16 @@
 # Save
 
-This is an unified API to save (insert / update) `ActiveModel` into database.
+This is an helper method to save (insert / update) `ActiveModel` into database.
 
 ## Save Behaviour
 
-When saving a `ActiveModel`, it will perform either insert or update depends on the primary key attribute
+When saving an `ActiveModel`, it will perform either insert or update depends on the primary key attribute
 - Insert if primary key is `Unset`
 - Update if primary key is `Set`
 
 ## Usage
 
-Calling `.save()` to insert and update `ActiveModel`.
+Calling `save` to insert or update an `ActiveModel`.
 
 ```rust
 let banana = fruit::ActiveModel {

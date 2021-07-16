@@ -1,10 +1,10 @@
 # One to Many
 
-An one-to-many relationship is similar to one-to-one relationship. In previous section we give the example of "a `Cake` entity has at most one `Fruit` topping". In one-to-many relationship we remove the "at most one" constraint. So, we have a `Cake` entity might have many `Fruit` toppings.
+An one-to-many relation is similar to one-to-one relation. In previous section we give the example of "a `Cake` entity has at most one `Fruit` topping". In one-to-many relation we change the "at most one" constraint. So, we have a `Cake` entity might have many `Fruit` toppings.
 
 ## Defining the Relation
 
-This is almost identical to defining an one-to-one, just that we use `has_many` here.
+This is almost identical to defining an one-to-one relation, the only different is that we use `Entity::has_many()` method here.
 
 ```rust {9,15,20} title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
@@ -36,7 +36,7 @@ impl Related<super::fruit::Entity> for Entity {
 
 ## Defining the Inverse Relation
 
-It is the same as defining the inverse of the one-to-one relationship.
+It is the same as defining the one-to-one inverse relation.
 
 ```rust {10,16,24} title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]

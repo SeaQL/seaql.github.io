@@ -4,7 +4,7 @@
 
 Find a `Model` from database, then convert it into `ActiveModel`, finally delete the corresponding row from database.
 
-Primary key must be set in order to delete the corresponding row from database.
+Note that primary key must be set in order to delete the corresponding row from database.
 
 ```rust
 let orange: Option<fruit::Model> = Fruit::find_by_id(30).one(db).await?;
