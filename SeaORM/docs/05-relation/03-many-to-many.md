@@ -1,6 +1,6 @@
 # Many to Many
 
-An many-to-many relation is formed by three tables, two end tables are related vai an intermediate table. For example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
+A many-to-many relation is formed by three tables, two end tables are related via an intermediate table. For example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
 
 ## Defining the Relation
 
