@@ -4,8 +4,6 @@
 
 Find a `Model` from database, then convert it into `ActiveModel`, finally delete the corresponding row from database.
 
-Note that primary key must be set in order to delete the corresponding row from database.
-
 ```rust
 let orange: Option<fruit::Model> = Fruit::find_by_id(30).one(db).await?;
 let orange: fruit::ActiveModel = orange.unwrap().into();
@@ -19,11 +17,11 @@ assert_eq!(res.rows_affected, 1);
 You can also delete multiple rows from database without finding each `Model` with SeaORM select.
 
 ```rust
-// Delete Many with SQL: DELETE FROM `fruit` WHERE `fruit`.`name` LIKE '%Orange%'
+// DELETE FROM `fruit` WHERE `fruit`.`name` LIKE '%Orange%'
 let res: DeleteResult = fruit::Entity::delete_many()
     .filter(fruit::Column::Name.contains("Orange"))
     .exec(db)
     .await?;
 
-assert_eq!(res.rows_affected, 1);
+assert_eq!(res.rows_affected, 2);
 ```

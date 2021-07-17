@@ -2,9 +2,7 @@
 
 ## Update One
 
-Find a `Model` from database, then convert it into `ActiveModel`. Then, make necessary changes to `ActiveModel` using `Set` and `Unset` methods introduced in previous section. Finally, update the corresponding row in database.
-
-Note that primary key must be set in order to update the corresponding row in database.
+You will get a `Model` from find result. If you want to save the model back into database, you need to convert it into an `ActiveModel` *first*. The generated query will only include the `Set` attributes.
 
 ```rust
 let pear: Option<fruit::Model> = Fruit::find_by_id(28).one(db).await?;
@@ -21,12 +19,12 @@ let pear: fruit::ActiveModel = Fruit::update(pear).exec(db).await?;
 
 ## Update Many
 
-You can also update multiple rows in database without finding each `Model` with SeaORM select.
+You can also update multiple rows in the database without finding each `Model` with SeaORM select.
 
 For example, we set "cake_id" column to null for all fruits with name contains "apple".
 
 ```rust
-// Update Many with SQL: UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'
+// UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'
 Fruit::update_many()
     .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
     .filter(fruit::Column::Name.contains("Apple"))

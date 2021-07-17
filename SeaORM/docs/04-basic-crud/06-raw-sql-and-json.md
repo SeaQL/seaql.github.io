@@ -1,14 +1,18 @@
 # Raw SQL & JSON
 
-This section discuss utilities that can be used.
+## Query by raw SQL
 
-## Query Raw SQL
+You can select `Model` from raw query.
 
 ```rust
-
+cake::Entity::find().from_raw_sql(
+    Statement::from_sql_and_values(
+        DbBackend::Postgres, r#"SELECT "cake"."id", "cake"."name" FROM "cake""#, vec![]
+    )
+).one(&db).await?,
 ```
 
-## Get Raw SQL for Debug
+## Get raw SQL query
 
 Use `build` and `to_string` methods on any CRUD operations to get the database specific raw SQL for debugging purpose.
 
@@ -24,23 +28,6 @@ assert_eq!(
         "WHERE `cake_filling`.`cake_id` = 6 AND `cake_filling`.`filling_id` = 8",
     ].join(" ")
 );
-
-assert_eq!(
-    fruit::Entity::update_many()
-        .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
-        .filter(fruit::Column::Name.contains("Apple"))
-        .build(DatabaseBackend::MySql)
-        .to_string(),
-    "UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'".to_owned()
-);
-
-assert_eq!(
-    fruit::Entity::delete_many()
-        .filter(fruit::Column::Name.contains("Orange"))
-        .build(DatabaseBackend::MySql)
-        .to_string(),
-    "DELETE FROM `fruit` WHERE `fruit`.`name` LIKE '%Orange%'".to_owned()
-);
 ```
 
 ## Select JSON Result
@@ -51,7 +38,7 @@ All SeaORM selects are capable of returning `serde_json::Value`.
 // Find by id
 let _: Option<serde_json::Value> = Cake::find_by_id(1)
     .into_json()
-    .one(&db)
+    .one(db)
     .await?;
 
 // Find with filter
