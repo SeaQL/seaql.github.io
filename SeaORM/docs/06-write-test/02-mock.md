@@ -3,8 +3,8 @@
 You can unit test your application logic using the mock database, it can mock all database backend specified in `DatabaseBackend` enum including MySql, Postgres and Sqlite.
 
 The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.
-- The query result should be defined to support any select operations
-- The query result should be defined to support any insert, update and delete operations
+- The query result should be provided to support select operations
+- The exec result should be provided to support insert, update and delete operations
 
 To ensure the correctness of your application logic you can also validate the transaction log in the mock database.
 
