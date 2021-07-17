@@ -4,8 +4,6 @@ Once you have defined the entity, you are ready to retrieve data from the databa
 
 By default SeaORM will select all columns defined in the `Column` enum.
 
-> If you want to select custom columns / expressions, read the [custom select section](/docs/advanced-query/custom-select#).
-
 ## Find by Primary Key
 
 Find a model by its primary key, it can be a single key or composite key. We start by calling the `find_by_id` method on `Entity` which helps you construct the select query and condition automatically. Then, fetch a single model from database with the `one` method.
@@ -16,11 +14,9 @@ use super::cake_filling::Entity as CakeFilling;
 
 // Find by primary key
 let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
-let cheese: cake::Model = cheese.unwrap();
 
 // Find by composite primary keys
 let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(db).await?;
-let vanilla: cake_filling::Model = vanilla.unwrap();
 ```
 
 ## Find with Conditions and Orders
@@ -69,18 +65,21 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
 
 ## Paginate Result
 
-Convert any SeaORM select into a streamable paginator with custom page size.
+Convert any SeaORM select into a paginator with custom page size.
 
 > Checkout the API of [paginator](#).
 
 ```rust
-let mut cake_stream = Cake::find()
-    .filter(cake::Column::Name.contains("chocolate"))
-    .order_by_asc(cake::Column::Name)
-    .paginate(db, 50)
-    .into_stream();
-
-while let Some(cakes) = cake_stream.try_next().await? {
+use sea_orm::{entity::*, query::*, tests_cfg::cake};
+let mut cake_pages = cake::Entity::find()
+    .order_by_asc(cake::Column::Id)
+    .paginate(db, 50);
+ 
+while let Some(cakes) = cake_pages.fetch_and_next().await? {
     // Do something on cakes: Vec<cake::Model>
 }
 ```
+
+## Select custom
+
+If you want to select custom columns and expressions, read the [custom select](/docs/advanced-query/custom-select#) section.
