@@ -12,7 +12,9 @@ To ensure the correctness of your application logic you can also validate the tr
 
 ## Mocking Query Result
 
-We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results were prepared using `append_query_results` method. Note that we passed a vector of vector to it, representing ...
+We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results were prepared using `append_query_results` method. Note that we passed a vector of vector to it, representing multiple query results each with more than one models. Finally, convert it into connection and use it to perform CRUD operations just like a normal live connection.
+
+One thing special about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded, you can validate each of it to ensure the correctness of your application logic.
 
 ```rust
 #[cfg(test)]
@@ -96,7 +98,7 @@ mod tests {
 
 ## Mocking Execution Result
 
-
+This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update and delete operations here in the unit test. The `append_exec_results` method takes vector of `MockExecResult` each represents the exec result of the corresponding operation.
 
 ```rust
 #[cfg(test)]
