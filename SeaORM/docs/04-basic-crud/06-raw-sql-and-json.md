@@ -2,14 +2,14 @@
 
 ## Query by raw SQL
 
-You can select `Model` from raw query.
+You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for Postgres.
 
 ```rust
-cake::Entity::find().from_raw_sql(
+let cheese: Option<cake::Model> = cake::Entity::find().from_raw_sql(
     Statement::from_sql_and_values(
-        DbBackend::Postgres, r#"SELECT "cake"."id", "cake"."name" FROM "cake""#, vec![]
+        DbBackend::Postgres, r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#, vec![1.into()]
     )
-).one(&db).await?,
+).one(&db).await?;
 ```
 
 ## Get raw SQL query
