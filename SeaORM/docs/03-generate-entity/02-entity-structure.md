@@ -8,7 +8,7 @@ Lets go through the sections of the example [cake](https://github.com/SeaQL/sea-
 
 ## Entity
 
-By implementing the [`EntityTrait`](#), you can perform CURD operations on the given table.
+By implementing the [`EntityTrait`](#), you can perform CRUD operations on the given table.
 
 ```rust
 #[derive(Copy, Clone, Default, Debug, DeriveEntity)]

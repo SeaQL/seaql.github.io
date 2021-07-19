@@ -1,6 +1,6 @@
 # Mock Interface
 
-You can unit test your application logic using the mock database, it can mock all database backend specified in `DatabaseBackend` enum including MySql, Postgres and Sqlite.
+You can unit test your application logic using the mock database, it can mock all database backend specified in `DatabaseBackend` enum including MySql, Postgres and SQLite.
 
 The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.
 - The query result should be provided to support select operations
