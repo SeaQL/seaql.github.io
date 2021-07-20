@@ -5,3 +5,12 @@
   align-items: center;
   width: 100%;
 }
+
+.table {
+  text-align: center;
+}
+
+.table tr, .table td, .table th {
+  border-color: transparent;
+  background-color: transparent !important;
+}

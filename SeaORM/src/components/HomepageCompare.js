@@ -7,21 +7,41 @@ export default function HomepageCompare() {
     <section className={clsx('home-section', styles.features)}>
       <div className="container">
         <div className="row">
-        <div className={clsx('col col--12')}>
+          <div className={clsx('col col--12')}>
             <div className="text--center padding-horiz--md">
               <h2>Comparison with Diesel</h2>
-              <p style={{whiteSpace: 'pre'}}>
-                <br /> Diesel          SeaORM
-                <br /> =====           =====
-                <br /> Sync            Async
-                <br /> Static          Dynamic
-                <br /> Native Driver   Pure Rust
-                <br /> =====================
-                <br />     Relational
-                <br />     Schema first
-                <br />     With Cli tools
-              </p>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className={clsx('col col--6 col--offset-5')}>
+            <table className={styles.table}>
+              <tr>
+                <th>Diesel</th>
+                <th>SeaORM</th>
+              </tr>
+              <tr>
+                <td>Sync</td>
+                <td>Async</td>
+              </tr>
+              <tr>
+                <td>Static</td>
+                <td>Dynamic</td>
+              </tr>
+              <tr>
+                <td>Native Driver</td>
+                <td>Pure Rust</td>
+              </tr>
+              <tr>
+                <td colSpan="2">Relational</td>
+              </tr>
+              <tr>
+                <td colSpan="2">Schema first</td>
+              </tr>
+              <tr>
+                <td colSpan="2">With Cli tools</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
