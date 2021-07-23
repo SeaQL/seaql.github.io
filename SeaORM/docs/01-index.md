@@ -56,9 +56,9 @@
 
 	6.1 Custom select
 
-	6.2 Aggregate functions
+	6.2 Conditional expressions
 
-	6.3 Conditional expressions
+	6.3 Aggregate functions
 
 	6.4 Subquery
 
