@@ -12,13 +12,13 @@ By default Rust run all tests in parallel and each test should be independent of
 #[async_std::test]
 async fn main() {
     // Connecting SQLite
-    let db: DbConn = setup::setup().await;
+    let db: DbConn = setup().await;
 
     // Setting up database schema
     setup_schema(&db).await;
 
     // Performing CRUD operations
-    crud_cake(&db).await.unwrap();
+    perform_tests(&db).await.unwrap();
 }
 ```
 
@@ -66,7 +66,7 @@ async fn setup_schema(db: &DbConn) {
 Perform CRUD operations on SQLite database.
 
 ```rust
-async fn crud_cake(db: &DbConn) -> Result<(), DbErr> {
+async fn perform_tests(db: &DbConn) -> Result<(), DbErr> {
     // Insert
     let apple = cake::ActiveModel {
         name: Set("Apple Pie".to_owned()),
