@@ -14,7 +14,13 @@ assert_eq!(
         .to_string(),
     r#"SELECT "cake"."id", "cake"."name" FROM "cake""#
 );
+```
 
+## Select Some Attributes Only
+
+Use `select_only` and `column` methods together to select only the attributes you want.
+
+```rust
 // Selecting the name column only
 assert_eq!(
     cake::Entity::find()
@@ -23,21 +29,6 @@ assert_eq!(
         .build(DbBackend::Postgres)
         .to_string(),
     r#"SELECT "cake"."name" FROM "cake""#
-);
-```
-
-## Select Some Attributes Only
-
-Use `select_only` and `column` methods together to select only the attributes you want.
-
-```rust
-assert_eq!(
-    cake::Entity::find()
-        .select_only()
-        .column(cake::Column::Id)
-        .build(DbBackend::Postgres)
-        .to_string(),
-    r#"SELECT "cake"."id" FROM "cake""#
 );
 ```
 
