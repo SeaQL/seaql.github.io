@@ -1,12 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
-import { MdCloud, MdBugReport, MdAvTimer, MdBuild } from "react-icons/md";
+import { MdCloud, MdCheckCircle, MdFlashOn, MdFlight } from "react-icons/md";
 
 const FeatureList = [
   {
     title: 'Async',
-    icon: <MdAvTimer size={26} />,
+    icon: <MdFlashOn size={26} />,
     description: (
       <>
         Relying on SQLx, SeaORM is a new library with async support from day 1.
@@ -15,7 +15,7 @@ const FeatureList = [
   },
   {
     title: 'Dynamic',
-    icon: <MdBuild size={26} />,
+    icon: <MdFlight size={26} />,
     description: (
       <>
         Built upon SeaQuery, SeaORM allows you to build complex queries without 'fighting the ORM'.
@@ -24,7 +24,7 @@ const FeatureList = [
   },
   {
     title: 'Testable',
-    icon: <MdBugReport size={26} />,
+    icon: <MdCheckCircle size={26} />,
     description: (
       <>
         Use mock connections to write unit tests for your logic.

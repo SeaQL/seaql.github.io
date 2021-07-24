@@ -11,6 +11,7 @@
 }
 
 .table tr, .table td, .table th {
-  border-color: transparent;
+  border-color: #aaa;
+  border-collapse: collapse;
   background-color: transparent !important;
 }
