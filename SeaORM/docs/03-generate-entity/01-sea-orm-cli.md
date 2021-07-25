@@ -6,13 +6,12 @@ First, install `sea-orm-cli` with `cargo install`.
 $ cargo install sea-orm-cli
 ```
 
-## Configuring Environment File
+## Configure Environment
 
-Create a `.env` file in your project root. Then specify your database connection as followings.
+Setting `DATABASE_URI` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
-DATABASE_URI=mysql://sea:sea@localhost/bakery
-DATABASE_SCHEMA=bakery
+DATABASE_URI=sql://username:password@localhost/database
 ```
 
 ## Getting Help

@@ -14,6 +14,10 @@
 
 	1.1 Choosing a Database & Async Runtime
 
+	1.2 Schema Management
+
+	1.3 Connection Pool
+
 2. Generating Entities
 
 	2.1 Using `sea-orm-cli`
