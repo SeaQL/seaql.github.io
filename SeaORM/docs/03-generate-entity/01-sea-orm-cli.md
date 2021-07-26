@@ -8,10 +8,10 @@ $ cargo install sea-orm-cli
 
 ## Configure Environment
 
-Setting `DATABASE_URI` in your environment, or create a `.env` file in your project root. Specify your database connection.
+Setting `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
-DATABASE_URI=sql://username:password@localhost/database
+DATABASE_URL=sql://username:password@localhost/database
 ```
 
 ## Getting Help
@@ -34,8 +34,8 @@ $ sea-orm-cli generate entity -h
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
 
 Command options:
-- `-u` / `--uri`: database URI (default: DATABASE_URI specified in env file)
-- `-s` / `--schema`: database schema (default: DATABASE_SCHEMA specified in env file)
+- `-url` / `--database-url`: database URL (default: DATABASE_URL specified in env file)
+- `-schema` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in env file)
 - `-o` / `--output_dir`: entity file output directory (default: current directory)
   - It is recommanded to output entity files to a separate folder
 
@@ -43,10 +43,10 @@ Command options:
 # Generate entity files to `src/entity` folder
 $ sea-orm-cli generate entity -o src/entity
 
-# Generate entity files with explicit database URI and schema
+# Generate entity files with explicit database URL and schema
 $ sea-orm-cli generate entity \
-    -u mysql://sea:sea@localhost/bakery \
-    -s bakery \
+    -url mysql://sea:sea@localhost/bakery \
+    -schema bakery \
     -o src/entity
 ```
 
