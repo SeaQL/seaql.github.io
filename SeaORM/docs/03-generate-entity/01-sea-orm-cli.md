@@ -36,7 +36,7 @@ Discover all tables in a database and generate corresponding SeaORM entity file 
 Command options:
 - `-url` / `--database-url`: database URL (default: DATABASE_URL specified in env file)
 - `-schema` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in env file)
-- `-o` / `--output_dir`: entity file output directory (default: current directory)
+- `-o` / `--output-dir`: entity file output directory (default: current directory)
   - It is recommanded to output entity files to a separate folder
 
 ```shell
