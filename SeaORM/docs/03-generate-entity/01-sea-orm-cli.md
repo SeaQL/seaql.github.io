@@ -1,6 +1,6 @@
 # Using `sea-orm-cli`
 
-First, install `sea-orm-cli` with `cargo install`.
+First, install `sea-orm-cli` with `cargo`.
 
 ```shell
 $ cargo install sea-orm-cli
@@ -19,10 +19,10 @@ DATABASE_URL=sql://username:password@localhost/database
 Use `-h` flag on any CLI command or subcommand for help.
 
 ```shell
-# Show all available commands
+# List all available commands
 $ sea-orm-cli -h
 
-# Show all subcommand available in `generate` command
+# List all subcommands available in `generate` command
 $ sea-orm-cli generate -h
 
 # Show how to use `generate entity` subcommand
@@ -33,21 +33,14 @@ $ sea-orm-cli generate entity -h
 
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
 
-Command options:
-- `-url` / `--database-url`: database URL (default: DATABASE_URL specified in env file)
-- `-schema` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in env file)
+Command line options:
+- `-url` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
+- `-schema` / `--database-schema`: database schema (optional; default: DATABASE_SCHEMA specified in ENV)
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
-  - It is recommanded to output entity files to a separate folder
 
 ```shell
-# Generate entity files to `src/entity` folder
-$ sea-orm-cli generate entity -o src/entity
-
-# Generate entity files with explicit database URL and schema
+# Generate entity files of database `bakery` to `src/entity`
 $ sea-orm-cli generate entity \
-    -url mysql://sea:sea@localhost/bakery \
-    -schema bakery \
+    -url sql://sea:sea@localhost/bakery \
     -o src/entity
 ```
-
-See the full working example [here](https://github.com/SeaQL/sea-orm/tree/master/examples/cli).
