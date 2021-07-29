@@ -41,6 +41,8 @@ Now, let's see how can we mitigate these errors:
 
 ### 1. Type Errors
 
+Using Rust automatically saves your from misspelling symbols.
+
 Using a *completely static* query builder (like Diesel) can eliminate this entire class of errors. However, it requires that every parameter to be defined statically and available compile-time. This is a *harsh* requirement, as there are always something you could not know until your program starts (environment variables) and running (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
 
 As such, SeaORM does not attempt to check things compile-time. We intend to (still in development) provide you runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
