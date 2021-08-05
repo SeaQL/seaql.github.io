@@ -1,4 +1,4 @@
-# Raw SQL & JSON
+# Raw SQL
 
 ## Query by raw SQL
 
@@ -30,29 +30,18 @@ assert_eq!(
 );
 ```
 
-## Select JSON Result
+## Use Raw Query & Execute Interface
 
-All SeaORM selects are capable of returning `serde_json::Value`.
+You can build SQL statement using `sea-query` and query / execute it directly on the `DatabaseConnection` interface inside SeaORM.
+
+### Get Custom Result using `query_one` and `query_all` methods
 
 ```rust
-// Find by id
-let _: Option<serde_json::Value> = Cake::find_by_id(1)
-    .into_json()
-    .one(db)
-    .await?;
 
-// Find with filter
-let _: Vec<serde_json::Value> = Cake::find()
-    .filter(cake::Column::Name.contains("chocolate"))
-    .order_by_asc(cake::Column::Name)
-    .into_json()
-    .all(db)
-    .await?;
+```
 
-// Paginate json result
-let _: Paginator<_> = Cake::find()
-    .filter(cake::Column::Name.contains("chocolate"))
-    .order_by_asc(cake::Column::Name)
-    .into_json()
-    .paginate(db, 50);
+### Execute Query using `execute` method
+
+```rust
+
 ```
