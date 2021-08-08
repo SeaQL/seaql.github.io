@@ -47,12 +47,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Introduction',
-              to: '/docs/introduction/orm',
+              label: 'Getting Started',
+              to: '/docs/index',
             },
             {
-              label: 'Getting Started',
-              to: '/docs/install-and-config/database-and-async-runtime',
+              label: 'API Reference',
+              to: 'https://docs.rs/sea-orm/latest/sea_orm/',
             },
           ],
         },
