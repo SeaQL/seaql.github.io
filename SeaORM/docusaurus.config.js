@@ -63,10 +63,10 @@ module.exports = {
               label: 'GitHub',
               href: 'https://github.com/SeaQL/sea-orm/discussions',
             },
-            // {
-            //   label: 'Discord',
-            //   href: 'https://discordapp.com/',
-            // },
+            {
+              label: 'Discord',
+              href: 'https://discord.com/invite/uCPdDXzbdv',
+            },
             {
               label: 'Twitter',
               href: 'https://twitter.com/sea_ql',
