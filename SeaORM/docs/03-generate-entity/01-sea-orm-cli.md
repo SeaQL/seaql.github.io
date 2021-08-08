@@ -34,13 +34,14 @@ $ sea-orm-cli generate entity -h
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
 
 Command line options:
-- `-url` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
-- `-schema` / `--database-schema`: database schema (optional; default: DATABASE_SCHEMA specified in ENV)
+- `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
+- `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 
 ```shell
 # Generate entity files of database `bakery` to `src/entity`
 $ sea-orm-cli generate entity \
-    -url sql://sea:sea@localhost/bakery \
+    -u sql://sea:sea@localhost/bakery \
+    -s bakery
     -o src/entity
 ```
