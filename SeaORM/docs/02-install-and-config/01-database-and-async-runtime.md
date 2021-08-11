@@ -38,9 +38,3 @@ Tip 2: `native-tls` uses platform's native security facilities, while `rustls` i
 `debug-print` - print every SQL statement to stdout
 
 `mock` - mock interface for unit testing
-
-`sqlx-json` - interoperate with `sqlx` and `serde_json`
-
-`sqlx-chrono` - interoperate with `sqlx` and `chrono`
-
-`sqlx-decimal` - interoperate with `sqlx` and `rust_decimal`
