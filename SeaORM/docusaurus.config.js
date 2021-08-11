@@ -10,6 +10,9 @@ module.exports = {
   organizationName: 'SeaQL',
   projectName: 'sea-orm',
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       title: 'SeaORM',
       logo: {
