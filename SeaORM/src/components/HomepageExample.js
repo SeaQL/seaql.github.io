@@ -137,7 +137,10 @@ export default function HomepageCompare() {
                       language="rust"
                     >
                       {({ className, tokens, getLineProps, getTokenProps }) => (
-                        <pre className={`${className}`}>
+                        <pre
+                          className={`${className}`}
+                          style={{ backgroundColor: isDarkTheme ? '#111' : '#fff' }}
+                        >
                           {tokens.map((line, i) => (
                             <div {...getLineProps({ line, key: i })}>
                               {line.map((token, key) => (
