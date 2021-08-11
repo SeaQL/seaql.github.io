@@ -36,9 +36,9 @@
 
 	3.5 DELETE: delete one & delete many
 
-	3.6 Raw SQL query
+	3.6 JSON
 
-	3.7 JSON
+	3.7 Raw SQL query
 
 ## Learn More
 

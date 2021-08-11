@@ -8,7 +8,7 @@ The `Entity` trait provides an API for you to inspect it's properties ([`Column`
 
 Each table have multiple columns, and those are called `attribute`.
 
-These attributes and their [`Value`](#) are grouped in a Rust struct so that you can manipulate them, and we call them [`Model`](/docs/generate-entity/entity-structure#model).
+These attributes and their values are grouped in a Rust struct so that you can manipulate them, and we call them [`Model`](/docs/generate-entity/entity-structure#model).
 
 However, `Model` is for read operations only. To perform insert, update or delete, you need to use an [`ActiveModel`](/docs/generate-entity/entity-structure#active-model) which attaches meta-data on each attribute.
 

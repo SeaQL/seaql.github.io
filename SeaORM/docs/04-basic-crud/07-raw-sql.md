@@ -4,6 +4,8 @@
 
 You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for Postgres.
 
+TODO: to select into a custom model using `into_model`
+
 ```rust
 let cheese: Option<cake::Model> = cake::Entity::find().from_raw_sql(
     Statement::from_sql_and_values(

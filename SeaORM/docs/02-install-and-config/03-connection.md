@@ -1,6 +1,6 @@
 # Connection Pool
 
-To obtain a database connection, you can simply:
+To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/0.x/sea_orm/struct.Database.html) interface:
 
 ```rust
 let db: DatabaseConnection = Database::connect("sql://username:password@localhost/database").await?;
