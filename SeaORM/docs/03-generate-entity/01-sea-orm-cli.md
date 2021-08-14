@@ -39,12 +39,11 @@ Command line options:
     - For MySQL, this argument is ignored
     - For PostgreSQL, this argument is optional with default value 'public'
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
-- `--include-hidden-tables`: generate entity file for hidden tables (i.e. table name starts with an underscore)
+- `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
 
 ```shell
 # Generate entity files of database `bakery` to `src/entity`
 $ sea-orm-cli generate entity \
     -u sql://sea:sea@localhost/bakery \
-    -s bakery
     -o src/entity
 ```
