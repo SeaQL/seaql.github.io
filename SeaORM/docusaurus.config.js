@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'SeaORM',
-  tagline: '🐚 An async & dynamic ORM for Rust',
+  title: 'SeaORM - 🐚 An async & dynamic ORM for Rust',
+  tagline: 'SeaORM - 🐚 An async & dynamic ORM for Rust',
   url: 'https://www.sea-ql.org/',
   baseUrl: '/SeaORM/',
   onBrokenLinks: 'throw',
