@@ -27,7 +27,7 @@ function HomepageHeader() {
       <div className="container">
         <img id="homepageLogo" width="90%" src="/SeaORM/img/SeaORM logo.png" />
         <img id="homepageBanner" width="90%" src="/SeaORM/img/SeaORM banner.png" />
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">SeaORM is an async & dynamic relational ORM<br/>to help you build light weight and concurrent web services<br/>in Rust.</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
