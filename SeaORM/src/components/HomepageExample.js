@@ -1,6 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
@@ -110,9 +110,28 @@ fruit::Entity::delete_many()
 ];
 
 export default function HomepageCompare() {
-  const prism  = useDocusaurusContext().siteConfig.themeConfig.prism;
+  const {
+    siteConfig: {
+      themeConfig: { prism = {} },
+    },
+  } = useDocusaurusContext();
+
+  const [mounted, setMounted] = useState(false);
+  // The Prism theme on SSR is always the default theme but the site theme
+  // can be in a different mode. React hydration doesn't update DOM styles
+  // that come from SSR. Hence force a re-render after mounting to apply the
+  // current relevant styles. There will be a flash seen of the original
+  // styles seen using this current approach but that's probably ok. Fixing
+  // the flash will require changing the theming approach and is not worth it
+  // at this point.
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { isDarkTheme } = useThemeContext();
-  const theme = isDarkTheme ? prism.darkTheme : prism.theme;
+  const lightModeTheme = prism.theme;
+  const darkModeTheme = prism.darkTheme || lightModeTheme;
+  const prismTheme = isDarkTheme ? darkModeTheme : lightModeTheme;
 
   return (
     <section className={clsx('home-section', 'home-section-alt', styles.features)}>
@@ -133,7 +152,8 @@ export default function HomepageCompare() {
                     <Highlight
                       {...defaultProps}
                       code={code}
-                      theme={theme}
+                      key={mounted}
+                      theme={prismTheme}
                       language="rust"
                     >
                       {({ className, tokens, getLineProps, getTokenProps }) => (
