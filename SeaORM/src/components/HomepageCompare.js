@@ -39,7 +39,7 @@ export default function HomepageCompare() {
                 <td colSpan="2">Schema first</td>
               </tr>
               <tr>
-                <td colSpan="2">With Cli tools</td>
+                <td colSpan="2">MySQL / Postgres / SQLite</td>
               </tr>
             </table>
           </div>
