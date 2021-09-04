@@ -6,8 +6,8 @@ This is an helper method to save (insert / update) `ActiveModel` into database.
 
 When saving an `ActiveModel`, it will perform either insert or update depends on the primary key attribute:
 
-- Insert if primary key is `Unset` (or `Unchanged`)
-- Update if primary key is `Set`
+- Insert if primary key is `Unset`
+- Update if primary key is `Set` or `Unchanged`
 
 ## Usage
 
