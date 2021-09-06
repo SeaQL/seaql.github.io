@@ -34,26 +34,55 @@ pub async fn setup() -> DatabaseConnection {
 
 ## Setting Up Database Schema
 
-Setup schema of SQLite database with SeaQuery query builder.
-
-> Instead of manually writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html), you can derive it from `Entity` using [`entity_to_table_create_statement`](https://docs.rs/sea-orm/*/sea_orm/entity/fn.entity_to_table_create_statement.html). See an example [here](https://github.com/SeaQL/sea-orm/blob/4b2019ff4e0fb00fd5b8785ead6b5f8772721adf/src/entity/schema.rs#L120-L160).
+Setup schema of SQLite database with SeaQuery query builder. Instead of manually writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html), you can derive it from `Entity` using [`create_table_from_entity`](#).
 
 ```rust
 async fn setup_schema(db: &DbConn) {
     use sea_query::*;
 
     // Build create table statement
-    let stmt = sea_query::Table::create()
-        .table(cake::Entity)
-        .col(
-            ColumnDef::new(cake::Column::Id)
-                .integer()
-                .not_null()
-                .auto_increment()
-                .primary_key(),
-        )
-        .col(ColumnDef::new(cake::Column::Name).string())
-        .build(SqliteQueryBuilder);
+    let stmt = create_table_from_entity(CakeFillingPrice).build(SqliteQueryBuilder);
+
+    // It constructs a TableCreateStatement based on the entity file
+    assert_eq!(
+        stmt,
+        Table::create()
+            .table(CakeFillingPrice)
+            .if_not_exists()
+            .col(
+                ColumnDef::new(cake_filling_price::Column::CakeId)
+                    .integer()
+                    .not_null()
+            )
+            .col(
+                ColumnDef::new(cake_filling_price::Column::FillingId)
+                    .integer()
+                    .not_null()
+            )
+            .col(
+                ColumnDef::new(cake_filling_price::Column::Price)
+                    .decimal()
+                    .not_null()
+            )
+            .primary_key(
+                Index::create()
+                    .name("pk-cake_filling_price")
+                    .col(cake_filling_price::Column::CakeId)
+                    .col(cake_filling_price::Column::FillingId)
+                    .primary()
+            )
+            .foreign_key(
+                ForeignKeyCreateStatement::new()
+                    .name("fk-cake_filling_price-cake_filling")
+                    .from_tbl(CakeFillingPrice)
+                    .from_col(cake_filling_price::Column::CakeId)
+                    .from_col(cake_filling_price::Column::FillingId)
+                    .to_tbl(CakeFilling)
+                    .to_col(cake_filling::Column::CakeId)
+                    .to_col(cake_filling::Column::FillingId)
+            )
+            .build(SqliteQueryBuilder)
+    );
 
     // Execute create table statement
     let result = db
