@@ -8,7 +8,7 @@ Lets go through the sections of the example [cake](https://github.com/SeaQL/sea-
 
 ## Entity
 
-By implementing the [`EntityTrait`](https://docs.rs/sea-orm/0.x/sea_orm/entity/trait.EntityTrait.html), you can perform CRUD operations on the given table.
+By implementing the [`EntityTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html), you can perform CRUD operations on the given table.
 
 ```rust
 #[derive(Copy, Clone, Default, Debug, DeriveEntity)]
@@ -54,7 +54,7 @@ pub enum Column {
 }
 ```
 
-To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-orm/0.x/sea_orm/entity/enum.ColumnType.html) enum can be used.
+To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html) enum can be used.
 
 ### Additional properties
 
@@ -131,7 +131,7 @@ pub struct Model {
 
 ## Active Model
 
-The `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/0.x/sea_orm/entity/struct.ActiveValue.html).
+The `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/*/sea_orm/entity/struct.ActiveValue.html).
 
 ```rust
 #[derive(Clone, Debug, PartialEq)]
