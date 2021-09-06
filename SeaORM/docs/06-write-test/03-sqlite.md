@@ -36,6 +36,8 @@ pub async fn setup() -> DatabaseConnection {
 
 Setup schema of SQLite database with SeaQuery query builder.
 
+> Instead of manually writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html), you can derive it from `Entity` using [`entity_to_table_create_statement`](https://docs.rs/sea-orm/*/sea_orm/entity/fn.entity_to_table_create_statement.html). See an example [here](https://github.com/SeaQL/sea-orm/blob/4b2019ff4e0fb00fd5b8785ead6b5f8772721adf/src/entity/schema.rs#L120-L160).
+
 ```rust
 async fn setup_schema(db: &DbConn) {
     use sea_query::*;
