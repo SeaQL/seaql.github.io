@@ -4,14 +4,34 @@
 
 You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for Postgres.
 
-TODO: to select into a custom model using `into_model`
+```rust
+let cheese: Option<cake::Model> = cake::Entity::find()
+    .from_raw_sql(Statement::from_sql_and_values(
+        DbBackend::Postgres,
+        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
+        vec![1.into()],
+    ))
+    .one(&db)
+    .await?;
+```
+
+You can also select a custom model. Here, we select all unique names from cake.
 
 ```rust
-let cheese: Option<cake::Model> = cake::Entity::find().from_raw_sql(
-    Statement::from_sql_and_values(
-        DbBackend::Postgres, r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#, vec![1.into()]
-    )
-).one(&db).await?;
+#[derive(Debug, FromQueryResult)]
+pub struct UniqueCake {
+    name: String,
+}
+
+let unique: Vec<UniqueCake> = cake::Entity::find()
+    .from_raw_sql(Statement::from_sql_and_values(
+        DbBackend::Postgres,
+        r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
+        vec![1.into()],
+    ))
+    .into_model()
+    .all(&db)
+    .await?;
 ```
 
 ## Get raw SQL query
@@ -39,11 +59,31 @@ You can build SQL statement using `sea-query` and query / execute it directly on
 ### Get Custom Result using `query_one` and `query_all` methods
 
 ```rust
+let query_res: Option<QueryResult> = db
+    .query_one(Statement::from_string(
+        DatabaseBackend::MySql,
+        "SELECT * FROM `cake`;".to_owned(),
+    ))
+    .await?;
+let query_res = query_res.unwrap();
+let id: i32 = query_res.try_get("", "id")?;
 
+let query_res_vec: Vec<QueryResult> = db
+    .query_all(Statement::from_string(
+        DatabaseBackend::MySql,
+        "SELECT * FROM `cake`;".to_owned(),
+    ))
+    .await?;
 ```
 
 ### Execute Query using `execute` method
 
 ```rust
-
+let exec_res: ExecResult = db
+    .execute(Statement::from_string(
+        DatabaseBackend::MySql,
+        "DROP DATABASE IF EXISTS `sea`;".to_owned(),
+    ))
+    .await?;
+assert_eq!(exec_res.rows_affected(), 1);
 ```
