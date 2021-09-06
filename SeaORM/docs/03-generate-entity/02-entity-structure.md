@@ -70,10 +70,22 @@ ColumnType::String(None).def().unique().indexed().null()
 
 An enum representing the primary key of this table. If it is a composite key, then multiple enum variants can be added.
 
+The `ValueType` define the return type of last insert id in [`InsertResult`](https://docs.rs/sea-orm/*/sea_orm/struct.InsertResult.html). if it is a composite key, then a tuple can be defined to represent it.
+
+The `auto_increment` define if the primary key has to be set or not during insert.
+
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DerivePrimaryKey)]
 pub enum PrimaryKey {
     Id,
+}
+
+impl PrimaryKeyTrait for PrimaryKey {
+    type ValueType = i32;
+
+    fn auto_increment() -> bool {
+        true
+    }
 }
 ```
 
@@ -83,6 +95,14 @@ Composite key
 pub enum PrimaryKey {
     CakeId,
     FruitId,
+}
+
+impl PrimaryKeyTrait for PrimaryKey {
+    type ValueType = (i32, i32);
+
+    fn auto_increment() -> bool {
+        false
+    }
 }
 ```
 
