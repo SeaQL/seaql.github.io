@@ -127,7 +127,7 @@ mod tests {
         };
 
         // Insert the ActiveModel into MockDatabase
-        let insert_result = cake::Entity::insert(apple).exec(&db).await?;
+        let insert_result = apple.insert(&db).await?;
 
         // Checking last insert id
         assert_eq!(insert_result.last_insert_id, 15);

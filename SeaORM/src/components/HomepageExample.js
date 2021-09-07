@@ -49,7 +49,7 @@ let pear = fruit::ActiveModel {
 };
  
 // insert one
-let res: InsertResult = Fruit::insert(pear).exec(db).await?;
+let res: InsertResult = pear.insert(db).await?;
  
 println!("InsertResult: {}", res.last_insert_id);
  
