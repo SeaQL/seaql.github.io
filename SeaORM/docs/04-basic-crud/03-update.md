@@ -13,8 +13,14 @@ let mut pear: fruit::ActiveModel = pear.unwrap().into();
 // Update name attribute
 pear.name = Set("Sweet pear".to_owned());
 
-// Update corresponding row in database
-let pear: fruit::ActiveModel = Fruit::update(pear).exec(db).await?;
+// Update corresponding row in database using primary key value
+let pear: fruit::ActiveModel = pear.update(db).await?;
+
+// Update corresponding row in database using custom filter
+let pear: fruit::ActiveModel = Fruit::update(pear)
+    .filter(fruit::Column::Id.eq(1))
+    .exec(db)
+    .await?;
 ```
 
 ## Update Many

@@ -49,7 +49,7 @@ let pear = fruit::ActiveModel {
 };
  
 // insert one
-let res: InsertResult = Fruit::insert(pear).exec(db).await?;
+let res: InsertResult = pear.insert(db).await?;
  
 println!("InsertResult: {}", res.last_insert_id);
  
@@ -66,7 +66,7 @@ let mut pear: fruit::ActiveModel = pear.unwrap().into();
 pear.name = Set("Sweet pear".to_owned());
  
 // update one
-let pear: fruit::ActiveModel = Fruit::update(pear).exec(db).await?;
+let pear: fruit::ActiveModel = pear.update(db).await?;
  
 // update many: UPDATE "fruit" SET "cake_id" = NULL WHERE "fruit"."name" LIKE '%Apple%'
 Fruit::update_many()

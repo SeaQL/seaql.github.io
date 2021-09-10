@@ -42,7 +42,7 @@ let pear = fruit::ActiveModel {
     ..Default::default() // all other attributes are `Unset`
 };
 
-let res: InsertResult = Fruit::insert(pear).exec(db).await?;
+let res: InsertResult = pear.insert(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
