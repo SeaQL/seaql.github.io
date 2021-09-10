@@ -78,6 +78,7 @@ assert_eq!(
         r#"FROM `filling`"#,
         r#"INNER JOIN `cake_filling` ON `cake_filling`.`filling_id` = `filling`.`id`"#,
         r#"INNER JOIN `cake` ON `cake`.`id` = `cake_filling`.`cake_id`"#,
+        r#"WHERE `cake`.`id` = 12"#,
     ]
     .join(" ")
 );
