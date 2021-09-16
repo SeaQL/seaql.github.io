@@ -18,6 +18,8 @@
 
 	1.3 [Connection Pool](/docs/install-and-config/connection)
 
+	1.4 [Debug Log](/docs/install-and-config/debug-log)
+
 2. Generating Entities
 
 	2.1 [Using `sea-orm-cli`](/docs/generate-entity/sea-orm-cli)
