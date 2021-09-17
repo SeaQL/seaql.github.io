@@ -1,6 +1,6 @@
 # Compact Entity Structure
 
-Lets look at a basic [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) entity.
+Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) entity.
 
 ```rust
 use sea_orm::entity::prelude::*;
