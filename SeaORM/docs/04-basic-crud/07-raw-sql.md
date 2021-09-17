@@ -23,13 +23,11 @@ pub struct UniqueCake {
     name: String,
 }
 
-let unique: Vec<UniqueCake> = cake::Entity::find()
-    .from_raw_sql(Statement::from_sql_and_values(
+let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
         vec![1.into()],
     ))
-    .into_model()
     .all(&db)
     .await?;
 ```
