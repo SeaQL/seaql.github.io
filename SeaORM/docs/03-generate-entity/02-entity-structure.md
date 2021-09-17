@@ -57,11 +57,11 @@ The column type will be derived automatically with the following mapping:
 | NaiveDate | Date |
 | NaiveTime | Time |
 | DateTime (chrono::NaiveDateTime) | DateTime |
-| DateTimeWithTimeZone (chrono::DateTime<FixedOffset>) | TimestampWithTimeZone |
+| DateTimeWithTimeZone (chrono::DateTime&lt;FixedOffset&gt;) | TimestampWithTimeZone |
 | Uuid (uuid::Uuid) | Uuid |
 | Json (serde_json::Value) | Json |
 | Decimal (rust_decimal::Decimal) | Decimal |
-| Vec<u8> | Binary |
+| Vec&lt;u8&gt; | Binary |
 
 You can override the default mappings between Rust type and `ColumnType` by the `column_type` attribute.
 
