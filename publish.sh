@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 cd SeaORM
 npm run build
 rm -r ../docs/SeaORM
