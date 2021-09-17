@@ -29,6 +29,18 @@ $ sea-orm-cli generate -h
 $ sea-orm-cli generate entity -h
 ```
 
+## Enabling Verbose Mode
+
+Use `-v` flag on any CLI command or subcommand to print debug messages.
+
+```shell
+# Print debug messages of `generate entity` subcommand
+$ sea-orm-cli generate entity \
+    -u sql://sea:sea@localhost/bakery \
+    -o src/entity
+    -v
+```
+
 ## Generating Entity Files
 
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
