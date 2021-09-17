@@ -24,7 +24,9 @@
 
 	2.1 [Using `sea-orm-cli`](/docs/generate-entity/sea-orm-cli)
 
-	2.2 [Entity Structure Dissection](/docs/generate-entity/entity-structure)
+	2.2 [Expanded Entity Structure Dissection](/docs/generate-entity/expanded-entity-structure)
+
+	2.3 [Compact Entity Structure Dissection](/docs/generate-entity/compact-entity-structure)
 
 3. Basic CRUD
 
