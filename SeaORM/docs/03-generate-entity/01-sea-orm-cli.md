@@ -29,18 +29,6 @@ $ sea-orm-cli generate -h
 $ sea-orm-cli generate entity -h
 ```
 
-## Enabling Verbose Mode
-
-Use `-v` flag on any CLI command or subcommand to print debug messages.
-
-```shell
-# Print debug messages of `generate entity` subcommand
-$ sea-orm-cli generate entity \
-    -u sql://sea:sea@localhost/bakery \
-    -o src/entity
-    -v
-```
-
 ## Generating Entity Files
 
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
@@ -51,8 +39,9 @@ Command line options:
     - For MySQL, this argument is ignored
     - For PostgreSQL, this argument is optional with default value 'public'
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
+- `-v` / `--verbose`: print debug messages
 - `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
-- `--compact-format`: Generate entity file of [compact format](/docs/generate-entity/compact-entity-structure) (default: true)
+- `--compact-format`: Generate entity file of [compact format](/docs/generate-entity/entity-structure) (default: true)
 - `--expanded-format`: Generate entity file of [expanded format](/docs/generate-entity/expanded-entity-structure)
 
 ```shell

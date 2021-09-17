@@ -32,7 +32,6 @@ The `table_name` attribute specify the corresponding table in database.
 Optionally, you can also specify the database schema by `schema_name` (Postgres only).
 
 ```rust
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "cake", schema_name = "public")]
 pub struct Model { ... }
 ```

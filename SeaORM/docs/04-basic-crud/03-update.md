@@ -17,7 +17,8 @@ pear.name = Set("Sweet pear".to_owned());
 let pear: fruit::ActiveModel = pear.update(db).await?;
 
 // Update corresponding row in database using custom filter
-let pear: fruit::ActiveModel = Fruit::update(pear)
+let pear: fruit::ActiveModel = Fruit::update_many()
+    .set(pear)
     .filter(fruit::Column::Id.eq(1))
     .exec(db)
     .await?;
