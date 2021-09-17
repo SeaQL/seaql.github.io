@@ -1,5 +1,5 @@
 ---
-slug: 2021-09-12-a-quick-tour
+slug: 2021-09-20-introducing-sea-orm
 title: This month in SeaQL
 author: Chris Tsang
 author_title: SeaQL Team
