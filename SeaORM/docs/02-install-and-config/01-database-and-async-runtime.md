@@ -35,6 +35,6 @@ Tip 2: `native-tls` uses platform's native security facilities, while `rustls` i
 
 ## Extra features
 
-`debug-print` - print every SQL statement to stdout
+`debug-print` - print every SQL statement to logger
 
 `mock` - mock interface for unit testing
