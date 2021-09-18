@@ -144,7 +144,4 @@ impl RelationTrait for Relation {
 }
 ```
 
-Learn more in the next section.
-
-- [Relation](/docs/generate-entity/expanded-entity-structure#relation)
-- [Related](/docs/generate-entity/expanded-entity-structure#related)
+Learn more about relations in the next section.

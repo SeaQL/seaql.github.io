@@ -1,6 +1,6 @@
 # Many to Many
 
-A many-to-many relation is formed by three tables, two end tables are related via an intermediate table. For example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
+A many-to-many relation is formed by three tables, where two tables are related via a junction table. As an example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
 
 ## Defining the Relation
 
@@ -8,17 +8,20 @@ On the `Cake` entity, implement the `Related<filling::Entity>` trait. First, joi
 
 ```rust title="entity/cake.rs"
 impl Related<super::filling::Entity> for Entity {
+    // The final relation is Cake -> CakeFilling -> Filling
     fn to() -> RelationDef {
         super::cake_filling::Relation::Filling.def()
     }
 
     fn via() -> Option<RelationDef> {
+        // The original relation is CakeFilling -> Cake,
+        // after `rev` it becomes Cake -> CakeFilling
         Some(super::cake_filling::Relation::Cake.def().rev())
     }
 }
 ```
 
-On the `Filling` entity, implement the `Related<cake::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Filling` relation, then join `to` `Cake` entity  with `cake_filling::Relation::Cake` relation.
+Similarly, on the `Filling` entity, implement the `Related<cake::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Filling` relation, then join `to` `Cake` entity  with `cake_filling::Relation::Cake` relation.
 
 ```rust title="entity/filling.rs"
 impl Related<super::cake::Entity> for Entity {
@@ -41,6 +44,7 @@ To define the inverse relation:
 1. Write the definition of both relations with `Entity::belongs_to()` method.
 
 ```rust title="entity/cake_filling.rs"
+#[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Cake,
     Filling,
@@ -59,5 +63,26 @@ impl RelationTrait for Relation {
                 .into(),
         }
     }
+}
+```
+
+Alternatively, the definition can be shortened by the `DeriveRelation` macro,
+where the following is equivalent to above:
+
+```rust
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::cake::Entity",
+        from = "Column::CakeId",
+        to = "super::cake::Column::Id"
+    )]
+    Cake,
+    #[sea_orm(
+        belongs_to = "super::filling::Entity",
+        from = "Column::FillingId",
+        to = "super::filling::Column::Id"
+    )]
+    Filling,
 }
 ```

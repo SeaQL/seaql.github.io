@@ -59,5 +59,4 @@ impl Related<super::cake::Entity> for Entity {
         Relation::Cake.def()
     }
 }
-// ...
 ```
