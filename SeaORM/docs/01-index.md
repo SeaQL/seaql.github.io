@@ -54,6 +54,8 @@
 
 	4.3 [Many to Many](/docs/relation/many-to-many)
 
+	4.4 [Bakery Schema](/docs/relation/bakery-schema)
+
 5. Writing Tests
 
 	5.1 [Robust & Correct](/docs/write-test/testing)

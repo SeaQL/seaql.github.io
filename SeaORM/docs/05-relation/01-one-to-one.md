@@ -9,14 +9,7 @@ On the `Cake` entity, to define the relation:
 1. Write the definition of it with the `Entity::has_one()` method.
 1. Implement the `Related<fruit::Entity>` trait.
 
-```rust {9,15,20} title="entity/cake.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
-pub enum Column {
-    Id,
-    Name,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter)]
+```rust {2,8,13} title="entity/cake.rs"
 pub enum Relation {
     Fruit,
 }
@@ -34,7 +27,6 @@ impl Related<super::fruit::Entity> for Entity {
         Relation::Fruit.def()
     }
 }
-// ...
 ```
 
 ## Defining the Inverse Relation

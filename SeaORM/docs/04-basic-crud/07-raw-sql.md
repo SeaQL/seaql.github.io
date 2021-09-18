@@ -26,7 +26,7 @@ pub struct UniqueCake {
 let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
-        vec![1.into()],
+        vec![],
     ))
     .all(&db)
     .await?;

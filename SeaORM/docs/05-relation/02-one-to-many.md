@@ -6,14 +6,7 @@ An one-to-many relation is similar to one-to-one relation. In previous section w
 
 This is almost identical to defining an one-to-one relation, the only different is that we use `Entity::has_many()` method here.
 
-```rust {9,15,20} title="entity/cake.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
-pub enum Column {
-    Id,
-    Name,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter)]
+```rust {2,8,13} title="entity/cake.rs"
 pub enum Relation {
     Fruit,
 }
@@ -31,7 +24,6 @@ impl Related<super::fruit::Entity> for Entity {
         Relation::Fruit.def()
     }
 }
-// ...
 ```
 
 ## Defining the Inverse Relation
