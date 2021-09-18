@@ -1,5 +1,9 @@
 # Derive Macros
 
+## EntityModel
+
+The [`EntityModel`](#) derive macro is the 'almighty' macro which would automatically generate `Entity`, `Column` and `PrimaryKey` from a given `Model`.
+
 ## Entity
 
 The [`DeriveEntity`](#) derive macro will implement [`EntityTrait`](#) for `Entity` and it assumes `Model`, `Column`, `PrimaryKey` and `Relation` exist in the current scope. It also provides implementation of [`Iden`](#) and [`IdenStatic`](#) for `Entity`.
@@ -22,4 +26,8 @@ The [`DeriveActiveModel`](#) derive macro will implement [`ActiveModelTrait`](#)
 
 ## Relation
 
-The [`EnumIter`](#) is derived allowing iteration over all enum variants.
+The [`DeriveRelation`](#) derive macro will implement [`RelationTrait`](#) for `Relation`.
+
+## Iterable
+
+The [`EnumIter`](#) derived macro will implement [`Iterable`](#) to allow iteration over all enum variants.
