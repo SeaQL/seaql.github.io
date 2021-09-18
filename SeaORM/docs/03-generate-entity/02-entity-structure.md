@@ -1,4 +1,4 @@
-# Compact Entity Structure
+# Entity Structure
 
 Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) entity.
 
