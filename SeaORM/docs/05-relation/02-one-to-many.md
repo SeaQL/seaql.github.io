@@ -30,14 +30,7 @@ impl Related<super::fruit::Entity> for Entity {
 
 It is the same as defining the one-to-one inverse relation.
 
-```rust {10,16,24} title="entity/fruit.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
-pub enum Column {
-    Id,
-    Name,
-    CakeId,
-}
-
+```rust title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Cake,
