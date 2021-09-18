@@ -15,22 +15,20 @@ pear.name = Set("Sweet pear".to_owned());
 
 // Update corresponding row in database using primary key value
 let pear: fruit::ActiveModel = pear.update(db).await?;
-
-// Update corresponding row in database using custom filter
-let pear: fruit::ActiveModel = Fruit::update_many()
-    .set(pear)
-    .filter(fruit::Column::Id.eq(1))
-    .exec(db)
-    .await?;
 ```
 
 ## Update Many
 
 You can also update multiple rows in the database without finding each `Model` with SeaORM select.
 
-For example, we set "cake_id" column to null for all fruits with name contains "apple".
-
 ```rust
+// Bulk set attributes using ActiveModel
+let pear: fruit::ActiveModel = Fruit::update_many()
+    .set(pear)
+    .filter(fruit::Column::Id.eq(1))
+    .exec(db)
+    .await?;
+
 // UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'
 Fruit::update_many()
     .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
