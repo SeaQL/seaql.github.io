@@ -8,7 +8,7 @@ The mock database has no data in it, so you have to define the expected data to 
 
 To ensure the correctness of your application logic you can also validate the transaction log in the mock database.
 
-> Checkout how we write unit test for the paginator API [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L103).
+> Checkout how we write unit test for the paginator API [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L159).
 
 ## Mocking Query Result
 

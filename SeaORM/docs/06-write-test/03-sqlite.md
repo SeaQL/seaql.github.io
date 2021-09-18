@@ -6,81 +6,44 @@ If you want to unit test application logic that does not require database-specif
 
 ## Running Unit Test
 
-By default Rust run all tests in parallel and each test should be independent of other, so if we need a single entry point for it to perform sequential operations. Then, we have the following code snippet connecting to database, setting up database schema and performing CRUD operations in sequence.
+By default Rust run all tests in parallel and each test should be independent of other, so if we need a single entry point for it to perform sequential operations. Then, we have the following code snippet connecting to database, setting up database schema and performing tests in sequence.
 
 ```rust
-#[async_std::test]
-async fn main() {
+async fn main() -> Result<(), DbErr> {
     // Connecting SQLite
-    let db: DbConn = setup().await;
+    let db = Database::connect("sqlite::memory:").await?;
 
-    // Setting up database schema
-    setup_schema(&db).await;
+    // Setup database schema
+    setup_schema(&db).await?;
 
-    // Performing CRUD operations
-    perform_tests(&db).await.unwrap();
+    // Performing tests
+    testcase(&db).await?;
+
+    Ok(())
 }
 ```
 
-## Connecting SQLite
+## Setup database schema
 
-Connect to in memory SQLite database.
-
-```rust
-pub async fn setup() -> DatabaseConnection {
-    Database::connect("sqlite::memory:").await.unwrap()
-}
-```
-
-## Setting Up Database Schema
-
-Setup schema of SQLite database with SeaQuery query builder. Instead of manually writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html), you can derive it from `Entity` using [`create_table_from_entity`](#).
+To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity).
 
 ```rust
 async fn setup_schema(db: &DbConn) {
-    use sea_query::*;
 
-    // Build create table statement
-    let stmt = create_table_from_entity(CakeFillingPrice).build(SqliteQueryBuilder);
+    // Derive from Entity
+    let stmt: TableCreateStatement = Schema::create_table_from_entity(MyEntity);
 
-    // It constructs a TableCreateStatement based on the entity file
+    // Or setup manually
     assert_eq!(
-        stmt,
+        stmt.build(SqliteQueryBuilder),
         Table::create()
-            .table(CakeFillingPrice)
-            .if_not_exists()
+            .table(MyEntity)
             .col(
-                ColumnDef::new(cake_filling_price::Column::CakeId)
+                ColumnDef::new(MyEntity::Column::Id)
                     .integer()
                     .not_null()
             )
-            .col(
-                ColumnDef::new(cake_filling_price::Column::FillingId)
-                    .integer()
-                    .not_null()
-            )
-            .col(
-                ColumnDef::new(cake_filling_price::Column::Price)
-                    .decimal()
-                    .not_null()
-            )
-            .primary_key(
-                Index::create()
-                    .name("pk-cake_filling_price")
-                    .col(cake_filling_price::Column::CakeId)
-                    .col(cake_filling_price::Column::FillingId)
-                    .primary()
-            )
-            .foreign_key(
-                ForeignKeyCreateStatement::new()
-                    .name("fk-cake_filling_price-cake_filling")
-                    .from_tbl(CakeFillingPrice)
-                    .from_col(cake_filling_price::Column::CakeId)
-                    .from_col(cake_filling_price::Column::FillingId)
-                    .to_tbl(CakeFilling)
-                    .to_col(cake_filling::Column::CakeId)
-                    .to_col(cake_filling::Column::FillingId)
-            )
+            //...
             .build(SqliteQueryBuilder)
     );
 
@@ -88,33 +51,33 @@ async fn setup_schema(db: &DbConn) {
     let result = db
         .execute(Statement::from_string(DbBackend::Sqlite, stmt))
         .await;
-    println!("Create table cake: {:?}", result);
 }
 ```
 
-## Performing CRUD Operations
+## Performing tests
 
-Perform CRUD operations on SQLite database.
+Execute testcases and assert against the results.
 
 ```rust
-async fn perform_tests(db: &DbConn) -> Result<(), DbErr> {
-    // Insert
-    let apple = cake::ActiveModel {
-        name: Set("Apple Pie".to_owned()),
+async fn testcase(db: &DbConn) -> Result<(), DbErr> {
+
+    let baker_bob = baker::ActiveModel {
+        name: Set("Baker Bob".to_owned()),
+        contact_details: Set(serde_json::json!({
+            "mobile": "+61424000000",
+            "home": "0395555555",
+            "address": "12 Test St, Testville, Vic, Australia"
+        })),
+        bakery_id: Set(Some(bakery_insert_res.last_insert_id as i32)),
         ..Default::default()
     };
-    let mut apple = apple.save(db).await?;
 
-    // Update
-    apple.name = Set("Lemon Tart".to_owned());
-    let apple = apple.save(db).await?;
+    let baker_insert_res = Baker::insert(baker_bob)
+        .exec(db)
+        .await
+        .expect("could not insert baker");
 
-    // Retrieve
-    let apple = cake::Entity::find_by_id(1).one(db).await?;
-
-    // Delete
-    let apple: cake::ActiveModel = apple.unwrap().into();
-    let result = apple.delete(db).await?;
+    assert_eq!(baker_insert_res.last_insert_id, 1);
 
     Ok(())
 }

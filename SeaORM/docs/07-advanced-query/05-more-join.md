@@ -36,7 +36,7 @@ assert_eq!(
 
 ## Linked
 
-If you have multiple join paths between two tables or have complex joins that involve multiple tables, you can define it with [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as an example. We join cake and filling via an intermediate cake_filling table.
+If you have multiple join paths between two tables or have complex joins that involve multiple tables, you can define it with [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as an example. We join cake and filling via an intermediate cake_filling table.
 
 ```rust
 #[derive(Debug)]
@@ -58,7 +58,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Use the [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Use the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 Linked models are loaded on demand when you ask for it, preferable if you want to load linked models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
