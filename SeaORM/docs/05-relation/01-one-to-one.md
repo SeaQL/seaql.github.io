@@ -5,9 +5,9 @@ An one-to-one relation is the most basic type of database relation. Let say a `C
 ## Defining the Relation
 
 On the `Cake` entity, to define the relation:
-1. Add a new enum variant `Relation::Fruit` to the `Cake` entity.
-1. Write the definition of it with the `Entity::has_one()` method.
-1. Implement the `Related<fruit::Entity>` trait.
+1. Add a new variant `Fruit` to the `Relation` enum.
+1. Define it with `Entity::has_one()`.
+1. Implement the `Related<Entity>` trait.
 
 ```rust title="entity/cake.rs"
 pub enum Relation {

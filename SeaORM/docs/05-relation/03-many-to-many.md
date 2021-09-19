@@ -40,8 +40,8 @@ impl Related<super::cake::Entity> for Entity {
 On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity and its `filling_id` attribute is referencing the primary key of `Filling` entity.
 
 To define the inverse relation:
-1. Add two new enum variant `Relation::Cake` and `Relation::Filling` to the `Fruit` entity.
-1. Write the definition of both relations with `Entity::belongs_to()` method.
+1. Add two new variants `Cake` and `Filling` to the `Relation` enum.
+1. Define both relations with `Entity::belongs_to()`.
 
 ```rust title="entity/cake_filling.rs"
 #[derive(Copy, Clone, Debug, EnumIter)]
