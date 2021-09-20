@@ -134,9 +134,42 @@ async fn list(
 
 We are building more examples for other web frameworks too.
 
-## Contributors
+## People
 
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
+
+### Core Members
+
+<div class="container">
+    <div class="row">
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
+                    <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Chris Tsang
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
+                    <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Billy Chan
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+### Contributors
 
 As a courtesy, here is the list of SeaQL's early contributors (in alphabetic order):
 
@@ -156,12 +189,24 @@ As a courtesy, here is the list of SeaQL's early contributors (in alphabetic ord
         </div>
         <div class="col col--3 margin-bottom--md">
             <div class="avatar">
-                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
-                    <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/MozarellaMan">
+                    <img src="https://avatars.githubusercontent.com/u/48062697?v=4" />
                 </a>
                 <div class="avatar__intro">
                     <div class="avatar__name">
-                        Billy Chan
+                        Ayomide Bamidele
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/benarmstead">
+                    <img src="https://avatars.githubusercontent.com/u/70973680?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Ben Armstead
                     </div>
                 </div>
             </div>
@@ -180,12 +225,24 @@ As a courtesy, here is the list of SeaQL's early contributors (in alphabetic ord
         </div>
         <div class="col col--3 margin-bottom--md">
             <div class="avatar">
-                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
-                    <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Hirtol">
+                    <img src="https://avatars.githubusercontent.com/u/55356909?v=4" />
                 </a>
                 <div class="avatar__intro">
                     <div class="avatar__name">
-                        Chris Tsang
+                        Hirtol
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Follpvosten">
+                    <img src="https://avatars.githubusercontent.com/u/22855787?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Jonas Rinner
                     </div>
                 </div>
             </div>
@@ -204,12 +261,60 @@ As a courtesy, here is the list of SeaQL's early contributors (in alphabetic ord
         </div>
         <div class="col col--3 margin-bottom--md">
             <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/code-mm">
+                    <img src="https://avatars.githubusercontent.com/u/43041831?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Markus Merklinger
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
                 <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/MuhannadAlrusayni">
                     <img src="https://avatars.githubusercontent.com/u/14802524?v=4" />
                 </a>
                 <div class="avatar__intro">
                     <div class="avatar__name">
                         Muhannad
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/nitnelave">
+                    <img src="https://avatars.githubusercontent.com/u/796633?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        nitnelave
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/duchainer">
+                    <img src="https://avatars.githubusercontent.com/u/11084784?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Raphaël Duchaîne
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/RemiKalbe">
+                    <img src="https://avatars.githubusercontent.com/u/8604600?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Rémi Kalbe
                     </div>
                 </div>
             </div>
