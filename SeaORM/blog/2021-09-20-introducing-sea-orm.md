@@ -100,11 +100,10 @@ async fn list(
     conn: Connection<Db>,
     posts_per_page: Option<usize>,
     page: Option<usize>,
-    flash: Option<FlashMessage<'_>>,
 ) -> Template {
     // Set page number and items per page
-    let page = page.unwrap_or(0);
-    let posts_per_page = posts_per_page.unwrap_or(DEFAULT_POSTS_PER_PAGE);
+    let page = page.unwrap_or(1);
+    let posts_per_page = posts_per_page.unwrap_or(10);
 
     // Setup paginator
     let paginator = Post::find()
@@ -113,7 +112,7 @@ async fn list(
 
     // Fetch paginated posts
     let posts = paginator
-        .fetch_page(page)
+        .fetch_page(page - 1)
         .await
         .expect("could not retrieve posts");
 
@@ -123,7 +122,6 @@ async fn list(
             page: page,
             posts_per_page: posts_per_page,
             posts: posts,
-            flash: flash.map(FlashMessage::into_inner),
             num_pages: paginator.num_pages().await.ok().unwrap(),
         },
     )
