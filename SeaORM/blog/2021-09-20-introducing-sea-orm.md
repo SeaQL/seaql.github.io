@@ -8,7 +8,7 @@ author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
 tags: [news]
 ---
 
-We are pleased to introduce SeaORM `0.2.2` to the Rust community today. It's our pleasure to have received feedback and contributions from awesome people to SeaQuery and SeaORM since `0.1.0`.
+We are pleased to introduce SeaORM [`0.2.2`](https://github.com/SeaQL/sea-orm/releases/tag/0.2.2) to the Rust community today. It's our pleasure to have received feedback and contributions from awesome people to SeaQuery and SeaORM since `0.1.0`.
 
 Rust is a wonderful language that can be used to build anything. One of the FAQs is "Are We Web Yet?", and if Rocket (or your favourite web framework) is Rust's Rail, then SeaORM is precisely Rust's ActiveRecord.
 
@@ -47,7 +47,7 @@ let cakes_with_filling: Vec<cake::Model> = cake::Entity::find()
     .await?;
 ```
 
-[more on SeaQuery](https://docs.rs/sea-query/*/sea_query/)
+[More on SeaQuery](https://docs.rs/sea-query/*/sea_query/)
 
 ## Testable
 
@@ -88,9 +88,9 @@ assert_eq!(
 );
 ```
 
-[more on testing](/docs/write-test/mock)
+[More on testing](/docs/write-test/mock)
 
-## Service oriented
+## Service Oriented
 
 Here is an example `Rocket` handler with pagination:
 
@@ -98,17 +98,18 @@ Here is an example `Rocket` handler with pagination:
 #[get("/?<page>&<posts_per_page>")]
 async fn list(
     conn: Connection<Db>,
-    posts_per_page: Option<usize>,
     page: Option<usize>,
+    per_page: Option<usize>,
 ) -> Template {
     // Set page number and items per page
     let page = page.unwrap_or(1);
-    let posts_per_page = posts_per_page.unwrap_or(10);
+    let per_page = per_page.unwrap_or(10);
 
     // Setup paginator
     let paginator = Post::find()
         .order_by_asc(post::Column::Id)
-        .paginate(&conn, posts_per_page);
+        .paginate(&conn, per_page);
+    let num_pages = paginator.num_pages().await.unwrap();
 
     // Fetch paginated posts
     let posts = paginator
@@ -120,15 +121,15 @@ async fn list(
         "index",
         context! {
             page: page,
-            posts_per_page: posts_per_page,
+            per_page: per_page,
             posts: posts,
-            num_pages: paginator.num_pages().await.ok().unwrap(),
+            num_pages: num_pages,
         },
     )
 }
 ```
 
-[full Rocket example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
+[Full Rocket example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
 
 We are building more examples for other web frameworks too.
 
