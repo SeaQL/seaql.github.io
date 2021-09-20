@@ -224,6 +224,18 @@ As a courtesy, here is the list of SeaQL's early contributors (in alphabetic ord
         </div>
         <div class="col col--3 margin-bottom--md">
             <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/scrblue">
+                    <img src="https://avatars.githubusercontent.com/u/1524936?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Daniel Lyne
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
                 <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Hirtol">
                     <img src="https://avatars.githubusercontent.com/u/55356909?v=4" />
                 </a>
