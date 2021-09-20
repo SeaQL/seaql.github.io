@@ -1,6 +1,6 @@
 ---
 slug: 2021-09-20-introducing-sea-orm
-title: This month in SeaQL
+title: Introducing SeaORM
 author: Chris Tsang
 author_title: SeaQL Team
 author_url: https://github.com/tyt2y3
@@ -21,7 +21,9 @@ Let's have a quick tour of SeaORM.
 Here is how you'd execute multiple queries in parallel:
 
 ```rust
-
+// execute multiple queries in parallel
+let cakes_and_fruits: (Vec<cake::Model>, Vec<fruit::Model>) =
+    futures::try_join!(Cake::find().all(&db), Fruit::find().all(&db))?;
 ```
 
 ## Dynamic
@@ -29,30 +31,109 @@ Here is how you'd execute multiple queries in parallel:
 You can use SeaQuery to build complex queries without 'fighting the ORM':
 
 ```rust
-
+// build subquery with ease
+let cakes_with_filling: Vec<cake::Model> = cake::Entity::find()
+    .filter(
+        Condition::any().add(
+            cake::Column::Id.in_subquery(
+                Query::select()
+                    .column(cake_filling::Column::CakeId)
+                    .from(cake_filling::Entity)
+                    .to_owned(),
+            ),
+        ),
+    )
+    .all(&db)
+    .await?;
 ```
 
-[more on SeaQuery]()
+[more on SeaQuery](https://docs.rs/sea-query/*/sea_query/)
 
 ## Testable
 
 To write unit tests, you can use our mock interface:
 
 ```rust
+// Setup mock connection
+let db = MockDatabase::new(DbBackend::Postgres)
+    .append_query_results(vec![
+        vec![
+            cake::Model {
+                id: 1,
+                name: "New York Cheese".to_owned(),
+            },
+        ],
+    ])
+    .into_connection();
 
+// Perform your application logic
+assert_eq!(
+    cake::Entity::find().one(&db).await?,
+    Some(cake::Model {
+        id: 1,
+        name: "New York Cheese".to_owned(),
+    })
+);
+
+// Compare it against the expected transaction log
+assert_eq!(
+    db.into_transaction_log(),
+    vec![
+        Transaction::from_sql_and_values(
+            DbBackend::Postgres,
+            r#"SELECT "cake"."id", "cake"."name" FROM "cake" LIMIT $1"#,
+            vec![1u64.into()]
+        ),
+    ]
+);
 ```
 
-[more on testing]()
+[more on testing](/docs/write-test/mock)
 
 ## Service oriented
 
 Here is an example `Rocket` handler with pagination:
 
 ```rust
+#[get("/?<page>&<posts_per_page>")]
+async fn list(
+    conn: Connection<Db>,
+    posts_per_page: Option<usize>,
+    page: Option<usize>,
+    flash: Option<FlashMessage<'_>>,
+) -> Template {
+    // Set page number and items per page
+    let page = page.unwrap_or(0);
+    let posts_per_page = posts_per_page.unwrap_or(DEFAULT_POSTS_PER_PAGE);
 
+    // Setup paginator
+    let paginator = Post::find()
+        .order_by_asc(post::Column::Id)
+        .paginate(&conn, posts_per_page);
+    let num_pages = paginator.num_pages().await.ok().unwrap();
+
+    // Fetch paginated posts
+    let posts = paginator
+        .fetch_page(page)
+        .await
+        .expect("could not retrieve posts");
+
+    let flash = flash.map(FlashMessage::into_inner);
+
+    Template::render(
+        "index",
+        context! {
+            posts: posts,
+            flash: flash,
+            page: page,
+            posts_per_page: posts_per_page,
+            num_pages: num_pages,
+        },
+    )
+}
 ```
 
-[full Rocket example]()
+[full Rocket example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
 
 We are building more examples for other web frameworks too.
 
@@ -61,3 +142,92 @@ We are building more examples for other web frameworks too.
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
 
 As a courtesy, here is the list of SeaQL's early contributors (in alphabetic order):
+
+<div class="container">
+    <div class="row">
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Acidic9">
+                    <img src="https://avatars.githubusercontent.com/u/16362377?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Ari Seyhun
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
+                    <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Billy Chan
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/bobbyng626">
+                    <img src="https://avatars.githubusercontent.com/u/67236456?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Bobby Ng
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
+                    <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Chris Tsang
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/nappa85">
+                    <img src="https://avatars.githubusercontent.com/u/7566389?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Marco Napetti
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/MuhannadAlrusayni">
+                    <img src="https://avatars.githubusercontent.com/u/14802524?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Muhannad
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col--3 margin-bottom--md">
+            <div class="avatar">
+                <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/samsamai">
+                    <img src="https://avatars.githubusercontent.com/u/3764355?v=4" />
+                </a>
+                <div class="avatar__intro">
+                    <div class="avatar__name">
+                        Sam Samai
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
