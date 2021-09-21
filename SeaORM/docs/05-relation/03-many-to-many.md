@@ -6,7 +6,7 @@ A many-to-many relation is formed by three tables, where two tables are related 
 
 On the `Cake` entity, implement the `Related<filling::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Cake` relation, then join `to` `Filling` entity  with `cake_filling::Relation::Filling` relation.
 
-```rust title="entity/cake.rs"
+```rust {4,10} title="entity/cake.rs"
 impl Related<super::filling::Entity> for Entity {
     // The final relation is Cake -> CakeFilling -> Filling
     fn to() -> RelationDef {
@@ -23,7 +23,7 @@ impl Related<super::filling::Entity> for Entity {
 
 Similarly, on the `Filling` entity, implement the `Related<cake::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Filling` relation, then join `to` `Cake` entity  with `cake_filling::Relation::Cake` relation.
 
-```rust title="entity/filling.rs"
+```rust {3,7} title="entity/filling.rs"
 impl Related<super::cake::Entity> for Entity {
     fn to() -> RelationDef {
         super::cake_filling::Relation::Cake.def()

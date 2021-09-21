@@ -9,7 +9,7 @@ On the `Cake` entity, to define the relation:
 1. Define it with `Entity::has_one()`.
 1. Implement the `Related<Entity>` trait.
 
-```rust title="entity/cake.rs"
+```rust {2,8,13} title="entity/cake.rs"
 pub enum Relation {
     Fruit,
 }
