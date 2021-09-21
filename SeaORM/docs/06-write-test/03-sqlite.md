@@ -1,12 +1,12 @@
 # Using SQLite
 
-If you want to unit test application logic that does not require database-specific features, SQLite will be a good choice for you.
+If you want to test application logic that does not require database-specific features, SQLite will be a good choice for you.
 
-> Check out the full demo [here](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs).
+Check out a simple example [here](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs).
 
-## Running Unit Test
+## Integration Test
 
-By default Rust run all tests in parallel and each test should be independent of other, so if we need a single entry point for it to perform sequential operations. Then, we have the following code snippet connecting to database, setting up database schema and performing tests in sequence.
+It is recommended to execute more complex test cases in [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html). The following code snippet illustrates the steps of connecting to a database, setting up schema and performing tests.
 
 ```rust
 async fn main() -> Result<(), DbErr> {
@@ -68,7 +68,7 @@ async fn testcase(db: &DbConn) -> Result<(), DbErr> {
             "home": "0395555555",
             "address": "12 Test St, Testville, Vic, Australia"
         })),
-        bakery_id: Set(Some(bakery_insert_res.last_insert_id as i32)),
+        bakery_id: Set(2),
         ..Default::default()
     };
 

@@ -1,6 +1,6 @@
 # Mock Interface
 
-You can unit test your application logic using the mock database, it can mock all database backend specified in `DatabaseBackend` enum including MySql, Postgres and SQLite.
+You can unit test your application logic using the mock database interface.
 
 The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.
 - The query result should be provided to support select operations
@@ -8,7 +8,7 @@ The mock database has no data in it, so you have to define the expected data to 
 
 To ensure the correctness of your application logic you can also validate the transaction log in the mock database.
 
-> Checkout how we write unit test for the paginator API [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L159).
+Checkout how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L159).
 
 ## Mocking Query Result
 
