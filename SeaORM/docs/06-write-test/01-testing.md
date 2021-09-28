@@ -8,7 +8,7 @@ Even if your program does not crash, it does not mean it is *correct*. It can st
 
 You can improve the correctness of your program by writing adequate tests.
 
-## Causes of Errors
+## Types of Errors
 
 First, lets classify different causes of errors in a data-driven application:
 

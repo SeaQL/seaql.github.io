@@ -33,6 +33,8 @@ $ sea-orm-cli generate entity -h
 
 Discover all tables in a database and generate corresponding SeaORM entity file for each table.
 
+> Generating Entity files from SQLite is not yet supported. You can write the entity files by hand, and then use the Entity to [initialize a database](/docs/write-test/sqlite#setup-database-schema).
+
 Command line options:
 - `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
 - `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)

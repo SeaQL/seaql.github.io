@@ -49,7 +49,7 @@ async fn setup_schema(db: &DbConn) {
 
     // Execute create table statement
     let result = db
-        .execute(Statement::from_string(DbBackend::Sqlite, stmt))
+        .execute(db.get_database_backend().build(&stmt))
         .await;
 }
 ```
