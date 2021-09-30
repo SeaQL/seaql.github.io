@@ -1,12 +1,12 @@
 # SeaORM Concepts
 
-In SeaORM, a database with a collection of tables are called `Schema`.
+In SeaORM, a database with a collection of tables is called a `Schema`.
 
 Each table corresponds to an [`Entity`](/docs/generate-entity/entity-structure#entity) in SeaORM, which helps you perform `CRUD` (Create, Read, Update, and Delete) operations on relevant tables.
 
-The `Entity` trait provides an API for you to inspect it's properties ([`Column`](/docs/generate-entity/entity-structure#column), [`Relation`](/docs/generate-entity/entity-structure#relation) and [`PrimaryKey`](/docs/generate-entity/entity-structure#primary-key)) at runtime.
+The `Entity` trait provides an API for you to inspect its properties ([`Column`](/docs/generate-entity/entity-structure#column), [`Relation`](/docs/generate-entity/entity-structure#relation) and [`PrimaryKey`](/docs/generate-entity/entity-structure#primary-key)) at runtime.
 
-Each table have multiple columns, and those are called `attribute`.
+Each table has multiple columns, and those are called `attribute`.
 
 These attributes and their values are grouped in a Rust struct so that you can manipulate them, and we call them [`Model`](/docs/generate-entity/entity-structure#model).
 

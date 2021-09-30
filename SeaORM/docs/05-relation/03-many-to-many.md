@@ -37,7 +37,7 @@ impl Related<super::cake::Entity> for Entity {
 
 ## Defining the Inverse Relation
 
-On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity and its `filling_id` attribute is referencing the primary key of `Filling` entity.
+On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity, and its `filling_id` attribute is referencing the primary key of `Filling` entity.
 
 To define the inverse relation:
 1. Add two new variants `Cake` and `Filling` to the `Relation` enum.

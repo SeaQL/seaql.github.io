@@ -34,7 +34,7 @@ let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_
 
 ## Get raw SQL query
 
-Use `build` and `to_string` methods on any CRUD operations to get the database specific raw SQL for debugging purpose.
+Use `build` and `to_string` methods on any CRUD operations to get the database-specific raw SQL for debugging purposes.
 
 ```rust
 use sea_orm::DatabaseBackend;
@@ -52,7 +52,7 @@ assert_eq!(
 
 ## Use Raw Query & Execute Interface
 
-You can build SQL statement using `sea-query` and query / execute it directly on the `DatabaseConnection` interface inside SeaORM.
+You can build SQL statements using `sea-query` and query / execute it directly on the `DatabaseConnection` interface inside SeaORM.
 
 ### Get Custom Result using `query_one` and `query_all` methods
 

@@ -1,6 +1,6 @@
 # Conditional Expressions
 
-You can add conditions to SeaORM find with `filter` method, you can also restrict the aggregated result with `having` method. Both of them take [`sea_query::Condition`](https://docs.rs/sea-query/0.12.7/sea_query/query/struct.Condition.html) as parameter.
+You can add conditions to SeaORM find with the `filter` method. You can also restrict the aggregated result with `having` method. Both of them take [`sea_query::Condition`](https://docs.rs/sea-query/0.12.7/sea_query/query/struct.Condition.html) as a parameter.
 
 ## AND Condition
 
@@ -46,7 +46,7 @@ assert_eq!(
 
 ## Nested Condition
 
-The `add` method can also take another conditional expression. By doing this we can construct complex nested condition flexibly.
+The `add` method can also take another conditional expression. By doing this, we can construct complex nested conditions flexibly.
 
 ```rust
 assert_eq!(

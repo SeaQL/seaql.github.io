@@ -56,7 +56,7 @@ async fn setup_schema(db: &DbConn) {
 
 ## Performing tests
 
-Execute testcases and assert against the results.
+Execute test cases and assert against the results.
 
 ```rust
 async fn testcase(db: &DbConn) -> Result<(), DbErr> {

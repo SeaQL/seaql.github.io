@@ -28,7 +28,7 @@ The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity`
 
 ### Table Name
 
-The `table_name` attribute specify the corresponding table in database.
+The `table_name` attribute specifies the corresponding table in the database.
 Optionally, you can also specify the database schema by `schema_name` (Postgres only).
 
 ```rust
@@ -62,7 +62,7 @@ The column type will be derived automatically with the following mapping:
 | Decimal (rust_decimal::Decimal) | Decimal |
 | Vec&lt;u8&gt; | Binary |
 
-You can override the default mappings between Rust type and `ColumnType` by the `column_type` attribute.
+You can override the default mappings between a Rust type and `ColumnType` by the `column_type` attribute.
 
 ```rust
 #[sea_orm(column_type = "Text")]
@@ -91,7 +91,7 @@ pub ignore_me: String
 
 ## Primary Key
 
-Use the `primary_key` attribute to mark a column as primary key.
+Use the `primary_key` attribute to mark a column as the primary key.
 
 ```rust
 #[sea_orm(primary_key)]
@@ -109,7 +109,7 @@ pub id: i32
 
 ### Composite Key
 
-This is usually the case in junction tables, where two column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key.
+This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key.
 
 ```rust
 pub struct Model {
