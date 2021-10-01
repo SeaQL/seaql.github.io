@@ -2,7 +2,7 @@
 
 ## Update One
 
-You will get a `Model` from find result. If you want to save the model back into database, you need to convert it into an `ActiveModel` *first*. The generated query will only include the `Set` attributes.
+You will get a `Model` from find result. If you want to save the model back into the database, you need to convert it into an `ActiveModel` *first*. The generated query will only include the `Set` attributes.
 
 ```rust
 let pear: Option<fruit::Model> = Fruit::find_by_id(28).one(db).await?;

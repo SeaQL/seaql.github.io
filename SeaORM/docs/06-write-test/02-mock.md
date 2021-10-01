@@ -6,15 +6,15 @@ The mock database has no data in it, so you have to define the expected data to 
 - The query result should be provided to support select operations
 - The exec result should be provided to support insert, update and delete operations
 
-To ensure the correctness of your application logic you can also validate the transaction log in the mock database.
+To ensure the correctness of your application logic, you can also validate the transaction log in the mock database.
 
-Checkout how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L159).
+Check out how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L159).
 
 ## Mocking Query Result
 
-We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results were prepared using `append_query_results` method. Note that we passed a vector of vector to it, representing multiple query results each with more than one models. Finally, convert it into connection and use it to perform CRUD operations just like a normal live connection.
+We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using `append_query_results` method. Note that we pass a vector of vector to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
 
-One thing special about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded, you can validate each of it to ensure the correctness of your application logic.
+One special thing about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded; you can validate each of it to ensure the correctness of your application logic.
 
 ```rust
 #[cfg(test)]
@@ -98,7 +98,7 @@ mod tests {
 
 ## Mocking Execution Result
 
-This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update and delete operations here in the unit test. The `append_exec_results` method takes vector of `MockExecResult` each represents the exec result of the corresponding operation.
+This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update and delete operations here in the unit test. The `append_exec_results` method takes a vector of `MockExecResult` each represents the exec result of the corresponding operation.
 
 ```rust
 #[cfg(test)]

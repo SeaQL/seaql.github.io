@@ -1,10 +1,10 @@
 # One to Many
 
-An one-to-many relation is similar to one-to-one relation. In previous section we give the example of "a `Cake` entity has at most one `Fruit` topping". In one-to-many relation we change the "at most one" constraint. So, we have a `Cake` entity might have many `Fruit` toppings.
+A one-to-many relation is similar to one-to-one relation. In the previous section, we give the example of "a `Cake` entity has at most one `Fruit` topping". In one-to-many relation, we change the "at most one" constraint. So, we have a `Cake` entity that might have many `Fruit` toppings.
 
 ## Defining the Relation
 
-This is almost identical to defining an one-to-one relation, the only different is that we use `Entity::has_many()` method here.
+This is almost identical to defining a one-to-one relation; the only difference is that we use `Entity::has_many()` method here.
 
 ```rust {2,8,13} title="entity/cake.rs"
 pub enum Relation {

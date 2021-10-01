@@ -1,6 +1,6 @@
 # Aggregate Functions
 
-You can group results selected from SeaORM find with `group_by` method and if you wish to further restrict the grouped result set `having` method can help you achieve that.
+You can group results selected from SeaORM find with the `group_by` method, and if you wish to further restrict the grouped result set, the `having` method can help you achieve that.
 
 ## Group By
 
@@ -20,7 +20,7 @@ assert_eq!(
 
 ## Having
 
-The `having` method can take any conditional expressions introduced in previous section.
+The `having` method can take any conditional expressions introduced in the previous section.
 
 ```rust
 assert_eq!(

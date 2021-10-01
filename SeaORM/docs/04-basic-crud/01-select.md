@@ -2,11 +2,11 @@
 
 Once you have defined the entity, you are ready to retrieve data from the database. Each row of data in the database corresponds to a `Model`.
 
-By default SeaORM will select all columns defined in the `Column` enum.
+By default, SeaORM will select all columns defined in the `Column` enum.
 
 ## Find by Primary Key
 
-Find a model by its primary key, it can be a single key or composite key. We start by calling [`find_by_id`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find_by_id) on [`Entity`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html) which helps you construct the select query and condition automatically. Then, fetch a single model from database with the `one` method.
+Find a model by its primary key, it can be a single key or composite key. We start by calling [`find_by_id`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find_by_id) on [`Entity`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html) which helps you construct the select query and condition automatically. Then, fetch a single model from the database with the `one` method.
 
 ```rust
 use super::cake::Entity as Cake;
@@ -21,7 +21,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 ## Find with Conditions and Orders
 
-In addition to retrieve model by primary key, you can also retrieve one or more models matching specific condition in certain order. The [`find`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It support construction of all common select expressions including where and order by expression, they can be constructed using [`filter`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/0.*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
+In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions including where and order by expression. They can be constructed using [`filter`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/0.*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
 
 > Read more about [conditional expression](/docs/advanced-query/conditional-expression#).
 
@@ -41,7 +41,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 Use the [`find_related`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_related) method.
 
-Related models are loaded on demand when you ask for it, preferable if you want to load related models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
+Related models are loaded on demand when you ask for them, preferable if you want to load related models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
 ```rust
 // Find a cake model first
@@ -54,7 +54,7 @@ let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 ### Eager Loading
 
-All related models are loaded at once. This provide minimum overhead on database round trips compared to lazy loading.
+All related models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
 
 #### One to One
 

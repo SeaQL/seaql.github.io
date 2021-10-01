@@ -2,7 +2,7 @@
 
 ## Custom Joins
 
-You can use `join` method to construct complex join select query. It takes any `RelationDef` defined in entity file, you can define relation with `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
+You can use the `join` method to construct complex join select query. It takes any `RelationDef` defined in entity file, you can define relation with `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
 
 ```rust
 use sea_orm::{JoinType, RelationTrait};
@@ -60,7 +60,7 @@ impl Linked for CakeToFilling {
 
 Use the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
-Linked models are loaded on demand when you ask for it, preferable if you want to load linked models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
+Linked models are loaded on demand when you ask for them, preferable if you want to load linked models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
 ```rust
 let cake_model = cake::Model {
@@ -88,7 +88,7 @@ assert_eq!(
 
 Use the [`find_also_linked`](https://docs.rs/sea-orm/0.2.1/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
-All linked models are loaded at once. This provide minimum overhead on database round trips compared to lazy loading.
+All linked models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
 
 ```rust
 assert_eq!(

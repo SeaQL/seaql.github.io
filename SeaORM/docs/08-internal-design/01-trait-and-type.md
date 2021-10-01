@@ -2,7 +2,7 @@
 
 ## Entity
 
-An unit struct implements [`EntityTrait`](#) representing a table in the database.
+A unit struct implements [`EntityTrait`](#) representing a table in the database.
 
 This trait contains the properties of an entity including
 - Table Name (implemented [`EntityName`](#))
@@ -34,7 +34,7 @@ It also implements
 
 ## Model
 
-A struct that implements [`ModelTrait`](#) storing the query result in memory. This is intended for readonly purpose and it is stateless.
+A struct that implements [`ModelTrait`](#) storing the query result in memory. This is intended for readonly purposes, and it is stateless.
 
 It also implements
 - [`FromQueryResult`](#) converts raw query result into corresponding model
@@ -55,4 +55,4 @@ It also implements
 
 ## Related
 
-A generic trait, [`Related`](#), that define join paths to help you query related entities together, especially helpful in many-to-many relations.
+A generic trait, [`Related`](#), defines join paths to help you query related entities together, especially helpful in many-to-many relations.

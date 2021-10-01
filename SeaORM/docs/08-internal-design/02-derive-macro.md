@@ -2,7 +2,7 @@
 
 ## EntityModel
 
-The [`EntityModel`](#) derive macro is the 'almighty' macro which would automatically generate `Entity`, `Column` and `PrimaryKey` from a given `Model`.
+The [`EntityModel`](#) derive macro is the 'almighty' macro which automatically generates `Entity`, `Column`, and `PrimaryKey` from a given `Model`.
 
 ## Entity
 
@@ -10,15 +10,15 @@ The [`DeriveEntity`](#) derive macro will implement [`EntityTrait`](#) for `Enti
 
 ## Column
 
-The [`DeriveColumn`](#) derive macro will implement [`ColumnTrait`](#) for `Columns`. It defines the identifier of each columns by implementing [`Iden`](#) and [`IdenStatic`](#). The [`EnumIter`](#) is also derived allowing iteration over all enum variants.
+The [`DeriveColumn`](#) derive macro will implement [`ColumnTrait`](#) for `Columns`. It defines the identifier of each column by implementing [`Iden`](#) and [`IdenStatic`](#). The [`EnumIter`](#) is also derived, allowing iteration over all enum variants.
 
 ## Primary Key
 
-The [`DerivePrimaryKey`](#) derive macro will implement [`PrimaryKeyToColumn`](#) for `PrimaryKey` which defines tedious mappings between primary keys and columns. The [`EnumIter`](#) is also derived allowing iteration over all enum variants.
+The [`DerivePrimaryKey`](#) derive macro will implement [`PrimaryKeyToColumn`](#) for `PrimaryKey` which defines tedious mappings between primary keys and columns. The [`EnumIter`](#) is also derived, allowing iteration over all enum variants.
 
 ## Model
 
-The [`DeriveModel`](#) derive macro will implement [`ModelTrait`](#) for `Model` which provides setters and getters for all attributes in the model. It also implement [`FromQueryResult`](#) to convert query result into corresponding `Model`.
+The [`DeriveModel`](#) derive macro will implement [`ModelTrait`](#) for `Model`, which provides setters and getters for all attributes in the model. It also implements [`FromQueryResult`](#) to convert a query result into the corresponding `Model`.
 
 ## Active Model
 

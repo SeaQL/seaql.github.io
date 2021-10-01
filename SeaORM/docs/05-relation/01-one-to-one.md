@@ -1,6 +1,6 @@
 # One to One
 
-An one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
+A one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
 
 ## Defining the Relation
 
