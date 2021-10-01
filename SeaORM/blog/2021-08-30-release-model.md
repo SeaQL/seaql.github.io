@@ -18,4 +18,4 @@ After that, a major release will be rolled out every year. So you will probably 
 
 All of these is only made possible with a solid infrastructure. While we have a [test suite](https://github.com/SeaQL/sea-orm/actions), its coverage will likely never be enough. We urge you to submit test cases to SeaORM if a particular feature is of importance to you.
 
-We hope that a continuous delivery pipeline will provide momentum to the community and propell us forward in the near future.
+We hope that a rolling release model will provide momentum to the community and propell us forward in the near future.
