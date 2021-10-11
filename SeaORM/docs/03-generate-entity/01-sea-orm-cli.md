@@ -45,6 +45,7 @@ Command line options:
 - `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
 - `--compact-format`: Generate entity file of [compact format](/docs/generate-entity/entity-structure) (default: true)
 - `--expanded-format`: Generate entity file of [expanded format](/docs/generate-entity/expanded-entity-structure)
+- `--with-serde`: Automatically derive serde Serialize / Deserialize traits for the entity (none, serialize, deserialize, both) (default: none)
 
 ```shell
 # Generate entity files of database `bakery` to `src/entity`
