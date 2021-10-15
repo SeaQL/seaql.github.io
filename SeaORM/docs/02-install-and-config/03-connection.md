@@ -15,3 +15,17 @@ Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.5.x/sqlx/struct.Pool.htm
 Each time you call `execute` or `query_one/all` on it, a connection will be acquired and released from the pool.
 
 Multiple queries will execute in parallel as you `await` on them.
+
+## Connect Options
+
+To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/0.*/sea_orm/struct.ConnectOptions.html) interface:
+
+```rust
+let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
+opt.max_connections(100)
+    .min_connections(5)
+    .connect_timeout(Duration::from_secs(8))
+    .idle_timeout(Duration::from_secs(8));
+
+let db = Database::connect(opt).await?;
+```
