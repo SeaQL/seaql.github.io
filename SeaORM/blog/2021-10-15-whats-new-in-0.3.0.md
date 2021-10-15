@@ -8,75 +8,20 @@ author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
 tags: [news]
 ---
 
-We are pleased to release SeaORM [`0.3.0`](https://github.com/SeaQL/sea-orm/releases/tag/0.3.0) today. Some feature highlights:
-
-## Connect Options
-
-[[@c673017](https://github.com/SeaQL/sea-orm/commit/c673017b975e3cf9e3127d6719b8fc97a140f5f3)] Configure [DatabaseConnection](https://docs.rs/sea-orm/0.3.0/sea_orm/enum.DatabaseConnection.html) with [ConnectOptions](https://docs.rs/sea-orm/0.*/sea_orm/struct.ConnectOptions.html), you can change the default settings such as the maximum and minimum number of connections managed by the connection pool.
-
-```rust
-let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
-opt.max_connections(100)
-    .min_connections(5)
-    .connect_timeout(Duration::from_secs(8))
-    .idle_timeout(Duration::from_secs(8));
-
-let db = Database::connect(opt).await?;
-```
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
-                <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Chris Tsang
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+🎉 We are pleased to release SeaORM [`0.3.0`](https://github.com/SeaQL/sea-orm/releases/tag/0.3.0) today! Here are some feature highlights 🌟:
 
 ## Transaction
 
-[[#222](https://github.com/SeaQL/sea-orm/pull/222)] [[#199](https://github.com/SeaQL/sea-orm/pull/199)] [[#142](https://github.com/SeaQL/sea-orm/pull/142)] Perform atomic actions with the help of transaction.
+[[#222](https://github.com/SeaQL/sea-orm/pull/222)] Use database transaction to perform atomic operations
 
-Two transaction API are provided:
+Two transaction APIs are provided:
 
-- `begin` the transaction follow by `commit` or `rollback`
-    ```rust
-    let txn = db.begin().await?;
-
-    bakery::ActiveModel {
-        name: Set("SeaSide Bakery".to_owned()),
-        profit_margin: Set(10.4),
-        ..Default::default()
-    }
-    .save(&txn)
-    .await?;
-
-    bakery::ActiveModel {
-        name: Set("Top Bakery".to_owned()),
-        profit_margin: Set(15.0),
-        ..Default::default()
-    }
-    .save(&txn)
-    .await?;
-
-    txn.commit().await?;
-    ```
-
-- perform atomic actions in transaction `closure`
+- `closure` style. Will be committed on Ok and rollback on Err.
     ```rust
     db.transaction::<_, _, DbErr>(|txn| {
         Box::pin(async move {
             bakery::ActiveModel {
                 name: Set("SeaSide Bakery".to_owned()),
-                profit_margin: Set(10.4),
                 ..Default::default()
             }
             .save(txn)
@@ -84,7 +29,6 @@ Two transaction API are provided:
 
             bakery::ActiveModel {
                 name: Set("Top Bakery".to_owned()),
-                profit_margin: Set(15.0),
                 ..Default::default()
             }
             .save(txn)
@@ -94,6 +38,15 @@ Two transaction API are provided:
         })
     })
     .await;
+    ```
+
+- `begin` the transaction followed by `commit` or `rollback`. If `txn` goes out of scope, it'd automatically rollback.
+    ```rust
+    let txn = db.begin().await?;
+
+    // do something with txn
+
+    txn.commit().await?;
     ```
 
 Contributed by:
@@ -125,9 +78,39 @@ Contributed by:
     </div>
 </div>
 
+## Streaming
+
+[[#222](https://github.com/SeaQL/sea-orm/pull/222)] Use async stream on any `Select` for memory efficiency.
+
+```rust
+let mut stream = Fruit::find().stream(&db).await?;
+
+while let Some(item) = stream.try_next().await? {
+    let item: fruit::ActiveModel = item.into();
+    // do something with item
+}
+```
+
+Contributed by:
+
+<div class="row">
+    <div class="col col--3 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/nappa85">
+                <img src="https://avatars.githubusercontent.com/u/7566389?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Marco Napetti
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 ## API for Custom Validation Logics on Save & Delete
 
-[[#210](https://github.com/SeaQL/sea-orm/pull/210)] You can now enforce custom validation logics before or after save and delete operation.
+[[#210](https://github.com/SeaQL/sea-orm/pull/210)] We redefined the trait methods of `ActiveModelBehavior`. You can now perform custom validation before and after `insert`, `update`, `save`, `delete` actions. You can abort an action even after it is done, if you are inside a transaction.
 
 ```rust
 impl ActiveModelBehavior for ActiveModel {
@@ -199,7 +182,7 @@ Contributed by:
 
 ## Generate Entity Models That Derive Serialize / Deserialize
 
-[[#237](https://github.com/SeaQL/sea-orm/pull/237)] You can use sea-orm-cli to generate entity models that derive serde Serialize / Deserialize traits.
+[[#237](https://github.com/SeaQL/sea-orm/pull/237)] You can use `sea-orm-cli` to generate entity models that also derive serde `Serialize` / `Deserialize` traits.
 
 ```rust
 //! SeaORM Entity. Generated by sea-orm-codegen 0.3.0
@@ -236,9 +219,11 @@ Contributed by:
     </div>
 </div>
 
-## Introduce Derive DeriveIntoActiveModel & IntoActiveValue Trait
+## Introduce `DeriveIntoActiveModel` macro & `IntoActiveValue` Trait
 
-[[#240](https://github.com/SeaQL/sea-orm/pull/240)] Creates a new derive macro DeriveIntoActiveModel for implementing IntoActiveModel on structs. This is useful for creating your own struct with only partial fields of a model, for example an insert struct, or update struct.
+[[#240](https://github.com/SeaQL/sea-orm/pull/240)] introduced a new derive macro `DeriveIntoActiveModel` for implementing `IntoActiveModel` on structs. This is useful for creating your own struct with only partial fields of a model, for example an insert struct, or update struct.
+
+`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` automatically.
 
 ```rust
 // Define regular model as usual
@@ -271,16 +256,6 @@ pub struct NewUser {
 pub struct UpdateUser {
     // Option<Option<T>> allows for Some(None) to update the column to be NULL
     pub phone: Option<Option<String>>,
-}
-```
-
-Additionally, an attribute active_model is available in case your active model struct has a custom name.
-
-```rust
-#[derive(DeriveIntoActiveModel)]
-#[sea_orm(active_model = MyActiveModel)]
-pub struct NewProduct {
-    // ...
 }
 ```
 
