@@ -34,6 +34,17 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ## Insert One
 
+Insert single active model and get inserted `ActiveModel`.
+
+```rust
+let pear = fruit::ActiveModel {
+    name: Set("Pear".to_owned()),
+    ..Default::default() // all other attributes are `Unset`
+};
+
+let res: fruit::ActiveModel = pear.insert(db).await?;
+```
+
 Insert single active model and get the last insert id.
 
 ```rust
@@ -42,7 +53,7 @@ let pear = fruit::ActiveModel {
     ..Default::default() // all other attributes are `Unset`
 };
 
-let res: InsertResult = pear.insert(db).await?;
+let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
