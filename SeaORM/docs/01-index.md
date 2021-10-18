@@ -76,6 +76,8 @@
 
 	6.5 [More joins](/docs/advanced-query/more-join)
 
+	6.6 [Transaction](/docs/advanced-query/transaction)
+
 7. Internal Design
 
 	7.1 [Traits and Types](/docs/internal-design/trait-and-type)
