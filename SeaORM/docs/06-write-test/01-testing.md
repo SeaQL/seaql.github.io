@@ -4,7 +4,7 @@ Testing is an integral part of programming in Rust. You see, [`cargo test`](http
 
 If you don't use `unsafe` and your code compiles, then your Rust program is *safe*. However, it does not automatically become *robust*. Your program can still panic unexpectedly if you are not careful on error handling.
 
-Even if your program does not crash, it does not mean it is *correct*. It can still misbehave and create data chaos.
+Even if your program does not panic, it does not mean it is *correct*. It can still misbehave and create data chaos.
 
 You can improve the correctness of your program by writing adequate tests.
 
