@@ -80,6 +80,8 @@
 
 	6.7 [Streaming](/docs/advanced-query/streaming)
 
+	6.8 [Custom Active Model](/docs/advanced-query/custom-active-model)
+
 7. Internal Design
 
 	7.1 [Traits and Types](/docs/internal-design/trait-and-type)
