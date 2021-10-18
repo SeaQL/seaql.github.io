@@ -153,22 +153,37 @@ Handler for different actions on an `ActiveModel`.
 impl ActiveModelBehavior for ActiveModel {
     /// Create a new ActiveModel with default values. Also used by `Default::default()`.
     fn new() -> Self {
-        <Self as ActiveModelTrait>::default()
+        Self {
+            uuid: Set(Uuid::new_v4()),
+            ..ActiveModelTrait::default()
+        }
     }
 
-    /// Will be called before saving
-    fn before_save(self) -> Self {
-        self
+    /// Will be triggered before insert / update
+    fn before_save(self, insert: bool) -> Result<Self, DbErr> {
+        if self.price.as_ref() <= &0.0 {
+            Err(DbErr::Custom(format!(
+                "[before_save] Invalid Price, insert: {}",
+                insert
+            )))
+        } else {
+            Ok(self)
+        }
     }
 
-    /// Will be called after saving
-    fn after_save(self) -> Self {
-        self
+    /// Will be triggered after insert / update
+    fn after_save(self, insert: bool) -> Result<Self, DbErr> {
+        Ok(self)
     }
 
-    /// Will be called before deleting
-    fn before_delete(self) -> Self {
-        self
+    /// Will be triggered before delete
+    fn before_delete(self) -> Result<Self, DbErr> {
+        Ok(self)
+    }
+
+    /// Will be triggered after delete
+    fn after_delete(self) -> Result<Self, DbErr> {
+        Ok(self)
     }
 }
 ```
