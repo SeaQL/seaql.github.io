@@ -18,6 +18,7 @@ Two transaction APIs are provided:
 
 - `closure` style. Will be committed on Ok and rollback on Err.
     ```rust
+    // <Fn, A, B> -> Result<A, B>
     db.transaction::<_, _, DbErr>(|txn| {
         Box::pin(async move {
             bakery::ActiveModel {
@@ -40,7 +41,7 @@ Two transaction APIs are provided:
     .await;
     ```
 
-- `begin` the transaction followed by `commit` or `rollback`. If `txn` goes out of scope, it'd automatically rollback.
+- RAII style. `begin` the transaction followed by `commit` or `rollback`. If `txn` goes out of scope, it'd automatically rollback.
     ```rust
     let txn = db.begin().await?;
 
@@ -221,9 +222,9 @@ Contributed by:
 
 ## Introduce `DeriveIntoActiveModel` macro & `IntoActiveValue` Trait
 
-[[#240](https://github.com/SeaQL/sea-orm/pull/240)] introduced a new derive macro `DeriveIntoActiveModel` for implementing `IntoActiveModel` on structs. This is useful for creating your own struct with only partial fields of a model, for example an insert struct, or update struct.
+[[#240](https://github.com/SeaQL/sea-orm/pull/240)] introduced a new derive macro `DeriveIntoActiveModel` for implementing `IntoActiveModel` on structs. This is useful when creating your own struct with only partial fields of a model, for example as a form submission in a REST API.
 
-`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` automatically.
+`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` with the method `into_active_value`.
 
 ```rust
 // Define regular model as usual

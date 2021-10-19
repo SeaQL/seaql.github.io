@@ -21,14 +21,14 @@ let mut stream = Fruit::find()
     .await?;
 ```
 
-Note that stream will persists the connection from connection pool until it gets dropped.
+Note that the stream object will exclusively hold onto the connection until being dropped, preventing the connection to be borrowed by others.
 
 ```rust
 {
-    // 3 connections are used
-    let _ = Fruit::find().stream(db).await?;
-    let _ = Fruit::find().stream(db).await?;
-    let _ = Fruit::find().stream(db).await?;
+    let s1 = Fruit::find().stream(db).await?;
+    let s2 = Fruit::find().stream(db).await?;
+    let s3 = Fruit::find().stream(db).await?;
+    // 3 connections are held
 }
-// All streams are dropped and connections are returned to connection pool
+// All streams are dropped and connections are returned to the connection pool
 ```

@@ -1,8 +1,8 @@
 # Custom Active Model
 
-A derive macro `DeriveIntoActiveModel` for implementing `IntoActiveModel` on structs. This is useful for creating your own struct with only partial fields of a model, for example an insert struct, or update struct.
+Creating your own struct with partial fields of a model, which implements `IntoActiveModel` that can be converted into an `ActiveModel` with the method `into_active_model`. For example, it can be used as a form submission in a REST API.
 
-`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` automatically.
+`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` with the method `into_active_value`.
 
 ```rust
 // Define regular model as usual
