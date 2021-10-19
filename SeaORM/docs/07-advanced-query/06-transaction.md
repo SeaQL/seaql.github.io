@@ -32,9 +32,9 @@ db.transaction::<_, (), DbErr>(|txn| {
 .await;
 ```
 
-This is the preferred way for most cases. However, if you happens to run into an *impossible lifetime* from trying to capture a reference in this async block, then the following is the only solution.
+This is the preferred way for most cases. However, if you happens to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
 
-## `Begin` & `commit` / `rollback`
+## `begin` & `commit` / `rollback`
 
 `begin` the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, it would automatically rollback the transaction.
 

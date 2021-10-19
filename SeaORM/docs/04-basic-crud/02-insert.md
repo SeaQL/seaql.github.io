@@ -34,7 +34,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ## Insert One
 
-Insert an active model and get back the inserted `ActiveModel`. Its value is retrieved from database, so any auto-generated will be populated.
+Insert an active model and get back a fresh `ActiveModel`. Its value is retrieved from database, so any auto-generated fields will be populated.
 
 ```rust
 let pear = fruit::ActiveModel {
