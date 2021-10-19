@@ -1,13 +1,14 @@
 # Transaction
 
-You can perform atomic operations inside transaction. There are two transaction APIs available to you.
+A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs.
 
-## `Closure` style
+## Within a `Closure`
 
-Transaction will be committed if the closure returned `Ok`, rollbacked if `Err`.
+The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively.
 
 ```rust
-db.transaction::<_, _, DbErr>(|txn| {
+// <Fn, A, B> -> Result<A, B>
+db.transaction::<_, (), DbErr>(|txn| {
     Box::pin(async move {
         bakery::ActiveModel {
             name: Set("SeaSide Bakery".to_owned()),
@@ -31,9 +32,11 @@ db.transaction::<_, _, DbErr>(|txn| {
 .await;
 ```
 
-## `Begin` ... `commit` / `rollback` style
+This is the preferred way for most cases. However, if you happens to run into an *impossible lifetime* from trying to capture a reference in this async block, then the following is the only solution.
 
-`Begin` the transaction followed by `commit` or `rollback`. If `txn` goes out of scope, it'd automatically rollback.
+## `Begin` & `commit` / `rollback`
+
+`begin` the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, it would automatically rollback the transaction.
 
 ```rust
 let txn = db.begin().await?;
