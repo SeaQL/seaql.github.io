@@ -34,7 +34,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ## Insert One
 
-Insert single active model and get inserted `ActiveModel`.
+Insert an active model and get back the inserted `ActiveModel`. Its value is retrieved from database, so any auto-generated will be populated.
 
 ```rust
 let pear = fruit::ActiveModel {
@@ -45,7 +45,7 @@ let pear = fruit::ActiveModel {
 let res: fruit::ActiveModel = pear.insert(db).await?;
 ```
 
-Insert single active model and get the last insert id.
+Insert an active model and get back the last insert id. Its type matches the model's primary key type, so it could be a tuple if the model has a composite primary key.
 
 ```rust
 let pear = fruit::ActiveModel {
@@ -59,7 +59,7 @@ assert_eq!(res.last_insert_id, 28)
 
 ## Insert Many
 
-Insert many active models and get the last insert id.
+Insert many active models and get back the last insert id.
 
 ```rust
 let apple = fruit::ActiveModel {
