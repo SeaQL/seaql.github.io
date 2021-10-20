@@ -1,6 +1,6 @@
 # Streaming
 
-Use async stream on any `Select` for memory efficiency.
+Use async stream on any `Select` for reducing memory allocation to improve efficiency.
 
 ```rust
 // Stream all fruits
