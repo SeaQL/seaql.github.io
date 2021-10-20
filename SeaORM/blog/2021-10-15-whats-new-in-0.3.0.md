@@ -109,7 +109,7 @@ Contributed by:
     </div>
 </div>
 
-## API for Custom Validation Logics on Save & Delete
+## API for custom logic on save & delete
 
 [[#210](https://github.com/SeaQL/sea-orm/pull/210)] We redefined the trait methods of `ActiveModelBehavior`. You can now perform custom validation before and after `insert`, `update`, `save`, `delete` actions. You can abort an action even after it is done, if you are inside a transaction.
 

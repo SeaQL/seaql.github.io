@@ -147,7 +147,7 @@ pub struct ActiveModel {
 
 ### Active Model Behavior
 
-Handler for different actions on an `ActiveModel`.
+Handlers for different triggered actions on an `ActiveModel`. For example, you can perform custom validation logic, preventing a model from saving into database. You can abort an action even after it is done, if you are inside a transaction.
 
 ```rust
 impl ActiveModelBehavior for ActiveModel {
