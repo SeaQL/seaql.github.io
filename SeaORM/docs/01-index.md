@@ -72,9 +72,9 @@
 
 	6.3 [Aggregate functions](/docs/advanced-query/aggregate-function)
 
-	6.4 [Subquery](/docs/advanced-query/subquery)
+	6.4 [Advanced Relations](/docs/advanced-query/advanced-relations)
 
-	6.5 [More joins](/docs/advanced-query/more-join)
+	6.5 [Subquery](/docs/advanced-query/subquery)
 
 	6.6 [Transaction](/docs/advanced-query/transaction)
 

@@ -1,4 +1,4 @@
-# More Joins
+# Advanced Relations
 
 ## Custom Joins
 
@@ -12,12 +12,14 @@ assert_eq!(
     cake::Entity::find()
         .column_as(filling::Column::Id.count(), "count")
         .join(
+            // construct `RelationDef` on the fly
             JoinType::InnerJoin,
             cake_filling::Entity::belongs_to(cake::Entity)
                 .from(cake_filling::Column::CakeId)
                 .to(cake::Column::Id)
                 .into()
         )
+        // reuse a `Relation` from existing Entity
         .join(JoinType::InnerJoin, cake_filling::Relation::Filling.def())
         .group_by(cake::Column::Id)
         .having(filling::Column::Id.count().equals(Expr::value(2)))

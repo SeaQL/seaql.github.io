@@ -35,7 +35,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ## Find Related Models
 
-> Read more about [table joins](/docs/advanced-query/more-join#).
+> Read more about [table joins](/docs/advanced-query/advanced-relations#).
 
 ### Lazy Loading
 
