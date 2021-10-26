@@ -1,14 +1,14 @@
 ---
 slug: 2021-10-01-whats-new-in-0.2.4
 title: What's new in SeaORM 0.2.4
-author: Chris Tsang
-author_title: SeaQL Team
-author_url: https://github.com/tyt2y3
-author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
+author: SeaQL Team
+author_title: Chris Tsang
+author_url: https://github.com/SeaQL
+author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-We are pleased to release SeaORM [`0.2.4`](https://github.com/SeaQL/sea-orm/releases/tag/0.2.4) today. Some feature highlights:
+🎉 We are pleased to release SeaORM [`0.2.4`](https://github.com/SeaQL/sea-orm/releases/tag/0.2.4) today! Some feature highlights:
 
 ## Better ergonomic when working with custom select list
 

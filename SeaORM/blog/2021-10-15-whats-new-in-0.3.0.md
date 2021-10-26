@@ -1,10 +1,10 @@
 ---
 slug: 2021-10-15-whats-new-in-0.3.0
 title: What's new in SeaORM 0.3.0
-author: Chris Tsang
-author_title: SeaQL Team
-author_url: https://github.com/tyt2y3
-author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
+author: SeaQL Team
+author_title: Chris Tsang
+author_url: https://github.com/SeaQL
+author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
