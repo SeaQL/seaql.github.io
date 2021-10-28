@@ -11,7 +11,7 @@ use sea_query::Expr;
 assert_eq!(
     cake::Entity::find()
         .column_as(filling::Column::Id.count(), "count")
-        .join(
+        .join_rev(
             // construct `RelationDef` on the fly
             JoinType::InnerJoin,
             cake_filling::Entity::belongs_to(cake::Entity)
@@ -27,7 +27,7 @@ assert_eq!(
         .to_string(),
     [
         "SELECT `cake`.`id`, `cake`.`name`, COUNT(`filling`.`id`) AS `count` FROM `cake`",
-        "INNER JOIN `cake` ON `cake_filling`.`cake_id` = `cake`.`id`",
+        "INNER JOIN `cake_filling` ON `cake_filling`.`cake_id` = `cake`.`id`",
         "INNER JOIN `filling` ON `cake_filling`.`filling_id` = `filling`.`id`",
         "GROUP BY `cake`.`id`",
         "HAVING COUNT(`filling`.`id`) = 2",
