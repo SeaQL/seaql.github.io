@@ -12,4 +12,4 @@ These attributes and their values are grouped in a Rust struct so that you can m
 
 However, `Model` is for read operations only. To perform insert, update or delete, you need to use an [`ActiveModel`](/docs/generate-entity/entity-structure#active-model) which attaches meta-data on each attribute.
 
-Finally, there is no singleton (global context) in SeaORM. You must manage the ownership of the [`DatabaseConnection`](/docs/install-and-config/connection) and pass it around for use.
+Finally, there is no singleton (global context) in SeaORM. Application code is responsible for managing the ownership of the [`DatabaseConnection`](/docs/install-and-config/connection). We do provide integration examples for web frameworks including [Rocket](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example), [Actix](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example) and [axum](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example).
