@@ -44,6 +44,8 @@
 
 	3.7 [Raw SQL query](/docs/basic-crud/raw-sql)
 
+	3.8 [ActiveEnum](/docs/basic-crud/active-enum)
+
 ## Learn More
 
 4. Relations

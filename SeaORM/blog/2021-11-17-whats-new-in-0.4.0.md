@@ -12,7 +12,7 @@ tags: [news]
 
 ## ActiveEnum
 
-[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use custom enum in model, each enum variants are serialized into database value of string, integer or native database enum. Please find [here](/here) for the in-depth documentation.
+[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use custom enum in model where each enum variants are serialized into database value of string, integer or native database enum. Please find [here](/SeaORM/docs/basic-crud/active-enum) for the in-depth documentation.
 
 ```rust
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
