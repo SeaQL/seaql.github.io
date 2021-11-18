@@ -28,70 +28,70 @@
 
 	2.3 [Expanded Entity Structure](/docs/generate-entity/expanded-entity-structure)
 
-3. Basic CRUD
+4. Basic CRUD
 
-	3.1 [SELECT: find, filter, sort, paging](/docs/basic-crud/select)
+	4.1 [SELECT: find, filter, sort, paging](/docs/basic-crud/select)
 
-	3.2 [INSERT: Model & ActiveModel, insert many](/docs/basic-crud/insert)
+	4.2 [INSERT: Model & ActiveModel, insert many](/docs/basic-crud/insert)
 
-	3.3 [UPDATE: find & save, update many](/docs/basic-crud/update)
+	4.3 [UPDATE: find & save, update many](/docs/basic-crud/update)
 
-	3.4 [SAVE: insert or update](/docs/basic-crud/save)
+	4.4 [SAVE: insert or update](/docs/basic-crud/save)
 
-	3.5 [DELETE: delete one & delete many](/docs/basic-crud/delete)
+	4.5 [DELETE: delete one & delete many](/docs/basic-crud/delete)
 
-	3.6 [JSON](/docs/basic-crud/json)
+	4.6 [JSON](/docs/basic-crud/json)
 
-	3.7 [Raw SQL query](/docs/basic-crud/raw-sql)
+	4.7 [Raw SQL query](/docs/basic-crud/raw-sql)
 
-	3.8 [ActiveEnum](/docs/basic-crud/active-enum)
+	4.8 [ActiveEnum](/docs/basic-crud/active-enum)
 
 ## Learn More
 
-4. Relations
+5. Relations
 
-	4.1 [One to One](/docs/relation/one-to-one)
+	5.1 [One to One](/docs/relation/one-to-one)
 
-	4.2 [One to Many](/docs/relation/one-to-many)
+	5.2 [One to Many](/docs/relation/one-to-many)
 
-	4.3 [Many to Many](/docs/relation/many-to-many)
+	5.3 [Many to Many](/docs/relation/many-to-many)
 
-	4.4 [Multiple Join Paths Between Two Entities](/docs/relation/multiple-join-paths-between-two-entities)
+	5.4 [Multiple Join Paths Between Two Entities](/docs/relation/multiple-join-paths-between-two-entities)
 
-	4.5 [Self Referencing](/docs/relation/self-referencing)
+	5.5 [Self Referencing](/docs/relation/self-referencing)
 
-	4.6 [Bakery Schema](/docs/relation/bakery-schema)
+	5.6 [Bakery Schema](/docs/relation/bakery-schema)
 
-5. Writing Tests
+6. Writing Tests
 
-	5.1 [Robust & Correct](/docs/write-test/testing)
+	6.1 [Robust & Correct](/docs/write-test/testing)
 
-	5.2 [Mock Interface](/docs/write-test/mock)
+	6.2 [Mock Interface](/docs/write-test/mock)
 
-	5.3 [Using SQLite](/docs/write-test/sqlite)
+	6.3 [Using SQLite](/docs/write-test/sqlite)
 
-6. Advanced Queries
+7. Advanced Queries
 
-	6.1 [Custom select](/docs/advanced-query/custom-select)
+	7.1 [Custom select](/docs/advanced-query/custom-select)
 
-	6.2 [Conditional expressions](/docs/advanced-query/conditional-expression)
+	7.2 [Conditional expressions](/docs/advanced-query/conditional-expression)
 
-	6.3 [Aggregate functions](/docs/advanced-query/aggregate-function)
+	7.3 [Aggregate functions](/docs/advanced-query/aggregate-function)
 
-	6.4 [Advanced Relations](/docs/advanced-query/advanced-relations)
+	7.4 [Advanced Relations](/docs/advanced-query/advanced-relations)
 
-	6.5 [Subquery](/docs/advanced-query/subquery)
+	7.5 [Subquery](/docs/advanced-query/subquery)
 
-	6.6 [Transaction](/docs/advanced-query/transaction)
+	7.6 [Transaction](/docs/advanced-query/transaction)
 
-	6.7 [Streaming](/docs/advanced-query/streaming)
+	7.7 [Streaming](/docs/advanced-query/streaming)
 
-	6.8 [Custom Active Model](/docs/advanced-query/custom-active-model)
+	7.8 [Custom Active Model](/docs/advanced-query/custom-active-model)
 
-7. Internal Design
+8. Internal Design
 
-	7.1 [Traits and Types](/docs/internal-design/trait-and-type)
+	8.1 [Traits and Types](/docs/internal-design/trait-and-type)
 
-	7.2 [Derive Macros](/docs/internal-design/derive-macro)
+	8.2 [Derive Macros](/docs/internal-design/derive-macro)
 
-	7.3 [Compare with Diesel](/docs/internal-design/diesel)
+	8.3 [Compare with Diesel](/docs/internal-design/diesel)
