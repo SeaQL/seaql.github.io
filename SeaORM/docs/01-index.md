@@ -28,6 +28,12 @@
 
 	2.3 [Expanded Entity Structure](/docs/generate-entity/expanded-entity-structure)
 
+3. Generating Database Schema
+
+	3.1 [Create Table](/docs/generate-database-schema/create-table)
+
+	3.2 [Create Enum](/docs/generate-database-schema/create-enum)
+
 4. Basic CRUD
 
 	4.1 [SELECT: find, filter, sort, paging](/docs/basic-crud/select)
