@@ -56,7 +56,11 @@
 
 	4.3 [Many to Many](/docs/relation/many-to-many)
 
-	4.4 [Bakery Schema](/docs/relation/bakery-schema)
+	4.4 [Multiple Join Paths Between Two Entities](/docs/relation/multiple-join-paths-between-two-entities)
+
+	4.5 [Self Referencing](/docs/relation/self-referencing)
+
+	4.6 [Bakery Schema](/docs/relation/bakery-schema)
 
 5. Writing Tests
 
