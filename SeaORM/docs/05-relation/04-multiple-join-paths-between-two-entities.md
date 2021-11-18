@@ -50,7 +50,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Use the [`find_also_linked`](https://docs.rs/sea-orm/0.2.1/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Use the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 All linked models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
 
