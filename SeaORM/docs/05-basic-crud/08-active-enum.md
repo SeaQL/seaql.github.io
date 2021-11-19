@@ -1,6 +1,6 @@
 # ActiveEnum
 
-You can now use custom enum in model where each enum variants are serialized into database value of string, integer or native database enum.
+You can now use Rust enums in model where the values are mapped to a database string, integer or native enum.
 
 - String
     ```rust

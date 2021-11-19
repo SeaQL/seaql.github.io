@@ -10,9 +10,30 @@ tags: [news]
 
 🎉 We are pleased to release SeaORM [`0.4.0`](https://github.com/SeaQL/sea-orm/releases/tag/0.4.0) today! Here are some feature highlights 🌟:
 
-## ActiveEnum
+## Rust Edition 2021
 
-[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use custom enum in model where each enum variants are serialized into database value of string, integer or native database enum. Please find [here](/SeaORM/docs/basic-crud/active-enum) for the in-depth documentation.
+[[#273](https://github.com/SeaQL/sea-orm/pull/273)] Upgrading SeaORM to [Rust Edition 2021](https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html#rust-2021)! Let's party 🦀❤🐚
+
+Contributed by:
+
+<div class="row">
+    <div class="col col--3 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sno2">
+                <img src="https://avatars.githubusercontent.com/u/43641633?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Carter Snook
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## Enumeration
+
+[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/basic-crud/active-enum).
 
 ```rust
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
@@ -55,12 +76,24 @@ pub enum Tea {
     #[sea_orm(string_value = "BreakfastTea")]
     BreakfastTea,
 }
-
-#[derive(Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
-
-impl ActiveModelBehavior for ActiveModel {}
 ```
+
+Proposed by:
+
+<div class="row">
+    <div class="col col--3 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
+                <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Chris Tsang
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 Contributed by:
 
@@ -79,9 +112,9 @@ Contributed by:
     </div>
 </div>
 
-## Supports RETURNING Clause on PostgreSQL
+## Supports `RETURNING` Clause on PostgreSQL
 
-[[#292](https://github.com/SeaQL/sea-orm/pull/292)] When performing insert or update operation on `ActiveModel` against PostgreSQL, RETURNING clause will be used to avoid excessive querying of inserted or updated model from the database.
+[[#292](https://github.com/SeaQL/sea-orm/pull/292)] When performing insert or update operation on `ActiveModel` against PostgreSQL, `RETURNING` clause will be used to perform select in a single SQL statement.
 
 ```rust
 // For PostgreSQL
@@ -125,6 +158,23 @@ assert_eq!(
         )]);
 ```
 
+Proposed by:
+
+<div class="row">
+    <div class="col col--3 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marlon-sousa">
+                <img src="https://avatars.githubusercontent.com/u/21093041?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Marlon Brandão de Sousa
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 Contributed by:
 
 <div class="row">
@@ -140,23 +190,11 @@ Contributed by:
             </div>
         </div>
     </div>
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marlon-sousa">
-                <img src="https://avatars.githubusercontent.com/u/21093041?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Marlon Brandão de Sousa
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 ## Axum Integration Example
 
-[[#297](https://github.com/SeaQL/sea-orm/pull/297)] Introducing [Axum integration example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example) which is Axum version of [Actix4](https://github.com/SeaQL/sea-orm/tree/master/examples/actix4_example) and [Actix3](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example) integration examples.
+[[#297](https://github.com/SeaQL/sea-orm/pull/297)] Added [Axum integration example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
 
 Contributed by:
 
@@ -175,30 +213,9 @@ Contributed by:
     </div>
 </div>
 
-## Rust Edition 2021
+## `PaginatorTrait`
 
-[[#273](https://github.com/SeaQL/sea-orm/pull/273)] Updating all SeaORM crates to [Rust Edition 2021](https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html#rust-2021)
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sno2">
-                <img src="https://avatars.githubusercontent.com/u/43641633?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Carter Snook
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-## PaginatorTrait
-
-[[#306](https://github.com/SeaQL/sea-orm/pull/306)] Refactor `paginate()` & `count()` utilities into `PaginatorTrait`. You can use the paginator as usual but you might need to import `PaginatorTrait` manually when upgrading to `0.4.x`.
+[[#306](https://github.com/SeaQL/sea-orm/pull/306)] Refactor `paginate()` & `count()` methods to `PaginatorTrait`. You might need to import `PaginatorTrait` manually when upgrading to `0.4.x`.
 
 ```rust
 use futures::TryStreamExt;
@@ -225,72 +242,6 @@ Contributed by:
             <div class="avatar__intro">
                 <div class="avatar__name">
                     Yoshiera
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-## Database Specific Schema Helper
-
-[[#309](https://github.com/SeaQL/sea-orm/pull/309)] The helper struct `Schema` converting `EntityTrait` into different `sea-query` statement now has to be initialized with `DbBackend`.
-
-```rust
-use sea_orm::{tests_cfg::*, DbBackend, Schema};
-use sea_orm::sea_query::TableCreateStatement;
-
-// Before `0.4.x`
-let _: TableCreateStatement = Schema::create_table_from_entity(cake::Entity);
-
-// Now
-let schema: Schema = Schema::new(DbBackend::MySql);
-let _: TableCreateStatement = schema.create_table_from_entity(cake::Entity);
-```
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
-                <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Billy Chan
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-## Disable SQLx Logging
-
-[[#290](https://github.com/SeaQL/sea-orm/pull/290)] You can now disable SQLx statement logging when initializing the connection.
-
-```rust
-let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
-opt.max_connections(100)
-    .min_connections(5)
-    .connect_timeout(Duration::from_secs(8))
-    .idle_timeout(Duration::from_secs(8))
-    // Disable SQLx statement logging
-    .sqlx_logging(false);
-
-let db = Database::connect(opt).await?;
-```
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
-                <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Chris Tsang
                 </div>
             </div>
         </div>
