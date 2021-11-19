@@ -233,7 +233,7 @@ Contributed by:
 
 ## Database Specific Schema Helper
 
-[[#309](https://github.com/SeaQL/sea-orm/pull/309)] The helper struct to convert `EntityTrait` into different `sea-query` statement now needs to be initialized with `DbBackend`.
+[[#309](https://github.com/SeaQL/sea-orm/pull/309)] The helper struct `Schema` converting `EntityTrait` into different `sea-query` statement now has to be initialized with `DbBackend`.
 
 ```rust
 use sea_orm::{tests_cfg::*, DbBackend, Schema};
