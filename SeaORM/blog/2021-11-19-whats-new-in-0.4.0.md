@@ -17,7 +17,7 @@ tags: [news]
 Contributed by:
 
 <div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sno2">
                 <img src="https://avatars.githubusercontent.com/u/43641633?v=4" />
@@ -161,7 +161,7 @@ assert_eq!(
 Proposed by:
 
 <div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marlon-sousa">
                 <img src="https://avatars.githubusercontent.com/u/21093041?v=4" />
