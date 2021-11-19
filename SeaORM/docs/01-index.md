@@ -62,7 +62,7 @@
 
 	5.3 [Many to Many](/docs/relation/many-to-many)
 
-	5.4 [Multiple Join Paths Between Two Entities](/docs/relation/multiple-join-paths-between-two-entities)
+	5.4 [Chained Relations](/docs/relation/chained-relations)
 
 	5.5 [Self Referencing](/docs/relation/self-referencing)
 

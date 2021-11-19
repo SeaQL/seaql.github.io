@@ -1,6 +1,6 @@
-# Multiple Join Paths Between Two Entities
+# Chained Relations
 
-If you have multiple join paths between two tables or have complex joins that involve multiple tables, you can define it with [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as an example. We join cake and filling via an intermediate cake_filling table.
+If you have multiple join paths between two entities or have complex joins that chain through multiple entities, you can define it with [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate cake_filling table.
 
 ```rust
 #[derive(Debug)]
@@ -23,8 +23,6 @@ impl Linked for CakeToFilling {
 ### Lazy Loading
 
 Use the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
-
-Linked models are loaded on demand when you ask for them, preferable if you want to load linked models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
 ```rust
 let cake_model = cake::Model {
@@ -51,8 +49,6 @@ assert_eq!(
 ### Eager Loading
 
 Use the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
-
-All linked models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
 
 ```rust
 assert_eq!(
