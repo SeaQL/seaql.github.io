@@ -1,6 +1,4 @@
-# Advanced Relations
-
-## Custom Joins
+# Custom Joins
 
 You can use the `join` method to construct complex join select query. It takes any `RelationDef` defined in entity file, you can define relation with `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
 

@@ -84,7 +84,7 @@
 
 	7.3 [Aggregate functions](/docs/advanced-query/aggregate-function)
 
-	7.4 [Advanced Relations](/docs/advanced-query/advanced-relations)
+	7.4 [Custom Joins](/docs/advanced-query/custom-joins)
 
 	7.5 [Subquery](/docs/advanced-query/subquery)
 
