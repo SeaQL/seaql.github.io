@@ -81,7 +81,7 @@ Contributed by:
 
 ## Supports RETURNING Clause on PostgreSQL
 
-[[#292](https://github.com/SeaQL/sea-orm/pull/292)] When performing insert or update operation on `ActiveModel` against PostgreSQL, RETURNING clause will be used to avoid the excessive querying of inserted or updated model from the database.
+[[#292](https://github.com/SeaQL/sea-orm/pull/292)] When performing insert or update operation on `ActiveModel` against PostgreSQL, RETURNING clause will be used to avoid excessive querying of inserted or updated model from the database.
 
 ```rust
 // For PostgreSQL
