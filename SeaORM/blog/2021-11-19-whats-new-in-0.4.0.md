@@ -33,7 +33,7 @@ Contributed by:
 
 ## Enumeration
 
-[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/basic-crud/active-enum).
+[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/generate-entity/enumeration).
 
 ```rust
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
@@ -78,7 +78,7 @@ pub enum Tea {
 }
 ```
 
-Proposed by:
+Designed by:
 
 <div class="row">
     <div class="col col--3 margin-bottom--md">
@@ -194,42 +194,7 @@ Contributed by:
 
 ## Axum Integration Example
 
-[[#297](https://github.com/SeaQL/sea-orm/pull/297)] Added [Axum integration example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/YoshieraHuang">
-                <img src="https://avatars.githubusercontent.com/u/38752027?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Yoshiera
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-## `PaginatorTrait`
-
-[[#306](https://github.com/SeaQL/sea-orm/pull/306)] Refactor `paginate()` & `count()` methods to `PaginatorTrait`. You might need to import `PaginatorTrait` manually when upgrading to `0.4.x`.
-
-```rust
-use futures::TryStreamExt;
-use sea_orm::{entity::*, query::*, tests_cfg::cake};
-
-let mut cake_stream = cake::Entity::find()
-    .order_by_asc(cake::Column::Id)
-    .paginate(db, 50)
-    .into_stream();
-
-while let Some(cakes) = cake_stream.try_next().await? {
-    // Do something on cakes: Vec<cake::Model>
-}
-```
+[[#297](https://github.com/SeaQL/sea-orm/pull/297)] Added [Axum integration example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example). More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
 
 Contributed by:
 

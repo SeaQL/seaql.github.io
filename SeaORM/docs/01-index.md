@@ -28,6 +28,8 @@
 
 	2.3 [Expanded Entity Structure](/docs/generate-entity/expanded-entity-structure)
 
+	2.4 [Enumeration](/docs/generate-entity/enumeration)
+
 3. Generating Database Schema
 
 	3.1 [Create Table](/docs/generate-database-schema/create-table)
@@ -49,8 +51,6 @@
 	4.6 [JSON](/docs/basic-crud/json)
 
 	4.7 [Raw SQL query](/docs/basic-crud/raw-sql)
-
-	4.8 [ActiveEnum](/docs/basic-crud/active-enum)
 
 ## Learn More
 
