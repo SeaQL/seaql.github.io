@@ -1,42 +1,4 @@
-# Advanced Relations
-
-## Custom Joins
-
-You can use the `join` method to construct complex join select query. It takes any `RelationDef` defined in entity file, you can define relation with `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
-
-```rust
-use sea_orm::{JoinType, RelationTrait};
-use sea_query::Expr;
-
-assert_eq!(
-    cake::Entity::find()
-        .column_as(filling::Column::Id.count(), "count")
-        .join_rev(
-            // construct `RelationDef` on the fly
-            JoinType::InnerJoin,
-            cake_filling::Entity::belongs_to(cake::Entity)
-                .from(cake_filling::Column::CakeId)
-                .to(cake::Column::Id)
-                .into()
-        )
-        // reuse a `Relation` from existing Entity
-        .join(JoinType::InnerJoin, cake_filling::Relation::Filling.def())
-        .group_by(cake::Column::Id)
-        .having(filling::Column::Id.count().equals(Expr::value(2)))
-        .build(DbBackend::MySql)
-        .to_string(),
-    [
-        "SELECT `cake`.`id`, `cake`.`name`, COUNT(`filling`.`id`) AS `count` FROM `cake`",
-        "INNER JOIN `cake_filling` ON `cake_filling`.`cake_id` = `cake`.`id`",
-        "INNER JOIN `filling` ON `cake_filling`.`filling_id` = `filling`.`id`",
-        "GROUP BY `cake`.`id`",
-        "HAVING COUNT(`filling`.`id`) = 2",
-    ]
-    .join(" ")
-);
-```
-
-## Linked
+# Multiple Join Paths Between Two Entities
 
 If you have multiple join paths between two tables or have complex joins that involve multiple tables, you can define it with [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as an example. We join cake and filling via an intermediate cake_filling table.
 
@@ -88,7 +50,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Use the [`find_also_linked`](https://docs.rs/sea-orm/0.2.1/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Use the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 All linked models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
 

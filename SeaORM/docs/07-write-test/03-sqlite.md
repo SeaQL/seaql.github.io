@@ -30,8 +30,11 @@ To create tables in SQLite database for testing, instead of writing [`TableCreat
 ```rust
 async fn setup_schema(db: &DbConn) {
 
+    // Setup Schema helper
+    let schema = Schema::new(DbBackend::Sqlite);
+
     // Derive from Entity
-    let stmt: TableCreateStatement = Schema::create_table_from_entity(MyEntity);
+    let stmt: TableCreateStatement = schema.create_table_from_entity(MyEntity);
 
     // Or setup manually
     assert_eq!(
