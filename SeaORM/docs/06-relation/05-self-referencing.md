@@ -1,8 +1,8 @@
 # Self Referencing
 
-From previous section, you learn the [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html) trait. It can also help you define self referencing relations.
+In previous section, we introduced the [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html) trait. It can also help you define self referencing relations.
 
-Defining an Entity that reference itself.
+The following example defines an Entity that references itself.
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -33,56 +33,4 @@ impl Linked for SelfReferencingLink {
         vec![Relation::SelfReferencing.def()]
     }
 }
-
-impl ActiveModelBehavior for ActiveModel {}
-```
-
-### Lazy Loading
-
-Use the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
-
-Linked models are loaded on demand when you ask for them, preferable if you want to load linked models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
-
-```rust
-let self_join_model = Model {
-    uuid: Uuid::default(),
-    uuid_ref: None,
-    time: None,
-};
-
-assert_eq!(
-    self_join_model
-        .find_linked(SelfReferencingLink)
-        .build(DbBackend::MySql)
-        .to_string(),
-    [
-        "SELECT `self_join`.`uuid`, `self_join`.`uuid_ref`, `self_join`.`time`",
-        "FROM `self_join`",
-        "INNER JOIN `self_join` AS `r0` ON `r0`.`uuid_ref` = `self_join`.`uuid`",
-        "WHERE `r0`.`uuid` = '00000000-0000-0000-0000-000000000000'",
-    ]
-    .join(" ")
-);
-```
-
-### Eager Loading
-
-Use the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
-
-All linked models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
-
-```rust
-assert_eq!(
-    Entity::find()
-        .find_also_linked(SelfReferencingLink)
-        .build(DbBackend::MySql)
-        .to_string(),
-    [
-        "SELECT `self_join`.`uuid` AS `A_uuid`, `self_join`.`uuid_ref` AS `A_uuid_ref`, `self_join`.`time` AS `A_time`,",
-        "`r0`.`uuid` AS `B_uuid`, `r0`.`uuid_ref` AS `B_uuid_ref`, `r0`.`time` AS `B_time`",
-        "FROM `self_join`",
-        "LEFT JOIN `self_join` AS `r0` ON `self_join`.`uuid_ref` = `r0`.`uuid`",
-    ]
-    .join(" ")
-);
 ```
