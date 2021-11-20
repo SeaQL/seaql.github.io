@@ -33,7 +33,7 @@ Contributed by:
 
 ## Enumeration
 
-[[#258](https://github.com/SeaQL/sea-orm/pull/258)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/generate-entity/enumeration).
+[[#252](https://github.com/SeaQL/sea-orm/issues/252)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/generate-entity/enumeration).
 
 ```rust
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
@@ -114,7 +114,7 @@ Contributed by:
 
 ## Supports `RETURNING` Clause on PostgreSQL
 
-[[#292](https://github.com/SeaQL/sea-orm/pull/292)] When performing insert or update operation on `ActiveModel` against PostgreSQL, `RETURNING` clause will be used to perform select in a single SQL statement.
+[[#183](https://github.com/SeaQL/sea-orm/issues/183)] When performing insert or update operation on `ActiveModel` against PostgreSQL, `RETURNING` clause will be used to perform select in a single SQL statement.
 
 ```rust
 // For PostgreSQL
