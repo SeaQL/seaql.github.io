@@ -12,7 +12,7 @@ tags: [news]
 
 ## Rust Edition 2021
 
-[[#273](https://github.com/SeaQL/sea-orm/pull/273)] Upgrading SeaORM to [Rust Edition 2021](https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html#rust-2021)! Let's party 🦀❤🐚
+[[#273](https://github.com/SeaQL/sea-orm/pull/273)] Upgrading SeaORM to [Rust Edition 2021](https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html#rust-2021) 🦀❤🐚!
 
 Contributed by:
 
@@ -78,10 +78,11 @@ pub enum Tea {
 }
 ```
 
-Designed by:
 
 <div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
+        Designed by:
+        <br/><br/>
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
                 <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
@@ -93,12 +94,9 @@ Designed by:
             </div>
         </div>
     </div>
-</div>
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
+        Contributed by:
+        <br/><br/>
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
                 <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
@@ -158,10 +156,11 @@ assert_eq!(
         )]);
 ```
 
-Proposed by:
 
 <div class="row">
     <div class="col col--6 margin-bottom--md">
+        Proposed by:
+        <br/><br/>
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marlon-sousa">
                 <img src="https://avatars.githubusercontent.com/u/21093041?v=4" />
@@ -173,12 +172,9 @@ Proposed by:
             </div>
         </div>
     </div>
-</div>
-
-Contributed by:
-
-<div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
+        Contributed by:
+        <br/><br/>
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
                 <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
@@ -199,7 +195,7 @@ Contributed by:
 Contributed by:
 
 <div class="row">
-    <div class="col col--3 margin-bottom--md">
+    <div class="col col--6 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/YoshieraHuang">
                 <img src="https://avatars.githubusercontent.com/u/38752027?v=4" />
@@ -207,6 +203,39 @@ Contributed by:
             <div class="avatar__intro">
                 <div class="avatar__name">
                     Yoshiera
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## Sponsor
+
+Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! If you feel generous, a small donation will be greatly appreciated.
+
+A big shout out to our first sponsors 😇:
+
+<div class="row">
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/exzachlyvv">
+                <img src="https://avatars.githubusercontent.com/u/46034847?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Zachary Vander Velden
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm">
+                <img style={{width: '100%'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Unnamed Sponsor
                 </div>
             </div>
         </div>
