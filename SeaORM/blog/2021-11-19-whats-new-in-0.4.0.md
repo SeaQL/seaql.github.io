@@ -218,6 +218,18 @@ A big shout out to our first sponsors 😇:
 <div class="row">
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/shanesveller">
+                <img src="https://avatars.githubusercontent.com/u/831?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Shane Sveller
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/exzachlyvv">
                 <img src="https://avatars.githubusercontent.com/u/46034847?v=4" />
             </a>
