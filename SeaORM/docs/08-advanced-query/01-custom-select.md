@@ -48,3 +48,36 @@ assert_eq!(
     r#"SELECT "cake"."id", "cake"."name", MAX("id") - "id" AS "id_diff", CURRENT_TIMESTAMP AS "current_time" FROM "cake""#
 );
 ```
+
+## Handling Custom Selects
+
+You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of a complex query. It is especially useful when dealing with custom columns or multiple joins which cannot directly be converted into models. It may be used to receive the result of any query, even raw SQL.
+
+```rust
+use sea_orm::{FromQueryResult, JoinType, RelationTrait};
+use sea_query::Expr;
+
+#[derive(FromQueryResult)]
+struct CakeAndFillingCount {
+    id: i32,
+    name: String,
+    count: i32,
+}
+
+let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
+    .column_as(filling::Column::Id.count(), "count")
+    .join_rev(
+        // construct `RelationDef` on the fly
+        JoinType::InnerJoin,
+        cake_filling::Entity::belongs_to(cake::Entity)
+            .from(cake_filling::Column::CakeId)
+            .to(cake::Column::Id)
+            .into()
+    )
+    // reuse a `Relation` from existing Entity
+    .join(JoinType::InnerJoin, cake_filling::Relation::Filling.def())
+    .group_by(cake::Column::Id)
+    .into_model::<CakeAndFillingCount>()
+    .all(db)
+    .await?;
+```
