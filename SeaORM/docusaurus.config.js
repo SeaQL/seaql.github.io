@@ -12,7 +12,7 @@ module.exports = {
   url: 'https://www.sea-ql.org/',
   baseUrl: '/SeaORM/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'SeaQL',
   projectName: 'sea-orm',
