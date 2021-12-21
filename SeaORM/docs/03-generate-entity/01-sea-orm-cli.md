@@ -33,7 +33,7 @@ $ sea-orm-cli generate entity -h
 
 Discover all tables in a database and generate a corresponding SeaORM entity file for each table.
 
-> Generating Entity files from SQLite is not yet supported. You can write the entity files by hand, and then use the Entity to [initialize a database](/docs/write-test/sqlite#setup-database-schema).
+> Generating Entity files from SQLite is not yet supported. You can write the entity files by hand, and then use the Entity to [initialize a database](07-write-test/03-sqlite.md#setup-database-schema).
 
 Command line options:
 - `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
@@ -43,8 +43,8 @@ Command line options:
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 - `-v` / `--verbose`: print debug messages
 - `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
-- `--compact-format`: Generate entity file of [compact format](/docs/generate-entity/entity-structure) (default: true)
-- `--expanded-format`: Generate entity file of [expanded format](/docs/generate-entity/expanded-entity-structure)
+- `--compact-format`: Generate entity file of [compact format](03-generate-entity/02-entity-structure.md) (default: true)
+- `--expanded-format`: Generate entity file of [expanded format](03-generate-entity/03-expanded-entity-structure.md)
 - `--with-serde`: Automatically derive serde Serialize / Deserialize traits for the entity (none, serialize, deserialize, both) (default: none)
 
 ```shell
