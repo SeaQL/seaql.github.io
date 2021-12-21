@@ -1,3 +1,10 @@
+const versions = require('./versions.json');
+
+function getNextMinorVersionName() {
+  const minorVersion = parseInt(versions[0].split('.')[1], 10);
+  return `0.${minorVersion + 1}.x`;
+}
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'SeaORM - 🐚 An async & dynamic ORM for Rust',
@@ -40,6 +47,12 @@ module.exports = {
           href: 'https://github.com/SeaQL/sea-orm',
           label: 'GitHub',
           position: 'right',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+
         },
       ],
     },
@@ -111,6 +124,11 @@ module.exports = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          versions: {
+            current: {
+              label: `${getNextMinorVersionName()} 🚧`,
+            },
+          },
         },
         blog: {
           showReadingTime: true,
