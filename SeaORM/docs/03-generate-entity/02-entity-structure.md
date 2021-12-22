@@ -29,7 +29,7 @@ The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity`
 ### Table Name
 
 The `table_name` attribute specifies the corresponding table in the database.
-Optionally, you can also specify the database schema by `schema_name` (Postgres only).
+Optionally, you can also specify the database schema or database name by `schema_name`.
 
 ```rust
 #[sea_orm(table_name = "cake", schema_name = "public")]
@@ -42,7 +42,7 @@ pub struct Model { ... }
 
 The column type will be derived automatically with the following mapping:
 
-| Rust type | Database Type |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.*/sea_orm/entity/enum.ColumnType.html)) |
 | --------- | ------------- |
 | char | Char |
 | String | String |
@@ -100,7 +100,7 @@ pub id: i32
 
 ### Auto Increment
 
-By default, `auto_increment` is implied. Override by specifying `false`.
+By default, `auto_increment` is implied for `primary_key` column. Override it by specifying `false`.
 
 ```rust
 #[sea_orm(primary_key, auto_increment = false)]
@@ -109,7 +109,7 @@ pub id: i32
 
 ### Composite Key
 
-This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key.
+This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key. By default, `auto_increment` is `false` for composite key.
 
 ```rust
 pub struct Model {

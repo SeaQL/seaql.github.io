@@ -12,7 +12,7 @@ Check out how we write unit tests using mock connection [here](https://github.co
 
 ## Mocking Query Result
 
-We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using `append_query_results` method. Note that we pass a vector of vector to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
+We create a mock database for PostgreSQL with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using `append_query_results` method. Note that we pass a vector of vector to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
 
 One special thing about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded; you can validate each of it to ensure the correctness of your application logic.
 
@@ -112,9 +112,23 @@ mod tests {
     async fn test_insert_cake() -> Result<(), DbErr> {
         // Create MockDatabase with mock execution result
         let db = MockDatabase::new(DatabaseBackend::Postgres)
+            .append_query_results(vec![
+                vec![cake::Model {
+                    id: 15,
+                    name: "Apple Pie".to_owned(),
+                }],
+                vec![cake::Model {
+                    id: 16,
+                    name: "Apple Pie".to_owned(),
+                }],
+            ])
             .append_exec_results(vec![
                 MockExecResult {
                     last_insert_id: 15,
+                    rows_affected: 1,
+                },
+                MockExecResult {
+                    last_insert_id: 16,
                     rows_affected: 1,
                 },
             ])
@@ -127,10 +141,17 @@ mod tests {
         };
 
         // Insert the ActiveModel into MockDatabase
-        let insert_result = apple.insert(&db).await?;
+        assert_eq!(
+            apple.clone().insert(&db).await?,
+            cake::Model {
+                id: 15,
+                name: "Apple Pie".to_owned()
+            }
+        );
 
-        // Checking last insert id
-        assert_eq!(insert_result.last_insert_id, 15);
+        // If you want to check the last insert id
+        let insert_result = cake::Entity::insert(apple).exec(&db).await?;
+        assert_eq!(insert_result.last_insert_id, 16);
 
         // Checking transaction log
         assert_eq!(
@@ -138,7 +159,12 @@ mod tests {
             vec![
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
-                    r#"INSERT INTO "cake" ("name") VALUES ($1)"#,
+                    r#"INSERT INTO "cake" ("name") VALUES ($1) RETURNING "id", "name""#,
+                    vec!["Apple Pie".into()]
+                ),
+                Transaction::from_sql_and_values(
+                    DatabaseBackend::Postgres,
+                    r#"INSERT INTO "cake" ("name") VALUES ($1) RETURNING "id""#,
                     vec!["Apple Pie".into()]
                 ),
             ]

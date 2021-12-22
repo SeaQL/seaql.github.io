@@ -46,6 +46,10 @@ A struct that implements [`ActiveModelTrait`](#) representing insert/update acti
 It also implements
 - [`ActiveModelBehavior`](#) defines handlers for different actions on an active model
 
+## Active Enum
+
+A enum that implements [`ActiveEnum`](#) representing value stored in database as a Rust enum variant.
+
 ## Relation
 
 An enum that implements [`RelationTrait`](#) defined relations with other entities.
@@ -56,3 +60,7 @@ It also implements
 ## Related
 
 A generic trait, [`Related`](#), defines join paths to help you query related entities together, especially helpful in many-to-many relations.
+
+## Linked
+
+A trait, [`Linked`](#), defines complex join paths including chained relation, self referencing relation and multiple relations between two entities.

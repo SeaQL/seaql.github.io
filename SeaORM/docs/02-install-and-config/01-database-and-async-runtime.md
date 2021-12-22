@@ -13,7 +13,7 @@ You must choose a `DATABASE_DRIVER` and an `ASYNC_RUNTIME`. `macros` is needed i
 You can choose one or more from:
 
 + `sqlx-mysql` - SQLx MySQL
-+ `sqlx-postgres` - SQLx Postgres
++ `sqlx-postgres` - SQLx PostgreSQL
 + `sqlx-sqlite` - SQLx SQLite
 
 See also: [SQLx docs](https://docs.rs/crate/sqlx/latest/features).

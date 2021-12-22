@@ -9,7 +9,8 @@ On the `Cake` entity, to define the relation:
 1. Define it with `Entity::has_one()`.
 1. Implement the `Related<Entity>` trait.
 
-```rust {2,8,13} title="entity/cake.rs"
+```rust {3,9,14} title="entity/cake.rs"
+#[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Fruit,
 }
@@ -26,6 +27,17 @@ impl Related<super::fruit::Entity> for Entity {
     fn to() -> RelationDef {
         Relation::Fruit.def()
     }
+}
+```
+
+Alternatively, the definition can be shortened by the `DeriveRelation` macro,
+where the following is equivalent to above:
+
+```rust
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(has_one = "super::fruit::Entity")]
+    Fruit,
 }
 ```
 
@@ -59,5 +71,20 @@ impl Related<super::cake::Entity> for Entity {
     fn to() -> RelationDef {
         Relation::Cake.def()
     }
+}
+```
+
+Alternatively, the definition can be shortened by the `DeriveRelation` macro,
+where the following is equivalent to above:
+
+```rust
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::cake::Entity",
+        from = "Column::CakeId",
+        to = "super::cake::Column::Id"
+    )]
+    Cake,
 }
 ```

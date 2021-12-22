@@ -172,8 +172,8 @@ impl ActiveModelBehavior for ActiveModel {
     }
 
     /// Will be triggered after insert / update
-    fn after_save(self, insert: bool) -> Result<Self, DbErr> {
-        Ok(self)
+    fn after_save(model: Model, insert: bool) -> Result<Model, DbErr> {
+        Ok(model)
     }
 
     /// Will be triggered before delete

@@ -1,14 +1,14 @@
 # Debug Log
 
-SeaORM (with `debug-print` feature turned on) and SQLx both log debug messages via the [`log`](https://crates.io/crates/log) crate.
+SeaORM (with `debug-print` feature turned on) log debug messages via the [`tracing`](https://crates.io/crates/tracing) crate.
 
-You need to choose one of the [logging implementations](https://docs.rs/log/0.4.14/log/#available-logging-implementations) to capture and view the debug log. To use [`env_logger`](https://crates.io/crates/env_logger), see the snippet below and a complete example [here](https://github.com/SeaQL/sea-orm/blob/master/examples/tokio/src/main.rs).
+You need to setup [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) to capture and view the debug log. See the snippet below and a complete example [here](https://github.com/SeaQL/sea-orm/blob/master/examples/actix_example/src/main.rs).
 
 ```rust
 pub async fn main() {
-    env_logger::builder()
-        .filter_level(log::LevelFilter::Debug)
-        .is_test(true)
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::DEBUG)
+        .with_test_writer()
         .init();
 
     // ...

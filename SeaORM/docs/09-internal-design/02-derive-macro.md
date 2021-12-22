@@ -24,6 +24,10 @@ The [`DeriveModel`](#) derive macro will implement [`ModelTrait`](#) for `Model`
 
 The [`DeriveActiveModel`](#) derive macro will implement [`ActiveModelTrait`](#) for `ActiveModel` which provides setters and getters for all active values in the active model.
 
+## Active Enum
+
+The [`DeriveActiveEnum`](#) derive macro will implement [`ActiveEnum`](#) for any enums.
+
 ## Relation
 
 The [`DeriveRelation`](#) derive macro will implement [`RelationTrait`](#) for `Relation`.

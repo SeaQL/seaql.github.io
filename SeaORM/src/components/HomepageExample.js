@@ -55,10 +55,8 @@ let cheese: cake::Model = cheese.unwrap();
 let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 // find related models (eager)
-let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
-    .find_with_related(Fruit)
-    .all(db)
-    .await?;`,
+let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> =
+    Cake::find().find_with_related(Fruit).all(db).await?;`,
   },
   {
     title: 'Insert',
@@ -66,17 +64,15 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     name: Set("Apple".to_owned()),
     ..Default::default() // no need to set primary key
 };
- 
+
 let pear = fruit::ActiveModel {
     name: Set("Pear".to_owned()),
     ..Default::default()
 };
- 
+
 // insert one
-let res: InsertResult = pear.insert(db).await?;
- 
-println!("InsertResult: {}", res.last_insert_id);
- 
+let pear: fruit::Model = pear.insert(db).await?;
+
 // insert many
 Fruit::insert_many(vec![apple, pear]).exec(db).await?;`,
   },
@@ -85,16 +81,16 @@ Fruit::insert_many(vec![apple, pear]).exec(db).await?;`,
     code: `use sea_orm::sea_query::{Expr, Value};
 
 let pear: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
- 
 let mut pear: fruit::ActiveModel = pear.unwrap().into();
+
 pear.name = Set("Sweet pear".to_owned());
- 
+
 // update one
-let pear: fruit::ActiveModel = pear.update(db).await?;
- 
+let pear: fruit::Model = pear.update(db).await?;
+
 // update many: UPDATE "fruit" SET "cake_id" = NULL WHERE "fruit"."name" LIKE '%Apple%'
 Fruit::update_many()
-    .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
+    .col_expr(fruit::Column::CakeId, Expr::value(Value::Int(None)))
     .filter(fruit::Column::Name.contains("Apple"))
     .exec(db)
     .await?;`,
@@ -102,12 +98,12 @@ Fruit::update_many()
   {
     title: 'Save',
     code: `let banana = fruit::ActiveModel {
-    id: Unset(None),
+    id: NotSet,
     name: Set("Banana".to_owned()),
     ..Default::default()
 };
 
-// create, because primary key \`id\` is \`Unset\`
+// create, because primary key \`id\` is \`NotSet\`
 let mut banana = banana.save(db).await?;
 
 banana.name = Set("Banana Mongo".to_owned());
@@ -117,12 +113,16 @@ let banana = banana.save(db).await?;`,
   },
   {
     title: 'Delete',
-    code: `let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let orange: fruit::ActiveModel = orange.unwrap().into();
+    code: `// delete one
+let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
+let orange: fruit::Model = orange.unwrap();
+fruit::Entity::delete(orange.into_active_model())
+    .exec(db)
+    .await?;
 
-// delete one
-fruit::Entity::delete(orange).exec(db).await?;
 // or simply
+let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
+let orange: fruit::Model = orange.unwrap();
 orange.delete(db).await?;
 
 // delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE 'Orange'

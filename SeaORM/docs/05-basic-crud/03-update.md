@@ -14,7 +14,7 @@ let mut pear: fruit::ActiveModel = pear.unwrap().into();
 pear.name = Set("Sweet pear".to_owned());
 
 // Update corresponding row in database using primary key value
-let pear: fruit::ActiveModel = pear.update(db).await?;
+let pear: fruit::Model = pear.update(db).await?;
 ```
 
 ## Update Many
@@ -23,7 +23,7 @@ You can also update multiple rows in the database without finding each `Model` w
 
 ```rust
 // Bulk set attributes using ActiveModel
-let pear: fruit::ActiveModel = Fruit::update_many()
+let update_result: UpdateResult = Fruit::update_many()
     .set(pear)
     .filter(fruit::Column::Id.eq(1))
     .exec(db)
