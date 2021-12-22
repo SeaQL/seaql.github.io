@@ -55,10 +55,14 @@ The column type will be derived automatically with the following mapping:
 | --------- | ------------- |
 | String | Char |
 | String | String |
-| u8, i8 | TinyInteger |
-| u16, i16 | SmallInteger |
-| u32, i32 | Integer |
-| u64, i64 | BigInteger |
+| i8 | TinyInteger |
+| u8 | TinyUnsigned |
+| i16 | SmallInteger |
+| u16 | SmallUnsigned |
+| i32 | Integer |
+| u32 | Unsigned |
+| i64 | BigInteger |
+| u64 | BigUnsigned |
 | f32 | Float |
 | f64 | Double |
 | bool | Boolean |
