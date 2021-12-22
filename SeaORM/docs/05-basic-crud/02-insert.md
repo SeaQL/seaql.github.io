@@ -34,7 +34,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ## Insert One
 
-Insert an active model and get back a fresh `ActiveModel`. Its value is retrieved from database, so any auto-generated fields will be populated.
+Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
 
 ```rust
 let pear = fruit::ActiveModel {
@@ -42,7 +42,7 @@ let pear = fruit::ActiveModel {
     ..Default::default() // all other attributes are `Unset`
 };
 
-let res: fruit::ActiveModel = pear.insert(db).await?;
+let pear: fruit::Model = pear.insert(db).await?;
 ```
 
 Insert an active model and get back the last insert id. Its type matches the model's primary key type, so it could be a tuple if the model has a composite primary key.
