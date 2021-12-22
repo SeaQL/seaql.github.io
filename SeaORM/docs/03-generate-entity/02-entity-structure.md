@@ -29,7 +29,7 @@ The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity`
 ### Table Name
 
 The `table_name` attribute specifies the corresponding table in the database.
-Optionally, you can also specify the database schema by `schema_name` (Postgres only).
+Optionally, you can also specify the database schema or database name by `schema_name`.
 
 ```rust
 #[sea_orm(table_name = "cake", schema_name = "public")]
