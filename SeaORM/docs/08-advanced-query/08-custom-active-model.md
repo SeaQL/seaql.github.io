@@ -19,6 +19,8 @@ pub struct Model {
 Create a new struct with some fields omitted.
 
 ```rust
+use sea_orm::ActiveValue::NotSet;
+
 #[derive(DeriveIntoActiveModel)]
 pub struct NewFruit {
     // id is omitted
@@ -34,7 +36,7 @@ assert_eq!(
     }
     .into_active_model(),
     fruit::ActiveModel {
-        id: Unset(None),
+        id: NotSet,
         name: Set("Apple".to_owned()),
         cake_id: Set(Some(1)),
     }
@@ -44,6 +46,8 @@ assert_eq!(
 `Option<Option<T>>` allows for `Some(None)` to update the column to be NULL.
 
 ```rust
+use sea_orm::ActiveValue::NotSet;
+
 #[derive(DeriveIntoActiveModel)]
 pub struct UpdateFruit {
     pub cake_id: Option<Option<i32>>,
@@ -55,8 +59,8 @@ assert_eq!(
     }
     .into_active_model(),
     fruit::ActiveModel {
-        id: Unset(None),
-        name: Unset(None),
+        id: NotSet,
+        name: NotSet,
         cake_id: Set(Some(1)),
     }
 );
@@ -67,8 +71,8 @@ assert_eq!(
     }
     .into_active_model(),
     fruit::ActiveModel {
-        id: Unset(None),
-        name: Unset(None),
+        id: NotSet,
+        name: NotSet,
         cake_id: Set(None),
     }
 );
@@ -79,9 +83,9 @@ assert_eq!(
     }
     .into_active_model(),
     fruit::ActiveModel {
-        id: Unset(None),
-        name: Unset(None),
-        cake_id: Unset(None),
+        id: NotSet,
+        name: NotSet,
+        cake_id: NotSet,
     }
 );
 ```
