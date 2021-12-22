@@ -109,7 +109,9 @@ pub mod active_enum {
 
 ### PostgreSQL
 
-Enum in PostgreSQL is defined as a custom type, it can be created with [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+Enum in PostgreSQL is defined as a custom type, it can be created from an `Entity` with [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+
+Or, it can be created directly from `ActiveEnum` with [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -127,6 +129,14 @@ assert_eq!(
         db_postgres,
         r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
     ),]
+);
+
+assert_eq!(
+    db_postgres.build(&schema.create_enum_from_active_enum::<Tea>()),
+    Statement::from_string(
+        db_postgres,
+        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
+    )
 );
 
 assert_eq!(
