@@ -6,7 +6,7 @@ Find a `Model` from the database, then convert it into `ActiveModel`, finally de
 
 ```rust
 let orange: Option<fruit::Model> = Fruit::find_by_id(30).one(db).await?;
-let orange: fruit::ActiveModel = orange.unwrap().into();
+let orange: fruit::Model = orange.unwrap();
 
 let res: DeleteResult = orange.delete(db).await?;
 assert_eq!(res.rows_affected, 1);
