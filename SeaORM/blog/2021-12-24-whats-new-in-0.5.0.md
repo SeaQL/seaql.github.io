@@ -12,10 +12,10 @@ tags: [news]
 
 ## Insert and Update Return `Model`
 
-[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert and update operations. If you want to mutate the model and save it back to the database you can convert the `Model` into `ActiveModel` by calling `into_active_model()` method.
+[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert or update operations. If you want to mutate the model and save it back to the database you can convert the `Model` into `ActiveModel` by calling `into_active_model()` method.
 
 Breaking Changes:
-- Insert and update return `Model` instead of `ActiveModel`
+- Insert or update return `Model` instead of `ActiveModel`
 - `ActiveModelBehavior::after_save` takes `Model` instead of `ActiveModel`
 
 ```rust
@@ -96,13 +96,13 @@ cake.delete(db).await?;
 
 ## `ActiveValue` Revamped
 
-[[#340](https://github.com/SeaQL/sea-orm/pull/340)] `ActiveValue` is now defined as an enum instead of struct. The public API of it remains unchanged, except `Unset` was deprecated and `ActiveValue::NotSet` should be used instead.
+[[#340](https://github.com/SeaQL/sea-orm/pull/340)] The `ActiveValue` is now defined as an enum instead of a struct. The public API of it remains unchanged, except `Unset` was deprecated and `ActiveValue::NotSet` should be used instead.
 
 Breaking Changes:
 - Rename `sea_orm::unchanged_active_value_not_intended_for_public_use()` to `sea_orm::Unchanged()`
 - Rename `ActiveValue::unset()` to `ActiveValue::not_set()`
 - Rename `ActiveValue::is_unset()` to `ActiveValue::is_not_set()`
-- `PartialEq` of `ActiveValue` will now check the equality of state instead of just checking the value
+- `PartialEq` of `ActiveValue` will also check the equality of state instead of just checking the equality of value
 
 ```rust
 /// Defines a stateful value used in ActiveModel.
@@ -160,7 +160,7 @@ cargo install sea-orm-cli
 
 Updates related to entity files generation (`cargo generate entity`):
 
-- [[#348](https://github.com/SeaQL/sea-orm/pull/348)] Discover and define PostgreSQL enums, enum model attribute will be defined in terms of `ActiveEnum`
+- [[#348](https://github.com/SeaQL/sea-orm/pull/348)] Discover and define PostgreSQL enums
 - [[#386](https://github.com/SeaQL/sea-orm/pull/386)] Support SQLite database, you can generate entity files from all supported databases including MySQL, PostgreSQL and SQLite
 
 <div class="row">
@@ -207,7 +207,7 @@ Updates related to entity files generation (`cargo generate entity`):
 
 ## Tracing
 
-[[#373](https://github.com/SeaQL/sea-orm/pull/373)] You can trace the query executed by SeaORM with the `debug-print` feature enabled and have the [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) up and running.
+[[#373](https://github.com/SeaQL/sea-orm/pull/373)] You can trace the query executed by SeaORM with the `debug-print` feature enabled with [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) up and running.
 
 ```rust
 pub async fn main() {
