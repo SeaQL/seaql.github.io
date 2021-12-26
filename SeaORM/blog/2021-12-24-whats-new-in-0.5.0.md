@@ -161,7 +161,6 @@ cargo install sea-orm-cli
 Updates related to entity files generation (`cargo generate entity`):
 
 - [[#348](https://github.com/SeaQL/sea-orm/pull/348)] Discover and define PostgreSQL enums, enum model attribute will be defined in terms of `ActiveEnum`
-- [[#397](https://github.com/SeaQL/sea-orm/pull/397)] Map MySQL unsigned integer columns to `u8`, `u16`, `u32` and `u64` respectively
 - [[#386](https://github.com/SeaQL/sea-orm/pull/386)] Support SQLite database, you can generate entity files from all supported databases including MySQL, PostgreSQL and SQLite
 
 <div class="row">
