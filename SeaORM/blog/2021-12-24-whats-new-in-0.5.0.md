@@ -10,12 +10,12 @@ tags: [news]
 
 🎉 We are pleased to release SeaORM [`0.5.0`](https://github.com/SeaQL/sea-orm/releases/tag/0.5.0) today! Here are some feature highlights 🌟:
 
-## Insert, Update & Save Return `Model`
+## Insert and Update Return `Model`
 
-[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert, update and save operation. If you want to mutate it and save it back to the database you can convert it back to `ActiveModel` by calling `into_active_model()` method easily.
+[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert and update operations. If you want to mutate the model and save it back to the database you can convert the `Model` into `ActiveModel` by calling `into_active_model()` method.
 
 Breaking Changes:
-- Insert, update and save return `Model` instead of `ActiveModel`
+- Insert and update return `Model` instead of `ActiveModel`
 - `ActiveModelBehavior::after_save` takes `Model` instead of `ActiveModel`
 
 ```rust
@@ -25,7 +25,7 @@ let active_model = ActiveModel {
     ..Default::default()
 };
 // Do insert
-let cake: Model = active_model.save(db).await?;
+let cake: Model = active_model.insert(db).await?;
 assert_eq!(
     cake,
     Model {
@@ -39,7 +39,7 @@ let mut active_model = cake.into_active_model();
 // Change name of cake
 active_model.name = Set("Chocolate Cake".to_owned());
 // Do update
-let cake: Model = active_model.save(db).await?;
+let cake: Model = active_model.update(db).await?;
 assert_eq!(
     cake,
     Model {

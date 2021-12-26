@@ -23,11 +23,10 @@ let banana = fruit::ActiveModel {
 };
 
 // Insert, because primary key `id` is `NotSet`
-let banana: fruit::Model = banana.save(db).await?;
-let mut banana: fruit::ActiveModel = banana.into();
+let banana: fruit::ActiveModel = banana.save(db).await?;
 
 banana.name = Set("Banana Mongo".to_owned());
 
 // Update, because primary key `id` is `Set`
-let banana: fruit::Model = banana.save(db).await?;
+let banana: fruit::ActiveModel = banana.save(db).await?;
 ```
