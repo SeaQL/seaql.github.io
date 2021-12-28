@@ -12,14 +12,14 @@ tags: [news]
 
 ## Insert and Update Return `Model`
 
-[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert or update operations. If you want to mutate the model and save it back to the database you can convert the `Model` into `ActiveModel` by calling `into_active_model()` method.
+[[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert or update operations. If you want to mutate the model and save it back to the database you can convert it into `ActiveModel` with the method `into_active_model`.
 
 Breaking Changes:
 - Insert or update return `Model` instead of `ActiveModel`
-- `ActiveModelBehavior::after_save` takes `Model` instead of `ActiveModel`
+- Method `ActiveModelBehavior::after_save` takes `Model` as input instead of `ActiveModel`
 
 ```rust
-// Construct a ActiveModel
+// Construct a `ActiveModel`
 let active_model = ActiveModel {
     name: Set("Classic Vanilla Cake".to_owned()),
     ..Default::default()
@@ -34,9 +34,9 @@ assert_eq!(
     }
 );
 
-// Covert Model into ActiveModel
+// Covert `Model` into `ActiveModel`
 let mut active_model = cake.into_active_model();
-// Change name of cake
+// Change the name of cake
 active_model.name = Set("Chocolate Cake".to_owned());
 // Do update
 let cake: Model = active_model.update(db).await?;
@@ -99,9 +99,9 @@ cake.delete(db).await?;
 [[#340](https://github.com/SeaQL/sea-orm/pull/340)] The `ActiveValue` is now defined as an enum instead of a struct. The public API of it remains unchanged, except `Unset` was deprecated and `ActiveValue::NotSet` should be used instead.
 
 Breaking Changes:
-- Rename `sea_orm::unchanged_active_value_not_intended_for_public_use()` to `sea_orm::Unchanged()`
-- Rename `ActiveValue::unset()` to `ActiveValue::not_set()`
-- Rename `ActiveValue::is_unset()` to `ActiveValue::is_not_set()`
+- Rename method `sea_orm::unchanged_active_value_not_intended_for_public_use` to `sea_orm::Unchanged`
+- Rename method `ActiveValue::unset` to `ActiveValue::not_set`
+- Rename method `ActiveValue::is_unset` to `ActiveValue::is_not_set`
 - `PartialEq` of `ActiveValue` will also check the equality of state instead of just checking the equality of value
 
 ```rust
@@ -160,8 +160,8 @@ cargo install sea-orm-cli
 
 Updates related to entity files generation (`cargo generate entity`):
 
-- [[#348](https://github.com/SeaQL/sea-orm/pull/348)] Discover and define PostgreSQL enums
-- [[#386](https://github.com/SeaQL/sea-orm/pull/386)] Support SQLite database, you can generate entity files from all supported databases including MySQL, PostgreSQL and SQLite
+- [[#348](https://github.com/SeaQL/sea-orm/pull/348)] Discovers and defines PostgreSQL enums
+- [[#386](https://github.com/SeaQL/sea-orm/pull/386)] Supports SQLite database, you can generate entity files from all supported databases including MySQL, PostgreSQL and SQLite
 
 <div class="row">
     <div class="col col--6 margin-bottom--md">
@@ -207,7 +207,7 @@ Updates related to entity files generation (`cargo generate entity`):
 
 ## Tracing
 
-[[#373](https://github.com/SeaQL/sea-orm/pull/373)] You can trace the query executed by SeaORM with the `debug-print` feature enabled with [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) up and running.
+[[#373](https://github.com/SeaQL/sea-orm/pull/373)] You can trace the query executed by SeaORM with `debug-print` feature enabled and [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) up and running.
 
 ```rust
 pub async fn main() {

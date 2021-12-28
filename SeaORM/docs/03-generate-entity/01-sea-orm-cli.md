@@ -41,14 +41,14 @@ Supported databases:
 Command line options:
 - `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
 - `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)
-    - For MySQL, this argument is ignored
+    - For MySQL & SQLite, this argument is ignored
     - For PostgreSQL, this argument is optional with default value 'public'
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 - `-v` / `--verbose`: print debug messages
 - `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
-- `--compact-format`: Generate entity file of [compact format](03-generate-entity/02-entity-structure.md) (default: true)
-- `--expanded-format`: Generate entity file of [expanded format](03-generate-entity/03-expanded-entity-structure.md)
-- `--with-serde`: Automatically derive serde Serialize / Deserialize traits for the entity (none, serialize, deserialize, both) (default: none)
+- `--compact-format`: generate entity file of [compact format](03-generate-entity/02-entity-structure.md) (default: true)
+- `--expanded-format`: generate entity file of [expanded format](03-generate-entity/03-expanded-entity-structure.md)
+- `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (none, serialize, deserialize, both) (default: none)
 
 ```shell
 # Generate entity files of database `bakery` to `src/entity`

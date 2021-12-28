@@ -12,7 +12,7 @@ Check out how we write unit tests using mock connection [here](https://github.co
 
 ## Mocking Query Result
 
-We create a mock database for Postgres with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using `append_query_results` method. Note that we pass a vector of vector to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
+We create a mock database for PostgreSQL with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using `append_query_results` method. Note that we pass a vector of vector to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
 
 One special thing about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded; you can validate each of it to ensure the correctness of your application logic.
 

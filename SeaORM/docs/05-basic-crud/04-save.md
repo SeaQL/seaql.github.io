@@ -17,7 +17,7 @@ Calling `save` to insert or update an `ActiveModel`.
 use sea_orm::ActiveValue::NotSet;
 
 let banana = fruit::ActiveModel {
-    id: NotSet, // unset (NotSet) primary key explicitly
+    id: NotSet, // primary key is NotSet
     name: Set("Banana".to_owned()),
     ..Default::default() // all other attributes are `NotSet`
 };
@@ -27,6 +27,6 @@ let banana: fruit::ActiveModel = banana.save(db).await?;
 
 banana.name = Set("Banana Mongo".to_owned());
 
-// Update, because primary key `id` is `Set`
+// Update, because primary key `id` is `Unchanged`
 let banana: fruit::ActiveModel = banana.save(db).await?;
 ```

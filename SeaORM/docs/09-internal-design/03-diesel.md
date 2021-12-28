@@ -2,7 +2,7 @@
 
 [SeaORM](https://github.com/SeaQL/sea-orm) and [Diesel](https://github.com/diesel-rs/diesel) share the same goal: to offer you a complete solution in interfacing with databases.
 
-Both SeaORM and Diesel work with MySQL, Postgres, and SQLite, so you aren't constrained going with either. While Diesel allows third parties to implement custom backends, SeaORM does not.
+Both SeaORM and Diesel work with MySQL, PostgreSQL, and SQLite, so you aren't constrained going with either. While Diesel allows third parties to implement custom backends, SeaORM does not.
 
 There are also other things we chose to do differently.
 

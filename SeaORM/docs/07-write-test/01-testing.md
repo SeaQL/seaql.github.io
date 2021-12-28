@@ -59,6 +59,6 @@ SeaORM helps you write these unit tests using the `Mock` database interface.
 
 This is basically testing your entire program on a domain level, requiring you to provide seed data and simulate the common user operations. Usually, you will do it in CI against a real database. However, SeaORM encourages you to scale down these tests so that the most important data-flow can be tested by Cargo's [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html).
 
-Since SeaORM is abstract over MySQL, Postgres, and SQLite, you can use SQLite as a backend to test your program's behaviours. It is lightweight enough to run it frequently, locally, and on CI. The catch is, SQLite lacks some advanced features of MySQL or Postgres, so depending on your use of database-specific features, not all logic can be tested inside SQLite.
+Since SeaORM is abstract over MySQL, PostgreSQL, and SQLite, you can use SQLite as a backend to test your program's behaviours. It is lightweight enough to run it frequently, locally, and on CI. The catch is, SQLite lacks some advanced features of MySQL or PostgreSQL, so depending on your use of database-specific features, not all logic can be tested inside SQLite.
 
-We are looking for SQLite alternatives that can simulate the more advanced features of MySQL and Postgres.
+We are looking for SQLite alternatives that can simulate the more advanced features of MySQL and PostgreSQL.

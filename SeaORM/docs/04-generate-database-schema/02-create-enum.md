@@ -1,10 +1,10 @@
 # Create Enum
 
-After you have defined `Entity`, you can generate SQL statement to create database table with enum columns via the [`Schema`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html) helper struct.
+You can generate SQL statement to create database tables with enum columns via the [`Schema`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html) helper struct.
 
 ## String & Integer Enum
 
-As this is just an ordinary string / integer column in database table, you can use the [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) method like below.
+This is just an ordinary string / integer column in database table that maps to Rust enum, you can simply use the [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) method to construct table create create statement just like previous section.
 
 Defining the `Entity` and enums.
 
@@ -75,7 +75,7 @@ assert_eq!(
 
 ## Native Database Enum
 
-The enum support are different across databases. We will explain the creation of native database enum for each databases.
+The enum support are different across databases. We will explain the creation of native database enum for each databases one by one.
 
 Defining the `Entity` and enums.
 
@@ -111,7 +111,7 @@ pub mod active_enum {
 
 Enum in PostgreSQL is defined as a custom type, it can be created from an `Entity` with [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
 
-Or, it can be created directly from `ActiveEnum` with [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
+You can also create it directly from `ActiveEnum` with [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/0.*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
 
 ```rust
 use sea_orm::{Schema, Statement};
