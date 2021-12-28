@@ -8,7 +8,7 @@ Let's go through the sections of the expanded [Cake](https://github.com/SeaQL/se
 
 ## Entity
 
-By implementing the [`EntityTrait`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html), you can perform CRUD operations on the given table.
+By implementing the [`EntityTrait`](https://docs.rs/sea-orm/0.4/sea_orm/entity/trait.EntityTrait.html), you can perform CRUD operations on the given table.
 
 ```rust
 #[derive(Copy, Clone, Default, Debug, DeriveEntity)]
@@ -58,7 +58,7 @@ pub enum Column {
 }
 ```
 
-To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-orm/0.*/sea_orm/entity/enum.ColumnType.html) enum can be used.
+To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-orm/0.4/sea_orm/entity/enum.ColumnType.html) enum can be used.
 
 ### Additional properties
 
@@ -74,7 +74,7 @@ ColumnType::String(None).def().unique().indexed().nullable()
 
 An enum representing the primary key of this table. If it is a composite key, then multiple enum variants can be added.
 
-The `ValueType` define the return type of last insert id in [`InsertResult`](https://docs.rs/sea-orm/0.*/sea_orm/struct.InsertResult.html).
+The `ValueType` define the return type of last insert id in [`InsertResult`](https://docs.rs/sea-orm/0.4/sea_orm/struct.InsertResult.html).
 
 The `auto_increment` defines whether the primary key has an auto-generated value.
 
@@ -135,7 +135,7 @@ pub struct Model {
 
 ## Active Model
 
-The `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/0.*/sea_orm/entity/struct.ActiveValue.html).
+The `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/0.4/sea_orm/entity/struct.ActiveValue.html).
 
 ```rust
 #[derive(Clone, Debug, PartialEq)]
