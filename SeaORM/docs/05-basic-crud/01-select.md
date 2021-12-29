@@ -21,7 +21,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 ## Find with Conditions and Orders
 
-In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions including where and order by expression. They can be constructed using [`filter`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/0.*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
+In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/0.*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
 
 > Read more about [conditional expression](08-advanced-query/02-conditional-expression.md).
 

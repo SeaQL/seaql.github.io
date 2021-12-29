@@ -20,7 +20,7 @@ impl Linked for CakeToFilling {
 }
 ```
 
-Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to above:
+Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to the above:
 
 ```rust
 #[derive(Debug)]
@@ -45,7 +45,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Find fillings that can be filled into a cake with [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -71,7 +71,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Find all pairs of cake and filling together in a single select with [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 ```rust
 assert_eq!(

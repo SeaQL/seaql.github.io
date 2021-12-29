@@ -10,7 +10,7 @@ We are still developing SeaORM's schema management utility, so for now you can u
 $ cargo install sqlx-cli
 ```
 
-Setting `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
+Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
 DATABASE_URL=sql://username:password@localhost/database

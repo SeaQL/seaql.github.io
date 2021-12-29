@@ -1,6 +1,6 @@
 # Aggregate Functions
 
-You can group results selected from SeaORM find with the `group_by` method, and if you wish to further restrict the grouped result set, the `having` method can help you achieve that.
+You can group results selected from SeaORM find with the `group_by` method. If you wish to further restrict the grouped result set, the `having` method can help you achieve that.
 
 ## Group By
 

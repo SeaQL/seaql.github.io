@@ -17,9 +17,9 @@ First, let's classify different causes of errors in a data-driven application:
 1. misspelled or non-existent symbol (table or column) name
 1. using incompatible functions or operators on data (e.g. add two strings)
 1. invalid SQL query
-	- e.g. ambiguous symbol in `JOIN` query
+	- e.g. ambiguous symbol in a `JOIN` query
 	- e.g. forget to insert data on non-nullable columns
-	- e.g. forget to aggregate every column in `GROUP BY` query
+	- e.g. forget to aggregate every column in a `GROUP BY` query
 
 ### 2. Transaction Errors
 
@@ -28,7 +28,7 @@ First, let's classify different causes of errors in a data-driven application:
 
 ### 3. Behavioural Errors
 
-1. join or filtering on wrong conditions
+1. joining or filtering on wrong conditions
 1. incomplete or incorrect query results
 1. insert, update or delete operations with unawared side effects
 1. any other behaviour not as intended
@@ -37,21 +37,21 @@ First, let's classify different causes of errors in a data-driven application:
 
 ## Mitigations
 
-Now, let's see how can we mitigate these errors:
+Now, let's see how we can mitigate these errors:
 
 ### 1. Type Errors
 
 Using Rust automatically saves you from misspelling symbols.
 
-Using a *completely static* query builder (like Diesel) can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and running (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
+Using a *completely static* query builder (like Diesel) can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and runs (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
 
-As such, SeaORM does not attempt to check things at compile-time. We intend to (still in development) provide you runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
+As such, SeaORM does not attempt to check things at compile-time. We intend to (still in development) provide runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
 
 ### 2. Transaction Errors
 
 These problems cannot be eliminated. It usually indicates your code has some logic bugs. When they happen, it is already too late, and your only choice is to abort. Instead, they have to be actively prevented: check beforehand the constraints before attempting data operations.
 
-You should write a bunch of unit tests that can reject bad data and prevent it from entering your database. Your unit test should also verify that each *transaction* (in your application domain, not necessarily the database transaction) is sound.
+You should write a bunch of unit tests that can reject bad data and prevent it from entering your database. Your unit tests should also verify that each *transaction* (in your application domain, not necessarily the database transaction) is sound.
 
 SeaORM helps you write these unit tests using the `Mock` database interface.
 
