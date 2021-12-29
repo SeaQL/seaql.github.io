@@ -21,7 +21,7 @@ let mut stream = Fruit::find()
     .await?;
 ```
 
-Note that the stream object will exclusively hold onto the connection until being dropped, preventing the connection to be borrowed by others.
+Note that the stream object will exclusively hold onto the connection until dropped, preventing the connection to be borrowed by others.
 
 ```rust
 {

@@ -2,7 +2,7 @@
 
 ## Entity
 
-A unit struct implements [`EntityTrait`](#) representing a table in the database.
+A unit struct that implements [`EntityTrait`](#) representing a table in the database.
 
 This trait contains the properties of an entity including
 - Table Name (implemented [`EntityName`](#))

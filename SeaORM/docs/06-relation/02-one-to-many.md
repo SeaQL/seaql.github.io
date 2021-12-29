@@ -1,6 +1,6 @@
 # One to Many
 
-A one-to-many relation is similar to one-to-one relation. In the previous section, we give the example of "a `Cake` entity has at most one `Fruit` topping". In one-to-many relation, we change the "at most one" constraint. So, we have a `Cake` entity that might have many `Fruit` toppings.
+A one-to-many relation is similar to a one-to-one relation. In the previous section, we gave the example of "a `Cake` entity has at most one `Fruit` topping". To make it a one-to-many relation, we remove the "at most one" constraint. So, we have a `Cake` entity that might have many `Fruit` toppings.
 
 ## Defining the Relation
 
@@ -28,7 +28,7 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following is equivalent to above:
+where the following is equivalent to the above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -67,7 +67,7 @@ impl Related<super::cake::Entity> for Entity {
 ```
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following is equivalent to above:
+where the following is equivalent to the above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

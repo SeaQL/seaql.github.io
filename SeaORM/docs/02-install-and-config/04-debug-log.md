@@ -1,6 +1,6 @@
 # Debug Log
 
-SeaORM (with `debug-print` feature turned on) log debug messages via the [`tracing`](https://crates.io/crates/tracing) crate.
+SeaORM (with `debug-print` feature turned on) logs debug messages via the [`tracing`](https://crates.io/crates/tracing) crate.
 
 You need to setup [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) to capture and view the debug log. See the snippet below and a complete example [here](https://github.com/SeaQL/sea-orm/blob/master/examples/actix_example/src/main.rs).
 

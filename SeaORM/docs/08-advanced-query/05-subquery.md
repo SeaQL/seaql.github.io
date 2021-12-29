@@ -2,7 +2,7 @@
 
 ## Conditional Expression With Subquery
 
-Use `in_subquery` or `not_in_subquery` methods to construct conditional expression with subquery.
+Use the `in_subquery` or `not_in_subquery` methods to construct conditional expressions with subqueries.
 
 ```rust
 use sea_orm::Condition;
