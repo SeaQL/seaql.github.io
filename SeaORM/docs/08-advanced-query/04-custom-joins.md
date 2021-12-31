@@ -1,6 +1,6 @@
 # Custom Joins
 
-You can use the `join` method to construct complex join select query. It takes any `RelationDef` defined in entity file, you can define relation with `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
+You can use the `join` method to construct complex join select queries. It takes any `RelationDef` defined in entity files, and you can define relation with the `belongs_to` method as well. Join type is specified using `JoinType` such as inner join, left join and right join.
 
 ```rust
 use sea_orm::{JoinType, RelationTrait};
@@ -33,3 +33,5 @@ assert_eq!(
     .join(" ")
 );
 ```
+
+> You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of such complex query. See [here](08-advanced-query/01-custom-select.md#handling-custom-selects) for details.

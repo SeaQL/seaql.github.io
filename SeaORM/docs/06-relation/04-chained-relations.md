@@ -20,9 +20,32 @@ impl Linked for CakeToFilling {
 }
 ```
 
+Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to the above:
+
+```rust
+#[derive(Debug)]
+pub struct CakeToFilling;
+
+impl Linked for CakeToFilling {
+    type FromEntity = cake::Entity;
+
+    type ToEntity = filling::Entity;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![
+            cake_filling::Relation::Cake.def().rev(),
+            cake_filling::Entity::belongs_to(filling::Entity)
+                .from(cake_filling::Column::FillingId)
+                .to(filling::Column::Id)
+                .into(),
+        ]
+    }
+}
+```
+
 ### Lazy Loading
 
-Use the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -48,7 +71,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Use the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 ```rust
 assert_eq!(

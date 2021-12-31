@@ -32,11 +32,11 @@ db.transaction::<_, (), DbErr>(|txn| {
 .await;
 ```
 
-This is the preferred way for most cases. However, if you happens to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
+This is the preferred way for most cases. However, if you happen to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
 
 ## `begin` & `commit` / `rollback`
 
-`begin` the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, it would automatically rollback the transaction.
+`begin` the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
 
 ```rust
 let txn = db.begin().await?;

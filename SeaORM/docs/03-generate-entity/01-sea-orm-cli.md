@@ -8,7 +8,7 @@ $ cargo install sea-orm-cli
 
 ## Configure Environment
 
-Setting `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
+Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
 DATABASE_URL=sql://username:password@localhost/database
@@ -33,19 +33,22 @@ $ sea-orm-cli generate entity -h
 
 Discover all tables in a database and generate a corresponding SeaORM entity file for each table.
 
-> Generating Entity files from SQLite is not yet supported. You can write the entity files by hand, and then use the Entity to [initialize a database](/docs/write-test/sqlite#setup-database-schema).
+Supported databases:
+- MySQL
+- PostgreSQL
+- SQLite
 
 Command line options:
 - `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
 - `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)
-    - For MySQL, this argument is ignored
+    - For MySQL & SQLite, this argument is ignored
     - For PostgreSQL, this argument is optional with default value 'public'
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 - `-v` / `--verbose`: print debug messages
-- `--include-hidden-tables`: generate entity files from hidden tables (table names starting with an underscore are ignored by default)
-- `--compact-format`: Generate entity file of [compact format](/docs/generate-entity/entity-structure) (default: true)
-- `--expanded-format`: Generate entity file of [expanded format](/docs/generate-entity/expanded-entity-structure)
-- `--with-serde`: Automatically derive serde Serialize / Deserialize traits for the entity (none, serialize, deserialize, both) (default: none)
+- `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
+- `--compact-format`: generate entity file of [compact format](03-generate-entity/02-entity-structure.md) (default: true)
+- `--expanded-format`: generate entity file of [expanded format](03-generate-entity/03-expanded-entity-structure.md)
+- `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
 
 ```shell
 # Generate entity files of database `bakery` to `src/entity`

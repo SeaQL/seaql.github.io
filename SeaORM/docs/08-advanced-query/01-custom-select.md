@@ -1,6 +1,6 @@
 # Custom Select
 
-By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to do so.
+By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to select certain columns only.
 
 ## Clear Default Selection
 

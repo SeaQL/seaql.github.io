@@ -7,11 +7,13 @@ Before diving into SeaORM insert we have to introduce `ActiveValue` and `ActiveM
 A wrapper struct to capture the changes made to `ActiveModel` attributes.
 
 ```rust
+use sea_orm::ActiveValue::NotSet;
+
 // Set value
 let _: ActiveValue<i32> = Set(10);
 
-// Unset value
-let _: ActiveValue<i32> = Unset(None);
+// NotSet value
+let _: ActiveValue<i32> = NotSet;
 ```
 
 ## Model & ActiveModel
@@ -34,15 +36,15 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ## Insert One
 
-Insert an active model and get back a fresh `ActiveModel`. Its value is retrieved from database, so any auto-generated fields will be populated.
+Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
 
 ```rust
 let pear = fruit::ActiveModel {
     name: Set("Pear".to_owned()),
-    ..Default::default() // all other attributes are `Unset`
+    ..Default::default() // all other attributes are `NotSet`
 };
 
-let res: fruit::ActiveModel = pear.insert(db).await?;
+let pear: fruit::Model = pear.insert(db).await?;
 ```
 
 Insert an active model and get back the last insert id. Its type matches the model's primary key type, so it could be a tuple if the model has a composite primary key.
@@ -50,7 +52,7 @@ Insert an active model and get back the last insert id. Its type matches the mod
 ```rust
 let pear = fruit::ActiveModel {
     name: Set("Pear".to_owned()),
-    ..Default::default() // all other attributes are `Unset`
+    ..Default::default() // all other attributes are `NotSet`
 };
 
 let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;

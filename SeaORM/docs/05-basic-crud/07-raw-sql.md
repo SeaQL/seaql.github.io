@@ -2,7 +2,7 @@
 
 ## Query by raw SQL
 
-You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for Postgres.
+You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for PostgreSQL.
 
 ```rust
 let cheese: Option<cake::Model> = cake::Entity::find()
