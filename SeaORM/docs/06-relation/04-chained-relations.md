@@ -1,6 +1,6 @@
 # Chained Relations
 
-If you have multiple join paths between two entities or have complex joins that chain through multiple entities, you can define it with [`Linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate cake_filling table.
+If you have multiple join paths between two entities or have complex joins that chain through multiple entities, you can define it with [`Linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate cake_filling table.
 
 ```rust
 #[derive(Debug)]
@@ -45,7 +45,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -71,7 +71,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/0.*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 ```rust
 assert_eq!(
