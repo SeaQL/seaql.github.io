@@ -15,7 +15,7 @@ tags: [news]
 [[#339](https://github.com/SeaQL/sea-orm/pull/339)] As asked and requested by many of our community members. You can now get the refreshed `Model` after insert or update operations. If you want to mutate the model and save it back to the database you can convert it into `ActiveModel` with the method `into_active_model`.
 
 Breaking Changes:
-- Insert or update return `Model` instead of `ActiveModel`
+- `ActiveModel::insert` and `ActiveModel::update` return `Model` instead of `ActiveModel`
 - Method `ActiveModelBehavior::after_save` takes `Model` as input instead of `ActiveModel`
 
 ```rust
