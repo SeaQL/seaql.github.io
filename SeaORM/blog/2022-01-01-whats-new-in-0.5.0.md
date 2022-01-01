@@ -1,5 +1,5 @@
 ---
-slug: 2021-12-24-whats-new-in-0.5.0
+slug: 2022-01-01-whats-new-in-0.5.0
 title: What's new in SeaORM 0.5.0
 author: SeaQL Team
 author_title: Chris Tsang
