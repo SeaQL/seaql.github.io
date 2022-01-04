@@ -246,6 +246,18 @@ A big shout out to our sponsors 😇:
 <div class="row">
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sakti">
+                <img src="https://avatars.githubusercontent.com/u/196178?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Sakti Dwi Cahyono
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/shanesveller">
                 <img src="https://avatars.githubusercontent.com/u/831?v=4" />
             </a>
