@@ -113,6 +113,12 @@ module.exports = {
         'rust',
       ],
     },
+    algolia: {
+      appId: 'F60BRNGE7P',
+      apiKey: 'cb0fff4f36dcd0f3d6a97e12e494dec7',
+      indexName: 'seaorm',
+      contextualSearch: true,
+    },
     hideableSidebar: true,
   },
   presets: [
