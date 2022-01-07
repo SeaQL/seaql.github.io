@@ -16,6 +16,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'SeaQL',
   projectName: 'sea-orm',
+  trailingSlash: false,
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,
