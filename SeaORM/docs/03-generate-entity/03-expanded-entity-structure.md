@@ -135,7 +135,7 @@ pub struct Model {
 
 ## Active Model
 
-An `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/0.5/sea_orm/entity/struct.ActiveValue.html).
+An `ActiveModel` has all the attributes of its corresponding `Model` but all attributes are wrapped in an [`ActiveValue`](https://docs.rs/sea-orm/0.5/sea_orm/entity/enum.ActiveValue.html).
 
 ```rust
 #[derive(Clone, Debug, PartialEq)]
