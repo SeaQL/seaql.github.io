@@ -1,6 +1,11 @@
 # Chained Relations
 
-If you have multiple join paths between two entities or have complex joins that chain through multiple entities, you can define it with [`Linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.Linked.html). Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate cake_filling table.
+The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
+
+1. there exist multiple join paths between a pair of entities
+1. joining across multiple entities in a relational query
+
+Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate `cake_filling` table.
 
 ```rust
 #[derive(Debug)]
