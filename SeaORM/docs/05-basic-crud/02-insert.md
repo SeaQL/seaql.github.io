@@ -34,6 +34,66 @@ let active_model: cake::ActiveModel = model.into();
 assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 ```
 
+### Set ActiveModel from JSON Value
+
+If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. Note that you might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) JSON's primary key attribute, you can config that as shown below.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
+#[sea_orm(table_name = "fruit")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    #[serde(skip_deserializing)] // Skip deserializing
+    pub id: i32,
+    pub name: String,
+    pub cake_id: Option<i32>,
+}
+```
+
+Set the attributes in `ActiveModel` with `set_from_json` method.
+
+```rust
+// A ActiveModel with primary key set
+let mut fruit = fruit::ActiveModel {
+    id: ActiveValue::Set(1),
+    name: ActiveValue::NotSet,
+    cake_id: ActiveValue::NotSet,
+};
+
+// Note that this method will not alter the primary key values in ActiveModel
+fruit.set_from_json(json!({
+    "id": 8,
+    "name": "Apple",
+    "cake_id": 1,
+}))?;
+
+assert_eq!(
+    fruit,
+    fruit::ActiveModel {
+        id: ActiveValue::Set(1),
+        name: ActiveValue::Set("Apple".to_owned()),
+        cake_id: ActiveValue::Set(Some(1)),
+    }
+);
+```
+
+Create a new `ActiveModel` from JSON value with the `from_json` method.
+
+```rust
+let fruit = fruit::ActiveModel::from_json(json!({
+    "name": "Apple",
+}))?;
+
+assert_eq!(
+    fruit,
+    fruit::ActiveModel {
+        id: ActiveValue::NotSet,
+        name: ActiveValue::Set("Apple".to_owned()),
+        cake_id: ActiveValue::NotSet,
+    }
+);
+```
+
 ## Insert One
 
 Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
