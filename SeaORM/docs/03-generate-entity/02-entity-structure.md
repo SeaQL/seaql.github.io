@@ -38,6 +38,15 @@ pub struct Model { ... }
 
 ## Column
 
+### Column Name
+
+All column names are assumed to be in snake-case. You can override the column name by specifying the `column_name` attribute.
+
+```rust
+#[sea_orm(column_name = "name")]
+pub name: String
+```
+
 ### Column Type
 
 The column type will be derived automatically with the following mapping:
