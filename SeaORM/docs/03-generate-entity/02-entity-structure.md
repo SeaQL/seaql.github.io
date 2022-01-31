@@ -69,6 +69,7 @@ The column type will be derived automatically with the following mapping:
 | NaiveDate | Date |
 | NaiveTime | Time |
 | DateTime (chrono::NaiveDateTime) | DateTime |
+| DateTimeLocal (chrono::DateTime&lt;Local&gt;) <br/>DateTimeUtc (chrono::DateTime&lt;Utc&gt;) | Timestamp |
 | DateTimeWithTimeZone (chrono::DateTime&lt;FixedOffset&gt;) | TimestampWithTimeZone |
 | Uuid (uuid::Uuid) | Uuid |
 | Json (serde_json::Value) | Json |
