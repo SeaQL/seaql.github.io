@@ -59,6 +59,22 @@ let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
+## Insert One with Default
+
+Insert an active model with its database's default values. 
+
+```rust
+let pear = fruit::ActiveModel {
+    ..Default::default() // all attributes are `NotSet`
+};
+
+// The SQL statement:
+//   - MySQL: INSERT INTO `fruit` VALUES (DEFAULT)
+//   - SQLite: INSERT INTO "fruit" DEFAULT VALUES
+//   - PostgreSQL: INSERT INTO "fruit" DEFAULT VALUES RETURNING "id", "name", "cake_id"
+let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
+```
+
 ## Insert Many
 
 Insert many active models and get back the last insert id.
