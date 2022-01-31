@@ -46,6 +46,20 @@ mod tests {
                     },
                 ],
             ])
+            .append_query_results(vec![
+                // Third query result
+                vec![(
+                    cake::Model {
+                        id: 1,
+                        name: "Apple Cake".to_owned(),
+                    },
+                    fruit::Model {
+                        id: 2,
+                        name: "Apple".to_owned(),
+                        cake_id: Some(1),
+                    },
+                )],
+            ])
             .into_connection();
 
         // Find a cake from MockDatabase
@@ -74,6 +88,25 @@ mod tests {
             ]
         );
 
+        // Find all cakes with its related fruits
+        assert_eq!(
+            cake::Entity::find()
+                .find_also_related(fruit::Entity)
+                .all(&db)
+                .await?,
+            vec![(
+                cake::Model {
+                    id: 1,
+                    name: "Apple Cake".to_owned(),
+                },
+                Some(fruit::Model {
+                    id: 2,
+                    name: "Apple".to_owned(),
+                    cake_id: Some(1),
+                })
+            )]
+        );
+
         // Checking transaction log
         assert_eq!(
             db.into_transaction_log(),
@@ -86,6 +119,11 @@ mod tests {
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"SELECT "cake"."id", "cake"."name" FROM "cake""#,
+                    vec![]
+                ),
+                Transaction::from_sql_and_values(
+                    DatabaseBackend::Postgres,
+                    r#"SELECT "cake"."id" AS "A_id", "cake"."name" AS "A_name", "fruit"."id" AS "B_id", "fruit"."name" AS "B_name", "fruit"."cake_id" AS "B_cake_id" FROM "cake" LEFT JOIN "fruit" ON "cake"."id" = "fruit"."cake_id""#,
                     vec![]
                 ),
             ]
