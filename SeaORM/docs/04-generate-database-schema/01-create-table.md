@@ -39,7 +39,7 @@ assert_eq!(
             )
             .foreign_key(
                 ForeignKeyCreateStatement::new()
-                    .name("fk-cake_filling_price-cake_filling")
+                    .name("fk-cake_filling_price-cake_id-filling_id")
                     .from_tbl(CakeFillingPrice)
                     .from_col(cake_filling_price::Column::CakeId)
                     .from_col(cake_filling_price::Column::FillingId)
@@ -71,7 +71,7 @@ To further illustrate it, we will show the SQL statement as string below.
                 r#""filling_id" integer NOT NULL,"#,
                 r#""price" decimal NOT NULL,"#,
                 r#"CONSTRAINT "pk-cake_filling_price" PRIMARY KEY ("cake_id", "filling_id"),"#,
-                r#"CONSTRAINT "fk-cake_filling_price-cake_filling" FOREIGN KEY ("cake_id", "filling_id") REFERENCES "cake_filling" ("cake_id", "filling_id")"#,
+                r#"CONSTRAINT "fk-cake_filling_price-cake_id-filling_id" FOREIGN KEY ("cake_id", "filling_id") REFERENCES "cake_filling" ("cake_id", "filling_id")"#,
                 r#")"#,
             ]
             .join(" ")
@@ -96,7 +96,7 @@ To further illustrate it, we will show the SQL statement as string below.
                 "`filling_id` int NOT NULL,",
                 "`price` decimal NOT NULL,",
                 "PRIMARY KEY `pk-cake_filling_price` (`cake_id`, `filling_id`),",
-                "CONSTRAINT `fk-cake_filling_price-cake_filling` FOREIGN KEY (`cake_id`, `filling_id`) REFERENCES `cake_filling` (`cake_id`, `filling_id`)",
+                "CONSTRAINT `fk-cake_filling_price-cake_id-filling_id` FOREIGN KEY (`cake_id`, `filling_id`) REFERENCES `cake_filling` (`cake_id`, `filling_id`)",
                 ")",
             ]
             .join(" ")
