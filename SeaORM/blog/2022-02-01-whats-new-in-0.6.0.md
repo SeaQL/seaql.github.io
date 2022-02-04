@@ -12,7 +12,7 @@ tags: [news]
 
 ## Migration
 
-[[#335](https://github.com/SeaQL/sea-orm/pull/335)] Version control you database schema with migrations written in SeaQuery or in raw SQL. View [migration docs](#) to learn more.
+[[#335](https://github.com/SeaQL/sea-orm/pull/335)] Version control you database schema with migrations written in SeaQuery or in raw SQL. View [migration docs](/SeaORM/docs/next/migration/setting-up-migration) to learn more.
 
 1. Setup the migration directory by executing `sea-orm-cli migrate init`.
     ```

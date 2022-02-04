@@ -36,68 +36,76 @@
 
 	3.2 [Create Enum](04-generate-database-schema/02-create-enum.md)
 
-4. Basic CRUD
+4. Migration
 
-	4.1 [SELECT: find, filter, sort, paging](05-basic-crud/01-select.md)
+	4.1 [Setting Up Migration](05-migration/01-setting-up-migration.md)
 
-	4.2 [INSERT: Model & ActiveModel, insert many](05-basic-crud/02-insert.md)
+	4.2 [Writing Migration](05-migration/02-writing-migration.md)
 
-	4.3 [UPDATE: find & save, update many](05-basic-crud/03-update.md)
+	4.3 [Running Migration](05-migration/03-running-migration.md)
 
-	4.4 [SAVE: insert or update](05-basic-crud/04-save.md)
+5. Basic CRUD
 
-	4.5 [DELETE: delete one & delete many](05-basic-crud/05-delete.md)
+	5.1 [SELECT: find, filter, sort, paging](06-basic-crud/01-select.md)
 
-	4.6 [JSON](05-basic-crud/06-json.md)
+	5.2 [INSERT: Model & ActiveModel, insert many](06-basic-crud/02-insert.md)
 
-	4.7 [Raw SQL query](05-basic-crud/07-raw-sql.md)
+	5.3 [UPDATE: find & save, update many](06-basic-crud/03-update.md)
+
+	5.4 [SAVE: insert or update](06-basic-crud/04-save.md)
+
+	5.5 [DELETE: delete one & delete many](06-basic-crud/05-delete.md)
+
+	5.6 [JSON](06-basic-crud/06-json.md)
+
+	5.7 [Raw SQL query](06-basic-crud/07-raw-sql.md)
 
 ## Learn More
 
-5. Relations
+6. Relations
 
-	5.1 [One to One](06-relation/01-one-to-one.md)
+	6.1 [One to One](07-relation/01-one-to-one.md)
 
-	5.2 [One to Many](06-relation/02-one-to-many.md)
+	6.2 [One to Many](07-relation/02-one-to-many.md)
 
-	5.3 [Many to Many](06-relation/03-many-to-many.md)
+	6.3 [Many to Many](07-relation/03-many-to-many.md)
 
-	5.4 [Chained Relations](06-relation/04-chained-relations.md)
+	6.4 [Chained Relations](07-relation/04-chained-relations.md)
 
-	5.5 [Self Referencing](06-relation/05-self-referencing.md)
+	6.5 [Self Referencing](07-relation/05-self-referencing.md)
 
-	5.6 [Bakery Schema](06-relation/06-bakery-schema.md)
+	6.6 [Bakery Schema](07-relation/06-bakery-schema.md)
 
-6. Writing Tests
+7. Writing Tests
 
-	6.1 [Robust & Correct](07-write-test/01-testing.md)
+	7.1 [Robust & Correct](08-write-test/01-testing.md)
 
-	6.2 [Mock Interface](07-write-test/02-mock.md)
+	7.2 [Mock Interface](08-write-test/02-mock.md)
 
-	6.3 [Using SQLite](07-write-test/03-sqlite.md)
+	7.3 [Using SQLite](08-write-test/03-sqlite.md)
 
-7. Advanced Queries
+8. Advanced Queries
 
-	7.1 [Custom select](08-advanced-query/01-custom-select.md)
+	8.1 [Custom select](09-advanced-query/01-custom-select.md)
 
-	7.2 [Conditional expressions](08-advanced-query/02-conditional-expression.md)
+	8.2 [Conditional expressions](09-advanced-query/02-conditional-expression.md)
 
-	7.3 [Aggregate functions](08-advanced-query/03-aggregate-function.md)
+	8.3 [Aggregate functions](09-advanced-query/03-aggregate-function.md)
 
-	7.4 [Custom Joins](08-advanced-query/04-custom-joins.md)
+	8.4 [Custom Joins](09-advanced-query/04-custom-joins.md)
 
-	7.5 [Subquery](08-advanced-query/05-subquery.md)
+	8.5 [Subquery](09-advanced-query/05-subquery.md)
 
-	7.6 [Transaction](08-advanced-query/06-transaction.md)
+	8.6 [Transaction](09-advanced-query/06-transaction.md)
 
-	7.7 [Streaming](08-advanced-query/07-streaming.md)
+	8.7 [Streaming](09-advanced-query/07-streaming.md)
 
-	7.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
+	8.8 [Custom Active Model](09-advanced-query/08-custom-active-model.md)
 
-8. Internal Design
+9. Internal Design
 
-	8.1 [Traits and Types](09-internal-design/01-trait-and-type.md)
+	9.1 [Traits and Types](10-internal-design/01-trait-and-type.md)
 
-	8.2 [Derive Macros](09-internal-design/02-derive-macro.md)
+	9.2 [Derive Macros](10-internal-design/02-derive-macro.md)
 
-	8.3 [Compare with Diesel](09-internal-design/03-diesel.md)
+	9.3 [Compare with Diesel](10-internal-design/03-diesel.md)
