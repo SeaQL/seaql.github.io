@@ -85,12 +85,12 @@ pub name: String
 
 ### Additional Properties
 
-You can add additional properties `unique`, `indexed` and `nullable` to a column.
+You can add additional properties `default_value`, `unique`, `indexed` and `nullable` to a column.
 
 If you specified a custom `column_type` for an optional attribute, you must also specify `nullable`.
 
 ```rust
-#[sea_orm(column_type = "Text", unique, indexed, nullable)]
+#[sea_orm(column_type = "Text", default_value = "Sam", unique, indexed, nullable)]
 pub name: Option<String>
 ```
 

@@ -63,12 +63,13 @@ To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-o
 
 ### Additional properties
 
+- Default Value
 - Unique
 - Indexed
 - Nullable
 
 ```rust
-ColumnType::String(None).def().unique().indexed().nullable()
+ColumnType::String(None).def().default_value("Sam").unique().indexed().nullable()
 ```
 
 ## Primary Key
