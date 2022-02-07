@@ -24,7 +24,7 @@ tags: [news]
         ├── m20220101_000001_create_table.rs
         └── main.rs
     ```
-2. Define the migration in SeaQuery.
+2. Defines the migration in SeaQuery.
     ```rust
     use sea_schema::migration::{
         sea_query::{self, *},
@@ -164,7 +164,7 @@ pub struct Model {
 
 ## Mock Join Results
 
-[[#455](https://github.com/SeaQL/sea-orm/pull/455)]
+[[#455](https://github.com/SeaQL/sea-orm/pull/455)] Constructs mock results of related model with tuple of model.
 
 ```rust
 let db = MockDatabase::new(DbBackend::Postgres)
@@ -245,7 +245,7 @@ assert_eq!(
 
 ## Support Max Connection Lifetime Option
 
-[[#493](https://github.com/SeaQL/sea-orm/pull/493)] You can set the maximum lifetime of individual connections with the `max_lifetime` method.
+[[#493](https://github.com/SeaQL/sea-orm/pull/493)] You can set the maximum lifetime of individual connection with the `max_lifetime` method.
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
@@ -293,8 +293,8 @@ let db = Database::connect(opt).await?;
 
 ## SeaORM CLI & Codegen Updates
 
-- [[#433](https://github.com/SeaQL/sea-orm/pull/433)] Generate the `column_name` macro attribute for column which is not in snake case
-- [[#335](https://github.com/SeaQL/sea-orm/pull/335)] Introduce migration subcommands `sea-orm-cli migrate`
+- [[#433](https://github.com/SeaQL/sea-orm/pull/433)] Generates the `column_name` macro attribute for column which is not named in snake case
+- [[#335](https://github.com/SeaQL/sea-orm/pull/335)] Introduces migration subcommands `sea-orm-cli migrate`
 
 <div class="row">
     <div class="col col--6 margin-bottom--md">
