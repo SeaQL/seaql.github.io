@@ -1,5 +1,5 @@
 ---
-slug: 2022-02-01-whats-new-in-0.6.0
+slug: 2022-02-07-whats-new-in-0.6.0
 title: What's new in SeaORM 0.6.0
 author: SeaQL Team
 author_title: Chris Tsang
