@@ -38,6 +38,15 @@ pub struct Model { ... }
 
 ## Column
 
+### Column Name
+
+All column names are assumed to be in snake-case. You can override the column name by specifying the `column_name` attribute.
+
+```rust
+#[sea_orm(column_name = "name")]
+pub name: String
+```
+
 ### Column Type
 
 The column type will be derived automatically with the following mapping:
@@ -56,6 +65,7 @@ The column type will be derived automatically with the following mapping:
 | NaiveDate | Date |
 | NaiveTime | Time |
 | DateTime (chrono::NaiveDateTime) | DateTime |
+| DateTimeLocal (chrono::DateTime&lt;Local&gt;) <br/>DateTimeUtc (chrono::DateTime&lt;Utc&gt;) | Timestamp |
 | DateTimeWithTimeZone (chrono::DateTime&lt;FixedOffset&gt;) | TimestampWithTimeZone |
 | Uuid (uuid::Uuid) | Uuid |
 | Json (serde_json::Value) | Json |
@@ -71,12 +81,12 @@ pub name: String
 
 ### Additional Properties
 
-You can add additional properties `unique`, `indexed` and `nullable` to a column.
+You can add additional properties `default_value`, `unique`, `indexed` and `nullable` to a column.
 
 If you specified a custom `column_type` for an optional attribute, you must also specify `nullable`.
 
 ```rust
-#[sea_orm(column_type = "Text", unique, indexed, nullable)]
+#[sea_orm(column_type = "Text", default_value = "Sam", unique, indexed, nullable)]
 pub name: Option<String>
 ```
 

@@ -48,12 +48,13 @@ impl ColumnTrait for Column {
 }
 ```
 
-All column names are assumed to be in snake-case.
+All column names are assumed to be in snake-case. You can override the column name by specifying the `column_name` attribute.
 
 ```rust
 pub enum Column {
     Id,      // maps to "id" in SQL
     Name,    // maps to "name" in SQL
+    #[sea_orm(column_name = "create_at")]
     CreateAt // maps to "create_at" in SQL
 }
 ```
@@ -62,12 +63,13 @@ To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-o
 
 ### Additional properties
 
+- Default Value
 - Unique
 - Indexed
 - Nullable
 
 ```rust
-ColumnType::String(None).def().unique().indexed().nullable()
+ColumnType::String(None).def().default_value("Sam").unique().indexed().nullable()
 ```
 
 ## Primary Key
