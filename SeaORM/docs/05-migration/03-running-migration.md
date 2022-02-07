@@ -33,7 +33,7 @@ $ sea-orm-cli migrate COMMAND -d ./other/migration/dir
 
 ### Via SeaSchema Migrator CLI
 
-Run migrator CLI defined in `migration/main.rs`.
+Runs migrator CLI defined in `migration/main.rs`.
 
 ```shell
 $ cd migration
@@ -42,10 +42,10 @@ $ cargo run -- COMMAND
 
 ## Migrating Programmatically
 
-Perform migration on application startup.
+Performs migration on application startup with `Migrator`, given that it implements [`MigratorTrait`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html).
 
 ```rust title="src/main.rs"
-use migration::Migrator;
+use migration::{Migrator, MigratorTrait};
 
 /// Apply all pending migrations
 Migrator::up(db, None).await?;
