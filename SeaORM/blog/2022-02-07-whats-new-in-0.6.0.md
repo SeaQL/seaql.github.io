@@ -26,10 +26,7 @@ tags: [news]
     ```
 2. Defines the migration in SeaQuery.
     ```rust
-    use sea_schema::migration::{
-        sea_query::{self, *},
-        *,
-    };
+    use sea_schema::migration::prelude::*;
 
     pub struct Migration;
 
@@ -57,8 +54,8 @@ tags: [news]
 3. Apply the migration by executing `sea-orm-cli migrate`.
     ```shell
     $ sea-orm-cli migrate
-    Appling all pending migrations
-    Appling migration 'm20220101_000001_create_table'
+    Applying all pending migrations
+    Applying migration 'm20220101_000001_create_table'
     Migration 'm20220101_000001_create_table' has been applied
     ```
 
