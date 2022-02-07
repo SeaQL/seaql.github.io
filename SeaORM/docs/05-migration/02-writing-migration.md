@@ -7,10 +7,7 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the `Migration::name` method accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
-use sea_schema::migration::{
-    sea_query::{self, *},
-    *,
-};
+use sea_schema::migration::prelude::*;
 
 pub struct Migration;
 
@@ -128,11 +125,8 @@ The `SchemaManager` helps you define migration in SeaQuery or in raw SQL
 Besides, you can define migration in raw SQL.
 
 ```rust
-use sea_schema::migration::{
-    sea_orm::Statement,
-    sea_query::{self, *},
-    *,
-};
+use sea_orm::Statement;
+use sea_schema::migration::prelude::*;
 
 pub struct Migration;
 

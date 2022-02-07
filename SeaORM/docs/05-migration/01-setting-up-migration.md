@@ -107,10 +107,7 @@ Writes migration for the "post" entity.
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
 // Use "post" entity
 use entity::post::*;
-use sea_schema::migration::{
-    sea_query::{self, *},
-    *,
-};
+use sea_schema::migration::prelude::*;
 
 pub struct Migration;
 
