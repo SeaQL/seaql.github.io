@@ -4,7 +4,7 @@ Version control you database schema with migrations written in SeaQuery or in ra
 
 ## Migration Table
 
-A table named "seaql_migrations" will be created in your database to keep track the applied migrations. It will be created automatically when you run the migration.
+A table named `seaql_migrations` will be created in your database to keep track the applied migrations. It will be created automatically when you run the migration.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
