@@ -42,7 +42,7 @@ Creating file `./other/migration/dir/README.md`
 Done!
 ```
 
-You should have a migration directory like below.
+You should have a migration directory with structure like below.
 
 ```
 migration
@@ -56,7 +56,7 @@ migration
 
 ## Workspace Structure
 
-It is recommanded to restructure you cargo workspace as follows to allow sharing of SeaORM entities across the core crate and the migration crate, and to ensure both of them depends on the same version of SeaORM through re-exporting.
+It is recommanded to restructure your cargo workspace as follows to allow sharing of SeaORM entities across the core crate and the migration crate. Also, to ensure both of them depends on the same version of SeaORM through re-exporting.
 
 Follow the steps below to restructure your workspace.
 
@@ -68,7 +68,7 @@ Checkout the integration examples:
 
 ### Entity Crate
 
-Create an entity crate in your root workspace. It should contains all of the SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
+Creates an entity crate in your root workspace. It should contains all SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
 
 ```
 entity
@@ -78,14 +78,14 @@ entity
     └── post.rs     # Define the "post" entity
 ```
 
-Specify SeaORM dependency in "Cargo.toml".
+Specifies SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
 sea-orm = { version = "^0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ], default-features = false }
 ```
 
-Re-export SeaORM in "lib.rs".
+Re-exports SeaORM.
 
 ```rust title="entity/src/lib.rs"
 pub use sea_orm;
@@ -102,7 +102,7 @@ Depends on the entity crate.
 entity = { path = "../entity" }
 ```
 
-Write migration for the "post" entity.
+Writes migration for the "post" entity.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
 // Use "post" entity
@@ -152,9 +152,9 @@ impl MigrationTrait for Migration {
 
 ### Core Crate
 
-This is where you put the application logic.
+This is where you put the application logics.
 
-Create a workspace that contains core, entity and migration crate. And include the entity and migration crate as well.
+Creates a workspace that contains core, entity and migration crate and includes the entity and migration crate as well.
 
 ```toml title="Cargo.toml"
 [workspace]
@@ -165,7 +165,7 @@ entity = { path = "entity" }
 migration = { path = "migration" }
 ```
 
-Use the re-exported SeaORM and entities.
+Uses the re-exported SeaORM and entities.
 
 ```rust title="src/main.rs"
 use entity::sea_orm;

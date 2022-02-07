@@ -10,7 +10,7 @@ Supported commands:
 - `init`: Initialize migration directory
 - `up`: Apply all pending migrations
 - `up -n 10`: Apply 10 pending migrations
-- `down`: Rollback last applied migrations
+- `down`: Rollback last applied migration
 - `down -n 10`: Rollback last 10 applied migrations
 - `status`: Check the status of all migrations
 - `fresh`: Drop all tables from the database, then reapply all migrations

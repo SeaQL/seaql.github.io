@@ -1,10 +1,10 @@
 # Writing Migration
 
-Each migration contains two methods: `up` and `down`. The `up` method is used to alter the database schema, such as add new tables, columns or indexes, while the `down` method revert the actions performed in the `up` method.
+Each migration contains two methods: `up` and `down`. The `up` method is used to alter the database schema, such as adding new tables, columns or indexes, while the `down` method revert the actions performed in the `up` method.
 
 ## Creating Migration File
 
-You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the `name` method accordingly.
+You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the `Migration::name` method accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_schema::migration::{
