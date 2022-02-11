@@ -70,12 +70,18 @@ Checkout the integration examples:
 
 Creates an entity crate in your root workspace. It should contains all SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
 
+<details>
+    <summary>If you don't have SeaORM entities defined?</summary>
+
+You can create an entity crate with no entity files in it. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](03-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src` folder.
+</details>
+
 ```
 entity
 ├── Cargo.toml      # Include SeaORM dependency
 └── src
     ├── lib.rs      # Re-export SeaORM and entities
-    └── post.rs     # Define the "post" entity
+    └── post.rs     # Define the `post` entity
 ```
 
 Specifies SeaORM dependency.
@@ -93,7 +99,7 @@ pub use sea_orm;
 
 ### Migration Crate
 
-You might need SeaORM entity when defining the migration, for example column name defined in entity can be reused in migration.
+For those existing SeaORM users, you might need SeaORM entity when defining the migration. For example, column names defined in entity can be reused in migration.
 
 Depends on the entity crate.
 
@@ -102,11 +108,9 @@ Depends on the entity crate.
 entity = { path = "../entity" }
 ```
 
-Writes migration for the "post" entity.
+Writes migration for the `post` entity, more on this in the next section.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
-// Use "post" entity
-use entity::post::*;
 use sea_schema::migration::prelude::*;
 
 pub struct Migration;
@@ -123,17 +127,7 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    .table(Entity)
-                    .if_not_exists()
-                    .col(
-                        ColumnDef::new(Column::Id)
-                            .integer()
-                            .not_null()
-                            .auto_increment()
-                            .primary_key(),
-                    )
-                    .col(ColumnDef::new(Column::Title).string().not_null())
-                    .col(ColumnDef::new(Column::Text).string().not_null())
+                    // ...
                     .to_owned(),
             )
             .await
@@ -141,7 +135,11 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(Entity).to_owned())
+            .drop_table(
+                Table::drop()
+                    // ...
+                    .to_owned()
+            )
             .await
     }
 }

@@ -58,11 +58,60 @@ The [`SchemaManager`](https://docs.rs/sea-schema/0.5/sea_schema/migration/manage
 
 ### SeaQuery
 
+Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of SeaQuery.
+
 #### Schema Creation Methods
 - Create Table
     ```rust
-    manager.drop_table(sea_query::Table::create())
+    use entity::post;
+
+    manager
+        .create_table(
+            sea_query::Table::create()
+                .table(post::Entity)
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(post::Column::Id)
+                        .integer()
+                        .not_null()
+                        .auto_increment()
+                        .primary_key(),
+                )
+                .col(ColumnDef::new(post::Column::Title).string().not_null())
+                .col(ColumnDef::new(post::Column::Text).string().not_null())
+                .to_owned()
+        )
     ```
+    <details>
+        <summary>If you don't have SeaORM entities defined?</summary>
+
+    ```rust
+    manager
+        .create_table(
+            Table::create()
+                .table(Post::Table)
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(Post::Id)
+                        .integer()
+                        .not_null()
+                        .auto_increment()
+                        .primary_key(),
+                )
+                .col(ColumnDef::new(Post::Title).string().not_null())
+                .col(ColumnDef::new(Post::Text).string().not_null())
+                .to_owned()
+        )
+
+    #[derive(Iden)]
+    pub enum Post {
+        Table,
+        Id,
+        Title,
+        Text,
+    }
+    ```
+    </details>
 - Create Index
     ```rust
     manager.create_index(sea_query::Index::create())
@@ -77,13 +126,40 @@ The [`SchemaManager`](https://docs.rs/sea-schema/0.5/sea_schema/migration/manage
     ```
 
 #### Schema Mutation Methods
+- Drop Table
+    ```rust
+    use entity::post;
+
+    manager
+        .drop_table(
+            sea_query::Table::drop()
+                .table(post::Entity)
+                .to_owned()
+        )
+    ```
+    <details>
+        <summary>If you don't have SeaORM entities defined?</summary>
+
+    ```rust
+    manager
+        .drop_table(
+            sea_query::Table::drop()
+                .table(Post::Table)
+                .to_owned()
+        )
+
+    #[derive(Iden)]
+    pub enum Post {
+        Table,
+        Id,
+        Title,
+        Text,
+    }
+    ```
+    </details>
 - Alter Table
     ```rust
     manager.alter_table(sea_query::Table::alter())
-    ```
-- Drop Table
-    ```rust
-    manager.drop_table(sea_query::Table::drop())
     ```
 - Rename Table
     ```rust
