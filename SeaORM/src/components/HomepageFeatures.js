@@ -48,7 +48,7 @@ function Feature({icon, title, description}) {
       <div style={{ paddingBottom: '20px', paddingTop: '20px' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ paddingRight: '22px' }}>{icon}</div>
-          <h3 style={{ fontSize: '20px' }}>{title}</h3>
+          <h3 style={{ fontSize: '20px', color: 'var(--ifm-color-primary)' }}>{title}</h3>
         </div>
         <p>{description}</p>
       </div>

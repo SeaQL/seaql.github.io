@@ -14,29 +14,29 @@ export default function HomepageCompare() {
           </div>
         </div>
         <div className="row">
-          <div className={clsx('col col--6 col--offset-5')}>
+          <div className={styles.tableFlexBox}>
             <table className={styles.table}>
               <tr>
-                <th>Diesel</th>
-                <th>SeaORM</th>
+                <th width="50%">SeaORM</th>
+                <th width="50%">Diesel</th>
               </tr>
               <tr>
-                <td>Sync</td>
                 <td>Async</td>
+                <td>Sync</td>
               </tr>
               <tr>
-                <td>Static</td>
                 <td>Dynamic</td>
+                <td>Static</td>
               </tr>
               <tr>
-                <td>Native Driver</td>
                 <td>Pure Rust</td>
+                <td>Native Driver</td>
               </tr>
               <tr>
                 <td colSpan="2">Relational</td>
               </tr>
               <tr>
-                <td colSpan="2">Schema first</td>
+                <td colSpan="2">Schema First</td>
               </tr>
               <tr>
                 <td colSpan="2">MySQL / Postgres / SQLite</td>

@@ -67,6 +67,10 @@ module.exports = {
               to: '/docs/index',
             },
             {
+              label: 'SeaORM Tutorials',
+              to: 'https://www.sea-ql.org/sea-orm-tutorial/',
+            },
+            {
               label: 'API Reference',
               to: 'https://docs.rs/sea-orm/latest/sea_orm/',
             },
@@ -103,7 +107,11 @@ module.exports = {
           ],
         },
       ],
-      copyright: `<br/>Copyright © ${new Date().getFullYear()} SeaQL<br/>Built with 🔥 by 🌊🦀🐚`,
+      copyright: [
+        `<br/><div style="display: flex; justify-content: center;"><iframe src="https://ghbtns.com/github-btn.html?user=SeaQL&repo=sea-orm&type=star&count=true" frameborder="0" scrolling="0" width="99" height="20" title="GitHub Stars"></iframe></div>`,
+        `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
+        `<br/>Built with 🔥 by 🌊🦀🐚`,
+      ].join(''),
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),

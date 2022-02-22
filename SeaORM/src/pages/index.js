@@ -19,7 +19,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">SeaORM is a relational ORM to help you build web services in Rust<br/>with the familiarity of dynamic languages.</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className="button button--primary button--lg"
             to="/docs/index">
             Getting Started
           </Link>

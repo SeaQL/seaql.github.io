@@ -1,5 +1,9 @@
 # Index
 
+## SeaORM Tutorials
+
+If you prefer step-by-step tutorials on how to use SeaORM. You can checkout [SeaORM Tutorials](https://www.sea-ql.org/sea-orm-tutorial/)!
+
 ## Introduction
 
 1. [What is an ORM](01-introduction/01-orm.md)
