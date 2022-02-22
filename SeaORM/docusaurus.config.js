@@ -20,6 +20,7 @@ module.exports = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    image: 'https://www.sea-ql.org/SeaORM/img/SeaORM banner.png',
     metadata: [
       {name: 'keywords', content: 'rust, orm, SeaORM, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, hacktoberfest, actix, async-std'},
     ],
