@@ -20,6 +20,9 @@ module.exports = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    metadata: [
+      {name: 'keywords', content: 'rust, orm, SeaORM, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, hacktoberfest, actix, async-std'},
+    ],
     navbar: {
       title: 'SeaORM',
       logo: {
@@ -147,6 +150,9 @@ module.exports = {
         blog: {
           showReadingTime: true,
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
+          postsPerPage: 'ALL',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
