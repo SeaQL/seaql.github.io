@@ -8,12 +8,12 @@ npm run build
 mv build ../docs/SeaORM
 cd ..
 
-# Build SeaQuery docs
-cd SeaQuery
-npm run build
-[[ -d ../docs/SeaQuery ]] && rm -r ../docs/SeaQuery
-mv build ../docs/SeaQuery
-cd ..
+# # Build SeaQuery docs
+# cd SeaQuery
+# npm run build
+# [[ -d ../docs/SeaQuery ]] && rm -r ../docs/SeaQuery
+# mv build ../docs/SeaQuery
+# cd ..
 
 # Commit & Push
 git add docs
