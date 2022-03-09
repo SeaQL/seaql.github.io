@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build SeaORM Docs
+        run: |
+          cd SeaORM
+          npm i
+          npm run build
+          [[ -d ../docs/SeaORM ]] && rm -r ../docs/SeaORM
+          mv build ../docs/SeaORM
+
+      # - name: Build SeaQuery Docs
+      #   run: |
+      #     cd SeaQuery
+      #     npm i
+      #     npm run build
+      #     [[ -d ../docs/SeaQuery ]] && rm -r ../docs/SeaQuery
+      #     mv build ../docs/SeaQuery
+
+      - name: Deploy GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .
+          single-commit: true
+          clean: true
