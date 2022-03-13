@@ -10,4 +10,4 @@ Due to Rust being a static, strongly typed, compiled, thread-safe, non-garbage-c
 
 SeaORM tries to help you in reaping the above benefits while avoiding the hiccups when programming in Rust.
 
-Without further ado, let's get started.
+Let's get started.
