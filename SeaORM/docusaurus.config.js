@@ -112,7 +112,7 @@ module.exports = {
         },
       ],
       copyright: [
-        `<br/><div style="display: flex; justify-content: center;"><iframe src="https://ghbtns.com/github-btn.html?user=SeaQL&repo=sea-orm&type=star&count=true" frameborder="0" scrolling="0" width="99" height="20" title="GitHub Stars"></iframe></div>`,
+        `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/sea-orm/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1"/></a></div>`,
         `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
         `<br/>Built with 🔥 by 🌊🦀🐚`,
       ].join(''),
