@@ -3,9 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
-import HomepageFeatures from '../components/HomepageFeatures';
-import HomepageCompare from '../components/HomepageCompare';
-import HomepageExample from '../components/HomepageExample';
+import HomepageDemo from '../components/HomepageDemo';
 import HomepageMascot from '../components/HomepageMascot';
 
 function HomepageHeader() {
@@ -36,9 +34,7 @@ export default function Home() {
       description={siteConfig.tagline}>
       <HomepageHeader />
       <main>
-        {/* <HomepageFeatures /> */}
-        {/* <HomepageCompare /> */}
-        {/* <HomepageExample /> */}
+        <HomepageDemo />
         <HomepageMascot />
       </main>
     </Layout>

@@ -33,6 +33,11 @@ module.exports = {
           position: 'left',
           label: 'Docs',
         },
+        {
+          to: '/demo',
+          label: 'Demo',
+          position: 'left',
+        },
         // {
         //   to: '/blog',
         //   label: 'Blog',
@@ -64,6 +69,10 @@ module.exports = {
             {
               label: 'Getting Started',
               to: '/docs/index',
+            },
+            {
+              label: 'Interactive Demo',
+              to: '/demo',
             },
             {
               label: 'API Reference',
