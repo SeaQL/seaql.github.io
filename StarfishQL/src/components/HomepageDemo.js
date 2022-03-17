@@ -2,6 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageDemo.module.css';
 
+const DEMO_BASE_URL = 'https://starfish-ql.vercel.app';
+
 export default function HomepageFeatures() {
   return (
     <section className={clsx('home-section', 'home-section-alt')}>
@@ -13,18 +15,18 @@ export default function HomepageFeatures() {
               <div className={clsx('col col--6', styles.demoColMargin)}>
                 <div class="card">
                   <div class="card__image">
-                    <img src="https://placekitten.com/640/400" />
+                    <img src="/StarfishQL/img/graph.png" />
                   </div>
                   <div class="card__body">
                     <h2 className={clsx('text--center')}>
                       Top-N Dependencies
                     </h2>
                     <p>
-                      e.g. To query the graph starting from the 10 most popular crates
+                      To query the graph starting from the 10 most popular crates
                     </p>
                   </div>
                   <div class="card__footer">
-                    <a class="button button--outline button--primary button--block" href="/StarfishQL/demo">
+                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/graph.html`} target="_blank">
                       Try Interactive Demo
                     </a>
                   </div>
@@ -33,18 +35,18 @@ export default function HomepageFeatures() {
               <div className={clsx('col col--6', styles.demoColMargin)}>
                 <div class="card">
                   <div class="card__image">
-                    <img src="https://placekitten.com/640/400" />
+                    <img src="/StarfishQL/img/tree.png" />
                   </div>
                   <div class="card__body">
                     <h2 className={clsx('text--center')}>
                       Dependencies & Dependants Graph
                     </h2>
                     <p>
-                      e.g. To query a crate id=888 with all its dependents (reverse of dependency)
+                      To query a crate id=888 with all its dependents
                     </p>
                   </div>
                   <div class="card__footer">
-                    <a class="button button--outline button--primary button--block" href="/StarfishQL/demo">
+                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/tree.html`} target="_blank">
                       Try Interactive Demo
                     </a>
                   </div>
