@@ -37,4 +37,4 @@ Alternatively, use the default compilation profile so that logs and SQL commands
 cargo run
 ```
 
-[^1]: Until [SeaQuery](https://crates.io/crates/sea-query) provides more support, only MySQL databases are supported in StarfishQL currently.
+[^1]: Until [SeaQuery](https://crates.io/crates/sea-query) provides more support, only MySQL databases are supported in StarfishQL.
