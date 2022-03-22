@@ -2,7 +2,7 @@
 
 The graph query engine is a Rust backend application powered by the [rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/).
 
-## Set up the Database
+## Set up the database
 
 Set up a MySQL[^1] database connection with Docker:
 
@@ -25,7 +25,7 @@ docker stop "mysql-8.0"
 DATABASE_URL="mysql://root:root@localhost:3306" cargo test --all
 ```
 
-## Start the Engine
+## Start the query engine
 
 ```sh
 # starfish-ql/starfish/
