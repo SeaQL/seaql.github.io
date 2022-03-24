@@ -12,7 +12,7 @@ npm start
 
 The server will run at [http://localhost:8080/](http://localhost:8080/).
 
-## Bundling the application
+## Bundle the application
 
 ```sh
 # starfish-ql/freeport/frontend
