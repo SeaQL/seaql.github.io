@@ -20,7 +20,7 @@ An instance of an Entity.
 
 *e.g. Depends*
 
-Relation between entities. It can be directed or undirected (equivalent on both directions).
+Relation between entities. It can be directed or undirected (equivalent on both directions).[^1]
 
 ## Edge
 
@@ -36,7 +36,7 @@ A data structure containing a set of nodes N and a set of edges E, where E must 
 
 *e.g. version*
 
-Quantities (numeric, scaler values) and qualities (categorical, enum labels) attached onto each node or edge.
+Quantities (numeric, scaler values) and qualities (categorical, enum labels) attached onto each node or edge.[^2]
 
 ## Query
 
@@ -55,3 +55,7 @@ When performing a query, the requirements of graph traversal or criteria on the 
 *e.g. version = "0.0.1"*
 
 When performing a query, the filters applied to the nodes and edges (usually on attributes).
+
+[^1]: So far, development has been centred around directed graphs. Hence, some functionalities have not been thoroughly tested for undirected graphs.
+
+[^2]: Only node attributes are supported for the time being.
