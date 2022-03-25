@@ -40,6 +40,8 @@ If you prefer step-by-step tutorials on how to use SeaORM. You can checkout [Sea
 
 	3.2 [Create Enum](04-generate-database-schema/02-create-enum.md)
 
+	3.3 [Create Index](04-generate-database-schema/03-create-index.md)
+
 4. Migration
 
 	4.1 [Setting Up Migration](05-migration/01-setting-up-migration.md)

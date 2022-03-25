@@ -4,6 +4,8 @@ To create tables in database instead of writing [`TableCreateStatement`](https:/
 
 Below we use [`CakeFillingPrice`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake_filling_price.rs) entity to demo its generated SQL statement. You can construct the same statement with [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html).
 
+Note that since version `0.7.0`, [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/0.5/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) no longer create indexes. If you need to create indexes in database please check [here](04-generate-database-schema/03-create-index.md) for details.
+
 ```rust
 use sea_orm::{sea_query::*, tests_cfg::*, EntityName, Schema};
 
