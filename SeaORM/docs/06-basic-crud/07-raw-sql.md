@@ -32,6 +32,22 @@ let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_
     .await?;
 ```
 
+You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/0.6.0/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
+
+```rust
+let mut cake_pages = cake::Entity::find()
+    .from_raw_sql(Statement::from_sql_and_values(
+        DbBackend::Postgres,
+        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
+        vec![1.into()],
+    ))
+    .paginate(db, 50);
+ 
+while let Some(cakes) = cake_pages.fetch_and_next().await? {
+    // Do something on cakes: Vec<cake::Model>
+}
+```
+
 ## Get raw SQL query
 
 Use `build` and `to_string` methods on any CRUD operations to get the database-specific raw SQL for debugging purposes.
