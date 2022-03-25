@@ -51,30 +51,37 @@ pub name: String
 
 The column type will be derived automatically with the following mapping:
 
+For the mappings of Rust primitive data types.
+
 | Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.5/sea_orm/entity/enum.ColumnType.html)) |
 | --------- | ------------- |
-| String | Char |
-| String | String |
-| i8 | TinyInteger |
-| u8 | TinyUnsigned |
-| i16 | SmallInteger |
-| u16 | SmallUnsigned |
-| i32 | Integer |
-| u32 | Unsigned |
-| i64 | BigInteger |
-| u64 | BigUnsigned |
-| f32 | Float |
-| f64 | Double |
-| bool | Boolean |
-| NaiveDate | Date |
-| NaiveTime | Time |
-| DateTime (chrono::NaiveDateTime) | DateTime |
-| DateTimeLocal (chrono::DateTime&lt;Local&gt;) <br/>DateTimeUtc (chrono::DateTime&lt;Utc&gt;) | Timestamp |
-| DateTimeWithTimeZone (chrono::DateTime&lt;FixedOffset&gt;) | TimestampWithTimeZone |
-| Uuid (uuid::Uuid) | Uuid |
-| Json (serde_json::Value) | Json |
-| Decimal (rust_decimal::Decimal) | Decimal |
-| Vec&lt;u8&gt; | Binary |
+| `String` | Char |
+| `String` | String |
+| `i8` | TinyInteger |
+| `u8` | TinyUnsigned |
+| `i16` | SmallInteger |
+| `u16` | SmallUnsigned |
+| `i32` | Integer |
+| `u32` | Unsigned |
+| `i64` | BigInteger |
+| `u64` | BigUnsigned |
+| `f32` | Float |
+| `f64` | Double |
+| `bool` | Boolean |
+| `Vec<u8>` | Binary |
+
+For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
+
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.5/sea_orm/entity/enum.ColumnType.html)) |
+| --------- | ------------- |
+| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date |
+| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time |
+| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime |
+| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp |
+| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone |
+| `Uuid`: uuid::Uuid | Uuid |
+| `Json`: serde_json::Value | Json |
+| `Decimal`: rust_decimal::Decimal | Decimal |
 
 You can override the default mappings between a Rust type and `ColumnType` by the `column_type` attribute.
 
