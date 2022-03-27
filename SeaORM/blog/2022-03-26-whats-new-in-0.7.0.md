@@ -414,3 +414,7 @@ A big shout out to our sponsors 😇:
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
 
 Here is the roadmap for SeaORM [`0.8.x`](https://github.com/SeaQL/sea-orm/milestone/8).
+
+## GSoC 2022
+
+We are super excited to be selected as a Google Summer of Code 2022 mentor organization. Prospective contributors, please visit our [GSoC 2022 Organization Profile](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql)!
