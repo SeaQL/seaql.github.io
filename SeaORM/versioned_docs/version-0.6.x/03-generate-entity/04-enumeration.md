@@ -40,11 +40,11 @@ You can use Rust enums in model where the values are mapped to a database string
 
 ## Implementations
 
-You can implement [`ActiveEnum`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.ActiveEnum.html) manually by hand or use the derive macro [`DeriveActiveEnum`](https://docs.rs/sea-orm/0.5/sea_orm/derive.DeriveActiveEnum.html).
+You can implement [`ActiveEnum`](https://docs.rs/sea-orm/0.6/sea_orm/entity/trait.ActiveEnum.html) manually by hand or use the derive macro [`DeriveActiveEnum`](https://docs.rs/sea-orm/0.6/sea_orm/derive.DeriveActiveEnum.html).
 
 ### Derive Implementation
 
-See [`DeriveActiveEnum`](https://docs.rs/sea-orm/0.5/sea_orm/derive.DeriveActiveEnum.html) for the full specification of macro attributes.
+See [`DeriveActiveEnum`](https://docs.rs/sea-orm/0.6/sea_orm/derive.DeriveActiveEnum.html) for the full specification of macro attributes.
 
 ```rust
 use sea_orm::entity::prelude::*;

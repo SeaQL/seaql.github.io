@@ -1,6 +1,6 @@
 # Create Index
 
-To create indexes in database instead of writing [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/0.5/sea_orm/schema/struct.Schema.html#method.create_index_from_entity). This method will help you create database indexes defined in `Entity`.
+To create indexes in database instead of writing [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/0.7/sea_orm/schema/struct.Schema.html#method.create_index_from_entity). This method will help you create database indexes defined in `Entity`.
 
 Below we use [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity to demo its generated SQL statement. You can construct the same statement with [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html).
 

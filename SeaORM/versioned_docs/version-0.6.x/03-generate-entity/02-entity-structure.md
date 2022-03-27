@@ -51,7 +51,7 @@ pub name: String
 
 The column type will be derived automatically with the following mapping:
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.5/sea_orm/entity/enum.ColumnType.html)) |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.6/sea_orm/entity/enum.ColumnType.html)) |
 | --------- | ------------- |
 | String | Char |
 | String | String |

@@ -1,6 +1,6 @@
 # Self Referencing
 
-In previous section, we introduced the [`Linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.Linked.html) trait. It can also help you define self referencing relations.
+In previous section, we introduced the [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) trait. It can also help you define self referencing relations.
 
 The following example defines an Entity that references itself.
 

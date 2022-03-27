@@ -1,6 +1,6 @@
 # Chained Relations
 
-The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
+The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
 
 1. there exist multiple join paths between a pair of entities
 1. joining across multiple entities in a relational query
@@ -50,7 +50,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -76,7 +76,7 @@ assert_eq!(
 
 ### Eager Loading
 
-Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/0.5/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
 
 ```rust
 assert_eq!(

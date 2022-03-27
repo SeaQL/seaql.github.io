@@ -25,7 +25,7 @@ async fn main() -> Result<(), DbErr> {
 
 ## Setup database schema
 
-To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/0.5/sea_orm/schema/struct.Schema.html#method.create_table_from_entity).
+To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity).
 
 ```rust
 async fn setup_schema(db: &DbConn) {

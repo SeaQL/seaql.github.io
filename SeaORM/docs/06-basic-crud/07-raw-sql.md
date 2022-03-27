@@ -32,7 +32,7 @@ let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_
     .await?;
 ```
 
-You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/0.6.0/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
+You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
 
 ```rust
 let mut cake_pages = cake::Entity::find()
