@@ -4,7 +4,9 @@
 
 1. [What is a Graph Query Engine](00-introduction/01-graph-query-engine.md)
 
-2. [StarfishQL Concepts](00-introduction/02-starfish-ql.md)
+3. [The Objective](00-introduction/02-objective.md)
+
+3. [StarfishQL Concepts](00-introduction/03-starfish-ql.md)
 
 ## Getting Started
 
@@ -22,9 +24,9 @@
 
 	2.2 [Defining Graph Schema](02-architecture-of-graph-query-engine/02-defining-graph-schema.md)
 
-	2.3 [Storage of Graph Data](02-architecture-of-graph-query-engine/03-storage-of-graph-data.md)
+	2.3 [Data Storage](02-architecture-of-graph-query-engine/03-data-storage.md)
 
-	2.4 [CRUD Operations](02-architecture-of-graph-query-engine/04-crud-operations.md)
+	2.4 [Mutate Operations](02-architecture-of-graph-query-engine/04-mutate-operations.md)
 
 	2.5 [Calculating Node Connectivity](02-architecture-of-graph-query-engine/05-calculating-node-connectivity.md)
 
