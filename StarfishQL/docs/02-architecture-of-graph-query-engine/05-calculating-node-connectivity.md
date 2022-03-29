@@ -23,6 +23,6 @@ find_in_conn(n, f):
 
 Different weight-decay factors lead to different interesting connectivity metrics, most noticeably:
 
-- When it is `0`, the connectivity is simply the trivial degrees.
-- When it is `1`, the connectivity takes into account **all** the ancestor/descendant nodes in the connected component of the node of interest.
-- When it is anything in between, the connectivity *decays* up to a certain depth of traversal, which is a nice property for some use cases.
+- When it is `0` (*Simple connectivity*), the connectivity is simply the trivial degrees.
+- When it is `1` (*Compound connectivity*), the connectivity takes into account **all** the ancestor/descendant nodes in the connected component of the node of interest.
+- When it is anything in between (*Complex connectivity*), the connectivity *decays* throughout traversal, which is a nice property for some use cases.
