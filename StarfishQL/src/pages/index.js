@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageDemo from '../components/HomepageDemo';
 import HomepageMascot from '../components/HomepageMascot';
+import clsx from 'clsx';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -13,8 +14,7 @@ function HomepageHeader() {
       <div className="container">
         <img className={styles.homepageLogo} width="90%" src="/StarfishQL/img/SeaQL logo.png" />
         <img className={styles.homepageBanner} width="90%" src="/StarfishQL/img/SeaQL logo.png" />
-        <h2 className="hero__subtitle">{siteConfig.tagline}</h2>
-        <p className="hero__subtitle">StarfishQL is graph database and query engine <br/>to enable graph analysis and visualization on the web.</p>
+        <h2 className={clsx("hero__subtitle", styles.tagline)}>StarfishQL is experimental graph database and query engine <br/>to enable graph analysis and visualization on the web.</h2>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
