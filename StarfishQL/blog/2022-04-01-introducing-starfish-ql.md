@@ -90,7 +90,7 @@ Graph data are stored in relational database:
                 <h3>Top-10 Dependencies</h3>
             </div>
             <div className="card__body">
-                <p>List of top 10 crates order by different decay modes.</p>
+                <p>List of top 10 crates order by different <a href="/StarfishQL/docs/architecture-of-graph-query-engine/calculating-node-connectivity/#weight-decay-factors">decay modes</a>.</p>
                 <div className="row row--no-gutters">
                     <div className="col col--4 padding-left--none padding-right--none">
                         <table>

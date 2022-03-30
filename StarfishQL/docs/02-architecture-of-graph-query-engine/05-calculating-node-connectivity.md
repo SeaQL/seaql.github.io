@@ -21,6 +21,8 @@ find_in_conn(n, f):
 
 *Note: This algorithm can be implemented with a stack/queue instead of using recursion for performance improvement. Also, graphs with cycles are ignored in this trivial algorithm, but it's simple to deal with in practice.*
 
+<a id="weight-decay-factors"></a>
+
 Different weight-decay factors lead to different interesting connectivity metrics, most noticeably:
 
 - When it is `0` (*Simple connectivity*), the connectivity is simply the trivial degrees.
