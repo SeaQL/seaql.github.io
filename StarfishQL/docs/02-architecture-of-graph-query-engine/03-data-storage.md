@@ -24,7 +24,7 @@ To exemplify, the edge "*sea-orm depends on serde*" is going to be stored as a *
 
 [^1]: All attributes are *nullable*. If an attribute is not specified when the node is inserted, it becomes null.
 
-[^2]: The connectivity is a set of metrics to describe, for any given node, how many other nodes is it related to. More on this in [Calculating Node Connectivity](./calculating-node-connectivity).
+[^2]: The connectivity is a set of metrics to describe, for any given node, how many other nodes is it related to. More on this in [Calculating Node Connectivity](02-architecture-of-graph-query-engine/05-calculating-node-connectivity.md).
 
 [^3]: Note that even though defining new relations causes new columns to be created, any existing data in the tables involved is left untouched during this process.
 

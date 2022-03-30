@@ -34,15 +34,15 @@ module.exports = {
           label: 'Docs',
         },
         {
+          to: '/blog',
+          label: 'Blog',
+          position: 'left'
+        },
+        {
           to: '/demo',
           label: 'Demo',
           position: 'left',
         },
-        // {
-        //   to: '/blog',
-        //   label: 'Blog',
-        //   position: 'left'
-        // },
         {
           href: 'https://crates.io/crates/starfish-ql',
           label: 'Crate',
@@ -104,10 +104,10 @@ module.exports = {
               label: 'About Us',
               to: '/about-us',
             },
-            // {
-            //   label: 'Blog',
-            //   to: '/blog',
-            // },
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
           ],
         },
       ],

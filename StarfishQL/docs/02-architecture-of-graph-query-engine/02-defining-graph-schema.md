@@ -117,6 +117,6 @@ If you want to reset the schema and re-define it in the same request, simply sup
 }
 ```
 
-[^1]: A unique column called `name` is implicitly inserted, but an attribute called `name` is still accepted. More on this in [Data Storage](./data-storage#storage-of-entities).
+[^1]: A unique column called `name` is implicitly inserted, but an attribute called `name` is still accepted. More on this in [Data Storage](02-architecture-of-graph-query-engine/03-data-storage.md#storage-of-entities).
 
 [^2]: For simplicity, all relations defined in the schema are many-to-many. Therefore, a separate table is created for each relation.
