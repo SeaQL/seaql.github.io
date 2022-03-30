@@ -16,6 +16,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'SeaQL',
   projectName: 'starfish-ql',
+  trailingSlash: true,
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,
@@ -158,7 +159,6 @@ module.exports = {
         sitemap: {
           changefreq: 'daily',
           priority: 0.8,
-          trailingSlash: true,
         },
       },
     ],
