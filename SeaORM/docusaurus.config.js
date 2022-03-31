@@ -22,7 +22,7 @@ module.exports = {
     },
     image: 'img/SeaORM banner.png',
     metadata: [
-      {name: 'keywords', content: 'rust, orm, SeaORM, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, hacktoberfest, actix, async-std'},
+      {name: 'keywords', content: 'rust, orm, SeaORM, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, actix, async-std'},
     ],
     navbar: {
       title: 'SeaORM',
