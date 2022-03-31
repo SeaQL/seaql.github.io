@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageDemo.module.css';
 
-const DEMO_BASE_URL = 'https://starfish-ql.vercel.app';
+const DEMO_BASE_URL = 'https://starfish-ql.sea-ql.org';
 
 export default function HomepageFeatures() {
   return (
@@ -22,11 +22,11 @@ export default function HomepageFeatures() {
                       Top-N Dependencies
                     </h2>
                     <p>
-                      To query the graph starting from the 10 most popular crates
+                      Traverse the graph in the normal direction starting from the N most connected nodes.
                     </p>
                   </div>
                   <div class="card__footer">
-                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/graph.html`} target="_blank">
+                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/graph`} target="_blank">
                       Try Interactive Demo
                     </a>
                   </div>
@@ -39,14 +39,14 @@ export default function HomepageFeatures() {
                   </div>
                   <div class="card__body">
                     <h2 className={clsx('text--center')}>
-                      Dependencies & Dependants Graph
+                      Dependencies & Dependents
                     </h2>
                     <p>
-                      To query a crate id=888 with all its dependents
+                      Traverse the graph in both the normal and reversed directions starting from a root node.
                     </p>
                   </div>
                   <div class="card__footer">
-                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/tree.html`} target="_blank">
+                    <a class="button button--outline button--primary button--block" href={`${DEMO_BASE_URL}/tree`} target="_blank">
                       Try Interactive Demo
                     </a>
                   </div>

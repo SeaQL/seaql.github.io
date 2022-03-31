@@ -6,7 +6,7 @@ Throughout this documentation, a concrete example (*Freeport*) involving the gra
 
 At the end of the day, we're interested in performing **graph analysis**, that is to extract meaningful information out of plain graph data. To achieve that, we believe that **visualization** is a crucial aid.
 
-StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo app](#).
+StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo app](https://starfish-ql.sea-ql.org/).
 
 ## Top-N Dependencies
 
