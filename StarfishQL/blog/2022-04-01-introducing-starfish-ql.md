@@ -260,6 +260,13 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                         </table>
                     </div>
                 </div>
+                <p>
+                    If we look at <i>Decay Mode: Immediate</i>, where the connectivity is simply the <b>number of immediate dependants</b>, we can see that
+                    <a href="https://crates.io/crates/serde" target="_blank"><code>serde</code></a> and <a href="https://crates.io/crates/serde_json" target="_blank"><code>serde_json</code></a> are at the top. I guess that supports our decision of defining the query language in JSON.
+                </p>
+                <p>
+                    <i>Decay Mode: None</i> tells another interesting story: when the connectivity is the <b>entire tree of dependants</b>, we are looking at the really core crates that are nested somewhere deeply inside the most crates. In other words, these are the ones that are built along with the most crates. Under this setting, the utility crates that interacts with the low-level, more fundamental aspects of Rust are ranked higher,like <a href="https://crates.io/crates/quote" target="_blank"><code>quote</code></a> with syntax trees, <a href="https://crates.io/crates/proc-macro2" target="_blank"><code>proc-macro2</code></a> with procedural macros, and <a href="https://crates.io/crates/unicode-xid" target="_blank"><code>unicode-xid</code></a> with Unicode checking.
+                </p>
             </div>
         </div>
     </div>
@@ -272,7 +279,7 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                 <h3>Number of crates without Dependencies</h3>
             </div>
             <div className="card__body">
-                <p>There are in total 19,369 out of 79,972 crates, or 24%, of the crates are not depends on any crates.</p>
+                <p>19,369 out of 79,972 crates, or 24% of the crates, do not depend on any crates.</p>
                 <p>
                     e.g.&nbsp;
                     <a href="https://crates.io/crates/a" target="_blank">a</a>,&nbsp;
@@ -283,6 +290,7 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                     <a href="https://crates.io/crates/zz-buffer" target="_blank">zz-buffer</a>,&nbsp;
                     <a href="https://crates.io/crates/z_table" target="_blank">z_table</a>
                 </p>
+                <p>In other words, about 76% of the crates are standing on the shoulders of giants! 💪</p>
             </div>
         </div>
     </div>
@@ -295,16 +303,18 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                 <h3>Number of crates without Dependants</h3>
             </div>
             <div className="card__body">
-                <p>There are in total 53,910 out of 79,972 crates, or 67%, of the crates have no dependants.</p>
+                <p>53,910 out of 79,972 crates, or 67% of the crates, have no dependants, i.e. no other crates depend on them.</p>
                 <p>
                     e.g.&nbsp;
                     <a href="https://crates.io/crates/a" target="_blank">a</a>,&nbsp;
                     <a href="https://crates.io/crates/a-" target="_blank">a-</a>,&nbsp;
                     <a href="https://crates.io/crates/a-bot" target="_blank">a-bot</a>,&nbsp;
+                    ...,&nbsp;
                     <a href="https://crates.io/crates/zzp-tools" target="_blank">zzp-tools</a>,&nbsp;
                     <a href="https://crates.io/crates/zzz" target="_blank">zzz</a>,&nbsp;
                     <a href="https://crates.io/crates/z_table" target="_blank">z_table</a>
                 </p>
+                <p>We imagine many of those crates are binaries/executables, if only we could figure out a way to check that... 🤔</p>
             </div>
         </div>
     </div>
