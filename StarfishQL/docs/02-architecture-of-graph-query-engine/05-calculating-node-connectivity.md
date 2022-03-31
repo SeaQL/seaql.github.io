@@ -26,5 +26,8 @@ find_in_conn(n, f):
 Different weight-decay factors lead to different interesting connectivity metrics, most noticeably:
 
 - When it is `0` (*Simple connectivity*), the connectivity is simply the trivial degrees.
+  - As the weight essentially decays to 0 immediately in this case, the *Decay Mode* is *Immediate*.
 - When it is `1` (*Compound connectivity*), the connectivity takes into account **all** the ancestor/descendant nodes in the connected component of the node of interest.
+  - As the weight essentially never decays in this case, the *Decay Mode* is *None*.
 - When it is anything in between (*Complex connectivity*), the connectivity *decays* throughout traversal, which is a nice property for some use cases.
+  - In this case, the *Decay Mode* is associated with a speed: *the smaller the factor, the faster the decay speed*.

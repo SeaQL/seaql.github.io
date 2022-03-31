@@ -8,7 +8,7 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-We are pleased to introduce StarfishQL to the Rust community today. StarfishQL is graph database and query engine to enable graph analysis and visualization on the web. It is an experimental project, with its primary purpose to explore the dependency network of Rust crates published on crates.io.
+We are pleased to introduce StarfishQL to the Rust community today. StarfishQL is a graph database and query engine to enable graph analysis and visualization on the web. It is an experimental project, with its primary purpose to explore the dependency network of Rust crates published on [crates.io](https://crates.io/).
 
 ## Motivation
 
@@ -20,7 +20,7 @@ At the end of the day, we're interested in performing graph analysis, that is to
 
 StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo app](#).
 
-<div className="row">
+<div className="row" id="colourful-graphs">
     <div className="col col--6 margin-bottom--md">
         <div className="card item shadow--lw">
             <div className="card__header">
@@ -47,19 +47,21 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
 
 ## Design
 
-A query engine takes input queries written in a specific query language (e.g. SQL statements), performs the necessary operations in the database, and then outputs the data of interest to the user application. You may also view a query engine as an abstraction layer such that the user can design queries simply in the supported query language and let the query engine do the rest.
+In general, a query engine takes input queries written in a specific query language (e.g. SQL statements), performs the necessary operations in the database, and then outputs the data of interest to the user application. You may also view a query engine as an abstraction layer such that the user can design queries simply in the supported query language and let the query engine do the rest.
 
 In the case of a graph query engine, the output data is a graph ([wiki](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))).
 
 ![Graph query engine overview](/img/graph_query_engine_overview.png)
 
+In the case of StarfishQL, the query language is a custom language we defined in the JSON format, which enables the engine to be highly accessible and portable.
+
 ## Implementation
 
-StarfishQL is make-up of following three components.
+In the example of Freeport, StarfishQL consists of the following three components.
 
 ### Graph Query Engine
 
-The graph query engine is a Rust backend application powered by the [rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/).
+As a core component of StarfishQL, the graph query engine is a Rust backend application powered by the [rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/).
 
 The engine listens at the following endpoints for the corresponding operation:
 - `/schema` - [Define/Reset the schema](/StarfishQL/docs/architecture-of-graph-query-engine/defining-graph-schema)
@@ -68,18 +70,18 @@ The engine listens at the following endpoints for the corresponding operation:
 
 You could also invoke the endpoints above programmatically.
 
-Graph data are stored in relational database:
-- [Metadata](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage) - Specification of each entity and relation, e.g. attributes of crates and dependency
-- [Node Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-entities) - An instance of entity, e.g. crate name and version number
-- [Edge Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-relations) - An instance of relation, e.g. one crate depends on another
+Graph data are stored in a relational database:
+- [Metadata](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage) - Definition of each entity and relation, e.g. attributes of crates and dependency
+- [Node Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-entities) - An instance of an entity, e.g. crate name and version number
+- [Edge Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-relations) - An instance of a relation, e.g. one crate depends on another
 
 ### crates.io Crawler
 
-
+To obtain the crate data to insert into the database, we used a [fast, non-disruptive crawler](/StarfishQL/docs/architecture-of-crates-io-crawler/overview) on a local clone of the public index repo of crates.io.
 
 ### Graph Visualization
 
-
+We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display the results. The two [colourful graphs](#colourful-graphs) above are such products.
 
 ## Analysis
 
@@ -96,11 +98,11 @@ Graph data are stored in relational database:
                         <table>
                             <thead>
                                 <tr>
-                                    <th colspan="2">Decay Mode: Immediate</th>
+                                    <th colspan="2">Decay Mode: Immediate / Simple Connectivity</th>
                                 </tr>
                                 <tr>
                                     <th>crate</th>
-                                    <th>weight</th>
+                                    <th>connectivity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -151,11 +153,11 @@ Graph data are stored in relational database:
                         <table>
                             <thead>
                                 <tr>
-                                    <th colspan="2">Decay Mode: Medium</th>
+                                    <th colspan="2">Decay Mode: Medium (.5) / Complex Connectivity</th>
                                 </tr>
                                 <tr>
                                     <th>crate</th>
-                                    <th>weight</th>
+                                    <th>connectivity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -206,11 +208,11 @@ Graph data are stored in relational database:
                         <table>
                             <thead>
                                 <tr>
-                                    <th colspan="2">Decay Mode: None</th>
+                                    <th colspan="2">Decay Mode: None / Compound Connectivity</th>
                                 </tr>
                                 <tr>
                                     <th>crate</th>
-                                    <th>weight</th>
+                                    <th>connectivity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -312,7 +314,11 @@ Graph data are stored in relational database:
 
 ## Conclusion
 
+StarfishQL allows flexible and portable definition, manipulation, retrieval, and visualization of graph data.
 
+The graph query engine built in Rust provides a nice interface for any web applications to access data in the relational graph database with stable performance and memory safety.
+
+Admittedly, StarfishQL is still in its infancy, so every detail in the design and implementation is subject to change. Fortunately, the good thing about this is, like all other open-source projects developed by brilliant Rust developers, you can contribute to it if you also find the concept interesting. With its addition to the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/), together we are one step closer to the vision of Rust for data engineering.
 
 ## People
 
