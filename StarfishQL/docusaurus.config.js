@@ -77,7 +77,7 @@ module.exports = {
             },
             {
               label: 'API Reference',
-              to: 'https://docs.rs/starfish-ql/latest/starfish_ql/',
+              to: 'https://docs.rs/starfish-ql/',
             },
           ],
         },
