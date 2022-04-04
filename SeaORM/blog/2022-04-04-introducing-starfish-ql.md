@@ -21,11 +21,12 @@ At the end of the day, we're interested in performing graph analysis, that is to
 StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo apps](https://starfish-ql.sea-ql.org/).
 
 <div className="row" id="colourful-graphs">
-    <a href="https://starfish-ql.sea-ql.org/graph.html">
     <div className="col col--6 margin-bottom--md">
         <div className="card item shadow--lw">
             <div className="card__header">
-                <h3>Top-N Dependencies</h3>
+                <a href="https://starfish-ql.sea-ql.org/graph.html">
+                    <h3>Top-N Dependencies</h3>
+                </a>
             </div>
             <div className="card__body">
                 <img src="https://www.sea-ql.org/StarfishQL/img/graph.png" />
@@ -33,20 +34,19 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
             </div>
         </div>
     </div>
-    </a>
-    <a href="https://starfish-ql.sea-ql.org/tree.html">
     <div className="col col--6 margin-bottom--md">
         <div className="card item shadow--lw">
             <div className="card__header">
-                <h3>Dependencies & Dependents</h3>
+                <a href="https://starfish-ql.sea-ql.org/tree.html">
+                    <h3>Dependencies & Dependents</h3>
+                </a>
             </div>
             <div className="card__body">
                 <img src="https://www.sea-ql.org/StarfishQL/img/tree.png" />
-                <p>Traverse the dependency tree in both the normal and reversed directions starting from a particular node.</p>
+                <p>Traverse the dependency tree in both forward and reverse directions starting from a particular node.</p>
             </div>
         </div>
     </div>
-    </a>
 </div>
 
 ## Design
