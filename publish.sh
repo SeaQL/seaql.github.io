@@ -15,6 +15,13 @@ cd ..
 # mv build ../docs/SeaQuery
 # cd ..
 
+# Build StarfishQL docs
+cd StarfishQL
+npm run build
+[[ -d ../docs/StarfishQL ]] && rm -r ../docs/StarfishQL
+mv build ../docs/StarfishQL
+cd ..
+
 # Commit & Push
 git add docs
 git commit -m 'Publish Docs'
