@@ -1,5 +1,5 @@
 ---
-slug: 2022-04-01-introducing-starfish-ql
+slug: 2022-04-04-introducing-starfish-ql
 title: Introducing StarfishQL
 author: SeaQL Team
 author_title: Chris Tsang
@@ -18,9 +18,10 @@ A concrete example (Freeport) involving the graph of crate dependency on [crates
 
 At the end of the day, we're interested in performing graph analysis, that is to extract meaningful information out of plain graph data. To achieve that, we believe that visualization is a crucial aid.
 
-StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo app](https://starfish-ql.sea-ql.org/).
+StarfishQL's query engine is designed to be able to incorporate different forms of visualization by using a flexible query language. However, the development of the project has been centred around the following, as showcased in our [demo apps](https://starfish-ql.sea-ql.org/).
 
 <div className="row" id="colourful-graphs">
+    <a href="https://starfish-ql.sea-ql.org/graph.html">
     <div className="col col--6 margin-bottom--md">
         <div className="card item shadow--lw">
             <div className="card__header">
@@ -28,10 +29,12 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
             </div>
             <div className="card__body">
                 <img src="https://www.sea-ql.org/StarfishQL/img/graph.png" />
-                <p>Traverse the graph in the normal direction starting from the N most connected nodes.</p>
+                <p>Traverse the dependency graph in the normal direction starting from the N most connected nodes.</p>
             </div>
         </div>
     </div>
+    </a>
+    <a href="https://starfish-ql.sea-ql.org/tree.html">
     <div className="col col--6 margin-bottom--md">
         <div className="card item shadow--lw">
             <div className="card__header">
@@ -39,10 +42,11 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
             </div>
             <div className="card__body">
                 <img src="https://www.sea-ql.org/StarfishQL/img/tree.png" />
-                <p>Traverse the graph in both the normal and reversed directions starting from a root node.</p>
+                <p>Traverse the dependency tree in both the normal and reversed directions starting from a particular node.</p>
             </div>
         </div>
     </div>
+    </a>
 </div>
 
 ## Design
