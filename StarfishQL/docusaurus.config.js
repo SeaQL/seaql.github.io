@@ -35,7 +35,8 @@ module.exports = {
           label: 'Docs',
         },
         {
-          to: '/blog',
+          to: 'https://www.sea-ql.org/SeaORM/blog/',
+          target: '_self',
           label: 'Blog',
           position: 'left'
         },
@@ -107,7 +108,8 @@ module.exports = {
             },
             {
               label: 'Blog',
-              to: '/blog',
+              to: 'https://www.sea-ql.org/SeaORM/blog/',
+              target: '_self',
             },
           ],
         },
@@ -149,10 +151,10 @@ module.exports = {
           //   },
           // },
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/StarfishQL/',
-        },
+        // blog: {
+        //   showReadingTime: true,
+        //   editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/StarfishQL/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
