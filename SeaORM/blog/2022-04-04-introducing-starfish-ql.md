@@ -336,9 +336,7 @@ Admittedly, StarfishQL is still in its infancy, so every detail in the design an
 
 ## People
 
-SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
-
-### Core Members
+The idea and design of StarfishQL originated from the research work at [Vision Cortex](https://www.visioncortex.org/). Development was led by Chris and is turned into reality by Billy and Sanford.
 
 <div className="container">
     <div className="row">
@@ -383,6 +381,6 @@ SeaQL is a community driven project. We welcome you to participate, contribute a
 
 ## Contributing
 
-We are super excited to be selected as a Google Summer of Code 2022 mentor organization. Thank you everyone in the SeaQL community for your support and adoption!
+We are super excited to be selected as a Google Summer of Code 2022 mentor organization!
 
-StarfishQL is one of the [GSoC project ideas](https://github.com/SeaQL/summer-of-code/blob/main/2022/README.md#2-a-graph-database-and-query-engine-codename-starfishql-for-graph-analysis-and-visualization) that open for development proposals. Join us on GSoC 2022 by following the instructions on [GSoC Contributing Guide](https://github.com/SeaQL/summer-of-code/blob/main/2022/CONTRIBUTING.md).
+StarfishQL is one of the [GSoC project ideas](https://github.com/SeaQL/summer-of-code/blob/main/2022/README.md#2-a-graph-database-and-query-engine-codename-starfishql-for-graph-analysis-and-visualization) that opens for development proposals. Join us on GSoC 2022 by following the instructions on [GSoC Contributing Guide](https://github.com/SeaQL/summer-of-code/blob/main/2022/CONTRIBUTING.md).
