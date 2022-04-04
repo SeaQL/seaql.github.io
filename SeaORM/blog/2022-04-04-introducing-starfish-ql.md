@@ -295,6 +295,8 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                     <a href="https://crates.io/crates/z_table" target="_blank">z_table</a>
                 </p>
                 <p>In other words, about 76% of the crates are standing on the shoulders of giants! 💪</p>
+                <img src="https://www.sea-ql.org/StarfishQL/img/crate_without_dependency_count.png" />
+                <img src="https://www.sea-ql.org/StarfishQL/img/crate_without_dependency_percentage.png" />
             </div>
         </div>
     </div>
