@@ -27,7 +27,7 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
                 <h3>Top-N Dependencies</h3>
             </div>
             <div className="card__body">
-                <img src="/StarfishQL/img/graph.png" />
+                <img src="https://www.sea-ql.org/StarfishQL/img/graph.png" />
                 <p>Traverse the graph in the normal direction starting from the N most connected nodes.</p>
             </div>
         </div>
@@ -38,7 +38,7 @@ StarfishQL's query engine is designed to be able to incorporate different forms 
                 <h3>Dependencies & Dependents</h3>
             </div>
             <div className="card__body">
-                <img src="/StarfishQL/img/tree.png" />
+                <img src="https://www.sea-ql.org/StarfishQL/img/tree.png" />
                 <p>Traverse the graph in both the normal and reversed directions starting from a root node.</p>
             </div>
         </div>
@@ -51,7 +51,7 @@ In general, a query engine takes input queries written in a specific query langu
 
 In the case of a graph query engine, the output data is a graph ([wiki](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))).
 
-![Graph query engine overview](/img/graph_query_engine_overview.png)
+![Graph query engine overview](https://www.sea-ql.org/StarfishQL/img/graph_query_engine_overview.png)
 
 In the case of StarfishQL, the query language is a custom language we defined in the JSON format, which enables the engine to be highly accessible and portable.
 
@@ -64,20 +64,20 @@ In the example of Freeport, StarfishQL consists of the following three component
 As a core component of StarfishQL, the graph query engine is a Rust backend application powered by the [rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/).
 
 The engine listens at the following endpoints for the corresponding operation:
-- `/schema` - [Define/Reset the schema](/StarfishQL/docs/architecture-of-graph-query-engine/defining-graph-schema)
-- `/mutate` - [Perform mutate operations](/StarfishQL/docs/architecture-of-graph-query-engine/mutate-operations)
-- `/query` - [Perform queries](/StarfishQL/docs/architecture-of-graph-query-engine/querying-graph-data)
+- `/schema` - [Define/Reset the schema](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/defining-graph-schema)
+- `/mutate` - [Perform mutate operations](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/mutate-operations)
+- `/query` - [Perform queries](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/querying-graph-data)
 
 You could also invoke the endpoints above programmatically.
 
 Graph data are stored in a relational database:
-- [Metadata](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage) - Definition of each entity and relation, e.g. attributes of crates and dependency
-- [Node Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-entities) - An instance of an entity, e.g. crate name and version number
-- [Edge Data](/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-relations) - An instance of a relation, e.g. one crate depends on another
+- [Metadata](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/data-storage) - Definition of each entity and relation, e.g. attributes of crates and dependency
+- [Node Data](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-entities) - An instance of an entity, e.g. crate name and version number
+- [Edge Data](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/data-storage#storage-of-relations) - An instance of a relation, e.g. one crate depends on another
 
 ### crates.io Crawler
 
-To obtain the crate data to insert into the database, we used a [fast, non-disruptive crawler](/StarfishQL/docs/architecture-of-crates-io-crawler/overview) on a local clone of the public index repo of crates.io.
+To obtain the crate data to insert into the database, we used a [fast, non-disruptive crawler](https://www.sea-ql.org/StarfishQL/docs/architecture-of-crates-io-crawler/overview) on a local clone of the public index repo of crates.io.
 
 ### Graph Visualization
 
@@ -92,7 +92,7 @@ We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display 
                 <h3>Top-10 Dependencies</h3>
             </div>
             <div className="card__body">
-                <p>List of top 10 crates order by different <a href="/StarfishQL/docs/architecture-of-graph-query-engine/calculating-node-connectivity/#weight-decay-factors">decay modes</a>.</p>
+                <p>List of top 10 crates order by different <a href="https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/calculating-node-connectivity/#weight-decay-factors">decay modes</a>.</p>
                 <div className="row row--no-gutters">
                     <div className="col col--4 padding-left--none padding-right--none">
                         <table>
