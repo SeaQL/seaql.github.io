@@ -8,7 +8,7 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-We are pleased to introduce StarfishQL to the Rust community today. StarfishQL is a graph database and query engine to enable graph analysis and visualization on the web. It is an experimental project, with its primary purpose to explore the dependency network of Rust crates published on [crates.io](https://crates.io/).
+We are pleased to introduce [StarfishQL](https://www.sea-ql.org/StarfishQL/) to the Rust community today. StarfishQL is a graph database and query engine to enable graph analysis and visualization on the web. It is an experimental project, with its primary purpose to explore the dependency network of Rust crates published on crates.io.
 
 ## Motivation
 
@@ -65,7 +65,7 @@ In the example of Freeport, StarfishQL consists of the following three component
 
 ### Graph Query Engine
 
-As a core component of StarfishQL, the graph query engine is a Rust backend application powered by the [rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/).
+As a core component of StarfishQL, the graph query engine is a Rust backend application powered by the [Rocket](https://crates.io/crates/rocket) web framework and the [SeaQL ecosystem](https://github.com/SeaQL).
 
 The engine listens at the following endpoints for the corresponding operation:
 - `/schema` - [Define/Reset the schema](https://www.sea-ql.org/StarfishQL/docs/architecture-of-graph-query-engine/defining-graph-schema)
@@ -87,7 +87,9 @@ To obtain the crate data to insert into the database, we used a [fast, non-disru
 
 We used [`d3.js`](https://d3js.org/) to create force-directed graphs to display the results. The two [colourful graphs](#colourful-graphs) above are such products.
 
-## Analysis
+## Findings
+
+Here are some interesting findings we made during the process.
 
 <div className="row">
     <div className="col col--12 margin-bottom--md">
@@ -337,8 +339,6 @@ The graph query engine built in Rust provides a nice interface for any web appli
 Admittedly, StarfishQL is still in its infancy, so every detail in the design and implementation is subject to change. Fortunately, the good thing about this is, like all other open-source projects developed by brilliant Rust developers, you can contribute to it if you also find the concept interesting. With its addition to the [SeaQL ecosystem](https://www.sea-ql.org/SeaORM/), together we are one step closer to the vision of Rust for data engineering.
 
 ## People
-
-The idea and design of StarfishQL originated from the research work at [Vision Cortex](https://www.visioncortex.org/). Development was led by Chris and is turned into reality by Billy and Sanford.
 
 <div className="container">
     <div className="row">
