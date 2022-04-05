@@ -340,6 +340,8 @@ Admittedly, StarfishQL is still in its infancy, so every detail in the design an
 
 ## People
 
+StarfishQL is created by the following SeaQL team members:
+
 <div className="container">
     <div className="row">
         <div className="col col--3 margin-bottom--md">
