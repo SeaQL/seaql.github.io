@@ -7,8 +7,8 @@ function getNextMinorVersionName() {
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'SeaORM - 🐚 An async & dynamic ORM for Rust',
-  tagline: 'SeaORM is a relational ORM to help you build web services in Rust with the familiarity of dynamic languages.',
+  title: 'SeaORM 🐚 An async & dynamic ORM for Rust',
+  tagline: '🐚 SeaORM is a relational ORM to help you build web services in Rust with the familiarity of dynamic languages.',
   url: 'https://www.sea-ql.org',
   baseUrl: '/SeaORM/',
   onBrokenLinks: 'throw',
@@ -114,7 +114,6 @@ module.exports = {
       copyright: [
         `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/sea-orm/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1"/></a></div>`,
         `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
-        `<br/>Built with 🔥 by 🌊🦀🐚`,
       ].join(''),
     },
     prism: {
