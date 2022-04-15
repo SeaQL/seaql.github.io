@@ -108,6 +108,10 @@ module.exports = {
               label: 'Blog',
               to: '/blog',
             },
+            {
+              label: 'StarfishQL',
+              to: 'https://www.sea-ql.org/StarfishQL/',
+            },
           ],
         },
       ],
