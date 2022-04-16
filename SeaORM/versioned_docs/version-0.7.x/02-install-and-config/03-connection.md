@@ -31,3 +31,5 @@ opt.max_connections(100)
 
 let db = Database::connect(opt).await?;
 ```
+
+To configure the underlying SQLite database use SQLite's [URI Filenames](https://www.sqlite.org/c3ref/open.html). As an example, to open a database for read and write, creating the database if it is missing, we would specify `sqlite://data.db?mode=rwc`.
