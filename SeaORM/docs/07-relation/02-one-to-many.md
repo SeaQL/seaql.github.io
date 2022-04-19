@@ -28,7 +28,7 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following is equivalent to the above:
+where the following is equivalent to the `RelationTrait` implementaion above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -67,7 +67,7 @@ impl Related<super::cake::Entity> for Entity {
 ```
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following is equivalent to the above:
+where the following is equivalent to the `RelationTrait` implementaion above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
