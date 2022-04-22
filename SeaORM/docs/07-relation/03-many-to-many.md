@@ -67,7 +67,7 @@ impl RelationTrait for Relation {
 ```
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following is equivalent to the `RelationTrait` implementaion above:
+where the following eliminates the need for the `RelationTrait` implementation above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
