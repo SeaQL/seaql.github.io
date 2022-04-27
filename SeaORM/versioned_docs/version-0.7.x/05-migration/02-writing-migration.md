@@ -4,7 +4,7 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migration File
 
-You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-schema/0.5/sea_schema/migration/trait.MigrationName.html#tymethod.name) method accordingly.
+You can create a migration by duplicating an existing migration file or by copying the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-schema/0.5/sea_schema/migration/trait.MigrationName.html#tymethod.name) method accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_schema::migration::prelude::*;
@@ -33,7 +33,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Also, you have to include the new migration in [`MigratorTrait::migrations`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+Additionally, you have to include the new migration in [`MigratorTrait::migrations`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
 
 ```rust title="migration/src/lib.rs"
 pub use sea_schema::migration::*;
@@ -54,7 +54,7 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-The [`SchemaManager`](https://docs.rs/sea-schema/0.5/sea_schema/migration/manager/struct.SchemaManager.html) helps you define migration in SeaQuery or in raw SQL
+The [`SchemaManager`](https://docs.rs/sea-schema/0.5/sea_schema/migration/manager/struct.SchemaManager.html) helps you define migration in either SeaQuery or raw SQL
 
 ### SeaQuery
 
@@ -198,7 +198,7 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
 
 ### Raw SQL
 
-Besides, you can define migration in raw SQL.
+You can define a migration in raw SQL too.
 
 ```rust
 use sea_orm::Statement;
