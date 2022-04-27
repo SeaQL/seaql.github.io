@@ -1,10 +1,10 @@
 # Setting Up Migration
 
-Version control you database schema with migrations written in SeaQuery or in raw SQL.
+Version control your database schema with migrations written in SeaQuery or in raw SQL.
 
 ## Migration Table
 
-A table named `seaql_migrations` will be created in your database to keep track the applied migrations. It will be created automatically when you run the migration.
+A table named `seaql_migrations` will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -42,7 +42,7 @@ Creating file `./other/migration/dir/README.md`
 Done!
 ```
 
-You should have a migration directory with structure like below.
+You should have a migration directory with a structure like below.
 
 ```
 migration
@@ -56,7 +56,7 @@ migration
 
 ## Workspace Structure
 
-It is recommanded to restructure your cargo workspace as follows to allow sharing of SeaORM entities across the core crate and the migration crate. Also, to ensure both of them depends on the same version of SeaORM through re-exporting.
+It is recommanded to restructure your cargo workspace as follows to allow sharing of SeaORM entities across the core crate and the migration crate. Also, to ensure both of them depend on the same version of SeaORM through re-exporting.
 
 Follow the steps below to restructure your workspace.
 
@@ -68,7 +68,7 @@ Checkout the integration examples:
 
 ### Entity Crate
 
-Creates an entity crate in your root workspace. It should contains all SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
+Create an entity crate in your root workspace. It should contain all SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
 
 <details>
     <summary>If you don't have SeaORM entities defined?</summary>
@@ -84,14 +84,14 @@ entity
     └── post.rs     # Define the `post` entity
 ```
 
-Specifies SeaORM dependency.
+Specify SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
 sea-orm = { version = "^0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ], default-features = false }
 ```
 
-Re-exports SeaORM.
+Re-export SeaORM.
 
 ```rust title="entity/src/lib.rs"
 pub use sea_orm;
@@ -99,16 +99,16 @@ pub use sea_orm;
 
 ### Migration Crate
 
-For those existing SeaORM users, you might need SeaORM entity when defining the migration. For example, column names defined in entity can be reused in migration.
+For existing SeaORM users, you might need the SeaORM entity when defining the migration. For example, column names defined in entity can be reused in migration.
 
-Depends on the entity crate.
+Specify the entity crate as a dependency.
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
 entity = { path = "../entity" }
 ```
 
-Writes migration for the `post` entity, more on this in the next section.
+Write a migration for the entity. See [Writing Migration](./02-writing-migration.md) for more details.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
 use sea_schema::migration::prelude::*;
@@ -147,9 +147,9 @@ impl MigrationTrait for Migration {
 
 ### Core Crate
 
-This is where you put the application logics.
+This is where the application logic goes.
 
-Creates a workspace that contains core, entity and migration crate and includes the entity and migration crate as well.
+Create a workspace that contains core, entity and migration crates.
 
 ```toml title="Cargo.toml"
 [workspace]
@@ -160,7 +160,7 @@ entity = { path = "entity" }
 migration = { path = "migration" }
 ```
 
-Uses the re-exported SeaORM and entities.
+Use the re-exported SeaORM and entities.
 
 ```rust title="src/main.rs"
 use entity::sea_orm;
