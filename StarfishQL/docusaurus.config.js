@@ -130,7 +130,7 @@ module.exports = {
     },
     algolia: {
       appId: 'QZ9XDFJ7RQ',
-      apiKey: 'd65f19a9e695c706f6e0896e5e82511c',
+      apiKey: 'da8d82019ca15152ae64f9b03ce0f9bb',
       indexName: 'starfishql',
       contextualSearch: true,
     },
