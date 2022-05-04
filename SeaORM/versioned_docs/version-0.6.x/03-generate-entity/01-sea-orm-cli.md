@@ -56,10 +56,3 @@ $ sea-orm-cli generate entity \
     -u sql://sea:sea@localhost/bakery \
     -o src/entity
 ```
-
-After generating the entity files, you might want to import it into `lib.rs` by adding following lines:
-
-```rust
-mod entities;
-pub use entities::*;
-```
