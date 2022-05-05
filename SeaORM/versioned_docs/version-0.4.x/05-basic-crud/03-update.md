@@ -29,9 +29,9 @@ let pear: fruit::ActiveModel = Fruit::update_many()
     .exec(db)
     .await?;
 
-// UPDATE `fruit` SET `cake_id` = NULL WHERE `fruit`.`name` LIKE '%Apple%'
+// UPDATE `fruit` SET `cake_id` = 1 WHERE `fruit`.`name` LIKE '%Apple%'
 Fruit::update_many()
-    .col_expr(fruit::Column::CakeId, Expr::value(Value::Null))
+    .col_expr(fruit::Column::CakeId, Expr::value(1))
     .filter(fruit::Column::Name.contains("Apple"))
     .exec(db)
     .await?;
