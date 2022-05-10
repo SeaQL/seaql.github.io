@@ -94,7 +94,7 @@ assert_eq!(
 );
 ```
 
-## Check any field are changed
+## Check ActiveModel are changed
 
 You can check any field in the `ActiveModel` are `Set` with the help of `is_changed` method.
 

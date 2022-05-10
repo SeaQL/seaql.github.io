@@ -135,7 +135,7 @@ let pear: fruit::Model = pear.insert(db).await?;
     </div>
 </div>
 
-## Checking any field in `ActiveModel` are changed
+## Checking `ActiveModel` are changed
 
 [[#683](https://github.com/SeaQL/sea-orm/pull/683)] You can check any field in the `ActiveModel` are `Set` with the help of `is_changed` method.
 
