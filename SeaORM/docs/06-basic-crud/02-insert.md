@@ -133,7 +133,7 @@ assert_eq!(res.last_insert_id, 28)
 
 ## Insert One with Default
 
-Insert an active model with its database's default values. 
+Insert a row populate with default values. Note that the target table should have default value for all of its columns.
 
 ```rust
 let pear = fruit::ActiveModel {

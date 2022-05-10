@@ -90,7 +90,7 @@ sea-orm-cli migrate generate create_product_table
 
 ## Inserting One with Default
 
-[[#589](https://github.com/SeaQL/sea-orm/pull/589)] Insert an active model with its database's default values.
+[[#589](https://github.com/SeaQL/sea-orm/pull/589)] Insert a row populate with default values. Note that the target table should have default value for all of its columns.
 
 ```rust
 let pear = fruit::ActiveModel {
