@@ -63,7 +63,7 @@ tags: [news]
 
 ## Generating New Migration
 
-[[#656](https://github.com/SeaQL/sea-orm/pull/656)] Adds a new subcommand to the SeaORM CLI that lets user create a new migration. This simplifies the migration process, new migrations no longer need to be added manually.
+[[#656](https://github.com/SeaQL/sea-orm/pull/656)] You can create a new migration with `migrate generate` subcommand. This simplifies the migration process, new migrations no longer need to be added manually.
 
 ```shell
 # A migration file `MIGRATION_DIR/src/mYYYYMMDD_HHMMSS_create_product_table.rs` will be created.
