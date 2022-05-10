@@ -83,7 +83,8 @@ An enum representing the primary key of this table. A composite key is represent
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DerivePrimaryKey)]
 pub enum PrimaryKey {
-    Id,
+    #[sea_orm(column_name = "id")] // Override the default column name
+    Id,  // maps to "id" in SQL
 }
 
 impl PrimaryKeyTrait for PrimaryKey {

@@ -94,6 +94,18 @@ assert_eq!(
 );
 ```
 
+## Check any field are changed
+
+You can check any field in the `ActiveModel` are `Set` with the help of `is_changed` method.
+
+```rust
+let mut fruit: fruit::ActiveModel = Default::default();
+assert!(!fruit.is_changed());
+
+fruit.set(fruit::Column::Name, "apple".into());
+assert!(fruit.is_changed());
+```
+
 ## Insert One
 
 Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
@@ -117,6 +129,22 @@ let pear = fruit::ActiveModel {
 
 let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
+```
+
+## Insert One with Default
+
+Insert an active model with its database's default values. 
+
+```rust
+let pear = fruit::ActiveModel {
+    ..Default::default() // all attributes are `NotSet`
+};
+
+// The SQL statement:
+//   - MySQL: INSERT INTO `fruit` VALUES ()
+//   - SQLite: INSERT INTO "fruit" DEFAULT VALUES
+//   - PostgreSQL: INSERT INTO "fruit" VALUES (DEFAULT) RETURNING "id", "name", "cake_id"
+let pear: fruit::Model = pear.insert(db).await?;
 ```
 
 ## Insert Many

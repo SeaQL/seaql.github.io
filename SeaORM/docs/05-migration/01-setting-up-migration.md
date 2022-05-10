@@ -118,7 +118,7 @@ entity = { path = "../entity" }
 Writes migration for the `post` entity, more on this in the next section.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 

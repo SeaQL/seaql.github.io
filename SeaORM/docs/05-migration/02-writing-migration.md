@@ -4,10 +4,10 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migration File
 
-You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-schema/0.5/sea_schema/migration/trait.MigrationName.html#tymethod.name) method accordingly.
+You can create migration by duplicating an existing migration file or copy the template below. Remember to name the file according to naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/trait.MigrationName.html#tymethod.name) method accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 
@@ -33,10 +33,10 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Also, you have to include the new migration in [`MigratorTrait::migrations`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+Also, you have to include the new migration in [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
 
 ```rust title="migration/src/lib.rs"
-pub use sea_schema::migration::*;
+pub use sea_orm_migration::*;
 
 mod m20220101_000001_create_table;
 
@@ -54,7 +54,7 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-The [`SchemaManager`](https://docs.rs/sea-schema/0.5/sea_schema/migration/manager/struct.SchemaManager.html) helps you define migration in SeaQuery or in raw SQL
+The [`SchemaManager`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/manager/struct.SchemaManager.html) helps you define migration in SeaQuery or in raw SQL
 
 ### SeaQuery
 
@@ -202,7 +202,7 @@ Besides, you can define migration in raw SQL.
 
 ```rust
 use sea_orm::Statement;
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 
