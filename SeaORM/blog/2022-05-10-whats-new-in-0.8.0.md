@@ -211,6 +211,105 @@ assert!(fruit.is_changed());
     </div>
 </div>
 
+## Integration Examples
+
+SeaORM play well with other crates in async ecosystem. It can be integrated easily with common RESTful framework but also gRPC framework, checkout our new [Tonic example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example) to see how it works. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
+
+- [Rocket Example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
+- [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
+- [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
+- [Poem Example](https://github.com/SeaQL/sea-orm/tree/master/examples/poem_example)
+- [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
+- [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
+- [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
+
+## Who's using SeaORM?
+
+SeaORM is the foundation of [StarfishQL](https://github.com/SeaQL/starfish-ql), an experimental graph database and query engine.
+
+For more projects, see [Built with SeaORM](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#built-with-seaorm).
+
+## Sponsor
+
+Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! If you feel generous, a small donation will be greatly appreciated.
+
+A big shout out to our sponsors 😇:
+
+<div class="row">
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Sytten">
+                <img src="https://avatars.githubusercontent.com/u/2366731?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Émile Fugulin
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/exzachlyvv">
+                <img src="https://avatars.githubusercontent.com/u/46034847?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Zachary Vander Velden
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/deansheather">
+                <img src="https://avatars.githubusercontent.com/u/11241812?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Dean Sheather
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/shanesveller">
+                <img src="https://avatars.githubusercontent.com/u/831?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Shane Sveller
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sakti">
+                <img src="https://avatars.githubusercontent.com/u/196178?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Sakti Dwi Cahyono
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm">
+                <img style={{width: '100%'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Unnamed Sponsor
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 ## Community
 
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
