@@ -73,7 +73,7 @@ Creates an entity crate in your root workspace. It should contains all SeaORM en
 <details>
     <summary>If you don't have SeaORM entities defined?</summary>
 
-You can create an entity crate with no entity files in it. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](03-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src` folder.
+You can create an entity crate with no entity files in it. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](03-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
 
 After generating the entity files, you can re-export the generated entities by adding following lines in `entity/src/lib.rs`:
 
