@@ -12,7 +12,7 @@ tags: [news]
 
 ## Migration Utilities Moved to `sea-orm-migration` crate
 
-[[#666](https://github.com/SeaQL/sea-orm/pull/666)] Utilities of SeaORM migration has been moved from `sea-schema` to `sea-orm-migration` crate. Users are advised to upgrade from older version by following the steps below:
+[[#666](https://github.com/SeaQL/sea-orm/pull/666)] Utilities of SeaORM migration have been moved from `sea-schema` to `sea-orm-migration` crate. Users are advised to upgrade from older versions with the following steps:
 
 1. Bump `sea-orm` version to `0.8.0`.
 2. Replace `sea-schema` dependency with `sea-orm-migration` in your `migration` crate.
@@ -63,7 +63,7 @@ tags: [news]
 
 ## Generating New Migration
 
-[[#656](https://github.com/SeaQL/sea-orm/pull/656)] You can create a new migration with `migrate generate` subcommand. This simplifies the migration process, new migrations no longer need to be added manually.
+[[#656](https://github.com/SeaQL/sea-orm/pull/656)] You can create a new migration with the `migrate generate` subcommand. This simplifies the migration process, as new migrations no longer need to be added manually.
 
 ```shell
 # A migration file `MIGRATION_DIR/src/mYYYYMMDD_HHMMSS_create_product_table.rs` will be created.
@@ -90,7 +90,7 @@ sea-orm-cli migrate generate create_product_table
 
 ## Inserting One with Default
 
-[[#589](https://github.com/SeaQL/sea-orm/pull/589)] Insert a row populate with default values. Note that the target table should have default value for all of its columns.
+[[#589](https://github.com/SeaQL/sea-orm/pull/589)] Insert a row populate with default values. Note that the target table should have default values defined for all of its columns.
 
 ```rust
 let pear = fruit::ActiveModel {
@@ -135,9 +135,9 @@ let pear: fruit::Model = pear.insert(db).await?;
     </div>
 </div>
 
-## Checking `ActiveModel` are changed
+## Checking if an `ActiveModel` is changed
 
-[[#683](https://github.com/SeaQL/sea-orm/pull/683)] You can check any field in the `ActiveModel` are `Set` with the help of `is_changed` method.
+[[#683](https://github.com/SeaQL/sea-orm/pull/683)] You can check whether any field in an `ActiveModel` is `Set` with the help of the `is_changed` method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -213,7 +213,7 @@ assert!(fruit.is_changed());
 
 ## Integration Examples
 
-SeaORM play well with other crates in async ecosystem. It can be integrated easily with common RESTful framework but also gRPC framework, checkout our new [Tonic example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example) to see how it works. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
+SeaORM plays well with the other crates in the async ecosystem. It can be integrated easily with common RESTful frameworks and also gRPC frameworks; check out our new [Tonic example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example) to see how it works. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
 
 - [Rocket Example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
 - [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
