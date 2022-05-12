@@ -51,8 +51,8 @@ Command line options:
 - `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
 
 ```shell
-# Generate entity files of database `bakery` to `src/entity`
+# Generate entity files of database `bakery` to `entity/src`
 $ sea-orm-cli generate entity \
     -u sql://sea:sea@localhost/bakery \
-    -o src/entity
+    -o entity/src
 ```
