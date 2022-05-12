@@ -94,9 +94,9 @@ assert_eq!(
 );
 ```
 
-## Check ActiveModel are changed
+## Checking if an ActiveModel is changed
 
-You can check any field in the `ActiveModel` are `Set` with the help of `is_changed` method.
+You can check whether any field in an `ActiveModel` is `Set` with the help of the `is_changed` method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -133,7 +133,7 @@ assert_eq!(res.last_insert_id, 28)
 
 ## Insert One with Default
 
-Insert a row populate with default values. Note that the target table should have default value for all of its columns.
+Insert a row populate with default values. Note that the target table should have default values defined for all of its columns.
 
 ```rust
 let pear = fruit::ActiveModel {
