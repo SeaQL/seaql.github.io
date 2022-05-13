@@ -65,6 +65,9 @@ Checkout the integration examples:
 - [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
 - [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
 - [Poem Example](https://github.com/SeaQL/sea-orm/tree/master/examples/poem_example)
+- [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
+- [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
+- [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
 
 ### Entity Crate
 
@@ -118,7 +121,7 @@ entity = { path = "../entity" }
 Writes migration for the `post` entity, more on this in the next section.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 
