@@ -52,8 +52,8 @@ Command line options:
 - `--max-connections`: maximum number of database connections to be initialized in the connection pool (default: `1`)
 
 ```shell
-# Generate entity files of database `bakery` to `src/entity`
+# Generate entity files of database `bakery` to `entity/src`
 $ sea-orm-cli generate entity \
     -u sql://sea:sea@localhost/bakery \
-    -o src/entity
+    -o entity/src
 ```
