@@ -225,6 +225,18 @@ SeaORM plays well with the other crates in the async ecosystem. It can be integr
 
 ## Who's using SeaORM?
 
+The following products are powered by SeaORM:
+
+<table>
+  <tbody>
+    <tr>
+      <td><br/><a href="https://caido.io/"><img src="https://www.sea-ql.org/SeaORM/img/other/caido-logo.png" width="250"/></a><br/>A lightweight web security auditing toolkit</td>
+      <td><a href="https://l2.technology/sensei"><img src="https://www.sea-ql.org/SeaORM/img/other/sensei-logo.svg" width="250"/></a><br/>A Bitcoin lightning node implementation</td>
+      <td><a href="https://www.svix.com/"><img src="https://www.sea-ql.org/SeaORM/img/other/svix-logo.svg" width="250"/></a><br/>The enterprise ready webhooks service</td>
+    </tr>
+  </tbody>
+</table>
+
 SeaORM is the foundation of [StarfishQL](https://github.com/SeaQL/starfish-ql), an experimental graph database and query engine.
 
 For more projects, see [Built with SeaORM](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#built-with-seaorm).
