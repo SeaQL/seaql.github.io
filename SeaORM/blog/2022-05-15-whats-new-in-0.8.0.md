@@ -1,5 +1,5 @@
 ---
-slug: 2022-05-10-whats-new-in-0.8.0
+slug: 2022-05-15-whats-new-in-0.8.0
 title: What's new in SeaORM 0.8.0
 author: SeaQL Team
 author_title: Chris Tsang
