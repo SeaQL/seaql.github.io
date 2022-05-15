@@ -94,9 +94,9 @@ assert_eq!(
 );
 ```
 
-## Checking if an ActiveModel is changed
+### Checking if an ActiveModel is changed
 
-You can check whether any field in an `ActiveModel` is `Set` with the help of the `is_changed` method.
+You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -129,22 +129,6 @@ let pear = fruit::ActiveModel {
 
 let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
-```
-
-## Insert One with Default
-
-Insert a row populate with default values. Note that the target table should have default values defined for all of its columns.
-
-```rust
-let pear = fruit::ActiveModel {
-    ..Default::default() // all attributes are `NotSet`
-};
-
-// The SQL statement:
-//   - MySQL: INSERT INTO `fruit` VALUES ()
-//   - SQLite: INSERT INTO "fruit" DEFAULT VALUES
-//   - PostgreSQL: INSERT INTO "fruit" VALUES (DEFAULT) RETURNING "id", "name", "cake_id"
-let pear: fruit::Model = pear.insert(db).await?;
 ```
 
 ## Insert Many
