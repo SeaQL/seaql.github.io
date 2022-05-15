@@ -35,7 +35,7 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 | :-----------: | :------------: |
 | `actix` | [`Actix`](https://actix.rs/) |
 | `async-std` | [`Tide`](https://docs.rs/tide) |
-| `tokio` | [`Rocket`](https://rocket.rs/) |
+| `tokio` | [`Axum`](https://docs.rs/axum), [`Rocket`](https://rocket.rs/), [`Poem`](https://docs.rs/poem) |
 
 2. `native-tls` uses the platform's native security facilities, while `rustls` is a pure Rust implementation.
 
