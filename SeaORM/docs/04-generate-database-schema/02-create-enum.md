@@ -95,7 +95,7 @@ Note the `db_type` and extra `enum_name` attributes.
 
 ### PostgreSQL
 
-Enums in PostgreSQL are defined by [TypeCreateStatement](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+Enums in PostgreSQL are defined by [`TypeCreateStatement`](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
 
 You can also create it from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
 
@@ -167,7 +167,7 @@ assert_eq!(
 
 ### SQLite
 
-Enum is not supported in SQLite so it will be stored as `TEXT` type.
+Enum is not supported in SQLite so it will be stored as `TEXT`.
 
 ```rust
 use sea_orm::{Schema, Statement};
