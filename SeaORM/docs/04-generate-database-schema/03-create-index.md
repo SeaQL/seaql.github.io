@@ -1,8 +1,21 @@
 # Create Index
 
-To create indexes in database instead of writing [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_index_from_entity). This method will help you create database indexes defined in `Entity`.
+You can create indices from entities using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_index_from_entity), or construct [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually.
 
-Below we use [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity to demo its generated SQL statement. You can construct the same statement with [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html).
+Example [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity:
+
+```rust title="indexes.rs"
+impl ColumnTrait for Column {
+    type EntityName = Entity;
+
+    fn def(&self) -> ColumnDef {
+        match self {
+            Self::Index1Attr => ColumnType::Integer.def().indexed(),
+            Self::Index2Attr => ColumnType::Integer.def().indexed().unique(),
+        }
+    }
+}
+```
 
 ```rust
 use sea_orm::{sea_query, tests_cfg::*, Schema};
@@ -11,7 +24,6 @@ let builder = db.get_database_backend();
 let schema = Schema::new(builder);
 
 let stmts = schema.create_index_from_entity(indexes::Entity);
-assert_eq!(stmts.len(), 2);
 
 let idx = sea_query::Index::create()
     .name("idx-indexes-index1_attr")
