@@ -40,33 +40,33 @@
 
     4.3 [Create Index](04-generate-database-schema/03-create-index.md)
 
-5. Migration
+5. Basic CRUD
 
-    5.1 [Setting Up Migration](05-migration/01-setting-up-migration.md)
+    5.1 [SELECT: find, filter, sort, paging](05-basic-crud/01-select.md)
 
-    5.2 [Writing Migration](05-migration/02-writing-migration.md)
+    5.2 [INSERT: Model & ActiveModel, insert many](05-basic-crud/02-insert.md)
 
-    5.3 [Running Migration](05-migration/03-running-migration.md)
+    5.3 [UPDATE: find & save, update many](05-basic-crud/03-update.md)
 
-    5.4 [Seeding Data](05-migration/04-seeding-data.md)
+    5.4 [SAVE: insert or update](05-basic-crud/04-save.md)
 
-6. Basic CRUD
+    5.5 [DELETE: delete one & delete many](05-basic-crud/05-delete.md)
 
-    6.1 [SELECT: find, filter, sort, paging](06-basic-crud/01-select.md)
+    5.6 [JSON](05-basic-crud/06-json.md)
 
-    6.2 [INSERT: Model & ActiveModel, insert many](06-basic-crud/02-insert.md)
-
-    6.3 [UPDATE: find & save, update many](06-basic-crud/03-update.md)
-
-    6.4 [SAVE: insert or update](06-basic-crud/04-save.md)
-
-    6.5 [DELETE: delete one & delete many](06-basic-crud/05-delete.md)
-
-    6.6 [JSON](06-basic-crud/06-json.md)
-
-    6.7 [Raw SQL query](06-basic-crud/07-raw-sql.md)
+    5.7 [Raw SQL query](05-basic-crud/07-raw-sql.md)
 
 ## Advanced Topics
+
+6. Migration
+
+    6.1 [Setting Up Migration](06-migration/01-setting-up-migration.md)
+
+    6.2 [Writing Migration](06-migration/02-writing-migration.md)
+
+    6.3 [Running Migration](06-migration/03-running-migration.md)
+
+    6.4 [Seeding Data](06-migration/04-seeding-data.md)
 
 7. Relations
 
