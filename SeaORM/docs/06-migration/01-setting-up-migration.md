@@ -1,10 +1,10 @@
 # Setting Up Migration
 
-Version control you database schema with migrations written in SeaQuery or SQL.
+Version control your database schema with migrations written in SeaQuery or SQL.
 
 ## Migration Table
 
-A table named `seaql_migrations` will be created in your database to keep track the applied migrations. It will be created automatically when you run the migration.
+A table named `seaql_migrations` will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -35,7 +35,7 @@ Done!
 $ sea-orm-cli migrate init -d ./other/migration/dir
 ```
 
-You should have a migration directory with structure like below.
+You should have a migration directory with a structure like below.
 
 ```
 migration
@@ -76,7 +76,7 @@ entity
     └── post.rs     # Define the `post` entity
 ```
 
-Specifies SeaORM dependency.
+Specify SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
@@ -140,7 +140,7 @@ impl MigrationTrait for Migration {
 
 ### App Crate
 
-This is where you put the application logic.
+This is where the application logic goes.
 
 Create a workspace that contains app, entity and migration crates and import the entity crate into the app crate.
 
