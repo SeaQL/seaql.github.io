@@ -1,6 +1,6 @@
 # Setting Up Migration
 
-Version control you database schema with migrations written in SeaQuery or in raw SQL.
+Version control you database schema with migrations written in SeaQuery or SQL.
 
 ## Migration Table
 
@@ -33,13 +33,6 @@ Done!
 
 # If you want to setup the migration directory in else where
 $ sea-orm-cli migrate init -d ./other/migration/dir
-Initializing migration directory...
-Creating file `./other/migration/dir/src/lib.rs`
-Creating file `./other/migration/dir/src/m20220101_000001_create_table.rs`
-Creating file `./other/migration/dir/src/main.rs`
-Creating file `./other/migration/dir/Cargo.toml`
-Creating file `./other/migration/dir/README.md`
-Done!
 ```
 
 You should have a migration directory with structure like below.
@@ -49,18 +42,14 @@ migration
 ├── Cargo.toml
 ├── README.md
 └── src
-    ├── lib.rs                              # Migrator, for running migration programmatically
+    ├── lib.rs                              # Migrator API, for integration
     ├── m20220101_000001_create_table.rs    # A sample migration file
-    └── main.rs                             # Migrator CLI, for running migration in console
+    └── main.rs                             # Migrator CLI, for running manually
 ```
 
 ## Workspace Structure
 
-It is recommanded to restructure your cargo workspace as follows to allow sharing of SeaORM entities across the core crate and the migration crate. Also, to ensure both of them depends on the same version of SeaORM through re-exporting.
-
-Follow the steps below to restructure your workspace.
-
-Checkout the integration examples:
+It is recommended to structure your cargo workspace as follows to share SeaORM entities between the app crate and the migration crate. Checkout the integration examples for demonstration:
 - [Rocket Example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
 - [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
 - [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
@@ -71,12 +60,12 @@ Checkout the integration examples:
 
 ### Entity Crate
 
-Creates an entity crate in your root workspace. It should contains all SeaORM entities and shares SeaORM dependency across the workspace through re-exporting.
+Create an entity crate in your root workspace.
 
 <details>
-    <summary>If you don't have SeaORM entities defined?</summary>
+    <summary>You don't have SeaORM entities defined?</summary>
 
-You can create an entity crate with no entity files in it. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](03-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
+You can create an entity crate with no entity files. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](03-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
 
 After generating the entity files, you can re-export the generated entities by adding following lines in `entity/src/lib.rs`:
 
@@ -98,29 +87,23 @@ Specifies SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
-sea-orm = { version = "^0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ], default-features = false }
-```
-
-Re-exports SeaORM.
-
-```rust title="entity/src/lib.rs"
-pub use sea_orm;
+sea-orm = { version = "^0" }
 ```
 
 ### Migration Crate
 
-For those existing SeaORM users, you might need SeaORM entity when defining the migration. For example, column names defined in entity can be reused in migration.
-
-Depends on the entity crate.
+Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) crate. If you need some SeaORM entities when writing migrations, you can import the entity crate.
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
-entity = { path = "../entity" }
+sea-orm-migration = { version = "^0" }
+entity = { path = "../entity" } # depends on your needs
 ```
 
-Writes migration for the `post` entity, more on this in the next section.
+Let's write a migration. Detailed instructions in the next section.
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
+use entity::post::*;
 use sea_orm_migration::prelude::*;
 
 pub struct Migration;
@@ -137,44 +120,48 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    // ...
+                    .table(Entity)
+                    .if_not_exists()
+                    .col(
+                        ColumnDef::new(Column::Id)
+                            .integer()
+                            .not_null()
+                            .auto_increment()
+                            .primary_key(),
+                    )
+                    .col(ColumnDef::new(Column::Title).string().not_null())
+                    .col(ColumnDef::new(Column::Text).string().not_null())
                     .to_owned(),
             )
             .await
     }
 
+    // if you are against backward migrations, you do not have to impl this
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(
-                Table::drop()
-                    // ...
-                    .to_owned()
-            )
+            .drop_table(Table::drop().table(Entity).to_owned())
             .await
     }
 }
 ```
 
-### Core Crate
+### App Crate
 
-This is where you put the application logics.
+This is where you put the application logic.
 
-Creates a workspace that contains core, entity and migration crate and includes the entity and migration crate as well.
+Create a workspace that contains app, entity and migration crates and import the entity crate into the app crate.
 
-```toml title="Cargo.toml"
+If we want to bundle the migration utility as part of your app, you'd also want to import the migration crate.
+
+```toml title="./Cargo.toml"
 [workspace]
 members = [".", "entity", "migration"]
 
 [dependencies]
 entity = { path = "entity" }
-migration = { path = "migration" }
-```
+migration = { path = "migration" } # depends on your needs
 
-Uses the re-exported SeaORM and entities.
-
-```rust title="src/main.rs"
-use entity::sea_orm;
-
-pub use entity::post;
-pub use entity::post::Entity as Post;
+[dependencies.sea-orm]
+version = "^0"
+features = [ ... ]
 ```

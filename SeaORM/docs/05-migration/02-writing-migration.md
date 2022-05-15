@@ -4,7 +4,7 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migration File
 
-You can create migration by duplicating an existing migration file or using the template below. Remember to name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/trait.MigrationName.html#tymethod.name) method accordingly.
+You can create migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
@@ -54,7 +54,7 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-The [`SchemaManager`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/manager/struct.SchemaManager.html) helps you define migration in SeaQuery or in raw SQL
+The [`SchemaManager`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/manager/struct.SchemaManager.html) helps you define migration 
 
 ### SeaQuery
 
@@ -83,26 +83,10 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
         )
     ```
     <details>
-        <summary>If you don't have SeaORM entities defined?</summary>
+        <summary>You don't have SeaORM entities defined?</summary>
 
     ```rust
-    manager
-        .create_table(
-            Table::create()
-                .table(Post::Table)
-                .if_not_exists()
-                .col(
-                    ColumnDef::new(Post::Id)
-                        .integer()
-                        .not_null()
-                        .auto_increment()
-                        .primary_key(),
-                )
-                .col(ColumnDef::new(Post::Title).string().not_null())
-                .col(ColumnDef::new(Post::Text).string().not_null())
-                .to_owned()
-        )
-
+    // Define the identifiers using SeaQuery's `Iden` macro 
     #[derive(Iden)]
     pub enum Post {
         Table,
@@ -137,26 +121,6 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
                 .to_owned()
         )
     ```
-    <details>
-        <summary>If you don't have SeaORM entities defined?</summary>
-
-    ```rust
-    manager
-        .drop_table(
-            sea_query::Table::drop()
-                .table(Post::Table)
-                .to_owned()
-        )
-
-    #[derive(Iden)]
-    pub enum Post {
-        Table,
-        Id,
-        Title,
-        Text,
-    }
-    ```
-    </details>
 - Alter Table
     ```rust
     manager.alter_table(sea_query::Table::alter())
@@ -198,9 +162,9 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
 
 ### Raw SQL
 
-Besides, you can define migration in raw SQL.
+You can write migration files in raw SQL, but then you lost the cross-backend compatibility SeaQuery offers. 
 
-```rust
+```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm::Statement;
 use sea_orm_migration::prelude::*;
 
@@ -215,7 +179,11 @@ impl MigrationName for Migration {
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        let sql = "CREATE TABLE `cake` ( `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL )";
+        let sql = r#"
+        CREATE TABLE `cake` (
+            `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            `name` varchar(255) NOT NULL
+        )"#;
         let stmt = Statement::from_string(manager.get_database_backend(), sql.to_owned());
         manager.get_connection().execute(stmt).await.map(|_| ())
     }
@@ -227,3 +195,11 @@ impl MigrationTrait for Migration {
     }
 }
 ```
+
+## Schema first or Entity first?
+
+In the grand scheme of things, we recommend a schema first approach: you write migrations first and generate entities from a live database.
+
+At times, you might want to use the `create_*_from_entity` methods to bootstrap your database with several hand written entity files.
+
+That's perfectly fine if you intend to never change the entity schema. Or, you can clone the original entity and rely on it in the migration file.
