@@ -1,10 +1,10 @@
 # Running Migration
 
-After you have defined the migrations, you can apply or revert migrations in console or on application startup.
+After you have defined the migrations, you can apply or revert migrations in the terminal or on application startup.
 
 ## Command Line Interface (CLI)
 
-Running migration manually in console. You should set `DATABASE_URL` in your environment, follow the instruction [here](03-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
+Migrations can be run manually in the terminal. `DATABASE_URL` must be set in your environment, follow the instructions [here](03-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
 
 Supported commands:
 - `init`: Initialize migration directory
@@ -33,7 +33,7 @@ $ sea-orm-cli migrate COMMAND -d ./other/migration/dir
 
 ### Via SeaSchema Migrator CLI
 
-Runs migrator CLI defined in `migration/main.rs`.
+Run the migrator CLI defined in `migration/main.rs`.
 
 ```shell
 $ cd migration
@@ -42,7 +42,7 @@ $ cargo run -- COMMAND
 
 ## Migrating Programmatically
 
-Performs migration on application startup with `Migrator`, given that it implements [`MigratorTrait`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html).
+You can perform migration on application startup with `Migrator`, given that it implements the [`MigratorTrait`](https://docs.rs/sea-schema/0.5/sea_schema/migration/migrator/trait.MigratorTrait.html).
 
 ```rust title="src/main.rs"
 use migration::{Migrator, MigratorTrait};
