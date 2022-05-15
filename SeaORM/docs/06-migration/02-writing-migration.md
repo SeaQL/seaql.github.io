@@ -4,7 +4,7 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migration File
 
-You can create migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
+You can create migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
@@ -33,7 +33,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Also, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+Also, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
 
 ```rust title="migration/src/lib.rs"
 pub use sea_orm_migration::*;
@@ -54,11 +54,11 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-The [`SchemaManager`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/manager/struct.SchemaManager.html) helps you define migration 
+See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
 
 ### SeaQuery
 
-Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of SeaQuery.
+Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
 #### Schema Creation Methods
 - Create Table
@@ -198,7 +198,7 @@ impl MigrationTrait for Migration {
 
 ## Schema first or Entity first?
 
-In the grand scheme of things, we recommend a schema first approach: you write migrations first and generate entities from a live database.
+In the grand scheme of things, we recommend a schema first approach: you write migrations first and then generate entities from a live database.
 
 At times, you might want to use the `create_*_from_entity` methods to bootstrap your database with several hand written entity files.
 
