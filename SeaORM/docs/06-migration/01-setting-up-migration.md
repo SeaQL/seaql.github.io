@@ -158,3 +158,12 @@ migration = { path = "migration" } # depends on your needs
 version = "^0"
 features = [ ... ]
 ```
+
+In your app, you can then run the migrator on startup.
+
+```rust title="src/main.rs"
+use migration::{Migrator, MigratorTrait};
+
+let connection = sea_orm::Database::connect(&database_url).await?;
+Migrator::up(&connection, None).await?;
+```
