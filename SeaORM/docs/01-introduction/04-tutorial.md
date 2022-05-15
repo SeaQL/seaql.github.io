@@ -1,4 +1,4 @@
-# Tutorial
+# Tutorial & Examples
 
 If you prefer step-by-step tutorials on how to use SeaORM, you can checkout our [SeaORM Tutorials](https://www.sea-ql.org/sea-orm-tutorial/).
 
