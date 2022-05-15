@@ -4,49 +4,40 @@ You can generate SQL statement to create database tables with enum columns via t
 
 ## String & Integer Enum
 
-This is just an ordinary string / integer column in database table that maps to Rust enum, you can simply use the [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) method to construct a table create statement just like in the previous section.
+This is just an ordinary string / integer column that maps to a Rust enum. Example entity definition:
 
-Defining the `Entity` and enums.
+```rust title="active_enum.rs"
+use sea_orm::entity::prelude::*;
 
-```rust
-pub mod active_enum {
-    use sea_orm::entity::prelude::*;
-    
-    #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-    #[sea_orm(schema_name = "public", table_name = "active_enum")]
-    pub struct Model {
-        #[sea_orm(primary_key)]
-        pub id: i32,
-        pub category: Option<Category>,
-        pub color: Option<Color>,
-    }
-    
-    #[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
-    pub enum Category {
-        #[sea_orm(string_value = "B")]
-        Big,
-        #[sea_orm(string_value = "S")]
-        Small,
-    }
-    
-    #[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "i32", db_type = "Integer")]
-    pub enum Color {
-        #[sea_orm(num_value = 0)]
-        Black,
-        #[sea_orm(num_value = 1)]
-        White,
-    }
-    
-    #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-    pub enum Relation {}
-    
-    impl ActiveModelBehavior for ActiveModel {}
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(schema_name = "public", table_name = "active_enum")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub category: Option<Category>,
+    pub color: Option<Color>,
+}
+
+#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+pub enum Category {
+    #[sea_orm(string_value = "B")]
+    Big,
+    #[sea_orm(string_value = "S")]
+    Small,
+}
+
+#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "i32", db_type = "Integer")]
+pub enum Color {
+    #[sea_orm(num_value = 0)]
+    Black,
+    #[sea_orm(num_value = 1)]
+    White,
 }
 ```
 
-Generating [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) from `Entity`.
+As an illustration, the enums are just ordinary database columns.
 
 ```rust
 use sea_orm::{sea_query, Schema};
@@ -75,43 +66,38 @@ assert_eq!(
 
 ## Native Database Enum
 
-The enum support are different across databases. We will explain the creation of native database enum for each databases one by one.
+Enum support is different across databases. Let's go through them one-by-one.
 
-Defining the `Entity` and enums.
+Consider the following entity:
 
-```rust
-pub mod active_enum {
-    use sea_orm::entity::prelude::*;
-    
-    #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-    #[sea_orm(schema_name = "public", table_name = "active_enum")]
-    pub struct Model {
-        #[sea_orm(primary_key)]
-        pub id: i32,
-        pub tea: Option<Tea>,
-    }
-    
-    #[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
-    pub enum Tea {
-        #[sea_orm(string_value = "EverydayTea")]
-        EverydayTea,
-        #[sea_orm(string_value = "BreakfastTea")]
-        BreakfastTea,
-    }
-    
-    #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-    pub enum Relation {}
-    
-    impl ActiveModelBehavior for ActiveModel {}
+```rust title="active_enum.rs"
+use sea_orm::entity::prelude::*;
+
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(schema_name = "public", table_name = "active_enum")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub tea: Option<Tea>,
+}
+
+#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+pub enum Tea {
+    #[sea_orm(string_value = "EverydayTea")]
+    EverydayTea,
+    #[sea_orm(string_value = "BreakfastTea")]
+    BreakfastTea,
 }
 ```
 
+Note the `db_type` and extra `enum_name` attributes.
+
 ### PostgreSQL
 
-Enum in PostgreSQL is defined as a custom type, it can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+Enums in PostgreSQL are defined by [TypeCreateStatement](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
 
-You can also create it directly from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
+You can also create it from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -156,7 +142,7 @@ assert_eq!(
 
 ### MySQL
 
-In MySQL, enum is defined on table creation so you only need the [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) method.
+In MySQL, enum is defined on table creation so you only need to call [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) once.
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -190,7 +176,7 @@ let db_sqlite = DbBackend::Sqlite;
 let schema = Schema::new(db_sqlite);
 
 assert_eq!(
-    db_sqlite.build(&schema.create_table_from_entity(active_enum::Entity)),
+    db_sqlite.build(&schema.create_enum_from_entity(active_enum::Entity)),
     Statement::from_string(
         db_sqlite,
         vec![
