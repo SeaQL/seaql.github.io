@@ -330,4 +330,4 @@ Here is the roadmap for SeaORM [`0.9.x`](https://github.com/SeaQL/sea-orm/milest
 
 ## GSoC 2022
 
-We are super excited to be selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql). The application is now closed, but the program is about to start! If you have thoughts over how we are going to implement the [project ideas](https://github.com/SeaQL/summer-of-code/tree/main/2022), feel free to participant in the discussion.
+We are super excited to be selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql). The application is now closed, but the program is about to start! If you have thoughts over how we are going to implement the [project ideas](https://github.com/SeaQL/summer-of-code/tree/main/2022), feel free to participate in the discussion.
