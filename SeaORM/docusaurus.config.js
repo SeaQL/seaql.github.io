@@ -105,12 +105,12 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'About Us',
-              to: '/about-us',
-            },
-            {
               label: 'Blog',
               to: '/blog',
+            },
+            {
+              label: 'About Us',
+              to: '/about-us',
             },
             {
               label: 'StarfishQL',
