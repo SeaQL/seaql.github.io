@@ -67,8 +67,6 @@ export default function HomepageProducts() {
           <div className="col col--12">
             <br/>
             <p className="text--center">
-              SeaORM is the foundation of <a href="https://github.com/SeaQL/starfish-ql" target="_blank">StarfishQL</a>, an experimental graph database and query engine developed by SeaQL.
-              <br/>
               For more projects, see <a href="https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#built-with-seaorm" target="_blank">Built with SeaORM</a>.
             </p>
           </div>
