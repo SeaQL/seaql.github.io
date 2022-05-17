@@ -6,6 +6,7 @@ import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageCompare from '../components/HomepageCompare';
 import HomepageExample from '../components/HomepageExample';
+import HomepageProducts from '../components/HomepageProducts';
 import HomepageMascot from '../components/HomepageMascot';
 
 function HomepageHeader() {
@@ -38,6 +39,7 @@ export default function Home() {
         <HomepageFeatures />
         <HomepageCompare />
         <HomepageExample />
+        <HomepageProducts />
         <HomepageMascot />
       </main>
     </Layout>
