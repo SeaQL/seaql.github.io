@@ -24,16 +24,16 @@ This is our first year to be part of GSoC. We have received two slots this year 
             </a>
             <div class="avatar__intro">
                 <div class="avatar__name">
-                    Kirawi
+                    Shafkath Shuhan
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-Hello, my name is Shafkath Shuhan and I'm a senior high school student from NYC. I've always had an interest in computer science, and Rust has been a game changer for its amazing packaging system, compile-time guarantees, and most importantly its helpful community. My GitHub profile is https://github.com/kirawi.
+Hello, my name is Shafkath Shuhan and I'm a senior high school student from NYC. I've always had an interest in computer science, and Rust has been a game changer for its amazing packaging system, compile-time guarantees, and most importantly its helpful community.
 
-I'll be working on a feature-gated runtime linter to validate the correctness of code dependent upon SeaORM, and add many tests to test this functionality. It will be implemented with extensibility in mind. My initial design is described in https://github.com/SeaQL/summer-of-code/discussions/13.
+I'll be working on a feature-gated runtime linter to validate the correctness of code dependent upon SeaORM. My initial design is described in a [discussion](https://github.com/SeaQL/summer-of-code/discussions/13) with extensibility in mind.
 
 ### Support TiDB in the SeaQL Ecosystem
 
@@ -45,20 +45,18 @@ I'll be working on a feature-gated runtime linter to validate the correctness of
             </a>
             <div class="avatar__intro">
                 <div class="avatar__name">
-                    Yuang XU
+                    Yuang Xu
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-My name is Yuang Xu, I live in Shanghai, China (UTC +8), I am a senior student at Shandong University, China, majoring in Computer and Science Technology. During my university years, I participated in open source projects many times, and once participated in the Tencent open-source Kona JDK project.
-I like to explore some new knowledge, such as the database. I am fortunate to participate in the development of the SeaQL project. Recently in China, some of my friends and I also organized a small open source community exchange platform, hoping that more people can join the open-source family.
-I like to make friends. If you can work together to do something interesting, remember to call me！
-My Github profile is https://github.com/itwaiX.
+My name is Yuang Xu, I live in Shanghai, China, I'm a senior student at Shandong University, China, majoring in Computer and Science Technology. During my university years, I participated in open-source projects many times, and once participated in the Tencent open-source Kona JDK project.
 
-I'll be working to support TiDB in the SeaQL ecosystem. The overall concept of the project is divided into two parts because TiDB and MySQL have many compatible parts. This part is integrated with the general part. The unique parts, such as cluster monitoring and other interfaces, build a complete system for operation.
-Glad to learn with you all, SO let's start this pleasant journey!
+I like to explore new knowledge, such as the database. I'm fortunate to participate in the development of the SeaQL project. Recently in China, some of my friends and I also organized a small open-source community exchange platform, hoping that more people can join the open-source family. I like to make friends. If you can work together to do something interesting, remember to call me！
+
+I'll be working on the support of TiDB in the SeaQL ecosystem. The overall concept of the project is divided in half as TiDB and MySQL are mostly compatible. The first half, focus on integrating with the compatible features. The second half, supporting unique features available to TiDB including cluster monitoring and interfaces that is essential for production environment.
 
 ## Projects of SeaQL Summer of Code 2022
 
@@ -81,11 +79,14 @@ There are many more vibrant contributors we want to mentor but we only received 
     </div>
 </div>
 
-I am Panagiotis, I live in Athens Greece (GMT+3 DST) and currently I pursue my second bachelors on economic sciences. My first bachelors was on computer science and I have a great passion on studying and implementing enterprise software solutions . I know rust the last year and I used it almost daily for a small startup project that me and my friends build for a startup competition. The reasons we chose rust was 1) protects you from forgetting edge cases, 2) easy to express business logic without errors, 3) you can open old code (months old) and refactor it without fear, 4) the low memory footprint.
+I'm Panagiotis, I live in Athens Greece and currently I pursue my second bachelors on economic sciences. My first bachelors was on computer science and I've a great passion on studying and implementing enterprise software solutions. I know Rust the last year and I used it almost daily for a small startup project that me and my friends build for a startup competition. The reasons we chose Rust was:
 
-I will be working on creating a cli tool that will explore a database schema and then generate a ready to build async_graphql api. The tool will allow quick integration with the Sea and Rust ecosystems as well as GraphQL. To be more specific, for database exploring I will use sea_schema and for entity generation sea_codegen, my job is to glue those together with async_graphql library. You can read more here https://github.com/SeaQL/summer-of-code/discussions/12, but the initial design is outdated.
+1. Protect you from forgetting edge cases
+2. Express business logic without errors
+3. Open (months) old code and refactor it without fear
+4. Low memory footprint
 
-I wish everyone a good start 🙂
+I'll be working on creating a CLI tool that will explore a database schema and then generate a ready to build `async-graphql` API. The tool will allow quick integration with the SeaQL and Rust ecosystems as well as GraphQL. To be more specific, for database exploring I'll use `sea-schema` and `sea-orm-codegen` for entity generation, my job is to glue those together with `async-graphql` library. You can read more [here](https://github.com/SeaQL/summer-of-code/discussions/12), but the initial design is outdated.
 
 ### SQL Interpreter for Mock Testing
 
@@ -104,16 +105,14 @@ I wish everyone a good start 🙂
     </div>
 </div>
 
-Hi. Thank you so much for this opportunity! I'm looking forward to building and learning with you all 😄 
+I'm Samyak Sarnayak, a final year Computer Science student from Bangalore, India. I started learning Rust around 6-7 months ago and it feels like I have found the perfect language for me :D. It does not have a runtime, has a great type system, really good compiler errors, good tooling, some functional programming patterns and metaprogramming. You can find more about me on my GitHub profile.
 
-I'm Samyak Sarnayak, a final year Computer Science student from Bangalore, India. I started learning Rust around 6-7 months ago and it feels like I have found the perfect language for me :D. It does not have a runtime, has a great type system, really good compiler errors, good tooling, some functional programming patterns and metaprogramming. You can find more about me on my GitHub: https://github.com/Samyak2.
-
-I'll be working on a new SQL interpreter for mock testing. This will be built specifically for testing and so the emphasis will be on correctness - it can be slow but the operations must always be correct. I'm hoping to build a working version of this and integrate it into the existing tests of SeaORM. Here is the discussion thread for this project: https://github.com/SeaQL/summer-of-code/discussions/11 (admittedly, I haven't been able to work on it in the last few weeks as I'm wrapping up my college work).
+I'll be working on a new SQL interpreter for mock testing. This will be built specifically for testing and so the emphasis will be on correctness - it can be slow but the operations must always be correct. I'm hoping to build a working version of this and integrate it into the existing tests of SeaORM. Here is the [discussion](https://github.com/SeaQL/summer-of-code/discussions/11) for this project.
 
 ## Mentors
 
 <div class="row">
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--12 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo" href="https://github.com/tyt2y3">
                 <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
@@ -125,7 +124,10 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+</div>
+
+<div class="row">
+    <div class="col col--12 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo" href="https://github.com/billy1624">
                 <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
@@ -133,6 +135,21 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
             <div class="avatar__intro">
                 <div class="avatar__name">
                     Billy Chan
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo" href="https://github.com/shpun817">
+                <img src="https://avatars.githubusercontent.com/u/47468266?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Sanford Pun
                 </div>
             </div>
         </div>
