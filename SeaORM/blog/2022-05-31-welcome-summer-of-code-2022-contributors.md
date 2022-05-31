@@ -143,6 +143,12 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
     </div>
 </div>
 
+Hey, this is Billy from Hong Kong. I've been using open-source libraries ever since I started coding but it's until 2020, I dedicated myself to be Rust open-source developer.
+
+I was also a full-stack developer specialized in formulating requirement specifications for user interfaces and database structures, implementing and testing both frontend and backend from ground up, finally releasing the MVP for production and maintaining it for years to come.
+
+I enjoy working with Rustaceans across the globe, building a better and sustainable ecosystem for Rust community. If you like what we do, consider starring, commenting, sharing and contributing, it would be much appreciated.
+
 <br/>
 
 <div class="row">
