@@ -86,7 +86,24 @@ Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick to
         <summary>You don't have SeaORM entities defined?</summary>
 
     ```rust
-    // Define the identifiers using SeaQuery's `Iden` macro 
+    manager
+        .create_table(
+            Table::create()
+                .table(Post::Table)
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(Post::Id)
+                        .integer()
+                        .not_null()
+                        .auto_increment()
+                        .primary_key(),
+                )
+                .col(ColumnDef::new(Post::Title).string().not_null())
+                .col(ColumnDef::new(Post::Text).string().not_null())
+                .to_owned()
+        )
+
+    // Define the identifiers using SeaQuery's `Iden` macro
     #[derive(Iden)]
     pub enum Post {
         Table,

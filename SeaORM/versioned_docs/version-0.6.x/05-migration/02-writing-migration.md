@@ -103,6 +103,7 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
                 .to_owned()
         )
 
+    // Define the identifiers using SeaQuery's `Iden` macro
     #[derive(Iden)]
     pub enum Post {
         Table,
@@ -148,6 +149,7 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
                 .to_owned()
         )
 
+    // Define the identifiers using SeaQuery's `Iden` macro
     #[derive(Iden)]
     pub enum Post {
         Table,
