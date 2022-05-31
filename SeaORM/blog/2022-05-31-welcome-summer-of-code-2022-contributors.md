@@ -12,7 +12,7 @@ We are thrilled to announce that we will mentor four contributors this summer! T
 
 ## Projects of Google Summer of Code 2022
 
-This is our first year to be part of GSoC. We have received two slots this year from Google. We will be mentoring following GSoC projects:
+This is our first year to be part of GSoC. We have received two slots this year from Google. We will be mentoring the following GSoC projects:
 
 ### Query Linter for SeaORM
 
@@ -60,7 +60,7 @@ I'll be working on the support of TiDB in the SeaQL ecosystem. The overall conce
 
 ## Projects of SeaQL Summer of Code 2022
 
-There are many more vibrant contributors we want to mentor but we only received two slots from Google. That is why we, SeaQL foundation, utilizes our own fund and offers two more slots under SSoC internship program.
+There are many more vibrant contributors we want to mentor but we only received two slots from Google. That is why we, the SeaQL foundation, are utilizing our own funding to offer two more slots under the SSoC internship program.
 
 ### A GraphQL Framework on Top of SeaORM
 
@@ -166,8 +166,12 @@ I enjoy working with Rustaceans across the globe, building a better and sustaina
     </div>
 </div>
 
+I'm Sanford, an enthusiastic software engineer who enjoys problem-solving! I've worked on Rust for a couple of years now. During my early days with Rust, I focused more on the field of graphics/image processing, where I fell in love with what the language has to offer! This year, I've been exploring data engineering in the StarfishQL project.
+
+A toast to the endless potential of Rust!
+
 ## Community
 
-Contributors and members in the community are encourage to know each other and help new contributors to get up to speed during the community bonding period from May 20 to June 12, before starting to code on June 13.
+Contributors and members in the community are encouraged to get to know each other and help new contributors get up to speed during the community bonding period from May 20 to June 12, before starting to code on June 13.
 
-If you are interested in the projects please subscribe to [SeaQL/summer-of-code](https://github.com/SeaQL/summer-of-code) repository on GitHub and join us on [Discord server](https://discord.com/invite/uCPdDXzbdv).
+If you are interested in the projects, please subscribe to the [SeaQL/summer-of-code](https://github.com/SeaQL/summer-of-code) repository on GitHub and join us on our [Discord server](https://discord.com/invite/uCPdDXzbdv).
