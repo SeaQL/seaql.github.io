@@ -126,6 +126,8 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
     </div>
 </div>
 
+<br/>
+
 <div class="row">
     <div class="col col--12 margin-bottom--md">
         <div class="avatar">
@@ -140,6 +142,8 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
         </div>
     </div>
 </div>
+
+<br/>
 
 <div class="row">
     <div class="col col--12 margin-bottom--md">
