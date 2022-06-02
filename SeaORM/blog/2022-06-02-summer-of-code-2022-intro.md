@@ -1,5 +1,5 @@
 ---
-slug: welcome-summer-of-code-2022-contributors
+slug: 2022-06-02-summer-of-code-2022-intro
 title: Welcome Summer of Code 2022 Contributors
 author: SeaQL Team
 author_title: Chris Tsang
@@ -8,32 +8,28 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-We are thrilled to announce that we will mentor four contributors this summer! Two Google Summer of Code ([GSoC](https://summerofcode.withgoogle.com/)) contributors and two SeaQL Summer of Code ([SSoC](https://github.com/SeaQL/summer-of-code)) contributors.
+We are thrilled to announce that we will bring in four contributors this summer! Two of them are sponsored by Google while two of them are sponsored by SeaQL.
 
-## Projects of Google Summer of Code 2022
-
-This is our first year to be part of GSoC. We have received two slots this year from Google. We will be mentoring the following GSoC projects:
-
-### Query Linter for SeaORM
+### A GraphQL Framework on Top of SeaORM
 
 <div class="row">
     <div class="col col--12 margin-bottom--md">
         <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/kirawi">
-                <img src="https://avatars.githubusercontent.com/u/67773714?v=4" />
+            <a class="avatar__photo-link avatar__photo" href="https://github.com/karatakis">
+                <img src="https://avatars.githubusercontent.com/u/7329022?v=4" />
             </a>
             <div class="avatar__intro">
                 <div class="avatar__name">
-                    Shafkath Shuhan
+                    Panagiotis Karatakis
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-Hello, my name is Shafkath Shuhan and I'm a senior high school student from NYC. I've always had an interest in computer science, and Rust has been a game changer for its amazing packaging system, compile-time guarantees, and most importantly its helpful community.
+I'm Panagiotis, I live in Athens Greece and currently I pursue my second bachelors on economic sciences. My first bachelors was on computer science and I've a great passion on studying and implementing enterprise software solutions. I know Rust the last year and I used it almost daily for a small startup project that me and my friends build for a startup competition.
 
-I'll be working on a feature-gated runtime linter to validate the correctness of code dependent upon SeaORM. My initial design is described in a [discussion](https://github.com/SeaQL/summer-of-code/discussions/13) with extensibility in mind.
+I'll be working on creating a CLI tool that will explore a database schema and then generate a ready to build `async-graphql` API. The tool will allow quick integration with the SeaQL and Rust ecosystems as well as GraphQL. To be more specific, for database exploring I'll use `sea-schema` and `sea-orm-codegen` for entity generation, my job is to glue those together with `async-graphql` library. You can read more [here](https://github.com/SeaQL/summer-of-code/discussions/12).
 
 ### Support TiDB in the SeaQL Ecosystem
 
@@ -54,39 +50,28 @@ I'll be working on a feature-gated runtime linter to validate the correctness of
 
 My name is Yuang Xu, I live in Shanghai, China, I'm a senior student at Shandong University, China, majoring in Computer and Science Technology. During my university years, I participated in open-source projects many times, and once participated in the Tencent open-source Kona JDK project.
 
-I like to explore new knowledge, such as the database. I'm fortunate to participate in the development of the SeaQL project. Recently in China, some of my friends and I also organized a small open-source community exchange platform, hoping that more people can join the open-source family. I like to make friends. If you can work together to do something interesting, remember to call me！
-
 I'll be working on the support of TiDB in the SeaQL ecosystem. The overall concept of the project is divided in half as TiDB and MySQL are mostly compatible. The first half, focus on integrating with the compatible features. The second half, supporting unique features available to TiDB including cluster monitoring and interfaces that is essential for production environment.
 
-## Projects of SeaQL Summer of Code 2022
-
-There are many more vibrant contributors we want to mentor but we only received two slots from Google. That is why we, the SeaQL foundation, are utilizing our own funding to offer two more slots under the SSoC internship program.
-
-### A GraphQL Framework on Top of SeaORM
+### Query Linter for SeaORM
 
 <div class="row">
     <div class="col col--12 margin-bottom--md">
         <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/karatakis">
-                <img src="https://avatars.githubusercontent.com/u/7329022?v=4" />
+            <a class="avatar__photo-link avatar__photo" href="https://github.com/kirawi">
+                <img src="https://avatars.githubusercontent.com/u/67773714?v=4" />
             </a>
             <div class="avatar__intro">
                 <div class="avatar__name">
-                    Panagiotis Karatakis
+                    Shafkath Shuhan
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-I'm Panagiotis, I live in Athens Greece and currently I pursue my second bachelors on economic sciences. My first bachelors was on computer science and I've a great passion on studying and implementing enterprise software solutions. I know Rust the last year and I used it almost daily for a small startup project that me and my friends build for a startup competition. The reasons we chose Rust was:
+Hello, my name is Shafkath Shuhan and I'm a senior high school student from NYC. I've always had an interest in computer science, and Rust has been a game changer for its amazing packaging system, compile-time guarantees, and most importantly its helpful community.
 
-1. Protect you from forgetting edge cases
-2. Express business logic without errors
-3. Open (months) old code and refactor it without fear
-4. Low memory footprint
-
-I'll be working on creating a CLI tool that will explore a database schema and then generate a ready to build `async-graphql` API. The tool will allow quick integration with the SeaQL and Rust ecosystems as well as GraphQL. To be more specific, for database exploring I'll use `sea-schema` and `sea-orm-codegen` for entity generation, my job is to glue those together with `async-graphql` library. You can read more [here](https://github.com/SeaQL/summer-of-code/discussions/12), but the initial design is outdated.
+I'll be working on a feature-gated runtime linter to validate the correctness of SQL queries upon SeaORM. My initial design is described in a [discussion](https://github.com/SeaQL/summer-of-code/discussions/13) with extensibility in mind.
 
 ### SQL Interpreter for Mock Testing
 
@@ -126,6 +111,10 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
     </div>
 </div>
 
+I am a strong believer in open source. I started my GitHub journey 10 years ago, when I published my first programming library. I had been looking for a programming language with speed, ergonomic and expressiveness. Until I found Rust.
+
+Seeing a niche and demand, I founded SeaQL in 2020 and have been leading the development and maintaining the libraries since then.
+
 <br/>
 
 <div class="row">
@@ -143,7 +132,7 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
     </div>
 </div>
 
-Hey, this is Billy from Hong Kong. I've been using open-source libraries ever since I started coding but it's until 2020, I dedicated myself to be Rust open-source developer.
+Hey, this is Billy from Hong Kong. I've been using open-source libraries ever since I started coding but it's until 2020, I dedicated myself to be a Rust open-source developer.
 
 I was also a full-stack developer specialized in formulating requirement specifications for user interfaces and database structures, implementing and testing both frontend and backend from ground up, finally releasing the MVP for production and maintaining it for years to come.
 
@@ -172,6 +161,4 @@ A toast to the endless potential of Rust!
 
 ## Community
 
-Contributors and members in the community are encouraged to get to know each other and help new contributors get up to speed during the community bonding period from May 20 to June 12, before starting to code on June 13.
-
-If you are interested in the projects, please subscribe to the [SeaQL/summer-of-code](https://github.com/SeaQL/summer-of-code) repository on GitHub and join us on our [Discord server](https://discord.com/invite/uCPdDXzbdv).
+If you are interested in the projects and want to share your thoughts, please star and watch the [SeaQL/summer-of-code](https://github.com/SeaQL/summer-of-code) repository on GitHub and join us on our [Discord server](https://discord.com/invite/uCPdDXzbdv)!
