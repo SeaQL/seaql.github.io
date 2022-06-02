@@ -113,7 +113,7 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
 
 I am a strong believer in open source. I started my GitHub journey 10 years ago, when I published my first programming library. I had been looking for a programming language with speed, ergonomic and expressiveness. Until I found Rust.
 
-Seeing a niche and demand, I founded SeaQL in 2020 and have been leading the development and maintaining the libraries since then.
+Seeing a niche and demand for data engineering tools in the Rust ecosystem, I founded SeaQL in 2020 and have been leading the development and maintaining the libraries since then.
 
 <br/>
 
