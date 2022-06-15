@@ -78,17 +78,15 @@
               {themeMode === 'dark' ? <i class="fa-solid fa-sun"></i> : <i class="fa-solid fa-moon"></i>}
             </IconButton>
           </Box>
-          <Container maxWidth="lg" style={{ minHeight: '100vh' }}>
+          <Container maxWidth="false" style={{ padding: '48px' }}>
             <p style={{ textAlign: 'center', margin: '0' }}>
               <img src="SeaQL logo.png" width="300px" height="300px" />
             </p>
             <Typography variant="h5" component="h1" align="center" gutterBottom>
               Building data intensive applications in Rust
             </Typography>
-            <br />
-            <br />
-            <br />
-            <br />
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={4}>
                 <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
@@ -127,10 +125,8 @@
                 </Card>
               </Grid>
             </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
@@ -150,7 +146,7 @@
                     <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                       A relational ORM to help you build web services in Rust with the familiarity of dynamic languages.
                     </Typography>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Chip
                         label="GitHub"
                         component="a"
@@ -169,6 +165,9 @@
                         sx={{ marginTop: '10px', marginRight: '10px' }}
                         clickable
                       />
+                      <a href="https://github.com/SeaQL/sea-orm/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1" height="22px" />
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
@@ -183,7 +182,7 @@
                     <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                       A query builder to help you construct dynamic SQL queries in Rust.
                     </Typography>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Chip
                         label="GitHub"
                         component="a"
@@ -202,6 +201,9 @@
                         sx={{ marginTop: '10px', marginRight: '10px' }}
                         clickable
                       />
+                      <a href="https://github.com/SeaQL/sea-query/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-query.svg?style=social&label=Star&maxAge=1" height="22px" />
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
@@ -216,7 +218,7 @@
                     <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                       A library to help you manage database schema.
                     </Typography>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Chip
                         label="GitHub"
                         component="a"
@@ -235,6 +237,9 @@
                         sx={{ marginTop: '10px', marginRight: '10px' }}
                         clickable
                       />
+                      <a href="https://github.com/SeaQL/sea-schema/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-schema.svg?style=social&label=Star&maxAge=1" height="22px" />
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
@@ -249,7 +254,7 @@
                     <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                       A graph database and query engine to enable graph analysis and visualization on the web.
                     </Typography>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Chip
                         label="GitHub"
                         component="a"
@@ -268,15 +273,16 @@
                         sx={{ marginTop: '10px', marginRight: '10px' }}
                         clickable
                       />
+                      <a href="https://github.com/SeaQL/starfish-ql/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/starfish-ql.svg?style=social&label=Star&maxAge=1" height="22px" />
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
               </Grid>
             </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3} style={{ justifyContent: 'center' }}>
               <Grid item xs={12}>
                 <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
@@ -291,7 +297,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/Sytten" underline="hover">
-                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/2366731?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/2366731?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Émile Fugulin
@@ -299,7 +305,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/exzachlyvv" underline="hover">
-                  <Avatar alt="Zachary Vander Velden" src="https://avatars.githubusercontent.com/u/46034847?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Zachary Vander Velden" src="https://avatars.githubusercontent.com/u/46034847?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Zachary Vander Velden
@@ -307,7 +313,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/deansheather" underline="hover">
-                  <Avatar alt="Dean Sheather" src="https://avatars.githubusercontent.com/u/11241812?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Dean Sheather" src="https://avatars.githubusercontent.com/u/11241812?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Dean Sheather
@@ -315,7 +321,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/shanesveller" underline="hover">
-                  <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/831?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/831?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Shane Sveller
@@ -323,7 +329,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/fabioluciano" underline="hover">
-                  <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/499057?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/499057?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Fábio Luciano
@@ -331,7 +337,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/sakti" underline="hover">
-                  <Avatar alt="Sakti Dwi Cahyono" src="https://avatars.githubusercontent.com/u/196178?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Sakti Dwi Cahyono" src="https://avatars.githubusercontent.com/u/196178?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Sakti Dwi Cahyono
@@ -339,17 +345,15 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link underline="hover">
-                  <Avatar alt="Unnamed Sponsor" src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Unnamed Sponsor" src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Unnamed Sponsor
                 </Typography>
               </Grid>
             </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3} style={{ justifyContent: 'center' }}>
               <Grid item xs={12}>
                 <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
@@ -358,7 +362,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/tyt2y3" underline="hover">
-                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/1782664?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/1782664?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Chris Tsang
@@ -366,7 +370,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/ikrivosheev" underline="hover">
-                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/6786239?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/6786239?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Ivan Krivosheev
@@ -374,7 +378,7 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/billy1624" underline="hover">
-                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/30400950?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/30400950?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Billy Chan
@@ -382,17 +386,15 @@
               </Grid>
               <Grid item xs={12} sm={6} md={3} style={{ display: 'flex', alignItems: 'center' }}>
                 <Link href="https://github.com/shpun817" underline="hover">
-                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/47468266?v=4" sx={{ width: 60, height: 60, marginRight: 2 }} />
+                  <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/47468266?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Sanford Pun
                 </Typography>
               </Grid>
             </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
@@ -403,16 +405,13 @@
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Your participation is what makes us unique; your adoption is what drives us forward. Thank you all in the Rust community for making SeaQL what it is today. You are also invited to shape it's future!
                 </Typography>
+                <br />
                 <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
                 <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
                   Please star our repos! Every ⭐ counts!
                 </Typography>
               </Grid>
             </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
           </Container>
           <Paper
             elevation={10}
