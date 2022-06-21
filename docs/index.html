@@ -3,8 +3,16 @@
 
 <head>
   <title>SeaQL - Building data intensive applications in Rust</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta data-react-helmet="true" property="og:title" content="SeaQL - Building data intensive applications in Rust">
+  <meta data-react-helmet="true" name="twitter:card" content="summary_large_image">
+  <meta data-react-helmet="true" property="og:image" content="https://www.sea-ql.org/SeaQL logo.png">
+  <meta data-react-helmet="true" name="twitter:image" content="https://www.sea-ql.org/SeaQL logo.png">
+  <meta data-react-helmet="true" name="description" content="We help developers in building data intensive applications in Rust, whether they are web services (GraphQL, gRPC, REST), command line tools or apps.">
+  <meta data-react-helmet="true" property="og:description" content="We help developers in building data intensive applications in Rust, whether they are web services (GraphQL, gRPC, REST), command line tools or apps.">
+  <meta data-react-helmet="true" property="og:url" content="https://www.sea-ql.org">
+  <meta data-react-helmet="true" name="keywords" content="rust, orm, SeaORM, SeaQuery, SeaSchema, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, actix, async-std">
   <script src="https://unpkg.com/react@latest/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@latest/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.production.min.js"></script>
@@ -61,6 +69,9 @@
         palette: {
           mode: themeMode,
         },
+        typography: {
+          fontSize: 16,
+        },
       });
 
       return (
@@ -88,48 +99,56 @@
           </Container>
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
-              <Grid item xs={12} md={4}>
-                <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
-                  <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
-                      Our Mission
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '16px', textAlign: 'center' }}>
-                      In the long term, we want to support all open source SQL, NewSQL and NoSQL databases, providing a uniform developer experience to data analytics, transaction processing, schema management and other data engineering work.
-                    </Typography>
-                  </CardContent>
-                </Card>
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
+                  Our Mission
+                </Typography>
               </Grid>
-              <Grid item xs={12} md={4}>
-                <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
-                  <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
-                      Our Vision
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '16px', textAlign: 'center' }}>
-                      We help developers in building data intensive applications in Rust, whether they are web services (GraphQL, gRPC, REST), command line tools or apps.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
-                  <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
-                      Our Values
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '16px', textAlign: 'center' }}>
-                      Community driven. Embrace the async Rust ecosystem. Welcome developers from other languages.
-                    </Typography>
-                  </CardContent>
-                </Card>
+            </Grid>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography variant="body1">
+                  In the long term, we want to support all open source SQL, NewSQL and NoSQL databases, providing a uniform developer experience to data analytics, transaction processing, schema management and other data engineering work.
+                </Typography>
               </Grid>
             </Grid>
           </Container>
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
+                  Our Vision
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography variant="body1">
+                  We help developers in building data intensive applications in Rust, whether they are web services (GraphQL, gRPC, REST), command line tools or apps.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
+                  Our Values
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography variant="body1">
+                  Community driven. Embrace the async Rust ecosystem. Welcome developers from other languages.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Container>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
                   Our Projects
                 </Typography>
               </Grid>
@@ -139,11 +158,11 @@
               <Grid item xs={12} md={6}>
                 <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
                   <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold' }} gutterBottom>
+                    <Typography variant="h5" component="h3" align="center" sx={{ fontWeight: 600 }} gutterBottom>
                       <span style={{ color: '#2468da' }}>Sea</span>
                       <span style={{ color: '#fa8023' }}>ORM</span>
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{  textAlign: 'center' }}>
                       A relational ORM to help you build web services in Rust with the familiarity of dynamic languages.
                     </Typography>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -175,11 +194,11 @@
               <Grid item xs={12} md={6}>
                 <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
                   <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold' }} gutterBottom>
+                    <Typography variant="h5" component="h3" align="center" sx={{ fontWeight: 600 }} gutterBottom>
                       <span style={{ color: '#2468da' }}>Sea</span>
                       <span style={{ color: '#fa8023' }}>Query</span>
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{  textAlign: 'center' }}>
                       A query builder to help you construct dynamic SQL queries in Rust.
                     </Typography>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -211,11 +230,11 @@
               <Grid item xs={12} md={6}>
                 <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
                   <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold' }} gutterBottom>
+                    <Typography variant="h5" component="h3" align="center" sx={{ fontWeight: 600 }} gutterBottom>
                       <span style={{ color: '#2468da' }}>Sea</span>
                       <span style={{ color: '#fa8023' }}>Schema</span>
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{  textAlign: 'center' }}>
                       A library to help you manage database schema.
                     </Typography>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -247,11 +266,11 @@
               <Grid item xs={12} md={6}>
                 <Card variant="elevation" elevation={3} style={{ height: '100%' }}>
                   <CardContent>
-                    <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold' }} gutterBottom>
+                    <Typography variant="h5" component="h3" align="center" sx={{ fontWeight: 600 }} gutterBottom>
                       <span style={{ color: '#2468da' }}>Starfish</span>
                       <span style={{ color: '#fa8023' }}>QL</span>
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{  textAlign: 'center' }}>
                       A graph database and query engine to enable graph analysis and visualization on the web.
                     </Typography>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -285,12 +304,12 @@
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3} style={{ justifyContent: 'center' }}>
               <Grid item xs={12}>
-                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
                   Our Sponsors
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ textAlign: 'center' }}>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Our <Link href="https://github.com/sponsors/SeaQL" underline="hover">GitHub Sponsor</Link> profile is up! If you feel generous, a small donation will be greatly appreciated.<br />
                   A big shout out to our sponsors 😇:
                 </Typography>
@@ -299,7 +318,7 @@
                 <Link href="https://github.com/Sytten" underline="hover">
                   <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/2366731?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Émile Fugulin
                 </Typography>
               </Grid>
@@ -307,7 +326,7 @@
                 <Link href="https://github.com/exzachlyvv" underline="hover">
                   <Avatar alt="Zachary Vander Velden" src="https://avatars.githubusercontent.com/u/46034847?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Zachary Vander Velden
                 </Typography>
               </Grid>
@@ -315,7 +334,7 @@
                 <Link href="https://github.com/deansheather" underline="hover">
                   <Avatar alt="Dean Sheather" src="https://avatars.githubusercontent.com/u/11241812?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Dean Sheather
                 </Typography>
               </Grid>
@@ -323,7 +342,7 @@
                 <Link href="https://github.com/shanesveller" underline="hover">
                   <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/831?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Shane Sveller
                 </Typography>
               </Grid>
@@ -331,7 +350,7 @@
                 <Link href="https://github.com/fabioluciano" underline="hover">
                   <Avatar alt="Shane Sveller" src="https://avatars.githubusercontent.com/u/499057?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Fábio Luciano
                 </Typography>
               </Grid>
@@ -339,7 +358,7 @@
                 <Link href="https://github.com/sakti" underline="hover">
                   <Avatar alt="Sakti Dwi Cahyono" src="https://avatars.githubusercontent.com/u/196178?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Sakti Dwi Cahyono
                 </Typography>
               </Grid>
@@ -347,7 +366,7 @@
                 <Link underline="hover">
                   <Avatar alt="Unnamed Sponsor" src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Unnamed Sponsor
                 </Typography>
               </Grid>
@@ -356,7 +375,7 @@
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3} style={{ justifyContent: 'center' }}>
               <Grid item xs={12}>
-                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
                   Our Core Members
                 </Typography>
               </Grid>
@@ -364,7 +383,7 @@
                 <Link href="https://github.com/tyt2y3" underline="hover">
                   <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/1782664?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Chris Tsang
                 </Typography>
               </Grid>
@@ -372,7 +391,7 @@
                 <Link href="https://github.com/ikrivosheev" underline="hover">
                   <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/6786239?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Ivan Krivosheev
                 </Typography>
               </Grid>
@@ -380,7 +399,7 @@
                 <Link href="https://github.com/billy1624" underline="hover">
                   <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/30400950?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Billy Chan
                 </Typography>
               </Grid>
@@ -388,7 +407,7 @@
                 <Link href="https://github.com/shpun817" underline="hover">
                   <Avatar alt="Émile Fugulin" src="https://avatars.githubusercontent.com/u/47468266?v=4" sx={{ width: 50, height: 50, marginRight: 2 }} />
                 </Link>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Sanford Pun
                 </Typography>
               </Grid>
@@ -397,17 +416,17 @@
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 'bold', color: '#2468da' }} gutterBottom>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600, color: '#2468da' }} gutterBottom>
                   Our Community
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ textAlign: 'center' }}>
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Your participation is what makes us unique; your adoption is what drives us forward. Thank you all in the Rust community for making SeaQL what it is today. You are also invited to shape it's future!
                 </Typography>
                 <br />
                 <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
-                <Typography variant="body1" sx={{ fontSize: '18px', textAlign: 'center' }}>
+                <Typography variant="body1" sx={{  textAlign: 'center' }}>
                   Please star our repos! Every ⭐ counts!
                 </Typography>
               </Grid>
