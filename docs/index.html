@@ -103,12 +103,6 @@
           <div class="rule rule-gradient"></div>
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
-              <Grid item xs={3} className="about-us-icons">
-                <img
-                  src="img/target.svg"
-                  style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
-                />
-              </Grid>
               <Grid item xs={9}>
                 <Grid item xs={12}>
                   <Typography variant="h4" component="h2" sx={{ fontWeight: 600 }} gutterBottom>
@@ -120,6 +114,12 @@
                     In the long term, we want to support all open source SQL, NewSQL and NoSQL databases, providing a uniform developer experience to data analytics, transaction processing, schema management and other data engineering work.
                   </Typography>
                 </Grid>
+              </Grid>
+              <Grid item xs={3} className="about-us-icons">
+                <img
+                  src="img/target.svg"
+                  style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
+                />
               </Grid>
             </Grid>
           </Container>
@@ -147,12 +147,6 @@
           </Container>
           <Container maxWidth="lg" style={{ padding: '48px' }}>
             <Grid container spacing={4}>
-              <Grid item xs={3} className="about-us-icons">
-                <img
-                  src="img/heart.svg"
-                  style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
-                />
-              </Grid>
               <Grid item xs={9}>
                 <Grid item xs={12}>
                   <Typography variant="h4" component="h2" sx={{ fontWeight: 600 }} gutterBottom>
@@ -164,6 +158,12 @@
                     Community driven. Embrace the async Rust ecosystem. Welcome developers from other languages.
                   </Typography>
                 </Grid>
+              </Grid>
+              <Grid item xs={3} className="about-us-icons">
+                <img
+                  src="img/heart.svg"
+                  style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
+                />
               </Grid>
             </Grid>
           </Container>
