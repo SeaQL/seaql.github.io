@@ -37,7 +37,6 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-        <HomepageCompare />
         <HomepageExample />
         <HomepageProducts />
         <HomepageMascot />
