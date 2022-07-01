@@ -27,7 +27,7 @@ const FeatureList = [
     icon: <MdCheckCircle size={26} />,
     description: (
       <>
-        Use mock connections to write unit tests for your logic.
+        Use mock connections and/or SQLite to write tests for your application logic.
       </>
     ),
   },
@@ -36,7 +36,7 @@ const FeatureList = [
     icon: <MdCloud size={26} />,
     description: (
       <>
-        Quickly build services that join, filter, sort and paginate data in APIs.
+        Quickly build services that join, filter, sort and paginate data in REST, GraphQL and gRPC APIs.
       </>
     ),
   },
