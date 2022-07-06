@@ -88,13 +88,13 @@
               right: '0px',
             }}
           >
-            <IconButton onClick={toggleThemeMode} variant="contained">
+            <IconButton onClick={toggleThemeMode} variant="contained" aria-label="Toggle Dark Theme">
               {themeMode === 'dark' ? <i class="fa-solid fa-sun"></i> : <i class="fa-solid fa-moon"></i>}
             </IconButton>
           </Box>
           <Container maxWidth="false" style={{ padding: '48px' }}>
             <p style={{ textAlign: 'center', margin: '0' }}>
-              <img src="img/SeaQL logo.png" width="300px" height="300px" />
+              <img src="img/SeaQL logo.png" alt="SeaQL Logo" width="300px" height="300px" />
             </p>
             <Typography variant="h5" component="h1" align="center" gutterBottom>
               Building data intensive applications in Rust
@@ -118,6 +118,7 @@
               <Grid item xs={3} className="about-us-icons">
                 <img
                   src="img/target.svg"
+                  alt="Out Mission"
                   style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
                 />
               </Grid>
@@ -128,6 +129,7 @@
               <Grid item xs={3} className="about-us-icons">
                 <img
                   src="img/telescope.svg"
+                  alt="Our Vision"
                   style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
                 />
               </Grid>
@@ -162,6 +164,7 @@
               <Grid item xs={3} className="about-us-icons">
                 <img
                   src="img/heart.svg"
+                  alt="Our Values"
                   style={themeMode === 'dark' ? { filter: 'invert(1) sepia(0) saturate(0) hue-rotate(0deg)' } : {}}
                 />
               </Grid>
@@ -214,7 +217,7 @@
                         clickable
                       />
                       <a href="https://github.com/SeaQL/sea-orm/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
-                        <img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1" height="22px" />
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1" alt="Star SeaORM" height="22px" />
                       </a>
                     </div>
                   </CardContent>
@@ -256,7 +259,7 @@
                         clickable
                       />
                       <a href="https://github.com/SeaQL/sea-query/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
-                        <img src="https://img.shields.io/github/stars/SeaQL/sea-query.svg?style=social&label=Star&maxAge=1" height="22px" />
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-query.svg?style=social&label=Star&maxAge=1" alt="Star SeaQuery" height="22px" />
                       </a>
                     </div>
                   </CardContent>
@@ -298,7 +301,7 @@
                         clickable
                       />
                       <a href="https://github.com/SeaQL/sea-schema/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
-                        <img src="https://img.shields.io/github/stars/SeaQL/sea-schema.svg?style=social&label=Star&maxAge=1" height="22px" />
+                        <img src="https://img.shields.io/github/stars/SeaQL/sea-schema.svg?style=social&label=Star&maxAge=1" alt="Star SeaSchema" height="22px" />
                       </a>
                     </div>
                   </CardContent>
@@ -340,7 +343,7 @@
                         clickable
                       />
                       <a href="https://github.com/SeaQL/starfish-ql/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
-                        <img src="https://img.shields.io/github/stars/SeaQL/starfish-ql.svg?style=social&label=Star&maxAge=1" height="22px" />
+                        <img src="https://img.shields.io/github/stars/SeaQL/starfish-ql.svg?style=social&label=Star&maxAge=1" alt="Star StarfishQL" height="22px" />
                       </a>
                     </div>
                   </CardContent>
