@@ -43,6 +43,11 @@ module.exports = {
           position: 'left'
         },
         {
+          href: 'https://www.sea-ql.org/sea-orm-tutorial/',
+          label: 'Tutorials',
+          position: 'left',
+        },
+        {
           href: 'https://crates.io/crates/sea-orm',
           label: 'Crate',
           position: 'right',
