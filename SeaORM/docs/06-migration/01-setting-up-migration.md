@@ -51,6 +51,38 @@ migration
 
 It is recommended to structure your cargo workspace as follows to share SeaORM entities between the app crate and the migration crate. Checkout the [integration examples](https://github.com/SeaQL/sea-orm/tree/master/examples) for demonstration.
 
+### Migration Crate
+
+Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) crate. If you need some SeaORM entities when writing migrations, you can import the entity crate.
+
+```toml title="migration/Cargo.toml"
+[dependencies]
+async-std = { version = "^1", features = ["attributes", "tokio1"] }
+sea-orm-migration = { version = "^0" }
+```
+
+Let's write a migration. Detailed instructions in the next section.
+
+```rust title="migration/src/m20220120_000001_create_post_table.rs"
+use sea_orm_migration::prelude::*;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        // Replace the sample below with your own migration scripts
+        todo!();
+    }
+
+    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        // Replace the sample below with your own migration scripts
+        todo!();
+    }
+}
+```
+
 ### Entity Crate
 
 Create an entity crate in your root workspace.
@@ -81,61 +113,6 @@ Specify SeaORM dependency.
 ```toml title="entity/Cargo.toml"
 [dependencies]
 sea-orm = { version = "^0" }
-```
-
-### Migration Crate
-
-Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) crate. If you need some SeaORM entities when writing migrations, you can import the entity crate.
-
-```toml title="migration/Cargo.toml"
-[dependencies]
-sea-orm-migration = { version = "^0" }
-entity = { path = "../entity" } # depends on your needs
-```
-
-Let's write a migration. Detailed instructions in the next section.
-
-```rust title="migration/src/m20220120_000001_create_post_table.rs"
-use entity::post::*;
-use sea_orm_migration::prelude::*;
-
-pub struct Migration;
-
-impl MigrationName for Migration {
-    fn name(&self) -> &str {
-        "m20220120_000001_create_post_table"
-    }
-}
-
-#[async_trait::async_trait]
-impl MigrationTrait for Migration {
-    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        manager
-            .create_table(
-                Table::create()
-                    .table(Entity)
-                    .if_not_exists()
-                    .col(
-                        ColumnDef::new(Column::Id)
-                            .integer()
-                            .not_null()
-                            .auto_increment()
-                            .primary_key(),
-                    )
-                    .col(ColumnDef::new(Column::Title).string().not_null())
-                    .col(ColumnDef::new(Column::Text).string().not_null())
-                    .to_owned(),
-            )
-            .await
-    }
-
-    // if you are against backward migrations, you do not have to impl this
-    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        manager
-            .drop_table(Table::drop().table(Entity).to_owned())
-            .await
-    }
-}
 ```
 
 ### App Crate
