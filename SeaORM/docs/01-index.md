@@ -82,7 +82,9 @@
 
     7.5 [Self Referencing](07-relation/05-self-referencing.md)
 
-    7.6 [Bakery Schema](07-relation/06-bakery-schema.md)
+    7.6 [Custom Join Condition](07-relation/06-custom-join-condition.md)
+
+    7.7 [Bakery Schema](07-relation/07-bakery-schema.md)
 
 8. Writing Tests
 
