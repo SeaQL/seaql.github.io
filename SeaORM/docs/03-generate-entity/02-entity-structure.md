@@ -72,16 +72,16 @@ For the mappings of Rust primitive data types.
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) |
-| --------- | ------------- |
-| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date |
-| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time |
-| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime |
-| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp |
-| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone |
-| `Uuid`: uuid::Uuid | Uuid |
-| `Json`: serde_json::Value | Json |
-| `Decimal`: rust_decimal::Decimal | Decimal |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite datatype | MySQL datatype | PostgreSQL datatype
+| --------- | --------- | --------- | --------- | --------- |
+| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | text | date | date |
+| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | text | time | time |
+| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime | text | datetime | timestamp |
+| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp | text | timestamp | N/A |
+| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone | text | timestamp | timestamp with time zone |
+| `Uuid`: uuid::Uuid | Uuid | text | binary(16) | uuid |
+| `Json`: serde_json::Value | Json | text | json | json |
+| `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 
 You can override the default mappings between a Rust type and `ColumnType` by the `column_type` attribute.
 
