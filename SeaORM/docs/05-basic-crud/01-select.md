@@ -75,6 +75,24 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
+> Since 0.9.0, `SelectTwoMany::one()` method has been dropped:
+> 
+> ```rust
+> let cake_with_fruits: Option<(cake::Model, Option<fruit::Model>)> = Cake::find()
+>     .find_with_related(Fruit)
+>     .one(db) // This method has been dropped
+>     .await?;
+> ```
+> 
+> `SelectTwoMany` is for selecting models of a one-to-many relationship
+> but `SelectTwoMany::one()` returns `Option<(E, Option<F>)>`
+> and the return value is a pair of models instead of `(E, Vec<F>)`
+> which is a weird query result for a one-to-many relationship.
+> 
+> Users are advised to query `(E, Vec<F>)` by first querying `E` from the database,
+> then use `find_related` method to query `Vec<F>`.
+> Read [lazy loading](#lazy-loading) for details.
+
 ## Paginate Result
 
 Convert any SeaORM select into a [paginator](https://docs.rs/sea-orm/*/sea_orm/struct.Paginator.html) with custom page size.
