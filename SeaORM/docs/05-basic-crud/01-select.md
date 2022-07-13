@@ -90,6 +90,42 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 }
 ```
 
+## Cursor Pagination
+
+If you want to paginate rows based on column(s) such as the primary key, you can use cursor pagination.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake};
+// Create a cursor that order by `cake`.`id`
+let mut cursor = cake::Entity::find().cursor_by(cake::Column::Id);
+
+// Filter paginated result by `cake`.`id` > 1 AND `cake`.`id` < 100
+cursor.after(1).before(100);
+
+// Get first 10 rows (order by `cake`.`id` ASC)
+for cake in cursor.first(10).all(db).await? {
+    // Do something on cake: cake::Model
+}
+
+// Get last 10 rows (order by `cake`.`id` DESC but rows are returned in ascending order)
+for cake in cursor.last(10).all(db).await? {
+    // Do something on cake: cake::Model
+}
+```
+
+Paginate rows by a composite primary key is also available.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake_filling};
+let rows = cake_filling::Entity::find()
+    .cursor_by((cake_filling::Column::CakeId, cake_filling::Column::FillingId))
+    .after((0, 1))
+    .before((10, 11))
+    .first(3)
+    .all(&db)
+    .await?,
+```
+
 ## Select custom
 
 If you want to select custom columns and expressions, read the [custom select](09-advanced-query/01-custom-select.md) section.
