@@ -90,6 +90,31 @@ You can override the default mappings between a Rust type and `ColumnType` by th
 pub name: String
 ```
 
+If you need your JSON field to be deserialized into a struct in Rust. You would need to derive `FromJsonQueryResult` for it.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "json_struct")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    // JSON column defined in `serde_json::Value`
+    pub json: Json,
+    // JSON column defined in custom struct
+    pub json_value: KeyValue,
+    pub json_value_opt: Option<KeyValue>,
+}
+
+// The custom struct much derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+pub struct KeyValue {
+    pub id: i32,
+    pub name: String,
+    pub price: f32,
+    pub notes: Option<String>,
+}
+```
+
 ### Additional Properties
 
 You can add additional properties `default_value`, `unique`, `indexed` and `nullable` to a column.
