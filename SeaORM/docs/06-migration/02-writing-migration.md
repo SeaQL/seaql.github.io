@@ -4,7 +4,16 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migrations
 
-You can create a migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
+Generate a new migration file by executing `sea-orm-cli migrate generate` command.
+
+```shell
+sea-orm-cli migrate generate --migration-name NAME_OF_MIGRATION
+
+# E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
+sea-orm-cli migrate generate --migration-name create_table
+```
+
+Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
