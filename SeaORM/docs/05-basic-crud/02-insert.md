@@ -149,3 +149,40 @@ let orange = fruit::ActiveModel {
 let res: InsertResult = Fruit::insert_many(vec![apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
+
+## On Conflict
+
+Specify the on conflict behaviour with the `on_conflict` method.
+
+```rust
+let orange = cake::ActiveModel {
+    id: ActiveValue::set(2),
+    name: ActiveValue::set("Orange".to_owned()),
+};
+
+assert_eq!(
+    cake::Entity::insert(orange.clone())
+        .on_conflict(
+            // on conflict do nothing
+            sea_query::OnConflict::column(cake::Column::Name)
+                .do_nothing()
+                .to_owned()
+        )
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"INSERT INTO "cake" ("id", "name") VALUES (2, 'Orange') ON CONFLICT ("name") DO NOTHING"#,
+);
+
+assert_eq!(
+    cake::Entity::insert(orange)
+        .on_conflict(
+            // on conflict do update
+            sea_query::OnConflict::column(cake::Column::Name)
+                .update_column(cake::Column::Name)
+                .to_owned()
+        )
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"INSERT INTO "cake" ("id", "name") VALUES (2, 'Orange') ON CONFLICT ("name") DO UPDATE SET "name" = "excluded"."name""#,
+);
+```
