@@ -64,7 +64,7 @@ See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/mana
 
 Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
-You would need [`sea_query::Iden`](https://github.com/SeaQL/sea-query#iden) to define identifiers used in your migration.
+You would need [`sea_query::Iden`](https://github.com/SeaQL/sea-query#iden) to define identifiers that will be used in your migration.
 
 ```rust
 #[derive(Iden)]

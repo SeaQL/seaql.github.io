@@ -6,19 +6,15 @@ Version control your database schema with migrations written in SeaQuery or SQL.
 
 A table named `seaql_migrations` will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
 
-```rust
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "seaql_migrations")]
-pub struct Model {
-    #[sea_orm(primary_key, auto_increment = false)]
-    pub version: String,
-    pub applied_at: i64,
-}
-```
-
 ## Creating Migration Directory
 
-Setup the migration directory by executing `sea-orm-cli migrate init`.
+First, install `sea-orm-cli` with `cargo`.
+
+```shell
+$ cargo install sea-orm-cli
+```
+
+Then, setup the migration directory by executing `sea-orm-cli migrate init`.
 
 ```shell
 # Setup the migration directory in `./migration`
