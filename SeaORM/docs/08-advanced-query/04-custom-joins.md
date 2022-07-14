@@ -51,4 +51,4 @@ assert_eq!(
 );
 ```
 
-> You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of such complex query. See [here](09-advanced-query/01-custom-select.md#handling-custom-selects) for details.
+> You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of such complex query. See [here](08-advanced-query/01-custom-select.md#handling-custom-selects) for details.
