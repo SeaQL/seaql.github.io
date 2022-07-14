@@ -134,7 +134,11 @@ module.exports = {
       indexName: 'starfishql',
       contextualSearch: true,
     },
-    hideableSidebar: true,
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
   },
   presets: [
     [
