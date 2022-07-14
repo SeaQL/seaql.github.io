@@ -75,23 +75,27 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-> Since 0.9.0, `SelectTwoMany::one()` method has been dropped:
-> 
-> ```rust
-> let cake_with_fruits: Option<(cake::Model, Option<fruit::Model>)> = Cake::find()
->     .find_with_related(Fruit)
->     .one(db) // This method has been dropped
->     .await?;
-> ```
-> 
-> `SelectTwoMany` is for selecting models of a one-to-many relationship
-> but `SelectTwoMany::one()` returns `Option<(E, Option<F>)>`
-> and the return value is a pair of models instead of `(E, Vec<F>)`
-> which is a weird query result for a one-to-many relationship.
-> 
-> Users are advised to query `(E, Vec<F>)` by first querying `E` from the database,
-> then use `find_related` method to query `Vec<F>`.
-> Read [lazy loading](#lazy-loading) for details.
+:::info
+
+Since 0.9.0, `SelectTwoMany::one()` method has been dropped:
+
+```rust
+let cake_with_fruits: Option<(cake::Model, Option<fruit::Model>)> = Cake::find()
+    .find_with_related(Fruit)
+    .one(db) // This method has been dropped
+    .await?;
+```
+
+`SelectTwoMany` is for selecting models of a one-to-many relationship
+but `SelectTwoMany::one()` returns `Option<(E, Option<F>)>`
+and the return value is a pair of models instead of `(E, Vec<F>)`
+which is a weird query result for a one-to-many relationship.
+
+Users are advised to query `(E, Vec<F>)` by first querying `E` from the database,
+then use `find_related` method to query `Vec<F>`.
+Read [lazy loading](#lazy-loading) for details.
+
+:::
 
 ## Paginate Result
 
@@ -110,7 +114,7 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 
 ## Cursor Pagination
 
-If you want to paginate rows based on column(s) such as the primary key, you can use cursor pagination.
+Use cursor pagination If you want to paginate rows based on column(s) such as the primary key.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake};
@@ -131,7 +135,7 @@ for cake in cursor.last(10).all(db).await? {
 }
 ```
 
-Paginate rows by a composite primary key is also available.
+Paginate rows based on a composite primary key is also available.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake_filling};

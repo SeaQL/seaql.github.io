@@ -152,7 +152,7 @@ assert_eq!(res.last_insert_id, 30)
 
 ## On Conflict
 
-Specify the on conflict behaviour with the `on_conflict` method.
+Insert active model with on conflict behaviour.
 
 ```rust
 let orange = cake::ActiveModel {

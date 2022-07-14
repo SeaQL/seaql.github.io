@@ -90,7 +90,7 @@ You can override the default mappings between a Rust type and `ColumnType` by th
 pub name: String
 ```
 
-If you need your JSON field to be deserialized into a struct in Rust. You would need to derive `FromJsonQueryResult` for it.
+If you need your JSON field to be deserialized into a struct. You would need to derive `FromJsonQueryResult` for it.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]

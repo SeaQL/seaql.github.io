@@ -16,7 +16,7 @@ It can be done via one of the following ways.
 
 ## Relation
 
-Add your additional join condition directly to the relation enum. The easiest way is to provide a `sea_query::SimpleExpr` via `on_condition` procedural macros attribute.
+Add your additional join conditions directly to the relation enum. The easiest way is to provide a `sea_query::SimpleExpr` via `on_condition` procedural macros attribute.
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -74,7 +74,7 @@ assert_eq!(
 
 ## Linked
 
-You can also define custom join condition on `Linked`.
+You can also define custom join conditions on `Linked`.
 
 ```rust
 #[derive(Debug)]
@@ -126,7 +126,7 @@ assert_eq!(
 
 ## Custom Join
 
-Last but not least, custom join condition can be defined at the point you construct the join expression.
+Last but not least, custom join conditions can be defined at the point you construct the join expression.
 
 ```rust
 assert_eq!(

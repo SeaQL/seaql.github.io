@@ -49,7 +49,7 @@ It is recommended to structure your cargo workspace as follows to share SeaORM e
 
 ### Migration Crate
 
-Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) crate. If you need some SeaORM entities when writing migrations, you can import the entity crate.
+Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and [`async-std`](https://crates.io/crates/async-std) crate.
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
@@ -86,7 +86,7 @@ Create an entity crate in your root workspace.
 <details>
     <summary>You don't have SeaORM entities defined?</summary>
 
-You can create an entity crate with no entity files. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](04-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
+You can create an entity crate without any entity files. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](04-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
 
 After generating the entity files, you can re-export the generated entities by adding following lines in `entity/src/lib.rs`:
 

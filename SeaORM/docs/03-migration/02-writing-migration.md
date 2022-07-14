@@ -95,11 +95,11 @@ assert_eq!(Post::Text.to_string(), "text");
                         .integer()
                         .not_null()
                         .auto_increment()
-                        .primary_key(),
+                        .primary_key()
                 )
                 .col(ColumnDef::new(Post::Title).string().not_null())
                 .col(ColumnDef::new(Post::Text).string().not_null())
-                .to_owned(),
+                .to_owned()
         )
     ```
 - Create Index
