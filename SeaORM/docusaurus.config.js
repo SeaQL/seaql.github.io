@@ -144,11 +144,6 @@ module.exports = {
       indexName: 'seaorm',
       contextualSearch: true,
     },
-    docs: {
-      sidebar: {
-        hideable: true,
-      },
-    },
   },
   presets: [
     [
