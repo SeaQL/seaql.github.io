@@ -4,18 +4,22 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 
 ## Creating Migrations
 
-You can create a migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
+Generate a new migration file by executing `sea-orm-cli migrate generate` command.
+
+```shell
+sea-orm-cli migrate generate NAME_OF_MIGRATION
+
+# E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
+sea-orm-cli migrate generate create_table
+```
+
+Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
 
+#[derive(DeriveMigrationName)]
 pub struct Migration;
-
-impl MigrationName for Migration {
-    fn name(&self) -> &str {
-        "m20220101_000001_create_table"
-    }
-}
 
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
@@ -60,35 +64,30 @@ See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/mana
 
 Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
+You would need [`sea_query::Iden`](https://github.com/SeaQL/sea-query#iden) to define identifiers that will be used in your migration.
+
+```rust
+#[derive(Iden)]
+enum Post {
+    Table,
+    Id,
+    Title,
+    #[iden = "text"] // Renaming the identifier
+    Text,
+}
+
+assert_eq!(Post::Table.to_string(), "post");
+assert_eq!(Post::Id.to_string(), "id");
+assert_eq!(Post::Title.to_string(), "title");
+assert_eq!(Post::Text.to_string(), "text");
+```
+
 #### Schema Creation Methods
 - Create Table
     ```rust
-    use entity::post;
-
     manager
         .create_table(
             sea_query::Table::create()
-                .table(post::Entity)
-                .if_not_exists()
-                .col(
-                    ColumnDef::new(post::Column::Id)
-                        .integer()
-                        .not_null()
-                        .auto_increment()
-                        .primary_key(),
-                )
-                .col(ColumnDef::new(post::Column::Title).string().not_null())
-                .col(ColumnDef::new(post::Column::Text).string().not_null())
-                .to_owned()
-        )
-    ```
-    <details>
-        <summary>You don't have SeaORM entities defined?</summary>
-
-    ```rust
-    manager
-        .create_table(
-            Table::create()
                 .table(Post::Table)
                 .if_not_exists()
                 .col(
@@ -96,23 +95,13 @@ Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick to
                         .integer()
                         .not_null()
                         .auto_increment()
-                        .primary_key(),
+                        .primary_key()
                 )
                 .col(ColumnDef::new(Post::Title).string().not_null())
                 .col(ColumnDef::new(Post::Text).string().not_null())
                 .to_owned()
         )
-
-    // Define the identifiers using SeaQuery's `Iden` macro
-    #[derive(Iden)]
-    pub enum Post {
-        Table,
-        Id,
-        Title,
-        Text,
-    }
     ```
-    </details>
 - Create Index
     ```rust
     manager.create_index(sea_query::Index::create())
@@ -134,7 +123,7 @@ Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick to
     manager
         .drop_table(
             sea_query::Table::drop()
-                .table(post::Entity)
+                .table(Post::Table)
                 .to_owned()
         )
     ```
@@ -185,13 +174,8 @@ You can write migration files in raw SQL, but then you lost the cross-backend co
 use sea_orm::Statement;
 use sea_orm_migration::prelude::*;
 
+#[derive(DeriveMigrationName)]
 pub struct Migration;
-
-impl MigrationName for Migration {
-    fn name(&self) -> &str {
-        "m20220101_000001_create_table"
-    }
-}
 
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {

@@ -25,6 +25,15 @@ You can use Rust enums in model where the values are mapped to a database string
         White,
     }
     ```
+    Alternatively, you could write:
+    ```rust
+    #[derive(EnumIter, DeriveActiveEnum)]
+    #[sea_orm(rs_type = "i32", db_type = "Integer")]
+    pub enum Color {
+        Black = 0,
+        White = 1,
+    }
+    ```
 
 - Native Database Enum
     ```rust

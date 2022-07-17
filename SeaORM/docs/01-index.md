@@ -24,23 +24,25 @@
 
     2.4 [Debug Log](02-install-and-config/04-debug-log.md)
 
-3. Generating Entities
+3. Migration
 
-    3.1 [Using `sea-orm-cli`](03-generate-entity/01-sea-orm-cli.md)
+    3.1 [Setting Up Migration](03-migration/01-setting-up-migration.md)
 
-    3.2 [Entity Structure](03-generate-entity/02-entity-structure.md)
+    3.2 [Writing Migration](03-migration/02-writing-migration.md)
 
-    3.3 [Expanded Entity Structure](03-generate-entity/03-expanded-entity-structure.md)
+    3.3 [Running Migration](03-migration/03-running-migration.md)
 
-    3.4 [Enumeration](03-generate-entity/04-enumeration.md)
+    3.4 [Seeding Data](03-migration/04-seeding-data.md)
 
-4. Generating Database Schema
+4. Generating Entities
 
-    4.1 [Create Table](04-generate-database-schema/01-create-table.md)
+    4.1 [Using `sea-orm-cli`](04-generate-entity/01-sea-orm-cli.md)
 
-    4.2 [Create Enum](04-generate-database-schema/02-create-enum.md)
+    4.2 [Entity Structure](04-generate-entity/02-entity-structure.md)
 
-    4.3 [Create Index](04-generate-database-schema/03-create-index.md)
+    4.3 [Expanded Entity Structure](04-generate-entity/03-expanded-entity-structure.md)
+
+    4.4 [Enumeration](04-generate-entity/04-enumeration.md)
 
 5. Basic CRUD
 
@@ -60,55 +62,55 @@
 
 ## Advanced Topics
 
-6. Migration
+6. Relations
 
-    6.1 [Setting Up Migration](06-migration/01-setting-up-migration.md)
+    6.1 [One to One](06-relation/01-one-to-one.md)
 
-    6.2 [Writing Migration](06-migration/02-writing-migration.md)
+    6.2 [One to Many](06-relation/02-one-to-many.md)
 
-    6.3 [Running Migration](06-migration/03-running-migration.md)
+    6.3 [Many to Many](06-relation/03-many-to-many.md)
 
-    6.4 [Seeding Data](06-migration/04-seeding-data.md)
+    6.4 [Chained Relations](06-relation/04-chained-relations.md)
 
-7. Relations
+    6.5 [Self Referencing](06-relation/05-self-referencing.md)
 
-    7.1 [One to One](07-relation/01-one-to-one.md)
+    6.6 [Custom Join Condition](06-relation/06-custom-join-condition.md)
 
-    7.2 [One to Many](07-relation/02-one-to-many.md)
+    6.7 [Bakery Schema](06-relation/07-bakery-schema.md)
 
-    7.3 [Many to Many](07-relation/03-many-to-many.md)
+7. Writing Tests
 
-    7.4 [Chained Relations](07-relation/04-chained-relations.md)
+    7.1 [Robust & Correct](07-write-test/01-testing.md)
 
-    7.5 [Self Referencing](07-relation/05-self-referencing.md)
+    7.2 [Mock Interface](07-write-test/02-mock.md)
 
-    7.6 [Bakery Schema](07-relation/06-bakery-schema.md)
+    7.3 [Using SQLite](07-write-test/03-sqlite.md)
 
-8. Writing Tests
+8. Advanced Queries
 
-    8.1 [Robust & Correct](08-write-test/01-testing.md)
+    8.1 [Custom select](08-advanced-query/01-custom-select.md)
 
-    8.2 [Mock Interface](08-write-test/02-mock.md)
+    8.2 [Conditional expressions](08-advanced-query/02-conditional-expression.md)
 
-    8.3 [Using SQLite](08-write-test/03-sqlite.md)
+    8.3 [Aggregate functions](08-advanced-query/03-aggregate-function.md)
 
-9. Advanced Queries
+    8.4 [Custom Joins](08-advanced-query/04-custom-joins.md)
 
-    9.1 [Custom select](09-advanced-query/01-custom-select.md)
+    8.5 [Sub Query](08-advanced-query/05-subquery.md)
 
-    9.2 [Conditional expressions](09-advanced-query/02-conditional-expression.md)
+    8.6 [Transaction](08-advanced-query/06-transaction.md)
 
-    9.3 [Aggregate functions](09-advanced-query/03-aggregate-function.md)
+    8.7 [Streaming](08-advanced-query/07-streaming.md)
 
-    9.4 [Custom Joins](09-advanced-query/04-custom-joins.md)
+    8.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
 
-    9.5 [Sub Query](09-advanced-query/05-subquery.md)
+9. Generating SeaQuery Statement
 
-    9.6 [Transaction](09-advanced-query/06-transaction.md)
+    9.1 [Create Table](09-generate-sea-query-statement/01-create-table.md)
 
-    9.7 [Streaming](09-advanced-query/07-streaming.md)
+    9.2 [Create Enum](09-generate-sea-query-statement/02-create-enum.md)
 
-    9.8 [Custom Active Model](09-advanced-query/08-custom-active-model.md)
+    9.3 [Create Index](09-generate-sea-query-statement/03-create-index.md)
 
 10. Internal Design
 

@@ -23,7 +23,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
 
-> Read more about [conditional expression](09-advanced-query/02-conditional-expression.md).
+> Read more about [conditional expression](08-advanced-query/02-conditional-expression.md).
 
 ```rust
 let chocolate: Vec<cake::Model> = Cake::find()
@@ -35,7 +35,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ## Find Related Models
 
-> Read more about [table joins](09-advanced-query/04-custom-joins.md).
+> Read more about [table joins](08-advanced-query/04-custom-joins.md).
 
 ### Lazy Loading
 
@@ -75,6 +75,28 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
+:::info
+
+Since 0.9.0, `SelectTwoMany::one()` method has been dropped:
+
+```rust
+let cake_with_fruits: Option<(cake::Model, Option<fruit::Model>)> = Cake::find()
+    .find_with_related(Fruit)
+    .one(db) // This method has been dropped
+    .await?;
+```
+
+`SelectTwoMany` is for selecting models of a one-to-many relationship
+but `SelectTwoMany::one()` returns `Option<(E, Option<F>)>`
+and the return value is a pair of models instead of `(E, Vec<F>)`
+which is a weird query result for a one-to-many relationship.
+
+Users are advised to query `(E, Vec<F>)` by first querying `E` from the database,
+then use `find_related` method to query `Vec<F>`.
+Read [lazy loading](#lazy-loading) for details.
+
+:::
+
 ## Paginate Result
 
 Convert any SeaORM select into a [paginator](https://docs.rs/sea-orm/*/sea_orm/struct.Paginator.html) with custom page size.
@@ -90,6 +112,42 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 }
 ```
 
+## Cursor Pagination
+
+Use cursor pagination If you want to paginate rows based on column(s) such as the primary key.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake};
+// Create a cursor that order by `cake`.`id`
+let mut cursor = cake::Entity::find().cursor_by(cake::Column::Id);
+
+// Filter paginated result by `cake`.`id` > 1 AND `cake`.`id` < 100
+cursor.after(1).before(100);
+
+// Get first 10 rows (order by `cake`.`id` ASC)
+for cake in cursor.first(10).all(db).await? {
+    // Do something on cake: cake::Model
+}
+
+// Get last 10 rows (order by `cake`.`id` DESC but rows are returned in ascending order)
+for cake in cursor.last(10).all(db).await? {
+    // Do something on cake: cake::Model
+}
+```
+
+Paginate rows based on a composite primary key is also available.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake_filling};
+let rows = cake_filling::Entity::find()
+    .cursor_by((cake_filling::Column::CakeId, cake_filling::Column::FillingId))
+    .after((0, 1))
+    .before((10, 11))
+    .first(3)
+    .all(&db)
+    .await?,
+```
+
 ## Select custom
 
-If you want to select custom columns and expressions, read the [custom select](09-advanced-query/01-custom-select.md) section.
+If you want to select custom columns and expressions, read the [custom select](08-advanced-query/01-custom-select.md) section.

@@ -4,10 +4,11 @@ After you have defined the migrations, you can apply or revert migrations in the
 
 ## Command Line Interface (CLI)
 
-Migrations can be run manually in the terminal. `DATABASE_URL` must be set in your environment, follow the instructions [here](03-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
+Migrations can be run manually in the terminal. `DATABASE_URL` must be set in your environment, follow the instructions [here](04-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
 
 Supported commands:
 - `init`: Initialize migration directory
+- `generate`: Generate a new migration file
 - `up`: Apply all pending migrations
 - `up -n 10`: Apply 10 pending migrations
 - `down`: Rollback last applied migration

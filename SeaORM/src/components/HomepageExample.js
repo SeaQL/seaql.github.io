@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import useThemeContext from "@theme/hooks/useThemeContext";
+import { useColorMode } from '@docusaurus/theme-common';
 
 import Prism from "prism-react-renderer/prism";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -152,7 +152,7 @@ export default function HomepageCompare() {
     setMounted(true);
   }, []);
 
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useColorMode();
   const lightModeTheme = prism.theme;
   const darkModeTheme = prism.darkTheme || lightModeTheme;
   const prismTheme = isDarkTheme ? darkModeTheme : lightModeTheme;

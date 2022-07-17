@@ -53,41 +53,66 @@ The column type will be derived automatically with the following mapping:
 
 For the mappings of Rust primitive data types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) |
-| --------- | ------------- |
-| `String` | Char |
-| `String` | String |
-| `i8` | TinyInteger |
-| `u8` | TinyUnsigned |
-| `i16` | SmallInteger |
-| `u16` | SmallUnsigned |
-| `i32` | Integer |
-| `u32` | Unsigned |
-| `i64` | BigInteger |
-| `u64` | BigUnsigned |
-| `f32` | Float |
-| `f64` | Double |
-| `bool` | Boolean |
-| `Vec<u8>` | Binary |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| --------- | --------- | --------- | --------- | --------- |
+| `String` | Char | text | char | char |
+| `String` | String | text | varchar | varchar |
+| `i8` | TinyInteger | integer | tinyint | smallint |
+| `u8` | TinyUnsigned | integer | tinyint | smallint |
+| `i16` | SmallInteger | integer | smallint | smallint |
+| `u16` | SmallUnsigned | integer | smallint | smallint |
+| `i32` | Integer | integer | int | integer |
+| `u32` | Unsigned | integer | int | integer |
+| `i64` | BigInteger | integer | bigint | bigint |
+| `u64` | BigUnsigned | integer | bigint | bigint |
+| `f32` | Float | real | float | real |
+| `f64` | Double | real | double | double precision |
+| `bool` | Boolean | integer | bool | bool |
+| `Vec<u8>` | Binary | blob | blob | bytea |
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) |
-| --------- | ------------- |
-| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date |
-| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time |
-| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime |
-| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp |
-| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone |
-| `Uuid`: uuid::Uuid | Uuid |
-| `Json`: serde_json::Value | Json |
-| `Decimal`: rust_decimal::Decimal | Decimal |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| --------- | --------- | --------- | --------- | --------- |
+| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | text | date | date |
+| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | text | time | time |
+| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime | text | datetime | timestamp |
+| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp | text | timestamp | N/A |
+| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone | text | timestamp | timestamp with time zone |
+| `Uuid`: uuid::Uuid | Uuid | text | binary(16) | uuid |
+| `Json`: serde_json::Value | Json | text | json | json |
+| `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 
 You can override the default mappings between a Rust type and `ColumnType` by the `column_type` attribute.
 
 ```rust
 #[sea_orm(column_type = "Text")]
 pub name: String
+```
+
+If you need your JSON field to be deserialized into a struct. You would need to derive `FromJsonQueryResult` for it.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "json_struct")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    // JSON column defined in `serde_json::Value`
+    pub json: Json,
+    // JSON column defined in custom struct
+    pub json_value: KeyValue,
+    pub json_value_opt: Option<KeyValue>,
+}
+
+// The custom struct much derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+pub struct KeyValue {
+    pub id: i32,
+    pub name: String,
+    pub price: f32,
+    pub notes: Option<String>,
+}
 ```
 
 ### Additional Properties

@@ -8,6 +8,7 @@ Migrations can be run manually in the terminal. `DATABASE_URL` must be set in yo
 
 Supported commands:
 - `init`: Initialize migration directory
+- `generate`: Generate a new migration file
 - `up`: Apply all pending migrations
 - `up -n 10`: Apply 10 pending migrations
 - `down`: Rollback last applied migration
