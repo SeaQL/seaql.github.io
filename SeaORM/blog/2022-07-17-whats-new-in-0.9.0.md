@@ -546,7 +546,7 @@ impl MigrationTrait for Migration {
     </div>
 </div>
 
-## SeaORM CLI Updates
+## SeaORM CLI Improvements
 
 - [[#735](https://github.com/SeaQL/sea-orm/pull/735)] Improve logging of generate entity command
 - [[#588](https://github.com/SeaQL/sea-orm/pull/588)] Generate enum with numeric like variants
@@ -671,7 +671,7 @@ impl MigrationTrait for Migration {
     </div>
 </div>
 
-## Enhancements
+## Miscellaneous Enhancements
 
 - [[#800](https://github.com/SeaQL/sea-orm/pull/800)] Added `sqlx_logging_level` to `ConnectOptions`
 - [[#768](https://github.com/SeaQL/sea-orm/pull/768)] Added `num_items_and_pages` to `Paginator`
