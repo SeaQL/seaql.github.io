@@ -1,5 +1,5 @@
 ---
-slug: 2022-07-13-whats-new-in-0.9.0
+slug: 2022-07-17-whats-new-in-0.9.0
 title: What's new in SeaORM 0.9.0
 author: SeaQL Team
 author_title: Chris Tsang
@@ -671,7 +671,7 @@ impl MigrationTrait for Migration {
     </div>
 </div>
 
-## Minor Enhancements
+## Enhancements
 
 - [[#800](https://github.com/SeaQL/sea-orm/pull/800)] Added `sqlx_logging_level` to `ConnectOptions`
 - [[#768](https://github.com/SeaQL/sea-orm/pull/768)] Added `num_items_and_pages` to `Paginator`
@@ -759,7 +759,7 @@ impl MigrationTrait for Migration {
 
 ## Integration Examples
 
-SeaORM plays well with the other crates in the async ecosystem. It can be integrated easily with common RESTful frameworks and also gRPC frameworks. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
+SeaORM plays well with the other crates in the async ecosystem. We maintain an array of example projects for building REST, GraphQL and gRPC services. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
 
 - [Rocket Example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
 - [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
@@ -768,24 +768,6 @@ SeaORM plays well with the other crates in the async ecosystem. It can be integr
 - [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
 - [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
 - [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
-
-## Who's using SeaORM?
-
-The following products are powered by SeaORM:
-
-<table>
-  <tbody>
-    <tr>
-      <td><br/><a href="https://caido.io/"><img src="https://www.sea-ql.org/SeaORM/img/other/caido-logo.png" width="250"/></a><br/>A lightweight web security auditing toolkit</td>
-      <td><a href="https://l2.technology/sensei"><img src="https://www.sea-ql.org/SeaORM/img/other/sensei-logo.svg" width="250"/></a><br/>A Bitcoin lightning node implementation</td>
-      <td><a href="https://www.svix.com/"><img src="https://www.sea-ql.org/SeaORM/img/other/svix-logo.svg" width="250"/></a><br/>The enterprise ready webhooks service</td>
-    </tr>
-  </tbody>
-</table>
-
-SeaORM is the foundation of [StarfishQL](https://github.com/SeaQL/starfish-ql), an experimental graph database and query engine.
-
-For more projects, see [Built with SeaORM](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#built-with-seaorm).
 
 ## Sponsor
 
@@ -873,7 +855,3 @@ A big shout out to our sponsors 😇:
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
 
 Here is the roadmap for SeaORM [`0.10.x`](https://github.com/SeaQL/sea-orm/milestone/10).
-
-## GSoC 2022
-
-We are super excited to be selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql). The application is now closed, but the program is about to start! If you have thoughts over how we are going to implement the [project ideas](https://github.com/SeaQL/summer-of-code/tree/main/2022), feel free to participate in the discussion. Click [here](/SeaORM/blog/2022-06-02-summer-of-code-2022-intro) to learn more about our contributors and mentors in Summer of Code 2022.
