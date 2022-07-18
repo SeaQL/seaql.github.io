@@ -58,13 +58,13 @@ For the mappings of Rust primitive data types.
 | `String` | Char | text | char | char |
 | `String` | String | text | varchar | varchar |
 | `i8` | TinyInteger | integer | tinyint | smallint |
-| `u8` | TinyUnsigned | integer | tinyint | smallint |
+| `u8` | TinyUnsigned | integer  | tinyint unsigned | smallint |
 | `i16` | SmallInteger | integer | smallint | smallint |
-| `u16` | SmallUnsigned | integer | smallint | smallint |
+| `u16` | SmallUnsigned | integer | smallint unsigned | smallint |
 | `i32` | Integer | integer | int | integer |
-| `u32` | Unsigned | integer | int | integer |
+| `u32` | Unsigned | integer | int unsigned | integer |
 | `i64` | BigInteger | integer | bigint | bigint |
-| `u64` | BigUnsigned | integer | bigint | bigint |
+| `u64` | BigUnsigned | integer | bigint unsigned | bigint |
 | `f32` | Float | real | float | real |
 | `f64` | Double | real | double | double precision |
 | `bool` | Boolean | integer | bool | bool |
