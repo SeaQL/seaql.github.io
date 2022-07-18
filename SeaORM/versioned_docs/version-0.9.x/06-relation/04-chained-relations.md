@@ -64,11 +64,11 @@ assert_eq!(
         .build(DbBackend::MySql)
         .to_string(),
     [
-        r#"SELECT `filling`.`id`, `filling`.`name`"#,
-        r#"FROM `filling`"#,
-        r#"INNER JOIN `cake_filling` ON `cake_filling`.`filling_id` = `filling`.`id`"#,
-        r#"INNER JOIN `cake` ON `cake`.`id` = `cake_filling`.`cake_id`"#,
-        r#"WHERE `cake`.`id` = 12"#,
+        "SELECT `filling`.`id`, `filling`.`name`, `filling`.`vendor_id`",
+        "FROM `filling`",
+        "INNER JOIN `cake_filling` AS `r0` ON `r0`.`filling_id` = `filling`.`id`",
+        "INNER JOIN `cake` AS `r1` ON `r1`.`id` = `r0`.`cake_id`",
+        "WHERE `r1`.`id` = 12",
     ]
     .join(" ")
 );
@@ -86,10 +86,10 @@ assert_eq!(
         .to_string(),
     [
         "SELECT `cake`.`id` AS `A_id`, `cake`.`name` AS `A_name`,",
-        "`filling`.`id` AS `B_id`, `filling`.`name` AS `B_name`",
+        "`r1`.`id` AS `B_id`, `r1`.`name` AS `B_name`, `r1`.`vendor_id` AS `B_vendor_id`",
         "FROM `cake`",
-        "LEFT JOIN `cake_filling` ON `cake`.`id` = `cake_filling`.`cake_id`",
-        "LEFT JOIN `filling` ON `cake_filling`.`filling_id` = `filling`.`id`",
+        "LEFT JOIN `cake_filling` AS `r0` ON `cake`.`id` = `r0`.`cake_id`",
+        "LEFT JOIN `filling` AS `r1` ON `r0`.`filling_id` = `r1`.`id`",
     ]
     .join(" ")
 );
