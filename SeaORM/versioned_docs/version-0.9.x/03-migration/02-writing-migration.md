@@ -37,7 +37,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Additionally, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+Additionally, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/0.9/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
 
 ```rust title="migration/src/lib.rs"
 pub use sea_orm_migration::*;
@@ -58,7 +58,7 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
+See [`SchemaManager`](https://docs.rs/sea-orm-migration/0.9/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
 
 ### SeaQuery
 

@@ -53,7 +53,7 @@ The column type will be derived automatically with the following mapping:
 
 For the mappings of Rust primitive data types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.9/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | text | char | char |
 | `String` | String | text | varchar | varchar |
@@ -72,7 +72,7 @@ For the mappings of Rust primitive data types.
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.9/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | text | date | date |
 | `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | text | time | time |

@@ -43,7 +43,7 @@ $ cargo run -- COMMAND
 
 ## Migrating Programmatically
 
-You can perform migration on application startup with `Migrator`, which implements the [`MigratorTrait`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html).
+You can perform migration on application startup with `Migrator`, which implements the [`MigratorTrait`](https://docs.rs/sea-orm-migration/0.9/sea_orm_migration/migrator/trait.MigratorTrait.html).
 
 ```rust title="src/main.rs"
 use migration::{Migrator, MigratorTrait};

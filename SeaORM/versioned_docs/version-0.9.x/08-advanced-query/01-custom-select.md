@@ -34,7 +34,7 @@ assert_eq!(
 
 ## Select Custom Expressions
 
-Select any custom expression with `column_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
+Select any custom expression with `column_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/0.9/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/0.9/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
 
 ```rust
 use sea_query::{Alias, Expr};

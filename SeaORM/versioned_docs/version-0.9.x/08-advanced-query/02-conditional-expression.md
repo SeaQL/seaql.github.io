@@ -4,7 +4,7 @@ You can add conditions to SeaORM find with the `filter` method. You can also res
 
 ## AND Condition
 
-Construct the AND conditional expression with `Condition::all` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
+Construct the AND conditional expression with `Condition::all` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/0.9/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
 
 ```rust
 assert_eq!(
@@ -25,7 +25,7 @@ assert_eq!(
 
 ## OR Condition
 
-Construct the OR conditional expression with `Condition::any` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
+Construct the OR conditional expression with `Condition::any` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/0.9/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
 
 ```rust
 assert_eq!(

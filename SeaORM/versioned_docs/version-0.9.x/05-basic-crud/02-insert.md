@@ -96,7 +96,7 @@ assert_eq!(
 
 ### Checking if an ActiveModel is changed
 
-You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
+You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/0.9/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
