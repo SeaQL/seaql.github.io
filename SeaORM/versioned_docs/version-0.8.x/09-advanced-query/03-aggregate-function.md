@@ -4,7 +4,7 @@ You can group results selected from SeaORM find with the `group_by` method. If y
 
 ## Group By
 
-The `group_by` method can take a column of the entity or a complex [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html).
+The `group_by` method can take a column of the entity or a complex [`sea_query::SimpleExpr`](https://docs.rs/sea-query/0.8/sea_query/expr/enum.SimpleExpr.html).
 
 ```rust
 assert_eq!(

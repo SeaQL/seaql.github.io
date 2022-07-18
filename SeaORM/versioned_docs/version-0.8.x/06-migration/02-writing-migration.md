@@ -13,7 +13,7 @@ sea-orm-cli migrate generate NAME_OF_MIGRATION
 sea-orm-cli migrate generate create_table
 ```
 
-Or you can create a migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
+Or you can create a migration using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs` and update the [`MigrationName::name`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/trait.MigrationName.html#tymethod.name) impl accordingly.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
@@ -42,7 +42,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Additionally, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+Additionally, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
 
 ```rust title="migration/src/lib.rs"
 pub use sea_orm_migration::*;
@@ -63,7 +63,7 @@ impl MigratorTrait for Migrator {
 
 ## Defining Migration
 
-See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
+See [`SchemaManager`](https://docs.rs/sea-orm-migration/0.8/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
 
 ### SeaQuery
 
