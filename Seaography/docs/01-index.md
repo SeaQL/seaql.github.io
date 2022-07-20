@@ -77,6 +77,6 @@ In order to understand how the generated code works its recommended to study the
 
 ## More documentation
 
-1. [How the CLI works](./tool-internals)
-2. [Generated project guide](./generated-project-explained)
-3. [Enchantments cookbook](./enchantments-cookbook)
+1. [How the CLI works](/docs/tool-internals)
+2. [Generated project guide](/docs/generated-project-structure)
+3. [Enchantments cookbook](/docs/enchantments-cookbook)
