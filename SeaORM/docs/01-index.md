@@ -119,3 +119,5 @@
     10.2 [Derive Macros](10-internal-design/02-derive-macro.md)
 
     10.3 [Compare with Diesel](10-internal-design/03-diesel.md)
+
+    10.4 [Architecture](10-internal-design/04-architecture.md)
