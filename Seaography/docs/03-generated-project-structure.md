@@ -399,3 +399,72 @@ async fn main() {
         .unwrap();
 }
 ```
+
+## Generated GraphQL Schema
+
+We can inspect a part of the generated GraphQL schema bellow.
+
+```typescript
+schema {
+  query: QueryRoot
+}
+
+input PaginationInput {
+  limit: Int!
+  page: Int!
+}
+
+type Actor {
+  actorId: Int!
+  firstName: String!
+  lastName: String!
+  lastUpdate: DateTime!
+  actorFilmActor: [FilmActor!]!
+}
+
+input ActorFilter {
+  or: [ActorFilter!]
+  and: [ActorFilter!]
+  actorId: SmallUnsignedFilter
+  firstName: StringFilter
+  lastName: StringFilter
+  lastUpdate: DateTimeUtcFilter
+}
+
+type FilmActor {
+  actorId: Int!
+  filmId: Int!
+  lastUpdate: DateTime!
+  actorActor: Actor!
+  filmFilm: Film!
+}
+
+type Film {
+    [...]
+}
+
+type QueryRoot {
+  film(filters: FilmFilter, pagination: PaginationInput): PaginatedFilmResult!
+  actor(
+    filters: ActorFilter
+    pagination: PaginationInput
+  ):    !
+  filmActor(
+    filters: FilmActorFilter
+    pagination: PaginationInput
+  ): PaginatedFilmActorResult!
+  [...]
+}
+
+type PaginatedActorResult {
+  data: [Actor!]!
+  pages: Int!
+  current: Int!
+}
+
+type PaginatedFilmResult {
+    [...]
+}
+
+[...]
+```
