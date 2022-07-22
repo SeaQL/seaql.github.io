@@ -233,7 +233,7 @@ cake::Entity::insert(orange)
 
 ## Join Table with Custom Conditions and Table Alias
 
-[[#793](https://github.com/SeaQL/sea-orm/pull/793), [#852](https://github.com/SeaQL/sea-orm/pull/852)] Click [Custom Join Conditions](/SeaORM/docs/next/relation/custom-join-condition) and [Custom Joins](/SeaORM/docs/next/advanced-query/custom-joins) to learn more.
+[[#793](https://github.com/SeaQL/sea-orm/pull/793), [#852](https://github.com/SeaQL/sea-orm/pull/852)] Click [Custom Join Conditions](https://www.sea-ql.org/SeaORM/docs/next/relation/custom-join-condition) and [Custom Joins](https://www.sea-ql.org/SeaORM/docs/next/advanced-query/custom-joins) to learn more.
 
 ```rust
 assert_eq!(

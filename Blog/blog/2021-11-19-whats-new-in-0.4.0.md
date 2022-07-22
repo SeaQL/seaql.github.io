@@ -33,7 +33,7 @@ Contributed by:
 
 ## Enumeration
 
-[[#252](https://github.com/SeaQL/sea-orm/issues/252)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](/SeaORM/docs/generate-entity/enumeration).
+[[#252](https://github.com/SeaQL/sea-orm/issues/252)] You can now use Rust enums in model where the values are mapped to a database string, integer or native enum. Learn more [here](https://www.sea-ql.org/SeaORM/docs/generate-entity/enumeration).
 
 ```rust
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]

@@ -88,7 +88,7 @@ assert_eq!(
 );
 ```
 
-[More on testing](/docs/write-test/mock)
+[More on testing](https://www.sea-ql.org/SeaORM/docs/write-test/mock)
 
 ## Service Oriented
 
