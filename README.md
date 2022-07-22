@@ -2,5 +2,6 @@
 
 ### Sitemap
 
+- [SeaQL Blog](https://www.sea-ql.org/blog/)
 - [SeaORM Documentation](https://www.sea-ql.org/SeaORM/)
 - [StarfishQL Documentation](https://www.sea-ql.org/StarfishQL/)
