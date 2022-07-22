@@ -46,12 +46,12 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://crates.io/crates/starfish-ql',
+          to: 'https://crates.io/crates/starfish-ql',
           label: 'Crate',
           position: 'right',
         },
         {
-          href: 'https://github.com/SeaQL/starfish-ql',
+          to: 'https://github.com/SeaQL/starfish-ql',
           label: 'GitHub',
           position: 'right',
         },
@@ -87,15 +87,15 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/SeaQL/starfish-ql/discussions',
+              to: 'https://github.com/SeaQL/starfish-ql/discussions',
             },
             {
               label: 'Discord',
-              href: 'https://discord.com/invite/uCPdDXzbdv',
+              to: 'https://discord.com/invite/uCPdDXzbdv',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/sea_ql',
+              to: 'https://twitter.com/sea_ql',
             },
           ],
         },

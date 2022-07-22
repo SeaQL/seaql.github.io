@@ -24,6 +24,7 @@ module.exports = {
         alt: 'SeaQL Logo',
         src: 'img/SeaQL.png',
         href: 'https://www.sea-ql.org',
+        target: '_self',
       },
       items: [
         {
@@ -32,7 +33,7 @@ module.exports = {
           position: 'left'
         },
         {
-          href: 'https://github.com/SeaQL',
+          to: 'https://github.com/SeaQL',
           label: 'GitHub',
           position: 'left',
         },
@@ -46,27 +47,27 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/SeaQL',
+              to: 'https://github.com/SeaQL',
             },
             {
               label: 'Discord',
-              href: 'https://discord.com/invite/uCPdDXzbdv',
+              to: 'https://discord.com/invite/uCPdDXzbdv',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/sea_ql',
+              to: 'https://twitter.com/sea_ql',
             },
             {
               label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/sea-ql',
+              to: 'https://www.linkedin.com/company/sea-ql',
             },
             {
               label: 'DEV',
-              href: 'https://dev.to/seaql',
+              to: 'https://dev.to/seaql',
             },
             {
               label: 'GSoC',
-              href: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
+              to: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
             },
           ],
         },
@@ -75,19 +76,19 @@ module.exports = {
           items: [
             {
               label: 'SeaORM',
-              href: 'https://github.com/SeaQL/sea-orm',
+              to: 'https://github.com/SeaQL/sea-orm',
             },
             {
               label: 'SeaQuery',
-              href: 'https://github.com/SeaQL/sea-query',
+              to: 'https://github.com/SeaQL/sea-query',
             },
             {
               label: 'SeaSchema',
-              href: 'https://github.com/SeaQL/sea-schema',
+              to: 'https://github.com/SeaQL/sea-schema',
             },
             {
               label: 'StarfishQL',
-              href: 'https://github.com/SeaQL/starfish-ql',
+              to: 'https://github.com/SeaQL/starfish-ql',
             },
           ],
         },
