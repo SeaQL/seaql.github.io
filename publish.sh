@@ -22,6 +22,13 @@ npm run build
 mv build ../docs/StarfishQL
 cd ..
 
+# Build SeaQL blog
+cd Blog
+npm run build
+[[ -d ../docs/blog ]] && rm -r ../docs/blog
+mv build ../docs/blog
+cd ..
+
 # Commit & Push
 git add docs
 git commit -m 'Publish Docs'

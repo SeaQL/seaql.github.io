@@ -39,22 +39,23 @@ module.exports = {
           label: 'Docs',
         },
         {
-          to: '/blog',
+          to: 'https://www.sea-ql.org/blog/',
+          target: '_self',
           label: 'Blog',
           position: 'left'
         },
         {
-          href: 'https://www.sea-ql.org/sea-orm-tutorial/',
+          to: 'https://www.sea-ql.org/sea-orm-tutorial/',
           label: 'Tutorials',
           position: 'left',
         },
         {
-          href: 'https://crates.io/crates/sea-orm',
+          to: 'https://crates.io/crates/sea-orm',
           label: 'Crate',
           position: 'right',
         },
         {
-          href: 'https://github.com/SeaQL/sea-orm',
+          to: 'https://github.com/SeaQL/sea-orm',
           label: 'GitHub',
           position: 'right',
         },
@@ -91,19 +92,19 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/SeaQL/sea-orm/discussions',
+              to: 'https://github.com/SeaQL/sea-orm/discussions',
             },
             {
               label: 'Discord',
-              href: 'https://discord.com/invite/uCPdDXzbdv',
+              to: 'https://discord.com/invite/uCPdDXzbdv',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/sea_ql',
+              to: 'https://twitter.com/sea_ql',
             },
             {
               label: 'GSoC',
-              href: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
+              to: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
             },
           ],
         },
@@ -112,7 +113,8 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              to: '/blog',
+              target: '_self',
+              to: 'https://www.sea-ql.org/blog/',
             },
             {
               label: 'About Us',
@@ -160,13 +162,7 @@ module.exports = {
             },
           },
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
-          blogSidebarTitle: 'All posts',
-          blogSidebarCount: 'ALL',
-          postsPerPage: 'ALL',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
