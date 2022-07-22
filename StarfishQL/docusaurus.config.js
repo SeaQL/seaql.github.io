@@ -108,7 +108,7 @@ module.exports = {
             },
             {
               label: 'Blog',
-              to: 'https://www.sea-ql.org/SeaORM/blog/',
+              to: 'https://www.sea-ql.org/blog/',
               target: '_self',
             },
           ],
