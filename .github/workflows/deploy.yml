@@ -36,6 +36,14 @@ jobs:
           [[ -d ../docs/StarfishQL ]] && rm -r ../docs/StarfishQL
           mv build ../docs/StarfishQL
 
+      - name: Build SeaQL Blog
+        run: |
+          cd Blog
+          npm i
+          npm run build
+          [[ -d ../docs/blog ]] && rm -r ../docs/blog
+          mv build ../docs/blog
+
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
