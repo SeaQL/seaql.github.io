@@ -32,3 +32,11 @@ npm run build
 [[ -d ../docs/blog ]] && rm -r ../docs/blog
 mv build ../docs/blog
 cd ..
+
+# Build Seaography docs
+cd Seaography
+npm i
+npm run build
+[[ -d ../docs/Seaography ]] && rm -r ../docs/Seaography
+mv build ../docs/Seaography
+cd ..
