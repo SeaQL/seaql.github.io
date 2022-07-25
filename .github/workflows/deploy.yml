@@ -13,36 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build SeaORM Docs
-        run: |
-          cd SeaORM
-          npm i
-          npm run build
-          [[ -d ../docs/SeaORM ]] && rm -r ../docs/SeaORM
-          mv build ../docs/SeaORM
-
-      # - name: Build SeaQuery Docs
-      #   run: |
-      #     cd SeaQuery
-      #     npm i
-      #     npm run build
-      #     [[ -d ../docs/SeaQuery ]] && rm -r ../docs/SeaQuery
-      #     mv build ../docs/SeaQuery
-
-      - name: Build StarfishQL Docs
-        run: |
-          cd StarfishQL
-          npm i
-          npm run build
-          [[ -d ../docs/StarfishQL ]] && rm -r ../docs/StarfishQL
-          mv build ../docs/StarfishQL
-
-      - name: Build SeaQL Blog
-        run: |
-          cd Blog
-          npm i
-          npm run build
-          [[ -d ../docs/blog ]] && rm -r ../docs/blog
-          mv build ../docs/blog
+        run: sh build.sh
 
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
