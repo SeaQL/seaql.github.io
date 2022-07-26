@@ -54,7 +54,16 @@ Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and
 ```toml title="migration/Cargo.toml"
 [dependencies]
 async-std = { version = "^1", features = ["attributes", "tokio1"] }
-sea-orm-migration = { version = "^0" }
+
+[dependencies.sea-orm-migration]
+version = "^0"
+features = [
+  # Enable at least one `ASYNC_RUNTIME` and `DATABASE_DRIVER` feature if you want to run migration via CLI.
+  # View the list of supported features at https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime.
+  # e.g.
+  # "runtime-tokio-rustls",  # `ASYNC_RUNTIME` featrure
+  # "sqlx-postgres",         # `DATABASE_DRIVER` feature
+]
 ```
 
 Let's write a migration. Detailed instructions in the next section.
