@@ -1,10 +1,10 @@
 # Tool internals
 
-Here we will describe the internals of the CLI tool. Firstly, we will study the tools itself. The tool is separated into 3 distinct sub-crates (`types`, `discovery`, `generator`). Then, we will focus on the generator sub-crate and study the different generator modes.
+Here we will describe the internals of the CLI tool. Firstly, we will study the tool itself, and how its structured. Then, we will focus on the generator sub-crate and study the different generator modes.
 
 ## Internal crates
 
-The project depends on 3 sub-crates with aim to separate of concern. Doing this allows easier maintenance, extension and debugging.
+The project depends on 3 sub-crates (`types`, `discovery`, `generator`). This helps with separation of logic into simpler modules which are easier to maintain, extend and debug.
 
 ### `types`
 
@@ -48,14 +48,13 @@ The core of the tool, coordinates all sub-crates.
 
 ## Generators
 
-The generators are responsible for generating the Rust code. Also, it is the main point where new features are implemented. Currently the project only implements the expanded code generator. A procedural macro based generator is WIP and will depend on the expanded format generator to generate code with fewer lines of code but same functionality.
-
+The generators are responsible for generating the Rust code. It is the main point where the core features we provide reside. Currently the project only implements the expanded code generator. A procedural macro based generator is WIP and will depend on the expanded format generator to generate code with fewer lines of code but same functionality.
 
 All examples are based on https://dev.mysql.com/doc/sakila/en/ database.
 
 ### Expanded mode
 
-The expanded generator produce all Rust code. Its easier to modify, but harder to maintain and larger surface of code means more bugs.
+The expanded generator produce all Rust code. Its easier to modify, but harder to maintain long term. In case a new version of the generator exists you have to regenerate the whole project and apply the your custom modifications again.
 
 #### Example entity
 

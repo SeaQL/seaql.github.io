@@ -1,6 +1,25 @@
-# Enchantments Cookbook
+# Extending generated code
 
-## Field guards
+When we are done generating the code we can then modify the Rust code based on our needs.
+
+## Introduction
+
+In order to extend the existing code first you need to be comfortable with the libraries the generated code depends on.
+
+* [async_graphql](https://github.com/async-graphql/async-graphql)
+* [poem](https://github.com/poem-web/poem)
+* [sea_orm](https://github.com/SeaQL/sea-orm)
+
+Studying the generated code structure provides valuable information on where to find important features, for more info [here](/docs/generated-project-structure).
+
+When you are comfortable enough with all the terms, you can jump into the folders and add new features or logic based on your objectives.
+
+
+## Major features
+
+Bellow there are some important features you might need:
+
+### Field guards
 
 With field guards you can protect specific queries or fields accessors from being accessed using custom guard function.
 
@@ -8,7 +27,7 @@ You can read more here https://async-graphql.github.io/async-graphql/en/field_gu
 
 
 
-## Query complexity
+### Query complexity and depth
 
 The current generators doesn't prevent cyclic dependencies. A bad actor can use cyclic dependencies to perform unlimited nested queries and crash the server.
 
@@ -60,7 +79,7 @@ You can perform the following query
 
 To prevent this behavior we can enable with few lines of code query complexity calculator and depth limiter.
 
-### Query depth limit
+#### Query depth limit
 
 On main.rs file we modify the following from
 
@@ -82,7 +101,7 @@ let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
     .finish();
 ```
 
-### Query complexity limit
+#### Query complexity limit
 
 On main.rs file we modify the following from
 
@@ -104,6 +123,6 @@ let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
     .finish();
 ```
 
-### For more documentation
+#### More documentation
 
 https://async-graphql.github.io/async-graphql/en/depth_and_complexity.html

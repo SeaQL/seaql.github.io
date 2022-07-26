@@ -78,7 +78,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'index',
+            docId: 'getting-started',
             position: 'left',
             label: 'Docs',
           },
@@ -108,7 +108,7 @@ const config = {
             items: [
               {
                 label: 'Getting Started',
-                to: '/docs/index',
+                to: '/docs/getting-started',
               },
               {
                 label: 'API Reference',
@@ -138,7 +138,8 @@ const config = {
             items: [
               {
                 label: 'About Us',
-                to: '/about-us',
+                to: 'https://www.sea-ql.org/about-us/',
+                target: '_self',
               },
               {
                 label: 'Blog',
