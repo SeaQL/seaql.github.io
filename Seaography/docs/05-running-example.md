@@ -22,28 +22,39 @@ In this article we will follow the instructions on how to setup the example proj
   cargo install
   ```
 
-3. Build project
-  ```shell
-  cargo build
-  ```
-
-4. Generate example project
-  ```shell
-  cargo run sqlite://./chinook.db/ generated ./generated
-  ```
-
-5. Copy database
-  ```shell
-  cp ./chinook.db ./generated/chinook.db
-  ```
-
-6. Run project
+3. Run project
   ```shell
   cd generated
   cargo run
   ```
 
-7. Browse local server
+4. Browse local server
+  http://127.0.0.1:8000/
+
+## Regenerating code
+
+1. Set working directory to Seaography folder
+  ```shell
+  $ cd seaography
+  ```
+
+2. Build project
+  ```shell
+  cargo build
+  ```
+
+3. Generate example project
+  ```shell
+  cargo run sqlite://./chinook.db/ generated ./generated
+  ```
+
+4. Run project
+  ```shell
+  cd generated
+  cargo run
+  ```
+
+5. Browse local server
   http://127.0.0.1:8000/
 
 ## Query examples
