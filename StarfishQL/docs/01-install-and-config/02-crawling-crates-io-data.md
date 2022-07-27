@@ -4,7 +4,7 @@ Once the database and query engine are up and running, the next step is to prepa
 
 ## Running the crawler for the first time
 
-```sh
+```shell
 # starfish-ql/freeport/backend
 npm install
 npm start
@@ -14,7 +14,7 @@ The node application **pulls** the [index repo](https://github.com/rust-lang/cra
 
 ## Updating the database
 
-```sh
+```shell
 # starfish-ql/freeport/backend
 npm start
 ```
@@ -25,7 +25,7 @@ The same npm script (`start`) is used for updating the database for convenience.
 
 In some cases, you may want to wipe out the whole database and start from scratch.
 
-```sh
+```shell
 # starfish-ql/freeport/backend
 npm restart
 ```
