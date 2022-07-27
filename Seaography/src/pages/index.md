@@ -6,6 +6,8 @@ Seaography is a CLI tool that generates a ready to compile Rust GraphQL API for 
 
 The tool connects to a relational database, explores its schema and based on it generates the ORM entities and GraphQL queries.
 
+<img src="img/playground_example_database.png" alt="Application preview" />
+
 ## Benefits
 
 * Generate the boilerplate
