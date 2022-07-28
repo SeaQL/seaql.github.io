@@ -103,12 +103,12 @@ module.exports = {
         'rust',
       ],
     },
-    // algolia: {
-    //   appId: 'F60BRNGE7P',
-    //   apiKey: 'cb0fff4f36dcd0f3d6a97e12e494dec7',
-    //   indexName: 'seaorm',
-    //   contextualSearch: true,
-    // },
+    algolia: {
+      appId: 'SLLZ32J41K',
+      apiKey: 'c115bc77747b9ab31b84d01c1c5c1a0a',
+      indexName: 'sea-ql',
+      contextualSearch: true,
+    },
   },
   presets: [
     [
