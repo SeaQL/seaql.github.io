@@ -8,7 +8,7 @@ author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
 tags: [news]
 ---
 
-It's hard to pin down the exact dates, but I think SeaQL.org was first setup in July 2020, a little over a year ago. Over the course of the year, SeaORM went from 0.1 to 0.9 and the number of users kept growing. I would like to outline our engineering approach in this blog post, and perhaps as a reference or guidance to the future maintainer of this project.
+It's hard to pin down the exact date, but I think SeaQL.org was setup in July 2020, a little over a year ago. Over the course of the year, SeaORM went from 0.1 to 0.9 and the number of users kept growing. I would like to outline our engineering process in this blog post, and perhaps it can serve as a reference or guidance to prospective contributors and the future maintainer of this project.
 
 In the open source world, the Benevolent Dictator for Life (BDL) model underpins a number of successful open source projects. That's not me! As a maintainer, I believe in an open, bottom-up, iterative and progressive approach. Let me explain each of these words and what they mean to me.
 
@@ -22,11 +22,11 @@ We rely on users to file feature requests, bug reports and of course pull reques
 
 ### Iterative
 
-Open source software is imperfect, impermanent and incomplete. While I do have a grand vision in mind, we do not try rushing to it all the way in one charge, nor keeping a project secret until it is 'complete'. Good old 'release early, release often' - we would release an initial working version of a tool, gather user feedback and improve upon it, often reimplementing a few things and break a few others - which brings us to the next point.
+Open source software is imperfect, impermanent and incomplete. While I do have a grand vision in mind, we do not try rushing it all the way in one charge, nor keeping a project secret until it is 'complete'. Good old 'release early, release often' - we would release an initial working version of a tool, gather user feedback and improve upon it, often reimplementing a few things and break a few others - which brings us to the next point.
 
 ### Progressive
 
-Progression. Always look forward and leave legacy behind. It does not mean that we would arbitrary break things, but when a decision is made, we'd always imagine how the software *should be* without historic context. We'd provide migrate paths and encourage users to move forward with us. After all, Rust is a young and evolving language! You may or may not know that `async` was just stabilized in 2020.
+Favour progression. Always look forward and leave legacy behind. It does not mean that we would arbitrary break things, but when a decision is made, we'd always imagine how the software *should be* without historic context. We'd provide migrate paths and encourage users to move forward with us. After all, Rust is a young and evolving language! You may or may not know that `async` was just stabilized in 2020.
 
 Enough said for the philosophy, let's now talk about the actual engineering process.
 
