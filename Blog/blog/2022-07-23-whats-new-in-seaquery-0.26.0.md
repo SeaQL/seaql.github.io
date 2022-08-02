@@ -21,76 +21,30 @@ tags: [news]
 
 Note that you might need to upgrade the corresponding dependency on your application as well.
 
-<div class="row">
-    <div class="col col--8 margin-bottom--md">
-        <div class="row">
-            <div class="col col--12 margin-bottom--md">
-                Proposed by:
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col--6 margin-bottom--md">
-                <div class="avatar">
-                    <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
-                        <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
-                    </a>
-                    <div class="avatar__intro">
-                        <div class="avatar__name">
-                            Billy Chan
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="row">
-            <div class="col col--12 margin-bottom--md">
-                Contributed by:
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col--12 margin-bottom--md">
-                <div class="avatar">
-                    <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
-                        <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
-                    </a>
-                    <div class="avatar__intro">
-                        <div class="avatar__name">
-                            Chris Tsang
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col--12 margin-bottom--md">
-                <div class="avatar">
-                    <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/ikrivosheev">
-                        <img src="https://avatars.githubusercontent.com/u/6786239?v=4" />
-                    </a>
-                    <div class="avatar__intro">
-                        <div class="avatar__name">
-                            Ivan Krivosheev
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col--12 margin-bottom--md">
-                <div class="avatar">
-                    <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marti4d">
-                        <img src="https://avatars.githubusercontent.com/u/22406337?v=4" />
-                    </a>
-                    <div class="avatar__intro">
-                        <div class="avatar__name">
-                            Chris Martin
-                        </div>
-                    </div>
-                </div>
-            </div>
+## Add support for VALUES lists in PostgreSQL backend
 
-        </div>
-    </div>
-</div>
+[[#351]](https://github.com/SeaQL/sea-query/issues/350)] 
 
+## Introduce sea-query-binder
+
+[[#273](https://github.com/SeaQL/sea-query/issues/273)]
+
+## Support LIKE ESCAPE 
+
+[[#352](https://github.com/SeaQL/sea-query/pull/352)]
+[[#353](https://github.com/SeaQL/sea-query/pull/353)]
+
+## Add method to make column nullable
+
+[[#365](https://github.com/SeaQL/sea-query/pull/365)]
+
+## Add is/is\_not to Expr
+
+[[#348](https://github.com/SeaQL/sea-query/pull/348)]
+
+## Add in\_tuple method
+
+[[#345](https://github.com/SeaQL/sea-query/pull/345)]
 
 ## Integration Examples
 
