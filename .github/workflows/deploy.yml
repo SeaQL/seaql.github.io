@@ -19,6 +19,14 @@ jobs:
       - name: Build SeaORM Docs
         run: sh build.sh
 
+      - name: Build Seaography Docs
+        run: |
+          cd Seaography
+          npm i
+          npm run build
+          [[ -d ../docs/Seaography ]] && rm -r ../docs/Seaography
+          mv build ../docs/Seaography
+
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
