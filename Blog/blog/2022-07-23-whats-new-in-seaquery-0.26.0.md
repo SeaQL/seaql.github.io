@@ -8,7 +8,7 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-🎉 We are pleased to release SeaQuery [`0.26.0`](https://github.com/SeaQL/sea-query/releases/tag/0.26.0) today! Here are some feature highlights 🌟:
+🎉 We are pleased to release SeaQuery [`0.26`](https://github.com/SeaQL/sea-query/releases/tag/0.26.2)! Here are some feature highlights 🌟:
 
 ## Dependency Upgrades
 
@@ -21,30 +21,170 @@ tags: [news]
 
 Note that you might need to upgrade the corresponding dependency on your application as well.
 
-## Add support for VALUES lists in PostgreSQL backend
+## VALUES lists
 
-[[#351]](https://github.com/SeaQL/sea-query/issues/350)] 
+[[#351]](https://github.com/SeaQL/sea-query/issues/350)] Add support for VALUES lists
+
+```rust
+// SELECT * FROM (VALUES (1, 'hello'), (2, 'world')) AS "x"
+let query = SelectStatement::new()
+    .expr(Expr::asterisk())
+    .from_values(vec![(1i32, "hello"), (2, "world")], Alias::new("x"))
+    .to_owned();
+
+ assert_eq!(
+     query.to_string(PostgresQueryBuilder), 
+     r#"SELECT * FROM (VALUES (1, 'hello'), (2, 'world')) AS "x""#
+ );
+```
 
 ## Introduce sea-query-binder
 
-[[#273](https://github.com/SeaQL/sea-query/issues/273)]
+[[#273](https://github.com/SeaQL/sea-query/issues/273)] Native support SQLx without marcos
 
-## Support LIKE ESCAPE 
+```rust
+use sea_query_binder::SqlxBinder;
 
-[[#352](https://github.com/SeaQL/sea-query/pull/352)]
-[[#353](https://github.com/SeaQL/sea-query/pull/353)]
+// Create SeaQuery query with prepare SQLx
+let (sql, values) = Query::select()
+    .columns([
+        Character::Id,
+        Character::Uuid,
+        Character::Character,
+        Character::FontSize,
+        Character::Meta,
+        Character::Decimal,
+        Character::BigDecimal,
+        Character::Created,
+        Character::Inet,
+        Character::MacAddress,
+    ])
+    .from(Character::Table)
+    .order_by(Character::Id, Order::Desc)
+    .build_sqlx(PostgresQueryBuilder);
 
-## Add method to make column nullable
+// Execute query
+let rows = sqlx::query_as_with::<_, CharacterStructChrono, _>(&sql, values)
+    .fetch_all(&mut pool)
+    .await?;
 
-[[#365](https://github.com/SeaQL/sea-query/pull/365)]
+// Print rows
+for row in rows.iter() {
+    println!("{:?}", row);
+}
+```
 
-## Add is/is\_not to Expr
+## SeaQL Improvements
 
-[[#348](https://github.com/SeaQL/sea-query/pull/348)]
+- [[#353](https://github.com/SeaQL/sea-query/pull/353)] Support `LIKE ... ESCAPE ...`  expression  
+- [[#306](https://github.com/SeaQL/sea-query/pull/306)] Move `escape` and `unescape` string to backend
+- [[#365](https://github.com/SeaQL/sea-query/pull/365)] Add method to make a column nullable
+- [[#348](https://github.com/SeaQL/sea-query/pull/348)] Add `is` & `is_not` to Expr
+- [[#349](https://github.com/SeaQL/sea-query/pull/349)] Add `CURRENT_TIMESTAMP` function
+- [[#345](https://github.com/SeaQL/sea-query/pull/345)] Add `in_tuple` method to Expr
 
-## Add in\_tuple method
 
-[[#345](https://github.com/SeaQL/sea-query/pull/345)]
+🎉 Previous SeaQuery release [`0.25`](https://github.com/SeaQL/sea-query/releases/tag/0.25.2)! Here are some feature highlights 🌟:
+
+## CASE WHEN statement support 
+
+[[#304](https://github.com/SeaQL/sea-query/pull/304)] Add support for `CASE WHEN` statement
+
+```rust
+let query = Query::select()
+    .expr_as(
+        CaseStatement::new()
+            .case(Expr::tbl(Glyph::Table, Glyph::Aspect).is_in(vec![2, 4]), Expr::val(true))
+            .finally(Expr::val(false)),
+        Alias::new("is_even")
+    )
+    .from(Glyph::Table)
+    .to_owned();
+    
+assert_eq!(
+    query.to_string(PostgresQueryBuilder),
+    r#"SELECT (CASE WHEN ("glyph"."aspect" IN (2, 4)) THEN TRUE ELSE FALSE END) AS "is_even" FROM "glyph""#
+);
+```
+
+## Add support for Ip(4,6)Network and MacAddress
+
+[[#309](https://github.com/SeaQL/sea-query/pull/309)] Add support for Network types in PostgreSQL backend
+
+## Introduce sea-query-attr
+
+[[#296](https://github.com/SeaQL/sea-query/issues/296)] Proc-macro for deriving Iden enum from struct
+
+```rust
+use sea_query::gen_type_def;
+
+#[gen_type_def]
+pub struct Hello {
+    pub name: String
+}
+
+println!("{:?}", HelloTypeDef::Name);
+```
+
+## Add ability to alter foreign keys
+
+[[#299](https://github.com/SeaQL/sea-query/pull/299)] Add support for `ALTER` foreign Keys
+
+```rust
+let foreign_key_char = TableForeignKey::new()
+    .name("FK_character_glyph")
+    .from_tbl(Char::Table)
+    .from_col(Char::FontId)
+    .from_col(Char::Id)
+    .to_tbl(Glyph::Table)
+    .to_col(Char::FontId)
+    .to_col(Char::Id)
+    .to_owned();
+
+let table = Table::alter()
+    .table(Character::Table)
+    .add_foreign_key(&foreign_key_char)
+    .to_owned();
+
+assert_eq!(
+    table.to_string(PostgresQueryBuilder),
+    vec![
+        r#"ALTER TABLE "character""#,
+        r#"ADD CONSTRAINT "FK_character_glyph""#,
+        r#"FOREIGN KEY ("font_id", "id") REFERENCES "glyph" ("font_id", "id")"#,
+        r#"ON DELETE CASCADE ON UPDATE CASCADE,"#,
+    ]
+    .join(" ")
+);
+```
+
+## Select DISTINCT ON
+
+[[#250](https://github.com/SeaQL/sea-query/issues/250)]
+
+```rust
+let query = Query::select()
+    .from(Char::Table)
+    .distinct_on(vec![Char::Character])
+    .column(Char::Character)
+    .column(Char::SizeW)
+    .column(Char::SizeH)
+    .to_owned();
+    
+ assert_eq!(
+     query.to_string(PostgresQueryBuilder),
+     r#"SELECT DISTINCT ON ("character") "character", "size_w", "size_h" FROM "character""#
+ );
+```
+
+## SeaQL Improvements
+- [[#266](https://github.com/SeaQL/sea-query/pull/266)] Insert Default
+- [[#324](https://github.com/SeaQL/sea-query/pull/324)] Make `sea-query-driver` an optional dependency
+- [[#334](https://github.com/SeaQL/sea-query/pull/334)] Add `ABS` function
+- [[#332](https://github.com/SeaQL/sea-query/pull/332)] Support `IF NOT EXISTS` when create index
+- [[#314](https://github.com/SeaQL/sea-query/pull/314)] Support different `blob` types in MySQL
+- [[#331](https://github.com/SeaQL/sea-query/pull/331)] Add `VarBinary` column type
+- [[#335](https://github.com/SeaQL/sea-query/pull/335)] `RETURNING` expression supporting `SimpleExpr`
 
 ## Integration Examples
 
