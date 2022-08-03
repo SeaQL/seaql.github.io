@@ -121,8 +121,6 @@ module.exports = {
       ].join(''),
     },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/dracula'),
       additionalLanguages: [
         'toml',
         'rust',

@@ -7,20 +7,23 @@ const ProductList = [
     url: 'https://caido.io/',
     logo: '/SeaORM/img/other/caido-logo.png',
     desc: 'A lightweight web security auditing toolkit',
+    logoClassName: null,
   },
   {
     url: 'https://l2.technology/sensei',
     logo: '/SeaORM/img/other/sensei-logo.svg',
     desc: 'A Bitcoin lightning node implementation',
+    logoClassName: styles.senseiLogo,
   },
   {
     url: 'https://www.svix.com/',
     logo: '/SeaORM/img/other/svix-logo.svg',
     desc: 'The enterprise ready webhooks service',
+    logoClassName: styles.svixLogo,
   },
 ];
 
-function Product({url, logo, desc}) {
+function Product({url, logo, desc, logoClassName}) {
   return (
     <div className={clsx('col col--4')}>
       <div style={{
@@ -33,7 +36,7 @@ function Product({url, logo, desc}) {
         justifyContent: 'flex-end',
       }}>
         <a href={url} target="_blank">
-          <img src={logo} style={{ width: '250px' }}/>
+          <img src={logo} className={clsx(logoClassName)} style={{ width: '250px' }}/>
         </a>
         <p>{desc}</p>
       </div>

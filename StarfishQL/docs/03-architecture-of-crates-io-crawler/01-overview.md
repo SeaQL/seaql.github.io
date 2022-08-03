@@ -6,7 +6,7 @@ The usual, trivial approaches might be directly scraping from their frontend web
 
 crates.io puts their data in a [public git repo](https://github.com/rust-lang/crates.io-index). Let's clone it and take a deeper dive.
 
-```sh
+```shell
 # tree crates.io-index | less
 crates.io-index
 ├── 1

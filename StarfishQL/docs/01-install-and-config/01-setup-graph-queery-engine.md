@@ -4,7 +4,7 @@
 
 Set up a MySQL[^1] database connection with Docker:
 
-```sh
+```shell
 docker run \
     --name "mysql-8.0" \
     --env MYSQL_DB="mysql" \
@@ -18,21 +18,21 @@ docker stop "mysql-8.0"
 
 ## Run the tests
 
-```sh
+```shell
 # starfish-ql/starfish/
 DATABASE_URL="mysql://root:root@localhost:3306" cargo test --all
 ```
 
 ## Start the query engine
 
-```sh
+```shell
 # starfish-ql/starfish/
 cargo run --release
 ```
 
 Alternatively, use the default compilation profile so that logs and SQL commands are displayed in the terminal.
 
-```sh
+```shell
 # starfish-ql/starfish/
 cargo run
 ```

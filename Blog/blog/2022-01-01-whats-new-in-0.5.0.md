@@ -154,7 +154,7 @@ where
 
 Install latest version of `sea-orm-cli`:
 
-```sh
+```shell
 cargo install sea-orm-cli
 ```
 

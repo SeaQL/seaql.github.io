@@ -4,7 +4,7 @@ With a populated database and a working query engine, it's time for some visuali
 
 ## Serve the application locally
 
-```sh
+```shell
 # starfish-ql/freeport/frontend
 npm install
 npm start
@@ -14,7 +14,7 @@ The server will run at [http://localhost:8080/](http://localhost:8080/).
 
 ## Bundle the application
 
-```sh
+```shell
 # starfish-ql/freeport/frontend
 npm run build
 ```
