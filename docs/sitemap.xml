@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://www.sea-ql.org/blog/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.sea-ql.org/SeaORM/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.sea-ql.org/StarfishQL/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.sea-ql.org/sea-orm-tutorial/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>

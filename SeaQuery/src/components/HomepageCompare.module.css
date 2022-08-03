@@ -1,0 +1,17 @@
+/* stylelint-disable docusaurus/copyright-header */
+
+.features {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.table {
+  text-align: center;
+}
+
+.table tr, .table td, .table th {
+  border-color: #aaa;
+  border-collapse: collapse;
+  background-color: transparent !important;
+}

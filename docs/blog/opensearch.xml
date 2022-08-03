@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>SeaQL - Building data intensive applications in Rust</ShortName>
+  <Description>Search SeaQL - Building data intensive applications in Rust</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://www.sea-ql.org/blog/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://www.sea-ql.org/blog/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://www.sea-ql.org/blog/opensearch.xml" />
+  <moz:SearchForm>https://www.sea-ql.org/blog/</moz:SearchForm>
+</OpenSearchDescription>

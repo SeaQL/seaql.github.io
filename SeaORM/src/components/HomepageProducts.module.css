@@ -1,0 +1,15 @@
+/* stylelint-disable docusaurus/copyright-header */
+
+.features {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+html[data-theme='light'] .senseiLogo {
+  filter: drop-shadow(1px 0 0px #1b1b1d) drop-shadow(0 1px 0 #1b1b1d) drop-shadow(-1px 0 0 #1b1b1d) drop-shadow(0 -1px 0 #1b1b1d);
+}
+
+html[data-theme='dark'] .svixLogo {
+  filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
+}
