@@ -23,7 +23,7 @@ Note that you might need to upgrade the corresponding dependency on your applica
 
 ## VALUES lists
 
-[[#351]](https://github.com/SeaQL/sea-query/issues/350)] Add support for VALUES lists
+[[#351](https://github.com/SeaQL/sea-query/issues/350)] Add support for VALUES lists
 
 ```rust
 // SELECT * FROM (VALUES (1, 'hello'), (2, 'world')) AS "x"
