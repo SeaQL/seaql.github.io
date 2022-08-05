@@ -1,5 +1,5 @@
 ---
-slug: 2022-07-23-whats-new-in-seaquery-0.26.0
+slug: 2022-08-05-whats-new-in-seaquery-0.26.0
 title: What's new in SeaQuery 0.26.0
 author: SeaQL Team
 author_title: Ivan Krivosheev
@@ -73,18 +73,6 @@ for row in rows.iter() {
     println!("{:?}", row);
 }
 ```
-
-## SeaQL Improvements
-
-- [[#353](https://github.com/SeaQL/sea-query/pull/353)] Support `LIKE ... ESCAPE ...`  expression  
-- [[#306](https://github.com/SeaQL/sea-query/pull/306)] Move `escape` and `unescape` string to backend
-- [[#365](https://github.com/SeaQL/sea-query/pull/365)] Add method to make a column nullable
-- [[#348](https://github.com/SeaQL/sea-query/pull/348)] Add `is` & `is_not` to Expr
-- [[#349](https://github.com/SeaQL/sea-query/pull/349)] Add `CURRENT_TIMESTAMP` function
-- [[#345](https://github.com/SeaQL/sea-query/pull/345)] Add `in_tuple` method to Expr
-
-
-🎉 Previous SeaQuery release [`0.25`](https://github.com/SeaQL/sea-query/releases/tag/0.25.2)! Here are some feature highlights 🌟:
 
 ## CASE WHEN statement support 
 
@@ -178,6 +166,12 @@ let query = Query::select()
 ```
 
 ## SeaQL Improvements
+- [[#353](https://github.com/SeaQL/sea-query/pull/353)] Support `LIKE ... ESCAPE ...`  expression  
+- [[#306](https://github.com/SeaQL/sea-query/pull/306)] Move `escape` and `unescape` string to backend
+- [[#365](https://github.com/SeaQL/sea-query/pull/365)] Add method to make a column nullable
+- [[#348](https://github.com/SeaQL/sea-query/pull/348)] Add `is` & `is_not` to Expr
+- [[#349](https://github.com/SeaQL/sea-query/pull/349)] Add `CURRENT_TIMESTAMP` function
+- [[#345](https://github.com/SeaQL/sea-query/pull/345)] Add `in_tuple` method to Expr
 - [[#266](https://github.com/SeaQL/sea-query/pull/266)] Insert Default
 - [[#324](https://github.com/SeaQL/sea-query/pull/324)] Make `sea-query-driver` an optional dependency
 - [[#334](https://github.com/SeaQL/sea-query/pull/334)] Add `ABS` function
@@ -185,6 +179,7 @@ let query = Query::select()
 - [[#314](https://github.com/SeaQL/sea-query/pull/314)] Support different `blob` types in MySQL
 - [[#331](https://github.com/SeaQL/sea-query/pull/331)] Add `VarBinary` column type
 - [[#335](https://github.com/SeaQL/sea-query/pull/335)] `RETURNING` expression supporting `SimpleExpr`
+
 
 ## Integration Examples
 
