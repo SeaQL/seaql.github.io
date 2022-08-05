@@ -8,7 +8,7 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-🎉 We are pleased to release SeaQuery [`0.26`](https://github.com/SeaQL/sea-query/releases/tag/0.26.2)! Here are some feature highlights 🌟:
+🎉 We are pleased to release SeaQuery [`0.26.0`](https://github.com/SeaQL/sea-query/releases/tag/0.26.0)! Here are some feature highlights 🌟:
 
 ## Dependency Upgrades
 
@@ -165,7 +165,8 @@ let query = Query::select()
  );
 ```
 
-## SeaQL Improvements
+## Miscellaneous Enhancements
+
 - [[#353](https://github.com/SeaQL/sea-query/pull/353)] Support `LIKE ... ESCAPE ...`  expression  
 - [[#306](https://github.com/SeaQL/sea-query/pull/306)] Move `escape` and `unescape` string to backend
 - [[#365](https://github.com/SeaQL/sea-query/pull/365)] Add method to make a column nullable
@@ -180,7 +181,6 @@ let query = Query::select()
 - [[#331](https://github.com/SeaQL/sea-query/pull/331)] Add `VarBinary` column type
 - [[#335](https://github.com/SeaQL/sea-query/pull/335)] `RETURNING` expression supporting `SimpleExpr`
 
-
 ## Integration Examples
 
 SeaQuery plays well with the other crates in the rust ecosystem. 
@@ -192,88 +192,6 @@ SeaQuery plays well with the other crates in the rust ecosystem.
 - [SQLx MySql Example](https://github.com/SeaQL/sea-query/tree/master/examples/sqlx_mysql)
 - [SQLx Sqlite Example](https://github.com/SeaQL/sea-query/tree/master/examples/sqlx_sqlite)
 
-## Sponsor
-
-Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! If you feel generous, a small donation will be greatly appreciated.
-
-A big shout out to our sponsors 😇:
-
-<div class="row">
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/Sytten">
-                <img src="https://avatars.githubusercontent.com/u/2366731?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Émile Fugulin
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/deansheather">
-                <img src="https://avatars.githubusercontent.com/u/11241812?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Dean Sheather
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/shanesveller">
-                <img src="https://avatars.githubusercontent.com/u/831?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Shane Sveller
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/sakti">
-                <img src="https://avatars.githubusercontent.com/u/196178?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Sakti Dwi Cahyono
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm">
-                <img style={{width: '100%'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Unnamed Sponsor
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm">
-                <img style={{width: '100%'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Unnamed Sponsor
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 ## Community
 
 SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
-
