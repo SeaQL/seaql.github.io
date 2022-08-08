@@ -7,10 +7,11 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 Generate a new migration file by executing `sea-orm-cli migrate generate` command.
 
 ```shell
-sea-orm-cli migrate generate NAME_OF_MIGRATION
+sea-orm-cli migrate generate NAME_OF_MIGRATION [-u|--universal-time]
 
 # E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
 sea-orm-cli migrate generate create_table
+sea-orm-cli migrate generate create_table -u  # generates filename in Utc time (recommended)
 ```
 
 Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
@@ -168,7 +169,7 @@ assert_eq!(Post::Text.to_string(), "text");
 
 ### Raw SQL
 
-You can write migration files in raw SQL, but then you lost the cross-backend compatibility SeaQuery offers. 
+You can write migration files in raw SQL, but then you lost the cross-backend compatibility SeaQuery offers.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm::Statement;
