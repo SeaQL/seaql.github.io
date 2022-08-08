@@ -144,6 +144,13 @@ module.exports = {
       indexName: 'seaorm',
       contextualSearch: true,
     },
+    announcementBar: {
+      id: 'support-us',
+      content: 'Please star our repos! Every ⭐ counts!',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: false,
+    },
   },
   presets: [
     [
