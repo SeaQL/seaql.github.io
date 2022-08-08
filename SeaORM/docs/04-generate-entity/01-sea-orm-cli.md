@@ -6,6 +6,12 @@ First, install `sea-orm-cli` with `cargo`.
 $ cargo install sea-orm-cli
 ```
 
+Alternatively, you can install the CLI using [Nix](https://nixos.org):
+
+```shell
+$ nix-env -iA sea-orm-cli
+```
+
 ## Configure Environment
 
 Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
