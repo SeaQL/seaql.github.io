@@ -31,48 +31,6 @@ I'm Panagiotis, I live in Athens Greece and currently I pursue my second bachelo
 
 I'll be working on creating a CLI tool that will explore a database schema and then generate a ready to build `async-graphql` API. The tool will allow quick integration with the SeaQL and Rust ecosystems as well as GraphQL. To be more specific, for database exploring I'll use `sea-schema` and `sea-orm-codegen` for entity generation, my job is to glue those together with `async-graphql` library. You can read more [here](https://github.com/SeaQL/summer-of-code/discussions/12).
 
-### Support TiDB in the SeaQL Ecosystem
-
-<div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/itwaiX">
-                <img src="https://avatars.githubusercontent.com/u/44227947?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Yuang Xu
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-My name is Yuang Xu, I live in Shanghai, China, I'm a senior student at Shandong University, China, majoring in Computer and Science Technology. During my university years, I participated in open-source projects many times, and once participated in the Tencent open-source Kona JDK project.
-
-I'll be working on the support of TiDB in the SeaQL ecosystem. The overall concept of the project is divided in half as TiDB and MySQL are mostly compatible. The first half, focus on integrating with the compatible features. The second half, supporting unique features available to TiDB including cluster monitoring and interfaces that is essential for production environment.
-
-### Query Linter for SeaORM
-
-<div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/kirawi">
-                <img src="https://avatars.githubusercontent.com/u/67773714?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Shafkath Shuhan
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-Hello, my name is Shafkath Shuhan and I'm a senior high school student from NYC. I've always had an interest in computer science, and Rust has been a game changer for its amazing packaging system, compile-time guarantees, and most importantly its helpful community.
-
-I'll be working on a feature-gated runtime linter to validate the correctness of SQL queries upon SeaORM. My initial design is described in a [discussion](https://github.com/SeaQL/summer-of-code/discussions/13) with extensibility in mind.
-
 ### SQL Interpreter for Mock Testing
 
 <div class="row">
@@ -93,6 +51,44 @@ I'll be working on a feature-gated runtime linter to validate the correctness of
 I'm Samyak Sarnayak, a final year Computer Science student from Bangalore, India. I started learning Rust around 6-7 months ago and it feels like I have found the perfect language for me :D. It does not have a runtime, has a great type system, really good compiler errors, good tooling, some functional programming patterns and metaprogramming. You can find more about me on my GitHub profile.
 
 I'll be working on a new SQL interpreter for mock testing. This will be built specifically for testing and so the emphasis will be on correctness - it can be slow but the operations must always be correct. I'm hoping to build a working version of this and integrate it into the existing tests of SeaORM. Here is the [discussion](https://github.com/SeaQL/summer-of-code/discussions/11) for this project.
+
+### Support TiDB in the SeaQL Ecosystem
+
+<div class="row">
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo" href="https://github.com/itwaiX">
+                <img src="https://avatars.githubusercontent.com/u/44227947?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Yuang Xu
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+Edit: This project was canceled due to unsatisfactory progress.
+
+### Query Linter for SeaORM
+
+<div class="row">
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo" href="https://github.com/kirawi">
+                <img src="https://avatars.githubusercontent.com/u/67773714?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Shafkath Shuhan
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+Edit: This project was canceled due to unsatisfactory progress.
 
 ## Mentors
 
