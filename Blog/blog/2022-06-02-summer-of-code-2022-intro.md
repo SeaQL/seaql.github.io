@@ -54,41 +54,11 @@ I'll be working on a new SQL interpreter for mock testing. This will be built sp
 
 ### Support TiDB in the SeaQL Ecosystem
 
-<div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/itwaiX">
-                <img src="https://avatars.githubusercontent.com/u/44227947?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Yuang Xu
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-Edit: This project was canceled due to unsatisfactory progress.
+Edit: This project was canceled.
 
 ### Query Linter for SeaORM
 
-<div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo" href="https://github.com/kirawi">
-                <img src="https://avatars.githubusercontent.com/u/67773714?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Shafkath Shuhan
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-Edit: This project was canceled due to unsatisfactory progress.
+Edit: This project was canceled.
 
 ## Mentors
 
