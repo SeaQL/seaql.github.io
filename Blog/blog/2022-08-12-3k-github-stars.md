@@ -10,7 +10,7 @@ tags: [news]
 
 SeaQL is celebrating the milestone of reaching 3,000 GitHub stars 🎉.
 
-This wouldn't have happened without all of your supports and contributions, so we want to thank the awesome community for being with us along the way.
+This wouldn't have happened without all of your support and contributions, so we want to thank the awesome community for being with us along the way.
 
 ## The Journey
 
@@ -40,7 +40,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 ## Where're We Now?
 
-We're thrilled by the adoption and constructive feedbacks from the Rust community. We couldn't make it this far without your supports and contributions.
+We're thrilled by the adoption and constructive feedbacks from the Rust community. We couldn't make it this far without your support and contributions.
 
 <div class="row">
     <div class="col col--4 margin-top--md margin-bottom--md">
@@ -297,4 +297,4 @@ Many new features are actually proposed by and implemented by the community. We 
 
 We've two ongoing [Summer of Code 2022 projects](https://www.sea-ql.org/blog/2022-06-02-summer-of-code-2022-intro/) that complement and enhance the ecosystem of SeaQL, planned to be released later this year. At the meantime, we're working on stabilizing existing SeaQL libraries and reaching version 1.0.0, we'd love to hear comments and feedbacks from the community.
 
-Last but not least, if you like what we do, consider starring, commenting, sharing, contributing and together building for Rust's future!
+Lastly, if you like what we do, consider starring, commenting, sharing, contributing and together building for Rust's future!
