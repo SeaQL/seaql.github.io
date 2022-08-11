@@ -14,7 +14,7 @@ This wouldn't have happened without all of your support and contributions, so we
 
 ## The Journey
 
-SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted ourself into developing open source libraries that help Rust developers in building data intensive applications. In the past two years, we published and actively maintaining four open source libraries: [SeaQuery](https://github.com/SeaQL/sea-query), [SeaSchema](https://github.com/SeaQL/sea-schema), [SeaORM](https://github.com/SeaQL/sea-orm) and [StarfishQL](https://github.com/SeaQL/starfish-ql). Each library is designed to fill a niche in existing Rust ecosystem, it's fully extensible and plays well with other Rust libraries.
+SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted ourselves into developing open source libraries that help Rust developers in building data intensive applications. In the past two years, we published and maintained four open source libraries: [SeaQuery](https://github.com/SeaQL/sea-query), [SeaSchema](https://github.com/SeaQL/sea-schema), [SeaORM](https://github.com/SeaQL/sea-orm) and [StarfishQL](https://github.com/SeaQL/starfish-ql). Each library is designed to fill a niche in existing Rust ecosystem, it's fully extensible and plays well with other Rust libraries.
 
 ### 2020
 
@@ -31,7 +31,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 ### 2022
 
-- Apr 2022: **SeaQL to be selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql)**
+- Apr 2022: **SeaQL selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql)**
 - Apr 2022: **StarfishQL first released**
 - Jul 2022: SeaQuery reached 0.26.2
 - Jul 2022: SeaSchema reached 0.9.3
@@ -40,7 +40,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 ## Where're We Now?
 
-We're thrilled by the adoption and constructive feedbacks from the Rust community. We couldn't make it this far without your support and contributions.
+We're thrilled by the adoption and constructive feedback from the Rust community. We couldn't make it this far without your support and contributions.
 
 <div class="row">
     <div class="col col--4 margin-top--md margin-bottom--md">
@@ -295,6 +295,6 @@ Many new features are actually proposed by and implemented by the community. We 
 
 ## What's Next?
 
-We've two ongoing [Summer of Code 2022 projects](https://www.sea-ql.org/blog/2022-06-02-summer-of-code-2022-intro/) that complement and enhance the ecosystem of SeaQL, planned to be released later this year. At the meantime, we're working on stabilizing existing SeaQL libraries and reaching version 1.0.0, we'd love to hear comments and feedbacks from the community.
+We've two ongoing [Summer of Code 2022 projects](https://www.sea-ql.org/blog/2022-06-02-summer-of-code-2022-intro/) to enrich the SeaQL ecosystem, planning to be released later this year. At the meantime, we're working on stabilizing existing SeaQL libraries and reaching version 1.0.0, we'd love to hear comments and feedback from the community.
 
-Lastly, if you like what we do, consider starring, commenting, sharing, contributing and together building for Rust's future!
+If you like what we do, consider starring, commenting, sharing, contributing and together building for Rust's future!
