@@ -1,20 +1,20 @@
 ---
 slug: 2022-08-12-3k-github-stars
-title: Celebrating 3,000+ GitHub Stars
+title: Celebrating 3,000+ GitHub Stars 🎉
 author: SeaQL Team
-author_title: Billy Chan
+author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-SeaQL is celebrating the milestone of reaching 3,000 GitHub stars 🎉.
+We are celebrating the milestone of reaching 3,000 GitHub stars across all SeaQL repositories!
 
-This wouldn't have happened without all of your support and contributions, so we want to thank the awesome community for being with us along the way.
+This wouldn't have happened without your support and contribution, so we want to thank the community for being with us along the way.
 
 ## The Journey
 
-SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted ourselves into developing open source libraries that help Rust developers in building data intensive applications. In the past two years, we published and maintained four open source libraries: [SeaQuery](https://github.com/SeaQL/sea-query), [SeaSchema](https://github.com/SeaQL/sea-schema), [SeaORM](https://github.com/SeaQL/sea-orm) and [StarfishQL](https://github.com/SeaQL/starfish-ql). Each library is designed to fill a niche in existing Rust ecosystem, it's fully extensible and plays well with other Rust libraries.
+SeaQL.org was founded back in 2020. We devoted ourselves into developing open source libraries that help Rust developers to build data intensive applications. In the past two years, we published and maintained four open source libraries: [SeaQuery](https://github.com/SeaQL/sea-query), [SeaSchema](https://github.com/SeaQL/sea-schema), [SeaORM](https://github.com/SeaQL/sea-orm) and [StarfishQL](https://github.com/SeaQL/starfish-ql). Each library is designed to fill a niche in the Rust ecosystem, and they are made to play well with other Rust libraries.
 
 ### 2020
 
@@ -31,7 +31,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 ### 2022
 
-- Apr 2022: **SeaQL selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql)**
+- Apr 2022: SeaQL selected as a Google Summer of Code 2022 [mentor organization](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql)
 - Apr 2022: **StarfishQL first released**
 - Jul 2022: SeaQuery reached 0.26.2
 - Jul 2022: SeaSchema reached 0.9.3
@@ -40,7 +40,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 ## Where're We Now?
 
-We're thrilled by the adoption and constructive feedback from the Rust community. We couldn't make it this far without your support and contributions.
+We're pleased by the adoption by the Rust community. We couldn't make it this far without your feedback and contributions.
 
 <div class="row">
     <div class="col col--4 margin-top--md margin-bottom--md">
@@ -135,12 +135,17 @@ We're thrilled by the adoption and constructive feedback from the Rust community
     </div>
 </div>
 
+<div style={{textAlign: 'right'}}>
+    <p></p>
+    <p><small>* as of Aug 12</small></p>
+</div>
+
 ## Core Members
 
-Our team has grown from being a two-person team into the current team. And we're still looking for talent that will help us make SeaQL even better.
+Our team has grown from two people initially into four. We always welcome passionate engineers to join us!
 
 <div class="row">
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--12 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
                 <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
@@ -149,22 +154,11 @@ Our team has grown from being a two-person team into the current team. And we're
                 <div class="avatar__name">
                     Chris Tsang
                 </div>
+                Founder. Led the initial development and maintaining the projects.
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/ikrivosheev">
-                <img src="https://avatars.githubusercontent.com/u/6786239?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Ivan Krivosheev
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--12 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
                 <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
@@ -173,10 +167,24 @@ Our team has grown from being a two-person team into the current team. And we're
                 <div class="avatar__name">
                     Billy Chan
                 </div>
+                Founding member. Contributed many features and bug fixes. Keeps the community alive.
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/ikrivosheev">
+                <img src="https://avatars.githubusercontent.com/u/6786239?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Ivan Krivosheev
+                </div>
+                Joined in 2022. Contributed many features and bug fixes, most notably to SeaQuery.
+            </div>
+        </div>
+    </div>
+    <div class="col col--12 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/shpun817">
                 <img src="https://avatars.githubusercontent.com/u/47468266?v=4" />
@@ -185,6 +193,77 @@ Our team has grown from being a two-person team into the current team. And we're
                 <div class="avatar__name">
                     Sanford Pun
                 </div>
+                Developed StarfishQL and wrote SeaORM's tutorial.
+            </div>
+        </div>
+    </div>
+</div>
+
+## Special Thanks
+
+<div class="row">
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/nappa85">
+                <img src="https://avatars.githubusercontent.com/u/7566389?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Marco Napetti
+                </div>
+                Contributed transaction, streaming and tracing API to SeaORM.
+            </div>
+        </div>
+    </div>
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/nitnelave">
+                <img src="https://avatars.githubusercontent.com/u/796633?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    nitnelave
+                </div>
+                Contributed binder crate and other improvements to SeaQuery.
+            </div>
+        </div>
+    </div>
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/samsamai">
+                <img src="https://avatars.githubusercontent.com/u/3764355?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Sam Samai
+                </div>
+                Developed SeaORM's test suite and demo schema.
+            </div>
+        </div>
+    </div>
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/scrblue">
+                <img src="https://avatars.githubusercontent.com/u/1524936?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Daniel Lyne
+                </div>
+                Developed SeaSchema's Postgres implementation.
+            </div>
+        </div>
+    </div>
+    <div class="col col--12 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/charleschege">
+                <img src="https://avatars.githubusercontent.com/u/33346042?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Charles Chege
+                </div>
+                Developed SeaSchema's SQLite implementation.
             </div>
         </div>
     </div>
@@ -192,7 +271,7 @@ Our team has grown from being a two-person team into the current team. And we're
 
 ## Sponsors
 
-If you feel generous, a small [donation](https://github.com/sponsors/SeaQL) will be greatly appreciated.
+If you are feeling generous, a small [donation](https://github.com/sponsors/SeaQL) will be greatly appreciated.
 
 A big shout out to our sponsors 😇:
 
@@ -273,7 +352,7 @@ A big shout out to our sponsors 😇:
 
 ## Contributors
 
-Many new features are actually proposed by and implemented by the community. We want to take this chance to thank all of our contributors!
+Many features and enhancements are actually proposed and implemented by the community. We want to take this chance to thank all our contributors!
 
 <div class="row">
     <div class="col col--12">
@@ -295,6 +374,6 @@ Many new features are actually proposed by and implemented by the community. We 
 
 ## What's Next?
 
-We've two ongoing [Summer of Code 2022 projects](https://www.sea-ql.org/blog/2022-06-02-summer-of-code-2022-intro/) to enrich the SeaQL ecosystem, planning to be released later this year. At the meantime, we're working on stabilizing existing SeaQL libraries and reaching version 1.0.0, we'd love to hear comments and feedback from the community.
+We have two ongoing [Summer of Code 2022 projects](https://www.sea-ql.org/blog/2022-06-02-summer-of-code-2022-intro/) to enrich the SeaQL ecosystem, planning to be released later this year. In the meantime, we're focusing on improving existing SeaQL libraries until reaching version 1.0, we'd love to hear comments and feedback from the community.
 
 If you like what we do, consider starring, commenting, sharing, contributing and together building for Rust's future!
