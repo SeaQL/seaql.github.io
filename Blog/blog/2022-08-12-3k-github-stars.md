@@ -42,7 +42,7 @@ SeaQL was founded by [Chris](https://github.com/tyt2y3) back in 2020. We devoted
 
 We're thrilled by the adoption and constructive feedbacks from the Rust community. We couldn't make it this far without your supports and contributions.
 
-<div class="row row--no-gutters">
+<div class="row">
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
