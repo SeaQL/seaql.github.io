@@ -46,7 +46,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                4
+                4 📦
             </div>
             <div class="col col--12">
                 Open source projects
@@ -56,7 +56,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                5
+                5 🏬
             </div>
             <div class="col col--12">
                 Startups using SeaQL
@@ -66,7 +66,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                1,972
+                1,972 🎈
             </div>
             <div class="col col--12">
                 Dependent projects
@@ -76,7 +76,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                131
+                131 👨‍👩‍👧‍👦
             </div>
             <div class="col col--12">
                 Contributors
@@ -86,7 +86,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                1,061
+                1,061 ✅
             </div>
             <div class="col col--12">
                 Merged PRs & resolved issues
@@ -96,7 +96,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                3,158
+                3,158 ⭐
             </div>
             <div class="col col--12">
                 GitHub stars
@@ -106,7 +106,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                432
+                432 🗣️
             </div>
             <div class="col col--12">
                 Discord members
@@ -116,7 +116,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                87,937
+                87,937 ⌨️
             </div>
             <div class="col col--12">
                 Lines of Rust
@@ -126,7 +126,7 @@ We're pleased by the adoption by the Rust community. We couldn't make it this fa
     <div class="col col--4 margin-top--md margin-bottom--md">
         <div class="row row--no-gutters">
             <div class="col col--12" style={{fontSize: '38px', lineHeight: '38px', fontWeight: 'bold'}}>
-                667,769
+                667,769 💿
             </div>
             <div class="col col--12">
                 Downloads on crates.io
