@@ -41,3 +41,8 @@ html[data-theme='dark'] {
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+html[data-theme='dark'] .announcementBar_node_modules-\@docusaurus-theme-classic-lib-theme-AnnouncementBar-styles-module {
+  background-color: var(--ifm-color-section-alt);
+  color: var(--ifm-heading-color);
+}

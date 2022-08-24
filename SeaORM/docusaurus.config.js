@@ -147,8 +147,6 @@ module.exports = {
     announcementBar: {
       id: 'support-us',
       content: 'Please star our repos! Every ⭐ counts!',
-      backgroundColor: '#fafbfc',
-      textColor: '#091E42',
       isCloseable: false,
     },
   },
