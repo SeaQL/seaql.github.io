@@ -147,6 +147,8 @@ module.exports = {
     announcementBar: {
       id: 'support-us',
       content: 'Please star our repos! Every ⭐ counts!',
+      backgroundColor: 'var(--ifm-color-section-alt)',
+      textColor: 'var(--ifm-heading-color)',
       isCloseable: false,
     },
   },
