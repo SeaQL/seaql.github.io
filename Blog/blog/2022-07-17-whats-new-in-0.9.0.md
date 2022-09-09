@@ -373,7 +373,7 @@ pub struct Model {
     pub json_value_opt: Option<KeyValue>,
 }
 
-// The custom struct much derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
+// The custom struct must derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
 pub struct KeyValue {
     pub id: i32,
