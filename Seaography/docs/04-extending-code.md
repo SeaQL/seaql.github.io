@@ -14,7 +14,6 @@ Studying the generated code structure provides valuable information on where to 
 
 When you are comfortable enough with all the terms, you can jump into the folders and add new features or logic based on your objectives.
 
-
 ## Major features
 
 Bellow there are some important features you might need:
@@ -24,7 +23,6 @@ Bellow there are some important features you might need:
 With field guards you can protect specific queries or fields accessors from being accessed using custom guard function.
 
 You can read more here https://async-graphql.github.io/async-graphql/en/field_guard.html
-
 
 
 ### Query complexity and depth
@@ -81,46 +79,32 @@ To prevent this behavior we can enable with few lines of code query complexity c
 
 #### Query depth limit
 
-On main.rs file we modify the following from
+On .env change the line from this:
 
-```rust
-let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-    .data(database)
-    .data(orm_dataloader)
-    .finish();
+```
+# DEPTH_LIMIT=
 ```
 
-to
+to this:
 
-```rust
 
-let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-    .data(database)
-    .data(orm_dataloader)
-    .limit_depth(5)
-    .finish();
+```
+DEPTH_LIMIT=2 # depth limit number
 ```
 
-#### Query complexity limit
+#### Query depth limit
 
-On main.rs file we modify the following from
+On .env change the line from this:
 
-```rust
-let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-    .data(database)
-    .data(orm_dataloader)
-    .finish();
+```
+# COMPLEXITY_LIMIT=
 ```
 
-to
+to this:
 
-```rust
 
-let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-    .data(database)
-    .data(orm_dataloader)
-    .limit_complexity(5)
-    .finish();
+```
+COMPLEXITY_LIMIT=32 # complexity limit number
 ```
 
 #### More documentation

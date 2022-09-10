@@ -2,25 +2,27 @@
 
 ## Project Description
 
-Seaography is a CLI tool that generates a ready to compile Rust GraphQL API for a relational database.
-
-The tool connects to a relational database, explores its schema and based on it generates the ORM entities and GraphQL queries.
+Seaography is a set of macros that turn Sea ORM Entities into GraphQL Nodes and a CLI tool
+that generates a ready to compile Rust GraphQL API for a relational database.
 
 <img src="img/playground_example_database.png" alt="Application preview" />
 
 ## Benefits
 
-* Generate the boilerplate
-* Focus on business logic
 * Easy and fast to get started
+* Hides the boilerplate
+* Focus on business logic
+* Based on popular projects
 
 ## Current features
 
-* Query entities with filters and relations
+* Pagination for queries
+* Filter using complex queries
+* Order results based on their fields
+* Query Related Entities (Joins)
 * Dataloader optimized to solve 1+N problem
 
 ## Upcoming features
-* Procedural macro API to reduce code surface
 * Single entity queries with relations
 * Create mutations
 * Update mutations
@@ -30,17 +32,17 @@ The tool connects to a relational database, explores its schema and based on it 
 
 1. Install the CLI tool
   ```shell
-  $ cargo install seaography
+  $ cargo install seaography-cli
   ```
 
 2. Generate the API
   ```shell
-  $ seaography mysql://root:root@127.0.0.1/ generated ./generated
+  $ seaography-cli mysql://root:root@127.0.0.1/ generated ./generated
   ```
 
 3. Modify code if needed
-  * Add authentication
-  * Add rate limiting
+  * Secure or hide Entity fields
+  * Add authentication middleware
   * Add business logic
   * etc.
 
@@ -53,7 +55,7 @@ The tool connects to a relational database, explores its schema and based on it 
 ## More documentation
 
 1. [Getting started](/docs/getting-started)
-2. [How the CLI works](/docs/tool-internals)
+2. [Macros documentation](/docs/macros-documentation)
 3. [Generated project guide](/docs/generated-project-structure)
 4. [How to extend generated code](/docs/extending-code)
 5. [Running an example](/docs/running-example)
