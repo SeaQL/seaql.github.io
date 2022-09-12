@@ -7,8 +7,8 @@ When we are done generating the code we can then modify the Rust code based on o
 In order to extend the existing code first you need to be comfortable with the libraries the generated code depends on.
 
 * [async_graphql](https://github.com/async-graphql/async-graphql)
-* [poem](https://github.com/poem-web/poem)
 * [sea_orm](https://github.com/SeaQL/sea-orm)
+* [poem](https://github.com/poem-web/poem)
 
 Studying the generated code structure provides valuable information on where to find important features, for more info [here](/docs/generated-project-structure).
 

@@ -1,1 +1,0 @@
-TODO: work on this guide

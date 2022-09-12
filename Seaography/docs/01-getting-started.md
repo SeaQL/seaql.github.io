@@ -28,7 +28,7 @@ OPTIONS:
 ```
 
 * **DATABASE_URL:** a valid URL pointing to the database.
-  examples: `mysql://user:pass@127.0.0.1:1235/database_name`, `sqlite://my_db.db`, `postgres://user:pass@127.0.0.1/base_name`
+  examples: `mysql://user:pass@127.0.0.1:1235/database_name`, `postgres://user:pass@127.0.0.1/base_name`, `sqlite://my_db.db`
 * **CRATE_NAME:** the cargo crate name of the generated project
 * **DESTINATION:** path pointing to the output folder, it will create it if does not exist
 * **COMPLEXITY_LIMIT:** [Number] Limit GraphQL query complexity so it cannot be greater than this number
@@ -45,7 +45,7 @@ In order to understand how the generated code works its recommended to study the
 
 2. [sea-orm](https://docs.rs/sea-orm/latest/sea_orm/)
 
-    SeaORM is a relational ORM to help you build web services in Rust with the familiarity of dynamic languages.
+    SeaORM is a relational ORM to help you build web services in Rust.
 
 3. [poem](https://docs.rs/crate/poem/latest)
 
