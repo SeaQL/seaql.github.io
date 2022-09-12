@@ -55,7 +55,7 @@ that generates a ready to compile Rust GraphQL API for a relational database.
 ## More documentation
 
 1. [Getting started](/docs/getting-started)
-2. [Macros documentation](/docs/macros-documentation)
-3. [Generated project guide](/docs/generated-project-structure)
+2. [Running an example](/docs/running-example)
+3. [Generated project structure](/docs/generated-project-structure)
 4. [How to extend generated code](/docs/extending-code)
-5. [Running an example](/docs/running-example)
+5. [Macros documentation](/docs/macros-documentation)
