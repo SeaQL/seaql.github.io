@@ -55,7 +55,7 @@ For the mappings of Rust primitive data types.
 
 | Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/0.9/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
-| `char` | Char | text | char | char |
+| `String` | Char | text | char | char |
 | `String` | String | text | varchar | varchar |
 | `i8` | TinyInteger | integer | tinyint | char |
 | `u8` | TinyUnsigned | integer  | tinyint unsigned | N/A |
