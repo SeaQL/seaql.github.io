@@ -8,167 +8,81 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-# Introduction
+Today, We are excited to introduce [Seaography](https://github.com/SeaQL/seaography) to the Rust community. Seaography is a GraphQL framework for building [async-graphql](https://github.com/async-graphql/async-graphql) resolvers using [SeaORM](https://github.com/SeaQL/sea-orm) entities. It ships with a CLI tool that can generate ready-to-compile Rust GraphQL servers from existing MySQL, Postgres and SQLite databases.
 
-During the past summer, I had the opportunity to work alongside the **[SeaQL](https://www.sea-ql.org/)** developers on a new product named **[Seaography](https://github.com/SeaQL/seaography)**. Seaography is a *"A GraphQL framework and code generator for SeaORM"*. To elaborate, the project is a collection of Rust macros that extend [SeaORM](https://github.com/SeaQL/sea-orm) entities to be GraphQL compatible with the [async-graphql](https://github.com/async-graphql/async-graphql) library. Lastly, the project also comes with a CLI tool which is able to generate a GraphQL API server for any supported database.
+## Motivation
 
-# Motivation
-Behind all projects there is intent, behind this one we had the following goals in mind:
+We observed that other languages had similar tools such as [PostGraphile](https://github.com/graphile/postgraphile) and [Hasura](https://github.com/hasura/graphql-engine) allowing user to query a database via GraphQL server with minimal effort to setup. So, we decided to bring that seamless experience to the Rust community.
 
-1) We observed that other languages had similar tools ([postgraphile](https://github.com/graphile/postgraphile), [hasura](https://github.com/hasura/graphql-engine)) but there was not anything similar for Rust.
+For existing SeaORM users, adding a GraphQL API is simple. Start by deriving a few extra derive macros on their SeaORM entities. Then, adds `seaography` and `async-graphql` dependencies to the crate. Finally, spin up the GraphQL server with a main function.
 
-2) Due to the complexity of the problem, this project would act as a great open source example for the SeaORM capabilities.
+Anyone who are new to SeaORM, no worries, we have your back. You only need to provide a database connection, the `seaography-cli` will helps you generate the SeaORM entities from scratch together with all the steps mentioned above.
 
-3) Lastly, trough exploring a complex real world use case of SeaORM we had in mind to fix and add more features that would benefit the SeaQL ecosystem in the long run.
+## Design
 
-# Design
+Lets "pop under the hood" and explore how this project is structured. The project is separated into the following crates:
 
-Lets "pop under the hood" and explore how this project is structured. The project is separated into 2 crates.
+* [`seaography`](https://github.com/SeaQL/seaography): The library crate, it re-export all the macros and define helper structures and functions required to extend a SeaORM entity into a GraphQL node.
 
-The main crates are:
+* [`seaography-cli`](https://github.com/SeaQL/seaography/tree/main/cli): The CLI tool, it generates a ready to run GraphQL API server and SeaORM entities based on a user provided database URL. Code generation pipeline have two parts. It will first discover the database schema and represent it in a vendor agnostic way. Then, perform the actual code generation based on it.
 
-* `seaography`: is the library crate, it contains all the macros and helper utilities required to extend a SeaORM entity into a GraphQL node.
-* `seaography-cli`: is the CLI tool, if supplied with a database url and the required parameters it generates a complete GraphQL API server ready to be compiled.
+* [`seaography-discoverer`](https://github.com/SeaQL/seaography/tree/main/discoverer): A helper crate that will be used by the CLI tool to discover the database schema and parsing it as a vendor agnostic schema.
 
-## `seaography` crate
-The crate itself provides utilities structures and functions that are used to use SeaORM entities with a GraphQL server. The macros come from the `seaography_derive` sub-crate.
+* [`seaography-generator`](https://github.com/SeaQL/seaography/tree/main/generator): A helper crate that will be used by the CLI tool to consumes the vendor agnostic schema and generates the SeaORM entities and the required server boilerplate for the GraphQL API server.
 
-## `seaography-cli` crate
-The crate depends on the following 2 sub-crates.
+* [`seaography-derive`](https://github.com/SeaQL/seaography/tree/main/derive): A procedural macros crate responsible to derive types and implementations to integrate SeaORM entity with GraphQL types.
 
-* `seaography_discoverer`: this crate is responsible of parsing any database into a vendor agnostic schema.
-* `seaography_generator`: this crate consumes the vendor agnostic schema and generates the SeaORM entities and the required server boilerplate for the GraphQL API server.
+### Supported Features
 
-## Current features
-Currently the generator combined with the macros provide the following features:
 * Relational query (1-to-1, 1-to-N)
 * Pagination on query's root entity
 * Filter with operators (e.g. gt, lt, eq)
 * Order by any column
 
-## Limitations
-Due to the compiled nature or Rust and the static natures of the libraries  you have to modify the code and compile it if changes have been made to the database. To compare, tools like Hasura or Postgraphile parse the database schema on runtime and provide an updated.
+Right now there is no mutation, but it's on our plan!
 
-# Example
+## Getting Started
 
-Bellow we will "dive into" an example on how to use Seaography. We will use SQLite database as an example because its easier to get started, but the tool works also with MySQL and PostgreSQL databases.
+To quick start, we have the following examples for you, alongside with the SQL scripts to initialize the database.
 
-## Setup Environment
-1. Download the database [file](https://github.com/SeaQL/seaography/raw/main/examples/sqlite/chinook.db) and place it where the project you want to be.
+* [MySQL](https://github.com/SeaQL/seaography/tree/main/examples/mysql)
+* [PostgreSQL](https://github.com/SeaQL/seaography/tree/main/examples/postgres)
+* [SQLite](https://github.com/SeaQL/seaography/tree/main/examples/sqlite)
 
-2. Install Seaography CLI tool
-    ```bash
-    cargo install seaography-cli
-    ```
+All examples provide a web-based GraphQL playground when running, on it you can inspect the GraphQL schema and query data. We also hosted a [demo GraphQL playground](https://playground.sea-ql.org/seaography) in case you can't wait to play with it.
 
-## Generating & Compiling
-1. Open terminal on the same folder as the database file.
+If you wish to start a GraphQL server for your own database. Please read on.
 
-2. Generate the project
-    ```bash
-    seaography-cli sqlite://chinook.db name-of-project .
-    ```
+* [Extending SeaORM entity to support GraphQL queries](https://www.sea-ql.org/Seaography/docs/getting-started/)
+* [Generating from scratch with an existing database](https://www.sea-ql.org/Seaography/docs/getting-started/)
 
-3. Compile
-    ```bash
-    cargo build
-    ```
+## What's Next?
 
-## Running Server and Executing Queries
-1. Run server
-    ```bash
-    cargo run
-    ```
+The project passed the first milestones that contains the essential features to be published, but it has a long way to go. The next milestones are the following:
 
-2. Open in browser https://localhost:8000/
-
-## Example queries
-
-* Fetch all stores with their employees
-    ```graphql
-    {
-      store {
-        data {
-          storeId
-          staff {
-            firstName
-            lastName
-          }
-        }
-      }
-    }
-    ```
-* Fetch store and its employees where store_id = 1
-    ```graphql
-    {
-        store(filters: {storeId:{eq: 1}}) {
-          data {
-            storeId
-            staff {
-              firstName
-              lastName
-            }
-          }
-        }
-    }
-    ```
-
-* Fetch the second page with the ids of the inactive customers limited 3 items per page
-    ```graphql
-    {
-      customer (
-        filters: { active: { eq: 0 } },
-        pagination:{ page: 2, limit: 3 }
-      ) {
-        data {
-          customerId
-        }
-        pages
-        current
-      }
-    }
-    ```
-
-* Fetch the first page with the payment_id and the amount of the payments with amount greater than 11.1 limited 1 items per page
-    ```graphql
-    {
-      payment(
-        filters: { amount: { gt: "11.1" } },
-        pagination: { limit: 2 }
-      ) {
-        data {
-          paymentId
-          amount
-        }
-        pages
-        current
-      }
-    }
-    ```
-
-# Next steps
-The project passed the first milestones that were essential in order to be published, but it has a long way to go. The next milestones are the following:
 * Query enhancements
-* * filter related queries
-* * filter based on related queries properties
-* * paginate related queries
-* * order by related queries
+  * Filter related queries
+  * Filter based on related queries properties
+  * Paginate related queries
+  * Order by related queries
 * Cursor based alternative pagination
 * Single entity query
 * Mutations
-* * Insert single entity
-* * Insert batch entities
-* * Update single entity
-* * Update batch entities using filter
-* * Delete single entity
-* * Delete batch entities
+  * Insert single entity
+  * Insert batch entities
+  * Update single entity
+  * Update batch entities using filter
+  * Delete single entity
+  * Delete batch entities
 
-# Conclusion
+## Conclusion
 
-To conclude, Seaography is an ergonomic library that turns SeaORM entities into GraphQL nodes. It provides a set of utilities structures and functions and combined with a code generator makes GraphQL API building a breeze.
+To conclude, Seaography is an ergonomic library that turns SeaORM entities into GraphQL nodes. It provides a set of utilities and combined with a code generator makes GraphQL API building a breeze.
 
+However, Seaography is still very young and everything is subject to change. Fortunately, the good thing about this is, like all other open-source projects developed by brilliant Rust developers, you can contribute to it if you also find the concept interesting. With its addition to the SeaQL ecosystem, together we are one step closer to the vision of Rust for data engineering.
 
-# People
+## People
+
 Seaography is created by the following SeaQL team members:
 
 <div className="container">
@@ -213,4 +127,5 @@ Seaography is created by the following SeaQL team members:
 </div>
 
 ## Contributing
-TODO
+
+SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
