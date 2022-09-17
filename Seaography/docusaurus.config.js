@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Seaography - GraphQL API generator for rust',
-  tagline: 'Seaography is Rust CLI application that generates a graphql API for relational databases.',
+  title: 'Seaography 🧭 A GraphQL framework and code generator for SeaORM',
+  tagline: '🧭 Seaography is a GraphQL framework and code generator for SeaORM',
   url: 'https://www.sea-ql.org',
   baseUrl: '/Seaography/',
   onBrokenLinks: 'throw',
@@ -83,7 +83,7 @@ const config = {
             label: 'Docs',
           },
           {
-            to: 'https://www.sea-ql.org/SeaORM/blog/',
+            to: 'https://www.sea-ql.org/blog/',
             target: '_self',
             label: 'Blog',
             position: 'left'
@@ -143,14 +143,14 @@ const config = {
               },
               {
                 label: 'Blog',
-                to: 'https://www.sea-ql.org/SeaORM/blog/',
+                to: 'https://www.sea-ql.org/blog/',
                 target: '_self',
               },
             ],
           },
         ],
         copyright: [
-          `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/starfish-ql/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/starfish-ql.svg?style=social&label=Star&maxAge=1"/></a></div>`,
+          `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/seaography/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/seaography.svg?style=social&label=Star&maxAge=1"/></a></div>`,
           `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
           `<br/>Built with 🔥 by 🌊🦀🐚`,
         ].join(''),
