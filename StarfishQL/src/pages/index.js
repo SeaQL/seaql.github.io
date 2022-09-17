@@ -35,7 +35,6 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HomepageDemo />
-        <HomepageMascot />
       </main>
     </Layout>
   );

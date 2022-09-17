@@ -124,6 +124,10 @@ module.exports = {
               label: 'StarfishQL',
               to: 'https://www.sea-ql.org/StarfishQL/',
             },
+            {
+              label: 'Seaography',
+              to: 'https://www.sea-ql.org/Seaography/',
+            },
           ],
         },
       ],

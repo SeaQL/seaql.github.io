@@ -31,7 +31,7 @@ export default function Home() {
     <Layout
       description={siteConfig.tagline}>
       <HomepageHeader />
-      <main style={{ margin: '100px' }}>
+      <main style={{ margin: '5%' }}>
         <p>Seaography is a GraphQL framework for building GraphQL resolvers using SeaORM entities.
           It ships with a CLI tool that can generate ready-to-compile Rust GraphQL servers from existing
           MySQL, Postgres and SQLite databases.</p>
