@@ -358,6 +358,48 @@
                   </CardContent>
                 </Card>
               </Grid>
+              <Grid item xs={12} md={6}>
+                <Card
+                  variant="elevation"
+                  elevation={3}
+                  style={{ height: '100%' }}
+                  className="projects-underline projects-underline-4"
+                >
+                  <CardContent>
+                    <Link href="https://github.com/SeaQL/seaography" underline="none" color="inherit">
+                      <Typography variant="h5" component="h1" align="center" sx={{ fontWeight: 600 }} gutterBottom>
+                        Seaography
+                      </Typography>
+                    </Link>
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>
+                      🧭 A GraphQL framework and code generator for SeaORM
+                    </Typography>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <Chip
+                        label="GitHub"
+                        component="a"
+                        href="https://github.com/SeaQL/seaography"
+                        variant="outlined"
+                        size="small"
+                        sx={{ marginTop: '10px', marginRight: '10px' }}
+                        clickable
+                      />
+                      <Chip
+                        label="Docs"
+                        component="a"
+                        href="/Seaography/"
+                        variant="outlined"
+                        size="small"
+                        sx={{ marginTop: '10px', marginRight: '10px' }}
+                        clickable
+                      />
+                      <a href="https://github.com/SeaQL/seaography/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/seaography.svg?style=social&label=Star&maxAge=1" alt="Star Seaography" height="22px" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </Container>
           <div class="rule rule-gradient"></div>
@@ -415,7 +457,7 @@
                   Your participation is what makes us unique; your adoption is what drives us forward. Thank you all in the Rust community for making SeaQL what it is today. You are also invited to shape it's future!
                 </Typography>
                 <br />
-                <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
+                <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql,seaql/seaography&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
                 <Typography variant="body1" sx={{ textAlign: 'center' }}>
                   Please star our repos! Every ⭐ counts!
                 </Typography>
@@ -467,6 +509,9 @@
                   </Link>
                   <Link href="https://github.com/SeaQL/starfish-ql" variant="body2" underline="hover" gutterBottom>
                     StarfishQL
+                  </Link>
+                  <Link href="https://github.com/SeaQL/seaography" variant="body2" underline="hover" gutterBottom>
+                    Seaography
                   </Link>
                 </Grid>
               </Grid>
