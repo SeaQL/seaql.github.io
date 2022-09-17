@@ -6,7 +6,7 @@ import styles from './index.module.css';
 import HomepageMascot from '../components/HomepageMascot';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={styles.heroBanner}>
       <div className="container">
@@ -26,13 +26,37 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       description={siteConfig.tagline}>
       <HomepageHeader />
-      <main>
-        <HomepageMascot />
+      <main style={{ margin: '100px' }}>
+        <p>Seaography is a GraphQL framework for building GraphQL resolvers using SeaORM entities.
+          It ships with a CLI tool that can generate ready-to-compile Rust GraphQL servers from existing
+          MySQL, Postgres and SQLite databases.</p>
+
+        <p><img src="img/playground_example_database.png" alt="Application preview" /></p>
+
+        <h3>Benefits</h3>
+
+        <ul>
+          <li>Quick and easy to get started</li>
+          <li>Generates readable code</li>
+          <li>Extensible project structure</li>
+          <li>Based on popular async libraries:&nbsp;
+            <a href="https://github.com/async-graphql/async-graphql">async-graphql</a>&nbsp;
+            and <a href="https://github.com/SeaQL/sea-orm">SeaORM</a></li>
+        </ul>
+
+        <h3>Features</h3>
+
+        <ul>
+          <li>Relational query (1-to-1, 1-to-N)</li>
+          <li>Pagination on query's root entity</li>
+          <li>Filter with operators (e.g. gt, lt, eq)</li>
+          <li>Order by any column</li>
+        </ul>
       </main>
     </Layout>
   );
