@@ -84,7 +84,7 @@ Seaography is created by:
 
 <div className="container">
     <div className="row">
-        <div className="col col--3 margin-bottom--md">
+        <div className="col col--12 margin-bottom--md">
             <div className="avatar">
                 <a className="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/karatakis">
                     <img src="https://avatars.githubusercontent.com/u/7329022?v=4" />
@@ -97,7 +97,7 @@ Seaography is created by:
                 </div>
             </div>
         </div>
-        <div className="col col--3 margin-bottom--md">
+        <div className="col col--12 margin-bottom--md">
             <div className="avatar">
                 <a className="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tyt2y3">
                     <img src="https://avatars.githubusercontent.com/u/1782664?v=4" />
@@ -110,7 +110,7 @@ Seaography is created by:
                 </div>
             </div>
         </div>
-        <div className="col col--3 margin-bottom--md">
+        <div className="col col--12 margin-bottom--md">
             <div className="avatar">
                 <a className="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/billy1624">
                     <img src="https://avatars.githubusercontent.com/u/30400950?v=4" />
