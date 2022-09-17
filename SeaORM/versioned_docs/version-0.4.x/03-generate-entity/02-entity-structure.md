@@ -44,7 +44,7 @@ The column type will be derived automatically with the following mapping:
 
 | Rust type | Database Type |
 | --------- | ------------- |
-| char | Char |
+| String | Char |
 | String | String |
 | u8, i8 | TinyInteger |
 | u16, i16 | SmallInteger |
