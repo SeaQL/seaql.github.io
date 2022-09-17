@@ -72,11 +72,11 @@ module.exports = {
           ],
         },
         {
-          title: 'Project',
+          title: 'Projects',
           items: [
             {
               label: 'SeaORM',
-              to: 'https://github.com/SeaQL/sea-orm',
+              to: 'https://www.sea-ql.org/SeaORM/',
             },
             {
               label: 'SeaQuery',
@@ -88,7 +88,11 @@ module.exports = {
             },
             {
               label: 'StarfishQL',
-              to: 'https://github.com/SeaQL/starfish-ql',
+              to: 'https://www.sea-ql.org/StarfishQL/',
+            },
+            {
+              label: 'Seaography',
+              to: 'https://www.sea-ql.org/Seaography/',
             },
           ],
         },
