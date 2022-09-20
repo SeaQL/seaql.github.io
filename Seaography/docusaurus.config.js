@@ -55,9 +55,6 @@ const config = {
           changefreq: 'daily',
           priority: 0.8,
         },
-        scripts: [
-          '/sea-ql.js',
-        ],
       }),
     ],
   ],
@@ -174,6 +171,9 @@ const config = {
         },
       },
     }),
+    scripts: [
+      '/sea-ql.js',
+    ],
 };
 
 module.exports = config;
