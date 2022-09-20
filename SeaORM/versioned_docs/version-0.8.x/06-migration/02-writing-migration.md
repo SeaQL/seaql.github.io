@@ -226,6 +226,6 @@ impl MigrationTrait for Migration {
 
 In the grand scheme of things, we recommend a schema first approach: you write migrations first and then generate entities from a live database.
 
-At times, you might want to use the `create_*_from_entity` methods to bootstrap your database with several hand written entity files.
+At times, you might want to use the [`create_*_from_entity`](04-generate-database-schema/01-create-table.md) methods to bootstrap your database with several hand written entity files.
 
 That's perfectly fine if you intend to never change the entity schema. Or, you can clone the original entity and rely on it in the migration file.
