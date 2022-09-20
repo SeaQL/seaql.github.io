@@ -55,10 +55,9 @@ const config = {
           changefreq: 'daily',
           priority: 0.8,
         },
-        // TODO: enable scripts
-        // scripts: [
-        //   '/sea-ql.js',
-        // ],
+        scripts: [
+          '/sea-ql.js',
+        ],
       }),
     ],
   ],
@@ -158,6 +157,10 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: [
+          'toml',
+          'rust',
+        ],
       },
       // algolia: {
       //   appId: 'QZ9XDFJ7RQ',
