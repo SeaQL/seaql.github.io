@@ -38,9 +38,9 @@ seaography-cli postgres://root:root@localhost/sakila seaography-postgres-example
 seaography-cli sqlite://examples/sqlite/sakila.db seaography-sqlite-example examples/sqliteql
 ```
 
-### Download a Example
+### Download an Example
 
-If you don't have a existing database. We have the following examples for you, alongside with the SQL scripts to initialize the database.
+If you don't have an existing database. We have the following examples for you, alongside with the SQL scripts to initialize the database.
 
 * [MySQL](https://github.com/SeaQL/seaography/tree/main/examples/mysql)
 * [PostgreSQL](https://github.com/SeaQL/seaography/tree/main/examples/postgres)
