@@ -232,7 +232,7 @@ Response
 
 ### Fetch inactive customers with pagination
 
-```grahpql
+```graphql
 {
   customer(filters: { active: { eq: 0 } }, pagination: { page: 2, limit: 3 }) {
     data {
