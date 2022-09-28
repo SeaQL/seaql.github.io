@@ -14,9 +14,140 @@ The design and implementation of seaography can be found on our [release blog po
 
 ## Setup a GraphQL Server
 
-You can spin a GraphQL server to query your existing database with a few commands. Or, you can download one of the example below to play with it.
+Since seaography is a GraphQL framework built on top of SeaORM, you can easily extend your SeaORM project to serve a GraphQL server.
+
+If you are new to SeaORM, no worries, we have your back. You only need to provide a database connection, and `seaography-cli` will generate the SeaORM entities together with a complete Rust project!
+
+Or, you can download one of the example below to play with it.
+
+### Extend From Existing SeaORM Project
+
+Start by adding seaography and GraphQL dependencies to your `Cargo.toml`.
+
+```diff title=Cargo.toml
+[dependencies]
+sea-orm = { version = "^0.9", features = [ ... ] }
++ seaography = { version = "^0.1", features = [ "with-decimal", "with-chrono" ] }
++ async-graphql = { version = "4.0.10", features = ["decimal", "chrono", "dataloader"] }
++ async-graphql-poem = { version = "4.0.10" }
++ async-trait = { version = "0.1.53" }
++ dotenv = { version = "0.15.0" }
++ heck = { version = "0.4.0" }
++ itertools = { version = "0.10.3" }
++ poem = { version = "1.3.29" }
++ tokio = { version = "1.17.0", features = ["macros", "rt-multi-thread"] }
++ tracing = { version = "0.1.34" }
++ tracing-subscriber = { version = "0.3.11" }
+```
+
+Then, derive a few more macros for all of the SeaORM entities.
+
+```diff title=src/entities/actor.rs
+use sea_orm::entity::prelude::*;
+
+#[derive(
+    Clone,
+    Debug,
+    PartialEq,
+    DeriveEntityModel,
++   async_graphql::SimpleObject,
++   seaography::macros::Filter,
+)]
++ #[graphql(complex)]
++ #[graphql(name = "Actor")]
+#[sea_orm(table_name = "actor")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub actor_id: i32,
+    pub first_name: String,
+    pub last_name: String,
+    pub last_update: DateTimeUtc,
+}
+
+#[derive(
+    Copy,
+    Clone,
+    Debug,
+    EnumIter,
+    DeriveRelation,
++   seaography::macros::RelationsCompact
+)]
+pub enum Relation {
+    #[sea_orm(has_many = "super::film_actor::Entity")]
+    FilmActor,
+}
+
+impl ActiveModelBehavior for ActiveModel {}
+```
+
+We also need to define `QueryRoot` for the GraphQL server. This define which SeaORM entity can be quired.
+
+```rust title=src/query_root.rs
+#[derive(Debug, seaography::macros::QueryRoot)]
+#[seaography(entity = "crate::entities::actor")]
+#[seaography(entity = "crate::entities::address")]
+#[seaography(entity = "crate::entities::category")]
+#[seaography(entity = "crate::entities::city")]
+#[seaography(entity = "crate::entities::country")]
+#[seaography(entity = "crate::entities::customer")]
+#[seaography(entity = "crate::entities::film")]
+#[seaography(entity = "crate::entities::film_actor")]
+#[seaography(entity = "crate::entities::film_category")]
+#[seaography(entity = "crate::entities::film_text")]
+#[seaography(entity = "crate::entities::inventory")]
+#[seaography(entity = "crate::entities::language")]
+#[seaography(entity = "crate::entities::payment")]
+#[seaography(entity = "crate::entities::rental")]
+#[seaography(entity = "crate::entities::staff")]
+#[seaography(entity = "crate::entities::store")]
+pub struct QueryRoot;
+```
+
+Bring everything into scope.
+
+```rust title=src/lib.rs
+use sea_orm::prelude::*;
+
+pub mod entities;
+pub mod query_root;
+
+pub use query_root::QueryRoot;
+
+pub struct OrmDataloader {
+    pub db: DatabaseConnection,
+}
+```
+
+Last, create a binary to run the GraphQL server. You can find the sample [here](https://github.com/SeaQL/seaography/blob/main/examples/sqlite/src/main.rs). Remember to import your local library by changing the highlighted line below.
+
+``` diff title=src/main.rs
+use async_graphql::{
+    dataloader::DataLoader,
+    http::{playground_source, GraphQLPlaygroundConfig},
+    EmptyMutation, EmptySubscription, Schema,
+};
+use async_graphql_poem::GraphQL;
+use dotenv::dotenv;
+use poem::{get, handler, listener::TcpListener, web::Html, IntoResponse, Route, Server};
+use sea_orm::Database;
+- use seaography_sqlite_example::*;
++ use <CRATE_NAME>::*;
+use std::env;
+
+#[handler]
+async fn graphql_playground() -> impl IntoResponse {
+    Html(playground_source(GraphQLPlaygroundConfig::new("/")))
+}
+
+#[tokio::main]
+async fn main() {
+    // Snip...
+}
+```
 
 ### Generate From Existing Database
+
+If you are new to SeaORM, read on, we will helps you set everything up.
 
 Install `seaography-cli`, it helps you generate SeaORM entities along with a full Rust project based on a user-provided database.
 
@@ -68,15 +199,23 @@ Let say we want to get the first 3 inactivated customers sorted in ascending ord
 
 ```graphql
 {
-  customer(
-    filters: { active: { eq: 0 } }
-    pagination: { page: 0, limit: 3 }
-    orderBy: { customerId: ASC }
+  film(
+    pagination: { limit: 3, page: 0 }
+    filters: { releaseYear: { gte: "2006" } }
+    orderBy: { title: ASC }
   ) {
     data {
-      customerId
-      lastName
-      email
+      filmId
+      title
+      description
+      releaseYear
+      filmActor {
+        actor {
+          actorId
+          firstName
+          lastName
+        }
+      }
     }
     pages
     current
@@ -89,25 +228,79 @@ We got the following JSON result after running the GraphQL query.
 ```json
 {
   "data": {
-    "customer": {
+    "film": {
       "data": [
         {
-          "customerId": 16,
-          "lastName": "MARTIN",
-          "email": "SANDRA.MARTIN@sakilacustomer.org"
+          "filmId": 1,
+          "title": "ACADEMY DINOSAUR",
+          "description": "An Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies",
+          "releaseYear": "2006",
+          "filmActor": [
+            {
+              "actor": {
+                "actorId": 1,
+                "firstName": "PENELOPE",
+                "lastName": "GUINESS"
+              }
+            },
+            {
+              "actor": {
+                "actorId": 10,
+                "firstName": "CHRISTIAN",
+                "lastName": "GABLE"
+              }
+            },
+            // Snip...
+          ]
         },
         {
-          "customerId": 64,
-          "lastName": "COX",
-          "email": "JUDITH.COX@sakilacustomer.org"
+          "filmId": 2,
+          "title": "ACE GOLDFINGER",
+          "description": "A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China",
+          "releaseYear": "2006",
+          "filmActor": [
+            {
+              "actor": {
+                "actorId": 19,
+                "firstName": "BOB",
+                "lastName": "FAWCETT"
+              }
+            },
+            {
+              "actor": {
+                "actorId": 85,
+                "firstName": "MINNIE",
+                "lastName": "ZELLWEGER"
+              }
+            },
+            // Snip...
+          ]
         },
         {
-          "customerId": 124,
-          "lastName": "WELLS",
-          "email": "SHEILA.WELLS@sakilacustomer.org"
+          "filmId": 3,
+          "title": "ADAPTATION HOLES",
+          "description": "A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory",
+          "releaseYear": "2006",
+          "filmActor": [
+            {
+              "actor": {
+                "actorId": 2,
+                "firstName": "NICK",
+                "lastName": "WAHLBERG"
+              }
+            },
+            {
+              "actor": {
+                "actorId": 19,
+                "firstName": "BOB",
+                "lastName": "FAWCETT"
+              }
+            },
+            // Snip...
+          ]
         }
       ],
-      "pages": 5,
+      "pages": 334,
       "current": 0
     }
   }
@@ -117,24 +310,31 @@ We got the following JSON result after running the GraphQL query.
 Behind the scene, following SQL was queried on the database.
 
 ```sql
-SELECT
-  "customer"."customer_id",
-  "customer"."store_id",
-  "customer"."first_name",
-  "customer"."last_name",
-  "customer"."email",
-  "customer"."address_id",
-  "customer"."active",
-  "customer"."create_date",
-  "customer"."last_update"
-FROM
-  "customer"
-WHERE
-  "customer"."active" = 0
-ORDER BY
-  "customer"."customer_id" ASC
-LIMIT
-  3 OFFSET 0
+SELECT "film"."film_id",
+       "film"."title",
+       "film"."description",
+       "film"."release_year",
+       "film"."language_id",
+       "film"."original_language_id",
+       "film"."rental_duration",
+       "film"."rental_rate",
+       "film"."length",
+       "film"."replacement_cost",
+       "film"."rating",
+       "film"."special_features",
+       "film"."last_update"
+FROM "film"
+WHERE "film"."release_year" >= '2006'
+ORDER BY "film"."title" ASC
+LIMIT 3 OFFSET 0
+
+SELECT "film_actor"."actor_id", "film_actor"."film_id", "film_actor"."last_update"
+FROM "film_actor"
+WHERE "film_actor"."film_id" IN (1, 3, 2)
+
+SELECT "actor"."actor_id", "actor"."first_name", "actor"."last_name", "actor"."last_update"
+FROM "actor"
+WHERE "actor"."actor_id" IN (24, 162, 20, 160, 1, 188, 123, 30, 53, 40, 2, 64, 85, 198, 10, 19, 108, 90)
 ```
 
 ## Features
