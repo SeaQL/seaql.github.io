@@ -330,7 +330,7 @@ WHERE "actor"."actor_id" IN (24, 162, 20, 160, 1, 188, 123, 30, 53, 40, 2, 64, 8
 
 Notice we query the related rows (N+1 problem) in batch, this greatly reduce the overhead of quiring deeply nested relation. Seaography uses [async_graphql::dataloader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html) to optimize loading of N+1 problem.
 
-Take `film_actor` as an example, we want to fetch `film_actor` with ID `(1, 3, 2)` from the database. We give the ID to `DataLoader`, it has two purpose. It tell `DataLoader` which row to be fetched. And, it's a unique ID to determine who is the proper receiver of a piece of data.
+Take `film_actor` as an example, we want to fetch `film_actor` with ID `(1, 3, 2)` from the database. We give the ID to `DataLoader`, it has two purpose. It tell `DataLoader` which row to be fetched. And, it's a unique ID to determine who is the caller and therefore the proper receiver of a piece of data.
 
 ```rust
 pub struct FilmActorFK(pub sea_orm::Value);
