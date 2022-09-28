@@ -34,7 +34,7 @@ sea-orm = { version = "^0.9", features = [ ... ] }
 
 Then, derive a few more macros for all of the SeaORM entities.
 
-```diff title=src/entities/actor.rs
+```diff title=src/entities/film_actor.rs
 use sea_orm::entity::prelude::*;
 
 #[derive(
@@ -46,13 +46,13 @@ use sea_orm::entity::prelude::*;
 +   seaography::macros::Filter,
 )]
 + #[graphql(complex)]
-+ #[graphql(name = "Actor")]
-#[sea_orm(table_name = "actor")]
++ #[graphql(name = "FilmActor")]
+#[sea_orm(table_name = "film_actor")]
 pub struct Model {
-    #[sea_orm(primary_key)]
+    #[sea_orm(primary_key, auto_increment = false)]
     pub actor_id: i32,
-    pub first_name: String,
-    pub last_name: String,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub film_id: i32,
     pub last_update: DateTimeUtc,
 }
 
@@ -62,11 +62,25 @@ pub struct Model {
     Debug,
     EnumIter,
     DeriveRelation,
-+   seaography::macros::RelationsCompact
++   seaography::macros::RelationsCompact,
 )]
 pub enum Relation {
-    #[sea_orm(has_many = "super::film_actor::Entity")]
-    FilmActor,
+    #[sea_orm(
+        belongs_to = "super::film::Entity",
+        from = "Column::FilmId",
+        to = "super::film::Column::FilmId",
+        on_update = "Cascade",
+        on_delete = "NoAction"
+    )]
+    Film,
+    #[sea_orm(
+        belongs_to = "super::actor::Entity",
+        from = "Column::ActorId",
+        to = "super::actor::Column::ActorId",
+        on_update = "Cascade",
+        on_delete = "NoAction"
+    )]
+    Actor,
 }
 
 impl ActiveModelBehavior for ActiveModel {}
