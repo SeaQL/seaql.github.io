@@ -30,14 +30,6 @@ sea-orm = { version = "^0.9", features = [ ... ] }
 + seaography = { version = "^0.1", features = [ "with-decimal", "with-chrono" ] }
 + async-graphql = { version = "4.0.10", features = ["decimal", "chrono", "dataloader"] }
 + async-graphql-poem = { version = "4.0.10" }
-+ async-trait = { version = "0.1.53" }
-+ dotenv = { version = "0.15.0" }
-+ heck = { version = "0.4.0" }
-+ itertools = { version = "0.10.3" }
-+ poem = { version = "1.3.29" }
-+ tokio = { version = "1.17.0", features = ["macros", "rt-multi-thread"] }
-+ tracing = { version = "0.1.34" }
-+ tracing-subscriber = { version = "0.3.11" }
 ```
 
 Then, derive a few more macros for all of the SeaORM entities.
@@ -103,8 +95,6 @@ We also need to define `QueryRoot` for the GraphQL server. This define which Sea
 pub struct QueryRoot;
 ```
 
-Bring everything into scope.
-
 ```rust title=src/lib.rs
 use sea_orm::prelude::*;
 
@@ -118,9 +108,9 @@ pub struct OrmDataloader {
 }
 ```
 
-Last, create a binary to run the GraphQL server. You can find the sample [here](https://github.com/SeaQL/seaography/blob/main/examples/sqlite/src/main.rs). Remember to import your local library by changing the highlighted line below.
+Last, create a binary to run the GraphQL server.
 
-``` diff title=src/main.rs
+``` rust title=src/main.rs
 use async_graphql::{
     dataloader::DataLoader,
     http::{playground_source, GraphQLPlaygroundConfig},
@@ -128,10 +118,9 @@ use async_graphql::{
 };
 use async_graphql_poem::GraphQL;
 use dotenv::dotenv;
-use poem::{get, handler, listener::TcpListener, web::Html, IntoResponse, Route, Server};
+use poem::{handler, listener::TcpListener, web::Html, IntoResponse, Route, Server};
 use sea_orm::Database;
-- use seaography_sqlite_example::*;
-+ use <CRATE_NAME>::*;
+use seaography_sqlite_example::*;
 use std::env;
 
 #[handler]
@@ -142,8 +131,32 @@ async fn graphql_playground() -> impl IntoResponse {
 #[tokio::main]
 async fn main() {
     // Snip...
+
+    let database = Database::connect(db_url).await.unwrap();
+    let orm_dataloader: DataLoader<OrmDataloader> = DataLoader::new(
+        OrmDataloader {
+            db: database.clone(),
+        },
+        tokio::spawn,
+    );
+
+    let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
+        .data(database)
+        .data(orm_dataloader)
+        .finish();
+
+    let app = Route::new()
+        .at("/", get(graphql_playground)
+        .post(GraphQL::new(schema)));
+
+    Server::new(TcpListener::bind("0.0.0.0:8000"))
+        .run(app)
+        .await
+        .unwrap();
 }
 ```
+
+Full source code available [here](https://github.com/SeaQL/seaography/blob/main/examples/sqlite).
 
 ### Generate From Existing Database
 
@@ -195,7 +208,7 @@ Visit the GraphQL playground at [http://localhost:8000](http://localhost:8000)
 
 ## Query Data via GraphQL
 
-Let say we want to get the first 3 inactivated customers sorted in ascending order of customer ID.
+Let say we want to get the first 3 films released on or after year 2006 sorted in ascending order of its title.
 
 ```graphql
 {
@@ -259,46 +272,10 @@ We got the following JSON result after running the GraphQL query.
           "description": "A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China",
           "releaseYear": "2006",
           "filmActor": [
-            {
-              "actor": {
-                "actorId": 19,
-                "firstName": "BOB",
-                "lastName": "FAWCETT"
-              }
-            },
-            {
-              "actor": {
-                "actorId": 85,
-                "firstName": "MINNIE",
-                "lastName": "ZELLWEGER"
-              }
-            },
             // Snip...
           ]
         },
-        {
-          "filmId": 3,
-          "title": "ADAPTATION HOLES",
-          "description": "A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory",
-          "releaseYear": "2006",
-          "filmActor": [
-            {
-              "actor": {
-                "actorId": 2,
-                "firstName": "NICK",
-                "lastName": "WAHLBERG"
-              }
-            },
-            {
-              "actor": {
-                "actorId": 19,
-                "firstName": "BOB",
-                "lastName": "FAWCETT"
-              }
-            },
-            // Snip...
-          ]
-        }
+        // Snip...
       ],
       "pages": 334,
       "current": 0
@@ -335,6 +312,70 @@ WHERE "film_actor"."film_id" IN (1, 3, 2)
 SELECT "actor"."actor_id", "actor"."first_name", "actor"."last_name", "actor"."last_update"
 FROM "actor"
 WHERE "actor"."actor_id" IN (24, 162, 20, 160, 1, 188, 123, 30, 53, 40, 2, 64, 85, 198, 10, 19, 108, 90)
+```
+
+Notice we query the related rows (N+1 problem) in batch, this greatly reduce the overhead of quiring deeply nested relation. Seaography uses [async_graphql::dataloader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html) to optimize loading of N+1 problem.
+
+Take `film_actor` as an example, we want to fetch `film_actor` with ID `(1, 3, 2)` from the database. We give the ID to `DataLoader`, it has two purpose. It tell `DataLoader` which row to be fetched. And, it's a unique ID to determine who is the proper receiver of a piece of data.
+
+```rust
+pub struct FilmActorFK(pub sea_orm::Value);
+
+impl Model { // film::Model
+  pub async fn FilmActor<'a>(
+      &self,
+      ctx: &async_graphql::Context<'a>,
+  ) -> Option<Vec<super::film_actor::Model>> {
+      let data_loader = ctx
+          .data::<async_graphql::dataloader::DataLoader<crate::OrmDataloader>>()
+          .unwrap();
+
+      let from_column: super::film::Column = // Snip...
+
+      let key = FilmActorFK(self.get(from_column));
+
+      let data: Option<_> = data_loader.load_one(key) // Batch querying with foreign keys
+          .await
+          .unwrap();
+
+      data
+  }
+}
+```
+
+Inside the `DataLoader`, it will execute the select in batch. Then, return a hashmap with ID as the key. This allow us to associate the query result with the receiver thus return the corresponding result to the proper receiver.
+
+```rust
+#[async_trait::async_trait]
+impl async_graphql::dataloader::Loader<FilmActorFK> for crate::OrmDataloader {
+    type Value = Vec<super::film_actor::Model>;
+    type Error = std::sync::Arc<sea_orm::error::DbErr>;
+
+    async fn load(
+        &self,
+        keys: &[FilmActorFK],
+    ) -> Result<std::collections::HashMap<FilmActorFK, Self::Value>, Self::Error> {
+        let key_values: Vec<_> = keys
+            .into_iter()
+            .map(|key| key.0.to_owned())
+            .collect();
+
+        let to_column: super::film_actor::Column = // Snip...
+
+        let data: std::collections::HashMap<FilmActorFK, Self::Value> = super::film_actor::Entity::find()
+            .filter(to_column.is_in(key_values)) // Filter by a batch of foreign keys
+            .all(&self.db)
+            .await?
+            .into_iter()
+            .map(|model| {
+                let key = FilmActorFK(model.get(to_column));
+                (key, model) // Collect rows into a hashmap with foreign key as the key
+            })
+            .into_group_map();
+
+        Ok(data)
+    }
+}
 ```
 
 ## Features
