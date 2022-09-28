@@ -10,19 +10,13 @@ tags: [news]
 
 [Seaography](https://github.com/SeaQL/seaography) is a GraphQL framework for building GraphQL resolvers using [SeaORM](https://github.com/SeaQL/sea-orm). It ships with a CLI tool that can generate ready-to-compile Rust projects from existing MySQL, Postgres and SQLite databases.
 
-The design and implementation of seaography can be found on our [release blog post](https://www.sea-ql.org/blog/2022-09-17-introducing-seaography/) and [documentation](https://www.sea-ql.org/Seaography/).
+The design and implementation of Seaography can be found on our [release blog post](https://www.sea-ql.org/blog/2022-09-17-introducing-seaography/) and [documentation](https://www.sea-ql.org/Seaography/).
 
-## Setup a GraphQL Server
+## Extending a SeaORM project
 
-Since seaography is a GraphQL framework built on top of SeaORM, you can easily extend your SeaORM project to serve a GraphQL server.
+Since Seaography is built on top of SeaORM, you can easily build a GraphQL server from a SeaORM project.
 
-If you are new to SeaORM, no worries, we have your back. You only need to provide a database connection, and `seaography-cli` will generate the SeaORM entities together with a complete Rust project!
-
-Or, you can download one of the example below to play with it.
-
-### Extend From Existing SeaORM Project
-
-Start by adding seaography and GraphQL dependencies to your `Cargo.toml`.
+Start by adding Seaography and GraphQL dependencies to your `Cargo.toml`.
 
 ```diff title=Cargo.toml
 [dependencies]
@@ -32,7 +26,7 @@ sea-orm = { version = "^0.9", features = [ ... ] }
 + async-graphql-poem = { version = "4.0.10" }
 ```
 
-Then, derive a few more macros for all of the SeaORM entities.
+Then, derive a few macros on the SeaORM entities.
 
 ```diff title=src/entities/film_actor.rs
 use sea_orm::entity::prelude::*;
@@ -82,30 +76,15 @@ pub enum Relation {
     )]
     Actor,
 }
-
-impl ActiveModelBehavior for ActiveModel {}
 ```
 
-We also need to define `QueryRoot` for the GraphQL server. This define which SeaORM entity can be quired.
+We also need to define `QueryRoot` for the GraphQL server. This define the GraphQL schema.
 
 ```rust title=src/query_root.rs
 #[derive(Debug, seaography::macros::QueryRoot)]
 #[seaography(entity = "crate::entities::actor")]
-#[seaography(entity = "crate::entities::address")]
-#[seaography(entity = "crate::entities::category")]
-#[seaography(entity = "crate::entities::city")]
-#[seaography(entity = "crate::entities::country")]
-#[seaography(entity = "crate::entities::customer")]
 #[seaography(entity = "crate::entities::film")]
 #[seaography(entity = "crate::entities::film_actor")]
-#[seaography(entity = "crate::entities::film_category")]
-#[seaography(entity = "crate::entities::film_text")]
-#[seaography(entity = "crate::entities::inventory")]
-#[seaography(entity = "crate::entities::language")]
-#[seaography(entity = "crate::entities::payment")]
-#[seaography(entity = "crate::entities::rental")]
-#[seaography(entity = "crate::entities::staff")]
-#[seaography(entity = "crate::entities::store")]
 pub struct QueryRoot;
 ```
 
@@ -122,7 +101,7 @@ pub struct OrmDataloader {
 }
 ```
 
-Last, create a binary to run the GraphQL server.
+Finally, create an executable to drive the GraphQL server.
 
 ``` rust title=src/main.rs
 use async_graphql::{
@@ -131,11 +110,10 @@ use async_graphql::{
     EmptyMutation, EmptySubscription, Schema,
 };
 use async_graphql_poem::GraphQL;
-use dotenv::dotenv;
 use poem::{handler, listener::TcpListener, web::Html, IntoResponse, Route, Server};
 use sea_orm::Database;
-use seaography_sqlite_example::*;
-use std::env;
+use seaography_example_project::*;
+// ...
 
 #[handler]
 async fn graphql_playground() -> impl IntoResponse {
@@ -144,13 +122,11 @@ async fn graphql_playground() -> impl IntoResponse {
 
 #[tokio::main]
 async fn main() {
-    // Snip...
+    // ...
 
     let database = Database::connect(db_url).await.unwrap();
     let orm_dataloader: DataLoader<OrmDataloader> = DataLoader::new(
-        OrmDataloader {
-            db: database.clone(),
-        },
+        OrmDataloader { db: database.clone() },
         tokio::spawn,
     );
 
@@ -170,13 +146,11 @@ async fn main() {
 }
 ```
 
-Full source code available [here](https://github.com/SeaQL/seaography/blob/main/examples/sqlite).
+## Generating a project from database
 
-### Generate From Existing Database
+If all you have is a database schema, good news! You can setup a GraphQL server without writing a single line of code.
 
-If you are new to SeaORM, read on, we will helps you set everything up.
-
-Install `seaography-cli`, it helps you generate SeaORM entities along with a full Rust project based on a user-provided database.
+Install `seaography-cli`, it helps you generate SeaORM entities along with a full Rust project based on a database schema.
 
 ```shell
 cargo install seaography-cli
@@ -196,9 +170,9 @@ seaography-cli postgres://root:root@localhost/sakila seaography-postgres-example
 seaography-cli sqlite://examples/sqlite/sakila.db seaography-sqlite-example examples/sqliteql
 ```
 
-### Download an Example
+## Checkout the example projects
 
-If you don't have an existing database. We have the following examples for you, alongside with the SQL scripts to initialize the database.
+We have the following examples for you, alongside with the SQL scripts to initialize the database.
 
 * [MySQL](https://github.com/SeaQL/seaography/tree/main/examples/mysql)
 * [PostgreSQL](https://github.com/SeaQL/seaography/tree/main/examples/postgres)
@@ -206,7 +180,7 @@ If you don't have an existing database. We have the following examples for you, 
 
 All examples provide a web-based GraphQL playground when running, so you can inspect the GraphQL schema and make queries. We also hosted a [demo GraphQL playground](https://playground.sea-ql.org/seaography) in case you can't wait to play with it.
 
-## Start the GraphQL Server
+## Starting the GraphQL Server
 
 Your GraphQL server is ready to launch! Go to the Rust project root then execute `cargo run` to spin it up.
 
@@ -277,7 +251,7 @@ We got the following JSON result after running the GraphQL query.
                 "lastName": "GABLE"
               }
             },
-            // Snip...
+            // ...
           ]
         },
         {
@@ -286,10 +260,10 @@ We got the following JSON result after running the GraphQL query.
           "description": "A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China",
           "releaseYear": "2006",
           "filmActor": [
-            // Snip...
+            // ...
           ]
         },
-        // Snip...
+        // ...
       ],
       "pages": 334,
       "current": 0
@@ -298,7 +272,7 @@ We got the following JSON result after running the GraphQL query.
 }
 ```
 
-Behind the scene, following SQL was queried on the database.
+Behind the scene, the following SQL were queried:
 
 ```sql
 SELECT "film"."film_id",
@@ -328,78 +302,9 @@ FROM "actor"
 WHERE "actor"."actor_id" IN (24, 162, 20, 160, 1, 188, 123, 30, 53, 40, 2, 64, 85, 198, 10, 19, 108, 90)
 ```
 
-Notice we query the related rows (N+1 problem) in batch, this greatly reduce the overhead of quiring deeply nested relation. Seaography uses [async_graphql::dataloader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html) to optimize loading of N+1 problem.
+Under the hood, Seaography uses [async_graphql::dataloader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html) in querying nested objects to tackle the N+1 problem.
 
-Take `film_actor` as an example, we want to fetch `film_actor` with ID `(1, 3, 2)` from the database. We give the ID to `DataLoader`, it has two purpose. It tell `DataLoader` which row to be fetched. And, it's a unique ID to determine who is the caller and therefore the proper receiver of the query result.
-
-```rust
-pub struct FilmActorFK(pub sea_orm::Value);
-
-impl Model { // film::Model
-  pub async fn FilmActor<'a>(
-      &self,
-      ctx: &async_graphql::Context<'a>,
-  ) -> Option<Vec<super::film_actor::Model>> {
-      let data_loader = ctx
-          .data::<async_graphql::dataloader::DataLoader<crate::OrmDataloader>>()
-          .unwrap();
-
-      let from_column: super::film::Column = // Snip...
-
-      let key = FilmActorFK(self.get(from_column));
-
-      let data: Option<_> = data_loader.load_one(key) // Batch querying with foreign keys
-          .await
-          .unwrap();
-
-      data
-  }
-}
-```
-
-Inside the `DataLoader`, it will execute the select in batch. Then, return a hashmap with ID as the key. This allow us to associate the query result with the receiver thus return the corresponding result to the proper receiver.
-
-```rust
-#[async_trait::async_trait]
-impl async_graphql::dataloader::Loader<FilmActorFK> for crate::OrmDataloader {
-    type Value = Vec<super::film_actor::Model>;
-    type Error = std::sync::Arc<sea_orm::error::DbErr>;
-
-    async fn load(
-        &self,
-        keys: &[FilmActorFK],
-    ) -> Result<std::collections::HashMap<FilmActorFK, Self::Value>, Self::Error> {
-        let key_values: Vec<_> = keys
-            .into_iter()
-            .map(|key| key.0.to_owned())
-            .collect();
-
-        let to_column: super::film_actor::Column = // Snip...
-
-        let data: std::collections::HashMap<FilmActorFK, Self::Value> = super::film_actor::Entity::find()
-            .filter(to_column.is_in(key_values)) // Filter by a batch of foreign keys
-            .all(&self.db)
-            .await?
-            .into_iter()
-            .map(|model| {
-                let key = FilmActorFK(model.get(to_column));
-                (key, model) // Collect rows into a hashmap with foreign key as the key
-            })
-            .into_group_map();
-
-        Ok(data)
-    }
-}
-```
-
-## Features
-
-* Relational query (1-to-1, 1-to-N)
-* Pagination on query's root entity
-* Filter with operators (e.g. gt, lt, eq)
-* Order by any column
-
-(Right now there is no mutation, but it's on our plan!)
+To learn more, checkout the [Seaography Documentation](https://www.sea-ql.org/Seaography/docs/data-loader/).
 
 ## Conclusion
 

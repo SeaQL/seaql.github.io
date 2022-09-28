@@ -1,3 +1,5 @@
+# Macros documentation
+
 ## `Filter` derive
 
 The `Filter` derive macro is attached on Sea ORM Models to generate structures and functions that are used by the QueryRoot to provide query functionality on Entities.
