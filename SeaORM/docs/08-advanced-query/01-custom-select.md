@@ -81,3 +81,49 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
     .all(db)
     .await?;
 ```
+
+Selecting a single value without a custom `struct` is also possible.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
+enum QueryAs {
+    CakeName,
+}
+
+let res: Vec<String> = cake::Entity::find()
+    .select_only()
+    .column_as(cake::Column::Name, QueryAs::CakeName)
+    .into_values::<_, QueryAs>()
+    .all(&db)
+    .await?;
+
+assert_eq!(
+    res,
+    vec!["Chocolate Forest".to_owned(), "New York Cheese".to_owned()]
+);
+```
+
+You can even select a tuple value.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
+enum QueryAs {
+    CakeName,
+    NumOfCakes,
+}
+
+let res: Vec<(String, i64)> = cake::Entity::find()
+    .select_only()
+    .column_as(cake::Column::Name, QueryAs::CakeName)
+    .column_as(cake::Column::Id.count(), QueryAs::NumOfCakes)
+    .group_by(cake::Column::Name)
+    .into_values::<_, QueryAs>()
+    .all(&db)
+    .await?;
+
+assert_eq!(res, vec![("Chocolate Forest".to_owned(), 2i64)]);
+```
