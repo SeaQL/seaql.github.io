@@ -7,7 +7,7 @@ A transaction is a group of SQL statements executed with ACID guarantee. There a
 The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively.
 
 ```rust
-use sea_orm::{TransactionTrait};
+use sea_orm::TransactionTrait;
 
 // <Fn, A, B> -> Result<A, B>
 db.transaction::<_, (), DbErr>(|txn| {
