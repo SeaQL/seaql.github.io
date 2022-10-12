@@ -7,11 +7,11 @@ Consider the following GraphQL query:
 ```graphql
 {
   film(
-    pagination: { limit: 3, page: 0 }
+    pagination: { pages: { limit: 3, page: 0 }}
     filters: { releaseYear: { gte: "2006" } }
     orderBy: { title: ASC }
   ) {
-    data {
+    nodes {
       filmId
       title
       description

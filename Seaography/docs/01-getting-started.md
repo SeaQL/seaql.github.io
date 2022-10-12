@@ -15,25 +15,22 @@ USAGE:
     seaography-cli [OPTIONS] <DATABASE_URL> <CRATE_NAME> <DESTINATION>
 
 ARGS:
-    <DATABASE_URL>
-    <CRATE_NAME>
-    <DESTINATION>
+    <DATABASE_URL>                               [String] A valid URL pointing to the database
+    <CRATE_NAME>                                 [String] The cargo crate name of the generated project
+    <DESTINATION>                                [String] Path pointing to the output folder, it will create it if does not exist
 
 OPTIONS:
-    -c, --complexity-limit <COMPLEXITY_LIMIT>
-    -d, --depth-limit <DEPTH_LIMIT>
-    -e, --expanded-format <EXPANDED_FORMAT>
+    -c, --complexity-limit <COMPLEXITY_LIMIT>    [Number] Limit GraphQL query complexity so it cannot be greater than this number.
+    -d, --depth-limit <DEPTH_LIMIT>              [String] Limit GraphQL query depth so it cannot be greater than this number
+    -e, --expanded-format <EXPANDED_FORMAT>      [Boolean]  If you want the Sea ORM Entities to be in extended format
+    -f, --framework <FRAMEWORK>                  [Enum] Dictates the generator what web API framework to use. Possible values: actix, poem (default=poem)
     -h, --help                                   Print help information
     -V, --version                                Print version information
 ```
 
-* **DATABASE_URL:** a valid URL pointing to the database.
-  examples: `mysql://user:pass@127.0.0.1:1235/database_name`, `postgres://user:pass@127.0.0.1/base_name`, `sqlite://my_db.db`
-* **CRATE_NAME:** the cargo crate name of the generated project
-* **DESTINATION:** path pointing to the output folder, it will create it if does not exist
-* **COMPLEXITY_LIMIT:** [Number] Limit GraphQL query complexity so it cannot be greater than this number
-* **DEPTH_LIMIT:** [Number] Limit GraphQL query depth so it cannot be greater than this number
-* **EXPANDED_FORMAT:** [Boolean] If you want the Sea ORM Entities to be in [extended format](https://www.sea-ql.org/SeaORM/docs/generate-entity/expanded-entity-structure/)
+#### Notes
+* **DATABASE_URL examples:** `mysql://user:pass@127.0.0.1:1235/database_name`, `postgres://user:pass@127.0.0.1/base_name`, `sqlite://my_db.db`
+* [extended format](https://www.sea-ql.org/SeaORM/docs/generate-entity/expanded-entity-structure/)
 
 ## Prerequisites
 
@@ -47,9 +44,10 @@ In order to understand how the generated code works its recommended to study the
 
     SeaORM is a relational ORM to help you build web services in Rust.
 
-3. [poem](https://docs.rs/crate/poem/latest)
+3. The web API of the generated project
 
-    A full-featured and easy-to-use web framework with the Rust programming language.
+    [poem](https://docs.rs/crate/poem/latest)
+    [actix](https://docs.rs/crate/actix/latest)
 
 4. [tokio*](https://docs.rs/tokio/latest/tokio/)
 

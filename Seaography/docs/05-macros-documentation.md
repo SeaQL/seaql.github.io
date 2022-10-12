@@ -82,8 +82,6 @@ pub fn order_by(stmt: sea_orm::Select<Entity>, order_by_struct: Option<OrderBy>)
 }
 ```
 
-TODO: WIP Cursor pagination structures and functions
-
 ## `RelationsCompact` derive
 
 The `RelationsCompact` derive macro is attached on Sea ORM Relation enum to generate structures and functions that are used by the Entity to query related Entities. This derive is applied on Entities in compact form.
@@ -269,40 +267,97 @@ pub struct QueryRoot;
 
 ```rust
 #[derive(Debug, async_graphql::InputObject)]
-pub struct PaginationInput {
+pub struct PageInput {
     pub limit: usize,
     pub page: usize,
 }
 
-#[derive(Debug, async_graphql::SimpleObject)]
-#[graphql(concrete(name = "PaginatedArtistsResult", params(crate::entities::artists::Model)))]
-#[graphql(concrete(name = "PaginatedEmployeesResult", params(crate::entities::employees::Model)))]
-pub struct PaginatedResult<T: async_graphql::ObjectType> {
-    pub data: Vec<T>,
-    pub pages: usize,
-    pub current: usize,
+#[derive(Debug, async_graphql::InputObject)]
+pub struct CursorInput {
+    pub cursor: Option<String>,
+    pub limit: u64,
+}
+
+#[derive(async_graphql::OneofObject)]
+pub enum Pagination {
+    Pages(PageInput),
+    Cursor(CursorInput),
+}
+
+/// Extra fields for pager pagination
+#[derive(async_graphql::SimpleObject)]
+pub struct ExtraPaginationFields {
+    pub pages: Option<usize>,
+    pub current: Option<usize>,
+}
+
+/// CursorValues is used to encode/decode the primary key of any Model for cursor pagination
+#[derive(Debug)]
+pub struct CursorValues(pub Vec<sea_orm::Value>);
+
+impl async_graphql::types::connection::CursorType for CursorValues {
+    type Error = String;
+
+    /// Used to decode cursor String into a vector of Values
+    fn decode_cursor(s: &str) -> Result<Self, Self::Error> {
+        ...
+    }
+
+    /// Used to encode a vector of Values into a cursor String
+    fn encode_cursor(&self) -> String {
+        ...
+    }
+}
+
+/// Used to track the parsing state of the cursor String
+#[derive(Debug)]
+pub enum DecodeMode {
+    Type,
+    Length,
+    ColonSkip,
+    Data,
+}
+
+/// Used to parse a vector of Values into a ValueTuple enum
+pub fn map_cursor_values(values: Vec<sea_orm::Value>) -> sea_orm::sea_query::value::ValueTuple {
+    ...
 }
 
 #[async_graphql::Object]
 impl QueryRoot {
-    pub async fn artists<'a>(
-      &self,
-      ctx: &async_graphql::Context<'a>,
-      filters: Option<crate::entities::artists::Filter>,
-      pagination: Option<PaginationInput>,
-      order_by: Option<crate::entities::artists::OrderBy>,
-    ) -> PaginatedResult<crate::entities::artists::Model> {
-      ...
+    pub async fn actor<'a>(
+        &self,
+        ctx: &async_graphql::Context<'a>,
+        filters: Option<crate::entities::actor::Filter>,
+        pagination: Option<Pagination>,
+        order_by: Option<crate::entities::actor::OrderBy>,
+    ) -> async_graphql::types::connection::Connection<
+        String,
+        crate::entities::actor::Model,
+        ExtraPaginationFields,
+        async_graphql::types::connection::EmptyFields,
+    > {
+        // 1. use definitions
+        // 2. initialize db connection
+        // 3. create sql statement
+        // 4. apply filters and ordering
+        // 5. apply pagination
+        // 6. return result
     }
 
-    pub async fn employees<'a>(
-      &self,
-      ctx: &async_graphql::Context<'a>,
-      filters: Option<crate::entities::artists::Filter>,
-      pagination: Option<PaginationInput>,
-      order_by: Option<crate::entities::artists::OrderBy>,
-    ) -> PaginatedResult<crate::entities::artists::Model> {
-      ...
+    pub async fn address<'a>(
+        &self,
+        ctx: &async_graphql::Context<'a>,
+        filters: Option<crate::entities::address::Filter>,
+        pagination: Option<Pagination>,
+        order_by: Option<crate::entities::address::OrderBy>,
+    ) -> async_graphql::types::connection::Connection<
+        String,
+        crate::entities::address::Model,
+        ExtraPaginationFields,
+        async_graphql::types::connection::EmptyFields,
+    > {
+        ...
     }
 }
 ```

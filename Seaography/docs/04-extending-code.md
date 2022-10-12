@@ -52,7 +52,7 @@ You can perform the following query
 ```graphql
 {
     category {
-        data {
+        nodes {
             id,
             name,
             product {
