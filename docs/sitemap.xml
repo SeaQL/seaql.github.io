@@ -15,4 +15,7 @@
   <sitemap>
     <loc>https://www.sea-ql.org/Seaography/sitemap.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>https://www.sea-ql.org/sea-orm-cookbook/sitemap.xml</loc>
+  </sitemap>
 </sitemapindex>
