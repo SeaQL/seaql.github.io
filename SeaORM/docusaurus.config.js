@@ -50,6 +50,11 @@ module.exports = {
           position: 'left',
         },
         {
+          to: 'https://www.sea-ql.org/sea-orm-cookbook/',
+          label: 'Cookbook',
+          position: 'left',
+        },
+        {
           to: 'https://crates.io/crates/sea-orm',
           label: 'Crate',
           position: 'right',
@@ -80,6 +85,10 @@ module.exports = {
             {
               label: 'SeaORM Tutorials',
               to: 'https://www.sea-ql.org/sea-orm-tutorial/',
+            },
+            {
+              label: 'SeaORM Cookbook',
+              to: 'https://www.sea-ql.org/sea-orm-cookbook/',
             },
             {
               label: 'API Reference',
