@@ -7,7 +7,7 @@ Each migration contains two methods: `up` and `down`. The `up` method is used to
 Generate a new migration file by executing `sea-orm-cli migrate generate` command.
 
 ```shell
-sea-orm-cli migrate generate NAME_OF_MIGRATION [-u|--universal-time]
+sea-orm-cli migrate generate NAME_OF_MIGRATION [--universal-time]
 
 # E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
 sea-orm-cli migrate generate create_table
