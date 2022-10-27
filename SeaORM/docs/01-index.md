@@ -12,6 +12,8 @@
 
     1.4. [Tutorial & Examples](01-introduction/04-tutorial.md)
 
+    1.5. [Bakery Schema](01-introduction/05-bakery-schema.md)
+
 ## Basics
 
 2. Installation & Configuration
@@ -75,8 +77,6 @@
     6.5 [Self Referencing](06-relation/05-self-referencing.md)
 
     6.6 [Custom Join Condition](06-relation/06-custom-join-condition.md)
-
-    6.7 [Bakery Schema](06-relation/07-bakery-schema.md)
 
 7. Writing Tests
 
