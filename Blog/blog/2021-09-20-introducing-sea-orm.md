@@ -253,7 +253,7 @@ As a courtesy, here is the list of SeaQL's early contributors (in alphabetic ord
                 </a>
                 <div class="avatar__intro">
                     <div class="avatar__name">
-                        Jonas Rinner
+                        Sylvie Rinner
                     </div>
                 </div>
             </div>
