@@ -1,6 +1,8 @@
 # Setting Up Migration
 
-Version control your database schema with migrations written in SeaQuery or SQL.
+> If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
+
+If you are starting from a fresh database, it's better to version control your database schema. SeaORM ships with a migration tool, allowing you to write migrations in SeaQuery or SQL.
 
 ## Migration Table
 
@@ -11,7 +13,7 @@ A table named `seaql_migrations` will be created in your database to keep track 
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-$ cargo install sea-orm-cli
+cargo install sea-orm-cli
 ```
 
 Then, setup the migration directory by executing `sea-orm-cli migrate init`.

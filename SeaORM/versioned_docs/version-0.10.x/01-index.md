@@ -18,11 +18,9 @@
 
     2.1 [Choosing a Database & Async Runtime](02-install-and-config/01-database-and-async-runtime.md)
 
-    2.2 [Schema Management](02-install-and-config/02-schema.md)
+    2.2 [Connection Pool](02-install-and-config/02-connection.md)
 
-    2.3 [Connection Pool](02-install-and-config/03-connection.md)
-
-    2.4 [Debug Log](02-install-and-config/04-debug-log.md)
+    2.3 [Debug Log](02-install-and-config/03-debug-log.md)
 
 3. Migration
 

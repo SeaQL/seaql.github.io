@@ -3,7 +3,7 @@
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-$ cargo install sea-orm-cli
+cargo install sea-orm-cli
 ```
 
 ## Configure Environment
@@ -11,7 +11,7 @@ $ cargo install sea-orm-cli
 Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
-DATABASE_URL=sql://username:password@localhost/database
+DATABASE_URL=protocol://username:password@localhost/database
 ```
 
 ## Getting Help
@@ -20,13 +20,13 @@ Use `-h` flag on any CLI command or subcommand for help.
 
 ```shell
 # List all available commands
-$ sea-orm-cli -h
+sea-orm-cli -h
 
 # List all subcommands available in `generate` command
-$ sea-orm-cli generate -h
+sea-orm-cli generate -h
 
 # Show how to use `generate entity` subcommand
-$ sea-orm-cli generate entity -h
+sea-orm-cli generate entity -h
 ```
 
 ## Generating Entity Files
@@ -56,7 +56,5 @@ Command line options:
 
 ```shell
 # Generate entity files of database `bakery` to `entity/src`
-$ sea-orm-cli generate entity \
-    -u sql://sea:sea@localhost/bakery \
-    -o entity/src
+sea-orm-cli generate entity -u protocol://username:password@localhost/bakery -o entity/src
 ```

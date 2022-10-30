@@ -32,6 +32,18 @@ let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_
     .await?;
 ```
 
+If you do not know what your model looks like beforehand, you can use `JsonValue`.
+
+```rust
+let unique: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
+        DbBackend::Postgres,
+        r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
+        vec![],
+    ))
+    .all(&db)
+    .await?;
+ ```
+
 You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
 
 ```rust

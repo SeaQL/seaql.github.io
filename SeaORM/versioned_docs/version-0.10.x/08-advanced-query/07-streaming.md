@@ -1,8 +1,10 @@
 # Streaming
 
-Use async stream on any `Select` for reducing memory allocation to improve efficiency.
+Use async stream from [futures](https://crates.io/crates/futures) crate on any `Select` for reducing memory allocation to improve efficiency.
 
 ```rust
+use futures::TryStreamExt;
+
 // Stream all fruits
 let mut stream = Fruit::find().stream(db).await?;
 
