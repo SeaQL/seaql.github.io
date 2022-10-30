@@ -25,6 +25,41 @@ Note that you might need to upgrade the corresponding dependency on your applica
 
 [[#433](https://github.com/SeaQL/sea-query/pull/433)] Postgres support is moved to `sea-query-postgres`
 
+```rust
+// before
+sea_query::sea_query_driver_postgres!();
+use sea_query_driver_postgres::{bind_query, bind_query_as};
+
+let (sql, values) = Query::select()
+    .from(Character::Table)
+    .expr(Func::count(Expr::col(Character::Id)))
+    .build(PostgresQueryBuilder);
+
+let row = bind_query(sqlx::query(&sql), &values)
+    .fetch_one(&mut pool)
+    .await
+    .unwrap();
+
+// now
+use sea_query_binder::SqlxBinder;
+
+let (sql, values) = Query::select()
+    .from(Character::Table)
+    .expr(Func::count(Expr::col(Character::Id)))
+    .build_sqlx(PostgresQueryBuilder);
+
+let row = sqlx::query_with(&sql, values)
+    .fetch_one(&mut pool)
+    .await
+    .unwrap();
+
+// You can now make use of SQLx's `query_as_with` nicely:
+let rows = sqlx::query_as_with::<_, StructWithFromRow, _>(&sql, values)
+    .fetch_all(&mut pool)
+    .await
+    .unwrap();
+```
+
 ## Support sub-query operators: `EXISTS`, `ALL`, `ANY`, `SOME`
 
 [[#118](https://github.com/SeaQL/sea-query/issues/118)] Added sub-query operators: `EXISTS`, `ALL`, `ANY`, `SOME`
@@ -130,13 +165,40 @@ assert_eq!(
 );
 ```
 
+## Added `OnConflict::value` and `OnConflict::values`
+
+[[#451](https://github.com/SeaQL/sea-query/issues/451)] Implementation `From<T>` for any `Into<Value>` into `SimpleExpr`
+
+```rust
+// Before:
+OnConflict::column(Glyph::Id).update_expr((Glyph::Image, Expr::val(1).add(2))
+// After:
+OnConflict::column(Glyph::Id).value(Glyph::Image, Expr::val(1).add(2))
+```
+
+## Improvement `ColumnDef::default`
+
+[[#347](https://github.com/SeaQL/sea-query/issues/347)] `ColumnDef::default` now accepts `Into<SimpleExpr>` instead `Into<Value>`
+
+```rust
+// Now we can write:
+ColumnDef::new(Char::FontId)
+    .timestamp()
+    .default(Keyword::CurrentTimestamp)
+```
+
+
 ## Breaking Changes
 
 - [[#386](https://github.com/SeaQL/sea-query/pull/386)] Changed `in_tuples` interface to accept `IntoValueTuple`
 - [[#320](https://github.com/SeaQL/sea-query/issues/320)] Removed deprecated methods
 - [[#440](https://github.com/SeaQL/sea-query/issues/440)] `CURRENT_TIMESTAMP` changed from being a function to keyword
 - [[#375](https://github.com/SeaQL/sea-query/issues/375)] Update SQLite `boolean` type from `integer to `boolean`
-- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `InsertStatement::exprs`, `InsertStatement::exprs_panic`, `OnConflict::update_value`, `OnConflict::update_values`, `OnConflict::update_expr`, `OnConflict::update_exprs`, `UpdateStatement::col_expr`, `UpdateStatement::value_expr`, `UpdateStatement::exprs`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `OnConflict::update_value`, `OnConflict::update_values`, `OnConflict::update_expr`, `OnConflict::update_exprs`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `InsertStatement::exprs`, `InsertStatement::exprs_panic`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `UpdateStatement::col_expr`, `UpdateStatement::value_expr`, `UpdateStatement::exprs`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] `UpdateStatement::value` now accept `Into<SimpleExpr>` instead of `Into<Value>`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] `Expr::case`, `CaseStatement::case` and `CaseStatement::finally` now accepts `Into<SimpleExpr>` instead of `Into<Expr>`
 - [[#460](https://github.com/SeaQL/sea-query/pull/460)] `InsertStatement::values`, `UpdateStatement::values` now accepts `IntoIterator<Item = SimpleExpr>` instead of `IntoIterator<Item = Value>`
 - [[#409](https://github.com/SeaQL/sea-query/issues/409)] Use native api from SQLx for SQLite to work with time
 - [[#435](https://github.com/SeaQL/sea-query/pull/435)] Changed type of `ColumnType::Enum` from `(String, Vec<String>)` to `Enum { name: DynIden, variants: Vec<DynIden>}`
@@ -152,11 +214,7 @@ assert_eq!(
 - [[#329](https://github.com/SeaQL/sea-query/pull/430)] Added RAND function
 - [[#425](https://github.com/SeaQL/sea-query/pull/425)] Implements `Display` for `Value`
 - [[#427](https://github.com/SeaQL/sea-query/issues/427)] Added `INTERSECT` and `EXCEPT` to UnionType
-- [[#347](https://github.com/SeaQL/sea-query/issues/347)] `ColumnDef::default` now accepts both Value and SimpleExpr
 - [[#448](https://github.com/SeaQL/sea-query/pull/448)] `OrderedStatement::order_by_customs`, `OrderedStatement::order_by_columns`, `OverStatement::partition_by_customs`, `OverStatement::partition_by_columns` now accepts `IntoIterator<Item = T>` instead of `Vec<T>`
-- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Added `OnConflict::value` and `OnConflict::values`
-- [[#451](https://github.com/SeaQL/sea-query/issues/451)] `Expr::case`, `CaseStatement::case` and `CaseStatement::finally` now accepts `Into<SimpleExpr>` instead of `Into<Expr>`
-- [[#451](https://github.com/SeaQL/sea-query/issues/451)] `UpdateStatement::value` now accept `Into<SimpleExpr>` instead of `Into<Value>`
 - [[#452](https://github.com/SeaQL/sea-query/issues/452)] `TableAlterStatement::rename_column`, `TableAlterStatement::drop_column`, `ColumnDef::new`, `ColumnDef::new_with_type` now accepts `IntoIden` instead of `Iden`
 - [[#426](https://github.com/SeaQL/sea-query/pull/426)] Cleanup `IndexBuilder` trait methods
 - [[#436](https://github.com/SeaQL/sea-query/pull/436)] Introduce `SqlWriter` trait
