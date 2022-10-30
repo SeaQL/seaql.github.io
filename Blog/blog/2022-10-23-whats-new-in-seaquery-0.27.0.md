@@ -20,7 +20,9 @@ Note that you might need to upgrade the corresponding dependency on your applica
 ## Drivers support
 
 [[#383](https://github.com/SeaQL/sea-query/issues/383)] Remove `sea-query-driver` in favour of `sea-query-binder`
+
 [[#422](https://github.com/SeaQL/sea-query/pull/422)] Rusqlite support is moved to `sea-query-rusqlite`
+
 [[#433](https://github.com/SeaQL/sea-query/pull/433)] Postgres support is moved to `sea-query-postgres`
 
 ## Support sub-query operators: `EXISTS`, `ALL`, `ANY`, `SOME`
