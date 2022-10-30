@@ -10,12 +10,12 @@ tags: [news]
 
 🎉 We are pleased to release SeaQuery [`0.27.0`](https://github.com/SeaQL/sea-query/releases/tag/0.27.0)! Here are some feature highlights 🌟:
 
-## Dependency Upgrades
+## Dependency Upgrade
 
-[[#356](https://github.com/SeaQL/sea-query/issues/356)] We have upgraded a major dependence:
+[[#356](https://github.com/SeaQL/sea-query/issues/356)] We have upgraded a major dependency:
 - Upgrade [`sqlx`](https://github.com/launchbadge/sqlx) to 0.6.1
 
-Note that you might need to upgrade the corresponding dependency on your application as well.
+You might need to upgrade the corresponding dependency in your application as well.
 
 ## Drivers support
 
@@ -178,7 +178,7 @@ OnConflict::column(Glyph::Id).update_expr((Glyph::Image, Expr::val(1).add(2)))
 OnConflict::column(Glyph::Id).value(Glyph::Image, Expr::val(1).add(2))
 ```
 
-## Improvement `ColumnDef::default`
+## Improvement to `ColumnDef::default`
 
 [[#347](https://github.com/SeaQL/sea-query/issues/347)] `ColumnDef::default` now accepts `Into<SimpleExpr>` instead `Into<Value>`
 
