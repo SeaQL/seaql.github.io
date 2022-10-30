@@ -169,7 +169,7 @@ assert_eq!(Post::Text.to_string(), "text");
 
 ### Raw SQL
 
-You can write migration files in raw SQL, but then you lost the cross-backend compatibility SeaQuery offers.
+You can write migration files in raw SQL, but then you lost the multi-backend compatibility SeaQuery offers.
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm::Statement;
@@ -204,4 +204,4 @@ In the grand scheme of things, we recommend a schema first approach: you write m
 
 At times, you might want to use the [`create_*_from_entity`](09-generate-sea-query-statement/01-create-table.md) methods to bootstrap your database with several hand written entity files.
 
-That's perfectly fine if you intend to never change the entity schema. Or, you can clone the original entity and rely on it in the migration file.
+That's perfectly fine if you intend to never change the entity schema. Or, you can keep the original entity and embed a copy in the migration file.
