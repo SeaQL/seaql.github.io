@@ -37,8 +37,8 @@ $ sea-orm-cli migrate COMMAND -d ./other/migration/dir
 Run the migrator CLI defined in `migration/main.rs`.
 
 ```shell
-$ cd migration
-$ cargo run -- COMMAND
+cd migration
+cargo run -- COMMAND
 ```
 
 ## Migrating Programmatically

@@ -13,7 +13,7 @@ $ cargo install sqlx-cli
 Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
 
 ```env title=".env"
-DATABASE_URL=sql://username:password@localhost/database
+DATABASE_URL=protocol://username:password@localhost/database
 ```
 
 Create a new `.sql` file.
