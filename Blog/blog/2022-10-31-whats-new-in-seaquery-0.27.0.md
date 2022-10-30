@@ -1,5 +1,5 @@
 ---
-slug: 2022-10-21-whats-new-in-seaquery-0.27.0
+slug: 2022-10-31-whats-new-in-seaquery-0.27.0
 title: What's new in SeaQuery 0.27.0
 author: SeaQL Team
 author_title: Ivan Krivosheev
@@ -19,7 +19,9 @@ Note that you might need to upgrade the corresponding dependency on your applica
 
 ## Drivers support
 
-[[#383](https://github.com/SeaQL/sea-query/issues/383)] Remove `sea-query-driver` in favour of `sea-query-binder`
+We have reworked the way drivers work in SeaQuery: priori to `0.27.0`, users have to invoke the `sea_query_driver_*` macros. Now each driver `sqlx`, `postgres` & `rusqlite` has their own supporting crate, which integrates tightly with the corresponding libraries.
+
+[[#383](https://github.com/SeaQL/sea-query/issues/383)] Deprecate `sea-query-driver` in favour of `sea-query-binder`
 
 [[#422](https://github.com/SeaQL/sea-query/pull/422)] Rusqlite support is moved to `sea-query-rusqlite`
 
@@ -170,9 +172,9 @@ assert_eq!(
 [[#451](https://github.com/SeaQL/sea-query/issues/451)] Implementation `From<T>` for any `Into<Value>` into `SimpleExpr`
 
 ```rust
-// Before:
-OnConflict::column(Glyph::Id).update_expr((Glyph::Image, Expr::val(1).add(2))
-// After:
+// Before: notice the tuple
+OnConflict::column(Glyph::Id).update_expr((Glyph::Image, Expr::val(1).add(2)))
+// After: it accepts `Value` as well as `SimpleExpr`
 OnConflict::column(Glyph::Id).value(Glyph::Image, Expr::val(1).add(2))
 ```
 
