@@ -12,7 +12,7 @@ tags: [news]
 
 ## Dependency Upgrades
 
-[[#356](https://github.com/SeaQL/sea-query/issues/356)] We have upgraded a few major dependencies:
+[[#356](https://github.com/SeaQL/sea-query/issues/356)] We have upgraded a major dependence:
 - Upgrade [`sqlx`](https://github.com/launchbadge/sqlx) to 0.6.1
 
 Note that you might need to upgrade the corresponding dependency on your application as well.
@@ -85,28 +85,10 @@ assert_eq!(
 );
 ```
 
-## Support one dimension Postgres array for SQLx
+## Changed cond_where chaining semantics
 
-[[#336](https://github.com/SeaQL/sea-query/issues/336)] Added support one dimension Postgres array for SQLx
+[[#414](https://github.com/SeaQL/sea-query/issues/414)] Changed cond_where chaining semantics
 
-
-## Breaking Changes
-
-- [[#386](https://github.com/SeaQL/sea-query/pull/386)] Changed `in_tuples` interface to accept `IntoValueTuple`
-- [[#320](https://github.com/SeaQL/sea-query/issues/320)] Removed deprecated methods
-- [[#440](https://github.com/SeaQL/sea-query/issues/440)] `CURRENT_TIMESTAMP` changed from being a function to keyword
-- [[#375](https://github.com/SeaQL/sea-query/issues/375)] Update SQLite `boolean` type from `integer to `boolean`
-- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `InsertStatement::exprs`, `InsertStatement::exprs_panic`, `OnConflict::update_value`, `OnConflict::update_values`, `OnConflict::update_expr`, `OnConflict::update_exprs`, `UpdateStatement::col_expr`, `UpdateStatement::value_expr`, `UpdateStatement::exprs`
-- [[#460](https://github.com/SeaQL/sea-query/pull/460)] `InsertStatement::values`, `UpdateStatement::values` now accepts `IntoIterator<Item = SimpleExpr>` instead of `IntoIterator<Item = Value>`
-- [[#409](https://github.com/SeaQL/sea-query/issues/409)] Use native api from SQLx for SQLite to work with time
-- [[#435](https://github.com/SeaQL/sea-query/pull/435)] Changed type of ColumnType::Enum from (String, Vec<String>) to:
-```rust
-Enum {
-    name: DynIden,
-    variants: Vec<DynIden>,
-}
-```
-- [[#414](https://github.com/SeaQL/sea-query/issues/414)] Changed cond_where chaining semantics
 ```rust
 // Before: will extend current Condition
 assert_eq!(
@@ -146,8 +128,20 @@ assert_eq!(
 );
 ```
 
+## Breaking Changes
+
+- [[#386](https://github.com/SeaQL/sea-query/pull/386)] Changed `in_tuples` interface to accept `IntoValueTuple`
+- [[#320](https://github.com/SeaQL/sea-query/issues/320)] Removed deprecated methods
+- [[#440](https://github.com/SeaQL/sea-query/issues/440)] `CURRENT_TIMESTAMP` changed from being a function to keyword
+- [[#375](https://github.com/SeaQL/sea-query/issues/375)] Update SQLite `boolean` type from `integer to `boolean`
+- [[#451](https://github.com/SeaQL/sea-query/issues/451)] Deprecated `InsertStatement::exprs`, `InsertStatement::exprs_panic`, `OnConflict::update_value`, `OnConflict::update_values`, `OnConflict::update_expr`, `OnConflict::update_exprs`, `UpdateStatement::col_expr`, `UpdateStatement::value_expr`, `UpdateStatement::exprs`
+- [[#460](https://github.com/SeaQL/sea-query/pull/460)] `InsertStatement::values`, `UpdateStatement::values` now accepts `IntoIterator<Item = SimpleExpr>` instead of `IntoIterator<Item = Value>`
+- [[#409](https://github.com/SeaQL/sea-query/issues/409)] Use native api from SQLx for SQLite to work with time
+- [[#435](https://github.com/SeaQL/sea-query/pull/435)] Changed type of `ColumnType::Enum` from `(String, Vec<String>)` to `Enum { name: DynIden, variants: Vec<DynIden>}`
+
 ## Miscellaneous Enhancements
 
+- [[#336](https://github.com/SeaQL/sea-query/issues/336)] Added support one dimension Postgres array for SQLx
 - [[#373](https://github.com/SeaQL/sea-query/issues/373)] Support CROSS JOIN
 - [[#457](https://github.com/SeaQL/sea-query/issues/457)] Added support `DROP COLUMN` for SQLite
 - [[#466](https://github.com/SeaQL/sea-query/pull/466)] Added `YEAR`, `BIT` and `VARBIT` types
