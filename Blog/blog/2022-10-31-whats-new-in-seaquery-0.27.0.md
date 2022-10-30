@@ -19,7 +19,7 @@ Note that you might need to upgrade the corresponding dependency on your applica
 
 ## Drivers support
 
-We have reworked the way drivers work in SeaQuery: priori to `0.27.0`, users have to invoke the `sea_query_driver_*` macros. Now each driver `sqlx`, `postgres` & `rusqlite` has their own supporting crate, which integrates tightly with the corresponding libraries.
+We have reworked the way drivers work in SeaQuery: priori to `0.27.0`, users have to invoke the `sea_query_driver_*` macros. Now each driver `sqlx`, `postgres` & `rusqlite` has their own supporting crate, which integrates tightly with the corresponding libraries. Checkout our integration examples below for more details.
 
 [[#383](https://github.com/SeaQL/sea-query/issues/383)] Deprecate `sea-query-driver` in favour of `sea-query-binder`
 
