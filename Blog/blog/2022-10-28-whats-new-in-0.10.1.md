@@ -264,6 +264,30 @@ A big shout out to our sponsors 😇:
     </div>
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/trueb2">
+                <img src="https://avatars.githubusercontent.com/u/8592049?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Jacob Trueb
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/marcusbuffett">
+                <img src="https://avatars.githubusercontent.com/u/1834328?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Marcus Buffett
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm">
                 <img style={{width: '100%'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="/>
             </a>
