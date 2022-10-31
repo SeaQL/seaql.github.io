@@ -72,3 +72,23 @@ Migrator::refresh(db).await?;
 /// Rollback all applied migrations
 Migrator::reset(db).await?;
 ```
+
+## Running Migration on Any PostgreSQL Schema
+
+By default migration will be run on the `public` schema, you can now override it when running migration on the CLI or programmatically.
+
+For CLI, you can specify the target schema with `-s` / `--database_schema` option:
+* via sea-orm-cli: `sea-orm-cli migrate -u postgres://root:root@localhost/database -s my_schema`
+* via SeaORM migrator: `cargo run -- -u postgres://root:root@localhost/database -s my_schema`
+
+You can also run the migration on the target schema programmatically:
+
+```rust
+let connect_options = ConnectOptions::new("postgres://root:root@localhost/database".into())
+    .set_schema_search_path("my_schema".into()) // Override the default schema
+    .to_owned();
+
+let db = Database::connect(connect_options).await?
+
+migration::Migrator::up(&db, None).await?;
+```
