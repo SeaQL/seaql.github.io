@@ -115,6 +115,22 @@ pub struct KeyValue {
 }
 ```
 
+Array datatype is supported for PostgreSQL, you can define a vector of any types that are already supported by SeaORM in the model. Keep in mind that you need to enable the `postgres-array` feature and this is a Postgres only feature.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "collection")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub integers: Vec<i32>,
+    pub integers_opt: Option<Vec<i32>>,
+    pub floats: Vec<f32>,
+    pub doubles: Vec<f64>,
+    pub strings: Vec<String>,
+}
+```
+
 ### Additional Properties
 
 You can add additional properties `default_value`, `unique`, `indexed` and `nullable` to a column.
