@@ -106,6 +106,37 @@ fruit.set(fruit::Column::Name, "apple".into());
 assert!(fruit.is_changed());
 ```
 
+### Convert ActiveModel back to Model
+
+Using [try_into_model](https://docs.rs/sea-orm/*/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) method you can convert ActiveModel back to Model.
+
+```rust
+assert_eq!(
+    ActiveModel {
+        id: Set(2),
+        name: Set("Apple".to_owned()),
+        cake_id: Set(Some(1)),
+    }
+    .try_into_model()
+    .unwrap(),
+    Model {
+        id: 2,
+        name: "Apple".to_owned(),
+        cake_id: Some(1),
+    }
+);
+
+assert_eq!(
+    ActiveModel {
+        id: Set(1),
+        name: NotSet,
+        cake_id: Set(None),
+    }
+    .try_into_model(),
+    Err(DbErr::AttrNotSet(String::from("name")))
+);
+```
+
 ## Insert One
 
 Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
