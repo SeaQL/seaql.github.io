@@ -41,12 +41,13 @@ Supported databases:
 Command line options:
 - `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
 - `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)
-    - For MySQL & SQLite, this argument is ignored
-    - For PostgreSQL, this argument is optional with default value 'public'
+    - for MySQL & SQLite, this argument is ignored
+    - for PostgreSQL, this argument is optional with default value 'public'
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 - `-v` / `--verbose`: print debug messages
+- `-l` / `--lib`: generate index file as `lib.rs` instead of `mod.rs`
 - `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
-- `--ignore-tables`: Skip generating entity file for specified tables (default: `seaql_migrations`)
+- `--ignore-tables`: skip generating entity file for specified tables (default: `seaql_migrations`)
 - `--compact-format`: generate entity file of [compact format](04-generate-entity/02-entity-structure.md) (default: true)
 - `--expanded-format`: generate entity file of [expanded format](04-generate-entity/03-expanded-entity-structure.md)
 - `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
