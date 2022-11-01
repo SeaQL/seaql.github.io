@@ -57,6 +57,8 @@ export default function Home() {
           <li>Filter with operators (e.g. gt, lt, eq)</li>
           <li>Order by any column</li>
         </ul>
+
+        (Right now there is no mutation, but it's on our plan!)
       </main>
     </Layout>
   );

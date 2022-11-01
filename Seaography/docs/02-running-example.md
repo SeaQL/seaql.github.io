@@ -120,12 +120,12 @@ Here are the instructions on how we can generate the examples from scratch.
 
 ## Query examples
 
-### Fetch films and their actors
+#### Fetch films and their actors
 
 ```graphql
 {
-  film(pagination: { limit: 10, page: 0 }, orderBy: { title: ASC }) {
-    data {
+  film(pagination: { pages: { limit: 2, page: 0 } }, orderBy: { title: ASC }) {
+    nodes {
       title
       description
       releaseYear
@@ -138,20 +138,86 @@ Here are the instructions on how we can generate the examples from scratch.
     }
   }
 }
+
 ```
 
 Response
-
 ```json
 {
   "data": {
     "film": {
-      "data": [
-        ...
+      "nodes": [
+        {
+          "title": "ACADEMY DINOSAUR",
+          "description": "An Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies",
+          "releaseYear": "2006",
+          "filmActor": [
+            {
+              "actor": {
+                "firstName": "PENELOPE",
+                "lastName": "GUINESS"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "CHRISTIAN",
+                "lastName": "GABLE"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "LUCILLE",
+                "lastName": "TRACY"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "SANDRA",
+                "lastName": "PECK"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "JOHNNY",
+                "lastName": "CAGE"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "MENA",
+                "lastName": "TEMPLE"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "WARREN",
+                "lastName": "NOLTE"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "OPRAH",
+                "lastName": "KILMER"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "ROCK",
+                "lastName": "DUKAKIS"
+              }
+            },
+            {
+              "actor": {
+                "firstName": "MARY",
+                "lastName": "KEITEL"
+              }
+            }
+          ]
+        },
         {
           "title": "ACE GOLDFINGER",
           "description": "A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China",
-          "releaseYear": 2006,
+          "releaseYear": "2006",
           "filmActor": [
             {
               "actor": {
@@ -178,20 +244,19 @@ Response
               }
             }
           ]
-        },
-        ...
+        }
       ]
     }
   }
 }
 ```
 
-### Fetch store and its employee
+#### Fetch store and its employee
 
 ```graphql
 {
   store(filters: { storeId: { eq: 1 } }) {
-    data {
+    nodes {
       storeId
       address {
         address
@@ -212,7 +277,7 @@ Response
 {
   "data": {
     "store": {
-      "data": [
+      "nodes": [
         {
           "storeId": 1,
           "address": {
@@ -234,8 +299,11 @@ Response
 
 ```graphql
 {
-  customer(filters: { active: { eq: 0 } }, pagination: { page: 2, limit: 3 }) {
-    data {
+  customer(
+    filters: { active: { eq: 0 } }
+    pagination: { pages: { page: 2, limit: 3 } }
+  ) {
+    nodes {
       customerId
       lastName
       email
@@ -252,7 +320,7 @@ Response
 {
   "data": {
     "customer": {
-      "data": [
+      "nodes": [
         {
           "customerId": 315,
           "lastName": "GOODEN",
@@ -276,21 +344,24 @@ Response
 }
 ```
 
-### Fetch expensive orders and customer data
+### The query above using cursor pagination
 
 ```graphql
 {
-  payment(filters: { amount: { gt: "11.1" } }) {
-    data {
-      paymentId
-      amount
-      customer {
-        lastName
-        email
-      }
+  customer(
+    filters: { active: { eq: 0 } }
+    pagination: { cursor: { limit: 3, cursor: "Int[3]:271" } }
+  ) {
+    nodes {
+      customerId
+      lastName
+      email
     }
-    pages
-    current
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      endCursor
+    }
   }
 }
 ```
@@ -300,36 +371,29 @@ Response
 ```json
 {
   "data": {
-    "payment": {
-      "data": [
+    "customer": {
+      "nodes": [
         {
-          "paymentId": 342,
-          "amount": "11.99",
-          "customer": {
-            "lastName": "JACKSON",
-            "email": "KAREN.JACKSON@sakilacustomer.org"
-          }
+          "customerId": 315,
+          "lastName": "GOODEN",
+          "email": "KENNETH.GOODEN@sakilacustomer.org"
         },
         {
-          "paymentId": 3146,
-          "amount": "11.99",
-          "customer": {
-            "lastName": "GIBSON",
-            "email": "VICTORIA.GIBSON@sakilacustomer.org"
-          }
+          "customerId": 368,
+          "lastName": "ARCE",
+          "email": "HARRY.ARCE@sakilacustomer.org"
         },
         {
-          "paymentId": 5280,
-          "amount": "11.99",
-          "customer": {
-            "lastName": "SIMS",
-            "email": "VANESSA.SIMS@sakilacustomer.org"
-          }
-        },
-        ...
+          "customerId": 406,
+          "lastName": "RUNYON",
+          "email": "NATHAN.RUNYON@sakilacustomer.org"
+        }
       ],
-      "pages": 1,
-      "current": 1
+      "pageInfo": {
+        "hasPreviousPage": true,
+        "hasNextPage": true,
+        "endCursor": "Int[3]:406"
+      }
     }
   }
 }
