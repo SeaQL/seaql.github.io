@@ -104,6 +104,8 @@
 
     8.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
 
+    8.9 [Error Handling](08-advanced-query/09-error-handling.md)
+
 9. Generating SeaQuery Statement
 
     9.1 [Create Table](09-generate-sea-query-statement/01-create-table.md)
