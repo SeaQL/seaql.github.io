@@ -159,12 +159,12 @@ const config = {
           'rust',
         ],
       },
-      // algolia: {
-      //   appId: 'QZ9XDFJ7RQ',
-      //   apiKey: 'da8d82019ca15152ae64f9b03ce0f9bb',
-      //   indexName: 'starfishql',
-      //   contextualSearch: true,
-      // },
+      algolia: {
+        appId: 'EUI01QE7ZT',
+        apiKey: '54027efc0b5f84970278ec0e3f8f434a',
+        indexName: 'seaography',
+        contextualSearch: true,
+      },
       docs: {
         sidebar: {
           hideable: true,
