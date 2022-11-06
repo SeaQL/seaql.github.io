@@ -122,7 +122,7 @@ fruit::Entity::delete(orange.into_active_model())
 
 // or simply
 let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let orange: fruit::Model = orange.unwrap();
+let orange: fruit::ActiveModel = orange.unwrap().into();
 orange.delete(db).await?;
 
 // delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE 'Orange'
