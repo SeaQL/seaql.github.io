@@ -186,7 +186,7 @@ let query = Query::select()
 SeaQuery plays well with the other crates in the rust ecosystem. 
 
 - [Postgres Example](https://github.com/SeaQL/sea-query/tree/master/examples/postgres)
-- [Rusqlute Example](https://github.com/SeaQL/sea-query/tree/master/examples/rusqlite)
+- [Rusqlite Example](https://github.com/SeaQL/sea-query/tree/master/examples/rusqlite)
 - [SQLx Any Example](https://github.com/SeaQL/sea-query/tree/master/examples/sqlx_any)
 - [SQLx Postgres Example](https://github.com/SeaQL/sea-query/tree/master/examples/sqlx_postgres)
 - [SQLx MySql Example](https://github.com/SeaQL/sea-query/tree/master/examples/sqlx_mysql)
