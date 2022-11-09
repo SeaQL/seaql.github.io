@@ -32,7 +32,7 @@ You can see that the `Future` has a lifetime `'a`, but as a side effect the life
 With GAT, the lifetime can be elided:
 
 ```rust
-pub trait StreamTrait: Send + Sync {
+trait StreamTrait: Send + Sync {
     type Stream<'a>: Stream<Item = Result<QueryResult, DbErr>> + Send
     where
         Self: 'a;
