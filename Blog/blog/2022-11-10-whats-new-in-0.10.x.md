@@ -1,6 +1,6 @@
 ---
-slug: 2022-10-28-whats-new-in-0.10.1
-title: What's new in SeaORM 0.10.1
+slug: 2022-11-10-whats-new-in-0.10.x
+title: What's new in SeaORM 0.10.x
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
@@ -8,17 +8,82 @@ author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
 tags: [news]
 ---
 
-🎉 We are pleased to release SeaORM [`0.10.1`](https://github.com/SeaQL/sea-orm/releases/tag/0.10.1) today! Here are some feature highlights 🌟:
+🎉 We are pleased to release SeaORM [`0.10.0`](https://github.com/SeaQL/sea-orm/releases/tag/0.10.0)!
+
+## Rust 1.65
+
+The long-anticipated Rust [1.65](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) has been released! Generic associated types (GATs) must be the hottest newly-stabilized feature.
+
+How is GAT useful to SeaORM? Let's take a look at the following:
+
+```rust
+trait StreamTrait<'a>: Send + Sync {
+    type Stream: Stream<Item = Result<QueryResult, DbErr>> + Send;
+
+    fn stream(
+        &'a self,
+        stmt: Statement,
+    ) -> Pin<Box<dyn Future<Output = Result<Self::Stream, DbErr>> + 'a + Send>>;
+}
+```
+
+You can see that the `Future` has a lifetime `'a`, but as a side effect the lifetime is tied to `StreamTrait`.
+
+With GAT, the lifetime can be elided:
+
+```rust
+pub trait StreamTrait: Send + Sync {
+    type Stream<'a>: Stream<Item = Result<QueryResult, DbErr>> + Send
+    where
+        Self: 'a;
+
+    fn stream<'a>(
+        &'a self,
+        stmt: Statement,
+    ) -> Pin<Box<dyn Future<Output = Result<Self::Stream<'a>, DbErr>> + 'a + Send>>;
+}
+```
+
+What benefit does it bring in practice? Consider you have a function that accepts a generic `ConnectionTrait` and calls `stream()`: 
+
+```rust
+async fn processor<'a, C>(conn: &'a C) -> Result<...>
+where C: ConnectionTrait + StreamTrait<'a> {...}
+```
+
+The fact that the lifetime of the connection is tied to the stream can create confusion to the compiler, most likely when you are making transactions:
+
+```rust
+// this does not compile
+async fn do_transaction<C>(conn: &C) -> Result<...>
+where C: ConnectionTrait + TransactionTrait
+{
+    let txn = conn.begin().await?;
+    processor(&txn).await?;
+    txn.commit().await?;
+}
+```
+
+But now, with the lifetime of the stream elided, it's much easier to work on streams inside transactions because the two lifetimes are now distinct and the stream's lifetime is implicit:
+
+```rust
+async fn processor<C>(conn: &C) -> Result<...>
+where C: ConnectionTrait + StreamTrait {...}
+```
+
+Big thanks to [@nappa85](https://github.com/nappa85) for the [contribution](https://github.com/SeaQL/sea-orm/pull/1161).
+
+ ---
+
+Below are some feature highlights 🌟:
 
 ## Support Array Data Types in Postgres
 
 [[#1132](https://github.com/SeaQL/sea-orm/pull/1132)] Support model field of type `Vec<T>`. (by [@hf29h8sh321](https://github.com/hf29h8sh321), [@ikrivosheev](https://github.com/ikrivosheev), [@tyt2y3](https://github.com/tyt2y3), [@billy1624](https://github.com/billy1624))
 
-You can define a vector of any types that are already supported by SeaORM in the model.
+You can define a vector of types that are already supported by SeaORM in the model.
 
 ```rust
-use sea_orm::entity::prelude::*;
-
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "collection")]
 pub struct Model {
@@ -30,11 +95,6 @@ pub struct Model {
     pub doubles: Vec<f64>,
     pub strings: Vec<String>,
 }
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
-
-impl ActiveModelBehavior for ActiveModel {}
 ```
 
 Keep in mind that you need to enable the `postgres-array` feature and this is a Postgres only feature.
