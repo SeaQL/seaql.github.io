@@ -26,6 +26,6 @@ GitHub
 - Issues: [Convert download chart from stacked chart to regular chart #3876](https://github.com/rust-lang/crates.io/issues/3876)
 - PR: [Toggle stacked download graph #5010](https://github.com/rust-lang/crates.io/pull/5010)
 
-## Community
+## Conclusion
 
-Together we shape the future of Rust.
+This is a great tool for us to gauge the adoption rate of our new releases and we highly encourage user upgrading to newer release that contains feature updates and bug fixes.
