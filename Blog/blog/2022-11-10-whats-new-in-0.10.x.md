@@ -54,7 +54,6 @@ where C: ConnectionTrait + StreamTrait<'a> {...}
 The fact that the lifetime of the connection is tied to the stream can create confusion to the compiler, most likely when you are making transactions:
 
 ```rust
-// this does not compile
 async fn do_transaction<C>(conn: &C) -> Result<...>
 where C: ConnectionTrait + TransactionTrait
 {
