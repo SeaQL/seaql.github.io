@@ -14,7 +14,7 @@ What's it all about?
 
 ## Problem
 
-The download graph in [crates.io](https://crates.io/) used to be a stacked graph. With download count of older versions stack on top of newer versions. You might misinterpret the numbers. Consider this, at the first glance, it seems that version 0.9.2 has 1,500+ downloads on Nov 7. But in fact, it has only 237 downloads that day because the graph is showing the cumulative downloads.
+The download graph in crates.io used to be a stacked graph. With download count of older versions stack on top of newer versions. You might misinterpret the numbers. Consider this, at the first glance, it seems that version 0.9.2 has 1,500+ downloads on Nov 7. But in fact, it has only 237 downloads that day because the graph is showing the cumulative downloads.
 
 ![crates.io Stacked Download Graph](https://user-images.githubusercontent.com/30400950/200738670-4266e178-7952-4e05-bff0-c2445ba345bf.png)
 
