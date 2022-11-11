@@ -5,6 +5,8 @@
 Find a `Model` from the database, then delete the corresponding row from database.
 
 ```rust
+use sea_orm::entity::ModelTrait;
+
 let orange: Option<fruit::Model> = Fruit::find_by_id(30).one(db).await?;
 let orange: fruit::Model = orange.unwrap();
 
