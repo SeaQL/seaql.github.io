@@ -22,6 +22,13 @@ pub enum Relation {
 impl ActiveModelBehavior for ActiveModel {}
 ```
 
+:::info
+
+Do not delete `Relation` enum or `ActiveModelBehavior` impl block even if you do not want any relations or additional behavior.
+Keep their body empty is enough to make the entity just work.
+
+:::
+
 ## Entity
 
 The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity` with associating `Model`, `Column` and `PrimaryKey`.
