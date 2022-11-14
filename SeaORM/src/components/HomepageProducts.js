@@ -10,16 +10,16 @@ const ProductList = [
     logoClassName: null,
   },
   {
-    url: 'https://l2.technology/sensei',
-    logo: '/SeaORM/img/other/sensei-logo.svg',
-    desc: 'A Bitcoin lightning node implementation',
-    logoClassName: styles.senseiLogo,
-  },
-  {
     url: 'https://www.svix.com/',
     logo: '/SeaORM/img/other/svix-logo.svg',
     desc: 'The enterprise ready webhooks service',
     logoClassName: styles.svixLogo,
+  },
+  {
+    url: 'https://docs.spyglass.fyi/',
+    logo: '/SeaORM/img/other/spyglass-logo.svg',
+    desc: 'A personal search engine',
+    logoClassName: styles.spyglassLogo,
   },
 ];
 
