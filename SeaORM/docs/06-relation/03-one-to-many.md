@@ -36,6 +36,13 @@ pub enum Relation {
     #[sea_orm(has_many = "super::fruit::Entity")]
     Fruit,
 }
+
+// `Related` trait has to be implemented by hand
+impl Related<super::fruit::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Fruit.def()
+    }
+}
 ```
 
 ## Defining the Inverse Relation
@@ -78,5 +85,12 @@ pub enum Relation {
         to = "super::cake::Column::Id"
     )]
     Cake,
+}
+
+// `Related` trait has to be implemented by hand
+impl Related<super::cake::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Cake.def()
+    }
 }
 ```
