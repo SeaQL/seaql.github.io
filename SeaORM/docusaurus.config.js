@@ -142,6 +142,7 @@ module.exports = {
       ],
       copyright: [
         `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/sea-orm/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star&maxAge=1"/></a></div>`,
+        `Please star our repos! Every ⭐ counts!<br/>`,
         `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
       ].join(''),
     },
@@ -156,13 +157,6 @@ module.exports = {
       apiKey: 'cb0fff4f36dcd0f3d6a97e12e494dec7',
       indexName: 'seaorm',
       contextualSearch: true,
-    },
-    announcementBar: {
-      id: 'support-us',
-      content: 'Please star our repos! Every ⭐ counts!',
-      backgroundColor: 'var(--ifm-color-section-alt)',
-      textColor: 'var(--ifm-heading-color)',
-      isCloseable: false,
     },
   },
   presets: [
