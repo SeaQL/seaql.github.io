@@ -16,7 +16,7 @@ const ProductList = [
     logoClassName: styles.svixLogo,
   },
   {
-    url: 'https://docs.spyglass.fyi/',
+    url: 'https://www.spyglass.fyi/',
     logo: '/SeaORM/img/other/spyglass-logo.svg',
     desc: 'A personal search engine',
     logoClassName: styles.spyglassLogo,
