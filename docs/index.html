@@ -464,6 +464,35 @@
               </Grid>
             </Grid>
           </Container>
+          <div class="rule rule-gradient"></div>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
+            <Grid container spacing={3} style={{ justifyContent: 'center' }}>
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600 }} gutterBottom>
+                  Our Sponsors
+                </Typography>
+              </Grid>
+              <Grid item xs={6} sm={4} md={4} style={{ display: 'flex', alignItems: 'center' }}>
+                <Link href="https://www.digitalocean.com/" underline="hover" style={{ margin: 'auto' }}>
+                  <img alt="DigitalOcean" src="img/sponsors/DigitalOcean.svg" style={{ maxWidth: '120px', width: '100%' }} />
+                </Link>
+              </Grid>
+              <Grid item xs={6} sm={4} md={4} style={{ display: 'flex', alignItems: 'center' }}>
+                <Link href="https://summerofcode.withgoogle.com/" underline="hover" style={{ margin: 'auto' }}>
+                  <img alt="Google Summer of Code" src="img/sponsors/GSoC.svg" style={themeMode !== 'dark' ? { maxWidth: '120px', width: '100%' } : { maxWidth: '120px', width: '100%', filter: 'drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff)' }} />
+                </Link>
+              </Grid>
+              <Grid item xs={6} sm={4} md={4} style={{ display: 'flex', alignItems: 'center' }}>
+                <Link href="https://www.jetbrains.com/" underline="hover" style={{ margin: 'auto' }}>
+                  <img alt="JetBrains" src="img/sponsors/JetBrains.svg" style={{ maxWidth: '120px', width: '100%' }} />
+                </Link>
+              </Grid>
+            </Grid>
+            <br />
+            <Typography variant="body1" sx={{ textAlign: 'center' }}>
+              Our <Link href="https://github.com/sponsors/SeaQL">GitHub Sponsor</Link> profile is up! If you feel generous, a small donation will be greatly appreciated.
+            </Typography>
+          </Container>
           <Paper
             elevation={10}
             sx={{ width: '100vw' }}
@@ -471,7 +500,7 @@
           >
             <Container maxWidth="lg" style={{ padding: '28px 38px' }}>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column' }}>
+                <Grid item xs={12} sm={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column', paddingLeft: '0 !important'  }}>
                   <img src="img/SeaQL logo.png" alt="SeaQL Logo" style={{ maxWidth: '150px', width: '100%' }} />
                   <Typography component="span" variant="body2" sx={{ paddingLeft: '10px', fontWeight: '100' }}>
                     Copyright © {new Date().getFullYear()} SeaQL
