@@ -68,7 +68,6 @@ module.exports = {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
-
         },
       ],
     },

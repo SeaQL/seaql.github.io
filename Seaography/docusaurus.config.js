@@ -3,6 +3,12 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const versions = require('./versions.json');
+
+function getNextMinorVersionName() {
+  const minorVersion = parseInt(versions[0].split('.')[1], 10);
+  return `0.${minorVersion + 1}.x`;
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -40,6 +46,11 @@ const config = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/Seaography/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          versions: {
+            current: {
+              label: `${getNextMinorVersionName()} 🚧`,
+            },
+          },
         },
         // blog: {
           // showReadingTime: true,
@@ -93,6 +104,11 @@ const config = {
             href: 'https://github.com/SeaQL/seaography',
             label: 'GitHub',
             position: 'right',
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
           },
         ],
       },
