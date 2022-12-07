@@ -186,7 +186,7 @@ OnConflict::column(Glyph::Id).value(Glyph::Image, Expr::val(1).add(2))
 // Now we can write:
 ColumnDef::new(Char::FontId)
     .timestamp()
-    .default(Keyword::CurrentTimestamp)
+    .default(Expr::current_timestamp())
 ```
 
 
