@@ -122,7 +122,11 @@ pub struct KeyValue {
 }
 ```
 
+:::info
+
 Array datatype is supported for PostgreSQL, you can define a vector of any types that are already supported by SeaORM in the model. Keep in mind that you need to enable the `postgres-array` feature and this is a Postgres only feature.
+
+:::
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
