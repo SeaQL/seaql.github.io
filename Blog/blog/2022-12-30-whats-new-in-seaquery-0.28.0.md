@@ -95,6 +95,23 @@ assert_eq!(
     statement,
     r#"SELECT `id` FROM `glyph` WHERE (TRUE) OR (FALSE)"#
 );
+
+// a complex example
+let (statement, values) = Query::select()
+    .column(Glyph::Id)
+    .from(Glyph::Table)
+    .cond_where(
+        Cond::all()
+            .add(Cond::all().not())
+            .add(Cond::any().not())
+            .not(),
+    )
+    .build(MysqlQueryBuilder);
+
+assert_eq!(
+    statement,
+    r#"SELECT `id` FROM `glyph` WHERE NOT ((NOT TRUE) AND (NOT FALSE))"#
+);
 ```
 
 ## Breaking Changes
@@ -154,9 +171,33 @@ assert_eq!(
 ```
 
 * [[#486](https://github.com/SeaQL/sea-query/pull/486)] Added binary operators from the Postgres `pg_trgm` extension
+```rust
+use sea_query::extension::postgres::PgBinOper;
+
+assert_eq!(
+    Query::select()
+        .expr(Expr::col(Font::Name).binary(PgBinOper::WordSimilarity, Expr::value("serif")))
+        .from(Font::Table)
+        .to_string(PostgresQueryBuilder),
+    r#"SELECT "name" <% 'serif' FROM "font""#
+);
 * [[#473](https://github.com/SeaQL/sea-query/pull/473)] Added `ILIKE` and `NOT ILIKE` operators
 * [[#510](https://github.com/SeaQL/sea-query/pull/510)] Added the `mul` and `div` methods for `SimpleExpr`
 * [[#513](https://github.com/SeaQL/sea-query/pull/513)] Added the `MATCH`, `->` and `->>` operators for SQLite
+```rust
+use sea_query::extension::sqlite::SqliteBinOper;
+
+assert_eq!(
+    Query::select()
+        .column(Char::Character)
+        .from(Char::Table)
+        .and_where(Expr::col(Char::Character).binary(SqliteBinOper::Match, Expr::val("test")))
+        .build(SqliteQueryBuilder),
+    (
+        r#"SELECT "character" FROM "character" WHERE "character" MATCH ?"#.to_owned(),
+        Values(vec!["test".into()])
+    )
+);
 * [[#497](https://github.com/SeaQL/sea-query/pull/497)] Added the `FULL OUTER JOIN`
 * [[#530](https://github.com/SeaQL/sea-query/pull/530)] Added `PgFunc::get_random_uuid`
 * [[#528](https://github.com/SeaQL/sea-query/pull/528)] Added `SimpleExpr::eq`, `SimpleExpr::ne`, `Expr::not_equals`
