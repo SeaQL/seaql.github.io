@@ -181,6 +181,8 @@ assert_eq!(
         .to_string(PostgresQueryBuilder),
     r#"SELECT "name" <% 'serif' FROM "font""#
 );
+```
+
 * [[#473](https://github.com/SeaQL/sea-query/pull/473)] Added `ILIKE` and `NOT ILIKE` operators
 * [[#510](https://github.com/SeaQL/sea-query/pull/510)] Added the `mul` and `div` methods for `SimpleExpr`
 * [[#513](https://github.com/SeaQL/sea-query/pull/513)] Added the `MATCH`, `->` and `->>` operators for SQLite
@@ -198,6 +200,8 @@ assert_eq!(
         Values(vec!["test".into()])
     )
 );
+```
+
 * [[#497](https://github.com/SeaQL/sea-query/pull/497)] Added the `FULL OUTER JOIN`
 * [[#530](https://github.com/SeaQL/sea-query/pull/530)] Added `PgFunc::get_random_uuid`
 * [[#528](https://github.com/SeaQL/sea-query/pull/528)] Added `SimpleExpr::eq`, `SimpleExpr::ne`, `Expr::not_equals`
