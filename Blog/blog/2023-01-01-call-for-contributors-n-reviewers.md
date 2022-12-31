@@ -1,5 +1,5 @@
 ---
-slug: 2023-01-01-call-for-contributors-n-reviewers.md
+slug: 2023-01-01-call-for-contributors-n-reviewers
 title: Call for Contributors and Reviewers 📢
 author: SeaQL Team
 author_title: Chris Tsang
