@@ -1,8 +1,8 @@
 ---
 slug: 2023-01-01-call-for-contributors-n-reviewers
 title: Call for Contributors and Reviewers 📢
-author: SeaQL Team
-author_title: Chris Tsang
+author: Chris Tsang
+author_title: SeaQL Founder
 author_url: https://github.com/tyt2y3
 author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
 tags: [news]
