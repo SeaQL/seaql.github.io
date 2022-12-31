@@ -23,9 +23,12 @@ If your project depends on SeaQL and you want to help us, here are some suggesti
 Now, I’d like to outline our review policy: for maturing projects, each PR merged has to be approved by at least two reviewers and one of them must be a core member; self-review allowed. Here are some examples:
 
 + A core member opened a PR, another core member approved ✅ 
++ A core member opened a PR, a reviewer approved ✅
 + A reviewer opened a PR, a core member approved ✅
++ A reviewer opened a PR, another reviewer approved ⛔
 + A contributor opened a PR, 2 core members approved ✅
-+ A contributor opened a PR, a core member + reviewer approved ✅
++ A contributor opened a PR, a core member and a reviewer approved ✅
++ A contributor opened a PR, 2 reviewers approved ⛔
 
 In a nutshell, at least two pairs of trusted eyes should have gone through each PR.
 
@@ -40,6 +43,7 @@ In a nutshell, at least two pairs of trusted eyes should have gone through each 
     2.	Is the API style consistent with our existing API?
     3.	Does the API made reasonable use of the type system to enforce constraints?
     4.	Are the failure paths and error messages clear?
+    5.  Are all breaking changes justified and documented?
 3.	Functionality
     1.	Does the feature make sense in computer science terms?
     2.	Does the feature actually work with all our supported backends?
@@ -53,7 +57,7 @@ In a nutshell, at least two pairs of trusted eyes should have gone through each 
 
 ### Who are the current reviewers?
 
-As of today, SeaQL has 3 core-member + reviewers:
+As of today, SeaQL has 3 core members who are also reviewers:
 
 <div class="row">
     <div class="col col--12 margin-bottom--md">
@@ -78,7 +82,7 @@ As of today, SeaQL has 3 core-member + reviewers:
                 <div class="avatar__name">
                     Billy Chan
                 </div>
-              Founding member. Co-maintainer of <a href="https://github.com/SeaQL/sea-orm">SeaORM</a> and <a href="https://github.com/SeaQL/Seaography">Seaography</a>.
+              Founding member. Co-maintainer of SeaORM and Seaography.
             </div>
         </div>
     </div>
@@ -91,7 +95,7 @@ As of today, SeaQL has 3 core-member + reviewers:
                 <div class="avatar__name">
                     Ivan Krivosheev
                 </div>
-                Joined in 2022. Co-maintainer of <a href="https://github.com/SeaQL/sea-query">SeaQuery</a>.
+                Joined in 2022. Co-maintainer of SeaQuery.
             </div>
         </div>
     </div>
@@ -100,6 +104,7 @@ As of today, SeaQL has 3 core-member + reviewers:
 ### How to become a reviewer?
 
 We are going to invite a few contributors we worked closely with, but you can also volunteer – the requirement is: you have made substantial code contribution to our projects, and has shown familiarity with our [engineering practices](https://www.sea-ql.org/blog/2022-07-30-engineering/).
+
 Over time, when you have made significant contribution to our organization, you can also become a core member.
 
 ### Let’s build for Rust's future together 🦀.
