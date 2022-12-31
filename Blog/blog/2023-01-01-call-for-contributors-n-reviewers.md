@@ -32,7 +32,9 @@ Now, I’d like to outline our review policy: for maturing projects, each PR mer
 
 In a nutshell, at least two pairs of trusted eyes should have gone through each PR.
 
-### What are the criteria when reviewing a PR (should answer yes to all)?
+### What are the criteria when reviewing a PR?
+
+The following questions should all be answered yes.
 
 1.	Implementation, documentation and tests
     1.	Is the implementation easy to follow (have meaningful variable and function names)?
