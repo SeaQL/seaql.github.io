@@ -109,4 +109,4 @@ We are going to invite a few contributors we worked closely with, but you can al
 
 Over time, when you have made significant contribution to our organization, you can also become a core member.
 
-### Let’s build for Rust's future together 🦀.
+### Let’s build for Rust's future together 🦀
