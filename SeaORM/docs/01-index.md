@@ -44,19 +44,21 @@
 
 5. Basic CRUD
 
-    5.1 [SELECT: find, filter, sort, paging](05-basic-crud/01-select.md)
+    5.1 [Basic Schema](05-basic-crud/01-basic-schema.md)
 
-    5.2 [INSERT: Model & ActiveModel, insert many](05-basic-crud/02-insert.md)
+    5.2 [SELECT: find, filter, sort, paging](05-basic-crud/02-select.md)
 
-    5.3 [UPDATE: find & save, update many](05-basic-crud/03-update.md)
+    5.3 [INSERT: Model & ActiveModel, insert many](05-basic-crud/03-insert.md)
 
-    5.4 [SAVE: insert or update](05-basic-crud/04-save.md)
+    5.4 [UPDATE: find & save, update many](05-basic-crud/04-update.md)
 
-    5.5 [DELETE: delete one & delete many](05-basic-crud/05-delete.md)
+    5.5 [SAVE: insert or update](05-basic-crud/05-save.md)
 
-    5.6 [JSON](05-basic-crud/06-json.md)
+    5.6 [DELETE: delete one & delete many](05-basic-crud/06-delete.md)
 
-    5.7 [Raw SQL query](05-basic-crud/07-raw-sql.md)
+    5.7 [JSON](05-basic-crud/07-json.md)
+
+    5.8 [Raw SQL query](05-basic-crud/08-raw-sql.md)
 
 ## Advanced Topics
 
