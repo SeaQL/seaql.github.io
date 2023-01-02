@@ -62,19 +62,19 @@
 
 6. Relations
 
-    6.1 [Bakery Schema](06-relation/01-bakery-schema.md)
+    6.1 [One to One](06-relation/01-one-to-one.md)
 
-    6.2 [One to One](06-relation/02-one-to-one.md)
+    6.2 [One to Many](06-relation/02-one-to-many.md)
 
-    6.3 [One to Many](06-relation/03-one-to-many.md)
+    6.3 [Many to Many](06-relation/03-many-to-many.md)
 
-    6.4 [Many to Many](06-relation/04-many-to-many.md)
+    6.4 [Chained Relations](06-relation/04-chained-relations.md)
 
-    6.5 [Chained Relations](06-relation/05-chained-relations.md)
+    6.5 [Self Referencing](06-relation/05-self-referencing.md)
 
-    6.6 [Self Referencing](06-relation/06-self-referencing.md)
+    6.6 [Custom Join Condition](06-relation/06-custom-join-condition.md)
 
-    6.7 [Custom Join Condition](06-relation/07-custom-join-condition.md)
+    6.7 [Bakery Schema](06-relation/07-bakery-schema.md)
 
 7. Writing Tests
 
