@@ -4,7 +4,11 @@ A many-to-many relation is formed by three tables, where two tables are related 
 
 ## Defining the Relation
 
-On the `Cake` entity, implement the `Related<filling::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Cake` relation, then join `to` `Filling` entity  with `cake_filling::Relation::Filling` relation.
+On the `Cake` entity, implement the `Related<filling::Entity>` trait.
+
+`Relation` in SeaORM is an arrow: it has `from` and `to`. `cake_filling::Relation::Cake` defines `CakeFilling -> Cake`. Calling [`rev`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) reverses it into `Cake -> CakeFilling`.
+
+Chaining this with `cake_filling::Relation::Filling` which defines `CakeFilling -> Filling` resulting in `Cake -> CakeFilling -> Filling`.
 
 ```rust {4,10} title="entity/cake.rs"
 impl Related<super::filling::Entity> for Entity {
@@ -66,8 +70,7 @@ impl RelationTrait for Relation {
 }
 ```
 
-Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following eliminates the need for the `RelationTrait` implementation above:
+Alternatively, the definition can be shortened by the `DeriveRelation` macro, where the following eliminates the need for the `RelationTrait` implementation above:
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
