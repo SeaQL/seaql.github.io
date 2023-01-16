@@ -11,7 +11,7 @@ sea-orm-cli migrate generate NAME_OF_MIGRATION [--universal-time]
 
 # E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
 sea-orm-cli migrate generate create_table
-sea-orm-cli migrate generate create_table -u  # generates filename in Utc time (recommended)
+sea-orm-cli migrate generate create_table --universal-time  # generates filename in Utc time (recommended)
 ```
 
 Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
