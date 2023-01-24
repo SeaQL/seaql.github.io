@@ -2,7 +2,7 @@
 slug: 2022-07-30-engineering
 title: Engineering at SeaQL.org
 author: Chris Tsang
-author_title: SeaQL Team
+author_title: Lead Developer
 author_url: https://github.com/tyt2y3
 author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
 tags: [news]
