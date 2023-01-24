@@ -173,7 +173,7 @@ OtterSQL is created by:
 
 Oh and by the way, let's meet our official mascot:
 
-<img src="https://raw.githubusercontent.com/SeaQL/otter-sql/main/assets/OtterSQL.png" style="width: 400px; max-width: 100%">
+<img src="https://raw.githubusercontent.com/SeaQL/otter-sql/main/assets/OtterSQL.png" style="width: 400px; max-width: 100%" />
 
 ## Acknowledgment
 
