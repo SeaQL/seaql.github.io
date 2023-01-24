@@ -205,3 +205,58 @@ In the grand scheme of things, we recommend a schema first approach: you write m
 At times, you might want to use the [`create_*_from_entity`](09-generate-sea-query-statement/01-create-table.md) methods to bootstrap your database with several hand written entity files.
 
 That's perfectly fine if you intend to never change the entity schema. Or, you can keep the original entity and embed a copy in the migration file.
+
+## Combining Multiple Schema Changes in one Migration
+
+You can combine multiple changes within both up and down migration functions. For example here we create both a table and an index in the up:
+
+   ```rust
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+
+        manager
+            .create_table(
+                sea_query::Table::create()
+                    .table(Post::Table)
+                    .if_not_exists()
+                    .col(
+                        ColumnDef::new(Post::Id)
+                            .integer()
+                            .not_null()
+                            .auto_increment()
+                            .primary_key()
+                    )
+                    .col(ColumnDef::new(Post::Title).string().not_null())
+                    .col(ColumnDef::new(Post::Text).string().not_null())
+                    .to_owned()
+            )
+            .await?
+        
+        manager
+            .create_index(
+                Index::create()
+                    .if_not_exists()
+                    .name("idx-post_title")
+                    .table(Post::Table)
+                    .col(Post::Title)                        
+                    .to_owned(),
+            )
+            .await?;
+        
+        Ok(()) // All good!
+    }
+    ```
+
+and here we have the matching down function:
+
+```rust
+    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        
+        manager.drop_index(Index::drop().name("idx-post-title").to_owned())
+        .await?;
+        
+        manager.drop_table(Table::drop().table(Post::Table).to_owned())
+        .await?;
+
+        Ok(()) // All good!
+    }
+```
