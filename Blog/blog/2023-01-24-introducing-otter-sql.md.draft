@@ -64,6 +64,7 @@ LIMIT 10
 
 The generated code is:
 ```rust
+// These bits don't make sense
 Source  { index: %0, name: table1 }
 Filter  { index: %0, expr: (column 'col1' = 1) }
 GroupBy { index: %0, expr: column 'col2' }
@@ -77,6 +78,8 @@ Return  { index: %1 }
 ```
 
 ### What is the execution model? *Eager* or *Lazy*?
+
+> This section requires revision
 
 Eager refers to executing instructions sequentially with no regards to its next or previous instructions. This could lead to extra data being processed which could have been avoided from a more holistic perspective. On the other hand, a lazy executor only performs the operations when the data is needed and processes just the right amount of data.
 
