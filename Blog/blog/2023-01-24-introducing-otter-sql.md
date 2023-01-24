@@ -3,13 +3,13 @@ slug: 2023-01-24-introducing-otter-sql
 title: Introducing OtterSQL
 authors:
  - name: Chris Tsang
- - title: SeaQL Team
- - url: https://github.com/tyt2y3
- - image_url: https://avatars.githubusercontent.com/u/1782664?v=4
+   title: SeaQL Team
+   url: https://github.com/tyt2y3
+   image_url: https://avatars.githubusercontent.com/u/1782664?v=4
  - name: Samyak Sarnayak
- - title: Contributor
- - url: https://github.com/Samyak2
- - image_url: https://avatars.githubusercontent.com/u/34161949?v=4
+   title: Contributor
+   url: https://github.com/Samyak2
+   image_url: https://avatars.githubusercontent.com/u/34161949?v=4
 tags: [news]
 ---
 
