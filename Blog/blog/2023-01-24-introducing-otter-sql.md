@@ -22,7 +22,7 @@ If we have a SQL executor written in Rust, we can use it to replace some of thos
 
 SeaORM allows you to write tests against an in-memory SQLite database, even when your application targets MySQL or Postgres in production. While SQLite does help to test some aspect of the application logic, the SQLite dialect is substantially different from MySQL or PostgreSQL and thus offers limited coverage.
 
-### How is this different from GlueSQL?
+### How is it different from GlueSQL?
 
 [GlueSQL](https://github.com/gluesql/gluesql) is great, but:
 + GlueSQL only uses the [generic dialect](https://github.com/gluesql/gluesql/blob/56204973524ceacb3752ce15bca7505262c1c530/core/src/parse_sql.rs#L15) from `sqlparser` with no way to configure or extend this.
