@@ -108,7 +108,7 @@ We decided to rely on the awesome [`sqlparser`](https://crates.io/crates/sqlpars
 
 OtterSQL:
 
- + is in-memory
+ + is an in-memory database
  + is written in Rust
  + can be embedded into any Rust program
  + has a dialect-agnostic IR
