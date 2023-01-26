@@ -21,7 +21,7 @@ Fellow undergraduates, here are a few good reasons why you should participate in
 1.	A tangible showcase on CV: open-source work is published, inspectable and has real-world impact. We will also ensure that it has good branding, graphics, and visibility.
 2.	Not driven by a business process, we do not compromise on quality of work. We do not have a proprietary development process, so it’s all open-source tools with transferable skills.
 3.	You will contribute to the community and will interact with people across the world. Collaboration on open source is the best thing humanity ever invented. You will only believe me when you have experienced it first-hand.
-4.	Because you are the owner of the project you work on, it allows you to uncover something more about yourself, in particular - abilities and discipline: you always have had under/over-estimated yourself in one aspect or another.
+4.	Because you are the driver of the project you work on, it allows you to uncover something more about yourself, in particular - abilities and discipline: you always have had under/over-estimated yourself in one aspect or another.
 
 Here are several things you are going to learn:
 
