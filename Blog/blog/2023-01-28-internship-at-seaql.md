@@ -40,7 +40,7 @@ We were a mentor organization in [GSoC 2022](https://summerofcode.withgoogle.com
 
 Don’t just listen to me though. Here is what our past interns says:
 
-+ Sanford Pun - in the team that created StarfishQL ✴️: [Interning at Vision Cortex and SeaQL](https://shpun817.github.io/2023/01/21/interning-at-vision-cortex-and-seaql/)
-+ Panagiotis Karatakis - in the team that created Seaography 🧭: [My GSoC Experience](https://karatakis.com/blog/my-gsoc-experience)
++ [Sanford Pun](https://github.com/shpun817) - in the team that created StarfishQL ✴️: [Interning at Vision Cortex and SeaQL](https://shpun817.github.io/2023/01/21/interning-at-vision-cortex-and-seaql/)
++ [Panagiotis Karatakis](https://github.com/karatakis) - in the team that created Seaography 🧭: [My GSoC Experience](https://karatakis.com/blog/my-gsoc-experience)
 
 Be well-prepared for your upcoming career in this technology industry!
