@@ -86,7 +86,7 @@ For the mappings of Rust non-primitive data types. You can check [`entity/prelud
 | `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime | text | datetime | timestamp |
 | `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp | text | timestamp | N/A |
 | `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone | text | timestamp | timestamp with time zone |
-| `Uuid`: uuid::Uuid | Uuid | text | binary(16) | uuid |
+| `Uuid`: uuid::Uuid, uuid::fmt::Braced, uuid::fmt::Hyphenated, uuid::fmt::Simple, uuid::fmt::Urn | Uuid | text | binary(16) | uuid |
 | `Json`: serde_json::Value | Json | text | json | json |
 | `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 
