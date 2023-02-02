@@ -113,3 +113,12 @@ let exec_res: ExecResult = db
     .await?;
 assert_eq!(exec_res.rows_affected(), 1);
 ```
+
+## Execute Unprepared SQL Statement
+
+You can execute an unprepared SQL statement with `ConnectionTrait::execute_unprepared()` method.
+
+```rust
+let exec_res: ExecResult =
+    db.execute_unprepared("CREATE EXTENSION IF NOT EXISTS citext").await?;
+```
