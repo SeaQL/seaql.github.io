@@ -363,7 +363,7 @@
                   variant="elevation"
                   elevation={3}
                   style={{ height: '100%' }}
-                  className="projects-underline projects-underline-4"
+                  className="projects-underline projects-underline-5"
                 >
                   <CardContent>
                     <Link href="https://github.com/SeaQL/seaography" underline="none" color="inherit">
@@ -395,6 +395,48 @@
                       />
                       <a href="https://github.com/SeaQL/seaography/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
                         <img src="https://img.shields.io/github/stars/SeaQL/seaography.svg?style=social&label=Star&maxAge=1" alt="Star Seaography" height="22px" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Card
+                  variant="elevation"
+                  elevation={3}
+                  style={{ height: '100%' }}
+                  className="projects-underline projects-underline-6"
+                >
+                  <CardContent>
+                    <Link href="https://github.com/SeaQL/otter-sql" underline="none" color="inherit">
+                      <Typography variant="h5" component="h1" align="center" sx={{ fontWeight: 600 }} gutterBottom>
+                        OtterSQL
+                      </Typography>
+                    </Link>
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>
+                      🦦 An Embeddable SQL Executor in Rust
+                    </Typography>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <Chip
+                        label="GitHub"
+                        component="a"
+                        href="https://github.com/SeaQL/otter-sql"
+                        variant="outlined"
+                        size="small"
+                        sx={{ marginTop: '10px', marginRight: '10px' }}
+                        clickable
+                      />
+                      <Chip
+                        label="Docs"
+                        component="a"
+                        href="https://docs.rs/otter-sql/*/otter_sql"
+                        variant="outlined"
+                        size="small"
+                        sx={{ marginTop: '10px', marginRight: '10px' }}
+                        clickable
+                      />
+                      <a href="https://github.com/SeaQL/otter-sql/stargazers" style={{ margin: '10px 10px 0px 0px' }}>
+                        <img src="https://img.shields.io/github/stars/SeaQL/otter-sql.svg?style=social&label=Star&maxAge=1" alt="Star OtterSQL" height="22px" />
                       </a>
                     </div>
                   </CardContent>
@@ -457,7 +499,7 @@
                   Your participation is what makes us unique; your adoption is what drives us forward. Thank you all in the Rust community for making SeaQL what it is today. You are also invited to shape it's future!
                 </Typography>
                 <br />
-                <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql,seaql/seaography&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
+                <img src="https://api.star-history.com/svg?repos=seaql/sea-orm,seaql/sea-query,seaql/sea-schema,seaql/starfish-ql,seaql/seaography,seaql/otter-sql&type=Timeline" alt="SeaQL Star History" style={{ width: '100%', maxWidth: '888px' }} />
                 <Typography variant="body1" sx={{ textAlign: 'center' }}>
                   Please star our repos! Every ⭐ counts!
                 </Typography>
@@ -542,6 +584,9 @@
                   <Link href="https://www.sea-ql.org/Seaography/" variant="body2" underline="hover" gutterBottom>
                     Seaography
                   </Link>
+                  <Link href="https://github.com/SeaQL/otter-sql" variant="body2" underline="hover" gutterBottom>
+                    OtterSQL
+                  </Link>
                 </Grid>
               </Grid>
             </Container>
@@ -583,11 +628,13 @@
       transition-timing-function: ease-out;
     }
 
-    .projects-underline-1:before {
+    .projects-underline-1:before,
+    .projects-underline-6:before {
       background: #236bdc;
     }
 
-    .projects-underline-2:before {
+    .projects-underline-2:before,
+    .projects-underline-5:before {
       background: #1492ec;
     }
 
