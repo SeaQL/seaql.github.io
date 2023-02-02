@@ -105,7 +105,9 @@ assert_eq!(
 );
 ```
 
-You can even select a tuple value.
+### Select a Tuple Value
+
+You can even select a tuple value with the `into_values` method but you need to supply an enum type.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
@@ -126,4 +128,17 @@ let res: Vec<(String, i64)> = cake::Entity::find()
     .await?;
 
 assert_eq!(res, vec![("Chocolate Forest".to_owned(), 2i64)]);
+```
+
+Instead, the `into_tuple` method can be used to fetch the tuple value.
+
+```rust
+let res: Vec<(String, i64)> = cake::Entity::find()
+    .select_only()
+    .column_as(cake::Column::Name, QueryAs::CakeName)
+    .column_as(cake::Column::Id.count(), QueryAs::NumOfCakes)
+    .group_by(cake::Column::Name)
+    .into_tuple()
+    .all(&db)
+    .await?;
 ```
