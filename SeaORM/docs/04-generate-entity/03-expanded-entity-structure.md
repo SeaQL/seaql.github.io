@@ -177,6 +177,7 @@ pub struct ActiveModel {
 Handlers for different triggered actions on an `ActiveModel`. For example, you can perform custom validation logic, preventing a model from saving into database. You can abort an action even after it is done, if you are inside a transaction.
 
 ```rust
+#[async_trait]
 impl ActiveModelBehavior for ActiveModel {
     /// Create a new ActiveModel with default values. Also used by `Default::default()`.
     fn new() -> Self {
@@ -187,7 +188,10 @@ impl ActiveModelBehavior for ActiveModel {
     }
 
     /// Will be triggered before insert / update
-    fn before_save(self, insert: bool) -> Result<Self, DbErr> {
+    async fn before_save<C>(self, db: &C, insert: bool) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         if self.price.as_ref() <= &0.0 {
             Err(DbErr::Custom(format!(
                 "[before_save] Invalid Price, insert: {}",
@@ -199,17 +203,26 @@ impl ActiveModelBehavior for ActiveModel {
     }
 
     /// Will be triggered after insert / update
-    fn after_save(model: Model, insert: bool) -> Result<Model, DbErr> {
+    async fn after_save<C>(model: Model, db: &C, insert: bool) -> Result<Model, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(model)
     }
 
     /// Will be triggered before delete
-    fn before_delete(self) -> Result<Self, DbErr> {
+    async fn before_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(self)
     }
 
     /// Will be triggered after delete
-    fn after_delete(self) -> Result<Self, DbErr> {
+    async fn after_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(self)
     }
 }
