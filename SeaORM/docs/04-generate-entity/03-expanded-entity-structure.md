@@ -72,6 +72,30 @@ To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-o
 ColumnType::String(None).def().default_value("Sam").unique().indexed().nullable()
 ```
 
+### Cast Column Type on Select and Save
+
+If you need to select a column as one type but save it into the database as another, you can override the `select_as` and the `save_as` methods to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should override the `ColumnTrait`'s methods as below:
+
+```rust
+use sea_orm::sea_query::{Expr, SimpleExpr, Alias}
+
+impl ColumnTrait for Column {
+    // Snipped...
+
+    /// Cast column expression used in select statement.
+    fn select_as(&self, expr: Expr) -> SimpleExpr {
+        Column::CaseInsensitiveText => expr.cast_as(Alias::new("text")),
+        _ => self.select_enum_as(expr),
+    }
+
+    /// Cast value of a column into the correct type for database storage.
+    fn save_as(&self, val: Expr) -> SimpleExpr {
+        Column::CaseInsensitiveText => val.cast_as(Alias::new("citext")),
+        _ => self.save_enum_as(val),
+    }
+}
+```
+
 ## Primary Key
 
 An enum representing the primary key of this table. A composite key is represented by an enum with multiple variants.

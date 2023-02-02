@@ -162,6 +162,18 @@ If you want to ignore a particular model attribute such that it maps to no datab
 pub ignore_me: String
 ```
 
+### Cast Column Type on Select and Save
+
+If you need to select a column as one type but save it into the database as another, you can specify the `select_as` and the `save_as` attributes to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should define the model field as below:
+
+```rust
+#[sea_orm(
+    select_as = "text",
+    save_as = "citext",
+)]
+pub case_insensitive_text: String
+```
+
 ## Primary Key
 
 Use the `primary_key` attribute to mark a column as the primary key.
