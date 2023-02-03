@@ -2,50 +2,53 @@
 
 You can use Rust enums in model where the values are mapped to a database string, integer or native enum.
 
-- String
-    ```rust
-    #[derive(EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
-    pub enum Category {
-        #[sea_orm(string_value = "B")]
-        Big,
-        #[sea_orm(string_value = "S")]
-        Small,
-    }
-    ```
+### String
 
-- Integer
-    ```rust
-    #[derive(EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "i32", db_type = "Integer")]
-    pub enum Color {
-        #[sea_orm(num_value = 0)]
-        Black,
-        #[sea_orm(num_value = 1)]
-        White,
-    }
-    ```
-    Alternatively, you could write:
-    ```rust
-    #[derive(EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "i32", db_type = "Integer")]
-    pub enum Color {
-        Black = 0,
-        White = 1,
-    }
-    ```
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+pub enum Category {
+    #[sea_orm(string_value = "B")]
+    Big,
+    #[sea_orm(string_value = "S")]
+    Small,
+}
+```
 
-- Native Database Enum
-    ```rust
-    #[derive(EnumIter, DeriveActiveEnum)]
-    #[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
-    pub enum Tea {
-        #[sea_orm(string_value = "EverydayTea")]
-        EverydayTea,
-        #[sea_orm(string_value = "BreakfastTea")]
-        BreakfastTea,
-    }
-    ```
+### Integers
+
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "i32", db_type = "Integer")]
+pub enum Color {
+    #[sea_orm(num_value = 0)]
+    Black,
+    #[sea_orm(num_value = 1)]
+    White,
+}
+```
+Alternatively, you could write:
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "i32", db_type = "Integer")]
+pub enum Color {
+    Black = 0,
+    White = 1,
+}
+```
+
+### Native Database Enum
+
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+pub enum Tea {
+    #[sea_orm(string_value = "EverydayTea")]
+    EverydayTea,
+    #[sea_orm(string_value = "BreakfastTea")]
+    BreakfastTea,
+}
+```
 
 ## Implementations
 
