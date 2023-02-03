@@ -76,7 +76,9 @@
 
     6.6 [Custom Join Condition](06-relation/06-custom-join-condition.md)
 
-    6.7 [Bakery Schema](06-relation/07-bakery-schema.md)
+    6.7 [Data Loader](06-relation/07-data-loader.md)
+
+    6.8 [Bakery Schema](06-relation/08-bakery-schema.md)
 
 7. Writing Tests
 
