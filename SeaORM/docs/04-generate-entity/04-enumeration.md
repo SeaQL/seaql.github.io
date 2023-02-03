@@ -59,7 +59,7 @@ See [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEn
 use sea_orm::entity::prelude::*;
 
 // Using the derive macro
-#[derive(Debug, PartialEq, EnumIter, DeriveActiveEnum)]
+#[derive(Debug, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(
     rs_type = "String",
     db_type = "String(Some(1))",
@@ -79,7 +79,7 @@ pub enum Category {
 use sea_orm::entity::prelude::*;
 
 // Implementing it manually
-#[derive(Debug, PartialEq, EnumIter)]
+#[derive(Debug, PartialEq, Eq, EnumIter)]
 pub enum Category {
     Big,
     Small,
@@ -128,7 +128,7 @@ impl ActiveEnum for Category {
 use sea_orm::entity::prelude::*;
 
 // Define the `Category` active enum
-#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
 pub enum Category {
     #[sea_orm(string_value = "B")]
@@ -137,7 +137,7 @@ pub enum Category {
     Small,
 }
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "active_enum")]
 pub struct Model {
     #[sea_orm(primary_key)]

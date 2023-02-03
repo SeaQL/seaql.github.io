@@ -7,7 +7,7 @@ The following example defines an Entity that references itself.
 ```rust
 use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "self_join")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]

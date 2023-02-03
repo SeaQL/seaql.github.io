@@ -6,7 +6,7 @@ Creating your own struct with partial fields of a model, which implements `IntoA
 
 ```rust
 // Define regular model as usual
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "fruit")]
 pub struct Model {
     #[sea_orm(primary_key)]

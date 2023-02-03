@@ -45,7 +45,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. Note that you might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) JSON's primary key attribute, you can config that as shown below.
 
 ```rust
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "fruit")]
 pub struct Model {
     #[sea_orm(primary_key)]

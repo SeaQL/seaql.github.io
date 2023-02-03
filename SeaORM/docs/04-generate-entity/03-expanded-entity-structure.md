@@ -142,7 +142,7 @@ impl PrimaryKeyTrait for PrimaryKey {
 The Rust struct for storing query results.
 
 ```rust
-#[derive(Clone, Debug, PartialEq, DeriveModel, DeriveActiveModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveModel, DeriveActiveModel)]
 pub struct Model {
     pub id: i32,
     pub name: String,
@@ -170,68 +170,6 @@ pub struct ActiveModel {
     pub id: ActiveValue<i32>,
     pub name: ActiveValue<Option<String>>,
 }
-```
-
-### Active Model Behavior
-
-Handlers for different triggered actions on an `ActiveModel`. For example, you can perform custom validation logic, preventing a model from saving into database. You can abort an action even after it is done, if you are inside a transaction.
-
-```rust
-#[async_trait]
-impl ActiveModelBehavior for ActiveModel {
-    /// Create a new ActiveModel with default values. Also used by `Default::default()`.
-    fn new() -> Self {
-        Self {
-            uuid: Set(Uuid::new_v4()),
-            ..ActiveModelTrait::default()
-        }
-    }
-
-    /// Will be triggered before insert / update
-    async fn before_save<C>(self, db: &C, insert: bool) -> Result<Self, DbErr>
-    where
-        C: ConnectionTrait,
-    {
-        if self.price.as_ref() <= &0.0 {
-            Err(DbErr::Custom(format!(
-                "[before_save] Invalid Price, insert: {}",
-                insert
-            )))
-        } else {
-            Ok(self)
-        }
-    }
-
-    /// Will be triggered after insert / update
-    async fn after_save<C>(model: Model, db: &C, insert: bool) -> Result<Model, DbErr>
-    where
-        C: ConnectionTrait,
-    {
-        Ok(model)
-    }
-
-    /// Will be triggered before delete
-    async fn before_delete<C>(self, db: &C) -> Result<Self, DbErr>
-    where
-        C: ConnectionTrait,
-    {
-        Ok(self)
-    }
-
-    /// Will be triggered after delete
-    async fn after_delete<C>(self, db: &C) -> Result<Self, DbErr>
-    where
-        C: ConnectionTrait,
-    {
-        Ok(self)
-    }
-}
-```
-
-If no customization is needed, simply write:
-
-```rust
-impl ActiveModelBehavior for ActiveModel {}
 ```
 
 ## Relation

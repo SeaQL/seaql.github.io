@@ -9,7 +9,7 @@ This is just an ordinary string / integer column that maps to a Rust enum. Examp
 ```rust title="active_enum.rs"
 use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(schema_name = "public", table_name = "active_enum")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -18,7 +18,7 @@ pub struct Model {
     pub color: Option<Color>,
 }
 
-#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
 pub enum Category {
     #[sea_orm(string_value = "B")]
@@ -27,7 +27,7 @@ pub enum Category {
     Small,
 }
 
-#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "i32", db_type = "Integer")]
 pub enum Color {
     #[sea_orm(num_value = 0)]
@@ -73,7 +73,7 @@ Consider the following entity:
 ```rust title="active_enum.rs"
 use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(schema_name = "public", table_name = "active_enum")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -81,7 +81,7 @@ pub struct Model {
     pub tea: Option<Tea>,
 }
 
-#[derive(Debug, Clone, PartialEq, EnumIter, DeriveActiveEnum)]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]

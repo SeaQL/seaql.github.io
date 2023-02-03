@@ -5,7 +5,7 @@ Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/t
 ```rust
 use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "cake")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -17,6 +17,12 @@ pub struct Model {
 pub enum Relation {
     #[sea_orm(has_many = "super::fruit::Entity")]
     Fruit,
+}
+
+impl Related<super::fruit::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Fruit.def()
+    }
 }
 
 impl ActiveModelBehavior for ActiveModel {}
@@ -100,7 +106,7 @@ pub name: String
 If you need your JSON field to be deserialized into a struct. You would need to derive `FromJsonQueryResult` for it.
 
 ```rust
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "json_struct")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -113,7 +119,7 @@ pub struct Model {
 }
 
 // The custom struct must derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, FromJsonQueryResult)]
 pub struct KeyValue {
     pub id: i32,
     pub name: String,
@@ -204,26 +210,85 @@ pub struct Model {
 
 ## Relation
 
-The `DeriveRelation` macro is a simple wrapper to impl the `RelationTrait`.
+`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html).
 
 ```rust
-#[derive(DeriveRelation)]
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(has_many = "super::fruit::Entity")]
     Fruit,
 }
 ```
 
-expands into
+If there are no relations, simply write:
 
 ```rust
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::Fruit => Entity::has_many(super::fruit::Entity).into(),
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {}
+```
+
+The [Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
+
+Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapter.
+
+## Active Model Behavior
+
+Handlers for different actions on an `ActiveModel`. For example, you can perform custom validation logic or trigger side effects. Inside a transaction, you can even abort an action after it is done, preventing it from saving into the database.
+
+```rust
+#[async_trait]
+impl ActiveModelBehavior for ActiveModel {
+    /// Create a new ActiveModel with default values. Also used by `Default::default()`.
+    fn new() -> Self {
+        Self {
+            uuid: Set(Uuid::new_v4()),
+            ..ActiveModelTrait::default()
         }
+    }
+
+    /// Will be triggered before insert / update
+    async fn before_save<C>(self, db: &C, insert: bool) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
+        if self.price.as_ref() <= &0.0 {
+            Err(DbErr::Custom(format!(
+                "[before_save] Invalid Price, insert: {}",
+                insert
+            )))
+        } else {
+            Ok(self)
+        }
+    }
+
+    /// Will be triggered after insert / update
+    async fn after_save<C>(model: Model, db: &C, insert: bool) -> Result<Model, DbErr>
+    where
+        C: ConnectionTrait,
+    {
+        Ok(model)
+    }
+
+    /// Will be triggered before delete
+    async fn before_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
+        Ok(self)
+    }
+
+    /// Will be triggered after delete
+    async fn after_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
+        Ok(self)
     }
 }
 ```
 
-Learn more about relations in the next section.
+If no customization is needed, simply write:
+
+```rust
+impl ActiveModelBehavior for ActiveModel {}
+```
