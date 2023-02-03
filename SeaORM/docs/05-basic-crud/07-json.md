@@ -29,7 +29,7 @@ let cakes: Vec<serde_json::Value> = Cake::find()
 
 assert_eq!(
     cakes,
-    vec![
+    [
         serde_json::json!({
             "id": 2,
             "name": "Chocolate Forest"

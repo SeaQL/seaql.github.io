@@ -76,7 +76,7 @@ mod tests {
         // Return the second query result
         assert_eq!(
             cake::Entity::find().all(&db).await?,
-            vec![
+            [
                 cake::Model {
                     id: 1,
                     name: "New York Cheese".to_owned(),
@@ -94,7 +94,7 @@ mod tests {
                 .find_also_related(fruit::Entity)
                 .all(&db)
                 .await?,
-            vec![(
+            [(
                 cake::Model {
                     id: 1,
                     name: "Apple Cake".to_owned(),
@@ -110,21 +110,21 @@ mod tests {
         // Checking transaction log
         assert_eq!(
             db.into_transaction_log(),
-            vec![
+            [
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"SELECT "cake"."id", "cake"."name" FROM "cake" LIMIT $1"#,
-                    vec![1u64.into()]
+                    [1u64.into()]
                 ),
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"SELECT "cake"."id", "cake"."name" FROM "cake""#,
-                    vec![]
+                    []
                 ),
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"SELECT "cake"."id" AS "A_id", "cake"."name" AS "A_name", "fruit"."id" AS "B_id", "fruit"."name" AS "B_name", "fruit"."cake_id" AS "B_cake_id" FROM "cake" LEFT JOIN "fruit" ON "cake"."id" = "fruit"."cake_id""#,
-                    vec![]
+                    []
                 ),
             ]
         );
@@ -194,16 +194,16 @@ mod tests {
         // Checking transaction log
         assert_eq!(
             db.into_transaction_log(),
-            vec![
+            [
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"INSERT INTO "cake" ("name") VALUES ($1) RETURNING "id", "name""#,
-                    vec!["Apple Pie".into()]
+                    ["Apple Pie".into()]
                 ),
                 Transaction::from_sql_and_values(
                     DatabaseBackend::Postgres,
                     r#"INSERT INTO "cake" ("name") VALUES ($1) RETURNING "id""#,
-                    vec!["Apple Pie".into()]
+                    ["Apple Pie".into()]
                 ),
             ]
         );

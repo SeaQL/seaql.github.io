@@ -177,7 +177,7 @@ let orange = fruit::ActiveModel {
     ..Default::default()
 };
 
-let res: InsertResult = Fruit::insert_many(vec![apple, orange]).exec(db).await?;
+let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 

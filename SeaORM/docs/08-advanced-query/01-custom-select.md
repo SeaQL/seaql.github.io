@@ -101,7 +101,7 @@ let res: Vec<String> = cake::Entity::find()
 
 assert_eq!(
     res,
-    vec!["Chocolate Forest".to_owned(), "New York Cheese".to_owned()]
+    ["Chocolate Forest".to_owned(), "New York Cheese".to_owned()]
 );
 ```
 
@@ -127,7 +127,7 @@ let res: Vec<(String, i64)> = cake::Entity::find()
     .all(&db)
     .await?;
 
-assert_eq!(res, vec![("Chocolate Forest".to_owned(), 2i64)]);
+assert_eq!(res, [("Chocolate Forest".to_owned(), 2i64)]);
 ```
 
 Instead, the `into_tuple` method can be used to fetch the tuple value.

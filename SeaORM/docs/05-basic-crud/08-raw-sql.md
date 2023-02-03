@@ -9,7 +9,7 @@ let cheese: Option<cake::Model> = cake::Entity::find()
     .from_raw_sql(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
-        vec![1.into()],
+        [1.into()],
     ))
     .one(&db)
     .await?;
@@ -26,7 +26,7 @@ pub struct UniqueCake {
 let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
-        vec![],
+        [],
     ))
     .all(&db)
     .await?;
@@ -38,7 +38,7 @@ If you do not know what your model looks like beforehand, you can use `JsonValue
 let unique: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
-        vec![],
+        [],
     ))
     .all(&db)
     .await?;
@@ -51,7 +51,7 @@ let mut cake_pages = cake::Entity::find()
     .from_raw_sql(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
-        vec![1.into()],
+        [1.into()],
     ))
     .paginate(db, 50);
  
@@ -71,7 +71,7 @@ assert_eq!(
     cake_filling::Entity::find_by_id((6, 8))
         .build(DatabaseBackend::MySql)
         .to_string(),
-    vec![
+    [
         "SELECT `cake_filling`.`cake_id`, `cake_filling`.`filling_id` FROM `cake_filling`",
         "WHERE `cake_filling`.`cake_id` = 6 AND `cake_filling`.`filling_id` = 8",
     ].join(" ")

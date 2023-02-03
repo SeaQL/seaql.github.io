@@ -67,7 +67,7 @@ To further illustrate it, we will show the SQL statement as string below.
         db_postgres.build(&schema.create_table_from_entity(CakeFillingPrice)),
         Statement::from_string(
             db_postgres,
-            vec![
+            [
                 r#"CREATE TABLE "public"."cake_filling_price" ("#,
                 r#""cake_id" integer NOT NULL,"#,
                 r#""filling_id" integer NOT NULL,"#,
@@ -92,7 +92,7 @@ To further illustrate it, we will show the SQL statement as string below.
         db_mysql.build(&schema.create_table_from_entity(CakeFillingPrice)),
         Statement::from_string(
             db_mysql,
-            vec![
+            [
                 "CREATE TABLE `cake_filling_price` (",
                 "`cake_id` int NOT NULL,",
                 "`filling_id` int NOT NULL,",
@@ -117,7 +117,7 @@ To further illustrate it, we will show the SQL statement as string below.
         db_sqlite.build(&schema.create_table_from_entity(CakeFillingPrice)),
         Statement::from_string(
             db_sqlite,
-            vec![
+            [
                 "CREATE TABLE `cake_filling_price` (",
                 "`cake_id` integer NOT NULL,",
                 "`filling_id` integer NOT NULL,",
