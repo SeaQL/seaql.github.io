@@ -16,6 +16,20 @@ let _: ActiveValue<i32> = Set(10);
 let _: ActiveValue<i32> = NotSet;
 ```
 
+### Reset ActiveValue
+
+Calling `reset` method will convert `Unchanged` active value as `Set`.
+
+```rust
+use sea_orm::ActiveValue;
+
+// An `Unchanged` value
+let active_value: ActiveValue<i32> = ActiveValue::Unchanged(10);
+
+// Convert `Unchanged` active value as `Set`
+assert!(active_value.reset(), ActiveValue::Set(10));
+```
+
 ## Model & ActiveModel
 
 An `ActiveModel` has all the attributes of `Model` wrapped in `ActiveValue`.
