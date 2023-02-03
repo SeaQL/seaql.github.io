@@ -51,6 +51,4 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 + `with-bigdecimal` - support [`bigdecimal`](https://crates.io/crates/bigdecimal) types
 + `with-uuid` - support [`uuid`](https://crates.io/crates/uuid) types
 + `postgres-array` - support array types in Postgres
-+ `sea-orm-internal` - opt-in unstable internal APIs
-    + `DatabaseConnection::get_*_connection_pool()` for accessing the inner SQLx connection pool
-    + Re-exporting SQLx errors
++ `sea-orm-internal` - opt-in unstable internal APIs (for accessing re-export SQLx types)
