@@ -7,27 +7,19 @@ Before diving into SeaORM insert we have to introduce `ActiveValue` and `ActiveM
 A wrapper struct to capture the changes made to `ActiveModel` attributes.
 
 ```rust
-use sea_orm::ActiveValue::NotSet;
+use sea_orm::ActiveValue::{Set, NotSet, Unchanged};
 
 // Set value
 let _: ActiveValue<i32> = Set(10);
 
 // NotSet value
 let _: ActiveValue<i32> = NotSet;
-```
-
-### Reset ActiveValue
-
-Calling `reset` method will convert `Unchanged` active value as `Set`, thus the attribute will be saved in the next operation.
-
-```rust
-use sea_orm::ActiveValue;
 
 // An `Unchanged` value
-let active_value: ActiveValue<i32> = ActiveValue::Unchanged(10);
+let v: ActiveValue<i32> = Unchanged(10);
 
 // Convert `Unchanged` active value as `Set`
-assert!(active_value.reset(), ActiveValue::Set(10));
+assert!(v.reset(), Set(10));
 ```
 
 ## Model & ActiveModel

@@ -116,7 +116,7 @@ assert_eq!(exec_res.rows_affected(), 1);
 
 ## Execute Unprepared SQL Statement
 
-You can execute an unprepared SQL statement with `ConnectionTrait::execute_unprepared()` method.
+You can execute an unprepared SQL statement with [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/*/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared).
 
 ```rust
 let exec_res: ExecResult =
