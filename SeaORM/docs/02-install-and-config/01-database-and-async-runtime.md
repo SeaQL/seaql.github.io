@@ -41,6 +41,16 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 
 ## Extra features
 
-`debug-print` - print every SQL statement to logger
-
-`mock` - mock interface for unit testing
++ `debug-print` - print every SQL statement to logger
++ `mock` - mock interface for unit testing
++ `macros` - procedural macros for your convenient
++ `with-chrono` - support [`chrono`](https://crates.io/crates/chrono) types
++ `with-time` - support [`time`](https://crates.io/crates/time) types
++ `with-json` - support [`serde-json`](https://crates.io/crates/serde-json) types
++ `with-rust_decimal` - support [`rust_decimal`](https://crates.io/crates/rust_decimal) types
++ `with-bigdecimal` - support [`bigdecimal`](https://crates.io/crates/bigdecimal) types
++ `with-uuid` - support [`uuid`](https://crates.io/crates/uuid) types
++ `postgres-array` - support array types in Postgres
++ `sea-orm-internal` - opt-in unstable internal APIs
+    + `DatabaseConnection::get_*_connection_pool()` for accessing the inner SQLx connection pool
+    + Re-exporting SQLx errors
