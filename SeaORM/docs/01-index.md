@@ -108,7 +108,7 @@
 
     8.9 [Error Handling](08-advanced-query/09-error-handling.md)
 
-9. Generating SeaQuery Statement
+9. Schema Statement
 
     9.1 [Create Table](09-schema-statement/01-create-table.md)
 
