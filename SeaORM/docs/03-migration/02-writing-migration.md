@@ -248,6 +248,12 @@ impl MigrationTrait for Migration {
 }
 ```
 
+## Atomic Migration
+
+Migration will be executed in Postgres atomically that means migration scripts will be executed inside a transaction. Changes done to the database will be rolled back if the migration failed. However, atomic migration is not supported in MySQL and SQLite.
+
+You can start a transaction inside each migration to perform operations like [seeding sample data](03-migration/04-seeding-data.md#seeding-data-transactionally) for a newly created table.
+
 ## Schema first or Entity first?
 
 In the grand scheme of things, we recommend a schema first approach: you write migrations first and then generate entities from a live database.

@@ -54,3 +54,35 @@ pub enum Cake {
     Name,
 }
 ```
+
+## Seeding Data Transactionally
+
+Starts a transaction and execute SQL inside migration up and down.
+
+```rust
+use sea_orm_migration::sea_orm::{entity::*, query::*};
+
+// ...
+
+#[async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        // Get the connection and start a transaction
+        let db = manager.get_connection();
+        let transaction = db.begin().await?;
+
+        // Insert with the transaction connection
+        cake::ActiveModel {
+            name: Set("Cheesecake".to_owned()),
+            ..Default::default()
+        }
+        .insert(&transaction)
+        .await?;
+
+        // Commit it
+        transaction.commit().await?;
+
+        Ok(())
+    }
+}
+```
