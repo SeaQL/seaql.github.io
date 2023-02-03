@@ -66,6 +66,8 @@ txn.commit().await?;
 
 Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/*/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/*/sea_orm/enum.AccessMode.html).
 
+For now, they are only implemented for MySQL and Postgres. MySQL will execute `SET TRANSACTION` commands before begin transaction, while Postgres will execute `SET TRANSACTION` commands after begin transaction.
+
 ### IsolationLevel
 
 `RepeatableRead`: Consistent reads within the same transaction read the snapshot established by the first read.
