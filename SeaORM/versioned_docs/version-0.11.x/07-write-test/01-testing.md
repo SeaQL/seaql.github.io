@@ -43,7 +43,7 @@ Now, let's see how we can mitigate these errors:
 
 Using Rust automatically saves you from misspelling symbols.
 
-Using a *completely static* query builder (like Diesel) can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and runs (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
+Using a *completely static* query builder can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and runs (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
 
 As such, SeaORM does not attempt to check things at compile-time. We intend to (still in development) provide runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
 
