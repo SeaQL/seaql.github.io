@@ -18,7 +18,7 @@ assert_eq!(
 
 ## Select Some Attributes Only
 
-Use `select_only` and `column` methods together to select only the attributes you want.
+Use `select_only` and `column` methods together to select only the attribute you want.
 
 ```rust
 // Selecting the name column only
@@ -26,6 +26,35 @@ assert_eq!(
     cake::Entity::find()
         .select_only()
         .column(cake::Column::Name)
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."name" FROM "cake""#
+);
+```
+
+If you want to select multiple attributes at once.
+
+```rust
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .columns([cake::Column::Id, cake::Column::Name])
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."id", "cake"."name" FROM "cake""#
+);
+```
+
+Conditionally select all columns expect a specific column.
+
+```rust
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .columns(cake::Column::iter().filter(|col| match col {
+            cake::Column::Id => false,
+            _ => true,
+        }))
         .build(DbBackend::Postgres)
         .to_string(),
     r#"SELECT "cake"."name" FROM "cake""#
