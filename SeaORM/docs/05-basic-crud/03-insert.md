@@ -18,7 +18,7 @@ let _: ActiveValue<i32> = NotSet;
 
 ### Reset ActiveValue
 
-Calling `reset` method will convert `Unchanged` active value as `Set`.
+Calling `reset` method will convert `Unchanged` active value as `Set`, thus the attribute will be saved in the next operation.
 
 ```rust
 use sea_orm::ActiveValue;
