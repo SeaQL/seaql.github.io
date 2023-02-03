@@ -7,7 +7,7 @@ use sea_orm_migration::sea_orm::{entity::*, query::*};
 
 // ...
 
-#[async_trait::async_trait]
+#[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         let db = manager.get_connection();
@@ -31,7 +31,7 @@ use sea_orm_migration::sea_orm::{entity::*, query::*};
 
 // ...
 
-#[async_trait::async_trait]
+#[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         let insert = Query::insert()
