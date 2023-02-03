@@ -86,7 +86,7 @@ For the mappings of Rust non-primitive data types. You can check [`entity/prelud
 | `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime | text | datetime | timestamp |
 | `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp | text | timestamp | N/A |
 | `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone | text | timestamp | timestamp with time zone |
-| `Uuid`: uuid::Uuid | Uuid | text | binary(16) | uuid |
+| `Uuid`: uuid::Uuid, uuid::fmt::Braced, uuid::fmt::Hyphenated, uuid::fmt::Simple, uuid::fmt::Urn | Uuid | text | binary(16) | uuid |
 | `Json`: serde_json::Value | Json | text | json | json |
 | `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 
@@ -160,6 +160,15 @@ If you want to ignore a particular model attribute such that it maps to no datab
 ```rust
 #[sea_orm(ignore)]
 pub ignore_me: String
+```
+
+### Cast Column Type on Select and Save
+
+If you need to select a column as one type but save it into the database as another, you can specify the `select_as` and the `save_as` attributes to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should define the model field as below:
+
+```rust
+#[sea_orm(select_as = "text", save_as = "citext")]
+pub case_insensitive_text: String
 ```
 
 ## Primary Key

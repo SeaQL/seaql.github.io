@@ -51,8 +51,12 @@ Command line options:
 - `--compact-format`: generate entity file of [compact format](04-generate-entity/02-entity-structure.md) (default: true)
 - `--expanded-format`: generate entity file of [expanded format](04-generate-entity/03-expanded-entity-structure.md)
 - `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
+    - `--serde-skip-deserializing-primary-key`: generate entity model with primary key field labeled as `#[serde(skip_deserializing)]`
+    - `--serde-skip-hidden-column`: generate entity model with hidden column (column name starts with `_`) field labeled as `#[serde(skip)]`
 - `--date-time-crate`: the datetime crate to use for generating entities (`chrono`, `time`) (default: `chrono`)
 - `--max-connections`: maximum number of database connections to be initialized in the connection pool (default: `1`)
+- `--model-extra-derives`: append extra derive macros to the generated model struct
+- `--model-extra-attributes`: append extra attributes to generated model struct
 
 ```shell
 # Generate entity files of database `bakery` to `entity/src`

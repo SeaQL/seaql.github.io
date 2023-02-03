@@ -72,6 +72,30 @@ To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-o
 ColumnType::String(None).def().default_value("Sam").unique().indexed().nullable()
 ```
 
+### Cast Column Type on Select and Save
+
+If you need to select a column as one type but save it into the database as another, you can override the `select_as` and the `save_as` methods to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should override the `ColumnTrait`'s methods as below:
+
+```rust
+use sea_orm::sea_query::{Expr, SimpleExpr, Alias}
+
+impl ColumnTrait for Column {
+    // Snipped...
+
+    /// Cast column expression used in select statement.
+    fn select_as(&self, expr: Expr) -> SimpleExpr {
+        Column::CaseInsensitiveText => expr.cast_as(Alias::new("text")),
+        _ => self.select_enum_as(expr),
+    }
+
+    /// Cast value of a column into the correct type for database storage.
+    fn save_as(&self, val: Expr) -> SimpleExpr {
+        Column::CaseInsensitiveText => val.cast_as(Alias::new("citext")),
+        _ => self.save_enum_as(val),
+    }
+}
+```
+
 ## Primary Key
 
 An enum representing the primary key of this table. A composite key is represented by an enum with multiple variants.
@@ -153,6 +177,7 @@ pub struct ActiveModel {
 Handlers for different triggered actions on an `ActiveModel`. For example, you can perform custom validation logic, preventing a model from saving into database. You can abort an action even after it is done, if you are inside a transaction.
 
 ```rust
+#[async_trait]
 impl ActiveModelBehavior for ActiveModel {
     /// Create a new ActiveModel with default values. Also used by `Default::default()`.
     fn new() -> Self {
@@ -163,7 +188,10 @@ impl ActiveModelBehavior for ActiveModel {
     }
 
     /// Will be triggered before insert / update
-    fn before_save(self, insert: bool) -> Result<Self, DbErr> {
+    async fn before_save<C>(self, db: &C, insert: bool) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         if self.price.as_ref() <= &0.0 {
             Err(DbErr::Custom(format!(
                 "[before_save] Invalid Price, insert: {}",
@@ -175,17 +203,26 @@ impl ActiveModelBehavior for ActiveModel {
     }
 
     /// Will be triggered after insert / update
-    fn after_save(model: Model, insert: bool) -> Result<Model, DbErr> {
+    async fn after_save<C>(model: Model, db: &C, insert: bool) -> Result<Model, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(model)
     }
 
     /// Will be triggered before delete
-    fn before_delete(self) -> Result<Self, DbErr> {
+    async fn before_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(self)
     }
 
     /// Will be triggered after delete
-    fn after_delete(self) -> Result<Self, DbErr> {
+    async fn after_delete<C>(self, db: &C) -> Result<Self, DbErr>
+    where
+        C: ConnectionTrait,
+    {
         Ok(self)
     }
 }

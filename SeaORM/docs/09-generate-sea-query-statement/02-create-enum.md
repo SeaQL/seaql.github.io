@@ -111,7 +111,7 @@ assert_eq!(
         .iter()
         .map(|stmt| db_postgres.build(stmt))
         .collect::<Vec<_>>(),
-    vec![Statement::from_string(
+    [Statement::from_string(
         db_postgres,
         r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
     ),]
@@ -129,7 +129,7 @@ assert_eq!(
     db_postgres.build(&schema.create_table_from_entity(active_enum::Entity)),
     Statement::from_string(
         db_postgres,
-        vec![
+        [
             r#"CREATE TABLE "public"."active_enum" ("#,
             r#""id" serial NOT NULL PRIMARY KEY,"#,
             r#""tea" tea"#,
@@ -154,7 +154,7 @@ assert_eq!(
     db_mysql.build(&schema.create_table_from_entity(active_enum::Entity)),
     Statement::from_string(
         db_mysql,
-        vec![
+        [
             "CREATE TABLE `active_enum` (",
             "`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,",
             "`tea` ENUM('EverydayTea', 'BreakfastTea')",
@@ -179,7 +179,7 @@ assert_eq!(
     db_sqlite.build(&schema.create_enum_from_entity(active_enum::Entity)),
     Statement::from_string(
         db_sqlite,
-        vec![
+        [
             "CREATE TABLE `active_enum` (",
             "`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,",
             "`tea` text",

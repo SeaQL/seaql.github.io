@@ -73,3 +73,23 @@ assert_eq!(
     ].join(" ")
 );
 ```
+
+## Fluent conditional query
+
+Apply an operation on the QueryStatement if the given `Option<T>` is `Some(_)`. It keeps your query expression fluent!
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DbBackend};
+
+assert_eq!(
+    cake::Entity::find()
+        .apply_if(Some(3), |mut query, v| {
+            query.filter(cake::Column::Id.eq(v))
+        })
+        .apply_if(Some(100), QuerySelect::limit)
+        .apply_if(None, QuerySelect::offset::<Option<u64>>) // no-op
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "cake"."id" = 3 LIMIT 100"#
+);
+```

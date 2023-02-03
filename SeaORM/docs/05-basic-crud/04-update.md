@@ -13,7 +13,25 @@ let mut pear: fruit::ActiveModel = pear.unwrap().into();
 // Update name attribute
 pear.name = Set("Sweet pear".to_owned());
 
-// Update corresponding row in database using primary key value
+// SQL: `UPDATE "fruit" SET "name" = 'Sweet pear' WHERE "id" = 28`
+let pear: fruit::Model = pear.update(db).await?;
+```
+
+To update all attributes, you can convert `Unchanged` into `Set`.
+
+```rust
+// Into ActiveModel
+let mut pear: fruit::ActiveModel = pear.into();
+
+// Update name attribute
+pear.name = Set("Sweet pear".to_owned());
+
+// Set a specific attribute as "dirty" (force update)
+pear.reset(fruit::Column::CakeId);
+// Or, set all attributes as "dirty" (force update)
+pear.reset_all();
+
+// SQL: `UPDATE "fruit" SET "name" = 'Sweet pear', "cake_id" = 10 WHERE "id" = 28`
 let pear: fruit::Model = pear.update(db).await?;
 ```
 

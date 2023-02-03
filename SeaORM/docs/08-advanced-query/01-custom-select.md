@@ -2,10 +2,6 @@
 
 By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to select certain columns only.
 
-## Clear Default Selection
-
-Clear the default selection by calling the `select_only` method if needed. Then, you can select some of the attributes or even custom expressions after it.
-
 ```rust
 // Selecting all columns
 assert_eq!(
@@ -16,9 +12,9 @@ assert_eq!(
 );
 ```
 
-## Select Some Attributes Only
+## Select Partial Attributes
 
-Use `select_only` and `column` methods together to select only the attributes you want.
+Clear the default selection by calling the `select_only` method. Then, you can select some of the attributes or custom expressions afterwards.
 
 ```rust
 // Selecting the name column only
@@ -26,6 +22,35 @@ assert_eq!(
     cake::Entity::find()
         .select_only()
         .column(cake::Column::Name)
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."name" FROM "cake""#
+);
+```
+
+If you want to select multiple attributes at once, you can supply an array.
+
+```rust
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .columns([cake::Column::Id, cake::Column::Name])
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."id", "cake"."name" FROM "cake""#
+);
+```
+
+Advanced example: conditionally select all columns except a specific column.
+
+```rust
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .columns(cake::Column::iter().filter(|col| match col {
+            cake::Column::Id => false,
+            _ => true,
+        }))
         .build(DbBackend::Postgres)
         .to_string(),
     r#"SELECT "cake"."name" FROM "cake""#
@@ -49,7 +74,9 @@ assert_eq!(
 );
 ```
 
-## Handling Custom Selects
+## Handling Select Results
+
+### Custom Struct
 
 You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of a complex query. It is especially useful when dealing with custom columns or multiple joins which cannot directly be converted into models. It may be used to receive the result of any query, even raw SQL.
 
@@ -82,48 +109,19 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
     .await?;
 ```
 
-Selecting a single value without a custom `struct` is also possible.
+### Unstructured Tuple
+
+You can select a tuple (or single value) with the `into_tuple` method.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
-enum QueryAs {
-    CakeName,
-}
-
-let res: Vec<String> = cake::Entity::find()
-    .select_only()
-    .column_as(cake::Column::Name, QueryAs::CakeName)
-    .into_values::<_, QueryAs>()
-    .all(&db)
-    .await?;
-
-assert_eq!(
-    res,
-    vec!["Chocolate Forest".to_owned(), "New York Cheese".to_owned()]
-);
-```
-
-You can even select a tuple value.
-
-```rust
-use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveColumn)]
-enum QueryAs {
-    CakeName,
-    NumOfCakes,
-}
 
 let res: Vec<(String, i64)> = cake::Entity::find()
     .select_only()
-    .column_as(cake::Column::Name, QueryAs::CakeName)
-    .column_as(cake::Column::Id.count(), QueryAs::NumOfCakes)
+    .column(cake::Column::Name)
+    .column(cake::Column::Id.count())
     .group_by(cake::Column::Name)
-    .into_values::<_, QueryAs>()
+    .into_tuple()
     .all(&db)
     .await?;
-
-assert_eq!(res, vec![("Chocolate Forest".to_owned(), 2i64)]);
 ```

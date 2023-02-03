@@ -7,13 +7,19 @@ Before diving into SeaORM insert we have to introduce `ActiveValue` and `ActiveM
 A wrapper struct to capture the changes made to `ActiveModel` attributes.
 
 ```rust
-use sea_orm::ActiveValue::NotSet;
+use sea_orm::ActiveValue::{Set, NotSet, Unchanged};
 
 // Set value
 let _: ActiveValue<i32> = Set(10);
 
 // NotSet value
 let _: ActiveValue<i32> = NotSet;
+
+// An `Unchanged` value
+let v: ActiveValue<i32> = Unchanged(10);
+
+// Convert `Unchanged` active value as `Set`
+assert!(v.reset(), Set(10));
 ```
 
 ## Model & ActiveModel
@@ -177,7 +183,7 @@ let orange = fruit::ActiveModel {
     ..Default::default()
 };
 
-let res: InsertResult = Fruit::insert_many(vec![apple, orange]).exec(db).await?;
+let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 

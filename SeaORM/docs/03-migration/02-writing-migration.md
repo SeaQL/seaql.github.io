@@ -21,7 +21,7 @@ use sea_orm_migration::prelude::*;
 #[derive(DeriveMigrationName)]
 pub struct Migration;
 
-#[async_trait::async_trait]
+#[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
@@ -46,7 +46,7 @@ mod m20220101_000001_create_table;
 
 pub struct Migrator;
 
-#[async_trait::async_trait]
+#[async_trait]
 impl MigratorTrait for Migrator {
     fn migrations() -> Vec<Box<dyn MigrationTrait>> {
         vec![
@@ -212,25 +212,47 @@ use sea_orm_migration::prelude::*;
 #[derive(DeriveMigrationName)]
 pub struct Migration;
 
-#[async_trait::async_trait]
+#[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        let sql = r#"
-        CREATE TABLE `cake` (
-            `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            `name` varchar(255) NOT NULL
-        )"#;
-        let stmt = Statement::from_string(manager.get_database_backend(), sql.to_owned());
-        manager.get_connection().execute(stmt).await.map(|_| ())
+        let db = manager.get_connection();
+
+        // Use `execute_unprepared` if the SQL statement doesn't have value bindings
+        db.execute_unprepared(
+            "CREATE TABLE `cake` (
+                `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                `name` varchar(255) NOT NULL
+            )"
+        )
+        .await?;
+
+        // Construct a `Statement` if the SQL contains value bindings
+        let stmt = Statement::from_sql_and_values(
+            manager.get_database_backend(),
+            r#"INSERT INTO `cake` (`name`) VALUES (?)"#,
+            ["Cheese Cake".into()]
+        );
+        db.execute(stmt).await?;
+
+        Ok(())
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        let sql = "DROP TABLE `cake`";
-        let stmt = Statement::from_string(manager.get_database_backend(), sql.to_owned());
-        manager.get_connection().execute(stmt).await.map(|_| ())
+        manager
+            .get_connection()
+            .execute_unprepared("DROP TABLE `cake`")
+            .await?;
+
+        Ok(())
     }
 }
 ```
+
+## Atomic Migration
+
+Migration will be executed in Postgres atomically that means migration scripts will be executed inside a transaction. Changes done to the database will be rolled back if the migration failed. However, atomic migration is not supported in MySQL and SQLite.
+
+You can start a transaction inside each migration to perform operations like [seeding sample data](03-migration/04-seeding-data.md#seeding-data-transactionally) for a newly created table.
 
 ## Schema first or Entity first?
 
