@@ -110,11 +110,11 @@
 
 9. Generating SeaQuery Statement
 
-    9.1 [Create Table](09-generate-sea-query-statement/01-create-table.md)
+    9.1 [Create Table](09-schema-statement/01-create-table.md)
 
-    9.2 [Create Enum](09-generate-sea-query-statement/02-create-enum.md)
+    9.2 [Create Enum](09-schema-statement/02-create-enum.md)
 
-    9.3 [Create Index](09-generate-sea-query-statement/03-create-index.md)
+    9.3 [Create Index](09-schema-statement/03-create-index.md)
 
 10. Internal Design
 
