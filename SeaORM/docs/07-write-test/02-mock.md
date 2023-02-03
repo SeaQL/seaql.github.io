@@ -28,7 +28,7 @@ mod tests {
     async fn test_find_cake() -> Result<(), DbErr> {
         // Create MockDatabase with mock query results
         let db = MockDatabase::new(DatabaseBackend::Postgres)
-            .append_query_results(vec![
+            .append_query_results([
                 // First query result
                 vec![cake::Model {
                     id: 1,
@@ -46,9 +46,9 @@ mod tests {
                     },
                 ],
             ])
-            .append_query_results(vec![
+            .append_query_results([
                 // Third query result
-                vec![(
+                [(
                     cake::Model {
                         id: 1,
                         name: "Apple Cake".to_owned(),
@@ -150,17 +150,17 @@ mod tests {
     async fn test_insert_cake() -> Result<(), DbErr> {
         // Create MockDatabase with mock execution result
         let db = MockDatabase::new(DatabaseBackend::Postgres)
-            .append_query_results(vec![
-                vec![cake::Model {
+            .append_query_results([
+                [cake::Model {
                     id: 15,
                     name: "Apple Pie".to_owned(),
                 }],
-                vec![cake::Model {
+                [cake::Model {
                     id: 16,
                     name: "Apple Pie".to_owned(),
                 }],
             ])
-            .append_exec_results(vec![
+            .append_exec_results([
                 MockExecResult {
                     last_insert_id: 15,
                     rows_affected: 1,
