@@ -163,7 +163,7 @@ const config = {
         ],
         copyright: [
           `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/seaography/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/seaography.svg?style=social&label=Star&maxAge=1"/></a></div>`,
-          `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
+          `<br/>Copyright © ${new Date().getFullYear()} SeaQL.org`,
           `<br/>Built with 🔥 by 🌊🦀🐚`,
         ].join(''),
       },

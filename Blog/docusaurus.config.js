@@ -98,7 +98,7 @@ module.exports = {
         },
       ],
       copyright: [
-        `<br/>Copyright © ${new Date().getFullYear()} SeaQL`,
+        `<br/>Copyright © ${new Date().getFullYear()} SeaQL.org`,
       ].join(''),
     },
     prism: {

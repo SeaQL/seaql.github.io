@@ -35,7 +35,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ## Find Related Models
 
-> Read more about [table joins](08-advanced-query/04-custom-joins.md).
+> Read more on the [Relation](06-relation/01-one-to-one.md) chapter.
 
 ### Lazy Loading
 
@@ -54,19 +54,19 @@ let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 ### Eager Loading
 
-All related models are loaded at once. This provides minimum overhead on database round trips compared to lazy loading.
+All related models are loaded at once. This provides minimum database round trips compared to lazy loading.
 
 #### One to One
 
 Use the [`find_also_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_related) method.
 
 ```rust
-let cake_and_fruit: Vec<(cake::Model, Option<fruit::Model>)> = Cake::find().find_also_related(Fruit).all(db).await?;
+let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().find_also_related(Cake).all(db).await?;
 ```
 
-#### One to Many
+#### One to Many / Many to Many
 
-Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models.
+Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. To achieve this, the query is ordered by Cake's primary key. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
@@ -75,29 +75,38 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-:::info
+### Batch Loading
 
-Since 0.9.0, `SelectTwoMany::one()` method has been dropped:
+Since 0.11, we introduced a [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) to load related entities in batches.
+
+Compared to eager loading, it saves bandwidth (consider the one to many case, the one side rows may duplicate) at the cost of one (or two, in the case of many to many) more database roundtrip.
+
+#### One to One
+
+Use the [load_one](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) method.
 
 ```rust
-let cake_with_fruits: Option<(cake::Model, Option<fruit::Model>)> = Cake::find()
-    .find_with_related(Fruit)
-    .one(db) // This method has been dropped
-    .await?;
+let fruits: Vec<fruit::Model> = Fruit::find().all(db).await?;
+let cakes: Vec<Option<cake::Model>> = fruits.load_one(Cake, db).await?;
 ```
 
-`SelectTwoMany` is for selecting models of a one-to-many relationship
-but `SelectTwoMany::one()` returns `Option<(E, Option<F>)>`
-and the return value is a pair of models instead of `(E, Vec<F>)`
-which is a weird query result for a one-to-many relationship.
+#### One to Many
 
-Users are advised to query `(E, Vec<F>)` by first querying `E` from the database,
-then use `find_related` method to query `Vec<F>`.
-Read [lazy loading](#lazy-loading) for details.
+Use the [load_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
 
-:::
+```rust
+let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
+let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
+```
 
-If you are building a web API that perform selecting nested relation extensively. Consider serving a GraphQL server instead. [seaography](https://github.com/SeaQL/seaography) is a GraphQL framework for building GraphQL resolvers using SeaORM entities. With GraphQL resolver in place select above nested relation is straightforward and easy. Check "[Getting Started with Seaography](https://www.sea-ql.org/blog/2022-09-27-getting-started-with-seaography/#query-data-via-graphql)" to learn more.
+#### Many to Many
+
+Use the [load_many_to_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many_to_many) method. You have to provide the junction Entity.
+
+```rust
+let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
+let fillings: Vec<Vec<filling::Model>> = cakes.load_many_to_many(Filling, CakeFilling, db).await?;
+```
 
 ## Paginate Result
 
