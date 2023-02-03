@@ -142,3 +142,23 @@ let res: Vec<(String, i64)> = cake::Entity::find()
     .all(&db)
     .await?;
 ```
+
+## Appling an Operation if Value Exists
+
+Apply an operation on the [QueryTrait::QueryStatement](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryTrait.html#associatedtype.QueryStatement) if the given `Option<T>` is `Some(_)`.
+
+```rust
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DbBackend};
+
+assert_eq!(
+    cake::Entity::find()
+        .apply_if(Some(3), |mut query, v| {
+            query.filter(cake::Column::Id.eq(v))
+        })
+        .apply_if(Some(100), QuerySelect::limit)
+        .apply_if(None, QuerySelect::offset::<Option<u64>>) // no-op
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "cake"."id" = 3 LIMIT 100"#
+);
+```
