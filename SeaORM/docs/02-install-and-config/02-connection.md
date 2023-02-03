@@ -37,7 +37,7 @@ let db = Database::connect(opt).await?;
 
 ## Closing Connection
 
-To close the connection explicitly, call the `close` method.
+The connection will be automatically closed on drop. To close the connection explicitly, call the `close` method.
 
 ```rust
 let db = Database::connect(url).await?;
