@@ -36,7 +36,7 @@ One layer down, is the SeaQuery `SelectStatement`, `InsertStatement`, `UpdateSta
 
 Third is the execution stage. A separate set of structs, `Selector`, `Inserter`, `Updater` & `Deleter`, are responsible for executing the statements against a database connection.
 
-Finally is the resolution stage, when query results are converted into Rust structs for consumption.
+Finally is the resolution stage, when query results are converted into Rust types and shoved into structs. Subsequently, if it is a relational query, the structs will be pieced together according to their relations.
 
 Because only the execution and resolution stages are database specific, we have the possibility to use a different driver by replacing those.
 
