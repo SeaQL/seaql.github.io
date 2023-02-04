@@ -46,7 +46,7 @@ module.exports = {
         },
         {
           to: 'https://www.sea-ql.org/sea-orm-tutorial/',
-          label: 'Tutorials',
+          label: 'Tutorial',
           position: 'left',
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
               to: '/docs/index',
             },
             {
-              label: 'SeaORM Tutorials',
+              label: 'SeaORM Tutorial',
               to: 'https://www.sea-ql.org/sea-orm-tutorial/',
             },
             {
