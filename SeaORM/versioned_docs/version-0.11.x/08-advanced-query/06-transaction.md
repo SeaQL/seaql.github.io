@@ -62,6 +62,68 @@ bakery::ActiveModel {
 txn.commit().await?;
 ```
 
+## Nested transaction
+
+Nested transaction is implemented with database's `SAVEPOINT`. The example below illustrates the behavior with the closure API.
+
+```rust
+assert_eq!(Bakery::find().all(txn).await?.len(), 0);
+
+ctx.db.transaction::<_, _, DbErr>(|txn| {
+    Box::pin(async move {
+        let _ = bakery::ActiveModel {..}.save(txn).await?;
+        let _ = bakery::ActiveModel {..}.save(txn).await?;
+        assert_eq!(Bakery::find().all(txn).await?.len(), 2);
+
+        // Try nested transaction committed
+        txn.transaction::<_, _, DbErr>(|txn| {
+            Box::pin(async move {
+                let _ = bakery::ActiveModel {..}.save(txn).await?;
+                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+
+                // Try nested-nested transaction rollbacked
+                assert!(txn.transaction::<_, _, DbErr>(|txn| {
+                        Box::pin(async move {
+                            let _ = bakery::ActiveModel {..}.save(txn).await?;
+                            assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+
+                            Err(DbErr::Query(RuntimeErr::Internal(
+                                "Force Rollback!".to_owned(),
+                            )))
+                        })
+                    })
+                    .await
+                    .is_err()
+                );
+
+                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+
+                // Try nested-nested transaction committed
+                txn.transaction::<_, _, DbErr>(|txn| {
+                    Box::pin(async move {
+                        let _ = bakery::ActiveModel {..}.save(txn).await?;
+                        assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+
+                        Ok(())
+                    })
+                })
+                .await;
+
+                assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+
+                Ok(())
+            })
+        })
+        .await;
+
+        Ok(())
+    })
+})
+.await;
+
+assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+```
+
 ## Isolation Level and Access Mode
 
 Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/*/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/*/sea_orm/enum.AccessMode.html).
