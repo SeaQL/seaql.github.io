@@ -2,7 +2,7 @@
 
 A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs.
 
-## With a `Closure`
+## With a Closure
 
 Perform a [transaction with a closure](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
 
