@@ -14,7 +14,7 @@ The internships normally take place during summer and winter semester breaks. Du
 
 The striking aspect of our mode of operation is it covers the entire lifecycle of software development, from Design ➡️ Implementation ➡️ Testing ➡️ Delivery. You will be amazed of how much you can achieve in such a short period of time!
 
-To date [StarfishQL](https://www.sea-ql.org/StarfishQL/) and [Seaography](https://www.sea-ql.org/Seaography/) are great projects our team has created in the past year. We pride ourselves on careful planning, consistent execution, and pragmatic approach in software engineering. I spend a huge amount of time on idea evaluation: if the scope of the project is too small, it will be uninteresting, but if it is too large, it will fail to be delivered.
+To date [StarfishQL ✴️](https://www.sea-ql.org/StarfishQL/) and [Seaography 🧭](https://www.sea-ql.org/Seaography/) are great projects our team has created in the past year. We pride ourselves on careful planning, consistent execution, and pragmatic approach in software engineering. I spend a huge amount of time on idea evaluation: if the scope of the project is too small, it will be uninteresting, but if it is too large, it will fail to be delivered.
 
 Fellow undergraduates, here are a few good reasons why you should participate in internships at an open-source organization like SeaQL:
 
