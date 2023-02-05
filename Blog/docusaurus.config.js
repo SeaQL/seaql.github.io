@@ -16,7 +16,7 @@ module.exports = {
     },
     image: 'img/SeaQL logo.png',
     metadata: [
-      {name: 'keywords', content: 'rust, orm, SeaORM, SeaQuery, SeaSchema, StarfishQL, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, actix, async-std'},
+      {name: 'keywords', content: 'rust, orm, SeaORM, SeaQuery, SeaSchema, Seaography, StarfishQL, database, sql, mysql, sqlite, postgresql, rocket, tokio, sqlx, actix, async-std'},
     ],
     navbar: {
       title: 'SeaQL',
@@ -81,10 +81,6 @@ module.exports = {
             {
               label: 'SeaQuery',
               to: 'https://github.com/SeaQL/sea-query',
-            },
-            {
-              label: 'SeaSchema',
-              to: 'https://github.com/SeaQL/sea-schema',
             },
             {
               label: 'StarfishQL',
