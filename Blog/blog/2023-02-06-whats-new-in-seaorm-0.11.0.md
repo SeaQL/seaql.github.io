@@ -110,9 +110,9 @@ pub enum Relation {}
 impl ActiveModelBehavior for ActiveModel {}
 ```
 
-## Change to `ActiveModelBehavior`
+## Changes to `ActiveModelBehavior`
 
-[[#1328](https://github.com/SeaQL/sea-orm/pull/1328), [#1145](https://github.com/SeaQL/sea-orm/pull/1145)] The methods of `ActiveModelBehavior` now has `Connection` as an additional parameter. It enables you to perform database operations, for example, logging the changes made to the existing model or validating the data before inserting it.
+[[#1328](https://github.com/SeaQL/sea-orm/pull/1328), [#1145](https://github.com/SeaQL/sea-orm/pull/1145)] The methods of `ActiveModelBehavior` now have `Connection` as an additional parameter. It enables you to perform database operations, for example, logging the changes made to the existing model or validating the data before inserting it.
 
 ```rust
 #[async_trait]
