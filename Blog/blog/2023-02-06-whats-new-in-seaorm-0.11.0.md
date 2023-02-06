@@ -23,7 +23,7 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-The SQL query generated is:
+The generated SQL is:
 
 ```sql
 SELECT
@@ -37,7 +37,7 @@ LEFT JOIN "fruit" ON "cake"."id" = "fruit"."cake_id"
 ORDER BY "cake"."id" ASC
 ```
 
-This is great, but if the N is a large number, the 1 side's (Cake) data will be duplicated a lot. This results in more data being transferred over the wire. Using the Loader would ensure each model is transferred only once.
+The 1 side's (Cake) data will be duplicated. If N is a large number, this would results in more data being transferred over the wire. Using the Loader would ensure each model is transferred only once.
 
 The following loads the same data as above, but with two queries:
 
@@ -52,6 +52,7 @@ for (cake, fruits) in cakes.into_iter().zip(fruits.into_iter()) { .. }
 SELECT "cake"."id", "cake"."name" FROM "cake"
 SELECT "fruit"."id", "fruit"."name", "fruit"."cake_id" FROM "fruit" WHERE "fruit"."cake_id" IN (..)
 ```
+
 You can even apply filters on the related entity:
 
 ```rust
@@ -65,6 +66,8 @@ let fruits_in_stock: Vec<Vec<fruit::Model>> = cakes.load_many(
 SELECT "fruit"."id", "fruit"."name", "fruit"."cake_id" FROM "fruit"
 WHERE "fruit"."stock" > 0 AND "fruit"."cake_id" IN (..)
 ```
+
+To learn more, read the [relation docs](https://www.sea-ql.org/SeaORM/docs/relation/data-loader/).
 
 ## Transaction Isolation Level and Access Mode
 
@@ -84,6 +87,8 @@ let transaction = db
     .begin_with_config(IsolationLevel::ReadCommitted, AccessMode::ReadOnly)
     .await?;
 ```
+
+To learn more, read the [transaction docs](https://www.sea-ql.org/SeaORM/docs/advanced-query/transaction/).
 
 ## Cast Column Type on Select and Save
 
@@ -105,9 +110,9 @@ pub enum Relation {}
 impl ActiveModelBehavior for ActiveModel {}
 ```
 
-## Methods of `ActiveModelBehavior` come with Connection
+## Change to `ActiveModelBehavior`
 
-[[#1328](https://github.com/SeaQL/sea-orm/pull/1328), [#1145](https://github.com/SeaQL/sea-orm/pull/1145)] The event hooks defined in `ActiveModelBehavior` come with connection. Enabling you to perform database operations in it, for example, logging the changes made to the existing model and validating correctness of a piece of data before inserting it.
+[[#1328](https://github.com/SeaQL/sea-orm/pull/1328), [#1145](https://github.com/SeaQL/sea-orm/pull/1145)] The methods of `ActiveModelBehavior` now has `Connection` as an additional parameter. It enables you to perform database operations, for example, logging the changes made to the existing model or validating the data before inserting it.
 
 ```rust
 #[async_trait]
@@ -138,6 +143,8 @@ impl ActiveModelBehavior for ActiveModel {
     }
 }
 ```
+
+To learn more, read the [entity docs](https://www.sea-ql.org/SeaORM/docs/generate-entity/entity-structure/#active-model-behavior).
 
 ## Execute Unprepared SQL Statement
 
@@ -512,42 +519,6 @@ A big shout out to our sponsors 😇:
             <div class="avatar__intro">
                 <div class="avatar__name">
                     Manfred Lee
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/exzachlyvv">
-                <img src="https://avatars.githubusercontent.com/u/46034847?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Zachary Vander Velden
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/fabioluciano">
-                <img src="https://avatars.githubusercontent.com/u/499057?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Fábio Luciano
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/praveenperera">
-                <img src="https://avatars.githubusercontent.com/u/1775346?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Praveen Perera
                 </div>
             </div>
         </div>
