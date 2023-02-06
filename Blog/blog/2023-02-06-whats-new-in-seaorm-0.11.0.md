@@ -386,7 +386,7 @@ SeaORM plays well with the other crates in the async ecosystem. We maintain an a
 
 ## Sponsor
 
-Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! If you feel generous, a small donation will be greatly appreciated.
+Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! SeaQL.org is an independent open-source organization run by volunteers. If you enjoy using SeaORM, please star and share our repositories. If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the project.
 
 A big shout out to our sponsors 😇:
 
@@ -549,8 +549,8 @@ A big shout out to our sponsors 😇:
     </div>
 </div>
 
-## Community
+## What's Next?
 
-SeaQL is a community driven project. We welcome you to participate, contribute and together build for Rust's future.
+SeaQL is a community driven project. We welcome you to participate, contribute and build together for Rust's future.
 
 Here is the roadmap for SeaORM [`0.12.x`](https://github.com/SeaQL/sea-orm/milestone/12).
