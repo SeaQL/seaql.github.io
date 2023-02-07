@@ -1,5 +1,5 @@
 ---
-slug: 2023-02-06-whats-new-in-seaorm-0.11.0
+slug: 2023-02-08-whats-new-in-seaorm-0.11.0
 title: What's new in SeaORM 0.11.0
 author: SeaQL Team
 author_title: Chris Tsang
