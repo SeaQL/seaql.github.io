@@ -223,3 +223,49 @@ assert_eq!(
     r#"INSERT INTO "cake" ("id", "name") VALUES (2, 'Orange') ON CONFLICT ("name") DO UPDATE SET "name" = "excluded"."name""#,
 );
 ```
+
+Performing an upsert statement without inserting or updating any of the row will result in a `DbErr::RecordNotInserted` error.
+
+```rust
+// When `id` column have conflicting value, do nothing
+let on_conflict = OnConflict::column(Column::Id).do_nothing().to_owned();
+
+// Insert `1`, `2`, `3` into the table
+let res = Entity::insert_many([
+    ActiveModel { id: Set(1) },
+    ActiveModel { id: Set(2) },
+    ActiveModel { id: Set(3) },
+])
+.on_conflict(on_conflict.clone())
+.exec(db)
+.await;
+
+assert_eq!(res?.last_insert_id, 3);
+
+// Insert `4` into the table together with the previous 3 rows
+let res = Entity::insert_many([
+    ActiveModel { id: Set(1) },
+    ActiveModel { id: Set(2) },
+    ActiveModel { id: Set(3) },
+    ActiveModel { id: Set(4) },
+])
+.on_conflict(on_conflict.clone())
+.exec(db)
+.await;
+
+assert_eq!(res?.last_insert_id, 4);
+
+// Repeat last insert. Since all 4 rows already exist, this essentially did nothing.
+// A `DbErr::RecordNotInserted` error will be thrown.
+let res = Entity::insert_many([
+    ActiveModel { id: Set(1) },
+    ActiveModel { id: Set(2) },
+    ActiveModel { id: Set(3) },
+    ActiveModel { id: Set(4) },
+])
+.on_conflict(on_conflict)
+.exec(db)
+.await;
+
+assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
+```
