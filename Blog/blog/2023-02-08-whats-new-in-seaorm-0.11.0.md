@@ -252,6 +252,8 @@ By enabling `sea-orm-internal` feature you opt-in unstable internal APIs includi
 
 ## Breaking Changes
 
+* [[#1366](https://github.com/SeaQL/sea-orm/pull/1366)] `sea-query` has been upgraded to [`0.28.x`](https://github.com/SeaQL/sea-query/releases/tag/0.28.0) and comes with some improvements and breaking changes, please follow the release notes for more details
+
 * [[#1420](https://github.com/SeaQL/sea-orm/pull/1420)] sea-orm-cli: `generate entity` command enable `--universal-time` flag by default
 
 * [[#1425](https://github.com/SeaQL/sea-orm/pull/1425)] Added `RecordNotInserted` and `RecordNotUpdated` to `DbErr`
