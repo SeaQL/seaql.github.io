@@ -40,3 +40,11 @@ npm run build
 [[ -d ../docs/Seaography ]] && rm -r ../docs/Seaography
 mv build ../docs/Seaography
 cd ..
+
+# Build SeaStreamer docs
+cd SeaStreamer
+npm i
+npm run build
+[[ -d ../docs/SeaStreamer ]] && rm -r ../docs/SeaStreamer
+mv build ../docs/SeaStreamer
+cd ..
