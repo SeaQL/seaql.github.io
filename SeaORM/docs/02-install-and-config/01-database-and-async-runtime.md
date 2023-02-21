@@ -1,6 +1,8 @@
 # Database & Async Runtime
 
-First, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
+First of all, star our [GitHub repo](https://github.com/SeaQL/sea-orm) if you have not already! Your support is vital to the continued maintenance of SeaORM.
+
+Then, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
 
 ```toml title="Cargo.toml"
 sea-orm = { version = "^0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
