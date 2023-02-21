@@ -1,6 +1,6 @@
 # Database & Async Runtime
 
-First of all, star our [GitHub repo](https://github.com/SeaQL/sea-orm) if you have not already! Your support is vital to the continued maintenance of SeaORM.
+First of all, please star our [GitHub repo](https://github.com/SeaQL/sea-orm)! Your support is vital to the continued maintenance of SeaORM.
 
 Then, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
 
