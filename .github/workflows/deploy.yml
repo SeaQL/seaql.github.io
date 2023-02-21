@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 16
 
-      - name: Build SeaORM Docs
+      - name: Build Docs
         run: sh build.sh
 
       - name: Deploy GitHub Pages
