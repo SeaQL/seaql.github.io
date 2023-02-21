@@ -15,6 +15,7 @@ function HomepageHeader() {
         <img className={styles.homepageLogo} width="90%" src="/SeaStreamer/img/SeaStreamer logo.png" />
         <img className={styles.homepageBanner} width="90%" src="/SeaStreamer/img/SeaStreamer banner.png" />
         <h2 className="hero__subtitle">{siteConfig.tagline}</h2>
+        <br/>
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
