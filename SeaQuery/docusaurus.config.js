@@ -16,6 +16,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'SeaQL',
   projectName: 'sea-query',
+  trailingSlash: true,
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,
@@ -118,7 +119,6 @@ module.exports = {
     //   indexName: 'seaorm',
     //   contextualSearch: true,
     // },
-    hideableSidebar: true,
   },
   presets: [
     [
@@ -145,7 +145,6 @@ module.exports = {
         sitemap: {
           changefreq: 'daily',
           priority: 0.8,
-          trailingSlash: true,
         },
       },
     ],

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import useThemeContext from "@theme/hooks/useThemeContext";
+import { useColorMode } from '@docusaurus/theme-common';
 
 import Prism from "prism-react-renderer/prism";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -152,10 +152,10 @@ export default function HomepageCompare() {
     setMounted(true);
   }, []);
 
-  const { isDarkTheme } = useThemeContext();
+  const { colorMode } = useColorMode();
   const lightModeTheme = prism.theme;
   const darkModeTheme = prism.darkTheme || lightModeTheme;
-  const prismTheme = isDarkTheme ? darkModeTheme : lightModeTheme;
+  const prismTheme = colorMode === 'dark' ? darkModeTheme : lightModeTheme;
 
   return (
     <section className={clsx('home-section', 'home-section-alt', styles.features)}>
@@ -183,7 +183,7 @@ export default function HomepageCompare() {
                       {({ className, tokens, getLineProps, getTokenProps }) => (
                         <pre
                           className={`${className}`}
-                          style={{ backgroundColor: isDarkTheme ? '#111' : '#fff' }}
+                          style={{ backgroundColor: '#292d3e' }}
                         >
                           {tokens.map((line, i) => (
                             <div {...getLineProps({ line, key: i })}>
