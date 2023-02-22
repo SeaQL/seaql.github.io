@@ -23,6 +23,8 @@ jobs:
         with:
           node-version: 16
 
+      - run: sh preview.sh ${{ github.event.number }}
+
       - run: sh build.sh
 
       - uses: rossjrw/pr-preview-action@v1
