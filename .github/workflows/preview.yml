@@ -26,6 +26,6 @@ jobs:
         with:
           preview-branch: gh-pages
           source-dir: docs
-          umbrella-dir: docs/docs/pr-preview
+          umbrella-dir: preview
           custom-url: www.sea-ql.org
           action: auto
