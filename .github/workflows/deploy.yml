@@ -29,7 +29,7 @@ jobs:
         with:
           preview-branch: gh-pages
           source-dir: docs
-          umbrella-dir: pr-preview
+          umbrella-dir: docs/pr-preview
           action: auto
 
       # - run: cp -rf ./build/* ./docs/
@@ -40,4 +40,4 @@ jobs:
       #     folder: .
       #     single-commit: true
       #     clean: true
-      #     clean-exclude: pr-preview
+      #     clean-exclude: docs/pr-preview
