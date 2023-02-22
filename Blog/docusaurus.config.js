@@ -28,7 +28,8 @@ module.exports = {
       },
       items: [
         {
-          to: '/blog',
+          to: 'https://www.sea-ql.org/blog/',
+          target: '_self',
           label: 'Blog',
           position: 'left'
         },
