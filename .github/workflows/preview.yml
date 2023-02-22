@@ -1,6 +1,7 @@
-name: Deploy
+name: Preview
 
 on:
+  pull_request:
   push:
     paths-ignore:
       - '.github/ISSUE_TEMPLATE/**'
@@ -13,7 +14,7 @@ concurrency:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Preview
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,11 +23,13 @@ jobs:
         with:
           node-version: 16
 
+      - run: sh preview.sh ${{ github.event.number }}
+
       - run: sh build.sh
 
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - uses: rossjrw/pr-preview-action@v1
         with:
-          branch: gh-pages
-          folder: .
-          clean: true
-          clean-exclude: docs/pr-preview
+          preview-branch: gh-pages
+          source-dir: docs
+          umbrella-dir: docs/pr-preview
+          action: auto
