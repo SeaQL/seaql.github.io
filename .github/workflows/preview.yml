@@ -2,11 +2,6 @@ name: Preview
 
 on:
   pull_request:
-  push:
-    paths-ignore:
-      - '.github/ISSUE_TEMPLATE/**'
-    branches:
-      - master
 
 concurrency:
   group: seaql.github.io
@@ -31,5 +26,6 @@ jobs:
         with:
           preview-branch: gh-pages
           source-dir: docs
-          umbrella-dir: docs/pr-preview
+          umbrella-dir: preview
+          custom-url: www.sea-ql.org
           action: auto

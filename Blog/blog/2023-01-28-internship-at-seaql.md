@@ -31,7 +31,7 @@ Here are several things you are going to learn:
 4.	Documentation. Our software aims to provide good documentation that is comprehensive, easy to follow, and fun to read.
 5.	Performance tuning. Depending on the project, we might do some benchmarking and optimization. But in general we put you off from writing code that creates unnecessary overhead.
 
-We were a mentor organization in [GSoC 2022](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql) and may be in 2023 (update: we are rejected by Google for GSoC 2023). We also offer internships outside of GSoC. So, what are the requirements when you become a contributor?
+We were a mentor organization in [GSoC 2022](https://summerofcode.withgoogle.com/programs/2022/organizations/seaql) and may be in 2023 (update: we were not accepted into GSoC 2023). We also offer internships outside of GSoC. So, what are the requirements when you become a contributor?
 
 1.	Be passionate. You must show your passion in open-source and software engineering, so a good GitHub profile with some participation is needed.
 2.	Be dedicated. This is a full-time job. While being fully remote and flexible on hours, you must have no other commitment or duties during the stipulated internship period.
