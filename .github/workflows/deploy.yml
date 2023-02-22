@@ -8,27 +8,25 @@ on:
       - master
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref || github.run_id }}
-  cancel-in-progress: true
+  group: seaql.github.io
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      - name: Build Docs
-        run: sh build.sh
+      - run: sh build.sh
 
-      - name: Deploy GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: .
-          single-commit: true
+          folder: docs
           clean: true
+          clean-exclude: preview

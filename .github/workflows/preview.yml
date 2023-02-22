@@ -1,0 +1,31 @@
+name: Preview
+
+on:
+  pull_request:
+
+concurrency:
+  group: seaql.github.io
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: sh preview.sh ${{ github.event.number }}
+
+      - run: sh build.sh
+
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          preview-branch: gh-pages
+          source-dir: docs
+          umbrella-dir: preview
+          custom-url: www.sea-ql.org
+          action: auto
