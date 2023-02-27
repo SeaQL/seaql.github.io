@@ -21,19 +21,15 @@ async fn main() -> Result<()> {
 
     let Args { stream } = Args::from_args();
 
-    let streamer = SeaStreamer::connect(
-        std::env::var("STREAMER_URL")
-            .unwrap_or_else(|_| "kafka://localhost:9092".to_owned())
-            .parse()?,
-        Default::default(),
-    )
-    .await?;
+    let streamer = SeaStreamer::connect(stream.streamer(), Default::default()).await?;
 
     let mut options = SeaConsumerOptions::new(ConsumerMode::RealTime);
     options.set_kafka_consumer_options(|options| {
         options.set_auto_offset_reset(AutoOffsetReset::Earliest);
     });
-    let consumer: SeaConsumer = streamer.create_consumer(&[stream], options).await?;
+    let consumer: SeaConsumer = streamer
+        .create_consumer(stream.stream_keys(), options)
+        .await?;
 
     loop {
         let mess: SeaMessage = consumer.next().await?;
@@ -50,15 +46,11 @@ async fn main() -> Result<()> {
 
     let Args { stream } = Args::from_args();
 
-    let streamer = SeaStreamer::connect(
-        std::env::var("STREAMER_URL")
-            .unwrap_or_else(|_| "kafka://localhost:9092".to_owned())
-            .parse()?,
-        Default::default(),
-    )
-    .await?;
+    let streamer = SeaStreamer::connect(stream.streamer(), Default::default()).await?;
 
-    let producer: SeaProducer = streamer.create_producer(stream, Default::default()).await?;
+    let producer: SeaProducer = streamer
+        .create_producer(stream.stream_key()?, Default::default())
+        .await?;
 
     for tick in 0..10 {
         let message = format!(r#""tick {tick}""#);
@@ -70,6 +62,34 @@ async fn main() -> Result<()> {
     producer.flush(Duration::from_secs(10)).await?;
 
     Ok(())
+}`
+  },
+  {
+    title: 'Processor',
+    full_example: 'https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/processor.rs',
+    code: `#[tokio::main]
+async fn main() -> Result<()> {
+    env_logger::init();
+
+    let Args { input, output } = Args::from_args();
+
+    let streamer = SeaStreamer::connect(input.streamer(), Default::default()).await?;
+    let options = SeaConsumerOptions::new(ConsumerMode::RealTime);
+    let consumer: SeaConsumer = streamer
+        .create_consumer(input.stream_keys(), options)
+        .await?;
+
+    let streamer = SeaStreamer::connect(output.streamer(), Default::default()).await?;
+    let producer: SeaProducer = streamer
+        .create_producer(output.stream_key()?, Default::default())
+        .await?;
+
+    loop {
+        let message: SeaMessage = consumer.next().await?;
+        let message = process(message).await?;
+        println!("{message}");
+        producer.send(message)?; // send is non-blocking
+    }
 }`
   },
 ];

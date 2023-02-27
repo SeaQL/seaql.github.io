@@ -93,7 +93,7 @@ module.exports = {
             },
             {
               label: 'About Us',
-              to: '/about-us',
+              to: 'https://www.sea-ql.org/about-us',
             }
           ],
         },
