@@ -4,7 +4,7 @@
 
     1.1. [Intro to Stream Processing](01-introduction/01-intro-to-streams.md)
 
-    1.2. [Async Programming]
+    1.2. [Async Programming](01-introduction/02-async-programming.md)
 
     1.3. [SeaStreamer Concepts]
 
