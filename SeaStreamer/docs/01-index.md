@@ -6,7 +6,7 @@
 
     1.2. [Async Programming](01-introduction/02-async-programming.md)
 
-    1.3. [SeaStreamer Concepts]
+    1.3. [SeaStreamer Concepts](01-introduction/03-sea-streamer.md)
 
     1.4. [Examples]
 

@@ -36,6 +36,6 @@ Again, without GC, Rust programs are less susceptible to "slow memory bloat over
 
 ### Ecosystem
 
-Finally, Rust also has a great ecosystem of async programming libraries: async mutex, atomic primitives, lock-free queues and other data structures to make async programming ergonomic and fun.
+Finally, Rust also has a great ecosystem of async programming libraries: networking libraries built on async-io, lock-free queues and other data structures to make async programming ergonomic and fun.
 
 Without further ado, let's get started!
