@@ -12,9 +12,9 @@
 
 2. Installation & Configuration
 
-    2.1. [Choosing an Async Runtime]
+    2.1. [Configuring Features](02-configuration/01-configuration.md)
 
-    2.2. [Navigating the Crates]
+    2.2. [SeaStreamer Architecture](02-configuration/02-architecture.md)
 
 3. SeaStreamer Semantics
 
