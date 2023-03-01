@@ -37,7 +37,7 @@ which in turn depends on [librdkafka-sys](https://docs.rs/librdkafka-sys), which
 This is the `stdio` backend implementation for SeaStreamer. It is designed to be connected together with unix pipes,
 enabling great flexibility when developing stream processors or processing data locally.
 
-You can connect processes together with pipes: `processor_a | processor_b`.
+You can connect processors together with pipes: `processor_a | processor_b`.
 
 ### `sea-streamer-runtime`: Async runtime abstraction
 

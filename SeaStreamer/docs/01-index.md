@@ -26,10 +26,12 @@
 
 4. Connecting Stream Processors
 
-    4.1. Inter-process
+    4.1. [Inter Process](04-processors/01-inter-process.md)
 
-    4.2. Intra-process
+    4.2. [Intra Process](04-processors/02-intra-process.md)
 
 5. What's next?
 
-    5.1. The Vision
+    5.1. [The Roadmap](05-next/01-roadmap.md)
+
+    5.2. [The Vision](05-next/02-vision.md)

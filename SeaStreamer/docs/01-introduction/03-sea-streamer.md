@@ -10,15 +10,17 @@ The streaming server is assumed to be a cluster: it can scale horizontally acros
 
 ## Stream
 
-A stream consists of a series of messages sharing the same key (known as `topic` in Kafka). Each message has a timestamp, sequence number (known as `offset` in Kafka) and shard id (known as `partition number` in Kafka) and payload. A message is uniquely identified by the (stream key, shard id, sequence number) tuple.
+A stream consists of a series of messages sharing the same key (known as `topic` in Kafka). Each message has a timestamp, sequence number (known as `offset` in Kafka), shard id (known as `partition number` in Kafka), and payload. A message is uniquely identified by the (stream key, shard id, sequence number) tuple.
 
 ### Stream URL
 
-In SeaStreamer streams are resources, and can be accessed through a URL composed of (protocol, host, stream). An example stream URL is `kafka://streamer.sea-ql.org:12345/my_stream`.
+In SeaStreamer streams are resources, and can be accessed through a URL comprises (protocol, host, stream). An example stream URL is `kafka://streamer.sea-ql.org:12345/my_stream`.
 
 ## Consumer
 
 A stream consumer subscribes to one or more streams and receive messages from one or more nodes in the cluster.
+
+A consumer can rewind a stream to any point (addressed by timestamp or sequence number) and continue streaming.
 
 ### Consumer Mode
 
@@ -26,8 +28,6 @@ There are two consuming modes:
 
 1. Real-time: we only care about the latest messages and would be okay to miss old data
 2. Resumable: when the consumer resubscribes, it will resume from the last consumed message
-
-A consumer can rewind a stream to any point (addressed by timestamp or sequence number) and continue streaming.
 
 ## Producer
 

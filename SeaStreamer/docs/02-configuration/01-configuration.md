@@ -2,7 +2,7 @@
 
 ## Cargo
 
-First of all, please star our [GitHub repo](https://github.com/SeaQL/sea-streamer)! Your support is vital to the continued maintenance of SeaStreamer.
+First of all, please star our [GitHub repo](https://github.com/SeaQL/sea-streamer)! Your support is vital to the continued development of SeaStreamer.
 
 Then, add `sea-streamer` to the `[dependencies]` section of your `Cargo.toml`.
 
@@ -19,7 +19,7 @@ SeaStreamer currently supports two backends, Kafka and Stdio.
 Each has their own support crate, and they all implement the same set of abstract traits. 
 It's easy to distinguish the symbols between the crates, because they all start with `Kafka*` or `Stdio*`.
 
-However, those abstractions are static: you have to designate the `KafkaStreamer` type compile-time.
+However, those abstractions are static: you have to designate the concrete `Streamer` type compile-time.
 To achieve *runtime-abstraction*, you can enable the `socket` flag and use the `Sea*` types.
 
 Here is a summary of the type names:
