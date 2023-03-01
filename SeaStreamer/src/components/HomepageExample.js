@@ -92,6 +92,23 @@ async fn main() -> Result<()> {
     }
 }`
   },
+  {
+    title: 'Running With Kafka',
+    code: `# Produce some input
+cargo run --bin producer -- --stream kafka://localhost:9092/hello1 &
+# Start the processor, producing some output
+cargo run --bin processor -- --input kafka://localhost:9092/hello1 --output kafka://localhost:9092/hello2 &
+# Replay the output
+cargo run --bin consumer -- --stream kafka://localhost:9092/hello2
+# Remember to stop the processes
+kill %1 %2`
+  },
+  {
+    title: 'Running With Stdio',
+    code: `# Pipe the producer to the processor
+cargo run --bin producer -- --stream stdio:///hello1 | \
+cargo run --bin processor -- --input stdio:///hello1 --output stdio:///hello2`
+  }
 ];
 
 export default function HomepageCompare() {
@@ -134,15 +151,17 @@ export default function HomepageCompare() {
               >
                 {codeBlocks.map(({ title, code, full_example }, i) => (
                   <TabItem key={i} value={title}>
-                    <p>
-                      Here is a basic stream {title.toLowerCase()}, <a href={full_example}>full example</a>:
-                    </p>
+                    {full_example &&
+                      <p>
+                        Here is a basic stream {title.toLowerCase()}, <a href={full_example}>full example</a>:
+                      </p>
+                    }
                     <Highlight
                       {...defaultProps}
                       code={code}
                       key={mounted}
                       theme={prismTheme}
-                      language="rust"
+                      language={ full_example ? 'rust' : 'shell' }
                     >
                       {({ className, tokens, getLineProps, getTokenProps }) => (
                         <pre
