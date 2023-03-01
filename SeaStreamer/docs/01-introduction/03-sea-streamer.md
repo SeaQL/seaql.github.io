@@ -25,7 +25,7 @@ A stream consumer subscribes to one or more streams and receive messages from on
 There are two consuming modes:
 
 1. Real-time: we only care about the latest messages and would be okay to miss old data
-2. Resumable: when the consumer resubscribe, it will resume the stream from the last consumed message
+2. Resumable: when the consumer resubscribes, it will resume from the last consumed message
 
 A consumer can rewind a stream to any point (addressed by timestamp or sequence number) and continue streaming.
 

@@ -10,7 +10,7 @@
 
     1.4. [Examples](01-introduction/04-examples.md)
 
-2. Installation & Configuration
+2. Configuration
 
     2.1. [Configuring Features](02-configuration/01-configuration.md)
 
@@ -18,11 +18,11 @@
 
 3. SeaStreamer Semantics
 
-    3.1. Streamer
+    3.1. [Streamer](03-streamer/01-streamer.md)
 
-    3.2. Producer
+    3.2. [Producer](03-streamer/02-producer.md)
 
-    3.3. Consumer
+    3.3. [Consumer](03-streamer/03-consumer.md)
 
 4. Connecting Stream Processors
 
