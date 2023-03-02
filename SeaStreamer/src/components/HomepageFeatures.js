@@ -36,7 +36,7 @@ const FeatureList = [
     icon: <MdCloud size={26} />,
     description: (
       <>
-        Let's build real-time (multi-threaded, no GC), self-contained (aka easy to deploy), low-resource-usage, long-running (no memory leak) stream processors in Rust!
+        Let's build real-time (multi-threaded, no GC), self-contained (aka easy to deploy), low-resource-usage, long-running stream processors in Rust!
       </>
     ),
   },
