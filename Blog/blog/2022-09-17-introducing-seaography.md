@@ -1,6 +1,6 @@
 ---
 slug: 2022-09-17-introducing-seaography
-title: Introducing Seaography
+title: Introducing Seaography 🧭
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
