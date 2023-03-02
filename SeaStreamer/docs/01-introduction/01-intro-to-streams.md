@@ -4,11 +4,11 @@
 
 ## Vs event-based programming
 
-Similar to event-based programming, stream processing is a programming paradigm that aims to handle events in near real-time or as soon as events happen. One way to classify between the two might be frequency. Streams are continuous sequence of events with a high throughput - to get rid of the connection setup/teardown overhead, you keep the connection open.
+Similar to event-based programming, stream processing is a programming paradigm that aims to handle events in near real-time or as soon as events happen. One way to classify between the two might be frequency. Streams are continuous sequence of events with a high throughput: instead of many short-lived connections, you simply keep one connection open.
 
 ## Vs analytic processing
 
-Say we want to compute the average of a certain attribute over a specific period of time. OLAP databases allow us to efficiently compute that over a very large table with millions of rows. To achieve the same goal in stream processing, we can replay all the messages over the specific time window and feed them through a stream processor, which probably deemed to be slower. But once the processor is steadily running, the output can be updated in real-time with minimal latency.
+Say we want to compute the average of a certain attribute over a specific period of time. OLAP databases allow us to efficiently compute that over a very large table with millions of rows. To achieve the same in stream processing, we can replay the stream and feed it through a stream processor, which probably deemed to be slower. Once the processor is steadily running, the output can be updated in real-time with minimal latency.
 
 ## Why Rust?
 
@@ -36,6 +36,6 @@ Again, without GC, Rust programs are less susceptible to "slow memory bloat over
 
 ### Ecosystem
 
-Finally, Rust has a great ecosystem of async programming libraries: networking libraries built on async IO, lock-free queues and other data structures to make async programming ergonomic and fun.
+Finally, Rust has a great ecosystem of async programming libraries: networking libraries built on async IO, lock-free channels and other data structures to make async programming ergonomic and fun.
 
 Without further ado, let's get started!

@@ -18,6 +18,13 @@ This is the 'vanilla' stream consumer. It does not auto-commit, and thus only co
 
 When the process restarts, it will resume the stream from the previous committed sequence.
 
+:::info
+#### Kafka semantics
+
+It will use a group id unique to this host: on a physical machine, it will use the mac address.
+Inside a docker container, it will use the container id.
+:::
+
 #### `LoadBalanced`
 
 You should assign a consumer group manually. The load-balancing mechanism is implementation-specific.
