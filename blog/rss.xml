@@ -100,7 +100,7 @@ If you overridden the default <code>ActiveModelBehavior</code> implementation:</
             <category>news</category>
         </item>
         <item>
-            <title><![CDATA[Introducing Seaography]]></title>
+            <title><![CDATA[Introducing Seaography 🧭]]></title>
             <link>https://www.sea-ql.org/blog/2022-09-17-introducing-seaography</link>
             <guid>https://www.sea-ql.org/blog/2022-09-17-introducing-seaography</guid>
             <pubDate>Sat, 17 Sep 2022 00:00:00 GMT</pubDate>
@@ -244,7 +244,7 @@ If you overridden the default <code>ActiveModelBehavior</code> implementation:</
             <category>news</category>
         </item>
         <item>
-            <title><![CDATA[Introducing SeaORM]]></title>
+            <title><![CDATA[Introducing SeaORM 🐚]]></title>
             <link>https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm</link>
             <guid>https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm</guid>
             <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
