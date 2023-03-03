@@ -1,6 +1,6 @@
 ---
 slug: 2021-09-20-introducing-sea-orm
-title: Introducing SeaORM
+title: Introducing SeaORM 🐚
 author: Chris Tsang
 author_title: SeaQL Team
 author_url: https://github.com/tyt2y3
