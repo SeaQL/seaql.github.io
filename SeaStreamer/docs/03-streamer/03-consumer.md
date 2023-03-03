@@ -2,7 +2,7 @@
 
 The [`Consumer`](https://docs.rs/sea-streamer/*/sea_streamer/trait.Consumer.html) trait defines the common interface of stream consumers.
 
-[`KafkaConsumer`](https://docs.rs/sea-streamer/*/sea_streamer_kafka/struct.KafkaConsumer.html) has more functions for committing offsets. [`StdioConsumer`](https://docs.rs/sea-streamer/*/sea_streamer_stdio/struct.StdioConsumer.html) currently has no specific functions.
+[`KafkaConsumer`](https://docs.rs/sea-streamer-kafka/*/sea_streamer_kafka/struct.KafkaConsumer.html) has more functions for committing offsets. [`StdioConsumer`](https://docs.rs/sea-streamer-stdio/*/sea_streamer_stdio/struct.StdioConsumer.html) currently has no specific functions.
 
 ## `ConsumerOptions`
 

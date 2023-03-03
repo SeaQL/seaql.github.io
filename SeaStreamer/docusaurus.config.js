@@ -58,7 +58,7 @@ module.exports = {
             },
             {
               label: 'API Reference',
-              to: 'https://docs.rs/sea-streamer/latest/sea_streamer/',
+              to: 'https://docs.rs/sea-streamer/',
             },
           ],
         },

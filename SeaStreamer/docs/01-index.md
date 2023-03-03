@@ -4,11 +4,11 @@
 
     1.1. [Intro to Stream Processing](01-introduction/01-intro-to-streams.md)
 
-    1.2. [Async Programming](01-introduction/02-async-programming.md)
+    1.2. [Async Programming in Rust](01-introduction/02-async-programming.md)
 
     1.3. [SeaStreamer Concepts](01-introduction/03-sea-streamer.md)
 
-    1.4. [Examples](01-introduction/04-examples.md)
+    1.4. [Example Processors](01-introduction/04-examples.md)
 
 2. Configuration
 

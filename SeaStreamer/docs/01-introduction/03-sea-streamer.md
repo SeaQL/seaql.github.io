@@ -14,7 +14,7 @@ A stream consists of a series of messages sharing the same key (known as `topic`
 
 ### Stream URL
 
-In SeaStreamer streams are resources, and can be accessed through a URL comprises (protocol, host, stream). An example stream URL is `kafka://streamer.sea-ql.org:12345/my_stream`.
+In SeaStreamer streams are resources, and can be accessed through a URL comprising (protocol, host, stream). An example stream URL is `kafka://streamer.sea-ql.org:12345/my_stream`.
 
 ## Consumer
 

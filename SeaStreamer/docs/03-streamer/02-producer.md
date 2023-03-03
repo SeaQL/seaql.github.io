@@ -1,8 +1,8 @@
 # Producer
 
-The [`Producer`](https://docs.rs/sea-streamer/*/sea_streamer/trait.Producer.html) trait defines the common interface of stream producers. `Producer` implements `Clone`, so you can generally just it like a `mpsc::Sender`.
+The [`Producer`](https://docs.rs/sea-streamer/*/sea_streamer/trait.Producer.html) trait defines the common interface of stream producers. `Producer` implements `Clone`, so you can use it like an `mpsc::Sender`.
 
-[`KafkaProducer`](https://docs.rs/sea-streamer/*/sea_streamer_kafka/struct.KafkaProducer.html) and [`StdioProducer`](https://docs.rs/sea-streamer/*/sea_streamer_stdio/struct.StdioProducer.html) have more functions for transaction and flushing.
+[`KafkaProducer`](https://docs.rs/sea-streamer-kafka/*/sea_streamer_kafka/struct.KafkaProducer.html) and [`StdioProducer`](https://docs.rs/sea-streamer-stdio/latest/sea_streamer_stdio/struct.StdioProducer.html) have more functions for transaction and flushing.
 
 ## `ProducerOptions`
 

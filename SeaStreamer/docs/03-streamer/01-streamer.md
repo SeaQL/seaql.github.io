@@ -14,7 +14,7 @@ Establish a connection to the streaming server. The `Streamer` implementation do
 
 ## `disconnect`
 
-Disconnect from the streaming server. The intention is to flush remaining messages and exit gracefully. You have to `await` this operation until it completes. Once you called this method, all producers and consumers created will be unusable.
+Disconnect from the streaming server. The intention is to flush remaining messages and exit gracefully. You have to `await` this operation until it completes. Once you called this method, all producers and consumers created will become unusable.
 
 ## `create_producer`
 
