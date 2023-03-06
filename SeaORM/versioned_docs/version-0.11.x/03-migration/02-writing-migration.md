@@ -74,6 +74,7 @@ enum Post {
     Title,
     #[iden = "text"] // Renaming the identifier
     Text,
+    Category,
 }
 
 assert_eq!(Post::Table.to_string(), "post");
@@ -85,7 +86,54 @@ assert_eq!(Post::Text.to_string(), "text");
 #### Schema Creation Methods
 - Create Table
     ```rust
-    manager.create_table(sea_query::Table::create()..)
+    use sea_orm::{EnumIter, Iterable};
+
+    #[derive(Iden)]
+    enum Post {
+        Table,
+        Id,
+        Title,
+        #[iden = "text"] // Renaming the identifier
+        Text,
+        Category,
+    }
+
+    #[derive(Iden, EnumIter)]
+    pub enum Category {
+        Table,
+        #[iden = "Feed"]
+        Feed,
+        #[iden = "Story"]
+        Story,
+    }
+
+    manager
+        .create_table(
+            Table::create()
+                .table(Post::Table)
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(Post::Id)
+                        .integer()
+                        .not_null()
+                        .auto_increment()
+                        .primary_key(),
+                )
+                .col(ColumnDef::new(Post::Title).string().not_null())
+                .col(ColumnDef::new(Post::Text).string().not_null())
+                .col(
+                    ColumnDef::new(Column::Category)
+                        .enumeration(Category, [Category::Feed, Category::Story]),
+                        // Or, write it like below.
+                        // Keep in mind that for it to work,
+                        // 1. you need to derive `EnumIter`,
+                        // 2. import `Iterable` into scope
+                        // 3. and make sure `Category::Table` is the first variant
+                        .enumeration(Category, Category::iter().skip(1)),
+                )
+                .to_owned(),
+        )
+        .await
     ```
 - Create Index
     ```rust
@@ -97,7 +145,31 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
-    manager.create_type(sea_query::Type::create()..)
+    use sea_orm::{EnumIter, Iterable};
+
+    #[derive(Iden, EnumIter)]
+    pub enum Category {
+        Table,
+        #[iden = "Feed"]
+        Feed,
+        #[iden = "Story"]
+        Story,
+    }
+
+    manager
+        .create_type(
+            Type::create()
+                .as_enum(Category::Table)
+                .values([Category::Feed, Category::Story])
+                // Or, write it like below.
+                // Keep in mind that for it to work,
+                // 1. you need to derive `EnumIter`,
+                // 2. import `Iterable` into scope
+                // 3. and make sure `Category::Table` is the first variant
+                .values(Category::iter().skip(1))
+                .to_owned(),
+        )
+        .await?;
     ```
 
 #### Schema Mutation Methods
