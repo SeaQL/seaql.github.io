@@ -9,6 +9,7 @@ The examples work for both `tokio` and `async-std` and uses the `sea-streamer-so
 + [`processor`](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/processor.rs): A basic stream processor
 + [`resumable`](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/resumable.rs): A resumable stream processor that continues from where it left off
 + [`buffered`](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/buffered.rs): An advanced stream processor with internal buffering and batch processing
++ [`blocking`](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/blocking.rs): An advanced stream processor for handling blocking / CPU-bound tasks
 
 ## Running the basic processor example
 
@@ -89,4 +90,28 @@ Output:
 [2023-02-27T10:43:59 | output | 7] [batch 1] { "tick": 7 } processed
 [2023-02-27T10:43:59 | output | 8] [batch 1] { "tick": 8 } processed
 ...
+```
+
+## Running the blocking processor example
+
+The clock runs 3x faster than the processor, but we have 4 threads, so we expect it to be able to catch up in real-time. Tasks are randomly assigned to threads, aka. a "fan out" pattern.
+
+This pattern is useful when you have to perform blocking IO or CPU-heavy computation.
+
+```bash
+alias clock='cargo run --package sea-streamer-stdio --features=executables --bin clock'
+clock -- --stream clock --interval 333ms | \
+cargo run --bin blocking -- --input stdio:///clock --output stdio:///output
+```
+
+Output:
+
+```log
+[2023-03-07T06:00:52 | output | 0] [thread 0] { "tick": 0 } processed
+[2023-03-07T06:00:53 | output | 1] [thread 1] { "tick": 1 } processed
+[2023-03-07T06:00:53 | output | 2] [thread 2] { "tick": 2 } processed
+[2023-03-07T06:00:53 | output | 3] [thread 3] { "tick": 3 } processed
+[2023-03-07T06:00:54 | output | 4] [thread 0] { "tick": 4 } processed
+[2023-03-07T06:00:54 | output | 5] [thread 1] { "tick": 5 } processed
+[2023-03-07T06:00:54 | output | 6] [thread 2] { "tick": 6 } processed
 ```
