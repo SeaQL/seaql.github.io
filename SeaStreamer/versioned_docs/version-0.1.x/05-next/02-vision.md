@@ -10,7 +10,7 @@ Since we've talked about shells a lot, it will be great if we have an equivalent
 
 ## Inter Process Communication
 
-Right now pipe is the only mechanism for connecting processors together, which is copy-heavy. For some high-throughput scenario, sharded memory could fair better.
+Right now pipe is the only mechanism for connecting processors together, which is copy-heavy. For some high-through scenario, sharded memory could fair better.
 
 ## Inter Host Communication
 

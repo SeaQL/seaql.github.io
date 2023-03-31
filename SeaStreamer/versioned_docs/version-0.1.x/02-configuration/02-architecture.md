@@ -5,7 +5,6 @@ The architecture of [`sea-streamer`](https://docs.rs/sea-streamer) is constructe
 + [`sea-streamer-types`](https://docs.rs/sea-streamer-types)
 + [`sea-streamer-socket`](https://docs.rs/sea-streamer-socket)
     + [`sea-streamer-kafka`](https://docs.rs/sea-streamer-kafka)
-    + [`sea-streamer-redis`](https://docs.rs/sea-streamer-redis)
     + [`sea-streamer-stdio`](https://docs.rs/sea-streamer-stdio)
 + [`sea-streamer-runtime`](https://docs.rs/sea-streamer-runtime)
 
@@ -21,30 +20,17 @@ stream processors for different streaming servers.
 While the `sea-streamer-types` crate provides a nice trait-based abstraction, this crates provides a concrete-type API,
 so that your program can stream from/to any SeaStreamer backend selected by the user *on runtime*.
 
-This allows you to do neat things, like generating data locally and then stream them to Redis / Kafka. Or in the other
-way, sink data from server to work on them locally. All _without recompiling_ the stream processor.
+This allows you to do neat things, like generating data locally and then stream them to Kafka. Or in the other
+way, sink data from Kafka to work on them locally. All _without recompiling_ the stream processor.
 
 ### `sea-streamer-kafka`: Kafka / Redpanda Backend
 
 This is the Kafka / Redpanda backend implementation for SeaStreamer.
 This crate provides a comprehensive type system that makes working with Kafka easier and safer.
 
-All API (many are sync) are properly wrapped as async. Methods are also marked `&mut` to eliminate possible race conditions.
-
 This crate depends on [`rdkafka`](https://docs.rs/rdkafka),
 which in turn depends on [librdkafka-sys](https://docs.rs/librdkafka-sys), which itself is a wrapper of
 [librdkafka](https://docs.confluent.io/platform/current/clients/librdkafka/html/index.html).
-
-### `sea-streamer-redis`: Redis Backend
-
-This is the Redis backend implementation for SeaStreamer. This crate provides a high-level async API on top of Redis that makes working with Redis Streams fool-proof:
-
-+ Implements the familiar SeaStreamer abstract interface
-+ A comprehensive type system that guides/restricts you with the API
-+ High-level API, so you don't call XADD, XREAD or XACK anymore
-+ Mutex-free implementation: concurrency achieved by message passing
-
-This crate is built on top of [`redis`](https://docs.rs/redis).
 
 ### `sea-streamer-stdio`: Standard I/O Backend
 

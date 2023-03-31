@@ -2,7 +2,7 @@
 
 Here is how you might organize a mid-to-large scale stream processing project. You have a number of crates implementing different processors, each depends on `sea-streamer` in a workspace. Now, you want to construct a downstream crate where you connect several processors together for testing.
 
-You can execute tests involving several processors by setting Stdio's [loopback](https://docs.rs/sea-streamer-stdio/*/sea_streamer_stdio/struct.StdioConnectOptions.html#method.set_loopback) option, where messages produced will be feed back to consumers in the same process.
+You can execute tests involving several processors by setting Stdio's [loopback](https://docs.rs/sea-streamer-stdio/0.1.0/sea_streamer_stdio/struct.StdioConnectOptions.html#method.set_loopback) option, where messages produced will be feed back to consumers in the same process.
 
 Here is an illustration of the behaviour, you can check out the [full example](https://github.com/SeaQL/sea-streamer/blob/main/sea-streamer-stdio/tests/loopback.rs). It's just `cargo test` without any prerequisite. If the tests fail, you will be able to diagnose the problem from the stdout log.
 

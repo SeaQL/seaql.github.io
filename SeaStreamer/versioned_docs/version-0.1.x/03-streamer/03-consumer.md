@@ -2,10 +2,7 @@
 
 The [`Consumer`](https://docs.rs/sea-streamer/*/sea_streamer/trait.Consumer.html) trait defines the common interface of stream consumers.
 
-Implemented by:
-+ [`KafkaConsumer`](https://docs.rs/sea-streamer-kafka/*/sea_streamer_kafka/struct.KafkaConsumer.html)
-+ [`RedisConsumer`](https://docs.rs/sea-streamer-redis/*/sea_streamer_redis/struct.RedisConsumer.html)
-+ [`StdioConsumer`](https://docs.rs/sea-streamer-stdio/*/sea_streamer_stdio/struct.StdioConsumer.html)
+[`KafkaConsumer`](https://docs.rs/sea-streamer-kafka/*/sea_streamer_kafka/struct.KafkaConsumer.html) has more functions for committing offsets. [`StdioConsumer`](https://docs.rs/sea-streamer-stdio/*/sea_streamer_stdio/struct.StdioConsumer.html) currently has no specific functions.
 
 ## `ConsumerOptions`
 
@@ -22,16 +19,10 @@ This is the 'vanilla' stream consumer. It does not auto-commit, and thus only co
 When the process restarts, it will resume the stream from the previous committed sequence.
 
 :::info
-#### Redis / Kafka semantics
+#### Kafka semantics
 
 It will use a group id unique to this host: on a physical machine, it will use the mac address.
 Inside a docker container, it will use the container id.
-:::
-
-:::info
-#### Redis semantics
-
-Redis requires consumers to self-assign consumer IDs. If unset, SeaStreamer uses a combination of `host id` + `process id` + `thread id` + `timestamp`.
 :::
 
 #### `LoadBalanced`
@@ -61,16 +52,6 @@ However if the stream has only 1 partition, even if there are many consumers, th
 :::
 
 :::info
-#### Redis semantics
-
-Multiple consumers in the same group share the same stream. This is load-balanced in a first-ask-first-served manner. This can be considered dynamic load-balancing: faster consumers will consume more messages.
-
-As a consequence, `ack` has to be done per message. It becomes two steps in SeaStreamer, ack and commit: `ack` is non-blocking, it will buffer acks internally and `commit` to Redis at a regular interval, or upon your request. There are multiple [auto ack / commit mechanisms](https://docs.rs/sea-streamer-redis/*/sea_streamer_redis/enum.AutoCommit.html) to choose from: `Immediate`, `Delayed`, `Rolling`, and `Disabled`.
-
-SeaStreamer also implements automatic failover, where leftover messages for other consumers can be 'claimed' after a set period of time, assuming they are dead. This can be configured via the [auto claim](https://docs.rs/sea-streamer-redis/*/sea_streamer_redis/struct.RedisConsumerOptions.html#method.set_auto_claim_interval) options.
-:::
-
-:::info
 #### Stdio semantics
 
 If multiple consumers share the same group, only one in the group will receive a message.
@@ -80,11 +61,10 @@ This is load-balanced in a round-robin fashion.
 ## `next`
 
 Poll and receive one message: it awaits until there are new messages.
-This method can be called from multiple threads.
 
 ## `stream`
 
-Returns an async stream which implements the [Stream Trait](https://docs.rs/futures-core/*/futures_core/stream/trait.Stream.html). You cannot create multiple streams from the same consumer, nor perform any operation while streaming.
+Returns an async stream. You cannot create multiple streams from the same consumer, nor perform any operation while streaming.
 
 It allows you to do neat things:
 
@@ -99,29 +79,32 @@ let items = consumer
 
 ## `assign`
 
-Assign this consumer to a particular shard. Can be called multiple times to assign
-to multiple shards. You cannot assign streams that has not been subscribed.
+Assign this consumer to a particular shard.
 
 It will only take effect on the next `Consumer::seek` or `Consumer::rewind`.
 
-## `unassign`
+:::info
+#### Kafka semantics
 
-Unassign a shard. Returns `ConsumerNotAssigned` if this consumer has not been assigned to this stream or shard. 
+Always succeed. This operation is additive. You can assign a consumer to multiple shards (aka partition). There is also a `KafkaConsumer::unassign` method.
+:::
+
+:::info
+#### Stdio semantics
+
+There is only shard ZERO anyway.
+:::
 
 ## `rewind`
 
 Rewind the stream to a particular sequence number.
 
+If the consumer is not already assigned, shard ZERO will be used.
+
 :::info
 #### Kafka semantics
 
-If the consumer is not already assigned, shard ZERO will be used. This async method is not cancel safe. You must await this future, and this Consumer will be unusable for any operations until it finishes.
-:::
-
-:::info
-#### Redis semantics
-
-In Redis a sequence number comprises a timestamp, so rewind is nearly the same as seek, but more precise: you can rewind to a particular point within a millisecond.
+Note: this rewind all streams across all assigned partitions.
 :::
 
 :::caution
@@ -134,17 +117,12 @@ This is not implemented by the Stdio backend.
 
 Seek all streams to the given point in time. It will start consuming from the earliest message with a timestamp later than `to`.
 
+If the consumer is not already assigned, shard ZERO will be used.
 
 :::info
 #### Kafka semantics
 
-This will self-assign all shards. This async method is not cancel safe. You must await this future, and this Consumer will be unusable for any operations until it finishes.
-:::
-
-:::info
-#### Redis semantics
-
-Seeking a Consumer will detach it from the Consumer Group, if it has been assigned one. It effectively makes it a RealTime Consumer.
+This async method is not cancel safe. You must await this future, and this Consumer will be unusable for any operations until it finishes.
 :::
 
 :::caution

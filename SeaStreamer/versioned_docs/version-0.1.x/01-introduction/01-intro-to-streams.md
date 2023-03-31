@@ -4,11 +4,11 @@
 
 ## Vs event-based programming
 
-Similar to event-based programming, stream processing is a programming paradigm that aims to handle events in near real-time or as soon as events happen. One way to classify between the two might be frequency. Streams are continuous sequence of events with a high throughput: instead of many short-lived connections, you simply keep a connection open and wait for events to come.
+Similar to event-based programming, stream processing is a programming paradigm that aims to handle events in near real-time or as soon as events happen. One way to classify between the two might be frequency. Streams are continuous sequence of events with a high throughput: instead of many short-lived connections, you simply keep one connection open.
 
-## Vs batch processing
+## Vs analytic processing
 
-Stream processing can be thought as batch processing with extremely small batch sizes. The batch size does not necessarily have to be 1. Messages can be micro-batched by the millisecond, or second, according to your latency requirement and processing power. But gone are the days of "it may take up to 24 hours for this change to reflect"!
+Say we want to compute the average of a certain attribute over a specific period of time. OLAP databases allow us to efficiently compute that over a very large table with millions of rows. To achieve the same in stream processing, we can replay the stream and feed it through a stream processor, which probably deemed to be slower. Once the processor is steadily running, the output can be updated in real-time with minimal latency.
 
 ## Why Rust?
 
@@ -16,7 +16,7 @@ We want to construct the best stream processing platform where Rust's unique cha
 
 ### Multi-threaded async
 
-Unlike other languages, Rust's async execution is multi-threaded. It allows you to scale up a process with as many threads as needed to fully utilize the CPU for maximum concurrency. **You do not need to setup an external queuing system**!
+Unlike other languages, Rust's async execution is multi-threaded. It allows you to scale up a process with as many threads as needed to fully utilize the CPU for maximum concurrency.
 
 ### Predictable latency
 

@@ -2,11 +2,6 @@
 
 The [`Streamer`](https://docs.rs/sea-streamer/*/sea_streamer/trait.Streamer.html) trait defines the common interface of streaming clients.
 
-Implemented by:
-+ [`KafkaStreamer`](https://docs.rs/sea-streamer-kafka/*/sea_streamer_kafka/struct.KafkaStreamer.html)
-+ [`RedisStreamer`](https://docs.rs/sea-streamer-redis/*/sea_streamer_redis/struct.RedisStreamer.html)
-+ [`StdioStreamer`](https://docs.rs/sea-streamer-stdio/latest/sea_streamer_stdio/struct.StdioStreamer.html)
-
 ## `ConnectOptions`
 
 ### `timeout`

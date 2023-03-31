@@ -24,9 +24,8 @@ async fn main() -> Result<()> {
     let streamer = SeaStreamer::connect(stream.streamer(), Default::default()).await?;
 
     let mut options = SeaConsumerOptions::new(ConsumerMode::RealTime);
-    options.set_kafka_consumer_options(|options| {
-        options.set_auto_offset_reset(AutoOffsetReset::Earliest);
-    });
+    options.set_auto_stream_reset(SeaStreamReset::Earliest);
+
     let consumer: SeaConsumer = streamer
         .create_consumer(stream.stream_keys(), options)
         .await?;
@@ -59,7 +58,7 @@ async fn main() -> Result<()> {
         tokio::time::sleep(Duration::from_secs(1)).await;
     }
 
-    producer.flush(Duration::from_secs(10)).await?;
+    producer.end().await?; // flush
 
     Ok(())
 }`
@@ -100,6 +99,17 @@ cargo run --bin producer -- --stream kafka://localhost:9092/hello1 &
 cargo run --bin processor -- --input kafka://localhost:9092/hello1 --output kafka://localhost:9092/hello2 &
 # Replay the output
 cargo run --bin consumer -- --stream kafka://localhost:9092/hello2
+# Remember to stop the processes
+kill %1 %2`
+  },
+  {
+    title: 'Running with Redis',
+    code: `# Produce some input
+cargo run --bin producer -- --stream redis://localhost:6379/hello1 &
+# Start the processor, producing some output
+cargo run --bin processor -- --input redis://localhost:6379/hello1 --output redis://localhost:6379/hello2 &
+# Replay the output
+cargo run --bin consumer -- --stream redis://localhost:6379/hello2
 # Remember to stop the processes
 kill %1 %2`
   },

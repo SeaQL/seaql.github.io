@@ -12,17 +12,11 @@ In addition, `stdio` can only work with UTF-8 text data, while `file` is able to
 
 We might be able to commit consumer states into a local SQLite database, enabling transactional behavior.
 
-## `sea-streamer-redis`: Redis Cluster
+## `sea-streamer-redis`: Redis Backend
 
-Redis support has been released in `sea-streamer` `0.2`! Basic stream sharding is implemented, but sharding without clustering is not very useful. 
+Redis Streams is a great alternative to Kafka. It would be nice if SeaStreamer can support Redis while delivering the same API, so that your stream processor can be multi-modal!
 
-In the future, we'd like to support Redis Cluster, right now it's pretty much a work-in-progress. It's quite a difficult task, because clients have to take responsibility when working with a cluster.
-In Redis, shards and nodes is a dynamic M-N mapping - shards can be moved among nodes *at any time*.
-It makes testing much more difficult.
-
-In Redis, consumers in the same group share the same shard, i.e. shared shard. In the future, we'd like to support 'owned shard' semantics, where each consumer will attempt to claim ownership of a shard, and other consumers in the group will not step in. This mimicks Kafka’s consumer group behaviour.
-
-Let us know if you'd like to help!
+We are aware of Redis having considerably different semantics from Kafka, but we will try to align their behavioural differences, most likely by implementing additional mechanism client-side.
 
 ## Your proposal
 

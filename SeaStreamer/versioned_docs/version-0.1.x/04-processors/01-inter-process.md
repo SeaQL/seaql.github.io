@@ -25,40 +25,26 @@ which may or may not be the desired behavior.
 
 ## Trying out
 
-A small number of cli programs are provided for demonstration. Let's set them up first:
+A small number of cli programs are provided by SeaStreamer for demonstration. Let's set them up first:
 
 ```shell
 # The `clock` program generate messages in the form of `{ "tick": N }`
 alias clock='cargo run --package sea-streamer-stdio  --features=executables --bin clock'
 # The `relay` program redirect messages from `input` to `output`
-alias relay='cargo run --package sea-streamer-socket --features=executables,backend-kafka,backend-redis --bin relay'
+alias relay='cargo run --package sea-streamer-socket --features=executables --bin relay'
 ```
 
-Here is how to stream from Stdio ➡️ Redis / Kafka. We generate messages using `clock` and then pipe it to `relay`,
-which then streams to Redis / Kafka:
+Here is how to stream from Stdio ➡️ Kafka. We generate messages using `clock` and then pipe it to `relay`,
+which then streams to Kafka:
 
 ```shell
-# Stdio -> Redis
-clock -- --stream clock --interval 1s | \
-relay -- --input stdio:///clock --output redis://localhost:6379/clock
-# Stdio -> Kafka
 clock -- --stream clock --interval 1s | \
 relay -- --input stdio:///clock --output kafka://localhost:9092/clock
 ```
 
-Here is how to stream between Redis ↔️ Kafka:
+Here is how to *replay* the stream from Kafka ➡️ Stdio:
 
 ```shell
-# Redis -> Kafka
-relay -- --input redis://localhost:6379/clock --output kafka://localhost:9092/clock
-# Kafka -> Redis
-relay -- --input kafka://localhost:9092/clock --output redis://localhost:6379/clock
-```
-
-Here is how to *replay* the stream from Kafka / Redis:
-
-```shell
-relay -- --input redis://localhost:6379/clock --output stdio:///clock --offset start
 relay -- --input kafka://localhost:9092/clock --output stdio:///clock --offset start
 ```
 

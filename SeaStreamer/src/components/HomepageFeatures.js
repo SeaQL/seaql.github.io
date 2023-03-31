@@ -18,7 +18,7 @@ const FeatureList = [
     icon: <MdFlight size={26} />,
     description: (
       <>
-        We provide integration for Kafka / Redpanda behind a generic trait interface, so your program can be backend-agnostic. Support for Redis Stream is being planned.
+        We provide integration for Redis & Kafka / Redpanda behind a generic trait interface, so your program can be backend-agnostic.
       </>
     ),
   },

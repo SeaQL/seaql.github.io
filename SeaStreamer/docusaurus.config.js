@@ -1,3 +1,10 @@
+const versions = require('./versions.json');
+
+function getNextMinorVersionName() {
+  const minorVersion = parseInt(versions[0].split('.')[1], 10);
+  return `0.${minorVersion + 1}.x`;
+}
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'SeaStreamer 🌊 The stream processing toolkit for Rust',
@@ -44,6 +51,11 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+        },
       ],
     },
     footer: {
@@ -76,10 +88,6 @@ module.exports = {
             {
               label: 'Twitter',
               to: 'https://twitter.com/sea_ql',
-            },
-            {
-              label: 'GSoC',
-              to: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
             },
           ],
         },
@@ -126,11 +134,11 @@ module.exports = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaStreamer/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
-          // versions: {
-          //   current: {
-          //     label: `${getNextMinorVersionName()} 🚧`,
-          //   },
-          // },
+          versions: {
+            current: {
+              label: `${getNextMinorVersionName()} 🚧`,
+            },
+          },
         },
         blog: false,
         theme: {
