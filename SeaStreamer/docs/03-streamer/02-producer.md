@@ -9,12 +9,10 @@ Implemented by:
 
 ## `ProducerOptions`
 
-There is nothing interesting as of now. We may add some in the future.
-
 :::info
 #### Redis semantics
 
-You can assign custom sharders to Producers.
+You can assign custom sharders to Producers. Sharding simply means splitting a stream into multiple keys, in the format of `STREAM_KEY:SHARD_ID`.
 :::
 
 ## `send`

@@ -8,7 +8,7 @@ Similar to event-based programming, stream processing is a programming paradigm 
 
 ## Vs batch processing
 
-Stream processing can be thought as batch processing with extremely small batch sizes. The batch size does not necessarily have to be 1. Messages can be micro-batched by the millisecond, or second, according to your latency requirement and processing power. But gone are the days of "it may take up to 24 hours for this change to reflect"!
+Stream processing can be thought as batch processing with extremely small batch sizes. The batch size does not necessarily have to be one. Messages can be micro-batched by the millisecond, or second, according to your latency requirement and processing power. But gone are the days of "it may take up to 24 hours for this change to reflect"!
 
 ## Why Rust?
 

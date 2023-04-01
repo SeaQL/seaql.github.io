@@ -24,10 +24,11 @@ A consumer can rewind a stream to any point (addressed by timestamp or sequence 
 
 ### Consumer Mode
 
-There are two consuming modes:
+There are three consuming modes:
 
 1. Real-time: we only care about the latest messages and would be okay to miss old data
 2. Resumable: when the consumer resubscribes, it will resume from the last consumed message
+3. Load-balanced: like Resumable, but with multiple consumers sharing the same set of streams
 
 ## Producer
 

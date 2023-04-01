@@ -8,13 +8,13 @@
 
     1.3. [SeaStreamer Concepts](01-introduction/03-sea-streamer.md)
 
-    1.4. [Example Processors](01-introduction/04-examples.md)
+2. Getting started
 
-2. Configuration
+    2.1. [Configuration](02-getting-started/01-configuration.md)
 
-    2.1. [Configuring Features](02-configuration/01-configuration.md)
+    2.2. [SeaStreamer Architecture](02-getting-started/02-architecture.md)
 
-    2.2. [SeaStreamer Architecture](02-configuration/02-architecture.md)
+    2.3. [Example Processors](02-getting-started/03-examples.md)
 
 3. SeaStreamer Semantics
 
@@ -32,6 +32,6 @@
 
 5. What's next?
 
-    5.1. [The Roadmap](05-next/01-roadmap.md)
+    5.1. [The Roadmap](05-whats-next/01-roadmap.md)
 
-    5.2. [The Vision](05-next/02-vision.md)
+    5.2. [The Vision](05-whats-next/02-vision.md)
