@@ -30,7 +30,7 @@
 
     4.2. [Intra Process](04-processors/02-intra-process.md)
 
-5. What's next?
+5. What's Next?
 
     5.1. [The Roadmap](05-next/01-roadmap.md)
 

@@ -87,7 +87,7 @@ async fn main() -> Result<()> {
 
 SeaStreamer Redis provides a Kafka-like stream semantics:
 
-+ Non-group streaming with AutoStreamReset options
++ Non-group streaming with AutoStreamReset option
 + Consumer-group-based streaming with auto-ack and/or auto-commit
 + Load balancing among consumers with automatic failover
 + Seek/rewind to point in time
@@ -99,6 +99,8 @@ You don't have to call `XADD`, `XREAD`, `XACK`, etc... anymore!
 The trait-based API requires you to designate the concrete `Streamer` type for monomorphization, otherwise the code cannot compile.
 
 Akin to how SeaORM implements runtime-polymorphism, SeaStreamer provides a enum-based generic streamer, in which the backend is selected ***on runtime***.
+
+Here is an illustration ([full example](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/resumable.rs)):
 
 ```rust
 // sea-streamer-socket
@@ -134,7 +136,7 @@ let kafka: Option<&mut KafkaConsumer> = consumer.get_kafka();
 let redis: Option<&mut RedisConsumer> = consumer.get_redis();
 ```
 
-So you can "write once, stream from/to anywhere"! [Full example](https://github.com/SeaQL/sea-streamer/blob/main/examples/src/bin/resumable.rs).
+So you can "write once, stream anywhere"!
 
 ## Good old unix pipe
 
@@ -170,7 +172,7 @@ SeaStreamer encourages you to write tests at all levels:
 
 All against the same piece of code! Let SeaStreamer take away the boilerplate and mocking facility from your codebase.
 
-Below is an example of [intra-process testing]((https://github.com/SeaQL/sea-streamer/blob/main/sea-streamer-stdio/tests/loopback.rs)):
+Below is an example of [intra-process testing](https://github.com/SeaQL/sea-streamer/blob/main/sea-streamer-stdio/tests/loopback.rs), which can be run with `cargo test` without any dependency or side-effects:
 
 ```rust
 let stream = StreamKey::new("test")?;
@@ -234,6 +236,6 @@ SeaStreamer is designed and developed by the same mind who brought you [SeaORM](
 
 ## Community
 
-SeaQL.org is an independent open-source organization run by passionate ️developers. If you enjoy using our libraries, please star ⭐ and share our repositories. If you feel generous, a small donation via [GitHub Sponsor](https://github.com/sponsors/SeaQL) will be greatly appreciated, and goes a long way towards sustaining the organization 🚢.
+SeaQL.org is an independent open-source organization run by passionate ️developers. If you like our projects, please star ⭐ and share our repositories. If you feel generous, a small donation via [GitHub Sponsor](https://github.com/sponsors/SeaQL) will be greatly appreciated, and goes a long way towards sustaining the organization 🚢.
 
 SeaStreamer is a community driven project. We welcome you to participate, contribute and together build for Rust's future 🦀.
