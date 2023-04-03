@@ -8,9 +8,9 @@
 
     1.3. [SeaStreamer Concepts](01-introduction/03-sea-streamer.md)
 
-2. Getting started
+2. Getting Started
 
-    2.1. [Configuration](02-getting-started/01-configuration.md)
+    2.1. [Configuring Features](02-getting-started/01-configuration.md)
 
     2.2. [SeaStreamer Architecture](02-getting-started/02-architecture.md)
 
@@ -30,7 +30,7 @@
 
     4.2. [Intra Process](04-processors/02-intra-process.md)
 
-5. What's next?
+5. What's Next?
 
     5.1. [The Roadmap](05-whats-next/01-roadmap.md)
 
