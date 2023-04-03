@@ -7,7 +7,7 @@ function getNextMinorVersionName() {
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'SeaStreamer 🌊 The stream processing toolkit for Rust',
+  title: 'SeaStreamer 🌊 The stream processing toolkit for Kafka and Redis Streams',
   tagline: '🌊 SeaStreamer is a stream processing toolkit to help you build stream processors in Rust',
   url: 'https://www.sea-ql.org',
   baseUrl: '/SeaStreamer/',
