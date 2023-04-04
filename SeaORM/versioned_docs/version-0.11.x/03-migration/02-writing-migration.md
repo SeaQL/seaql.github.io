@@ -280,6 +280,7 @@ You can write migration files in raw SQL, but then you lost the multi-backend co
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm::Statement;
 use sea_orm_migration::prelude::*;
+use sea_orm_migration::sea_orm::ConnectionTrait;
 
 #[derive(DeriveMigrationName)]
 pub struct Migration;
