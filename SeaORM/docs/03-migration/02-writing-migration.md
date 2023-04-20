@@ -122,14 +122,14 @@ assert_eq!(Post::Text.to_string(), "text");
                 .col(ColumnDef::new(Post::Title).string().not_null())
                 .col(ColumnDef::new(Post::Text).string().not_null())
                 .col(
-                    ColumnDef::new(Column::Category)
-                        .enumeration(Category, [Category::Feed, Category::Story]),
+                    ColumnDef::new(Post::Category)
+                        .enumeration(Category::Table, [Category::Feed, Category::Story]),
                         // Or, write it like below.
                         // Keep in mind that for it to work,
                         // 1. you need to derive `EnumIter`,
                         // 2. import `Iterable` into scope
                         // 3. and make sure `Category::Table` is the first variant
-                        .enumeration(Category, Category::iter().skip(1)),
+                        .enumeration(Category::Table, Category::iter().skip(1)),
                 )
                 .to_owned(),
         )
@@ -241,7 +241,7 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
                 .col(ColumnDef::new(Post::Text).string().not_null())
                 .to_owned()
         )
-        .await?
+        .await?;
     
     manager
         .create_index(
