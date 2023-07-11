@@ -6,7 +6,25 @@ If you are starting from a fresh database, it's better to version control your d
 
 ## Migration Table
 
-A table named `seaql_migrations` will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
+A table will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
+
+By default, it will be named `seaql_migrations`. You can also use a custom name for your migration table.
+```rust
+#[async_trait::async_trait]
+impl MigratorTrait for Migrator {
+    fn migrations() -> Vec<Box<dyn MigrationTrait>> {
+        vec![
+            Box::new(m20220118_000001_create_cake_table::Migration),
+            Box::new(m20220118_000002_create_fruit_table::Migration),
+        ]
+    }
+
+    // Override the name of migration table
+    fn migration_table_name() -> sea_orm::DynIden {
+        Alias::new("override_migration_table_name").into_iden()
+    }
+}
+```  
 
 ## Creating Migration Directory
 
