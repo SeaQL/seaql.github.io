@@ -45,6 +45,8 @@ migration
     └── main.rs                             # Migrator CLI, for running manually
 ```
 
+Note that if you setup the migration directory directly within a Git repository, a `.gitignore` file will also be created
+
 ## Workspace Structure
 
 It is recommended to structure your cargo workspace as follows to share SeaORM entities between the app crate and the migration crate. Checkout the [integration examples](https://github.com/SeaQL/sea-orm/tree/master/examples) for demonstration.
