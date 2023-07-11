@@ -57,6 +57,33 @@ assert_eq!(
 );
 ```
 
+### Optional field
+
+Since 0.12, SeaORM supports for partial select of `Option<T>` model field.  
+A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
+```rust
+customer::ActiveModel {
+    name: Set("Alice".to_owned()),
+    notes: Set(Some("Want to communicate with Bob".to_owned())),
+    ..Default::default()
+}
+.save(db)
+.await?;
+
+// The `notes` field was intentionally leaved out
+let customer = Customer::find()
+    .select_only()
+    .column(customer::Column::Id)
+    .column(customer::Column::Name)
+    .one(db)
+    .await
+    .unwrap();
+
+// The select result does not contain `notes` field.
+// Since it's of type `Option<String>`, it'll be `None` and no error will be thrown.
+assert_eq!(customers.notes, None);
+```
+
 ## Select Custom Expressions
 
 Select any custom expression with `column_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
