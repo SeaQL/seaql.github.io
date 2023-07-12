@@ -64,6 +64,41 @@ assert_eq!(
 );
 ```
 
+Note that non-UAX#31 compliant characters would be converted.
+For example,
+```rust
+#[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(None)")]
+pub enum StringValue {
+    #[sea_orm(string_value = "")]
+    Member1,
+    #[sea_orm(string_value = "$")]
+    Member2,
+    #[sea_orm(string_value = "$$")]
+    Member3,
+    #[sea_orm(string_value = "AB")]
+    Member4,
+    #[sea_orm(string_value = "A_B")]
+    Member5,
+    #[sea_orm(string_value = "A$B")]
+    Member6,
+    #[sea_orm(string_value = "0 123")]
+    Member7,
+}
+```
+will now produce the following Variant Enum:
+```rust
+pub enum StringValueVariant {
+    __Empty,
+    _0x24,
+    _0x240x24,
+    Ab,
+    A0x5Fb,
+    A0x24B,
+    _0x300x20123,
+}
+```
+
 ## Native Database Enum
 
 Enum support is different across databases. Let's go through them one-by-one.
