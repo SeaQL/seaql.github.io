@@ -21,7 +21,7 @@ Multiple queries will execute in parallel as you `await` on them.
 To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/*/sea_orm/struct.ConnectOptions.html) interface:
 
 ```rust
-let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
+let mut opt = ConnectOptions::new("protocol://username:password@host/database");
 opt.max_connections(100)
     .min_connections(5)
     .connect_timeout(Duration::from_secs(8))
@@ -30,7 +30,7 @@ opt.max_connections(100)
     .max_lifetime(Duration::from_secs(8))
     .sqlx_logging(true)
     .sqlx_logging_level(log::LevelFilter::Info)
-    .set_schema_search_path("my_schema".into()); // Setting default PostgreSQL schema
+    .set_schema_search_path("my_schema"); // Setting default PostgreSQL schema
 
 let db = Database::connect(opt).await?;
 ```

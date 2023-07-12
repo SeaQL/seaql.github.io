@@ -84,8 +84,8 @@ For CLI, you can specify the target schema with `-s` / `--database_schema` optio
 You can also run the migration on the target schema programmatically:
 
 ```rust
-let connect_options = ConnectOptions::new("postgres://root:root@localhost/database".into())
-    .set_schema_search_path("my_schema".into()) // Override the default schema
+let connect_options = ConnectOptions::new("postgres://root:root@localhost/database")
+    .set_schema_search_path("my_schema") // Override the default schema
     .to_owned();
 
 let db = Database::connect(connect_options).await?

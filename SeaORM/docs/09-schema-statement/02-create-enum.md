@@ -113,7 +113,7 @@ assert_eq!(
         .collect::<Vec<_>>(),
     [Statement::from_string(
         db_postgres,
-        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
+        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#
     ),]
 );
 
@@ -121,7 +121,7 @@ assert_eq!(
     db_postgres.build(&schema.create_enum_from_active_enum::<Tea>()),
     Statement::from_string(
         db_postgres,
-        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
+        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#
     )
 );
 
