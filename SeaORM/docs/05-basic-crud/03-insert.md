@@ -187,6 +187,23 @@ let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 
+### Failing Insertion
+
+## on empty
+
+Normally it will return an error if the Insert statement is empty.
+However, you can change the behaviour with `.on_empty_do_nothing()` method.
+
+```rust
+// now, you can do:
+let res = Bakery::insert_many(std::iter::empty())
+    .on_empty_do_nothing()
+    .exec(db)
+    .await;
+
+assert!(matches!(res, Ok(TryInsertResult::Empty)));
+```
+
 ## On Conflict
 
 Insert active model with on conflict behaviour.
