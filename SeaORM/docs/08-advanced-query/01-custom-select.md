@@ -101,6 +101,21 @@ assert_eq!(
 );
 ```
 
+Alternatively, you can simply select with `expr`, `exprs` and `expr_as` methods.
+```rust
+use sea_orm::sea_query::Expr;
+use sea_orm::{entity::*, tests_cfg::cake, DbBackend, QuerySelect, QueryTrait};
+
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .expr(Expr::col((cake::Entity, cake::Column::Id)))
+        .build(DbBackend::MySql)
+        .to_string(),
+    "SELECT `cake`.`id` FROM `cake`"
+);
+```
+
 ## Handling Select Results
 
 ### Custom Struct
