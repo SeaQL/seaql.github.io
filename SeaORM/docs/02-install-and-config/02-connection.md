@@ -35,6 +35,18 @@ opt.max_connections(100)
 let db = Database::connect(opt).await?;
 ```
 
+## Connection Ping
+
+You can ping your connection when in doubt.
+
+```rust
+|db: DatabaseConnection| {
+    assert!(db.ping().await.is_ok());
+    db.clone().close().await;
+    assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire)));
+}
+```
+
 ## Closing Connection
 
 The connection will be automatically closed on drop. To close the connection explicitly, call the `close` method.
