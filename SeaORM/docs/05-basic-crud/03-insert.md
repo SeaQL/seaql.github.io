@@ -286,3 +286,17 @@ let res = Entity::insert_many([
 
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
+
+Or you can use `.do_nothing()` to return safely instead.
+
+```rust
+let on = OnConflict::column(Column::Id).do_nothing().to_owned();
+
+// Existing behaviour
+let res = Entity::insert_many([..]).on_conflict(on).exec(db).await;
+assert!(matches!(res, Err(DbErr::RecordNotInserted)));
+
+// you can also:
+let res = Entity::insert_many([..]).on_conflict(on).do_nothing().exec(db).await;
+assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
+```
