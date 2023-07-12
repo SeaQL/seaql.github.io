@@ -89,7 +89,8 @@ assert_eq!(Post::Text.to_string(), "text");
 #### Schema Creation Methods
 - Create Table
     ```rust
-    use sea_orm::{EnumIter, Iterable};
+    use sea_orm::Iterable;
+    use sea_orm_macros::EnumIter;
 
     #[derive(Iden)]
     enum Post {
@@ -148,7 +149,8 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
-    use sea_orm::{EnumIter, Iterable};
+    use sea_orm::Iterable;
+    use sea_orm_macros::EnumIter;
 
     #[derive(Iden, EnumIter)]
     pub enum Category {

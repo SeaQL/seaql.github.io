@@ -156,7 +156,8 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
 You can select a tuple (or single value) with the `into_tuple` method.
 
 ```rust
-use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn};
+use sea_orm_macros::EnumIter;
 
 let res: Vec<(String, i64)> = cake::Entity::find()
     .select_only()
