@@ -65,7 +65,7 @@ assert_eq!(
 ```
 
 Note that non-UAX#31 compliant characters would be converted.
-For example,
+See the following code snippet to understand how would it be converted.
 ```rust
 #[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(None)")]
@@ -85,9 +85,8 @@ pub enum StringValue {
     #[sea_orm(string_value = "0 123")]
     Member7,
 }
-```
-will now produce the following Variant Enum:
-```rust
+
+// The following will be generated
 pub enum StringValueVariant {
     __Empty,
     _0x24,
