@@ -187,12 +187,7 @@ let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 
-### Failing Insertion
-
-## on empty
-
-Normally it will return an error if the Insert statement is empty.
-However, you can change the behaviour with `.on_empty_do_nothing()` method.
+Supplying an empty iterator to `insert_many` method will yield an error. However, you can change the behaviour with `on_empty_do_nothing` method to handle inserting an empty iterator properly.
 
 ```rust
 // now, you can do:
@@ -287,7 +282,7 @@ let res = Entity::insert_many([
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
 
-Or you can use `.do_nothing()` to return safely instead.
+Or you can use `.do_nothing()` to handle insert with conflict properly.
 
 ```rust
 let on = OnConflict::column(Column::Id).do_nothing().to_owned();

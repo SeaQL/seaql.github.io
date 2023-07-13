@@ -64,8 +64,8 @@ assert_eq!(
 );
 ```
 
-Note that non-UAX#31 compliant characters would be converted.
-See the following code snippet to understand how would it be converted.
+Note that non-UAX#31 compliant characters would be converted. See the following code snippet to understand how would it be converted.
+
 ```rust
 #[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(None)")]

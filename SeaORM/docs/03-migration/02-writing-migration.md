@@ -13,8 +13,9 @@ sea-orm-cli migrate generate NAME_OF_MIGRATION [--local-time]
 
 # E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
 sea-orm-cli migrate generate create_table
-# You can also do the naming like this
-sea-orm-cli migrate generate create table
+
+# This create the same migration file as above command
+sea-orm-cli migrate generate "create table"
 ```
 
 Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
@@ -90,8 +91,7 @@ assert_eq!(Post::Text.to_string(), "text");
 #### Schema Creation Methods
 - Create Table
     ```rust
-    use sea_orm::Iterable;
-    use sea_orm_macros::EnumIter;
+    use sea_orm::{EnumIter, Iterable};
 
     #[derive(Iden)]
     enum Post {
@@ -150,8 +150,7 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
-    use sea_orm::Iterable;
-    use sea_orm_macros::EnumIter;
+    use sea_orm::{EnumIter, Iterable};
 
     #[derive(Iden, EnumIter)]
     pub enum Category {

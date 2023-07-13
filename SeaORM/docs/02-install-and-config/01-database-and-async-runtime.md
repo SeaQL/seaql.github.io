@@ -52,5 +52,5 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 + `with-rust_decimal` - support [`rust_decimal`](https://crates.io/crates/rust_decimal) types
 + `with-bigdecimal` - support [`bigdecimal`](https://crates.io/crates/bigdecimal) types
 + `with-uuid` - support [`uuid`](https://crates.io/crates/uuid) types
-+ `postgres-array` - support array types in Postgres, automatically enabled when the driver is `sqlx-postgres`
++ `postgres-array` - support array types in Postgres (automatically enabled when `sqlx-postgres` feature is turned on)
 + `sea-orm-internal` - opt-in unstable internal APIs (for accessing re-export SQLx types)

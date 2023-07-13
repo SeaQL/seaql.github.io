@@ -35,9 +35,9 @@ opt.max_connections(100)
 let db = Database::connect(opt).await?;
 ```
 
-## Connection Ping
+## Checking Connection is Valid
 
-You can ping your connection when in doubt.
+Checks if a connection to the database is still valid.
 
 ```rust
 |db: DatabaseConnection| {

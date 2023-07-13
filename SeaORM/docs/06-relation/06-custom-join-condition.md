@@ -17,6 +17,7 @@ It can be done via one of the following ways.
 ## Relation
 
 Add your additional join conditions directly to the relation enum. The easiest way is to provide a `sea_query::SimpleExpr` via `on_condition` procedural macros attribute.
+
 If you want to have a `OR` condition relation, you can use `condition_type = "any"` to alter the relation.
 
 ```rust
@@ -134,8 +135,7 @@ assert_eq!(
 
 ## Custom Join
 
-Last but not least, custom join conditions can be defined at the point you construct the join expression.
-Overriding condition relation can also be done in custom join on the fly.
+Last but not least, custom join conditions can be defined at the point you construct the join expression. Overriding condition relation can also be done in custom join on the fly.
 
 ```rust
 assert_eq!(

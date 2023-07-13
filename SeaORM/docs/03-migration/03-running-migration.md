@@ -92,6 +92,7 @@ let db = Database::connect(connect_options).await?
 
 migration::Migrator::up(&db, None).await?;
 ```
+
 ## Checking Migration Status
 
 You can use `Migration::name()` and `Migration::status()` to get the name and status of a `sea_orm_migration::Migration`

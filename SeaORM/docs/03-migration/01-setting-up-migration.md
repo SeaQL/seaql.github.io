@@ -9,6 +9,7 @@ If you are starting from a fresh database, it's better to version control your d
 A table will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
 
 By default, it will be named `seaql_migrations`. You can also use a custom name for your migration table.
+
 ```rust
 #[async_trait::async_trait]
 impl MigratorTrait for Migrator {
@@ -63,7 +64,7 @@ migration
     └── main.rs                             # Migrator CLI, for running manually
 ```
 
-Note that if you setup the migration directory directly within a Git repository, a `.gitignore` file will also be created
+Note that if you setup the migration directory directly within a Git repository, a `.gitignore` file will also be created.
 
 ## Workspace Structure
 

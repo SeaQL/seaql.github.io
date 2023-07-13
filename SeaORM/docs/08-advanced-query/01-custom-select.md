@@ -59,8 +59,8 @@ assert_eq!(
 
 ### Optional field
 
-Since 0.12, SeaORM supports for partial select of `Option<T>` model field.  
-A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
+Since 0.12, SeaORM supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
+
 ```rust
 customer::ActiveModel {
     name: Set("Alice".to_owned()),
@@ -102,6 +102,7 @@ assert_eq!(
 ```
 
 Alternatively, you can simply select with `expr`, `exprs` and `expr_as` methods.
+
 ```rust
 use sea_orm::sea_query::Expr;
 use sea_orm::{entity::*, tests_cfg::cake, DbBackend, QuerySelect, QueryTrait};
@@ -113,6 +114,29 @@ assert_eq!(
         .build(DbBackend::MySql)
         .to_string(),
     "SELECT `cake`.`id` FROM `cake`"
+);
+
+assert_eq!(
+    cake::Entity::find()
+        .select_only()
+        .exprs([
+            Expr::col((cake::Entity, cake::Column::Id)),
+            Expr::col((cake::Entity, cake::Column::Name)),
+        ])
+        .build(DbBackend::MySql)
+        .to_string(),
+    "SELECT `cake`.`id`, `cake`.`name` FROM `cake`"
+);
+
+assert_eq!(
+    cake::Entity::find()
+        .expr_as(
+            Func::upper(Expr::col((cake::Entity, cake::Column::Name))),
+            "name_upper"
+        )
+        .build(DbBackend::MySql)
+        .to_string(),
+    "SELECT `cake`.`id`, `cake`.`name`, UPPER(`cake`.`name`) AS `name_upper` FROM `cake`"
 );
 ```
 
@@ -156,8 +180,7 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
 You can select a tuple (or single value) with the `into_tuple` method.
 
 ```rust
-use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn};
-use sea_orm_macros::EnumIter;
+use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
 
 let res: Vec<(String, i64)> = cake::Entity::find()
     .select_only()
