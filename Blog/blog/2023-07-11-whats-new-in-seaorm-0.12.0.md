@@ -133,33 +133,6 @@ assert_eq!(format!("{}", DisplayTea::BreakfastTea), "Breakfast");
 assert_eq!(format!("{}", DisplayTea::EverydayTea), "Everyday");
 ```
 
-## Supports for Partial Select of `Option<T>` Model Field
-
-[[#1513](https://github.com/SeaQL/sea-orm/pull/1513)] Supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
-
-```rust
-customer::ActiveModel {
-    name: Set("Alice".to_owned()),
-    notes: Set(Some("Want to communicate with Bob".to_owned())),
-    ..Default::default()
-}
-.save(db)
-.await?;
-
-// The `notes` field was intentionally leaved out
-let customer = Customer::find()
-    .select_only()
-    .column(customer::Column::Id)
-    .column(customer::Column::Name)
-    .one(db)
-    .await
-    .unwrap();
-
-// The select result does not contain `notes` field.
-// Since it's of type `Option<String>`, it'll be `None` and no error will be thrown.
-assert_eq!(customers.notes, None);
-```
-
 ## Matching Common Database Errors
 
 [[#1707](https://github.com/SeaQL/sea-orm/pull/1707)] Add `DbErr::sql_err()` method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors.
@@ -306,6 +279,40 @@ pub enum RelatedEntity {
 }
 ```
 
+## Supports `default_expr` in `DeriveEntityModel`
+
+[[#1474](https://github.com/SeaQL/sea-orm/pull/1474)] You can now set `default_expr` in model.
+
+```rust
+#[derive(DeriveEntityModel)]
+#[sea_orm(table_name = "hello")]
+pub struct Model {
+    #[sea_orm(default_expr = "Expr::current_timestamp()")]
+    pub timestamp: DateTimeUtc,
+}
+
+assert_eq!(
+    Column::Timestamp.def(),
+    ColumnType::TimestampWithTimeZone.def().default(Expr::current_timestamp())
+);
+```
+
+## `ConnAcquireErr` for Fine Grained Connection Error
+
+[[#1737](https://github.com/SeaQL/sea-orm/pull/1737)] Definition of `DbErr::ConnectionAcquire` changed to `ConnectionAcquire(ConnAcquireErr)`, providing more fine grained connection error.
+
+```rust
+enum DbErr {
+    ConnectionAcquire(ConnAcquireErr),
+    ..
+}
+
+enum ConnAcquireErr {
+    Timeout,
+    ConnectionClosed,
+}
+```
+
 ## Upgrades
 
 * [[#1520](https://github.com/SeaQL/sea-orm/pull/1520)], [[#1544](https://github.com/SeaQL/sea-orm/pull/1544)] Upgrade `heck` dependency in `sea-orm-macros` and `sea-orm-codegen` to 0.4
@@ -327,9 +334,12 @@ pub enum RelatedEntity {
 * [[#1661](https://github.com/SeaQL/sea-orm/pull/1661)] Replace the use of `SeaRc<T>` where `T` isn't `dyn Iden` with `RcOrArc<T>`
 * [[#1728](https://github.com/SeaQL/sea-orm/pull/1728)], [[#1743](https://github.com/SeaQL/sea-orm/pull/1743)] Enabled `hashable-value` feature in SeaQuery, thus `Value::Float(NaN) == Value::Float(NaN)` would be true
 * [[#1726](https://github.com/SeaQL/sea-orm/pull/1726)] The `DeriveActiveEnum` derive macro no longer provide `std::fmt::Display` implementation for the enum. You need to derive an extra `DeriveDisplay` macro alongside with `DeriveActiveEnum` derive macro.
+* [[#1737](https://github.com/SeaQL/sea-orm/pull/1737)] Definition of `DbErr::ConnectionAcquire` changed to `ConnectionAcquire(ConnAcquireErr)`
+* `FromJsonQueryResult` removed from entity prelude
 
 ## SeaORM Enhancements
 
+* [[#1513](https://github.com/SeaQL/sea-orm/pull/1513)] Supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
 * [[#1508](https://github.com/SeaQL/sea-orm/pull/1508)] Supports entity with composite primary key of length 12
 * [[#1599](https://github.com/SeaQL/sea-orm/pull/1599)] Add generation of `seaography` related information to `sea-orm-codegen`
 * [[#1519](https://github.com/SeaQL/sea-orm/pull/1519)] Added `Migration::name()` and `Migration::status()` getters for the name and status of `sea_orm_migration::Migration`
