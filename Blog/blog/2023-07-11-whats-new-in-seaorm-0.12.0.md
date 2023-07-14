@@ -336,6 +336,34 @@ enum ConnAcquireErr {
 * [[#1726](https://github.com/SeaQL/sea-orm/pull/1726)] The `DeriveActiveEnum` derive macro no longer provide `std::fmt::Display` implementation for the enum. You need to derive an extra `DeriveDisplay` macro alongside with `DeriveActiveEnum` derive macro.
 * [[#1737](https://github.com/SeaQL/sea-orm/pull/1737)] Definition of `DbErr::ConnectionAcquire` changed to `ConnectionAcquire(ConnAcquireErr)`
 * `FromJsonQueryResult` removed from entity prelude
+* `sea-query/derive` is no longer enabled by `sea-orm`, as such, `Iden` no longer works as a derive macro (it's still a trait). Instead, we are shipping a new macro `DeriveIden`:
+```rust
+// then:
+
+#[derive(Iden)]
+#[iden = "category"]
+pub struct CategoryEnum;
+
+#[derive(Iden)]
+pub enum Tea {
+    Table,
+    #[iden = "EverydayTea"]
+    EverydayTea,
+}
+
+// now:
+
+#[derive(DeriveIden)]
+#[sea_orm(iden = "category")]
+pub struct CategoryEnum;
+
+#[derive(DeriveIden)]
+pub enum Tea {
+    Table,
+    #[sea_orm(iden = "EverydayTea")]
+    EverydayTea,
+}
+```
 
 ## SeaORM Enhancements
 
