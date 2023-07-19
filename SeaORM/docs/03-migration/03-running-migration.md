@@ -84,11 +84,24 @@ For CLI, you can specify the target schema with `-s` / `--database_schema` optio
 You can also run the migration on the target schema programmatically:
 
 ```rust
-let connect_options = ConnectOptions::new("postgres://root:root@localhost/database".into())
-    .set_schema_search_path("my_schema".into()) // Override the default schema
+let connect_options = ConnectOptions::new("postgres://root:root@localhost/database")
+    .set_schema_search_path("my_schema") // Override the default schema
     .to_owned();
 
 let db = Database::connect(connect_options).await?
 
 migration::Migrator::up(&db, None).await?;
+```
+
+## Checking Migration Status
+
+You can use `Migration::name()` and `Migration::status()` to get the name and status of a `sea_orm_migration::Migration`
+
+```rust
+let migrations = Migrator::get_pending_migrations(db).await?;
+assert_eq!(migrations.len(), 5);
+
+let migration = migrations.get(0).unwrap();
+assert_eq!(migration.name(), "m20220118_000002_create_fruit_table");
+assert_eq!(migration.status(), MigrationStatus::Pending);
 ```

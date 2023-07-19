@@ -88,7 +88,7 @@ You can build SQL statements using `sea-query` and query / execute it directly o
 let query_res: Option<QueryResult> = db
     .query_one(Statement::from_string(
         DatabaseBackend::MySql,
-        "SELECT * FROM `cake`;".to_owned(),
+        "SELECT * FROM `cake`;",
     ))
     .await?;
 let query_res = query_res.unwrap();
@@ -97,7 +97,7 @@ let id: i32 = query_res.try_get("", "id")?;
 let query_res_vec: Vec<QueryResult> = db
     .query_all(Statement::from_string(
         DatabaseBackend::MySql,
-        "SELECT * FROM `cake`;".to_owned(),
+        "SELECT * FROM `cake`;",
     ))
     .await?;
 ```
@@ -108,7 +108,7 @@ let query_res_vec: Vec<QueryResult> = db
 let exec_res: ExecResult = db
     .execute(Statement::from_string(
         DatabaseBackend::MySql,
-        "DROP DATABASE IF EXISTS `sea`;".to_owned(),
+        "DROP DATABASE IF EXISTS `sea`;",
     ))
     .await?;
 assert_eq!(exec_res.rows_affected(), 1);

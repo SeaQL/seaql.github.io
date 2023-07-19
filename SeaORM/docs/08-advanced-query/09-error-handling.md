@@ -39,3 +39,28 @@ match error {
     _ => panic!("Unexpected Error kind"),
 }
 ```
+
+## SQL related errors
+
+You can use `DbErr::sql_err()` method to convert SQL related error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors.
+
+```rust
+assert!(matches!(
+    cake
+        .into_active_model()
+        .insert(db)
+        .await
+        .expect_err("Insert a row with duplicated primary key")
+        .sql_err(),
+    Some(SqlErr::UniqueConstraintViolation(_))
+));
+
+assert!(matches!(
+    fk_cake
+        .insert(db)
+        .await
+        .expect_err("Insert a row with invalid foreign key")
+        .sql_err(),
+    Some(SqlErr::ForeignKeyConstraintViolation(_))
+));
+```

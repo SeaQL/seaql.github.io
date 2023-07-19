@@ -64,6 +64,40 @@ assert_eq!(
 );
 ```
 
+Note that non-UAX#31 compliant characters would be converted. See the following code snippet to understand how would it be converted.
+
+```rust
+#[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(None)")]
+pub enum StringValue {
+    #[sea_orm(string_value = "")]
+    Member1,
+    #[sea_orm(string_value = "$")]
+    Member2,
+    #[sea_orm(string_value = "$$")]
+    Member3,
+    #[sea_orm(string_value = "AB")]
+    Member4,
+    #[sea_orm(string_value = "A_B")]
+    Member5,
+    #[sea_orm(string_value = "A$B")]
+    Member6,
+    #[sea_orm(string_value = "0 123")]
+    Member7,
+}
+
+// The following will be generated
+pub enum StringValueVariant {
+    __Empty,
+    _0x24,
+    _0x240x24,
+    Ab,
+    A0x5Fb,
+    A0x24B,
+    _0x300x20123,
+}
+```
+
 ## Native Database Enum
 
 Enum support is different across databases. Let's go through them one-by-one.
@@ -113,7 +147,7 @@ assert_eq!(
         .collect::<Vec<_>>(),
     [Statement::from_string(
         db_postgres,
-        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
+        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#
     ),]
 );
 
@@ -121,7 +155,7 @@ assert_eq!(
     db_postgres.build(&schema.create_enum_from_active_enum::<Tea>()),
     Statement::from_string(
         db_postgres,
-        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#.to_owned()
+        r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#
     )
 );
 
