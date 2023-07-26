@@ -30,7 +30,7 @@ You have to choose one from:
 
 Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 
-+ `ASYNC_RUNTIME` can be [`async-std`](https://crates.io/crates/async-std), or [`tokio`](https://crates.io/crates/tokio)
++ `ASYNC_RUNTIME` can be [`async-std`](https://crates.io/crates/async-std) or [`tokio`](https://crates.io/crates/tokio)
 + `TLS_LIB` can either be [`native-tls`](https://crates.io/crates/native-tls) or [`rustls`](https://crates.io/crates/rustls)
 
 1. Choose the ASYNC_RUNTIME corresponding to your Rust web framework:
