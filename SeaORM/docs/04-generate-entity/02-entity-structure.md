@@ -199,7 +199,7 @@ pub id: i32
 
 This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key. By default, `auto_increment` is `false` for composite key.
 
-You can define up to 12 primary key in a model.
+The max arity of a primary key is 12.
 
 ```rust
 pub struct Model {

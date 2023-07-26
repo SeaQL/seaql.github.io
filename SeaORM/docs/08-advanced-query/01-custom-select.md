@@ -57,7 +57,7 @@ assert_eq!(
 );
 ```
 
-### Optional field
+### Optional fields
 
 Since 0.12, SeaORM supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
 
@@ -86,10 +86,10 @@ assert_eq!(customers.notes, None);
 
 ## Select Custom Expressions
 
-Select any custom expression with `column_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
+Select any custom expression with `column_as` / `expr_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
 
 ```rust
-use sea_query::{Alias, Expr};
+use sea_query::{Alias, Expr, Func};
 
 assert_eq!(
     cake::Entity::find()
@@ -99,41 +99,10 @@ assert_eq!(
         .to_string(),
     r#"SELECT "cake"."id", "cake"."name", MAX("id") - "id" AS "id_diff", CURRENT_TIMESTAMP AS "current_time" FROM "cake""#
 );
-```
-
-Alternatively, you can simply select with `expr`, `exprs` and `expr_as` methods.
-
-```rust
-use sea_orm::sea_query::Expr;
-use sea_orm::{entity::*, tests_cfg::cake, DbBackend, QuerySelect, QueryTrait};
 
 assert_eq!(
     cake::Entity::find()
-        .select_only()
-        .expr(Expr::col((cake::Entity, cake::Column::Id)))
-        .build(DbBackend::MySql)
-        .to_string(),
-    "SELECT `cake`.`id` FROM `cake`"
-);
-
-assert_eq!(
-    cake::Entity::find()
-        .select_only()
-        .exprs([
-            Expr::col((cake::Entity, cake::Column::Id)),
-            Expr::col((cake::Entity, cake::Column::Name)),
-        ])
-        .build(DbBackend::MySql)
-        .to_string(),
-    "SELECT `cake`.`id`, `cake`.`name` FROM `cake`"
-);
-
-assert_eq!(
-    cake::Entity::find()
-        .expr_as(
-            Func::upper(Expr::col((cake::Entity, cake::Column::Name))),
-            "name_upper"
-        )
+        .expr_as(Func::upper(Expr::col((cake::Entity, cake::Column::Name))), "name_upper")
         .build(DbBackend::MySql)
         .to_string(),
     "SELECT `cake`.`id`, `cake`.`name`, UPPER(`cake`.`name`) AS `name_upper` FROM `cake`"
@@ -190,4 +159,60 @@ let res: Vec<(String, i64)> = cake::Entity::find()
     .into_tuple()
     .all(&db)
     .await?;
+```
+
+## Select Partial Model
+
+In `0.12`, we introduced a new trait `PartialModelTrait` and pairing macro `DerivePartialModel` for improving the ergonomic of custom selects.
+
+Instead of:
+
+```rust
+use user::Entity as User;
+
+#[derive(FromQueryResult)]
+struct PartialUser {
+    pub id: i32,
+    pub avatar: String,
+    pub unique_id: Uuid,
+}
+
+let query = User::find()
+    .select_only()
+    .column(Column::Id)
+    .column(Column::Avatar)
+    .column(Column::UniqueId)
+    .into_model::<PartialUser>();
+```
+
+You can define a partial model, and the corresponding columns will be automatically selected:
+
+```rust
+#[derive(DerivePartialModel, FromQueryResult)]
+#[sea_orm(entity = "User")]
+struct PartialUser {
+    pub id: i32,
+    pub avatar: String,
+    pub unique_id: Uuid,
+}
+
+let query = User::find().into_partial_model::<PartialUser>();
+```
+
+Advanced usages include column remap and custom expression:
+
+```rust
+#[derive(DerivePartialModel, FromQueryResult)]
+#[sea_orm(entity = "User")]
+struct PartialRow {
+    #[sea_orm(from_col = "id")]
+    user_id: i32,
+    #[sea_orm(from_expr = "Expr::col(user::Column::Id).add(1)")]
+    next_id: i32,
+}
+
+// The above is equivalent to:
+User::find()
+    .column_as(user::Column::Id, "user_id")
+    .column_as(Expr::col(user::Column::Id).add(1), "next_id")
 ```

@@ -187,10 +187,9 @@ let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 
-Supplying an empty iterator to `insert_many` method will yield an error. However, you can change the behaviour with `on_empty_do_nothing` method to handle inserting an empty iterator properly.
+Supplying an empty set to `insert_many` method will result in an error. However, you can change the behaviour with `on_empty_do_nothing` which wraps the `InsertResult` with a `TryInsertResult`.
 
 ```rust
-// now, you can do:
 let res = Bakery::insert_many(std::iter::empty())
     .on_empty_do_nothing()
     .exec(db)
@@ -282,16 +281,14 @@ let res = Entity::insert_many([
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
 
-Or you can use `.do_nothing()` to handle insert with conflict properly.
+If you want `RecordNotInserted` to be an `Ok` instead of an error, call `.do_nothing()`:
 
 ```rust
-let on = OnConflict::column(Column::Id).do_nothing().to_owned();
+let res = Entity::insert_many([..])
+    .on_conflict(on_conflict)
+    .do_nothing()
+    .exec(db)
+    .await;
 
-// Existing behaviour
-let res = Entity::insert_many([..]).on_conflict(on).exec(db).await;
-assert!(matches!(res, Err(DbErr::RecordNotInserted)));
-
-// you can also:
-let res = Entity::insert_many([..]).on_conflict(on).do_nothing().exec(db).await;
 assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
 ```

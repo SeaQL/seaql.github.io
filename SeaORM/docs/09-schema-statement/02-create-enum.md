@@ -64,7 +64,8 @@ assert_eq!(
 );
 ```
 
-Note that non-UAX#31 compliant characters would be converted. See the following code snippet to understand how would it be converted.
+<details>
+    <summary>Note that non-UAX#31 compliant characters would be converted as illustrated below.</summary>
 
 ```rust
 #[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
@@ -97,6 +98,7 @@ pub enum StringValueVariant {
     _0x300x20123,
 }
 ```
+</details>
 
 ## Native Database Enum
 

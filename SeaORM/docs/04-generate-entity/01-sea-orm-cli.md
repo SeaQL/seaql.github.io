@@ -57,7 +57,7 @@ Command line options:
 - `--max-connections`: maximum number of database connections to be initialized in the connection pool (default: `1`)
 - `--model-extra-derives`: append extra derive macros to the generated model struct
 - `--model-extra-attributes`: append extra attributes to generated model struct
-- `--seaography`: an additional RelatedEntity enum for seaography integration will be generated.
+- `--seaography`: generate addition structs in entities for seaography integration
 
 ```shell
 # Generate entity files of database `bakery` to `entity/src`

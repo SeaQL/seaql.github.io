@@ -90,11 +90,12 @@ pub enum Relation {
 }
 ```
 
-Note that the implementation of `Related<R>` with `via` and `to` methods will not be generated if there exists multiple paths via an intermediate table. 
+<details>
+    <summary>Note that the implementation of `Related` with `via` and `to` methods will not be generated if there exists multiple paths via an intermediate table.</summary>
 
 For example, in the schema defined below, there are two paths:
-- Path 1. `users <-> users_votes <-> bills`
-- Path 2. `users <-> users_saved_bills <-> bills`
++ Path 1. `users <-> users_votes <-> bills`
++ Path 2. `users <-> users_saved_bills <-> bills`
 
 Therefore, the implementation of `Related<R>` will not be generated
 
@@ -130,3 +131,4 @@ CREATE TABLE users_saved_bills
   CONSTRAINT users_saved_bills_pkey PRIMARY KEY (user_id, bill_id)
 );
 ```
+</details>
