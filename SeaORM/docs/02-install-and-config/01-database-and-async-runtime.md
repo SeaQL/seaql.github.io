@@ -7,7 +7,7 @@ Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/Sea
 Then, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
 
 ```toml title="Cargo.toml"
-sea-orm = { version = "^0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
+sea-orm = { version = "0.12", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
 ```
 
 You must choose a `DATABASE_DRIVER` and an `ASYNC_RUNTIME`. `macros` is needed if you use SeaORM's generated entities (most likely).

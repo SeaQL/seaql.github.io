@@ -76,10 +76,10 @@ Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
-async-std = { version = "^1", features = ["attributes", "tokio1"] }
+async-std = { version = "1", features = ["attributes", "tokio1"] }
 
 [dependencies.sea-orm-migration]
-version = "^0"
+version = "0.12"
 features = [
   # Enable at least one `ASYNC_RUNTIME` and `DATABASE_DRIVER` feature if you want to run migration via CLI.
   # View the list of supported features at https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime.
@@ -140,7 +140,7 @@ Specify SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
-sea-orm = { version = "^0" }
+sea-orm = { version = "0.12" }
 ```
 
 ### App Crate
@@ -159,9 +159,8 @@ members = [".", "entity", "migration"]
 entity = { path = "entity" }
 migration = { path = "migration" } # depends on your needs
 
-[dependencies.sea-orm]
-version = "^0"
-features = [ ... ]
+[dependencies]
+sea-orm = { version = "0.12", features = [..] }
 ```
 
 In your app, you can then run the migrator on startup.
