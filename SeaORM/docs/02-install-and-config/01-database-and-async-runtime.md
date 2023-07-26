@@ -4,7 +4,7 @@
 Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)! Your support is vital to the continued development and maintenance of SeaORM.
 :::
 
-Then, add `sea-orm` to the `[dependencies]` section of your `Cargo.toml`.
+First, add `sea-orm` to the `[dependencies]` section of `Cargo.toml`.
 
 ```toml title="Cargo.toml"
 sea-orm = { version = "0.12", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
