@@ -1,5 +1,9 @@
 # Create Table
 
+:::tip We need your help! 📝
+Thank you for reading this documentation. While we have you, would you spare a few minutes into completing our [SeaQL Community Survey](https://www.sea-ql.org/community-survey)? This is essential for the continued development and maintenance of SeaORM.
+:::
+
 To create tables in database instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity). This method will help you create a database table including all the columns and foreign key constraints defined in `Entity`.
 
 Below we use [`CakeFillingPrice`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake_filling_price.rs) entity to demo its generated SQL statement. You can construct the same statement with [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html).

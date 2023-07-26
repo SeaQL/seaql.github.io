@@ -1,5 +1,9 @@
 # One to One
 
+:::tip We need your help! 📝
+Thank you for reading this documentation. While we have you, would you spare a few minutes into completing our [SeaQL Community Survey](https://www.sea-ql.org/community-survey)? This is essential for the continued development and maintenance of SeaORM.
+:::
+
 A one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
 
 ## Defining the Relation

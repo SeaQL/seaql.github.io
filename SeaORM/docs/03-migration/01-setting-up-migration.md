@@ -1,8 +1,12 @@
 # Setting Up Migration
 
-> If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
+:::tip We need your help! 📝
+Thank you for reading this documentation. While we have you, would you spare a few minutes into completing our [SeaQL Community Survey](https://www.sea-ql.org/community-survey)? This is essential for the continued development and maintenance of SeaORM.
+:::
 
 If you are starting from a fresh database, it's better to version control your database schema. SeaORM ships with a migration tool, allowing you to write migrations in SeaQuery or SQL.
+
+If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
 
 ## Migration Table
 
