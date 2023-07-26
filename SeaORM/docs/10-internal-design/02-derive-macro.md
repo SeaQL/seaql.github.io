@@ -42,4 +42,12 @@ The [`DeriveRelation`](#) derive macro will implement [`RelationTrait`](#) for `
 
 ## Iterable
 
-The [`EnumIter`](#) derived macro will implement [`Iterable`](#) to allow iteration over all enum variants.
+The [`EnumIter`](#) derive macro will implement [`Iterable`](#) to allow iteration over all enum variants.
+
+## Value Type
+
+The [`DeriveValueType`](#) derive macro will implement `From<T> for Value`, `sea_orm::TryGetable for T` and `sea_query::ValueType for T` for `T`.
+
+## Display
+
+The [`DeriveDisplay`](#) derive macro will implement `std::fmt::Display` for enums.

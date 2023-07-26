@@ -66,7 +66,7 @@ let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().f
 
 #### One to Many / Many to Many
 
-Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. To achieve this, the query is ordered by Cake's primary key. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
+Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()

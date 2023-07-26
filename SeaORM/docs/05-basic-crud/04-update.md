@@ -54,3 +54,15 @@ Fruit::update_many()
     .exec(db)
     .await?;
 ```
+
+### Update with returning (Postgres only)
+
+Use `exec_with_returning` to return models that were modified:
+
+```rust
+let fruits: Vec<fruit::Model> = Fruit::update_many()
+    .col_expr(fruit::Column::CakeId, Expr::value(1))
+    .filter(fruit::Column::Name.contains("Apple"))
+    .exec_with_returning(db)
+    .await?;
+```

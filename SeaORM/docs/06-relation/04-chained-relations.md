@@ -7,8 +7,7 @@ The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on
 
 Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) as a simple example, where we join cake and filling via an intermediate `cake_filling` table.
 
-```rust
-#[derive(Debug)]
+```rust title="entity/links.rs"
 pub struct CakeToFilling;
 
 impl Linked for CakeToFilling {
@@ -28,7 +27,6 @@ impl Linked for CakeToFilling {
 Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to the above:
 
 ```rust
-#[derive(Debug)]
 pub struct CakeToFilling;
 
 impl Linked for CakeToFilling {
@@ -76,20 +74,20 @@ assert_eq!(
 
 ### Eager Loading
 
-Find all pairs of cake and filling together in a single select with the [`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) method.
+[`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
 
 ```rust
 assert_eq!(
     cake::Entity::find()
-        .find_also_linked(cake::CakeToFilling)
+        .find_also_linked(links::CakeToFilling)
         .build(DbBackend::MySql)
         .to_string(),
     [
-        "SELECT `cake`.`id` AS `A_id`, `cake`.`name` AS `A_name`,",
-        "`r1`.`id` AS `B_id`, `r1`.`name` AS `B_name`, `r1`.`vendor_id` AS `B_vendor_id`",
-        "FROM `cake`",
-        "LEFT JOIN `cake_filling` AS `r0` ON `cake`.`id` = `r0`.`cake_id`",
-        "LEFT JOIN `filling` AS `r1` ON `r0`.`filling_id` = `r1`.`id`",
+        r#"SELECT `cake`.`id` AS `A_id`, `cake`.`name` AS `A_name`,"#,
+        r#"`r1`.`id` AS `B_id`, `r1`.`name` AS `B_name`, `r1`.`vendor_id` AS `B_vendor_id`"#,
+        r#"FROM `cake`"#,
+        r#"LEFT JOIN `cake_filling` AS `r0` ON `cake`.`id` = `r0`.`cake_id`"#,
+        r#"LEFT JOIN `filling` AS `r1` ON `r0`.`filling_id` = `r1`.`id`"#,
     ]
     .join(" ")
 );

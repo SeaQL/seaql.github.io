@@ -42,7 +42,7 @@
 
     4.4 [Enumeration](04-generate-entity/04-enumeration.md)
 
-    4.5 [Newtype](04-generate-entity/05-newtype.md)
+    4.5 [New Type](04-generate-entity/05-newtype.md)
 
 5. Basic CRUD
 
