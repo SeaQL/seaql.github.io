@@ -41,3 +41,11 @@ html[data-theme='dark'] {
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+div[class^=announcementBar_] {
+  background: linear-gradient(90deg, #3d2fc2, #0d9ef1);
+  background-color: #d7d7d7;
+  background-blend-mode: multiply;
+  font-weight: 800;
+  color: #fff;
+}
