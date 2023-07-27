@@ -18,7 +18,7 @@ const FeatureList = [
     icon: <MdFlight size={26} />,
     description: (
       <>
-        Built upon SeaQuery, SeaORM allows you to build complex queries without 'fighting the ORM'.
+        Built upon SeaQuery, SeaORM allows you to build complex dynamic queries.
       </>
     ),
   },
