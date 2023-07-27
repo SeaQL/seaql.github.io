@@ -92,7 +92,7 @@
               {themeMode === 'dark' ? <i class="fa-solid fa-sun"></i> : <i class="fa-solid fa-moon"></i>}
             </IconButton>
           </Box>
-          <Container maxWidth="lg" style={{ padding: '48px' }}>
+          <Container maxWidth="false" style={{ padding: '48px' }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <p style={{ textAlign: 'center', margin: '0' }}>
@@ -100,10 +100,15 @@
                 </p>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="h4" component="h2" align="center" sx={{ fontWeight: 600 }} gutterBottom>
+                <Typography variant="h4" component="h2" align="center" gutterBottom>
                   Community Survey
                 </Typography>
               </Grid>
+            </Grid>
+          </Container>
+          <div class="rule rule-gradient"></div>
+          <Container maxWidth="lg" style={{ padding: '48px' }}>
+            <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="body1">
                   <p>SeaQL is an independent open-source organization. Our goal is to empower engineers with comprehensive and flexible tools to develop applications in Rust. To achieve this goal, we need to understand you, the developer, better.</p>
@@ -117,7 +122,6 @@
               </Grid>
             </Grid>
           </Container>
-          <div class="rule rule-gradient"></div>
           <Paper
             elevation={10}
             sx={{ width: '100vw' }}
