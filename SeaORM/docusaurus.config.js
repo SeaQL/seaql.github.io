@@ -158,7 +158,7 @@ module.exports = {
       contextualSearch: true,
     },
     announcementBar: {
-      id: 'community-survey-2023',
+      id: 'community-survey',
       content: 'While we have you, would you spare a few minutes into completing our <a target="_blank" rel="noopener noreferrer" href="https://sea-ql.org/community-survey">SeaQL Community Survey</a>?',
       isCloseable: false,
     },
