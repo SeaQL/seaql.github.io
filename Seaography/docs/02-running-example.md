@@ -124,13 +124,17 @@ Here are the instructions on how we can generate the examples from scratch.
 
 ```graphql
 {
-  film(pagination: { pages: { limit: 2, page: 0 } }, orderBy: { title: ASC }) {
+  film(
+    pagination: { page: { limit: 1, page: 1 } }
+    filters: { releaseYear: { eq: 2006 } }
+    orderBy: { title: ASC }
+  ) {
     nodes {
       title
       description
       releaseYear
-      filmActor {
-        actor {
+      actor {
+        nodes {
           firstName
           lastName
         }
@@ -138,7 +142,6 @@ Here are the instructions on how we can generate the examples from scratch.
     }
   }
 }
-
 ```
 
 Response
@@ -148,102 +151,29 @@ Response
     "film": {
       "nodes": [
         {
-          "title": "ACADEMY DINOSAUR",
-          "description": "An Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies",
-          "releaseYear": "2006",
-          "filmActor": [
-            {
-              "actor": {
-                "firstName": "PENELOPE",
-                "lastName": "GUINESS"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "CHRISTIAN",
-                "lastName": "GABLE"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "LUCILLE",
-                "lastName": "TRACY"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "SANDRA",
-                "lastName": "PECK"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "JOHNNY",
-                "lastName": "CAGE"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "MENA",
-                "lastName": "TEMPLE"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "WARREN",
-                "lastName": "NOLTE"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "OPRAH",
-                "lastName": "KILMER"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "ROCK",
-                "lastName": "DUKAKIS"
-              }
-            },
-            {
-              "actor": {
-                "firstName": "MARY",
-                "lastName": "KEITEL"
-              }
-            }
-          ]
-        },
-        {
           "title": "ACE GOLDFINGER",
           "description": "A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China",
-          "releaseYear": "2006",
-          "filmActor": [
-            {
-              "actor": {
+          "releaseYear": 2006,
+          "actor": {
+            "nodes": [
+              {
                 "firstName": "BOB",
                 "lastName": "FAWCETT"
-              }
-            },
-            {
-              "actor": {
+              },
+              {
                 "firstName": "MINNIE",
                 "lastName": "ZELLWEGER"
-              }
-            },
-            {
-              "actor": {
+              },
+              {
                 "firstName": "SEAN",
                 "lastName": "GUINESS"
-              }
-            },
-            {
-              "actor": {
+              },
+              {
                 "firstName": "CHRIS",
                 "lastName": "DEPP"
               }
-            }
-          ]
+            ]
+          }
         }
       ]
     }
@@ -251,7 +181,7 @@ Response
 }
 ```
 
-#### Fetch store and its employee
+#### Fetch store and its staff
 
 ```graphql
 {
@@ -301,15 +231,17 @@ Response
 {
   customer(
     filters: { active: { eq: 0 } }
-    pagination: { pages: { page: 2, limit: 3 } }
+    pagination: { page: { page: 2, limit: 3 } }
   ) {
     nodes {
       customerId
       lastName
       email
     }
-    pages
-    current
+    paginationInfo {
+      pages
+      current
+    }
   }
 }
 ```
@@ -337,8 +269,10 @@ Response
           "email": "NATHAN.RUNYON@sakilacustomer.org"
         }
       ],
-      "pages": 5,
-      "current": 2
+      "paginationInfo": {
+        "pages": 5,
+        "current": 2
+      }
     }
   }
 }

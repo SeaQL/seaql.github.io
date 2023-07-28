@@ -24,7 +24,6 @@ With field guards you can protect specific queries or fields accessors from bein
 
 You can read more here https://async-graphql.github.io/async-graphql/en/field_guard.html
 
-
 ### Query complexity and depth
 
 The current generators doesn't prevent cyclic dependencies. A bad actor can use cyclic dependencies to perform unlimited nested queries and crash the server.
@@ -32,7 +31,6 @@ The current generators doesn't prevent cyclic dependencies. A bad actor can use 
 We have the following entities:
 
 ```rust
-
 pub struct Category {
     pub id: i32,
     pub name: String,
@@ -44,7 +42,6 @@ pub struct Product {
     pub name: String,
     pub categories: Vec<Category>
 }
-
 ```
 
 You can perform the following query
@@ -87,7 +84,6 @@ On .env change the line from this:
 
 to this:
 
-
 ```
 DEPTH_LIMIT=2 # depth limit number
 ```
@@ -101,7 +97,6 @@ On .env change the line from this:
 ```
 
 to this:
-
 
 ```
 COMPLEXITY_LIMIT=32 # complexity limit number

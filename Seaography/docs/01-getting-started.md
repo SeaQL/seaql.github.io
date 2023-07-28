@@ -1,36 +1,39 @@
 # Getting started
 
+## Installing SeaORM and Seaography CLI
 
-## Installing CLI
 ```bash
-cargo install seaography-cli
+cargo install sea-orm-cli@^0.12
+cargo install seaography-cli@1
 ```
 
 ## CLI parameters
 
 ```bash
-seaography-cli
+🧭 A GraphQL framework and code generator for SeaORM
 
-USAGE:
-    seaography-cli [OPTIONS] <DATABASE_URL> <CRATE_NAME> <DESTINATION>
+Usage: seaography-cli [OPTIONS] <DESTINATION> <ENTITIES> <DATABASE_URL> <CRATE_NAME>
 
-ARGS:
-    <DATABASE_URL>                               [String] A valid URL pointing to the database
-    <CRATE_NAME>                                 [String] The cargo crate name of the generated project
-    <DESTINATION>                                [String] Path pointing to the output folder, it will create it if does not exist
+Arguments:
+  <DESTINATION>   Project destination folder
+  <ENTITIES>      SeaORM entities folder
+  <DATABASE_URL>  Database URL to write in .env
+  <CRATE_NAME>    Crate name for generated project
 
-OPTIONS:
-    -c, --complexity-limit <COMPLEXITY_LIMIT>    [Number] Limit GraphQL query complexity so it cannot be greater than this number.
-    -d, --depth-limit <DEPTH_LIMIT>              [String] Limit GraphQL query depth so it cannot be greater than this number
-    -e, --expanded-format <EXPANDED_FORMAT>      [Boolean]  If you want the Sea ORM Entities to be in extended format
-    -f, --framework <FRAMEWORK>                  [Enum] Dictates the generator what web API framework to use. Possible values: actix, poem (default=poem)
-    -h, --help                                   Print help information
-    -V, --version                                Print version information
+Options:
+  -f, --framework <FRAMEWORK>
+          Which web framework to use [default: poem] [possible values: actix, poem]
+      --depth-limit <DEPTH_LIMIT>
+          GraphQL depth limit
+      --complexity-limit <COMPLEXITY_LIMIT>
+          GraphQL complexity limit
+  -h, --help
+          Print help
+  -V, --version
+          Print version
 ```
 
-#### Notes
-* **DATABASE_URL examples:** `mysql://user:pass@127.0.0.1:1235/database_name`, `postgres://user:pass@127.0.0.1/base_name`, `sqlite://my_db.db`
-* [extended format](https://www.sea-ql.org/SeaORM/docs/generate-entity/expanded-entity-structure/)
+* `DATABASE_URL` examples: `mysql://user:pass@127.0.0.1:1235/database_name`, `postgres://user:pass@127.0.0.1/base_name`, `sqlite://my_db.db`
 
 ## Prerequisites
 
