@@ -4,8 +4,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
-import HomepageCompare from '../components/HomepageCompare';
 import HomepageExample from '../components/HomepageExample';
+import HomepageCompare from '../components/HomepageCompare';
 import HomepageProducts from '../components/HomepageProducts';
 import HomepageMascot from '../components/HomepageMascot';
 
@@ -39,6 +39,7 @@ export default function Home() {
       <main>
         <HomepageFeatures />
         <HomepageExample />
+        <HomepageCompare />
         <HomepageProducts />
         <HomepageMascot />
       </main>

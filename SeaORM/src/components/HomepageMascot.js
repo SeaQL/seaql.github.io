@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageMascot.module.css';
 
-export default function HomepageCompare() {
+export default function render() {
   return (
     <section className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">

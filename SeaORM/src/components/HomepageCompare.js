@@ -2,46 +2,19 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 
-export default function HomepageCompare() {
+export default function render() {
   return (
-    <section className={clsx('home-section', styles.features)}>
+    <section className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
         <div className="row">
           <div className={clsx('col col--12')}>
+            <h2 className="text--center">SeaORM 🧭 GraphQL</h2>
+            <p className="text--center">
+              With <a href="https://github.com/SeaQL/seaography">Seaography</a>, you can easily launch a GraphQL server from SeaORM entities!
+            </p>
             <div className="text--center padding-horiz--md">
-              <h2>Comparison with Diesel</h2>
+              <img className={styles.seaography} src="/SeaORM/img/Seaography Screenshot.png"/>
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className={styles.tableFlexBox}>
-            <table className={styles.table}>
-              <tr>
-                <th width="50%">SeaORM</th>
-                <th width="50%">Diesel</th>
-              </tr>
-              <tr>
-                <td>Async</td>
-                <td>Sync</td>
-              </tr>
-              <tr>
-                <td>Dynamic</td>
-                <td>Static</td>
-              </tr>
-              <tr>
-                <td>Pure Rust</td>
-                <td>Native Driver</td>
-              </tr>
-              <tr>
-                <td colSpan="2">Relational</td>
-              </tr>
-              <tr>
-                <td colSpan="2">Schema First</td>
-              </tr>
-              <tr>
-                <td colSpan="2">MySQL / Postgres / SQLite</td>
-              </tr>
-            </table>
           </div>
         </div>
       </div>

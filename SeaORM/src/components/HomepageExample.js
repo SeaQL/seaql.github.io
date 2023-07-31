@@ -71,10 +71,10 @@ let pear = fruit::ActiveModel {
 };
 
 // insert one
-let pear: fruit::Model = pear.insert(db).await?;
+let pear = pear.insert(db).await?;
 
 // insert many
-Fruit::insert_many(vec![apple, pear]).exec(db).await?;`,
+Fruit::insert_many([apple, pear]).exec(db).await?;`,
   },
   {
     title: 'Update',
