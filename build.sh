@@ -9,22 +9,6 @@ npm run build
 mv build ../docs/SeaORM
 cd ..
 
-# # Build SeaQuery docs
-# cd SeaQuery
-# npm i
-# npm run build
-# [[ -d ../docs/SeaQuery ]] && rm -r ../docs/SeaQuery
-# mv build ../docs/SeaQuery
-# cd ..
-
-# Build StarfishQL docs
-cd StarfishQL
-npm i
-npm run build
-[[ -d ../docs/StarfishQL ]] && rm -r ../docs/StarfishQL
-mv build ../docs/StarfishQL
-cd ..
-
 # Build SeaQL blog
 cd Blog
 npm i
