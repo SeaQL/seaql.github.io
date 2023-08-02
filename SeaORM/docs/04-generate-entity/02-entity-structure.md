@@ -127,9 +127,7 @@ pub struct KeyValue {
 ```
 
 :::info
-
-Array datatype is supported for PostgreSQL, you can define a vector of any types that are already supported by SeaORM in the model. Keep in mind that you need to enable the `postgres-array` feature and this is a Postgres only feature.
-
+Array datatype is a Postgres-only feature. You can define a vector of types that are already supported by SeaORM.
 :::
 
 ```rust
@@ -157,15 +155,6 @@ If you specified a custom `column_type` for an optional attribute, you must also
 pub name: Option<String>
 ```
 
-### Ignore Attribute
-
-If you want to ignore a particular model attribute such that it maps to no database column, you can use the `ignore` annotation.
-
-```rust
-#[sea_orm(ignore)]
-pub ignore_me: String
-```
-
 ### Cast Column Type on Select and Save
 
 If you need to select a column as one type but save it into the database as another, you can specify the `select_as` and the `save_as` attributes to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should define the model field as below:
@@ -173,6 +162,15 @@ If you need to select a column as one type but save it into the database as anot
 ```rust
 #[sea_orm(select_as = "text", save_as = "citext")]
 pub case_insensitive_text: String
+```
+
+### Ignore Attribute
+
+If you want to ignore a particular model attribute such that it maps to no database column, you can use the `ignore` annotation.
+
+```rust
+#[sea_orm(ignore)]
+pub ignore_me: String
 ```
 
 ## Primary Key
@@ -195,7 +193,7 @@ pub id: i32
 
 ### Composite Key
 
-This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key. By default, `auto_increment` is `false` for composite key.
+This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key. `auto_increment` is `false` for composite key.
 
 The max arity of a primary key is 12.
 
@@ -233,7 +231,7 @@ Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapt
 
 ## Active Model Behavior
 
-Handlers for different actions on an `ActiveModel`. For example, you can perform custom validation logic or trigger side effects. Inside a transaction, you can even abort an action after it is done, preventing it from saving into the database.
+Hooks for different actions on an `ActiveModel`. For example, you can perform custom validation logic or trigger side effects. Inside a transaction, you can even abort an action after it is done, preventing it from saving into the database.
 
 ```rust
 #[async_trait]

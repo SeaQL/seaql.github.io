@@ -74,7 +74,7 @@ customer::ActiveModel {
 .save(db)
 .await?;
 
-// The `notes` field was intentionally leaved out
+// The `notes` field was intentionally left out
 let customer = Customer::find()
     .select_only()
     .column(customer::Column::Id)

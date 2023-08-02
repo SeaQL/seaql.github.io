@@ -72,12 +72,12 @@ Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick to
 You would need [`sea_query::Iden`](https://github.com/SeaQL/sea-query#iden) to define identifiers that will be used in your migration.
 
 ```rust
-#[derive(Iden)]
+#[derive(DeriveIden)]
 enum Post {
     Table,
     Id,
     Title,
-    #[iden = "text"] // Renaming the identifier
+    #[sea_orm(iden = "text")] // Renaming the identifier
     Text,
     Category,
 }
@@ -93,12 +93,12 @@ assert_eq!(Post::Text.to_string(), "text");
     ```rust
     use sea_orm::{EnumIter, Iterable};
 
-    #[derive(Iden)]
+    #[derive(DeriveIden)]
     enum Post {
         Table,
         Id,
         Title,
-        #[iden = "text"] // Renaming the identifier
+        #[sea_orm(iden = "text")] // Renaming the identifier
         Text,
         Category,
     }

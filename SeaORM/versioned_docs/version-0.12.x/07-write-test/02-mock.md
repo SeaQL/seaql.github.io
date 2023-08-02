@@ -3,9 +3,7 @@
 You can unit test your application logic using the mock database interface.
 
 :::info
-
-Friendly reminder: you need to enable `mock` feature.
-
+You need to enable the `mock` feature flag in Cargo.toml.
 :::
 
 The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.

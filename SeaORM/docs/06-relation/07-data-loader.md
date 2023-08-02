@@ -1,9 +1,5 @@
 # Data Loader
 
-:::tip
-If you are building a web API that queries nested relations extensively, consider building a GraphQL server. [Seaography](https://www.sea-ql.org/Seaography/) is a GraphQL framework for building GraphQL resolvers using SeaORM entities. Read "[Getting Started with Seaography](https://www.sea-ql.org/blog/2022-09-27-getting-started-with-seaography/)" to learn more.
-:::
-
 The [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) provides an API to load related entities in batches.
 
 Consider this one to many relation:
@@ -57,7 +53,7 @@ In an advanced use case, you can apply filters on the related entity:
 
 ```rust
 let fruits_in_stock: Vec<Vec<fruit::Model>> = cakes.load_many(
-    fruit::Entity::find().filter(fruit::Column::Stock.gt(0i32))
+    fruit::Entity::find().filter(fruit::Column::Stock.gt(0i32)),
     db
 ).await?;
 ```
