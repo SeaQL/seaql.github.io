@@ -135,3 +135,7 @@
     11.3 [Compare with Diesel](11-internal-design/03-diesel.md)
 
     11.4 [Architecture](11-internal-design/04-architecture.md)
+
+12. What's Next
+
+    12.1 [What's Next](12-whats-next/01-whats-next.md)
