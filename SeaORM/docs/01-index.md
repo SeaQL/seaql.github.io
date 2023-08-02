@@ -118,12 +118,20 @@
 
     9.3 [Create Index](09-schema-statement/03-create-index.md)
 
-10. Internal Design
+10. Seaography
 
-    10.1 [Traits and Types](10-internal-design/01-trait-and-type.md)
+    10.1 [🧭 Seaography Intro](10-seaography/01-seaography-intro.md)
 
-    10.2 [Derive Macros](10-internal-design/02-derive-macro.md)
+    10.2 [Getting Started](10-seaography/02-getting-started.md)
 
-    10.3 [Compare with Diesel](10-internal-design/03-diesel.md)
+    10.3 [Looking Forward](10-seaography/03-looking-forward.md)
 
-    10.4 [Architecture](10-internal-design/04-architecture.md)
+11. Internal Design
+
+    11.1 [Traits and Types](11-internal-design/01-trait-and-type.md)
+
+    11.2 [Derive Macros](11-internal-design/02-derive-macro.md)
+
+    11.3 [Compare with Diesel](11-internal-design/03-diesel.md)
+
+    11.4 [Architecture](11-internal-design/04-architecture.md)

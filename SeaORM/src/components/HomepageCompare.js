@@ -8,7 +8,7 @@ export default function render() {
       <div className="container">
         <div className="row">
           <div className={clsx('col col--12')}>
-            <h2 className="text--center">SeaORM 🧭 GraphQL</h2>
+            <h2 className="text--center">SeaORM ➕ GraphQL = 🧭 Seaography</h2>
             <p className="text--center">
               With <a href="https://github.com/SeaQL/seaography">Seaography</a>, you can easily launch a GraphQL server from SeaORM entities!
             </p>
