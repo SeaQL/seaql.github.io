@@ -8,10 +8,6 @@ The [`EntityModel`](#) derive macro is the 'almighty' macro which automatically 
 
 The [`DeriveEntity`](#) derive macro will implement [`EntityTrait`](#) for `Entity` and it assumes `Model`, `Column`, `PrimaryKey` and `Relation` exist in the current scope. It also provides implementation of [`Iden`](#) and [`IdenStatic`](#) for `Entity`.
 
-## RelatedEntity
-
-The [`DeriveRelatedEntity`](#) derive macro will implement [`seaography::RelationBuilder`](#) for `RelatedEntity` enumeration when the `seaography` feature is enabled
-
 ## Column
 
 The [`DeriveColumn`](#) derive macro will implement [`ColumnTrait`](#) for `Columns`. It defines the identifier of each column by implementing [`Iden`](#) and [`IdenStatic`](#). The [`EnumIter`](#) is also derived, allowing iteration over all enum variants.
@@ -39,6 +35,10 @@ The [`DeriveActiveEnum`](#) derive macro will implement [`ActiveEnum`](#) for an
 ## Relation
 
 The [`DeriveRelation`](#) derive macro will implement [`RelationTrait`](#) for `Relation`.
+
+## RelatedEntity
+
+The [`DeriveRelatedEntity`](#) derive macro will implement [`seaography::RelationBuilder`](#) for `RelatedEntity` enumeration when the `seaography` feature is enabled
 
 ## Iterable
 

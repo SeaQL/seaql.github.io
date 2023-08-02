@@ -30,9 +30,7 @@ impl ActiveModelBehavior for ActiveModel {}
 
 :::info
 
-Do not delete `Relation` enum or `ActiveModelBehavior` impl block even if you do not want any relations or additional behavior.
-Keep their body empty is enough to make the entity just work.
-
+Do not delete the `Relation` enum or `ActiveModelBehavior` impl block even if they are empty.
 :::
 
 ## Entity
