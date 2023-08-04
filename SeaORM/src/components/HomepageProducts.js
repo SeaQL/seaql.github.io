@@ -77,7 +77,7 @@ const settings = {
   swipeToSlide: true,
   slidesToShow: 4,
   slidesToScroll: 1,
-  initialSlide: 0,
+  initialSlide: Math.floor(Math.random() * ProductList.length),
   rows: 1,
   autoplay: true,
   speed: 500,
@@ -105,7 +105,7 @@ export default function HomepageProducts() {
         <div className="row">
           <div className="col col--12">
             <Slider {...settings}>
-              {ProductList.sort(() => Math.random() - 0.5).map((props, idx) => (
+              {ProductList.map((props, idx) => (
                 <Product key={idx} {...props} />
               ))}
             </Slider>
