@@ -24,9 +24,17 @@ jobs:
           path: |
             ~/.npm
             SeaORM/node_modules
+            SeaORM/.docusaurus
+            SeaORM/build
             Blog/node_modules
+            Blog/.docusaurus
+            Blog/build
             Seaography/node_modules
+            Seaography/.docusaurus
+            Seaography/build
             SeaStreamer/node_modules
+            SeaStreamer/.docusaurus
+            SeaStreamer/build
 
       - run: sh preview.sh ${{ github.event.number }}
 
