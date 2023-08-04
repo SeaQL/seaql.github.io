@@ -47,4 +47,3 @@ jobs:
           umbrella-dir: preview
           custom-url: www.sea-ql.org
           action: auto
-
