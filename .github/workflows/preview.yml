@@ -18,6 +18,16 @@ jobs:
         with:
           node-version: 16
 
+      - uses: actions/cache@v3
+        with:
+          key: ${{ github.repository }}-${{ github.ref_name }}
+          path: |
+            ~/.npm
+            SeaORM/node_modules
+            Blog/node_modules
+            Seaography/node_modules
+            SeaStreamer/node_modules
+
       - run: sh preview.sh ${{ github.event.number }}
 
       - run: sh build.sh
