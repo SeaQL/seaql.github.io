@@ -49,3 +49,13 @@ div[class^=announcementBar_] {
   font-weight: 800;
   color: #fff;
 }
+
+.slick-arrow {
+  filter: drop-shadow(1px 0 0px grey) drop-shadow(0 1px 0 grey) drop-shadow(-1px 0 0 grey) drop-shadow(0 -1px 0 grey);
+}
+
+@media only screen and (max-width: 1200px) {
+  .slick-arrow {
+    display: none !important;
+  }
+}
