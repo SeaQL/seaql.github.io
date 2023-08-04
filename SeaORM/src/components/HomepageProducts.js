@@ -14,12 +14,6 @@ const ProductList = [
     logoClassName: null,
   },
   {
-    url: 'https://codectrl.authentura.com/',
-    logo: 'img/other/codectrl-logo.png',
-    desc: 'A self-hostable code logging platform',
-    logoClassName: styles.codectrlLogo,
-  },
-  {
     url: 'https://mydatamyconsent.com/',
     logo: 'img/other/mydatamyconsent-logo.png',
     desc: 'Online data sharing simplified',
