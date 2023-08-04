@@ -96,10 +96,6 @@ export default function HomepageProducts() {
         <div className="row">
           <div className="col col--12">
               <h2 className="text--center">Who's using SeaORM?</h2>
-              <br/>
-              <p className="text--center">
-                The following products are powered by SeaORM:
-              </p>
           </div>
         </div>
         <div className="row">
