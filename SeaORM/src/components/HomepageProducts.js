@@ -6,18 +6,7 @@ import styles from './HomepageProducts.module.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
-const ProductList = shuffle([
+const ProductList = [
   {
     url: 'https://caido.io/',
     logo: 'img/other/caido-logo.png',
@@ -60,7 +49,7 @@ const ProductList = shuffle([
     desc: 'Serverless Pay as you go VPN',
     logoClassName: styles.upvpnLogo,
   },
-]);
+];
 
 function Product({url, logo, desc, logoClassName}) {
   return (
@@ -76,7 +65,7 @@ function Product({url, logo, desc, logoClassName}) {
           justifyContent: 'flex-end',
         }}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img src={logo} className={clsx(logoClassName)} style={{ width: '250px' }}/>
+            <img src={`${logo}?t=${Date.now()}`} className={clsx(logoClassName)} style={{ width: '250px' }}/>
           </div>
           <p style={{ margin: '0px', marginTop: '20px' }}>
             {desc}
@@ -93,16 +82,16 @@ const settings = {
   pauseOnHover: true,
   swipeToSlide: true,
   slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToScroll: 1,
   initialSlide: 0,
   rows: 1,
   autoplay: true,
   speed: 500,
   autoplaySpeed: 3000,
   responsive: [
-    { breakpoint: 1680, settings: { slidesToShow: 3, slidesToScroll: 3 } },
-    { breakpoint: 900, settings: { slidesToShow: 2, slidesToScroll: 2 } },
-    { breakpoint: 650, settings: { slidesToShow: 1, slidesToScroll: 1, rows: 2 } },
+    { breakpoint: 1680, settings: { slidesToShow: 3 } },
+    { breakpoint: 900, settings: { slidesToShow: 2 } },
+    { breakpoint: 650, settings: { slidesToShow: 1, rows: 2 } },
   ]
 };
 
@@ -122,7 +111,7 @@ export default function HomepageProducts() {
         <div className="row">
           <div className="col col--12">
             <Slider {...settings}>
-              {ProductList.map((props, idx) => (
+              {ProductList.sort(() => Math.random() - 0.5).map((props, idx) => (
                 <Product key={idx} {...props} />
               ))}
             </Slider>
