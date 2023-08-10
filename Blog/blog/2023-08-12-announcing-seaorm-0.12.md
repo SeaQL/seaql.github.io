@@ -20,19 +20,18 @@ Today, many open-source projects, a handful of startups and many more closed-sou
 
 ## New Features 🌟
 
-### 🧭 Seaography: GraphQL integration (preview)
+### 🧭 [Seaography](https://github.com/SeaQL/seaography): GraphQL integration (preview)
 
 <img alt="Seaography example" src="/blog/img/Seaography%20example.png"/>
 
-[Seaography](https://github.com/SeaQL/seaography) is a GraphQL framework built on top of SeaORM. In `0.12`, Seaography integration is built into `sea-orm`.
-
+Seaography is a GraphQL framework built on top of SeaORM. In `0.12`, Seaography integration is built into `sea-orm`.
 Seaography allows you to build GraphQL resolvers quickly. With just a few commands, you can launch a GraphQL server from SeaORM entities!
 
 While Seaography development is still in an early stage, it is especially useful in prototyping and building internal-use admin panels.
 
 [Read the documentation](https://www.sea-ql.org/SeaORM/docs/seaography/seaography-intro/) to learn more.
 
-### Added macro `DerivePartialModel`
+### Added macro [`DerivePartialModel`](https://docs.rs/sea-orm/0.12.2/sea_orm/derive.DerivePartialModel.html)
 
 [#1597](https://github.com/SeaQL/sea-orm/pull/1597) Now you can easily perform custom select to query only the columns you needed
 
@@ -56,7 +55,7 @@ assert_eq!(
 );
 ```
 
-### Added `Select::find_with_linked`
+### Added [`Select::find_with_linked`](https://docs.rs/sea-orm/0.12.2/sea_orm/query/struct.Select.html#method.find_with_linked)
 
 [#1728](https://github.com/SeaQL/sea-orm/pull/1728), [#1743](https://github.com/SeaQL/sea-orm/pull/1743) Similar to `find_with_related`, you can now select related entities and consolidate the models.
 
@@ -87,7 +86,7 @@ let res: Vec<(baker::Model, Vec<customer::Model>)> = Baker::find()
     .await?
 ```
 
-### Added `DeriveValueType` derive macro for custom wrapper types
+### Added [`DeriveValueType`](https://docs.rs/sea-orm/latest/sea_orm/derive.DeriveValueType.html) derive macro for [custom wrapper types](https://www.sea-ql.org/SeaORM/docs/generate-entity/newtype/)
 
 [#1720](https://github.com/SeaQL/sea-orm/pull/1720) So now you can use newtypes easily.
 
@@ -134,7 +133,7 @@ impl ValueType for StringVec {
 
 #### [#1433](https://github.com/SeaQL/sea-orm/pull/1433) Chained AND / OR join ON condition
 
-Added more macro attributes to `DeriveRelation`
+Added more macro attributes to [`DeriveRelation`](https://docs.rs/sea-orm/0.12.2/sea_orm/derive.DeriveRelation.html)
 
 ```rust
 // Entity file
@@ -172,7 +171,7 @@ pub struct Model {
 }
 ```
 
-#### [#1677](https://github.com/SeaQL/sea-orm/pull/1677) Added `UpdateMany::exec_with_returning()`
+#### [#1677](https://github.com/SeaQL/sea-orm/pull/1677) Added [`UpdateMany::exec_with_returning()`](https://docs.rs/sea-orm/0.12.2/sea_orm/query/struct.UpdateMany.html#method.exec_with_returning)
 
 ```rust
 let models: Vec<Model> = Entity::update_many()
@@ -181,7 +180,7 @@ let models: Vec<Model> = Entity::update_many()
     .await?;
 ```
 
-#### [#1511](https://github.com/SeaQL/sea-orm/pull/1511) Added `MigratorTrait::migration_table_name()` method to configure the name of migration table
+#### [#1511](https://github.com/SeaQL/sea-orm/pull/1511) Added [`MigratorTrait::migration_table_name()`](https://docs.rs/sea-orm-migration/0.12.2/sea_orm_migration/migrator/trait.MigratorTrait.html#method.migration_table_name) method to configure the name of migration table
 ```rust
 #[async_trait::async_trait]
 impl MigratorTrait for Migrator {
@@ -192,7 +191,7 @@ impl MigratorTrait for Migrator {
     ...
 }
 ```
-#### [#1707](https://github.com/SeaQL/sea-orm/pull/1707) Added `DbErr::sql_err()` method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors
+#### [#1707](https://github.com/SeaQL/sea-orm/pull/1707) Added [`DbErr::sql_err()`](https://docs.rs/sea-orm/0.12.2/sea_orm/error/enum.DbErr.html#method.sql_err) method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors
 ```rust
 assert!(matches!(
     cake.into_active_model().insert(db).await
@@ -208,7 +207,7 @@ assert!(matches!(
     Some(SqlErr::ForeignKeyConstraintViolation(_))
 ));
 ```
-#### [#1737](https://github.com/SeaQL/sea-orm/pull/1737) Introduced new `ConnAcquireErr`
+#### [#1737](https://github.com/SeaQL/sea-orm/pull/1737) Introduced new [`ConnAcquireErr`](https://docs.rs/sea-orm/0.12.2/sea_orm/error/enum.ConnAcquireErr.html)
 ```rust
 enum DbErr {
     ConnectionAcquire(ConnAcquireErr),
@@ -220,7 +219,7 @@ enum ConnAcquireErr {
     ConnectionClosed,
 }
 ```
-#### [#1627](https://github.com/SeaQL/sea-orm/pull/1627) Added `DatabaseConnection::ping`
+#### [#1627](https://github.com/SeaQL/sea-orm/pull/1627) Added [`DatabaseConnection::ping()`](https://docs.rs/sea-orm/0.12.2/sea_orm/error/enum.ConnAcquireErr.html)
 ```rust
 |db: DatabaseConnection| {
     assert!(db.ping().await.is_ok());
@@ -228,7 +227,7 @@ enum ConnAcquireErr {
     assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire)));
 }
 ```
-#### [#1708](https://github.com/SeaQL/sea-orm/pull/1708) Added `TryInsert` that does not panic on empty inserts
+#### [#1708](https://github.com/SeaQL/sea-orm/pull/1708) Added [`TryInsert`](https://docs.rs/sea-orm/0.12.2/sea_orm/query/struct.TryInsert.html) that does not panic on empty inserts
 ```rust
 // now, you can do:
 let res = Bakery::insert_many(std::iter::empty())
@@ -251,7 +250,7 @@ let res =
 Entity::insert_many([..]).on_conflict(on).do_nothing().exec(db).await;
 assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
 ```
-#### [#1740](https://github.com/SeaQL/sea-orm/pull/1740), [#1755](https://github.com/SeaQL/sea-orm/pull/1755) Replacing `sea_query::Iden` with `sea_orm::DeriveIden`
+#### [#1740](https://github.com/SeaQL/sea-orm/pull/1740), [#1755](https://github.com/SeaQL/sea-orm/pull/1755) Replacing `sea_query::Iden` with [`sea_orm::DeriveIden`](https://docs.rs/sea-orm/0.12.2/sea_orm/derive.DeriveIden.html)
 
 To provide a more consistent interface, `sea-query/derive` is no longer enabled by `sea-orm`, as such, `Iden` no longer works as a derive macro (it's still a trait).
 

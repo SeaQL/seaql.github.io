@@ -155,7 +155,7 @@ module.exports = {
     },
     announcementBar: {
       id: 'sea-orm-bar',
-      content: '🐚 SeaORM 0.12 is released! If you like SeaORM, please give us a <a target="_blank" rel="noopener noreferrer" href="https://github.com/SeaQL/sea-orm">⭐️ on GitHub</a> and complete our <a target="_blank" rel="noopener noreferrer" href="https://sea-ql.org/community-survey">Community Survey</a>! 🦀',
+      content: '🐚 <a href="https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/">SeaORM 0.12 is released!</a> If you like SeaORM, please give us a <a target="_blank" href="https://github.com/SeaQL/sea-orm">⭐️ on GitHub</a> and complete our <a target="_blank" href="https://sea-ql.org/community-survey">Community Survey</a>! 🦀',
       isCloseable: false,
     },
   },
