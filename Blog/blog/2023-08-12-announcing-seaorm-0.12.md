@@ -1,89 +1,49 @@
 ---
 slug: 2023-08-12-announcing-seaorm-0.12
-title: Announcing SeaORM 0.12
+title: Announcing SeaORM 0.12 🐚
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
-author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
+author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
 tags: [news]
 ---
 
-![SeaORM 0.12 Banner](../static/img/SeaORM%2012%20Banner.png)
+<img alt="SeaORM 0.12 Banner" src="/blog/img/SeaORM%2012%20Banner.png"/>
 
 🎉 We are pleased to announce SeaORM [`0.12`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.1) today!
 
-We still remember the time when we first [introduced SeaORM](https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago. We set out a goal to enable developers to build async, database-driven applications in Rust.
+We still remember the time when we first [introduced SeaORM](/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago. We set out a goal to enable developers to build asynchronous database-driven applications in Rust.
 
-Today, many open-source projects, a handful of startups and many more closed-source projects are using SeaORM. Thank you all who participated and contributed in the making of SeaORM.
+Today, many open-source projects, a handful of startups and many more closed-source projects are using SeaORM. Thank you all who participated and contributed in the making!
 
-Below are some feature highlights 🌟:
+<img alt="SeaORM Star History" src="/blog/img/star-history-sea-orm-2023.png"/>
 
-## `DeriveValueType` for Custom Wrapper Type
+## New Features 🌟
 
-[[#1720](https://github.com/SeaQL/sea-orm/pull/1720)] `DeriveValueType` derive macro will implements the required traits of custom wrapper type.
+### 🧭 Seaography: GraphQL integration (preview)
 
-```rust
-// You can customize the `column_type` and `array_type` if needed
-#[derive(DeriveValueType)]
-#[sea_orm(array_type = "Int")]
-pub struct Integer(i32);
+<img alt="Seaography example" src="/blog/img/Seaography%20example.png"/>
 
-#[derive(DeriveValueType)]
-#[sea_orm(column_type = "Boolean", array_type = "Bool")]
-pub struct Boolbean(pub String);
+[Seaography](https://github.com/SeaQL/seaography) is a GraphQL framework built on top of SeaORM. In `0.12`, Seaography integration is built into `sea-orm`.
 
-// Or, leave it as default
+Seaography allows you to build GraphQL resolvers quickly. With just a few commands, you can launch a GraphQL server from SeaORM entities!
 
-#[derive(DeriveValueType)]
-pub struct StringVec(pub Vec<String>);
+While Seaography development is still in an early stage, it is especially useful in prototyping and building internal-use admin panels.
 
-// The `DeriveValueType` will be expanded into...
+[Read the documentation](https://www.sea-ql.org/SeaORM/docs/seaography/seaography-intro/) to learn more.
 
-impl From<StringVec> for Value {
-    fn from(source: StringVec) -> Self {
-        source.0.into()
-    }
-}
+### Added macro `DerivePartialModel`
 
-impl sea_orm::TryGetable for StringVec {
-    fn try_get_by<I: sea_orm::ColIdx>(res: &QueryResult, idx: I) -> Result<Self, sea_orm::TryGetError> {
-        <Vec<String> as sea_orm::TryGetable>::try_get_by(res, idx).map(|v| StringVec(v))
-    }
-}
-
-impl sea_orm::sea_query::ValueType for StringVec {
-    fn try_from(v: Value) -> Result<Self, sea_orm::sea_query::ValueTypeErr> {
-        <Vec<String> as sea_orm::sea_query::ValueType>::try_from(v).map(|v| StringVec(v))
-    }
-
-    fn type_name() -> String {
-        stringify!(StringVec).to_owned()
-    }
-
-    fn array_type() -> sea_orm::sea_query::ArrayType {
-        std::convert::Into::<sea_orm::sea_query::ArrayType>::into(
-            <Vec<String> as sea_orm::sea_query::ValueType>::array_type()
-        )
-    }
-
-    fn column_type() -> sea_orm::sea_query::ColumnType {
-        std::convert::Into::<sea_orm::sea_query::ColumnType>::into(
-            <Vec<String> as sea_orm::sea_query::ValueType>::column_type()
-        )
-    }
-}
-```
-
-## `DerivePartialModel` for Querying Partial Model
-
-[[#1597](https://github.com/SeaQL/sea-orm/pull/1597)] `DerivePartialModel` derive macro helps you query partial model. You can customize the field mapping with `from_col` and `from_expr` attributes.
+[#1597](https://github.com/SeaQL/sea-orm/pull/1597) Now you can easily perform custom select to query only the columns you needed
 
 ```rust
 #[derive(DerivePartialModel, FromQueryResult)]
 #[sea_orm(entity = "Cake")]
 struct PartialCake {
     name: String,
-    #[sea_orm(from_expr = r#"SimpleExpr::FunctionCall(Func::upper(Expr::col((Cake, cake::Column::Name))))"#)]
+    #[sea_orm(
+        from_expr = r#"SimpleExpr::FunctionCall(Func::upper(Expr::col((Cake, cake::Column::Name))))"#
+    )]
     name_upper: String,
 }
 
@@ -96,120 +56,97 @@ assert_eq!(
 );
 ```
 
-## `DeriveDisplay` for Active Enum
+### Added `Select::find_with_linked`
 
-[[#1726](https://github.com/SeaQL/sea-orm/pull/1726)] Add `DeriveDisplay` derive macro to implements `std::fmt::Display` for active enum.
+[#1728](https://github.com/SeaQL/sea-orm/pull/1728), [#1743](https://github.com/SeaQL/sea-orm/pull/1743) Similar to `find_with_related`, you can now select related entities and consolidate the models.
 
 ```rust
-// String enum
-#[derive(EnumIter, DeriveActiveEnum, DeriveDisplay)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))", enum_name = "category")]
-pub enum DeriveCategory {
-    #[sea_orm(string_value = "B")]
-    Big,
-    #[sea_orm(string_value = "S")]
-    Small,
-}
-assert_eq!(format!("{}", DeriveCategory::Big), "Big");
-assert_eq!(format!("{}", DeriveCategory::Small), "Small");
+// Consider the following link
+pub struct BakedForCustomer;
 
-// Numeric enum
-#[derive(EnumIter, DeriveActiveEnum, DeriveDisplay)]
-#[sea_orm(rs_type = "i32", db_type = "Integer")]
-pub enum $ident {
-    #[sea_orm(num_value = -10)]
-    Negative,
-    #[sea_orm(num_value = 1)]
-    Big,
-    #[sea_orm(num_value = 0)]
-    Small,
-}
-assert_eq!(format!("{}", $ident::Big), "Big");
-assert_eq!(format!("{}", $ident::Small), "Small");
-assert_eq!(format!("{}", $ident::Negative), "Negative");
+impl Linked for BakedForCustomer {
+    type FromEntity = Entity;
 
-// String enum with `display_value` overrides
-#[derive(EnumIter, DeriveActiveEnum, DeriveDisplay)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
-pub enum DisplayTea {
-    #[sea_orm(string_value = "EverydayTea", display_value = "Everyday")]
-    EverydayTea,
-    #[sea_orm(string_value = "BreakfastTea", display_value = "Breakfast")]
-    BreakfastTea,
+    type ToEntity = super::customer::Entity;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![
+            super::cakes_bakers::Relation::Baker.def().rev(),
+            super::cakes_bakers::Relation::Cake.def(),
+            super::lineitem::Relation::Cake.def().rev(),
+            super::lineitem::Relation::Order.def(),
+            super::order::Relation::Customer.def(),
+        ]
+    }
 }
-assert_eq!(format!("{}", DisplayTea::BreakfastTea), "Breakfast");
-assert_eq!(format!("{}", DisplayTea::EverydayTea), "Everyday");
+
+let res: Vec<(baker::Model, Vec<customer::Model>)> = Baker::find()
+    .find_with_linked(baker::BakedForCustomer)
+    .order_by_asc(baker::Column::Id);
 ```
 
-## Matching Common Database Errors
+### Added `DeriveValueType` derive macro for custom wrapper types
 
-[[#1707](https://github.com/SeaQL/sea-orm/pull/1707)] Add `DbErr::sql_err()` method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors.
-
-```rust
-assert!(matches!(
-    cake
-        .into_active_model()
-        .insert(db)
-        .await
-        .expect_err("Insert a row with duplicated primary key")
-        .sql_err(),
-    Some(SqlErr::UniqueConstraintViolation(_))
-));
-
-assert!(matches!(
-    fk_cake
-        .insert(db)
-        .await
-        .expect_err("Insert a row with invalid foreign key")
-        .sql_err(),
-    Some(SqlErr::ForeignKeyConstraintViolation(_))
-));
-```
-
-## Find with Linked API
-
-[[#1728](https://github.com/SeaQL/sea-orm/pull/1728)], [[#1743](https://github.com/SeaQL/sea-orm/pull/1743)] Add `Select::find_with_linked` method, similar to the `find_with_related` method.
+[#1720](https://github.com/SeaQL/sea-orm/pull/1720) So now you can use newtypes easily. You can customize the `column_type`:
 
 ```rust
-fn find_with_related<R>(self, r: R) -> SelectTwoMany<E, R>
-where 
-    R: EntityTrait,
-    E: Related<R>
-
-fn find_with_linked<L, T>(self, l: L) -> SelectTwoMany<E, T>
-where
-    L: Linked<FromEntity = E, ToEntity = T>,
-    T: EntityTrait
-
-// both yields `Vec<(E::Model, Vec<F::Model>)>`
-```
-
-## Construct Chained AND / OR Join On Condition
-
-[[#1433](https://github.com/SeaQL/sea-orm/pull/1433)] Added option to construct chained AND / OR join on condition.
-
-```rust
-use sea_orm::entity::prelude::*;
-
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
-#[sea_orm(table_name = "cake")]
+#[sea_orm(table_name = "custom_value_type")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    #[sea_orm(column_name = "name", enum_name = "Name")]
-    pub name: String,
+    pub number: Integer,
+    // Postgres only
+    pub str_vec: StringVec,
 }
+
+#[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
+#[sea_orm(column_type = "Int")]
+pub struct Integer(i32);
+
+#[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
+pub struct StringVec(pub Vec<String>);
+```
+
+Which saves you the boilerplate of:
+
+```rust
+impl std::convert::From<StringVec> for Value { .. }
+
+impl TryGetable for StringVec {
+    fn try_get_by<I: ColIdx>(res: &QueryResult, idx: I)
+        -> Result<Self, TryGetError> { .. }
+}
+
+impl ValueType for StringVec {
+    fn try_from(v: Value) -> Result<Self, ValueTypeErr> { .. }
+
+    fn type_name() -> String { "StringVec".to_owned() }
+
+    fn array_type() -> ArrayType { ArrayType::String }
+
+    fn column_type() -> ColumnType { ColumnType::String(None) }
+}
+```
+
+## Enhancements 🆙
+
+#### [#1433](https://github.com/SeaQL/sea-orm/pull/1433) Chained AND / OR join ON condition
+
+Added more macro attributes to `DeriveRelation`
+
+```rust
+// Entity file
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
-    // By default, it's
-    // `JOIN `fruit` ON `cake`.`id` = `fruit`.`cake_id` AND `fruit`.`name` LIKE '%tropical%'`
+    // By default, it's `JOIN `fruit` ON `cake`.`id` = `fruit`.`cake_id` AND `fruit`.`name` LIKE '%tropical%'`
     #[sea_orm(
         has_many = "super::fruit::Entity",
         on_condition = r#"super::fruit::Column::Name.like("%tropical%")"#
     )]
     TropicalFruit,
-    // Or specify `condition_type = "any"` to override it,
+    // Specify `condition_type = "any"` to override it, now it becomes
     // `JOIN `fruit` ON `cake`.`id` = `fruit`.`cake_id` OR `fruit`.`name` LIKE '%tropical%'`
     #[sea_orm(
         has_many = "super::fruit::Entity",
@@ -218,32 +155,59 @@ pub enum Relation {
     )]
     OrTropicalFruit,
 }
-
-impl ActiveModelBehavior for ActiveModel {}
 ```
 
-## Supports `default_expr` in `DeriveEntityModel`
-
-[[#1474](https://github.com/SeaQL/sea-orm/pull/1474)] You can now set `default_expr` in model.
+#### [#1508](https://github.com/SeaQL/sea-orm/pull/1508) Supports entity with composite primary key of arity 12
 
 ```rust
-#[derive(DeriveEntityModel)]
-#[sea_orm(table_name = "hello")]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "primary_key_of_12")]
 pub struct Model {
-    #[sea_orm(default_expr = "Expr::current_timestamp()")]
-    pub timestamp: DateTimeUtc,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id_1: String,
+    ...
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id_12: bool,
 }
-
-assert_eq!(
-    Column::Timestamp.def(),
-    ColumnType::TimestampWithTimeZone.def().default(Expr::current_timestamp())
-);
 ```
 
-## `ConnAcquireErr` for Fine Grained Connection Error
+#### [#1677](https://github.com/SeaQL/sea-orm/pull/1677) Added `UpdateMany::exec_with_returning()`
 
-[[#1737](https://github.com/SeaQL/sea-orm/pull/1737)] Definition of `DbErr::ConnectionAcquire` changed to `ConnectionAcquire(ConnAcquireErr)`, providing more fine grained connection error.
+```rust
+let models: Vec<Model> = Entity::update_many()
+    .col_expr(Column::Values, Expr::expr(..))
+    .exec_with_returning(db)
+    .await?;
+```
 
+#### [#1511](https://github.com/SeaQL/sea-orm/pull/1511) Added `MigratorTrait::migration_table_name()` method to configure the name of migration table
+```rust
+#[async_trait::async_trait]
+impl MigratorTrait for Migrator {
+    // Override the name of migration table
+    fn migration_table_name() -> sea_orm::DynIden {
+        Alias::new("override_migration_table_name").into_iden()
+    }
+    ...
+}
+```
+#### [#1707](https://github.com/SeaQL/sea-orm/pull/1707) Added `DbErr::sql_err()` method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors
+```rust
+assert!(matches!(
+    cake.into_active_model().insert(db).await
+        .expect_err("Insert a row with duplicated primary key")
+        .sql_err(),
+    Some(SqlErr::UniqueConstraintViolation(_))
+));
+
+assert!(matches!(
+    fk_cake.insert(db).await
+        .expect_err("Insert a row with invalid foreign key")
+        .sql_err(),
+    Some(SqlErr::ForeignKeyConstraintViolation(_))
+));
+```
+#### [#1737](https://github.com/SeaQL/sea-orm/pull/1737) Introduced new `ConnAcquireErr`
 ```rust
 enum DbErr {
     ConnectionAcquire(ConnAcquireErr),
@@ -255,31 +219,41 @@ enum ConnAcquireErr {
     ConnectionClosed,
 }
 ```
+#### [#1627](https://github.com/SeaQL/sea-orm/pull/1627) Added `DatabaseConnection::ping`
+```rust
+|db: DatabaseConnection| {
+    assert!(db.ping().await.is_ok());
+    db.clone().close().await;
+    assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire)));
+}
+```
+#### [#1708](https://github.com/SeaQL/sea-orm/pull/1708) Added `TryInsert` that does not panic on empty inserts
+```rust
+// now, you can do:
+let res = Bakery::insert_many(std::iter::empty())
+    .on_empty_do_nothing()
+    .exec(db)
+    .await;
 
-## Upgrades
+assert!(matches!(res, Ok(TryInsertResult::Empty)));
+```
+#### [#1712](https://github.com/SeaQL/sea-orm/pull/1712) Insert on conflict do nothing to return Ok
+```rust
+let on = OnConflict::column(Column::Id).do_nothing().to_owned();
 
-* [[#1520](https://github.com/SeaQL/sea-orm/pull/1520)], [[#1544](https://github.com/SeaQL/sea-orm/pull/1544)] Upgrade `heck` dependency in `sea-orm-macros` and `sea-orm-codegen` to 0.4
-* [[#1752](https://github.com/SeaQL/sea-orm/pull/1752)] Upgrade `strum` to 0.25
-* [[#1562](https://github.com/SeaQL/sea-orm/pull/1562)] Upgrade `sea-query` to 0.29
-* [[#1562](https://github.com/SeaQL/sea-orm/pull/1562)] Upgrade `sea-query-binder` to 0.4
-* [[#1562](https://github.com/SeaQL/sea-orm/pull/1562)] Upgrade `sea-schema` to 0.12
-* [[#1468](https://github.com/SeaQL/sea-orm/pull/1468)] Upgrade `clap` to 4.3
-* [[#1742](https://github.com/SeaQL/sea-orm/pull/1742)] Upgrade `sqlx` to 0.7
-* [[#1739](https://github.com/SeaQL/sea-orm/pull/1739)] Replace `bae` with `sea-bae`
+// Existing behaviour
+let res = Entity::insert_many([..]).on_conflict(on).exec(db).await;
+assert!(matches!(res, Err(DbErr::RecordNotInserted)));
 
-## Breaking Changes
+// New API; now you can:
+let res =
+Entity::insert_many([..]).on_conflict(on).do_nothing().exec(db).await;
+assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
+```
+#### [#1740](https://github.com/SeaQL/sea-orm/pull/1740), [#1755](https://github.com/SeaQL/sea-orm/pull/1755) Replacing `sea_query::Iden` with `sea_orm::DeriveIden`
 
-* [[#1513](https://github.com/SeaQL/sea-orm/pull/1513)] Supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field instead of throwing an error.
-* [[#1535](https://github.com/SeaQL/sea-orm/pull/1535)] Replaced `sea-strum` dependency with upstream `strum` in `sea-orm`
-    * Added `derive` and `strum` features to `sea-orm-macros`
-    * The derive macro `EnumIter` is now shipped by `sea-orm-macros`
-* [[#1508](https://github.com/SeaQL/sea-orm/pull/1508)] Added a new variant `Many` to `Identity`
-* [[#1661](https://github.com/SeaQL/sea-orm/pull/1661)] Replace the use of `SeaRc<T>` where `T` isn't `dyn Iden` with `RcOrArc<T>`
-* [[#1728](https://github.com/SeaQL/sea-orm/pull/1728)], [[#1743](https://github.com/SeaQL/sea-orm/pull/1743)] Enabled `hashable-value` feature in SeaQuery, thus `Value::Float(NaN) == Value::Float(NaN)` would be true
-* [[#1726](https://github.com/SeaQL/sea-orm/pull/1726)] The `DeriveActiveEnum` derive macro no longer provide `std::fmt::Display` implementation for the enum. You need to derive an extra `DeriveDisplay` macro alongside with `DeriveActiveEnum` derive macro.
-* [[#1737](https://github.com/SeaQL/sea-orm/pull/1737)] Definition of `DbErr::ConnectionAcquire` changed to `ConnectionAcquire(ConnAcquireErr)`
-* `FromJsonQueryResult` removed from entity prelude
-* `sea-query/derive` is no longer enabled by `sea-orm`, as such, `Iden` no longer works as a derive macro (it's still a trait). Instead, we are shipping a new macro `DeriveIden`:
+To provide a more consistent interface, `sea-query/derive` is no longer enabled by `sea-orm`, as such, `Iden` no longer works as a derive macro (it's still a trait).
+
 ```rust
 // then:
 
@@ -290,7 +264,7 @@ pub struct CategoryEnum;
 #[derive(Iden)]
 pub enum Tea {
     Table,
-    #[iden = "EverydayTea"]
+    #[iden = "AfternoonTea"]
     EverydayTea,
 }
 
@@ -303,48 +277,38 @@ pub struct CategoryEnum;
 #[derive(DeriveIden)]
 pub enum Tea {
     Table,
-    #[sea_orm(iden = "EverydayTea")]
+    #[sea_orm(iden = "AfternoonTea")]
     EverydayTea,
 }
 ```
 
-## SeaORM Enhancements
+## New Release Train 🚅
 
-* [[#1513](https://github.com/SeaQL/sea-orm/pull/1513)] Supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
-* [[#1508](https://github.com/SeaQL/sea-orm/pull/1508)] Supports entity with composite primary key of length 12
-* [[#1599](https://github.com/SeaQL/sea-orm/pull/1599)] Add generation of `seaography` related information to `sea-orm-codegen`
-* [[#1519](https://github.com/SeaQL/sea-orm/pull/1519)] Added `Migration::name()` and `Migration::status()` getters for the name and status of `sea_orm_migration::Migration`
-* [[#1565](https://github.com/SeaQL/sea-orm/pull/1565)] The `postgres-array` feature will be enabled when `sqlx-postgres` backend is selected
-* [[#1439](https://github.com/SeaQL/sea-orm/pull/1439)] Replace `String` parameters in API with `Into<String>`
-* [[#1661](https://github.com/SeaQL/sea-orm/pull/1661)] Re-export `sea_query::{DynIden, RcOrArc, SeaRc}` in `sea_orm::entity::prelude` module
-* [[#1627](https://github.com/SeaQL/sea-orm/pull/1627)] Added `DatabaseConnection::ping`
-* [[#1708](https://github.com/SeaQL/sea-orm/pull/1708)] Added `TryInsert` that does not panic on empty inserts
-* [[#1712](https://github.com/SeaQL/sea-orm/pull/1712)] On conflict do nothing not resulting in Err
-* [[#1677](https://github.com/SeaQL/sea-orm/pull/1677)] Added `UpdateMany::exec_with_returning()`
+It's been the **12th** release of SeaORM! Initially, a major version was released every month. It gradually became 2 to 3 months, and now, it's been 6 months since the last major release. As our userbase grew and some are already [using SeaORM in production](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#startups), we understand the importance of having a stable API surface and feature set.
 
-## CLI Enhancements
+That's why we are committed to:
 
-* [[#1334](https://github.com/SeaQL/sea-orm/pull/1334)] The `migrate init` command will create a `.gitignore` file when the migration folder reside in a Git repository
-* [[#1570](https://github.com/SeaQL/sea-orm/pull/1570)] Added support for generating migration of space separated name, for example executing `sea-orm-cli migrate generate "create accounts table"` command will create `m20230503_000000_create_accounts_table.rs` for you
-* [[#1511](https://github.com/SeaQL/sea-orm/pull/1511)] Added `MigratorTrait::migration_table_name()` method to configure the name of migration table
+1. Reviewing breaking changes with strict scrutiny
+2. Expanding our test suite to cover all features of our library
+3. Never remove features, and consider deprecation carefully
 
-## Integration Examples
+Today, the architecture of SeaORM is pretty solid and stable, and with the `0.12` release where we paid back a lot of technical debt, we will be able to deliver new features and enhancements without breaking. As our major dependency [SQLx](https://github.com/launchbadge/sqlx) is not `1.0` yet, technically we cannot be `1.0`.
 
-SeaORM plays well with the other crates in the async ecosystem. We maintain an array of example projects for building REST, GraphQL and gRPC services. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
+We are still advancing rapidly, and we will always make a new release as soon as SQLx makes a new release, so that you can upgrade everything at once. As a result, the next major release of SeaORM will come out **6 months from now, or when SQLx makes a new release**, whichever is earlier.
 
-* [Actix v4 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
-* [Actix v3 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix3_example)
-* [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
-* [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
-* [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
-* [Poem Example](https://github.com/SeaQL/sea-orm/tree/master/examples/poem_example)
-* [Rocket Example](https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example)
-* [Salvo Example](https://github.com/SeaQL/sea-orm/tree/master/examples/salvo_example)
-* [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
+## [Community Survey](https://www.sea-ql.org/community-survey) 📝
 
-## Sponsor
+SeaQL is an independent open-source organization. Our goal is to enable developers to build data intensive applications in Rust. If you are using SeaORM, please participate in the [SeaQL Community Survey](https://www.sea-ql.org/community-survey)!
 
-Our [GitHub Sponsor](https://github.com/sponsors/SeaQL) profile is up! SeaQL.org is an independent open-source organization run by passionate developers. If you enjoy using SeaORM, please star and share our repositories. If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the project.
+By completing this survey, you will help us gather insights into how you, the developer, are using our libraries and identify means to improve your developer experience. We will also publish an annual survey report to summarize our findings.
+
+If you are a happy user of SeaORM, consider [writing us a testimonial](https://forms.office.com/r/YbeqfTAgkJ)!
+
+## Sponsor 🥇
+
+A big thank to [DigitalOcean](https://www.digitalocean.com/) who sponsored our server hosting, and [JetBrains](https://www.jetbrains.com/) who sponsored our IDE, and every sponsor on [GitHub Sponsor](https://github.com/sponsors/SeaQL)!
+
+If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
 
 A big shout out to our sponsors 😇:
 
@@ -507,8 +471,10 @@ A big shout out to our sponsors 😇:
     </div>
 </div>
 
-## What's Next?
+## What's Next for SeaORM? ⛵
 
-SeaQL is a community driven project. We welcome you to participate, contribute and build together for Rust's future.
+Open-source project is a never-ending work, and we are actively looking for ways to sustain the project. You can support our endeavour by starring & sharing our repositories and becoming a sponsor.
 
-Here is the roadmap for SeaORM [`0.13.x`](https://github.com/SeaQL/sea-orm/milestone/13).
+We are considering multiple directions to generate revenue for the organization. If you have any suggestion, or want to join or collaborate with us, please contact us via `hello[at]sea-ql.org`.
+
+Thank you for your support, and together we can make open-source sustainable.
