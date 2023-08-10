@@ -82,12 +82,14 @@ impl Linked for BakedForCustomer {
 
 let res: Vec<(baker::Model, Vec<customer::Model>)> = Baker::find()
     .find_with_linked(baker::BakedForCustomer)
-    .order_by_asc(baker::Column::Id);
+    .order_by_asc(baker::Column::Id)
+    .all(db)
+    .await?
 ```
 
 ### Added `DeriveValueType` derive macro for custom wrapper types
 
-[#1720](https://github.com/SeaQL/sea-orm/pull/1720) So now you can use newtypes easily. You can customize the `column_type`:
+[#1720](https://github.com/SeaQL/sea-orm/pull/1720) So now you can use newtypes easily.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -101,7 +103,6 @@ pub struct Model {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
-#[sea_orm(column_type = "Int")]
 pub struct Integer(i32);
 
 #[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
