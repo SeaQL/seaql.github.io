@@ -191,7 +191,7 @@ impl MigratorTrait for Migrator {
     ...
 }
 ```
-#### [#1707](https://github.com/SeaQL/sea-orm/pull/1707) Added [`DbErr::sql_err()`](https://docs.rs/sea-orm/0.12.2/sea_orm/error/enum.DbErr.html#method.sql_err) method to convert error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors
+#### [#1707](https://github.com/SeaQL/sea-orm/pull/1707) Added [`DbErr::sql_err()`](https://docs.rs/sea-orm/0.12.2/sea_orm/error/enum.DbErr.html#method.sql_err) method to parse common database errors
 ```rust
 assert!(matches!(
     cake.into_active_model().insert(db).await
