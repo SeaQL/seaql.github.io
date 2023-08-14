@@ -114,11 +114,23 @@ cargo run --bin consumer -- --stream redis://localhost:6379/hello2
 kill %1 %2`
   },
   {
+    title: 'Running with File',
+    code: `# Create the file
+file=/tmp/sea-streamer-$(date +%s)
+touch $file && echo "File created at $file"
+# Produce some input
+cargo run --bin producer -- --stream file://$file/hello &
+# Replay the input
+cargo run --bin consumer -- --stream file://$file/hello
+# Start the processor, producing some output
+cargo run --bin processor -- --input file://$file/hello --output stdio:///hello`
+  },
+  {
     title: 'Running with Stdio',
     code: `# Pipe the producer to the processor
 cargo run --bin producer -- --stream stdio:///hello1 | \
 cargo run --bin processor -- --input stdio:///hello1 --output stdio:///hello2`
-  }
+  },
 ];
 
 export default function HomepageCompare() {
