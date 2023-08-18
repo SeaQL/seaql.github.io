@@ -14,7 +14,7 @@ tags: [news]
 
 We still remember the time when we first [introduced SeaORM](/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago. We set out a goal to enable developers to build asynchronous database-driven applications in Rust.
 
-Today, many open-source projects, a handful of startups and many more closed-source projects are using SeaORM. Thank you all who participated and contributed in the making!
+Today, many open-source projects, [a handful of startups](https://www.sea-ql.org/SeaORM/index.html#our-users) and many more closed-source projects are using SeaORM. Thank you all who participated and contributed in the making!
 
 <img alt="SeaORM Star History" src="/blog/img/star-history-sea-orm-2023.png"/>
 

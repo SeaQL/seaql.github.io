@@ -91,7 +91,7 @@ const settings = {
 
 export default function HomepageProducts() {
   return (
-    <section className={clsx('home-section', styles.features)}>
+    <section id="our-users" className={clsx('home-section', styles.features)}>
       <div className="container">
         <div className="row">
           <div className="col col--12">
