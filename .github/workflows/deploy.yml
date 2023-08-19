@@ -40,11 +40,26 @@ jobs:
             SeaStreamer/.docusaurus
             SeaStreamer/build
 
-      - run: sh build.sh
+      - id: git-log
+        run: echo "message=$(git log --no-merges -1 --oneline)" >> $GITHUB_OUTPUT
+
+      - run: echo $GITHUB_OUTPUT
+
+      - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh SeaORM SeaORM
+
+      - if: ${{ contains(steps.git-log.outputs.message, '[blog]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh Blog blog
+
+      - if: ${{ contains(steps.git-log.outputs.message, '[Seaography]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh Seaography Seaography
+
+      - if: ${{ contains(steps.git-log.outputs.message, '[SeaStreamer]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh SeaStreamer SeaStreamer
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs
-          clean: true
+          clean: false
           clean-exclude: preview
