@@ -48,7 +48,7 @@ jobs:
       - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaORM SeaORM
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[blog]') || contains(steps.git-log.outputs.message, '[full]') }}
+      - if: ${{ contains(steps.git-log.outputs.message, '[Blog]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh Blog blog
 
       - if: ${{ contains(steps.git-log.outputs.message, '[Seaography]') || contains(steps.git-log.outputs.message, '[full]') }}
