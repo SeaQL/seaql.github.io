@@ -48,6 +48,8 @@ SeaStreamer achieves this by computing checksums for every message, and also the
 
 #### Summary
 
+This file format is also easy to implement in different languages, as we just made an (experimental) [reader in Typescript](https://github.com/SeaQL/sea-streamer/tree/main/sea-streamer-file/sea-streamer-file-reader).
+
 That's it! If you are interested, you can go and take a look at the [format description](https://docs.rs/sea-streamer-file/latest/sea_streamer_file/format/index.html).
 
 ## Redis Backend
@@ -60,7 +62,7 @@ The pitfall is, it's not easy to maximize concurrency with the raw Redis API. To
 
 SeaStreamer breaks these obstacles for you and offers a Kafka-like API experience!
 
-## Throughput
+## Benchmark
 
 In `0.3`, we have done some optimizations to improve the throughput of the Redis and File backend. We set our initial benchmark at 100k messages per second, which hopefully we can further improve over time.
 
@@ -73,7 +75,7 @@ For Redis, it's running on the same computer in Docker. On my not-very-impressiv
 ```
 redis    0.5s
 stdio    0.5s
-file     1.5s
+file     0.5s
 ```
 
 #### Consumer
@@ -81,10 +83,10 @@ file     1.5s
 ```
 redis    1.0s
 stdio    1.0s
-file     2.0s
+file     1.1s
 ```
 
-It practically means that we are comfortably in the realm of 100k messages per second with the Redis and Stdio backend, but fall short of the benchmark with the File backend. Suggestions to performance improvements are welcomed!
+It practically means that we are comfortably in the realm of *producing* 100k messages per second, but are just about able to *consume* 100k messages in 1 second. Suggestions to performance improvements are welcomed!
 
 ## Community
 
