@@ -42,9 +42,9 @@ These beacons also double as indices: they contain summaries of the individual s
 
 ### Streaming-friendliness
 
-It should always be safe to truncate files. It should be relatively easy to stitch together several files without expensive re-encoding. We should be able to tell if the data is corrupted.
+It should always be safe to truncate files. It should be relatively easy to split a file into chunks. We should be able to tell if the data is corrupted.
 
-SeaStreamer achieves this by a computing checksum for every message, and also the running checksum of the checksums for each stream. It's not enforced right now, but in theory we can detect if any messages are missing from a stream.
+SeaStreamer achieves this by computing a checksum for every message, and also the running checksum of the checksums for each stream. It's not enforced right now, but in theory we can detect if any messages are missing from a stream.
 
 #### Summary
 
