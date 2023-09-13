@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { useColorMode } from '@docusaurus/theme-common';
 
 import Prism from "prism-react-renderer/prism";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -152,10 +151,7 @@ export default function HomepageCompare() {
     setMounted(true);
   }, []);
 
-  const { colorMode } = useColorMode();
-  const lightModeTheme = prism.theme;
-  const darkModeTheme = prism.darkTheme || lightModeTheme;
-  const prismTheme = colorMode === 'dark' ? darkModeTheme : lightModeTheme;
+  const prismTheme = prism.theme;
 
   return (
     <section className={clsx('home-section', 'home-section-alt', styles.features)}>
