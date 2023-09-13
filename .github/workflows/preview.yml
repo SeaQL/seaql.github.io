@@ -22,7 +22,7 @@ jobs:
         with:
           key: ${{ github.repository }}-${{ github.ref_name }}
           path: |
-            ~/.npm
+            ~/.yarn
             SeaORM/node_modules
             SeaORM/.docusaurus
             SeaORM/build
