@@ -12,7 +12,7 @@ tags: [news]
 
 🎉 We are pleased to announce SeaORM [`0.12`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.1) today!
 
-We still remember the time when we first [introduced SeaORM](/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago. We set out a goal to enable developers to build asynchronous database-driven applications in Rust.
+We still remember the time when we first [introduced SeaORM](https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago. We set out a goal to enable developers to build asynchronous database-driven applications in Rust.
 
 Today, many open-source projects, [a handful of startups](https://www.sea-ql.org/SeaORM/index.html#our-users) and many more closed-source projects are using SeaORM. Thank you all who participated and contributed in the making!
 

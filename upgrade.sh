@@ -5,11 +5,12 @@ set -e
 cd SeaORM
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx -y update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
 
@@ -17,11 +18,12 @@ cd ..
 cd SeaQuery
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx --yes update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
 
@@ -29,11 +31,12 @@ cd ..
 cd StarfishQL
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx --yes update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
 
@@ -41,11 +44,12 @@ cd ..
 cd Blog
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx --yes update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
 
@@ -53,11 +57,12 @@ cd ..
 cd Seaography
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx --yes update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
 
@@ -65,10 +70,11 @@ cd ..
 cd SeaStreamer
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
-npm install
+[[ -d .yarn ]] && rm -rf .yarn
+[[ -d build ]] && rm -rf build
 yarn install
-yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
-npx update-browserslist-db@latest -y
-npm run build
+yarn up @docusaurus/core @docusaurus/preset-classic
+npx --yes update-browserslist-db@latest
+yarn build
 rm -rf build
 cd ..
