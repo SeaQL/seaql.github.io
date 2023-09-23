@@ -282,7 +282,7 @@ pub enum Tea {
 }
 ```
 
-## New Release Train 🚅
+## New Release ~~Train~~ Ferry 🚢
 
 It's been the **12th** release of SeaORM! Initially, a major version was released every month. It gradually became 2 to 3 months, and now, it's been 6 months since the last major release. As our userbase grew and some are already [using SeaORM in production](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#startups), we understand the importance of having a stable API surface and feature set.
 
