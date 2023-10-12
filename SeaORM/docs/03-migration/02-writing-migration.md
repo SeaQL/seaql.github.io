@@ -210,7 +210,7 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Drop Data Type (PostgreSQL only)
     ```rust
-    manager.drop_type(sea_query::Type::drop()..)
+    manager.drop_type(sea_query::extension::postgres::Type()..)
     ```
 
 #### Schema Inspection Methods

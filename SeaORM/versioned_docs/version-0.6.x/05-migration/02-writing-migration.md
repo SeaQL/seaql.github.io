@@ -185,7 +185,7 @@ Click [here](https://github.com/SeaQL/sea-query#usage) to take a quick tour of S
     ```
 - Drop Data Type (PostgreSQL only)
     ```rust
-    manager.drop_type(sea_query::Type::drop())
+    manager.drop_type(sea_query::extension::postgres::Type())
     ```
 
 #### Schema Inspection Methods
