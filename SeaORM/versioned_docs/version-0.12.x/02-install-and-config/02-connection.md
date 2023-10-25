@@ -1,4 +1,4 @@
-# Connection Pool
+# Database Connection
 
 To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/*/sea_orm/struct.Database.html) interface:
 
@@ -10,11 +10,53 @@ let db: DatabaseConnection = Database::connect("protocol://username:password@hos
 
 `host` is usually `localhost`, a domain name or an IP address.
 
+:::tip
+
+If you can't get `localhost` to work, try putting in an IP address and port number, e.g. `127.0.0.1:3306` or even `192.168.x.x`.
+
+:::
+
 Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.5/sqlx/struct.Pool.html) is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/*/sea_orm/enum.DatabaseConnection.html).
 
 Each time you call `execute` or `query_one/all` on it, a connection will be acquired and released from the pool.
 
 Multiple queries will execute in parallel as you `await` on them.
+
+## Connection String
+
+Here are some tips for database specific options:
+
+### MySQL
+
+Can't think of any
+
+### Postgres
+
+#### Specify a schema
+
+```
+postgres://username:password@host/database?currentSchema=my_schema
+```
+
+### SQLite
+
+#### In memory
+
+```
+sqlite::memory:
+```
+
+#### Create file if not exists
+
+```
+sqlite://path/to/db.sqlite?mode=rwc
+```
+
+#### Read only
+
+```
+sqlite://path/to/db.sqlite?mode=ro
+```
 
 ## Connect Options
 
