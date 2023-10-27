@@ -22,6 +22,8 @@ jobs:
         with:
           node-version: 16
 
+      - run: yarn set version 3.6.1
+
       - uses: actions/cache@v3
         with:
           key: ${{ github.repository }}-${{ github.ref_name }}
