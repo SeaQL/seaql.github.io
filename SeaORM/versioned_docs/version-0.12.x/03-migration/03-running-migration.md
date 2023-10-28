@@ -54,7 +54,7 @@ Migrator::up(db, None).await?;
 /// Apply 10 pending migrations
 Migrator::up(db, Some(10)).await?;
 
-/// Rollback last applied migrations
+/// Rollback all applied migrations
 Migrator::down(db, None).await?;
 
 /// Rollback last 10 applied migrations
