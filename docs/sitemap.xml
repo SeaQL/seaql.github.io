@@ -21,4 +21,7 @@
   <sitemap>
     <loc>https://www.sea-ql.org/SeaStreamer/sitemap.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>https://firedbg.sea-ql.org/sitemap.xml</loc>
+  </sitemap>
 </sitemapindex>
