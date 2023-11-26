@@ -1,6 +1,6 @@
 ---
 slug: 2023-11-25-openuk-award
-title: OpenUK Award 2023
+title: OpenUK Award 2023 🏆
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
