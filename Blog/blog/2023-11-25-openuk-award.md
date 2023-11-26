@@ -10,7 +10,7 @@ tags: [news]
 
 <img src="https://www.sea-ql.org/blog/img/openuk-software-seaql.jpg"/>
 
-It is our honour to have been awarded by [OpenUK for the 2023 Award](https://openuk.uk/awards/) in the Software category! The award ceremony was a very memorable experience. And thank you [Red Badger](https://red-badger.com/) for sponsoring the award.
+It is our honour to have been awarded by [OpenUK for the 2023 Award](https://openuk.uk/awards/) in the Software category! The award ceremony was a very memorable experience. A huge thanks to [Red Badger](https://red-badger.com/) who sponsored the software award.
 
 In case you wonder, SeaQL was founded in Hong Kong, and is based in the United Kingdom since 2023. Within this year, we released SeaStreamer, two major versions of SeaORM, a new version of Seaography, and have been busy working on a new project on the side.
 
