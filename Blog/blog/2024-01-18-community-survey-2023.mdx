@@ -1,0 +1,310 @@
+---
+slug: 2024-01-18-community-survey-2023
+title: Community Survey 2023
+author: SeaQL Team
+author_title: Chris Tsang
+author_url: https://github.com/SeaQL
+author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
+tags: [news]
+---
+
+import * as Chart from '../src/chart.js';
+
+Number of responses 524.
+
+## Questions for Developer Using SeaQL Libraries
+
+### 1. Are you using SeaQL libraries in building a project?
+
+<Chart.numUsingSeaQL />
+
+### 2. Which SeaQL libraries are you using?
+
+<Chart.numUsingSeaQLLib />
+
+### 3. Are you using SeaQL libraries in a personal, academic or professional context?
+
+<Chart.numUsingContext />
+
+### 4. Where are you located in?
+
+<Chart.numCountry />
+
+Other countries: <Chart.badges items={[
+    "Argentina",
+    "Australia",
+    "Austria",
+    "Belarus",
+    "Belgium",
+    "Cyprus",
+    "Czechia",
+    "Denmark",
+    "Hungary",
+    "Iran",
+    "Ireland",
+    "Italy",
+    "Japan",
+    "Kazakstan",
+    "Korea",
+    "Mongolia",
+    "Nigeria",
+    "Norway",
+    "Peru",
+    "Poland",
+    "Slovakia",
+    "South Africa",
+    "Spain",
+    "Sweden",
+    "Taiwan ",
+    "Thailand",
+    "Turkey",
+    "Ukraine",
+]} />
+
+### 5. How many team members (including you) are working on the project?
+
+<Chart.numTeamMember />
+
+### 6. Can you categorize the nature of the project?
+
+<Chart.projNature />
+
+Other natures: <Chart.badges items={[
+    "Forecasting",
+    "Financial trading",
+    "Fintech",
+    "Cloud infrstructure automation tool",
+    "A healthcare ERP/CRM solution",
+    "Enterprise Resource Planning (ERP)",
+    "Backend of a web app",
+    "Backend for a complex system",
+    "Backend for a web and mobile application",
+    "Backend for desktop, mobile and web application",
+]} />
+
+### 7. What is your development environment?
+
+<Chart.devEnv />
+
+### 8. Which database(s) do you use?
+
+<Chart.db />
+
+### 9. Which web framework are you using?
+
+<Chart.webFramework />
+
+### 10. What is the deployment environment?
+
+<Chart.deployEnv />
+
+### 11. Are you using Rust at work?
+
+<Chart.useRust />
+
+### 12. Which industry your company is in?
+
+<Chart.industry />
+
+### 13. How many engineers in your company are dedicated to writing Rust?
+
+<Chart.engineer />
+
+### 14. What is the size of your company?
+
+<Chart.companySize />
+
+### 15. If you may, can you share the name of the company?
+
+
+
+### 16. Otherwise, can you give a vague description of the company (e.g. "publicly traded health-tech company")?
+
+
+
+### 17. Which layer(s) of the technology stack are using Rust?
+
+<Chart.techStack />
+
+### 18. How many company projects are using SeaQL libraries?
+
+<Chart.numRustProj />
+
+### 19. Would your company be interested in using SeaQL libraries with other databases?
+
+<Chart.dbInterested />
+
+### 20. What other "Enterprise features" that your company may need?
+
+### 21. Are you learning / new to Rust?
+
+<Chart.learningRust />
+
+### 22. Which language(s) are you most familiar with?
+
+<Chart.familiarLanguage />
+
+### 23. Do you find Rust easy or hard to learn?
+
+<Chart.hardToLearn />
+
+### 24. What motivates you to learn Rust?
+
+<Chart.motivation />
+
+Other: <Chart.badges items={[
+    "Speed",
+    "Ability to develop fast, secure and standalone API driven tools",
+    "Efficiency, Safety, low resources",
+    "Completely typesafe",
+    "Good design decisions from the start",
+    "Very fast",
+    "Hobby, Programing is God of future. I Like programing so so so much. Can be described as sacrificing sleep and meals.",
+    "Reliability and ease of development",
+    "School makes me to learn",
+    "Rust is too cool",
+    "The ecosystem of libraries + general competence of lib authors",
+    "Apparently it is the most loved language, but I am not too sure why... ",
+    "I can always make sense of everything. Never confused about how a programming structure works.",
+    "The guarantees Rust provides",
+    "Learning something new",
+    "Type safety and speed",
+    "Making passion project and want to get away from Null",
+    "no boilerplate, if you do not want it",
+    "Performance",
+]} />
+
+### 25. What learning resources do you rely on?
+
+<Chart.learningResource />
+
+Other: <Chart.badges items={[
+    "Vedios",
+    "Rust Book experiment - Brown University",
+    "Online videos",
+    "Just doing it.",
+    "The voices",
+    "Youtube",
+    "courses",
+    "ChatGPT helps with debugging or getting ideas out in rust-style code",
+    "ChatGPT 4",
+]} />
+
+### 26. What is your first project built using Rust?
+
+<Chart.firstProj />
+
+Other: <Chart.badges items={[
+    "Scraper",
+    "Rasterization of the mandelbrot set",
+    "IoT",
+    "Simple graphql service",
+    "API for web app",
+    "linux desktop ui container manager",
+    "API",
+    "Library",
+]} />
+
+### 27. Why did you choose SeaQL libraries?
+
+<Chart.whySeaQL />
+
+Other: <Chart.badges items={[
+    "async, rich cli",
+    "It was recommended on websites and youtube",
+    "It is easier to use in a library than e.g. diesel",
+    "Diesel has no proper async support + there are no other ORMs",
+    "async support, seems future proof, better/prettier docs than diesel",
+    "Does not use SQL for migrations (we tried Diesel first but some of our developers really don't like writing SQL)",
+    "included postgres drivers made me curious",
+    "API",
+    "It is this or Diesel",
+    "The most important thing is that it is very beginner-friendly and easy to get started.",
+    "Didn't like Diesel, SeaQL async API",
+    "Managed to translate Eloquent ORM knowledge more easily",
+    "Tokio runtime",
+    "Query performance",
+    "Wanted to try",
+    "then i saw the convenience and power of sea-orm (can drop into sea-query if necessary, but shouldn't need to frequently)",
+    "used in Loco",
+    "I like the modern design of you website. ",
+    "i started with sqlx, then tried sea-query and was happy to give up compile time correctness for a typed approach to building queries",
+    "I'we found good examples in youtobe",
+]} />
+
+### 28. Are you familiar with SQL?
+
+<Chart.familiarWithSql />
+
+### 29. What qualities of SeaQL libraries do you think are important?
+
+<Chart.quality />
+
+Other: <Chart.badges items={[
+    "Generate modules from existent database via CLI",
+    "Being able to express easily what you would otherwise be able to write in pure SQL",
+    "Code generation with cli",
+    "migration/entity generation",
+    "Clarify of the implementation and usage patterns",
+    "Simple Syntax",
+    "Efficient query building especially with relations and joins",
+    "Ergonomic API",
+]} />
+
+### 30. Which aspects do you want to see advancement on SeaORM?
+
+<Chart.advancement />
+
+Other: <Chart.badges items={[
+    "You can structure queries for some complex Join statements.",
+    "Multiple schemas",
+    "Less verbose migrations",
+    "Better entity format",
+    "Sql Server support?",
+    "Better interaction with Juniper (GraphQL)",
+    "A stable release, support for all features of MySQL",
+    "Better migration, seeding and mocking",
+    "Migrations based on Entity diffs",
+    "Better support for custom mappings",
+    "Schema first migrations",
+    "Better types for joins",
+    "Tutorial in how to extend SeaOrm with other databases",
+    "comparable features with Django's ORM",
+    "better date / time integration, especially for sqlite where everything is just stored as string",
+    "Complex query support and type safety",
+    "Lazy-Loading multiple Enteties",
+    "consolidating existing integrations",
+    "Lower throughput: using SeaOrm ergonomically often requires fetching entire entries when you only want part of them.",
+    "Couldn't tell yet",
+    "Model-first instead of Schema-First",
+    "easier testing",
+    "Better docs, generate schema from entities",
+    "Ergonomic API",
+    "schema, migration generation from entity. kinda like django and prisma",
+    "Support for SQL \"Exists\" and add Serialize to the Models when generating Entities.",
+    "Better documentation",
+    "Being able to use SeaOrm on a relation table that has no primary key",
+    "Turso (libsql) integration",
+    "Fetching nested structures in more than on level deep",
+    "Views, nested many-to-any relationship queries",
+    "A feature-rich implementation of MockDatabase, outside of internal testing. Kinda like pg-embed, for example. DB unit tests are difficult in Rust without a configured deployment ","pipeline with real db.",
+    "Full Mysql coverage",
+    "GraphQL mutations are the missing link for me",
+]} />
+
+### 31. What tools would you be interested in using, if developed first-party by SeaQL?
+
+<Chart.firstPartySupport />
+
+Other: <Chart.badges items={[
+    "api integration testing",
+    "some kind of oso-based authorization integration for seaography/async-graphql",
+    "A visual tool for managing migrations",
+    "Database Layout editor (like dbdiagram.io)",
+]} />
+
+### 32. Anything else you want to say or let us know?
+
+<!-- <Chart. /> -->
+
+<!-- Other: <Chart.badges items={[]} /> -->
