@@ -214,23 +214,56 @@ export function projNature(props) {
 export function devEnv(props) {
     const id = "devEnv";
     const data = [
-        { label: "MacOS (Apple Silicon) (M1, M2, etc)", count: 160 },
-        { label: "Linux (Ubuntu)", count: 112 },
-        { label: "Windows (Native)", count: 102 },
-        { label: "Linux (Arch)", count: 80 },
-        { label: "Windows (Windows Subsystem for Linux)", count: 76 },
-        { label: "Linux (Debian)", count: 51 },
-        { label: "Linux (Fedora)", count: 41 },
-        { label: "Linux (NixOS)", count: 28 },
-        { label: "MacOS (Intel)", count: 16 },
-        { label: "Linux (Manjaro)", count: 9 },
-        { label: "Linux (openSUSE)", count: 6 },
-        { label: "Linux (RHEL)", count: 3 },
-        { label: "Linux (Arch Linux)", count: 3 },
-        { label: "Linux (Mint)", count: 3 },
+        { label: "Linux", count: 112+51+41+28+24 },
+        { label: "Windows", count: 102+76 },
+        { label: "MacOS", count: 160+16 },
     ];
     useEffect(() => {
         barChart(id, data)
+    });
+    return <Canvas id={id}>{props.children}</Canvas>
+}
+
+export function devEnvLinux(props) {
+    const id = "devEnvLinux";
+    const data = [
+        { label: "Ubuntu", count: 112 },
+        { label: "Arch", count: 80 },
+        { label: "Debian", count: 51 },
+        { label: "Fedora", count: 41 },
+        { label: "NixOS", count: 28 },
+        { label: "Manjaro", count: 9 },
+        { label: "openSUSE", count: 6 },
+        { label: "RHEL", count: 3 },
+        { label: "Arch Linux", count: 3 },
+        { label: "Mint", count: 3 },
+    ];
+    useEffect(() => {
+        pieChart(id, data)
+    });
+    return <Canvas id={id}>{props.children}</Canvas>
+}
+
+export function devEnvWin(props) {
+    const id = "devEnvWin";
+    const data = [
+        { label: "Windows (Native)", count: 102 },
+        { label: "Windows (Windows Subsystem for Linux)", count: 76 },
+    ];
+    useEffect(() => {
+        pieChart(id, data)
+    });
+    return <Canvas id={id}>{props.children}</Canvas>
+}
+
+export function devEnvMac(props) {
+    const id = "devEnvMac";
+    const data = [
+        { label: "MacOS (Apple Silicon) (M1, M2, etc)", count: 160 },
+        { label: "MacOS (Intel)", count: 16 },
+    ];
+    useEffect(() => {
+        pieChart(id, data)
     });
     return <Canvas id={id}>{props.children}</Canvas>
 }
@@ -245,7 +278,7 @@ export function db(props) {
         { label: "Other", count: 21 },
     ];
     useEffect(() => {
-        pieChart(id, data)
+        barChart(id, data)
     });
     return <Canvas id={id}>{props.children}</Canvas>
 }
@@ -259,8 +292,7 @@ export function webFramework(props) {
         { label: "Poem", count: 16 },
         { label: "Tonic", count: 12 },
         { label: "Salvo", count: 6 },
-        { label: "Teloxide", count: 3 },
-        { label: "Loco", count: 3 },
+        { label: "Other", count: 6 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -306,7 +338,7 @@ export function industry(props) {
         { label: "Healthcare", count: 12 },
         { label: "Manufacturing", count: 9 },
         { label: "SaaS", count: 6 },
-        { label: "Media", count: 6 },
+        { label: "Media", count: 5 },
         { label: "Other", count: 84 },
     ];
     useEffect(() => {
@@ -319,17 +351,9 @@ export function engineer(props) {
     const id = "engineer";
     const data = [
         { label: "1", count: 105 },
-        { label: "2", count: 41 },
-        { label: "3", count: 32 },
-        { label: "4", count: 12 },
-        { label: "5", count: 12 },
-        { label: "6", count: 6 },
-        { label: "7", count: 3 },
-        { label: "8", count: 3 },
-        { label: "10", count: 9 },
-        { label: "12", count: 3 },
-        { label: "20", count: 3 },
-        { label: "30", count: 3 },
+        { label: "2-4", count: 41+32+12 },
+        { label: "5-9", count: 12+6+3+3 },
+        { label: "10 or more", count: 9+9 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -421,13 +445,11 @@ export function familiarLanguage(props) {
         { label: "C / C++", count: 76 },
         { label: "C#", count: 67 },
         { label: "Go", count: 54 },
-        { label: "php", count: 44 },
+        { label: "PHP", count: 44 },
         { label: "Swift", count: 22 },
         { label: "Kotlin", count: 19 },
         { label: "Ruby", count: 12 },
-        { label: "Scala", count: 6 },
-        { label: "Dart", count: 6 },
-        { label: "Other", count: 18 },
+        { label: "Other", count: 30 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -484,8 +506,7 @@ export function firstProj(props) {
         { label: "CLI Tool", count: 34 },
         { label: "Game", count: 25 },
         { label: "Backend API", count: 19 },
-        { label: "Chatbot", count: 12 },
-        { label: "Other", count: 24 },
+        { label: "Other", count: 36 },
     ];
     useEffect(() => {
         pieChart(id, data)
@@ -501,7 +522,6 @@ export function whySeaQL(props) {
         { label: "A popular choice", count: 31 },
         { label: "Plentiful examples", count: 28 },
         { label: "Friendly community", count: 16 },
-        { label: "Async", count: 2 },
         { label: "Other", count: 60 },
     ];
     useEffect(() => {
@@ -533,7 +553,7 @@ export function quality(props) {
         { label: "Other", count: 24 },
     ];
     useEffect(() => {
-        pieChart(id, data)
+        barChart(id, data)
     });
     return <Canvas id={id}>{props.children}</Canvas>
 }
