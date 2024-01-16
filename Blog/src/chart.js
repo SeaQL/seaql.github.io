@@ -228,14 +228,13 @@ export function devEnvLinux(props) {
     const id = "devEnvLinux";
     const data = [
         { label: "Ubuntu", count: 112 },
-        { label: "Arch", count: 80 },
+        { label: "Arch", count: 83 },
         { label: "Debian", count: 51 },
         { label: "Fedora", count: 41 },
         { label: "NixOS", count: 28 },
         { label: "Manjaro", count: 9 },
         { label: "openSUSE", count: 6 },
         { label: "RHEL", count: 3 },
-        { label: "Arch Linux", count: 3 },
         { label: "Mint", count: 3 },
     ];
     useEffect(() => {
