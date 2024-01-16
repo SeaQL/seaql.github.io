@@ -126,9 +126,7 @@ export function numUsingSeaQLLib(props) {
         { label: "SeaORM", count: 489 },
         { label: "SeaQuery", count: 227 },
         { label: "SeaSchema", count: 70 },
-        { label: "SeaMigration", count: 3 },
-        { label: "SeaStreamer", count: 3 },
-        { label: "Seaography", count: 3 },
+        { label: "Other", count: 10 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -248,7 +246,7 @@ export function devEnvWin(props) {
     const id = "devEnvWin";
     const data = [
         { label: "Windows (Native)", count: 102 },
-        { label: "Windows (Windows Subsystem for Linux)", count: 76 },
+        { label: "Windows Subsystem for Linux", count: 76 },
     ];
     useEffect(() => {
         pieChart(id, data)
