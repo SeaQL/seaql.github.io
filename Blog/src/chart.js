@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Chart from 'chart.js/auto'
 
 async function pieChart(id, data) {
@@ -12,14 +13,33 @@ async function pieChart(id, data) {
                     data: data.map(row => row.count)
                 }]
             },
+            plugins: [ChartDataLabels],
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: "right",
+                        position: "left",
+                    },
+                    datalabels: {
+                        formatter: function(value, ctx) {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            const percent = (value * 100 / sum).toFixed(0);
+                            if (percent <= 1) {
+                                return "";
+                            }
+                            return percent + "%";
+                        },
+                        font: {
+                            weight: "800"
+                        },
+                        color: "#fff",
                     },
                 },
-                aspectRatio: 16/9,
+                aspectRatio: 2.5,
             }
         }
     );
@@ -36,12 +56,31 @@ async function barChart(id, data) {
                     data: data.map(row => row.count)
                 }]
             },
+            plugins: [ChartDataLabels],
             options: {
                 responsive: true,
                 indexAxis: 'y',
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    datalabels: {
+                        formatter: function(value, ctx) {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            const percent = (value * 100 / sum).toFixed(0);
+                            if (percent <= 1) {
+                                return "";
+                            }
+                            return percent + "%";
+                        },
+                        font: {
+                            weight: "800"
+                        },
+                        color: "#fff",
                     },
                 },
             }
@@ -59,6 +98,15 @@ export function badges(props) {
     )
 }
 
+export function Canvas(props) {
+    return (
+        <div style={{ marginBottom: "60px" }}>
+            <canvas id={props.id} class="chart-js" style={{ width: "100%", margin: "auto auto", marginBottom: "10px" }}></canvas>
+            {props.children}
+        </div>
+    )
+}
+
 export function numUsingSeaQL(props) {
     const id = "numUsingSeaQL";
     const data = [
@@ -68,9 +116,7 @@ export function numUsingSeaQL(props) {
     useEffect(() => {
         pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", maxWidth: "380px", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function numUsingSeaQLLib(props) {
@@ -84,11 +130,9 @@ export function numUsingSeaQLLib(props) {
         { label: "Seaography", count: 3 },
     ];
     useEffect(() => {
-        pieChart(id, data)
+        barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", maxWidth: "380px", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function numUsingContext(props) {
@@ -101,9 +145,7 @@ export function numUsingContext(props) {
     useEffect(() => {
         pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", maxWidth: "380px", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function numCountry(props) {
@@ -127,9 +169,7 @@ export function numCountry(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function numTeamMember(props) {
@@ -148,9 +188,7 @@ export function numTeamMember(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function projNature(props) {
@@ -170,9 +208,7 @@ export function projNature(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function devEnv(props) {
@@ -196,9 +232,7 @@ export function devEnv(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function db(props) {
@@ -207,21 +241,13 @@ export function db(props) {
         { label: "Postgres", count: 348 },
         { label: "SQLite", count: 172 },
         { label: "MySQL", count: 105 },
-        { label: "Mariadb", count: 6 },
-        { label: "Microsoft SQL Server", count: 3 },
-        { label: "Turso (libsql)", count: 3 },
-        { label: "MSSQL", count: 3 },
-        { label: "Salesforce", count: 3 },
-        { label: "Cockroach", count: 3 },
-        { label: "Planetscale", count: 3 },
-        { label: "CockroachDb", count: 3 },
+        { label: "MariaDB", count: 6 },
+        { label: "Other", count: 21 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function webFramework(props) {
@@ -239,9 +265,7 @@ export function webFramework(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function deployEnv(props) {
@@ -257,23 +281,19 @@ export function deployEnv(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function useRust(props) {
     const id = "useRust";
     const data = [
-        { label: "No", count: 272 },
         { label: "Yes", count: 252 },
+        { label: "No", count: 272 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function industry(props) {
@@ -292,9 +312,7 @@ export function industry(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function engineer(props) {
@@ -316,9 +334,7 @@ export function engineer(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function companySize(props) {
@@ -330,11 +346,9 @@ export function companySize(props) {
         { label: "1000+", count: 28 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function techStack(props) {
@@ -350,9 +364,7 @@ export function techStack(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function numRustProj(props) {
@@ -367,9 +379,7 @@ export function numRustProj(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function dbInterested(props) {
@@ -386,9 +396,7 @@ export function dbInterested(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function learningRust(props) {
@@ -398,11 +406,9 @@ export function learningRust(props) {
         { label: "No", count: 233 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function familiarLanguage(props) {
@@ -426,9 +432,7 @@ export function familiarLanguage(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function hardToLearn(props) {
@@ -439,11 +443,9 @@ export function hardToLearn(props) {
         { label: "Hard: I struggle in getting Rust code to compile", count: 3 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function motivation(props) {
@@ -455,11 +457,9 @@ export function motivation(props) {
         { label: "Other", count: 60 }
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function learningResource(props) {
@@ -472,11 +472,9 @@ export function learningResource(props) {
         { label: "Other", count: 27 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function firstProj(props) {
@@ -490,11 +488,9 @@ export function firstProj(props) {
         { label: "Other", count: 24 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function whySeaQL(props) {
@@ -511,9 +507,7 @@ export function whySeaQL(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function familiarWithSql(props) {
@@ -524,11 +518,9 @@ export function familiarWithSql(props) {
         { label: "Beginner: basic knowledge", count: 44 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function quality(props) {
@@ -541,11 +533,9 @@ export function quality(props) {
         { label: "Other", count: 24 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function advancement(props) {
@@ -561,9 +551,7 @@ export function advancement(props) {
     useEffect(() => {
         barChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
 
 export function firstPartySupport(props) {
@@ -575,9 +563,7 @@ export function firstPartySupport(props) {
         { label: "Other", count: 12 },
     ];
     useEffect(() => {
-        barChart(id, data)
+        pieChart(id, data)
     });
-    return (
-        <canvas id={id} class="chart-js" style={{ width: "100%", margin: "auto auto" }}></canvas>
-    )
+    return <Canvas id={id}>{props.children}</Canvas>
 }
