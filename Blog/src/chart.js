@@ -28,15 +28,15 @@ async function pieChart(id, data) {
                                 sum += data;
                             });
                             const percent = (value * 100 / sum).toFixed(0);
-                            if (percent <= 1) {
-                                return "";
+                            if (percent <= 2) {
+                                return null;
                             }
                             return percent + "%";
                         },
                         font: {
                             weight: "800"
                         },
-                        color: "#fff",
+                        color: "rgb(28, 30, 33)",
                     },
                 },
                 aspectRatio: 2.5,
@@ -73,14 +73,14 @@ async function barChart(id, data) {
                             });
                             const percent = (value * 100 / sum).toFixed(0);
                             if (percent <= 1) {
-                                return "";
+                                return null;
                             }
                             return percent + "%";
                         },
                         font: {
                             weight: "800"
                         },
-                        color: "#fff",
+                        color: "rgb(28, 30, 33)",
                     },
                 },
             }
@@ -164,7 +164,7 @@ export function numCountry(props) {
         { label: "Switzerland", count: 9 },
         { label: "Brazil", count: 9 },
         { label: "United Kingdom", count: 9 },
-        { label: "Other Countries", count: 108 },
+        { label: "Other", count: 108 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -203,7 +203,7 @@ export function projNature(props) {
         { label: "Content management system", count: 16 },
         { label: "Research project", count: 12 },
         { label: "E-commerce", count: 12 },
-        { label: "Other nature", count: 30 },
+        { label: "Other", count: 30 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -307,7 +307,7 @@ export function industry(props) {
         { label: "Manufacturing", count: 9 },
         { label: "SaaS", count: 6 },
         { label: "Media", count: 6 },
-        { label: "Other industry", count: 84 },
+        { label: "Other", count: 84 },
     ];
     useEffect(() => {
         barChart(id, data)
@@ -427,7 +427,7 @@ export function familiarLanguage(props) {
         { label: "Ruby", count: 12 },
         { label: "Scala", count: 6 },
         { label: "Dart", count: 6 },
-        { label: "Other language", count: 18 },
+        { label: "Other", count: 18 },
     ];
     useEffect(() => {
         barChart(id, data)
