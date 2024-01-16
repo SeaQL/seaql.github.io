@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartDeferred from 'chartjs-plugin-deferred';
 import Chart from 'chart.js/auto'
 
 async function pieChart(id, data) {
@@ -13,7 +14,7 @@ async function pieChart(id, data) {
                     data: data.map(row => row.count)
                 }]
             },
-            plugins: [ChartDataLabels],
+            plugins: [ChartDeferred, ChartDataLabels],
             options: {
                 responsive: true,
                 plugins: {
@@ -56,7 +57,7 @@ async function barChart(id, data) {
                     data: data.map(row => row.count)
                 }]
             },
-            plugins: [ChartDataLabels],
+            plugins: [ChartDeferred, ChartDataLabels],
             options: {
                 responsive: true,
                 indexAxis: 'y',
