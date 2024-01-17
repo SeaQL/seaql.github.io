@@ -93,7 +93,7 @@ export function badges(props) {
     return (
         props.items.map((item) => {
             return (
-                <span class="badge badge--secondary" style={{ marginRight: "6px", marginBottom: "6px" }}>{ item }</span>
+                <span class="badge badge--secondary badge-dark-mode" style={{ marginRight: "6px", marginBottom: "6px" }}>{ item }</span>
             )
         })
     )
