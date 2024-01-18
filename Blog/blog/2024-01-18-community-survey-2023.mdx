@@ -1,0 +1,392 @@
+---
+slug: 2024-01-18-community-survey-2023
+title: SeaQL Community Survey 2023 Results
+author: SeaQL Team
+author_title: Billy Chan
+author_url: https://github.com/SeaQL
+author_image_url: https://www.sea-ql.org/SeaORM/img/SeaQL.png
+tags: [news]
+toc_max_heading_level: 2
+---
+
+import * as Chart from '../src/chart.js';
+
+524 members of the SeaQL community from 41 countries kindly contributed their thoughts on using SeaQL libraries, learning Rust and employing Rust in their day to day development lives.
+From these responses we hope to get an understanding of where the SeaQL and Rust community stands in 2023.
+
+This is our first community survey, we will conduct the survey annually to keep track of how the community evolves over time.
+
+## Demographics
+
+### Q. Where are you located in?
+
+Participants are from 41 countries across the world!
+
+<Chart.numCountry>
+    Other: <Chart.badges items={[
+        "Argentina",
+        "Australia",
+        "Austria",
+        "Belarus",
+        "Belgium",
+        "Cyprus",
+        "Czechia",
+        "Denmark",
+        "Hungary",
+        "Iran",
+        "Ireland",
+        "Italy",
+        "Japan",
+        "Kazakstan",
+        "Korea",
+        "Mongolia",
+        "Nigeria",
+        "Norway",
+        "Peru",
+        "Poland",
+        "Slovakia",
+        "South Africa",
+        "Spain",
+        "Sweden",
+        "Taiwan ",
+        "Thailand",
+        "Turkey",
+        "Ukraine",
+    ]} />
+</Chart.numCountry>
+
+## Use of SeaQL Libraries
+
+### Q. Are you using SeaQL libraries in building a project?
+
+<Chart.numUsingSeaQL />
+
+### Q. Which SeaQL libraries are you using in building a project?
+
+<Chart.numUsingSeaQLLib>
+    Other: <Chart.badges items={[
+        "Seaography",
+        "SeaStreamer",
+    ]} />
+</Chart.numUsingSeaQLLib>
+
+### Q. Are you using SeaQL libraries in a personal, academic or professional context?
+
+<Chart.numUsingContext />
+
+### Q. Why did you choose SeaQL libraries?
+
+<Chart.whySeaQL>
+    Other: <Chart.badges items={[
+        "Async support, future proof and good documentation",
+        "Good Query Performance",
+        "It was recommended on websites and YouTube",
+        "Does not use SQL for migrations",
+        "Beginner-friendly and easy to get started",
+        "Easy to translate from Eloquent ORM knowledge",
+        "Can drop in to SeaQuery if necessary",
+        "I started with SQLx, then tried SeaQuery",
+        "I found good examples on YouTube",
+    ]} />
+</Chart.whySeaQL>
+
+### Q. What qualities of SeaQL libraries do you think are important?
+
+<Chart.quality>
+    Other: <Chart.badges items={[
+        "Simple Syntax",
+        "Being able to easily express what you would otherwise be able to write in pure SQL",
+        "Migration and entity generation",
+        "Clarify of the implementation and usage patterns",
+        "Efficient query building especially with relations and joins",
+        "Ergonomic API",
+    ]} />
+</Chart.quality>
+
+## Team & Project Nature
+
+### Q. How many team members (including you) are working on the project?
+
+<Chart.numTeamMember />
+
+### Q. Can you categorize the nature of the project?
+
+<Chart.projNature>
+    Other: <Chart.badges items={[
+        "Forecasting",
+        "Financial trading",
+        "Enterprise Resource Planning (ERP)",
+        "Fintech",
+        "Cloud infrstructure automation",
+        "Backend for desktop, mobile and web application",
+    ]} />
+</Chart.projNature>
+
+## Tech Stack
+
+### Q. What is your development environment?
+
+<Chart.devEnv />
+
+### Linux Breakdown
+
+<Chart.devEnvLinux />
+
+### Windows Breakdown
+
+<Chart.devEnvWin />
+
+### macOS Breakdown
+
+<Chart.devEnvMac />
+
+### Q. Which database(s) do you use?
+
+<Chart.db />
+
+### Q. Which web framework are you using?
+
+<Chart.webFramework />
+
+### Q. What is the deployment environment?
+
+<Chart.deployEnv />
+
+## Rust at Work
+
+### Q. Are you using Rust at work?
+
+<Chart.useRust />
+
+### Q. Which industry your company is in?
+
+<Chart.industry />
+
+#### Vague description of the company
+
+<Chart.badges items={[
+    "A banking company",
+    "A business to business lending platform",
+    "A cloud Storage",
+    "A consulting company",
+    "A cybersecurity management platform",
+    "An IT solution company",
+    "An E-Commerce clothing store",
+    "A children entertainmets company",
+    "A factory construction management platform",
+    "A fintech startup",
+    "A geology technology company",
+    "A publicly traded health-tech company",
+    "A private restaurant chain",
+    "An industrial IoT for heating and water distributions",
+    "An internet provider",
+    "A nonprofit tech research organization",
+    "A payment service provider",
+    "A road intelligence company",
+    "A SaaS startup",
+    "A server hosting provider",
+    "A DevOps platform that helps our users scale their Kubernetes application",
+    "An Automotive company",
+]} />
+
+### Q. What is the size of your company?
+
+<Chart.companySize />
+
+### Q. How many engineers in your company are dedicated to writing Rust?
+
+<Chart.engineer />
+
+### Q. Which layer(s) of the technology stack are using Rust?
+
+<Chart.techStack />
+
+## Learning Rust
+
+### Q. Are you learning / new to Rust?
+
+<Chart.learningRust />
+
+### Q. Which language(s) are you most familiar with?
+
+<Chart.familiarLanguage />
+
+### Q. Are you familiar with SQL?
+
+<Chart.familiarWithSql />
+
+### Q. Do you find Rust easy or hard to learn?
+
+<Chart.hardToLearn />
+
+### Q. What motivates you to learn Rust?
+
+<Chart.motivation>
+    Other: <Chart.badges items={[
+        "Ability to develop fast, secure and standalone API driven tools",
+        "Efficiency, safety, low resource usage",
+        "Good design decisions from the start",
+        "Reliability and ease of development",
+        "School makes me to learn",
+        "Rust is too cool",
+        "The ecosystem of libraries + general competence of lib authors",
+        "It is the most loved language",
+        "The guarantees Rust provides",
+        "Learning something new",
+        "Type safety and speed",
+        "Want to get away from NULL",
+        "No boilerplate, if you do not want it",
+        "Performance",
+    ]} />
+</Chart.motivation>
+
+### Q. What learning resources do you rely on?
+
+<Chart.learningResource>
+    Other: <Chart.badges items={[
+        "YouTube",
+        "Online Courses",
+        "ChatGPT",
+    ]} />
+</Chart.learningResource>
+
+### Q. What is your first project built using Rust?
+
+<Chart.firstProj>
+    Other: <Chart.badges items={[
+        "Chatbot",
+        "Scraper",
+        "Rasterization of the mandelbrot set",
+        "IoT",
+        "Library",
+    ]} />
+</Chart.firstProj>
+
+## What's Next
+
+### Q. Which aspects do you want to see advancement on SeaORM?
+
+Thank you for all the suggestions, we will certainly take them into account!
+
+<Chart.advancement>
+    Other: <Chart.badges items={[
+        "Full MySQL coverage",
+        "MS SQL Server support",
+        "Structured queries for complex joins",
+        "A stable release",
+        "Data seeding",
+        "Migrations based on Entity diffs",
+        "Type safety",
+        "Support tables without primary key",
+        "Turso integration",
+        "Fetching nested structures",
+        "Views",
+    ]} />
+</Chart.advancement>
+
+### Q. What tools would you be interested in using, if developed first-party by SeaQL?
+
+<Chart.firstPartySupport>
+    Other: <Chart.badges items={[
+        "An API integration testing utility",
+        "An oso-based authorization integration",
+        "A visual tool for managing migrations",
+        "Database layout editor (like dbdiagram.io)",
+    ]} />
+</Chart.firstPartySupport>
+
+## Share Your Thoughts
+
+### Q. Anything else you want to say?
+
+Didn't expect this section to turn into a testimonial, thank you for all the kind words :)
+
+> Good job yall
+
+> Great projects, thanks for your hard work
+
+> I expect it to be an asynchronous type-safe library. Keep up the good work!
+
+> I'd like to see entity generation without a database
+
+> The website, support from JetBrains, the documentation and the release cycle are very nice!
+
+> I'm very interested in how SeaORM will continue evolving and I would like to wish you the best of luck!
+
+> I've found SeaORM very useful and I'm very grateful to the development team for creating and maintaining it!
+
+> In TypeORM I can write entities and then generate migration from them. It's very handy. It helps to increase development speed. It would be nice to have this functionality in SeaORM.
+
+> It needs to have better integration with SeaQuery, I sometimes need to get to it because not all features are available in SeaORM which makes it a pain.
+
+> Keep the good work!
+
+> Keep going! Love SeaORM!
+
+> Keep up the great work. Rust needs a fast, ergonomic and reliable ORM.
+
+> SeaORM is very powerful, but the rust docs and tutorial examples could be more fleshed out.
+
+> SeaORM is an awesome library. Most things are quite concise and therefore straightforward. Simply a few edge cases concerning DB specific types and values could be better.
+
+> The trait system is too complex and coding experience is not pretty well with that.
+
+> Automatic migration generation would make the library pretty much perfect in my opinion.
+
+> SeaQL tutorials could be better. Much more detailed explanation and definitely it has to have best practices section for Design Patterns like and good best practices related with clean architecture.
+
+> SeaQL are great products and it’s very enjoyable using them
+
+> Thank you <3
+
+> Thank you for awesome library!
+
+> Thank you for this wonderful project. I feel the documentation lacks examples for small functions and usage of some obscure features.
+
+> Thank you for your hard work!
+
+> Thank you for your work on SeaQL, your efforts are appreciated 
+
+> Thank you for your work, we are seeking actively to include SeaORM in our projects
+
+> Thank you very much for your work!
+
+> Thanks a lot for the amazing work you guys put into this set of libraries. This is an amazing development for the rust ecosystem.
+
+> Thanks and keep up the good work.
+
+> Thanks for a great tool!
+
+> Thanks for all the amazing work.
+
+> Thanks for making SeaORM!
+
+> The project I am doing for work is only a prototype, it's a new implementation of a current Python forecasting project which uses a pandas and a custom psycopg2 orm. My intent is to create a faster/dev friendly version with SeaORM and Polars. I am hoping to eventually get a prototype I can display to my team to get a go ahead to fully develop a new version, and to migrate 4-5 other forecasting apps using shared libraries for io and calculations.
+
+> I have also been using SeaORM for a small API client for financial data, which I may make open source.
+
+> I think one thing which could really improve SeaORM is some more advance examples in the documentation section. The docs are really detailed as far as rust documentation goes.
+
+> Very promising project, keep it up.
+
+> Thank you so much for taking it upon yourselves to selflessly give your free time. It probably doesn't matter much, but thank you so much for your work. SeaORM is a fantastic tool that I can see myself using for a long time to come. I hope to make contributions in any form when I am under better circumstances :3 Kudos to the team!
+
+> 你们的库非常的棒，至少我觉得比Diesel好太多了，入门简单，对新手非常友好，这是最大的亮点，其次是库貌似可以实现很复杂的Join SQL逻辑而不用写原生的SQL，这点也是非常值得点赞的，但是在这块的文档貌似写的有点简略了，希望可以丰富一下文档内容，对于复杂查询的说明可以更加详细一些，这样就再好不过了。谢谢你们，我会持续关注你们，未来的项目如果涉及ORM，那绝对非你们莫属了！
+
+## Rustacean Sticker Pack 🦀
+
+The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for coding!
+
+Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
+
+Sticker Pack Contents:
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
+- Mascot of SeaQL: Terres the Hermit Crab
+- Mascot of Rust: Ferris the Crab
+- The Rustacean word
+
+[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+
+<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.png" /></a>

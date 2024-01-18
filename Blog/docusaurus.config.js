@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'SeaQL - Building data intensive applications in Rust',
-  tagline: 'We help developers in building data intensive applications in Rust, whether they are web services (GraphQL, gRPC, REST), command line tools or apps.',
+  title: 'SeaQL',
+  tagline: 'Building Developer Tools for Rust',
   url: 'https://www.sea-ql.org',
   baseUrl: '/blog/',
   onBrokenLinks: 'throw',
