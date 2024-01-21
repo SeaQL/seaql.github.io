@@ -12,6 +12,10 @@ tags: [news]
 
 It had been a while since the initial [SeaORM 0.12 release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/). This blog post summarizes the new features and enhancements introduced in SeaORM [`0.12.2`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.2) through [`0.12.12`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.12)!
 
+## Celebrating 2M downloads on crates.io 📦
+
+We've just reached the milestone of 2,000,000 all time downloads on [crates.io](https://crates.io/crates/sea-orm). It's a testament to SeaORM's adoption in professional use. Thank you to all our users for your trust and for being a part of our community.
+
 ## New Features
 
 ### Entity format update
@@ -33,7 +37,7 @@ pub struct JsonColumn {
 }
 ```
 
-* [#2009](https://github.com/SeaQL/sea-orm/pull/2009) Added `comment` attribute for Entity; `create_table_from_entity` supports comment
+* [#2009](https://github.com/SeaQL/sea-orm/pull/2009) Added `comment` attribute for Entity; `create_table_from_entity` now supports comment on MySQL
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "applog", comment = "app logs")]
@@ -111,7 +115,7 @@ cake::Entity::find()
 
 [#1881](https://github.com/SeaQL/sea-orm/pull/1881), [#2000](https://github.com/SeaQL/sea-orm/pull/2000) Added "proxy" to database backend (requires feature flag `proxy`).
 
-It enables the possibility of using SeaORM on client-side! See the [Demo for GlueSQL](https://github.com/SeaQL/sea-orm/tree/master/examples/proxy_gluesql_example) for an example.
+It enables the possibility of using SeaORM on edge / client-side! See the [GlueSQL demo](https://github.com/SeaQL/sea-orm/tree/master/examples/proxy_gluesql_example) for an example.
 
 ## Enhancements
 
@@ -229,7 +233,7 @@ There are still a few breaking changes planned for the next major release. After
 
 ## Sponsor
 
-A big thank to [DigitalOcean](https://www.digitalocean.com/) who sponsored our server hosting, and [JetBrains](https://www.jetbrains.com/) who sponsored our IDE, and every sponsor on [GitHub Sponsor](https://github.com/sponsors/SeaQL)!
+A big thank to [DigitalOcean](https://www.digitalocean.com/) who sponsored our servers, and [JetBrains](https://www.jetbrains.com/) who sponsored our IDE, and every sponsor on [GitHub Sponsor](https://github.com/sponsors/SeaQL)!
 
 If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
 
