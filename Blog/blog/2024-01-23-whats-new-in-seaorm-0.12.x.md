@@ -10,7 +10,7 @@ tags: [news]
 
 <img alt="SeaORM 0.12 Banner" src="/blog/img/SeaORM%2012%20Banner.png"/>
 
-It had been a while since the initial [SeaORM 0.12 release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/). This blog post summarizes the new features and enhancements introduced in SeaORM `0.12.2` through `0.12.12`!
+It had been a while since the initial [SeaORM 0.12 release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/). This blog post summarizes the new features and enhancements introduced in SeaORM [`0.12.2`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.2) through [`0.12.12`](https://github.com/SeaQL/sea-orm/releases/tag/0.12.12)!
 
 ## New Features
 
