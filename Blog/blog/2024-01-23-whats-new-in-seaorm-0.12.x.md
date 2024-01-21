@@ -10,64 +10,13 @@ tags: [news]
 
 <img alt="SeaORM 0.12 Banner" src="/blog/img/SeaORM%2012%20Banner.png"/>
 
-It had been 5 months, since the first SeaORM 0.12 release. Many new features and enhancements has been published from SeaORM `0.12.2` through `0.12.11`!
+It had been a while since the initial [SeaORM 0.12 release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/). This blog post summarizes the new features and enhancements introduced in SeaORM `0.12.2` through `0.12.12`!
 
-## Changelog
+## New Features
 
-### New Features
+### Entity format update
 
-* [#2037](https://github.com/SeaQL/sea-orm/pull/2037) Added `desc` to `Cursor` paginator
-```rust
-// After 5 DESC, i.e. id < 5
-
-let mut cursor = Entity::find().cursor_by(Column::Id);
-
-cursor.after(5).desc();
-
-assert_eq!(
-    cursor.first(3).all(db).await?,
-    [Model { id: 4 }, Model { id: 3 }, Model { id: 2 },]
-);
-```
-
-* [#2009](https://github.com/SeaQL/sea-orm/pull/2009) [sea-orm-macro] Comment attribute for Entity (`#[sea_orm(comment = "action")]`); `create_table_from_entity` supports comment
-```rust
-use sea_orm::entity::prelude::*;
-
-#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
-#[sea_orm(table_name = "applog", comment = "app logs")]
-pub struct Model {
-    #[sea_orm(primary_key, comment = "ID")]
-    pub id: i32,
-    #[sea_orm(comment = "action")]
-    pub action: String,
-    pub json: Json,
-    pub created_at: DateTimeWithTimeZone,
-}
-```
-
-* [#1881](https://github.com/SeaQL/sea-orm/pull/1881), [#2000](https://github.com/SeaQL/sea-orm/pull/2000) Added "proxy" (feature flag `proxy`) to database backend  
-    See [SeaORM Proxy Demo for GlueSQL](https://github.com/SeaQL/sea-orm/tree/master/examples/proxy_gluesql_example) for the usage.
-
-* [#1954](https://github.com/SeaQL/sea-orm/pull/1954) Added `#[sea_orm(skip)]` for `FromQueryResult` derive macro
-```rust
-#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize, FromQueryResult)]
-pub struct PublicUser {
-    pub id: i64,
-    pub name: String,
-    pub username: String,
-    pub avatar: String,
-    pub group: Group,
-    pub banned: bool,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
-    #[sea_orm(skip)]
-    pub connections: UserConnections,
-    pub created: DateTimeWithTimeZone,
-}
-```
-
-* [#1898](https://github.com/SeaQL/sea-orm/pull/1898) Add support for root JSON arrays  
-    Now the following works (requires the `json-array` / `postgres-array` feature)!
+* [#1898](https://github.com/SeaQL/sea-orm/pull/1898) Add support for root JSON arrays (requires the `json-array` / `postgres-array` feature)! It involved an intricate type system refactor to work around the orphan rule.
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "json_struct_vec")]
@@ -82,6 +31,129 @@ pub struct Model {
 pub struct JsonColumn {
     pub value: String,
 }
+```
+
+* [#2009](https://github.com/SeaQL/sea-orm/pull/2009) Added `comment` attribute for Entity; `create_table_from_entity` supports comment
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "applog", comment = "app logs")]
+pub struct Model {
+    #[sea_orm(primary_key, comment = "ID")]
+    pub id: i32,
+    #[sea_orm(comment = "action")]
+    pub action: String,
+    pub json: Json,
+    pub created_at: DateTimeWithTimeZone,
+}
+```
+
+### Cursor paginator improvements
+
+* [#2037](https://github.com/SeaQL/sea-orm/pull/2037) Added descending order to Cursor:
+
+```rust
+// (default behaviour) Before 5 ASC, i.e. id < 5
+
+let mut cursor = Entity::find().cursor_by(Column::Id);
+cursor.before(5);
+
+assert_eq!(
+    cursor.first(4).all(db).await?,
+    [
+        Model { id: 1 },
+        Model { id: 2 },
+        Model { id: 3 },
+        Model { id: 4 },
+    ]
+);
+
+// (new API) After 5 DESC, i.e. id < 5
+
+let mut cursor = Entity::find().cursor_by(Column::Id);
+cursor.after(5).desc();
+
+assert_eq!(
+    cursor.first(4).all(db).await?,
+    [
+        Model { id: 4 },
+        Model { id: 3 },
+        Model { id: 2 },
+        Model { id: 1 },
+    ]
+);
+```
+
+* [#1826](https://github.com/SeaQL/sea-orm/pull/1826) Added cursor support to `SelectTwo`:
+
+```rust
+// Join with linked relation; cursor by first table's id
+
+cake::Entity::find()
+    .find_also_linked(entity_linked::CakeToFillingVendor)
+    .cursor_by(cake::Column::Id)
+    .before(10)
+    .first(2)
+    .all(&db)
+    .await?
+
+// Join with relation; cursor by the 2nd table's id 
+
+cake::Entity::find()
+    .find_also_related(Fruit)
+    .cursor_by_other(fruit::Column::Id)
+    .before(10)
+    .first(2)
+    .all(&db)
+    .await?
+```
+
+### Added "proxy" to database backend
+
+[#1881](https://github.com/SeaQL/sea-orm/pull/1881), [#2000](https://github.com/SeaQL/sea-orm/pull/2000) Added "proxy" to database backend (requires feature flag `proxy`).
+
+It enables the possibility of using SeaORM on client-side! See the [Demo for GlueSQL](https://github.com/SeaQL/sea-orm/tree/master/examples/proxy_gluesql_example) for an example.
+
+## Enhancements
+
+* [#1954](https://github.com/SeaQL/sea-orm/pull/1954) [sea-orm-macro] Added `#[sea_orm(skip)]` to `FromQueryResult` derive macro
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize, FromQueryResult)]
+pub struct PublicUser {
+    pub id: i64,
+    pub name: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[sea_orm(skip)]
+    pub something: Something,
+}
+```
+
+* [#1598](https://github.com/SeaQL/sea-orm/pull/1598) [sea-orm-macro] Added support for Postgres arrays in `FromQueryResult` impl of `JsonValue`
+```rust
+// existing API:
+
+assert_eq!(
+    Entity::find_by_id(1).one(db).await?,
+    Some(Model {
+        id: 1,
+        name: "Collection 1".into(),
+        integers: vec![1, 2, 3],
+        teas: vec![Tea::BreakfastTea],
+        colors: vec![Color::Black],
+    })
+);
+
+// new API:
+
+assert_eq!(
+    Entity::find_by_id(1).into_json().one(db).await?,
+    Some(json!({
+        "id": 1,
+        "name": "Collection 1",
+        "integers": [1, 2, 3],
+        "teas": ["BreakfastTea"],
+        "colors": [0],
+    }))
+);
 ```
 
 * [#1828](https://github.com/SeaQL/sea-orm/pull/1828) [sea-orm-migration] Check if an index exists
@@ -116,35 +188,6 @@ impl MigrationTrait for Migration {
 }
 ```
 
-* [#1826](https://github.com/SeaQL/sea-orm/pull/1826) Added `cursor_by` to `SelectTwo`
-```rust
-assert_eq!(
-    bakery::Entity::find()
-        .find_also_related(Baker)
-        .cursor_by(bakery::Column::Id)
-        .before(5)
-        .first(20)
-        .all(db)
-        .await?,
-    [
-        (bakery(1), Some(baker('A'))),
-        (bakery(1), Some(baker('K'))),
-        (bakery(1), Some(baker('U'))),
-        (bakery(2), Some(baker('B'))),
-        (bakery(2), Some(baker('L'))),
-        (bakery(2), Some(baker('V'))),
-        (bakery(3), Some(baker('C'))),
-        (bakery(3), Some(baker('M'))),
-        (bakery(3), Some(baker('W'))),
-        (bakery(4), Some(baker('D'))),
-        (bakery(4), Some(baker('N'))),
-        (bakery(4), Some(baker('X'))),
-    ]
-);
-```
-
-### Enhancements
-
 * [#2030](https://github.com/SeaQL/sea-orm/pull/2030) Improve query performance of `Paginator`'s `COUNT` query
 * [#2055](https://github.com/SeaQL/sea-orm/pull/2055) Added SQLx slow statements logging to `ConnectOptions`
 * [#1867](https://github.com/SeaQL/sea-orm/pull/1867) Added `QuerySelect::lock_with_behavior`
@@ -153,55 +196,38 @@ assert_eq!(
 * [#1960](https://github.com/SeaQL/sea-orm/issues/1960) Implement `StatementBuilder` for `sea_query::WithQuery`
 * [#1979](https://github.com/SeaQL/sea-orm/pull/1979) Added method `expr_as_` that accepts `self`
 * [#1868](https://github.com/SeaQL/sea-orm/pull/1868) Loader: use `ValueTuple` as hash key
-* [#1693](https://github.com/SeaQL/sea-orm/pull/1693) [sea-orm-cli] Support generation of related entity with composite foreign key
-* [#1598](https://github.com/SeaQL/sea-orm/pull/1598) Added support for Postgres arrays in `FromQueryResult` impl of `JsonValue`
-
-### Bug fixes
-
-* [#2054](https://github.com/SeaQL/sea-orm/pull/2054) [sea-orm-macro] Qualify types in `DeriveValueType` macro
-* [#1953](https://github.com/SeaQL/sea-orm/pull/1953) [sea-orm-cli] Fix duplicated active enum use statements on generated entities
 * [#1934](https://github.com/SeaQL/sea-orm/pull/1934) [sea-orm-cli] Added `--enum-extra-derives`
 * [#1952](https://github.com/SeaQL/sea-orm/pull/1952) [sea-orm-cli] Added `--enum-extra-attributes`
-* [#1855](https://github.com/SeaQL/sea-orm/pull/1855) [sea-orm-macro] Fixed `DeriveValueType` by qualifying `QueryResult`
-* [#1800](https://github.com/SeaQL/sea-orm/issues/1800) Fixed `find_with_related` consolidation logic
-* Fixed `Loader` panic on empty inputs
+* [#1693](https://github.com/SeaQL/sea-orm/pull/1693) [sea-orm-cli] Support generation of related entity with composite foreign key
 
-### Upgrades
+## Bug fixes
+
+* [#1855](https://github.com/SeaQL/sea-orm/pull/1855), [#2054](https://github.com/SeaQL/sea-orm/pull/2054) [sea-orm-macro] Qualify types in `DeriveValueType` macro
+* [#1953](https://github.com/SeaQL/sea-orm/pull/1953) [sea-orm-cli] Fix duplicated active enum use statements on generated entities
+* [#1800](https://github.com/SeaQL/sea-orm/issues/1800) Fixed `find_with_related` consolidation logic
+* [5a6acd67](https://github.com/SeaQL/sea-orm/commit/5a6acd67312601e4dba32896600044950e20f99f) Fixed `Loader` panic on empty inputs
+
+## Upgrades
 
 * [#1984](https://github.com/SeaQL/sea-orm/pull/1984) Upgraded `axum` example to `0.7`
 * [#1858](https://github.com/SeaQL/sea-orm/pull/1858) Upgraded `chrono` to `0.4.30`
+* [#1959](https://github.com/SeaQL/sea-orm/pull/1959) Upgraded `rocket` to `0.5.0`
 * Upgraded `sea-query` to `0.30.5`
 * Upgraded `sea-schema` to `0.14.2`
 * Upgraded `salvo` to `0.50`
 
-### House Keeping
+## House Keeping
 
 * [#2057](https://github.com/SeaQL/sea-orm/pull/2057) Fix clippy warnings on 1.75
 * [#1811](https://github.com/SeaQL/sea-orm/pull/1811) Added test cases for `find_xxx_related/linked`
 
-## First Stable Release of SeaORM!
+## Release planning
 
-> It's been the **12th** release of SeaORM! Initially, a major version was released every month. It gradually became 2 to 3 months, and now, it's been 6 months since the last major release. As our userbase grew and some are already [using SeaORM in production](https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#startups), we understand the importance of having a stable API surface and feature set.
-> 
-> That's why we are committed to:
-> 
-> 1. Reviewing breaking changes with strict scrutiny
-> 2. Expanding our test suite to cover all features of our library
-> 3. Never remove features, and consider deprecation carefully
-> 
-> Today, the architecture of SeaORM is pretty solid and stable, and with the `0.12` release where we paid back a lot of technical debt, we will be able to deliver new features and enhancements without breaking. As our major dependency [SQLx](https://github.com/launchbadge/sqlx) is not `1.0` yet, technically we cannot be `1.0`.
-> 
-> We are still advancing rapidly, and we will always make a new release as soon as SQLx makes a new release, so that you can upgrade everything at once. As a result, the next major release of SeaORM will come out **6 months from now, or when SQLx makes a new release**, whichever is earlier.
+In the [announcement blog post](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/) of SeaORM 0.12, we stated we want to reduce the frequency of breaking releases while maintaining the pace for feature updates and enhancements. I am glad to say that we've accomplished that!
 
-## [Community Survey](https://www.sea-ql.org/community-survey) 📝
+There are still a few breaking changes planned for the next major release. After some [discussions](https://github.com/SeaQL/sea-orm/discussions/2031) and consideration, we decided that the next major release will be a release candidate for 1.0!
 
-SeaQL is an independent open-source organization. Our goal is to enable developers to build data intensive applications in Rust. If you are using SeaORM, please participate in the [SeaQL Community Survey](https://www.sea-ql.org/community-survey)!
-
-By completing this survey, you will help us gather insights into how you, the developer, are using our libraries and identify means to improve your developer experience. We will also publish an annual survey report to summarize our findings.
-
-If you are a happy user of SeaORM, consider [writing us a testimonial](https://forms.office.com/r/YbeqfTAgkJ)!
-
-## Sponsor 🥇
+## Sponsor
 
 A big thank to [DigitalOcean](https://www.digitalocean.com/) who sponsored our server hosting, and [JetBrains](https://www.jetbrains.com/) who sponsored our IDE, and every sponsor on [GitHub Sponsor](https://github.com/sponsors/SeaQL)!
 
@@ -408,7 +434,7 @@ A big shout out to our sponsors 😇:
 
 The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
 Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for coding!
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
 
 Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
 
