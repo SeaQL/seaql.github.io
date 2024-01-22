@@ -208,6 +208,8 @@ impl MigrationTrait for Migration {
 
 * [#1855](https://github.com/SeaQL/sea-orm/pull/1855), [#2054](https://github.com/SeaQL/sea-orm/pull/2054) [sea-orm-macro] Qualify types in `DeriveValueType` macro
 * [#1953](https://github.com/SeaQL/sea-orm/pull/1953) [sea-orm-cli] Fix duplicated active enum use statements on generated entities
+* [#1821](https://github.com/SeaQL/sea-orm/pull/1821) [sea-orm-cli] Fix entity generation for non-alphanumeric enum variants
+* [#2071](https://github.com/SeaQL/sea-orm/pull/2071) [sea-orm-cli] Fix entity generation for relations with composite keys
 * [#1800](https://github.com/SeaQL/sea-orm/issues/1800) Fixed `find_with_related` consolidation logic
 * [5a6acd67](https://github.com/SeaQL/sea-orm/commit/5a6acd67312601e4dba32896600044950e20f99f) Fixed `Loader` panic on empty inputs
 
