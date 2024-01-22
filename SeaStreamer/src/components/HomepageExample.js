@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { useColorMode } from '@docusaurus/theme-common';
 
 import Prism from "prism-react-renderer/prism";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -138,6 +139,7 @@ export default function HomepageCompare() {
       themeConfig: { prism = {} },
     },
   } = useDocusaurusContext();
+  const { colorMode } = useColorMode();
 
   const [mounted, setMounted] = useState(false);
   // The Prism theme on SSR is always the default theme but the site theme
@@ -152,6 +154,7 @@ export default function HomepageCompare() {
   }, []);
 
   const prismTheme = prism.theme;
+  const prismDarkTheme = prism.darkTheme;
 
   return (
     <section className={clsx('home-section', styles.features)}>
@@ -178,14 +181,11 @@ export default function HomepageCompare() {
                       {...defaultProps}
                       code={code}
                       key={mounted}
-                      theme={prismTheme}
+                      theme={colorMode == 'dark' ? prismDarkTheme : prismTheme}
                       language={ full_example ? 'rust' : 'shell' }
                     >
                       {({ className, tokens, getLineProps, getTokenProps }) => (
-                        <pre
-                          className={`${className}`}
-                          style={{ backgroundColor: '#292d3e' }}
-                        >
+                        <pre className={`${className}`}>
                           {tokens.map((line, i) => (
                             <div {...getLineProps({ line, key: i })}>
                               {line.map((token, key) => (
