@@ -1,8 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const versions = require('./versions.json');
 
 function getNextMinorVersionName() {
@@ -168,8 +166,9 @@ const config = {
         ].join(''),
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        // Themes: https://github.com/FormidableLabs/prism-react-renderer/tree/master/packages/prism-react-renderer/src/themes
+        theme: require('prism-react-renderer/themes/vsLight'),
+        darkTheme: require('prism-react-renderer/themes/vsDark'),
         additionalLanguages: [
           'toml',
           'rust',
