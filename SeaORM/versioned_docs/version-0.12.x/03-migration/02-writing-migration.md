@@ -105,7 +105,6 @@ assert_eq!(Post::Text.to_string(), "text");
 
     #[derive(Iden, EnumIter)]
     pub enum Category {
-        Table,
         #[iden = "Feed"]
         Feed,
         #[iden = "Story"]
@@ -128,13 +127,7 @@ assert_eq!(Post::Text.to_string(), "text");
                 .col(ColumnDef::new(Post::Text).string().not_null())
                 .col(
                     ColumnDef::new(Post::Category)
-                        .enumeration(Category::Table, [Category::Feed, Category::Story]),
-                        // Or, write it like below.
-                        // Keep in mind that for it to work,
-                        // 1. you need to derive `EnumIter`,
-                        // 2. import `Iterable` into scope
-                        // 3. and make sure `Category::Table` is the first variant
-                        .enumeration(Category::Table, Category::iter().skip(1)),
+                        .enumeration(Alias::new("category"), Category::iter()),
                 )
                 .to_owned(),
         )
@@ -150,12 +143,23 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
+    use sea_orm::{EnumIter, Iterable};
+
+    #[derive(DeriveIden)]
+    struct CategoryEnum;
+
+    #[derive(DeriveIden, EnumIter)]
+    enum CategoryVariants {
+        Feed,
+        #[sea_orm(iden = "story")]
+        Story,
+    }
+
     manager
         .create_type(
-            // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
             Type::create()
-                .as_enum(Alias::new("tea"))
-                .values([Alias::new("EverydayTea"), Alias::new("BreakfastTea")])
+                .as_enum(CategoryEnum)
+                .values(CategoryVariants::iter())
                 .to_owned(),
         )
         .await?;
