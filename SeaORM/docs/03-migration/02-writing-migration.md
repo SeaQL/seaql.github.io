@@ -2,6 +2,12 @@
 
 Each migration contains two methods: `up` and `down`. The `up` method is used to alter the database schema, such as adding new tables, columns or indexes, while the `down` method revert the actions performed in the `up` method.
 
+The SeaORM migration system has the following advantages:
+
+1. Write DDL statements with SeaQuery or SQL
+2. Execute multiple DDL (with conditions)
+3. Seed data using the SeaORM API
+
 ## Creating Migrations
 
 Generate a new migration file by executing `sea-orm-cli migrate generate` command.
@@ -65,28 +71,29 @@ impl MigratorTrait for Migrator {
 
 See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
 
-### SeaQuery
+### Using SeaQuery
 
 Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
-You would need [`sea_query::Iden`](https://github.com/SeaQL/sea-query#iden) to define identifiers that will be used in your migration.
+You can use the [`DeriveIden`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveIden.html) macro to define identifiers that will be used in your migration.
 
 ```rust
 #[derive(DeriveIden)]
 enum Post {
-    Table,
+    Table, // this is a special case; will be mapped to `post`
     Id,
     Title,
-    #[sea_orm(iden = "text")] // Renaming the identifier
+    #[sea_orm(iden = "full_text")] // Renaming the identifier
     Text,
-    Category,
 }
 
 assert_eq!(Post::Table.to_string(), "post");
 assert_eq!(Post::Id.to_string(), "id");
 assert_eq!(Post::Title.to_string(), "title");
-assert_eq!(Post::Text.to_string(), "text");
+assert_eq!(Post::Text.to_string(), "full_text");
 ```
+
+Here are some common DDL snippets you may find useful.
 
 #### Schema Creation Methods
 - Create Table
@@ -202,16 +209,68 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 
 #### Schema Inspection Methods
+
 - Has Table
     ```rust
-    manager.has_table(table_name)
+    manager.has_table("table_name")
     ```
 - Has Column
     ```rust
-    manager.has_column(table_name, column_name)
+    manager.has_column("table_name", "column_name")
+    ```
+- Has Index
+    ```rust
+    manager.has_index("table_name", "index_name")
     ```
 
-## Combining Multiple Schema Changes in one Migration
+### Using raw SQL
+
+You can write migration files in raw SQL, but then you lost the multi-backend compatibility SeaQuery offers.
+
+```rust title="migration/src/m20220101_000001_create_table.rs"
+use sea_orm::Statement;
+use sea_orm_migration::prelude::*;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        let db = manager.get_connection();
+
+        // Use `execute_unprepared` if the SQL statement doesn't have value bindings
+        db.execute_unprepared(
+            "CREATE TABLE `cake` (
+                `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                `name` varchar(255) NOT NULL
+            )"
+        )
+        .await?;
+
+        // Construct a `Statement` if the SQL contains value bindings
+        let stmt = Statement::from_sql_and_values(
+            manager.get_database_backend(),
+            r#"INSERT INTO `cake` (`name`) VALUES (?)"#,
+            ["Cheese Cake".into()]
+        );
+        db.execute(stmt).await?;
+
+        Ok(())
+    }
+
+    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        manager
+            .get_connection()
+            .execute_unprepared("DROP TABLE `cake`")
+            .await?;
+
+        Ok(())
+    }
+}
+```
+
+## Tip 1: combining multiple schema changes in one migration
 
 You can combine multiple changes within both up and down migration functions. Here is a complete example:
 
@@ -266,52 +325,38 @@ async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
 }
 ```
 
-### Raw SQL
+## Tip 2: `ADD COLUMN IF NOT EXISTS`
 
-You can write migration files in raw SQL, but then you lost the multi-backend compatibility SeaQuery offers.
+Since this syntax is not available on MySQL, you can:
 
-```rust title="migration/src/m20220101_000001_create_table.rs"
-use sea_orm::Statement;
-use sea_orm_migration::prelude::*;
-
-#[derive(DeriveMigrationName)]
-pub struct Migration;
-
-#[async_trait]
-impl MigrationTrait for Migration {
-    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        let db = manager.get_connection();
-
-        // Use `execute_unprepared` if the SQL statement doesn't have value bindings
-        db.execute_unprepared(
-            "CREATE TABLE `cake` (
-                `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                `name` varchar(255) NOT NULL
-            )"
-        )
-        .await?;
-
-        // Construct a `Statement` if the SQL contains value bindings
-        let stmt = Statement::from_sql_and_values(
-            manager.get_database_backend(),
-            r#"INSERT INTO `cake` (`name`) VALUES (?)"#,
-            ["Cheese Cake".into()]
-        );
-        db.execute(stmt).await?;
-
-        Ok(())
+```rust
+async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+    if manager.has_column("my_table", "col_to_add").await? {
+        // ALTER TABLE `my_table` ADD COLUMN `col_to_add` ..
     }
 
-    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        manager
-            .get_connection()
-            .execute_unprepared("DROP TABLE `cake`")
-            .await?;
-
-        Ok(())
-    }
+    Ok(())
 }
 ```
+
+## Tip 3: Seed data with Entity
+
+```rust
+async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+    let db = manager.get_connection();
+
+    cake::ActiveModel {
+        name: Set("Cheesecake".to_owned()),
+        ..Default::default()
+    }
+    .insert(db)
+    .await?;
+
+    Ok(())
+}
+```
+
+[Full example](https://github.com/SeaQL/sea-orm/blob/master/examples/seaography_example/migration/src/m20230102_000001_seed_bakery_data.rs).
 
 ## Atomic Migration
 
