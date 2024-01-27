@@ -150,28 +150,12 @@ assert_eq!(Post::Text.to_string(), "text");
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
-    use sea_orm::{EnumIter, Iterable};
-
-    #[derive(Iden, EnumIter)]
-    pub enum Category {
-        Table,
-        #[iden = "Feed"]
-        Feed,
-        #[iden = "Story"]
-        Story,
-    }
-
     manager
         .create_type(
+            // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
             Type::create()
-                .as_enum(Category::Table)
-                .values([Category::Feed, Category::Story])
-                // Or, write it like below.
-                // Keep in mind that for it to work,
-                // 1. you need to derive `EnumIter`,
-                // 2. import `Iterable` into scope
-                // 3. and make sure `Category::Table` is the first variant
-                .values(Category::iter().skip(1))
+                .as_enum(Alias::new("tea"))
+                .values([Alias::new("EverydayTea"), Alias::new("BreakfastTea")])
                 .to_owned(),
         )
         .await?;
