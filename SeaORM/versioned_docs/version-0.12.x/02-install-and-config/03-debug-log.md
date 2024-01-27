@@ -2,7 +2,7 @@
 
 SeaORM logs debug messages via the [`tracing`](https://crates.io/crates/tracing) crate.
 
-You have to enable the `debug-print` feature flag:
+You can enable SeaORM's logging with the `debug-print` feature flag:
 
 ```toml
 [dependencies.sea-orm]
@@ -31,8 +31,9 @@ SQLx also logs by default. If you turned on SeaORM's `debug-print`, you can disa
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());
-opt.sqlx_logging(false) // Disable SQLx log
-    .sqlx_logging_level(log::LevelFilter::Info); // Set SQLx log level
+opt
+    .sqlx_logging(false) // Disable SQLx log
+    .sqlx_logging_level(log::LevelFilter::Info); // Or set SQLx log level
 
 let db = Database::connect(opt).await?;
 ```

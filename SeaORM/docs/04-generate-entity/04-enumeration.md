@@ -37,7 +37,7 @@ pub enum Color {
 }
 ```
 
-### Native Database Enum
+## Native Database Enum
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -50,18 +50,66 @@ pub enum Tea {
 }
 ```
 
+### MySQL
+
+MySQL enum is just part of the column definition, and cannot be reused for different tables.
+
+```rust
+Table::create()
+    .table(Posts::TableName)
+    .col(
+        ColumnDef::new(Posts::ColumnName)
+            .enumeration(Alias::new("tea"), [Alias::new("EverydayTea"), Alias::new("BreakfastTea")]),
+    )
+
+"CREATE TABLE `table_name` (`column_name` ENUM('EverydayTea', 'BreakfastTea'))",
+```
+
+### Postgres
+
+If you are using Postgres, the enum has to be created in a separate `Type` statement in a migration, you can create it with:
+
+#### 1. Custom TYPE statement
+
+[Full example](https://github.com/SeaQL/sea-orm/blob/master/sea-orm-migration/tests/common/migration/m20220118_000004_create_tea_enum.rs).
+
+```rust
+// run this in migration:
+
+manager
+    .create_type(
+        // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
+        Type::create()
+            .as_enum(Alias::new("tea"))
+            .values([Alias::new("EverydayTea"), Alias::new("BreakfastTea")])
+            .to_owned(),
+    )
+    .await?;
+```
+
+#### 2. `create_enum_from_active_enum`
+
+```rust
+// we can do this in migration:
+
+use sea_orm::{Schema, DbBackend};
+let schema = Schema::new(DbBackend::Postgres);
+
+manager
+    .create_type(
+        // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
+        schema.create_enum_from_active_enum::<Tea>(),
+    )
+    .await?;
+```
+
 ## Implementations
 
-You can implement [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) manually by hand or use the derive macro [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html).
-
-### Derive Implementation
-
-See [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) for the full specification of macro attributes.
+You can implement [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) by using the [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro.
 
 ```rust
 use sea_orm::entity::prelude::*;
 
-// Using the derive macro
 #[derive(Debug, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(
     rs_type = "String",
@@ -76,18 +124,20 @@ pub enum Category {
 }
 ```
 
-### Manual Implementation
+<details>
+  <summary>For illustration purpose, this is roughly what the macro implements:</summary>
+  <div>
 
 ```rust
 use sea_orm::entity::prelude::*;
 
-// Implementing it manually
 #[derive(Debug, PartialEq, Eq, EnumIter)]
 pub enum Category {
     Big,
     Small,
 }
 
+// Implementing manually
 impl ActiveEnum for Category {
     // The macro attribute `rs_type` is being pasted here
     type Value = String;
@@ -124,6 +174,8 @@ impl ActiveEnum for Category {
     }
 }
 ```
+  </div>
+</details>
 
 ## Using ActiveEnum on Model
 
