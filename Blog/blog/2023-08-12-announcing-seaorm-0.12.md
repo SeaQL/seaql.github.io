@@ -5,6 +5,7 @@ author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
+image: https://www.sea-ql.org/blog/img/SeaORM%2012%20Banner.png
 tags: [news]
 ---
 
