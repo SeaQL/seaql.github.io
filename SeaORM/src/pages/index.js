@@ -7,6 +7,7 @@ import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageExample from '../components/HomepageExample';
 import HomepageCompare from '../components/HomepageCompare';
 import HomepageProducts from '../components/HomepageProducts';
+import HomepageSponsors from '../components/HomepageSponsors';
 import HomepageMascot from '../components/HomepageMascot';
 
 function HomepageHeader() {
@@ -41,6 +42,7 @@ export default function Home() {
         <HomepageExample />
         <HomepageCompare />
         <HomepageProducts />
+        <HomepageSponsors />
         <HomepageMascot />
       </main>
     </Layout>
