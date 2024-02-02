@@ -244,8 +244,8 @@ A big shout out to our sponsors 😇:
 #### Gold Sponsors
 
 <a href="https://www.digitalocean.com/">
-    <img src="https://www.sea-ql.org/static/sponsors/Osmos.svg#light" width="180" />
-    <img src="https://www.sea-ql.org/static/sponsors/Osmos-dark.svg#dark" width="180" />
+    <img src="https://www.sea-ql.org/static/sponsors/Osmos.svg#light" width="238" />
+    <img src="https://www.sea-ql.org/static/sponsors/Osmos-dark.svg#dark" width="238" />
 </a>
 
 #### Sponsors
