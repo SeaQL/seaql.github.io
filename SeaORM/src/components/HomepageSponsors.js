@@ -36,14 +36,14 @@ export default function HomepageProducts() {
               <div className="col col--2">
                 <p className="text--center">
                   <a href="https://www.digitalocean.com/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="160" />
+                    <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="148" />
                   </a>
                 </p>
               </div>
               <div className="col col--2">
                 <p className="text--center">
                   <a href="https://www.jetbrains.com/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="160" />
+                    <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="148" />
                   </a>
                 </p>
               </div>

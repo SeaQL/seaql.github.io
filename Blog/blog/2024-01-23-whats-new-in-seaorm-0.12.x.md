@@ -235,11 +235,9 @@ There are still a few breaking changes planned for the next major release. After
 
 ## Sponsor
 
-A big thank to [DigitalOcean](https://www.digitalocean.com/) who sponsored our servers, and [JetBrains](https://www.jetbrains.com/) who sponsored our IDE, and every sponsor on [GitHub Sponsor](https://github.com/sponsors/SeaQL)!
-
 If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
 
-A big shout out to our sponsors 😇:
+A big shout out to our [sponsors](https://github.com/sponsors/SeaQL) 😇:
 
 #### Gold Sponsors
 
@@ -248,7 +246,7 @@ A big shout out to our sponsors 😇:
     <img src="https://www.sea-ql.org/static/sponsors/Osmos-dark.svg#dark" width="238" />
 </a>
 
-#### Sponsors
+#### GitHub Sponsors
 
 <div class="row">
     <div class="col col--6 margin-bottom--md">
