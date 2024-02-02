@@ -10,18 +10,7 @@ export default function HomepageProducts() {
   return (
     <section id="our-users" className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
-        <div className="row">
-          <div className="col col--12">
-              <h2 className="text--center">Our Sponsors</h2>
-              <br/>
-              <p className="text--center">
-                If you feel generous, a small donation via GitHub Sponsor will be greatly appreciated,
-                <br/>and goes a long way towards sustaining the organization.
-              </p>
-          </div>
-        </div>
-        <br />
-        <h3 className="text--center">Gold Sponsors</h3>
+        <h2 className="text--center">Gold Sponsors</h2>
         <div className="row">
           <div className="col col--12">
             <div className="row">
@@ -38,7 +27,7 @@ export default function HomepageProducts() {
           </div>
         </div>
         <br />
-        <h3 className="text--center">Sponsors</h3>
+        <h2 className="text--center">Silver Sponsors</h2>
         <div className="row">
           <div className="col col--12">
             <div className="row">

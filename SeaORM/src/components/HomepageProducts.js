@@ -26,12 +26,6 @@ const ProductList = [
     logoClassName: styles.prefixdevLogo,
   },
   {
-    url: 'https://www.spyglass.fyi/',
-    logo: 'img/other/spyglass-logo.svg',
-    desc: 'A personal search engine',
-    logoClassName: styles.spyglassLogo,
-  },
-  {
     url: 'https://www.svix.com/',
     logo: 'img/other/svix-logo.svg',
     desc: 'The enterprise ready webhooks service',
