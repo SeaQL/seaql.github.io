@@ -46,3 +46,11 @@ html[data-theme='dark'] canvas.chart-js,
 html[data-theme='dark'] .badge-dark-mode {
   filter: invert(1) hue-rotate(180deg);
 }
+
+[data-theme='light'] img[src$='dark'],
+[data-theme='dark'] img[src$='light'],
+[data-theme='light'] video[data-theme='dark'],
+[data-theme='dark'] video[data-theme='light']
+{
+  display: none;
+}

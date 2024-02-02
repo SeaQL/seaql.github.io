@@ -241,6 +241,15 @@ If you feel generous, a small donation will be greatly appreciated, and goes a l
 
 A big shout out to our sponsors 😇:
 
+#### Gold Sponsors
+
+<a href="https://www.digitalocean.com/">
+    <img src="https://www.sea-ql.org/static/sponsors/Osmos.svg#light" width="180" />
+    <img src="https://www.sea-ql.org/static/sponsors/Osmos-dark.svg#dark" width="180" />
+</a>
+
+#### Sponsors
+
 <div class="row">
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
