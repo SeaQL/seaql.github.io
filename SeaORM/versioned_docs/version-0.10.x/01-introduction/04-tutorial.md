@@ -7,7 +7,6 @@ It's a good idea to have a grasp of the basic concepts first, so let's continue.
 If you are so eager and want something grab-and-go, SeaQL maintains a set of official examples contributed by the community (we welcome more!):
 
 - [Actix v4 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
-- [Actix v3 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix3_example)
 - [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
 - [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
 - [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)

@@ -762,7 +762,6 @@ impl MigrationTrait for Migration {
 SeaORM plays well with the other crates in the async ecosystem. We maintain an array of example projects for building REST, GraphQL and gRPC services. More examples [wanted](https://github.com/SeaQL/sea-orm/issues/269)!
 
 - [Actix v4 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
-- [Actix v3 Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix3_example)
 - [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
 - [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
 - [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
