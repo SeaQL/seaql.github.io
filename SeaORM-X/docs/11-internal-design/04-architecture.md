@@ -9,3 +9,4 @@ SeaORM X is built upon the original SeaORM, featuring the support of MSSQL. The 
 SeaQuery X extends from the original SeaQuery, adding the support of MSSQL query building and MSSQL specific statement and syntax.
 
 SeaSchema X rebased from the original SeaSchema, enabling the support of MSSQL schema discovery and recreating schema from table create statement.
+
