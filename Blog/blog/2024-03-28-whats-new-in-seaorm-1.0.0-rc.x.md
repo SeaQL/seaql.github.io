@@ -16,10 +16,39 @@ We've just reached the milestone of 2,600,000 all time downloads on [crates.io](
 
 ### Migration Schema Helper
 
-[#2099](https://github.com/SeaQL/sea-orm/pull/2099) Schema helpers were added to the migration. Using shorthand to define common column types, there are three variants for each common column types:
+[#2099](https://github.com/SeaQL/sea-orm/pull/2099) Schema helpers were added to the migration, you can now use shorthand to define common column types.
+
+There are three variants for each common column types:
 - `<COLUMN_TYPE>()` helper function, e.g. `string()`, define a non-null string column
 - `<COLUMN_TYPE>_null()` helper function, e.g. `string_null()`, define a nullable string column
 - `<COLUMN_TYPE>_uniq()` helper function, e.g. `string_uniq()`, define a non-null and unique string column
+
+The old migration script looks like this... which is quite wordy.
+
+```rust
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        manager
+            .create_table(
+                Table::create()
+                    .table(Users::Table)
+                    .if_not_exists()
+                    .col(
+                        ColumnDef::new(Users::Id)
+                            .integer()
+                            .not_null()
+                            .auto_increment()
+                            .primary_key(),
+                    )
+                    .col(ColumnDef::new(Users::Pid).uuid().not_null())
+                    .col(ColumnDef::new(Users::Email).string().not_null().unique_key())
+                    // ...
+    }
+}
+```
+
+Now, with migration schema helper, you can define the common column types with ease.
 
 ```rust
 // Remember to import `sea_orm_migration::schema::*`
@@ -56,58 +85,16 @@ impl MigrationTrait for Migration {
 }
 ```
 
-## Enhancements
+### End-to-end SQLite Type Mapping
 
-* [#2137](https://github.com/SeaQL/sea-orm/pull/2137) `DerivePartialModel` macro attribute `entity` now supports `syn::Type`
-```rust
-#[derive(DerivePartialModel)]
-#[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
-struct EntityNameNotAIdent {
-    #[sea_orm(from_col = "foo2")]
-    _foo: i32,
-    #[sea_orm(from_col = "bar2")]
-    _bar: String,
-}
-```
+[#2077](https://github.com/SeaQL/sea-orm/pull/2077), [#2078](https://github.com/SeaQL/sea-orm/pull/2078) Entity defined in SQLite can now be discovered correctly by SeaSchema
 
-* [#2146](https://github.com/SeaQL/sea-orm/pull/2146) Added `RelationDef::from_alias()`
-```rust
-assert_eq!(
-    cake::Entity::find()
-        .join_as(
-            JoinType::LeftJoin,
-            cake_filling::Relation::Cake.def().rev(),
-            cf.clone()
-        )
-        .join(
-            JoinType::LeftJoin,
-            cake_filling::Relation::Filling.def().from_alias(cf)
-        )
-        .build(DbBackend::MySql)
-        .to_string(),
-    [
-        "SELECT `cake`.`id`, `cake`.`name` FROM `cake`",
-        "LEFT JOIN `cake_filling` AS `cf` ON `cake`.`id` = `cf`.`cake_id`",
-        "LEFT JOIN `filling` ON `cf`.`filling_id` = `filling`.`id`",
-    ]
-    .join(" ")
-);
-```
+Data types will be stored in SQLite in the following ways:
+* `INTEGER`: integer, tiny_integer, small_integer, big_integer and boolean are stored as integer
+* `REAL`: float, double, decimal and money are stored as real
+* `BLOB`: blob and varbinary_blob are stored as blob
+* `TEXT`: all other data types are stored as text, including string, char, text, json, uuid, date, time, datetime, timestamp, etc.
 
-* [#1665](https://github.com/SeaQL/sea-orm/pull/1665) [sea-orm-macro] Qualify traits in `DeriveActiveModel` macro
-* [#2064](https://github.com/SeaQL/sea-orm/pull/2064) [sea-orm-cli] Fix `migrate generate` on empty `mod.rs` files
-
-## Breaking Changes
-
-### SeaORM
-
-* [#2088](https://github.com/SeaQL/sea-orm/pull/2088) Updated Strum to version 0.26
-* [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Renamed `ConnectOptions::pool_options()` to `ConnectOptions::sqlx_pool_options()`
-* [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Made `sqlx_common` private, hiding `sqlx_error_to_xxx_err`
-
-### SeaQuery
-
-* [#2077](https://github.com/SeaQL/sea-orm/pull/2077), [#2078](https://github.com/SeaQL/sea-orm/pull/2078) Rework SQLite type mapping
 ```rust
 assert_eq!(
     Table::create()
@@ -167,6 +154,53 @@ assert_eq!(
     .join(" ")
 );
 ```
+
+## Enhancements
+
+* [#2137](https://github.com/SeaQL/sea-orm/pull/2137) `DerivePartialModel` macro attribute `entity` now supports `syn::Type`
+```rust
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
+struct EntityNameNotAIdent {
+    #[sea_orm(from_col = "foo2")]
+    _foo: i32,
+    #[sea_orm(from_col = "bar2")]
+    _bar: String,
+}
+```
+
+* [#2146](https://github.com/SeaQL/sea-orm/pull/2146) Added `RelationDef::from_alias()`
+```rust
+assert_eq!(
+    cake::Entity::find()
+        .join_as(
+            JoinType::LeftJoin,
+            cake_filling::Relation::Cake.def().rev(),
+            cf.clone()
+        )
+        .join(
+            JoinType::LeftJoin,
+            cake_filling::Relation::Filling.def().from_alias(cf)
+        )
+        .build(DbBackend::MySql)
+        .to_string(),
+    [
+        "SELECT `cake`.`id`, `cake`.`name` FROM `cake`",
+        "LEFT JOIN `cake_filling` AS `cf` ON `cake`.`id` = `cf`.`cake_id`",
+        "LEFT JOIN `filling` ON `cf`.`filling_id` = `filling`.`id`",
+    ]
+    .join(" ")
+);
+```
+
+* [#1665](https://github.com/SeaQL/sea-orm/pull/1665) [sea-orm-macro] Qualify traits in `DeriveActiveModel` macro
+* [#2064](https://github.com/SeaQL/sea-orm/pull/2064) [sea-orm-cli] Fix `migrate generate` on empty `mod.rs` files
+
+## Breaking Changes
+
+* [#2088](https://github.com/SeaQL/sea-orm/pull/2088) Updated Strum to version 0.26
+* [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Renamed `ConnectOptions::pool_options()` to `ConnectOptions::sqlx_pool_options()`
+* [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Made `sqlx_common` private, hiding `sqlx_error_to_xxx_err`
 * MySQL money type maps to decimal
 * MySQL blob types moved to `extension::mysql::MySqlType`; `ColumnDef::blob()` now takes no parameters
 ```rust
@@ -213,13 +247,6 @@ pub enum StringLen {
 * `ColumnType::Binary` and `ColumnType::VarBinary` map to `bytea` for Postgres
 * `Value::Decimal` and `Value::BigDecimal` bind as `real` for SQLite
 * `ColumnType::Year(Option<MySqlYear>)` changed to `ColumnType::Year`
-
-### SeaSchema
-
-* `SchemaProbe::query_tables(..)` changed to `SchemaProbe::query_tables(&self, ..)`
-* `SchemaProbe::has_table(..)` changed to `SchemaProbe::has_table(&self, ..)`
-* `SchemaProbe::has_column(..)` changed to `SchemaProbe::has_column(&self, ..)`
-* `SchemaProbe::has_index(..)` changed to `SchemaProbe::has_index(&self, ..)`
 
 ## Upgrades
 
