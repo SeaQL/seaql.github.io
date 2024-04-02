@@ -2,6 +2,12 @@
 
 Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) entity.
 
+:::tip MSSQL support available in SeaORM X
+
+The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/generate-entity/entity-structure/).
+
+:::
+
 ```rust
 use sea_orm::entity::prelude::*;
 

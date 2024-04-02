@@ -1,5 +1,11 @@
 # Insert
 
+:::tip MSSQL support available in SeaORM X
+
+The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/basic-crud/insert/).
+
+:::
+
 Before diving into SeaORM insert we have to introduce `ActiveValue` and `ActiveModel`.
 
 ## ActiveValue

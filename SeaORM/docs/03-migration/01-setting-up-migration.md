@@ -8,6 +8,12 @@ If you are starting from a fresh database, it's better to version control your d
 
 If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
 
+:::tip MSSQL support available in SeaORM X
+
+The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/migration/setting-up-migration/).
+
+:::
+
 ## Migration Table
 
 A table will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.

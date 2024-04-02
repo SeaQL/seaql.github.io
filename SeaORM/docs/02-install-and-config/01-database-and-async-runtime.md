@@ -12,6 +12,12 @@ sea-orm = { version = "0.12", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "
 
 You must choose a `DATABASE_DRIVER` and an `ASYNC_RUNTIME`. `macros` is needed if you use SeaORM's generated entities (most likely).
 
+:::tip MSSQL support available in SeaORM X
+
+The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/install-and-config/database-and-async-runtime/).
+
+:::
+
 ## DATABASE_DRIVER
 
 You can choose one or more from:
