@@ -310,7 +310,7 @@ In the [previous release](https://www.sea-ql.org/blog/2024-01-23-whats-new-in-se
 While `0.12` will still be maintained before `1.0` get finalized, you are welcome to try out `1.0-rc.x` today! There will still be a few minor but still technically breaking changes:
 
 1. [#2185](https://github.com/SeaQL/sea-orm/pull/2185) Adding trait const `ARITY` to `PrimaryKeyTrait`, allowing users to write better generic code
-2. Associating `ActiveModelBehavior` to `EntityTrait`, allowing users to extend the behaviour of Entities
+2. [#2186](https://github.com/SeaQL/sea-orm/pull/2186) Associating `ActiveModel` to `EntityTrait`, allowing users to extend the behaviour of Entities
 
 Now is also the perfect time for you to propose breaking changes that'd have long term impact to SeaORM. After the stablization, we hope that SeaORM can offer a stable API surface that developers can use in production for the years to come.
 
