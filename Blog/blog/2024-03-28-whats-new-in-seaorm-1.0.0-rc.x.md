@@ -305,7 +305,7 @@ pub enum StringLen {
 
 ## Release Planning
 
-In the [last release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/) of SeaORM, we stated that we want our next release to be `1.0`. We are very close to `1.0` now!
+In the [previous release](https://www.sea-ql.org/blog/2024-01-23-whats-new-in-seaorm-0.12.x/#release-planning) of SeaORM, we stated that we want our next release to be `1.0`. We are indeed very close to `1.0` now!
 
 While `0.12` will still be maintained before `1.0` get finalized, you are welcome to try out `1.0-rc.x` today! There will still be a few minor but still technically breaking changes:
 
