@@ -8,22 +8,13 @@ author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
 tags: [news]
 ---
 
-## Celebrating 2.6M downloads on crates.io 📦
-
-We've just reached the milestone of 2,600,000 all time downloads on [crates.io](https://crates.io/crates/sea-orm). It's a testament to SeaORM's adoption in professional use. Thank you to all our users for your trust and for being a part of our community.
-
 ## New Features
 
-### Migration Schema Helper
+### Refreshed migration schema definition
 
-[#2099](https://github.com/SeaQL/sea-orm/pull/2099) Schema helpers were added to the migration, you can now use shorthand to define common column types.
+[#2099](https://github.com/SeaQL/sea-orm/pull/2099) We are aware that SeaORM's migration scripts can sometimes looks verbose. Thanks to the clever design made by Loco, we've refreshed the schema definition syntax.
 
-There are three variants for each common column types:
-- `<COLUMN_TYPE>()` helper function, e.g. `string()`, define a non-null string column
-- `<COLUMN_TYPE>_null()` helper function, e.g. `string_null()`, define a nullable string column
-- `<COLUMN_TYPE>_uniq()` helper function, e.g. `string_uniq()`, define a non-null and unique string column
-
-The old migration script looks like this... which is quite wordy.
+An old migration script looks like this:
 
 ```rust
 #[async_trait::async_trait]
@@ -48,7 +39,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Now, with migration schema helper, you can define the common column types with ease.
+Now, using the new schema helpers, you can define the schema with a simplified syntax!
 
 ```rust
 // Remember to import `sea_orm_migration::schema::*`
@@ -85,15 +76,26 @@ impl MigrationTrait for Migration {
 }
 ```
 
-### End-to-end SQLite Type Mapping
+There are three variants for each commonly used column type:
 
-[#2077](https://github.com/SeaQL/sea-orm/pull/2077), [#2078](https://github.com/SeaQL/sea-orm/pull/2078) Entity defined in SQLite can now be discovered correctly by SeaSchema
+- `<COLUMN_TYPE>()` helper function, e.g. `string()`, define a non-null string column
+- `<COLUMN_TYPE>_null()` helper function, e.g. `string_null()`, define a nullable string column
+- `<COLUMN_TYPE>_uniq()` helper function, e.g. `string_uniq()`, define a non-null and unique string column
 
-Data types will be stored in SQLite in the following ways:
-* `INTEGER`: integer, tiny_integer, small_integer, big_integer and boolean are stored as integer
-* `REAL`: float, double, decimal and money are stored as real
-* `BLOB`: blob and varbinary_blob are stored as blob
-* `TEXT`: all other data types are stored as text, including string, char, text, json, uuid, date, time, datetime, timestamp, etc.
+The new schema helpers can be used by importing `sea_orm_migration::schema::*`. The migration library is fully backward compatible, so there is no rush to migrate old scripts. The new syntax is recommended for new scripts, and all examples in the SeaORM repository have been updated for demonstration. For advanced use cases, the old SeaQuery syntax can still be used.
+
+### Reworked SQLite Type Mappings
+
+[sea-orm#2077](https://github.com/SeaQL/sea-orm/pull/2077) [sea-query#735](https://github.com/SeaQL/sea-query/pull/735) [sea-schema#117](https://github.com/SeaQL/sea-schema/pull/117) We've reworked the type mappings for SQLite across the SeaQL ecosystem, such that SeaQuery and SeaSchema are now reciprocal to each other. Migrations written with SeaQuery can be rediscovered by `sea-orm-cli` and generate compatible entities! In other words, the roundtrip is complete.
+
+Data types will be mapped to SQLite types with a custom naming scheme following SQLite's affinity rule:
+
+* `INTEGER`: `integer`, `tiny_integer`, `small_integer`, `big_integer` and `boolean` are stored as `integer`
+* `REAL`: `float`, `double`, `decimal` and `money` are stored as `real`
+* `BLOB`: `blob` and `varbinary_blob` are stored as `blob`
+* `TEXT`: all other data types are stored as `text`, including `string`, `char`, `text`, `json`, `uuid`, `date`, `time`, `datetime`, `timestamp`, etc.
+
+To illustrate,
 
 ```rust
 assert_eq!(
@@ -125,7 +127,8 @@ assert_eq!(
         .col(ColumnDef::new(Alias::new("binary3")).var_binary(1024))
         .to_string(SqliteQueryBuilder),
     [
-        r#"CREATE TABLE "strange" ( "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,"#,
+        r#"CREATE TABLE "strange" ("#,
+            r#""id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,"#,
             r#""int1" integer,"#,
             r#""int2" tinyint,"#,
             r#""int3" smallint,"#,
@@ -154,6 +157,47 @@ assert_eq!(
     .join(" ")
 );
 ```
+
+The full type mapping table is [documented here](https://docs.rs/sea-query/0.31.0-rc.4/sea_query/table/enum.ColumnType.html):
+
+| ColumnType            | MySQL data type   | PostgreSQL data type        | SQLite data type             |
+|-----------------------|-------------------|-----------------------------|------------------------------|
+| Char                  | char              | char                        | char                         |
+| String                | varchar           | varchar                     | varchar                      |
+| Text                  | text              | text                        | text                         |
+| TinyInteger           | tinyint           | smallint                    | tinyint                      |
+| SmallInteger          | smallint          | smallint                    | smallint                     |
+| Integer               | int               | integer                     | integer                      |
+| BigInteger            | bigint            | bigint                      | integer                      |
+| TinyUnsigned          | tinyint unsigned  | smallint                    | tinyint                      |
+| SmallUnsigned         | smallint unsigned | smallint                    | smallint                     |
+| Unsigned              | int unsigned      | integer                     | integer                      |
+| BigUnsigned           | bigint unsigned   | bigint                      | integer                      |
+| Float                 | float             | real                        | float                        |
+| Double                | double            | double precision            | double                       |
+| Decimal               | decimal           | decimal                     | real                         |
+| DateTime              | datetime          | timestamp without time zone | datetime_text                |
+| Timestamp             | timestamp         | timestamp                   | timestamp_text               |
+| TimestampWithTimeZone | timestamp         | timestamp with time zone    | timestamp_with_timezone_text |
+| Time                  | time              | time                        | time_text                    |
+| Date                  | date              | date                        | date_text                    |
+| Year                  | year              | N/A                         | N/A                          |
+| Interval              | N/A               | interval                    | N/A                          |
+| Binary                | binary            | bytea                       | blob                         |
+| VarBinary             | varbinary         | bytea                       | varbinary_blob               |
+| Bit                   | bit               | bit                         | N/A                          |
+| VarBit                | bit               | varbit                      | N/A                          |
+| Boolean               | bool              | bool                        | boolean                      |
+| Money                 | decimal           | money                       | real_money                   |
+| Json                  | json              | json                        | json_text                    |
+| JsonBinary            | json              | jsonb                       | jsonb_text                   |
+| Uuid                  | binary(16)        | uuid                        | uuid_text                    |
+| Enum                  | ENUM(...)         | ENUM_NAME                   | enum_text                    |
+| Array                 | N/A               | DATA_TYPE[]                 | N/A                          |
+| Cidr                  | N/A               | cidr                        | N/A                          |
+| Inet                  | N/A               | inet                        | N/A                          |
+| MacAddr               | N/A               | macaddr                     | N/A                          |
+| LTree                 | N/A               | ltree                       | N/A                          |
 
 ## Enhancements
 
@@ -198,11 +242,10 @@ assert_eq!(
 
 ## Breaking Changes
 
-* [#2088](https://github.com/SeaQL/sea-orm/pull/2088) Updated Strum to version 0.26
 * [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Renamed `ConnectOptions::pool_options()` to `ConnectOptions::sqlx_pool_options()`
 * [#2145](https://github.com/SeaQL/sea-orm/pull/2145) Made `sqlx_common` private, hiding `sqlx_error_to_xxx_err`
-* MySQL money type maps to decimal
-* MySQL blob types moved to `extension::mysql::MySqlType`; `ColumnDef::blob()` now takes no parameters
+* MySQL `money` type maps to `decimal`
+* MySQL `blob` types moved to `extension::mysql::MySqlType`; `ColumnDef::blob()` now takes no parameters
 ```rust
 assert_eq!(
     Table::create()
@@ -227,12 +270,11 @@ assert_eq!(
     .join(" ")
 );
 ```
-* `ColumnDef::binary()` set column type as binary with default length of 1
+* `ColumnDef::binary()` sets column type as `binary` with default length of `1`
 * Removed `BlobSize` enum
-* Added `StringLen` to represent length of var-char/binary
+* Added `StringLen` to represent length of `varchar` / `varbinary`
 ```rust
 /// Length for var-char/binary; default to 255
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum StringLen {
     /// String size
     N(u32),
@@ -245,14 +287,15 @@ pub enum StringLen {
 * `ValueType::columntype()` of `String` maps to `String(StringLen::None)`
 * `ColumnType::Bit` maps to `bit` for Postgres
 * `ColumnType::Binary` and `ColumnType::VarBinary` map to `bytea` for Postgres
-* `Value::Decimal` and `Value::BigDecimal` bind as `real` for SQLite
+* `Value::Decimal` and `Value::BigDecimal` map to `real` for SQLite
 * `ColumnType::Year(Option<MySqlYear>)` changed to `ColumnType::Year`
 
 ## Upgrades
 
 * Upgrade `sea-query` to `0.31.0-rc.3`
-* Upgrade `sea-query-binder` to `0.6.0-rc.1`
 * Upgrade `sea-schema` to `0.15.0-rc.4`
+* Upgrade `sea-query-binder` to `0.6.0-rc.1`
+* [#2088](https://github.com/SeaQL/sea-orm/pull/2088) Upgrade `strum` to `0.26`
 
 ## House Keeping
 
@@ -260,11 +303,18 @@ pub enum StringLen {
 * [#2154](https://github.com/SeaQL/sea-orm/pull/2154) Deprecated Actix v3 example
 * [#2136](https://github.com/SeaQL/sea-orm/pull/2136) Re-enabled `rocket_okapi` example
 
-## Release planning
+## Release Planning
 
-In the [announcement blog post](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/) of SeaORM 0.12, we stated we want to reduce the frequency of breaking releases while maintaining the pace for feature updates and enhancements. I am glad to say we've accomplished that!
+In the [last release](https://www.sea-ql.org/blog/2023-08-12-announcing-seaorm-0.12/) of SeaORM, we stated that we want our next release to be `1.0`. We are very close to `1.0` now!
 
-There are still a few breaking changes planned for the 1.0 major release. After some [discussions](https://github.com/SeaQL/sea-orm/discussions/2031) and consideration, we decided that the next major release will be a release candidate for 1.0!
+While `0.12` will still be maintained before `1.0` get finalized, you are welcome to try out `1.0-rc.x` today! There will still be a few minor but still technically breaking changes:
+
+1. [#2185](https://github.com/SeaQL/sea-orm/pull/2185) Adding trait const `ARITY` to `PrimaryKeyTrait`, allowing users to write better generic code
+2. Associating `ActiveModelBehavior` to `EntityTrait`, allowing users to extend the behaviour of Entities
+
+Now is also the perfect time for you to propose breaking changes that'd have long term impact to SeaORM. After the stablization, we hope that SeaORM can offer a stable API surface that developers can use in production for the years to come.
+
+We'd not have more than 2 major releases in a year, and each major release will be maintained for at least 1 year. It's still tentative, but that's what we have in mind for now. Moreoever, it will actually allow us to ship new features more frequently!
 
 ## Sponsor
 
