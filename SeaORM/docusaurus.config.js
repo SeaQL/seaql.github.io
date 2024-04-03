@@ -1,8 +1,16 @@
 const versions = require('./versions.json');
 
 function getNextMinorVersionName() {
-  const minorVersion = parseInt(versions[0].split('.')[1], 10);
-  return `0.${minorVersion + 1}.x`;
+  const lastVersion = versions[0];
+  let majorVersion = parseInt(lastVersion.split('.')[0]);
+  let minorVersion = parseInt(lastVersion.split('.')[1]);
+  if (majorVersion >= 1) {
+    minorVersion += 1;
+  } else {
+    majorVersion = 1;
+    minorVersion = 0;
+  }
+  return `${majorVersion}.${minorVersion}.x`;
 }
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
