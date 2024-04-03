@@ -16,7 +16,7 @@ If you are so eager and want something grab-and-go, SeaQL maintains a set of off
 + [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
 + [Seaography Example](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example)
 
-:::tip MSSQL support available in SeaORM X
+:::tip MSSQL support available in SeaORM X 🎉
 
 MSSQL examples can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/introduction/tutorial/).
 

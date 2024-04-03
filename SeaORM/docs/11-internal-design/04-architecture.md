@@ -4,12 +4,6 @@
 
 <img width="100%" src="/SeaORM/img/SeaORM Architecture.svg" />
 
-:::tip MSSQL support available in SeaORM X
-
-The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/internal-design/architecture/).
-
-:::
-
 To understand the architecture of SeaORM, let's discuss what is an ORM. ORM exists to provide abstractions over common operations you would do against a database and hide the implementation details like the actual SQL queries.
 
 With a good ORM, you shouldn't bother to look under the API surface. Until you do. I hear you say *'abstraction leaks'*, and yes, it does.
@@ -47,3 +41,9 @@ Finally is the resolution stage, when query results are converted into Rust type
 Because only the execution and resolution stages are database specific, we have the possibility to use a different driver by replacing those.
 
 I imagine some day, we will support a number of databases, with a matrix of different syntaxes, protocols and form-factors.
+
+:::tip MSSQL support available in SeaORM X 🎉
+
+The internal architecture of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/internal-design/architecture/).
+
+:::

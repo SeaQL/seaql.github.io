@@ -6,9 +6,9 @@ First, install `sea-orm-cli` with `cargo`.
 cargo install sea-orm-cli
 ```
 
-:::tip MSSQL support available in SeaORM X
+:::tip MSSQL support available in SeaORM X 🎉
 
-The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/generate-entity/sea-orm-cli/).
+The installation and the usage of `sea-orm-cli` with MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/generate-entity/sea-orm-cli/).
 
 :::
 

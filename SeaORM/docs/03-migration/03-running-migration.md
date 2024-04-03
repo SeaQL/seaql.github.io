@@ -2,12 +2,6 @@
 
 After you have defined the migrations, you can apply or revert migrations in the terminal or on application startup.
 
-:::tip MSSQL support available in SeaORM X
-
-The installation and configuration of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/migration/running-migration/).
-
-:::
-
 ## Command Line Interface (CLI)
 
 Migrations can be run manually in the terminal. `DATABASE_URL` must be set in your environment, follow the instructions [here](04-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
@@ -98,6 +92,12 @@ let db = Database::connect(connect_options).await?
 
 migration::Migrator::up(&db, None).await?;
 ```
+
+:::tip MSSQL support available in SeaORM X 🎉
+
+The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/migration/running-migration/).
+
+:::
 
 ## Checking Migration Status
 
