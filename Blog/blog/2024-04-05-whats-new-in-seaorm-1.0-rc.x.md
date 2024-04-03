@@ -1,6 +1,6 @@
 ---
-slug: 2024-03-28-whats-new-in-seaorm-1.0.0-rc.x
-title: What's new in SeaORM 1.0.0-rc.x
+slug: 2024-04-05-whats-new-in-seaorm-1.0-rc.x
+title: What's new in SeaORM 1.0-rc.x
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
