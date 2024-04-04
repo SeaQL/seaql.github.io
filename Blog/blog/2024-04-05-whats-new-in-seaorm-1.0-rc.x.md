@@ -8,6 +8,8 @@ author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
 tags: [news]
 ---
 
+<img alt="SeaORM 1.0-rc Banner" src="/blog/img/SeaORM 1.0-rc Banner.png"/>
+
 ## New Features
 
 ### Refreshed migration schema definition
