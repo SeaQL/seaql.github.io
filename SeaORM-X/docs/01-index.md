@@ -6,7 +6,7 @@
 
     1.1. [What is SeaORM X](01-introduction/01-orm.md)
 
-    1.4. [Tutorial & Examples](01-introduction/04-tutorial.md)
+    1.2. [Tutorial & Examples](01-introduction/02-tutorial.md)
 
 ## Basics
 
@@ -30,10 +30,4 @@
 
 5. Basic CRUD
 
-    5.3 [INSERT: Model & ActiveModel, insert many](05-basic-crud/03-insert.md)
-
-## Advanced Topics
-
-11. Internal Design
-
-    11.4 [Architecture](11-internal-design/04-architecture.md)
+    5.1 [INSERT: Model & ActiveModel, insert many](05-basic-crud/01-insert.md)

@@ -4,7 +4,7 @@ If you prefer a step-by-step tutorial on how to use SeaORM, you can check out ou
 
 You can also check out [SeaORM Cookbook](https://www.sea-ql.org/sea-orm-cookbook/) for some frequently asked questions and recommended practices of using SeaORM.
 
-If you are so eager and want something grab-and-go, SeaQL maintains a set of official examples contributed by the community (we welcome more!):
+If you are so eager and want something grab-and-go, SeaQL maintains a set of official examples:
 
 + [Actix Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/mssql_actix_example)
 + [Axum Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/mssql_axum_example)
