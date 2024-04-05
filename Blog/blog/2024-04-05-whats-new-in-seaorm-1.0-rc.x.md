@@ -14,7 +14,7 @@ tags: [news]
 
 ### Refreshed migration schema definition
 
-[#2099](https://github.com/SeaQL/sea-orm/pull/2099) We are aware that SeaORM's migration scripts can sometimes looks verbose. Thanks to the clever design made by Loco, we've refreshed the schema definition syntax.
+[#2099](https://github.com/SeaQL/sea-orm/pull/2099) We are aware that SeaORM's migration scripts can sometimes look verbose. Thanks to the clever design made by Loco, we've refreshed the schema definition syntax.
 
 An old migration script looks like this:
 
