@@ -318,6 +318,10 @@ Now is also the perfect time for you to propose breaking changes that'd have lon
 
 We'd not have more than 2 major releases in a year, and each major release will be maintained for at least 1 year. It's still tentative, but that's what we have in mind for now. Moreoever, it will actually allow us to ship new features more frequently!
 
+## SQL Server Support
+
+We've been planning SQL Server for SeaORM for a while, but it was put aside in 2023 (which I regretted). Anyway SQL Server support is coming soon! It will first be offered as a closed beta to our partners. If you are interested, please join our waiting list.
+
 ## Sponsor
 
 If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
