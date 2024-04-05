@@ -4,7 +4,7 @@
 
 1. Introduction
 
-    1.1. [What is an ORM](01-introduction/01-orm.md)
+    1.1. [What is SeaORM X](01-introduction/01-orm.md)
 
     1.4. [Tutorial & Examples](01-introduction/04-tutorial.md)
 

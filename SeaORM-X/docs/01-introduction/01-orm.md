@@ -1,13 +1,15 @@
 # What is SeaORM X
 
-An Object Relational Mapper (ORM) is a programming library to help you interact with a relational database from an Object-Oriented Programming (OOP) language.
+SeaORM X stands for SeaORM eXtended, and is built on top of SeaORM, add support for other database backends. The architecture of SeaORM X remains the same.
 
-Tables and columns in a database are mapped to objects and attributes, while additional methods allow you to load and store data from and to the database.
+The MSSQL (aka SQL Server) backend is based on `tiberius`, and in the future, could be `SQLx Pro`. We have implemented many additional features in our driver library, including: transaction (and nested transaction), connection pooling and multiple async runtime support.
 
-Services built in Rust are lightweight (small binary size, low memory usage), safe (with compile-time guarantee), correct (if unit tests are well-designed), and fast (compile-time optimizations minimize runtime overhead).
+SeaQuery X extends SeaQuery, adding the support of MSSQL query building and MSSQL specific types, statements and syntax.
 
-Due to Rust being a static, strongly typed, compiled, thread-safe, non-garbage-collected, and unconventional object-oriented language, working with an ORM in Rust is a bit different from other scripting languages you are already familiar with.
+SeaSchema X extends SeaSchema, adding the support of MSSQL schema definition, discovery, serialization and reconstruction.
 
-SeaORM X tries to help you in reaping the above benefits while avoiding the hiccups when programming in Rust and allows you to interact with MSSQL using the fluent API of SeaORM.
+SeaORM X extends SeaORM, integrating SeaQuery X and SeaSchema X and offering complete support for MSSQL, and of course, working around the nuances of MSSQL. We aim to offer an experience as good as SeaORM by porting all test cases and examples, complemented by MSSQL specific documentation.
 
-Let's get started.
+In the future, we'd also like to bring Seaography to the table, allowing developers to easily create admin dashboards.
+
+SeaORM X is now in closed-beta, and will be based on SeaORM `1.0`, so the API surface will be stable and supported long term. We offer an Evaluation License and a Production License with two support tiers. If you are interested, please email us for pricing information.
