@@ -320,7 +320,7 @@ We'd not have more than 2 major releases in a year, and each major release will 
 
 ## SQL Server Support
 
-We've been planning SQL Server for SeaORM for a while, but it was put aside in 2023 (which I regretted). Anyway SQL Server support is coming soon! It will first be offered as a closed beta to our partners. If you are interested, please join our waiting list.
+We've been planning SQL Server for SeaORM for a while, but it was put aside in 2023 (which I regretted). Anyway SQL Server support is coming soon! It will first be offered as a closed beta to our partners. If you are interested, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR).
 
 ## Sponsor
 
