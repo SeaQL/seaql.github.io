@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'SeaORM X 🐚 An async & dynamic MSSQL ORM for Rust',
-  tagline: '🐚 SeaORM X is a relational MSSQL ORM to help you build web services in Rust',
+  title: 'SeaORM X 🐚 An async & dynamic ORM built on top of SeaORM with support for SQL Server',
+  tagline: '🐚 SeaORM X is built on top of SeaORM with support for SQL Server',
   url: 'https://www.sea-ql.org',
   baseUrl: '/SeaORM-X/',
   onBrokenLinks: 'throw',
