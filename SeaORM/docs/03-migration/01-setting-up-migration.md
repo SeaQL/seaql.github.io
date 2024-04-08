@@ -35,7 +35,7 @@ First, install `sea-orm-cli` with `cargo`.
 cargo install sea-orm-cli
 ```
 
-:::tip MSSQL support available in SeaORM X 🎉
+:::tip SQL Server (MSSQL) backend
 
 The installation of `sea-orm-cli` with MSSQL support can be found [here](https://www.sea-ql.org/SeaORM-X/docs/migration/setting-up-migration/).
 

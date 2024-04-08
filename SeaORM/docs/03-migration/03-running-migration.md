@@ -93,7 +93,7 @@ let db = Database::connect(connect_options).await?
 migration::Migrator::up(&db, None).await?;
 ```
 
-:::tip MSSQL support available in SeaORM X 🎉
+:::tip SQL Server (MSSQL) backend
 
 The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/).
 

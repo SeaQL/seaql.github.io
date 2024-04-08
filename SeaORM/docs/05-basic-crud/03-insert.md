@@ -168,7 +168,7 @@ let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
-:::tip MSSQL support available in SeaORM X 🎉
+:::tip SQL Server (MSSQL) backend
 
 The `IDENTITY INSERT` of MSSQL is documented [here](https://www.sea-ql.org/SeaORM-X/docs/basic-crud/insert/).
 

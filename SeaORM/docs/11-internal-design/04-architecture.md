@@ -41,9 +41,3 @@ Finally is the resolution stage, when query results are converted into Rust type
 Because only the execution and resolution stages are database specific, we have the possibility to use a different driver by replacing those.
 
 I imagine some day, we will support a number of databases, with a matrix of different syntaxes, protocols and form-factors.
-
-:::tip MSSQL support available in SeaORM X 🎉
-
-The internal architecture of MSSQL support can be found [here](https://www.sea-ql.org/SeaORM-X/docs/internal-design/architecture/).
-
-:::

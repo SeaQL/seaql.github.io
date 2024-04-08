@@ -62,7 +62,7 @@ pub name: String
 
 The column type will be derived automatically with the following mapping:
 
-:::tip MSSQL support available in SeaORM X 🎉
+:::tip SQL Server (MSSQL) backend
 
 The column type mapping of MSSQL can be found [here](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/).
 
