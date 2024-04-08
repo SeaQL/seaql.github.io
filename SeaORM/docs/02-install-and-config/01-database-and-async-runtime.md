@@ -22,6 +22,12 @@ You can choose one or more from:
 
 See also: [SQLx docs](https://docs.rs/crate/sqlx/latest/features).
 
+:::tip MSSQL support available in SeaORM X 🎉
+
+The installation and configuration of MSSQL driver can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/install-and-config/database-and-async-runtime/).
+
+:::
+
 ## ASYNC_RUNTIME
 
 You have to choose one from:

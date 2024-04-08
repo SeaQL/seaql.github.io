@@ -6,6 +6,12 @@ First, install `sea-orm-cli` with `cargo`.
 cargo install sea-orm-cli
 ```
 
+:::tip MSSQL support available in SeaORM X 🎉
+
+The installation and the usage of `sea-orm-cli` with MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/generate-entity/sea-orm-cli/).
+
+:::
+
 ## Configure Environment
 
 Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.

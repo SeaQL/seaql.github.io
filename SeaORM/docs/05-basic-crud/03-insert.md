@@ -168,6 +168,12 @@ let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
+:::tip MSSQL support available in SeaORM X 🎉
+
+The `IDENTITY INSERT` of MSSQL is documented [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/basic-crud/insert/).
+
+:::
+
 ## Insert Many
 
 Insert many active models and get back the last insert id.

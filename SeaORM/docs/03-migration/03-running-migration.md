@@ -93,6 +93,12 @@ let db = Database::connect(connect_options).await?
 migration::Migrator::up(&db, None).await?;
 ```
 
+:::tip MSSQL support available in SeaORM X 🎉
+
+The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/migration/running-migration/).
+
+:::
+
 ## Checking Migration Status
 
 You can use `MigratorTrait::get_pending_migrations()` and `MigratorTrait::get_applied_migrations()` to retrieve the list of migrations.
