@@ -5,10 +5,11 @@ author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
+image: https://www.sea-ql.org/blog/img/SeaORM%201.0-rc%20Banner.png
 tags: [news]
 ---
 
-<img alt="SeaORM 1.0-rc Banner" src="/blog/img/SeaORM 1.0-rc Banner.png"/>
+<img alt="SeaORM 1.0-rc Banner" src="/blog/img/SeaORM%201.0-rc%20Banner.png"/>
 
 This blog post summarizes the new features and enhancements introduced in SeaORM `1.0-rc.x`:
 
