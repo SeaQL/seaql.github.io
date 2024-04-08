@@ -44,6 +44,6 @@ I imagine some day, we will support a number of databases, with a matrix of diff
 
 :::tip MSSQL support available in SeaORM X 🎉
 
-The internal architecture of MSSQL support can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/internal-design/architecture/).
+The internal architecture of MSSQL support can be found [here](https://www.sea-ql.org/SeaORM-X/docs/internal-design/architecture/).
 
 :::

@@ -95,7 +95,7 @@ migration::Migrator::up(&db, None).await?;
 
 :::tip MSSQL support available in SeaORM X 🎉
 
-The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/migration/running-migration/).
+The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/).
 
 :::
 

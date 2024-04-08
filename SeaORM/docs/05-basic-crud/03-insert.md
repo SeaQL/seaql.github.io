@@ -170,7 +170,7 @@ assert_eq!(res.last_insert_id, 28)
 
 :::tip MSSQL support available in SeaORM X 🎉
 
-The `IDENTITY INSERT` of MSSQL is documented [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/basic-crud/insert/).
+The `IDENTITY INSERT` of MSSQL is documented [here](https://www.sea-ql.org/SeaORM-X/docs/basic-crud/insert/).
 
 :::
 

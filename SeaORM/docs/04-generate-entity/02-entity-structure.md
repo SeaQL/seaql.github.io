@@ -64,7 +64,7 @@ The column type will be derived automatically with the following mapping:
 
 :::tip MSSQL support available in SeaORM X 🎉
 
-The column type mapping of MSSQL can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/generate-entity/entity-structure/).
+The column type mapping of MSSQL can be found [here](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/).
 
 :::
 

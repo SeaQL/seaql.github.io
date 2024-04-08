@@ -1,5 +1,12 @@
 # Index
 
+:::tip Documentation for the base SeaORM
+
+This document only contains the usage and information of the extended support of other database backends such as MSSQL.
+The documentation for the base SeaORM can be found [here](https://www.sea-ql.org/SeaORM/docs/index/).
+
+:::
+
 ## Introduction
 
 1. Introduction

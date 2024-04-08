@@ -15,7 +15,7 @@ function HomepageHeader() {
   return (
     <header className={styles.heroBanner}>
       <div className="container">
-        <img className={styles.homepageLogo} width="90%" src="/SeaORM-X/img/SeaORM X logo.png" />
+        <img className={styles.homepageLogo} width="90%" src="/SeaORM-X/img/SeaORM logo.png" />
         <img className={styles.homepageBanner} width="90%" src="/SeaORM-X/img/SeaORM X banner.png" />
         <h2 className="hero__subtitle">{siteConfig.tagline}</h2>
         <br/>
@@ -40,7 +40,7 @@ export default function Home() {
       <main>
         <HomepageFeatures />
         <HomepageExample />
-        <HomepageCompare />
+        {/* <HomepageCompare /> */}
         <HomepageProducts />
         <HomepageSponsors />
         <HomepageMascot />

@@ -18,6 +18,6 @@ If you are so eager and want something grab-and-go, SeaQL maintains a set of off
 
 :::tip MSSQL support available in SeaORM X 🎉
 
-MSSQL examples can be found [here](https://www.sea-ql.org/preview/pr-119/SeaORM-X/docs/introduction/tutorial/).
+MSSQL examples can be found [here](https://www.sea-ql.org/SeaORM-X/docs/introduction/tutorial/).
 
 :::
