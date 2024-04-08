@@ -1,5 +1,5 @@
 ---
-slug: 2024-04-05-whats-new-in-seaorm-1.0-rc.x
+slug: 2024-04-08-whats-new-in-seaorm-1.0-rc.x
 title: What's new in SeaORM 1.0-rc.x
 author: SeaQL Team
 author_title: Chris Tsang
@@ -9,6 +9,12 @@ tags: [news]
 ---
 
 <img alt="SeaORM 1.0-rc Banner" src="/blog/img/SeaORM 1.0-rc Banner.png"/>
+
+This blog post summarizes the new features and enhancements introduced in SeaORM `1.0-rc.x`:
+
++ [1.0.0-rc.1](https://github.com/SeaQL/sea-orm/releases/tag/1.0.0-rc.1)
++ [1.0.0-rc.2](https://github.com/SeaQL/sea-orm/releases/tag/1.0.0-rc.2)
++ [1.0.0-rc.3](https://github.com/SeaQL/sea-orm/releases/tag/1.0.0-rc.3)
 
 ## New Features
 
