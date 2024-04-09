@@ -11,6 +11,5 @@ If you are so eager and want something grab-and-go, SeaQL maintains a set of off
 + [GraphQL Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/graphql_example)
 + [jsonrpsee Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/jsonrpsee_example)
 + [Poem Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/poem_example)
-+ [Rocket Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/rocket_example)
 + [Salvo Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/salvo_example)
 + [Tonic Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/tonic_example)
