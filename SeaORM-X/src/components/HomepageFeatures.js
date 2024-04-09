@@ -9,7 +9,7 @@ const FeatureList = [
     icon: <MdFlashOn size={26} />,
     description: (
       <>
-        Relying on SQLx, SeaORM is a new library with async support from day 1.
+        Relying on SQLx and tiberius, SeaORM X is a new library with async support from day 1.
       </>
     ),
   },
@@ -18,7 +18,7 @@ const FeatureList = [
     icon: <MdFlight size={26} />,
     description: (
       <>
-        Built upon SeaQuery, SeaORM allows you to build complex dynamic queries.
+        Built upon SeaQuery X, SeaORM X allows you to build complex dynamic queries.
       </>
     ),
   },
