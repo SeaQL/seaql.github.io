@@ -118,6 +118,23 @@ Here are some common DDL snippets you may find useful.
         Story,
     }
 
+    // Remember to import `sea_orm_migration::schema::*` schema helpers into scope
+    use sea_orm_migration::{prelude::*, schema::*};
+
+    // Defining the schema with helpers
+    manager
+        .create_table(
+            Table::create()
+                .table(Post::Table)
+                .if_not_exists()
+                .col(pk_auto(Post::Id))
+                .col(string(Post::Title))
+                .col(string(Post::Text))
+                .col(enumeration_null(Post::Category, Alias::new("category"), Category::iter()))
+        )
+        .await
+
+    // Or, you can define the schema without the helpers
     manager
         .create_table(
             Table::create()
@@ -136,7 +153,6 @@ Here are some common DDL snippets you may find useful.
                     ColumnDef::new(Post::Category)
                         .enumeration(Alias::new("category"), Category::iter()),
                 )
-                .to_owned(),
         )
         .await
     ```
@@ -167,7 +183,6 @@ Here are some common DDL snippets you may find useful.
             Type::create()
                 .as_enum(CategoryEnum)
                 .values(CategoryVariants::iter())
-                .to_owned(),
         )
         .await?;
     ```
@@ -275,6 +290,9 @@ impl MigrationTrait for Migration {
 You can combine multiple changes within both up and down migration functions. Here is a complete example:
 
 ```rust
+// Remember to import `sea_orm_migration::schema::*` schema helpers into scope
+use sea_orm_migration::{prelude::*, schema::*};
+
 async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
 
     manager
@@ -282,16 +300,9 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
             sea_query::Table::create()
                 .table(Post::Table)
                 .if_not_exists()
-                .col(
-                    ColumnDef::new(Post::Id)
-                        .integer()
-                        .not_null()
-                        .auto_increment()
-                        .primary_key()
-                )
-                .col(ColumnDef::new(Post::Title).string().not_null())
-                .col(ColumnDef::new(Post::Text).string().not_null())
-                .to_owned()
+                .col(pk_auto(Post::Id))
+                .col(string(Post::Title))
+                .col(string(Post::Text))
         )
         .await?;
     
@@ -302,7 +313,6 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
                 .name("idx-post_title")
                 .table(Post::Table)
                 .col(Post::Title)                        
-                .to_owned(),
         )
         .await?;
     
@@ -315,10 +325,10 @@ and here we have the matching down function:
 ```rust
 async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
     
-    manager.drop_index(Index::drop().name("idx-post-title").to_owned())
+    manager.drop_index(Index::drop().name("idx-post-title"))
     .await?;
     
-    manager.drop_table(Table::drop().table(Post::Table).to_owned())
+    manager.drop_table(Table::drop().table(Post::Table))
     .await?;
 
     Ok(()) // All good!
