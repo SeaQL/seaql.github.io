@@ -38,7 +38,7 @@ Specify SeaORM X dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
-sea-orm-x = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x" }
+sea-orm = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x" }
 ```
 
 ### App Crate
@@ -58,5 +58,5 @@ entity = { path = "entity" }
 migration = { path = "migration" } # depends on your needs
 
 [dependencies]
-sea-orm-x = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x", features = [..] }
+sea-orm = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x", features = [..] }
 ```

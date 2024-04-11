@@ -3,7 +3,7 @@
 First, add `sea-orm-x` to the `[dependencies]` section of `Cargo.toml`.
 
 ```toml title="Cargo.toml"
-sea-orm-x = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
+sea-orm = { version = "0.12", path = "<SEA_ORM_X_ROOT>/sea-orm-x", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
 ```
 
 You must choose a `DATABASE_DRIVER` and an `ASYNC_RUNTIME`. `macros` is needed if you use SeaORM's generated entities (most likely).
