@@ -14,4 +14,4 @@ All libraries are supersets of their open-source versions, so it's possible to i
 
 In the future, we'd also like to include Seaography in the bundle, allowing developers to easily create admin dashboards.
 
-SeaORM X is now in closed-beta, and will be based on SeaORM `1.0`, so the API surface will be stable and supported long term. We offer an Evaluation License and a Production License with two support tiers. If you are interested, please email us for pricing information.
+SeaORM X is now in closed-beta, and will be based on SeaORM `1.0`, so the API surface will be stable and supported long term. We offer an Evaluation License and a Production License with two support tiers. If you are interested, please [contact us](https://forms.office.com/r/1MuRPJmYBR) for pricing information.

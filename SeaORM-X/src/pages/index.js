@@ -41,8 +41,8 @@ export default function Home() {
         <HomepageFeatures />
         <HomepageExample />
         {/* <HomepageCompare /> */}
-        <HomepageProducts />
-        <HomepageSponsors />
+        {/* <HomepageProducts /> */}
+        {/* <HomepageSponsors /> */}
         <HomepageMascot />
       </main>
     </Layout>
