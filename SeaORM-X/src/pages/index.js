@@ -8,6 +8,7 @@ import HomepageExample from '../components/HomepageExample';
 import HomepageCompare from '../components/HomepageCompare';
 import HomepageProducts from '../components/HomepageProducts';
 import HomepageSponsors from '../components/HomepageSponsors';
+import HomepageWaitingList from '../components/HomepageWaitingList';
 import HomepageMascot from '../components/HomepageMascot';
 
 function HomepageHeader() {
@@ -23,7 +24,7 @@ function HomepageHeader() {
           <Link
             className="button button--primary button--lg"
             to="/docs/index">
-            Getting Started
+            Documentation
           </Link>
         </div>
       </div>
@@ -43,6 +44,7 @@ export default function Home() {
         {/* <HomepageCompare /> */}
         {/* <HomepageProducts /> */}
         {/* <HomepageSponsors /> */}
+        <HomepageWaitingList />
         <HomepageMascot />
       </main>
     </Layout>

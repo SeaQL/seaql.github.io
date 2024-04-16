@@ -398,6 +398,21 @@ fruit::Entity::delete_many()
     .await?;`
   },
   {
+    title: 'Identity Insert',
+    code: `// Insert an active model with a specific primary key value.
+// For MSSQL, SeaORM X will automatically enable \`IDENTITY INSERT\` when inserting a row with primary key value,
+// and then disable the \`IDENTITY INSERT\` once the insert finished.
+
+let pear = fruit::ActiveModel {
+    id: Set(1),
+    name: Set("Pear".to_owned()),
+    cake_id: NotSet,
+};
+
+// \`IDENTITY INSERT\` behind the hood
+let pear: fruit::Model = pear.insert(db).await?;`
+  },
+  {
     title: 'Nested Transaction',
     code: `assert_eq!(Bakery::find().all(txn).await?.len(), 0);
 
