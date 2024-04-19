@@ -211,6 +211,8 @@ assert_eq!(
 Specify table alias in the join statement:
 
 ```rust
+let cf = Alias::new("cf");
+
 assert_eq!(
     cake::Entity::find()
         .join_as(

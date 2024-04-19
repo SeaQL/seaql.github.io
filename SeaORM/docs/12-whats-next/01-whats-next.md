@@ -2,7 +2,7 @@
 
 We still remember the time when we first [introduced SeaORM](https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago.
 
-Today, many open-source projects, a handful of startups and many more closed-source projects are using SeaORM. If your company is using SeaORM and would like to be featured, please [submit a testimonial](https://forms.office.com/r/YbeqfTAgkJ).
+Today, many open-source projects, many startups and companies are using SeaORM. If your company is using SeaORM and would like to be featured, please [submit a testimonial](https://forms.office.com/r/YbeqfTAgkJ).
 
 If you are using SeaORM, please participate in the [Community Survey](https://www.sea-ql.org/community-survey). Your response will influence the decisions we'd make regarding the project's future. In particular, is the current feature set good enough to be regarded 'stable'? Shall we name this release a `1.0`? Or shall we mark this release as `LTS` and support it for long? Will this drive adoption or hamper progress?
 

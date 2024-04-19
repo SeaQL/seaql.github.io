@@ -194,8 +194,6 @@ You can define a partial model, and the corresponding columns will be automatica
 ```rust
 #[derive(DerivePartialModel, FromQueryResult)]
 #[sea_orm(entity = "User")]
-// `DerivePartialModel` macro attribute `entity` supports `syn::Type` as well
-#[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
 struct PartialUser {
     pub id: i32,
     pub avatar: String,
@@ -204,6 +202,16 @@ struct PartialUser {
 
 let query = User::find().into_partial_model::<PartialUser>();
 ```
+
+:::tip Since `1.0.0-rc.2`
+`DerivePartialModel` macro attribute `entity` supports complex types
+```rust
+#[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
+struct PartialUser {
+    ..
+}
+```
+:::
 
 Advanced usages include column remap and custom expression:
 
