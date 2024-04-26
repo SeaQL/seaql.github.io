@@ -12,7 +12,7 @@ You must choose a `DATABASE_DRIVER` and an `ASYNC_RUNTIME`. `macros` is needed i
 
 You can choose one or more from:
 
-+ `sqlx-mysql` - SQLx MySQL
++ `sqlx-mysql` - SQLx MySQL and MariaDB
 + `sqlx-postgres` - SQLx Postgres
 + `sqlx-sqlite` - SQLx SQLite
 
