@@ -42,6 +42,14 @@ Or, specify the schema name by providing an extra `currentSchema` query param.
 mssql://username:password@host/database?currentSchema=my_schema
 ```
 
+#### Trust Peer Certificate
+
+You can trust peer certificate by providing an extra `trustCertificate` query param.
+
+```
+mssql://username:password@host/database?trustCertificate=true
+```
+
 ## Connect Options
 
 To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/*/sea_orm/struct.ConnectOptions.html) interface:
