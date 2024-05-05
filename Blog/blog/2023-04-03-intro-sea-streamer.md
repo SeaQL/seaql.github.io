@@ -5,6 +5,7 @@ author: Chris Tsang
 author_title: SeaQL Team
 author_url: https://github.com/tyt2y3
 author_image_url: https://avatars.githubusercontent.com/u/1782664?v=4
+image: https://www.sea-ql.org/SeaStreamer/img/SeaStreamer%20banner.png
 tags: [news]
 ---
 
