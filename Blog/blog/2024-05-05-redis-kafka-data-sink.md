@@ -102,17 +102,54 @@ let producer: SeaProducer = streamer
 
 There aren't any specific options for Producer.
 
-Step 3, send the messages:
+Step 3, decode the messages:
 
 ```rust
 let spread: SpreadMessage = serde_json::from_str(&data)?;
 let message = serde_json::to_string(&spread)?;
-producer.send(message)?;
 ```
 
-Here, we use the awesome [`serde`](https://crates.io/crates/serde) library to do some message parsing and re-formatting.
+Here, we use the awesome [`serde`](https://crates.io/crates/serde) library to perform message parsing and conversion:
 
-Note that the [`producer.send`](https://docs.rs/sea-streamer/latest/sea_streamer/trait.Producer.html#method.send) call is not `async/await`, and it is crucial! This removes the stream processing bottleneck. Behind the scene, the messages will be buffered and handled on a different thread, so that your input stream can run as close to real-time as possible.
+```rust
+// The raw message looks like: [80478222,["1.25475","1.25489","1714946803.030088","949.74917071","223.36195920"],"spread","GBP/USD"]
+
+#[derive(Debug, Serialize, Deserialize)]
+struct SpreadMessage {
+    #[allow(dead_code)]
+    #[serde(skip_serializing)]
+    channel_id: u32, // placeholder; not needed
+    spread: Spread, // nested object
+    channel_name: String,
+    pair: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Spread {
+    bid: Decimal,
+    ask: Decimal,
+    #[serde(with = "timestamp_serde")] // custom serde
+    timestamp: Timestamp,
+    bid_vol: Decimal,
+    ask_vol: Decimal,
+}
+```
+
+Step 4, send the messages:
+
+```rust
+loop {
+    match ws.next().await {
+        Some(Ok(Message::Text(data))) => {
+            let spread: SpreadMessage = serde_json::from_str(&data)?;
+            let message = serde_json::to_string(&spread)?;
+            producer.send(message)?; // <--
+        }
+    }
+}
+```
+
+Note that the [`producer.send`](https://docs.rs/sea-streamer/latest/sea_streamer/trait.Producer.html#method.send) call is not `async/await`, and this is a crucial detail! This removes the stream processing bottleneck. Behind the scene, messages will be buffered and handled on a different thread, so that your input stream can run as close to real-time as possible.
 
 Here is the complete [`price-feed`](https://github.com/SeaQL/sea-streamer/tree/main/examples/price-feed) app which you can checkout from the SeaStreamer repository:
 
@@ -168,7 +205,7 @@ pub struct Model {
 }
 ```
 
-The table shall be named `event` and we derive `Deserialize` on the Model. There should be many SeaORM tutorials out there! Please refer to them for more explanation.
+The table shall be named `event` and we derive `Deserialize` on the Model.
 
 We will use the following helper method to create the database table, where the schema is derived from the Entity:
 
@@ -213,13 +250,14 @@ In a few lines of code, we:
 Run the [`sea-orm-sink`](https://github.com/SeaQL/sea-streamer/tree/main/examples/sea-orm-sink) app in another terminal:
 
 ```log
+$ cd examples/sea-orm-sink
 $ RUST_LOG=info cargo run
 
 [INFO  sea_streamer_sea_orm_sink] CREATE TABLE IF NOT EXISTS "event" ( "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "timestamp" varchar NOT NULL, "bid" varchar NOT NULL, "ask" varchar NOT NULL, "bid_vol" varchar NOT NULL, "ask_vol" varchar NOT NULL )
 [INFO  sea_streamer_sea_orm_sink] {"spread":{"bid":"1.25495","ask":"1.25513","timestamp":"2024-05-05T16:31:00.961214","bid_vol":"61.50588918","ask_vol":"787.90883861"},"channel_name":"spread","pair":"GBP/USD"}
 ```
 
-That's it! Now you can inspect the data with your favourite database GUI:
+That's it! Now you can inspect the data with your favourite database GUI and write some SQL queries:
 
 <img alt="screenshot of SQLite database" src="/blog/img/2024-05-05-redis-kafka-data-sink-sqlite.png"/>
 
