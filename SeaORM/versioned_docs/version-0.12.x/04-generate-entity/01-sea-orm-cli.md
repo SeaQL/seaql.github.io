@@ -58,7 +58,7 @@ Command line options:
 - `--model-extra-derives`: append extra derive macros to the generated model struct
 - `--model-extra-attributes`: append extra attributes to generated model struct
 - `--enum-extra-derives`: append extra derive macros to generated enums
-- `--enum_extra_attributes`: append extra attributes to generated enums
+- `--enum-extra-attributes`: append extra attributes to generated enums
 - `--seaography`: generate addition structs in entities for seaography integration
 
 ```shell
