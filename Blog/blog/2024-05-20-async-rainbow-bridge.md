@@ -9,6 +9,8 @@ image: https://www.sea-ql.org/blog/img/async-rainbow-bridge.png
 tags: [news]
 ---
 
+<img src="/blog/img/async-rainbow-bridge.png" />
+
 This story stems from the saying "What Color is Your Function?" as a criticism to the async implementation of common programming languages. Well, Rust also falls into the category of "colored functions". So in this blog post, let's see how we can design systems to effectively combine sync and async code.
 
 Rainbow bridge is a reference to the bridge in Thor that teleports you between different realms - a perfect analogy!
@@ -107,7 +109,12 @@ Full source code can be found [here](https://github.com/SeaQL/FireDBG.Rust.Testb
 
 Next, we'll migrate to async land. Using [tokio::sync::mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html), it's very similar to the above example, except every operation is `async` and thus imposes additional restrictions to lifetimes. (The trick is, just move / clone. Don't borrow)
 
-Strangely `tokio`'s `unbounded_channel` is the equivalent to `std`'s `channel`. Otherwise it's very similar. The `spawn` method takes in a `Future`; since the worker needs to take in the channels, we construct an async closure with `async move {}`.
+`tokio`'s `unbounded_channel` is the equivalent to `std`'s `channel`. Otherwise it's very similar. The `spawn` method takes in a `Future`; since the worker needs to take in the channels, we construct an async closure with `async move {}`.
+
+| std | tokio |
+|-------|-------|
+| (unbounded) [`channel`](https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html) | [`unbounded_channel`](https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.unbounded_channel.html)
+| [`sync_channel`](https://doc.rust-lang.org/std/sync/mpsc/fn.sync_channel.html) | (bounded) [`channel`](https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.channel.html) |
 
 ```rust
 let (result, mut collector) = unbounded_channel();
@@ -162,11 +169,12 @@ Here is the ideal setup:
                               └─────────────────┘              
 ```
 
-Let's rewrite our example using [Flume](https://docs.rs/flume/latest/flume/). But first, note the differences between `tokio` and `flume`:
+Let's rewrite our example using [Flume](https://docs.rs/flume/latest/flume/). But first, know the mapping between `tokio` and `flume`:
 
 | Tokio | Flume |
 |-------|-------|
-| [`unbounded_channel`](https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.unbounded_channel.html) | [`unbounded`](https://docs.rs/flume/latest/flume/fn.unbounded.html) |
+| [`unbounded_channel`](https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.unbounded_channel.html) | [`unbounded`](https://docs.rs/flume/latest/flume/fn.unbounded.html) (channel) |
+| (bounded) [`channel`](https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.channel.html) | [bounded](https://docs.rs/flume/latest/flume/fn.bounded.html) (channel) |
 | `send` | `send` |
 | `recv` | `recv_async` |
 
@@ -216,7 +224,7 @@ In the example below, our blocking operation is 'reading from stdin' from the ma
 └─────────────┘           └──────────────┘
 ```
 
-It follow the usual 3 steps:
+It follows the usual 3 steps:
 
 1. create a flume channel
 2. pass the receiver end to a worker thread

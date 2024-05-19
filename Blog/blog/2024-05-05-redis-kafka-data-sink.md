@@ -9,7 +9,7 @@ image: https://www.sea-ql.org/SeaStreamer/img/SeaStreamer%20banner.png
 tags: [news]
 ---
 
-<a href="https://www.sea-ql.org/SeaStreamer/"><img src="https://www.sea-ql.org/SeaStreamer/img/SeaStreamer%20banner.png" /></a>
+<img src="https://www.sea-ql.org/SeaStreamer/img/SeaStreamer%20banner.png" />
 
 This tutorial shows you how to use Rust to build a system that:
 
