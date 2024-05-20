@@ -105,6 +105,7 @@ module.exports = {
       additionalLanguages: [
         'toml',
         'rust',
+        'bash',
       ],
     },
     algolia: {

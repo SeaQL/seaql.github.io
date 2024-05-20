@@ -172,6 +172,7 @@ const config = {
         additionalLanguages: [
           'toml',
           'rust',
+          'bash',
         ],
       },
       algolia: {
