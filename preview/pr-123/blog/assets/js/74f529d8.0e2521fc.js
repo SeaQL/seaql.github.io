@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksea_ql_blog=self.webpackChunksea_ql_blog||[]).push([[9642],{7259:e=>{e.exports=JSON.parse('{"permalink":"/preview/pr-123/blog/tags/news","page":1,"postsPerPage":41,"totalPages":1,"totalCount":41,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
