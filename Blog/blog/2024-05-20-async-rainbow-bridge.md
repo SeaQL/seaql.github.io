@@ -337,6 +337,3 @@ Sticker Pack Contents:
 [Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
 
 <a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
-
-[^1]: via [SeaORM X](https://www.sea-ql.org/SeaORM-X/)
-[^2]: [Why Rust?](https://www.sea-ql.org/SeaStreamer/docs/introduction/intro-to-streams/#why-rust)
