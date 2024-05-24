@@ -100,7 +100,7 @@ impl Linked for CheeseCakeToFillingVendor {
                 // The `on_condition` method takes a closure with parameters
                 // denoting the left-hand side and right-hand side table in the join expression.
                 .on_condition(|left, _right| {
-                    Expr::tbl(left, super::cake::Column::Name)
+                    Expr::col((left, super::cake::Column::Name))
                         .like("%cheese%")
                         .into_condition()
                 })

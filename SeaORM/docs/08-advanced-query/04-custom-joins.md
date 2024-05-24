@@ -10,7 +10,7 @@ assert_eq!(
     cake::Entity::find()
         .column_as(filling::Column::Id.count(), "count")
         .column_as(
-            Expr::tbl(Alias::new("fruit_alias"), fruit::Column::Name).into_simple_expr(),
+            Expr::col((Alias::new("fruit_alias"), fruit::Column::Name)).into_simple_expr(),
             "fruit_name"
         )
         // construct `RelationDef` on the fly
@@ -29,7 +29,7 @@ assert_eq!(
             cake::Relation::Fruit
                 .def()
                 .on_condition(|_left, right| {
-                    Expr::tbl(right, fruit::Column::Name)
+                    Expr::col((right, fruit::Column::Name))
                         .like("%tropical%")
                         .into_condition()
                 }),
