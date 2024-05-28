@@ -10,6 +10,8 @@ tags: [news]
 
 In this tutorial, we would create an REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads.
 
+The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter). The documentation of the REST API is available [here](https://documenter.getpostman.com/view/34752358/2sA3QmEF5q).
+
 ## What is Loco?
 
 Loco is a Rails inspired web framework for Rust. It includes almost every Rails feature with best-effort Rust ergonomics:
