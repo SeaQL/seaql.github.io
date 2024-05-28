@@ -627,3 +627,17 @@ mssql://username:password@host/database?currentSchema=my_schema
 # You can trust peer certificate by providing an extra trustCertificate query param.
 mssql://username:password@host/database?trustCertificate=true
 ```
+
+SeaORM X has full Loco support and integrate seamlessly with other frameworks:
+
+> If you are interested to checkout the integration examples, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR)
+
++ [Actix Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/actix_example)
++ [Axum Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/axum_example)
++ [GraphQL Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/graphql_example)
++ [jsonrpsee Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/jsonrpsee_example)
++ [Loco Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_example)
++ [Loco REST Starter Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_starter)
++ [Poem Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/poem_example)
++ [Salvo Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/salvo_example)
++ [Tonic Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/tonic_example)

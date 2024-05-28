@@ -10,6 +10,8 @@ If you are so eager and want something grab-and-go, SeaQL maintains a set of off
 + [Axum Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/axum_example)
 + [GraphQL Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/graphql_example)
 + [jsonrpsee Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/jsonrpsee_example)
++ [Loco Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_example)
++ [Loco REST Starter Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_starter)
 + [Poem Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/poem_example)
 + [Salvo Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/salvo_example)
 + [Tonic Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/tonic_example)
