@@ -1,5 +1,5 @@
 ---
-slug: 2024-05-25-getting-started-with-loco-seaorm
+slug: 2024-05-28-getting-started-with-loco-seaorm
 title: Getting Started with Loco & SeaORM
 author: Billy Chan
 author_title: SeaQL Team
@@ -599,22 +599,29 @@ Remember to enable `multipart` in `axum` and add `tokio-util` dependency.
 
 ## SQL Server Support
 
-We've been planning [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) for a while, but it was put aside in 2023 (which I regretted). Anyway SQL Server support is coming soon! It will first be offered as a closed beta to our partners. If you are interested, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR).
+The [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) will first be offered as a closed beta to our partners. If you are interested, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR).
 
-## Rustacean Sticker Pack 🦀
+Migrating from `sea-orm` to `sea-orm-x` is straightforward with two simple steps. First, update the existing `sea-orm` dependency to `sea-orm-x` and enable the `sqlz-mssql` feature. Note that you might need to patch SeaORM dependency for the upstream dependencies.
 
-The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
-Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+```toml title="Cargo.toml"
+sea-orm = { path = "<SEA_ORM_X_ROOT>/sea-orm-x", features = ["runtime-async-std-rustls", "sqlz-mssql"] }
+sea-orm-migration = { path = "<SEA_ORM_X_ROOT>/sea-orm-x/sea-orm-migration" }
 
-Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
+# Patch SeaORM dependency for the upstream dependencies
+[patch.crates-io]
+sea-orm = { path = "<SEA_ORM_X_ROOT>/sea-orm-x" }
+sea-orm-migration = { path = "<SEA_ORM_X_ROOT>/sea-orm-x/sea-orm-migration" }
+```
 
-Sticker Pack Contents:
-- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
-- Mascot of SeaQL: Terres the Hermit Crab
-- Mascot of Rust: Ferris the Crab
-- The Rustacean word
+Then, remember to update the connection string for you MSSQL database connection.
 
-[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+```sh
+# If the schema is `dbo`, simply write:
+mssql://username:password@host/database
 
-<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
+# Or, specify the schema name by providing an extra `currentSchema` query param.
+mssql://username:password@host/database?currentSchema=my_schema
+
+# You can trust peer certificate by providing an extra trustCertificate query param.
+mssql://username:password@host/database?trustCertificate=true
+```
