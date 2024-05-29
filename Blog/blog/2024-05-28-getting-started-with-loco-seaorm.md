@@ -8,7 +8,7 @@ author_image_url: https://avatars.githubusercontent.com/u/30400950?v=4
 tags: [news]
 ---
 
-In this tutorial, we would create an REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads.
+In this tutorial, we would create a REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads.
 
 The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter). The documentation of the REST API is available [here](https://documenter.getpostman.com/view/34752358/2sA3QmEF5q).
 
@@ -601,7 +601,7 @@ Remember to enable `multipart` in `axum` and add `tokio-util` dependency.
 
 ## SQL Server Support
 
-The [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) will first be offered as a closed beta to our partners. If you are interested, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR).
+[SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) is now available as a closed beta. If you are interested, please signup [here](https://forms.office.com/r/1MuRPJmYBR).
 
 Migrating from `sea-orm` to `sea-orm-x` is straightforward with two simple steps. First, update the existing `sea-orm` dependency to `sea-orm-x` and enable the `sqlz-mssql` feature. Note that you might need to patch SeaORM dependency for the upstream dependencies.
 
@@ -615,7 +615,7 @@ sea-orm = { path = "<SEA_ORM_X_ROOT>/sea-orm-x" }
 sea-orm-migration = { path = "<SEA_ORM_X_ROOT>/sea-orm-x/sea-orm-migration" }
 ```
 
-Then, remember to update the connection string for you MSSQL database connection.
+Second, update the connection string to connect to the MSSQL database.
 
 ```sh
 # If the schema is `dbo`, simply write:
@@ -628,16 +628,15 @@ mssql://username:password@host/database?currentSchema=my_schema
 mssql://username:password@host/database?trustCertificate=true
 ```
 
-SeaORM X has full Loco support and integrate seamlessly with other frameworks:
+SeaORM X has full Loco support and integrate seamlessly with all web frameworks:
 
-> If you are interested to checkout the integration examples, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR)
++ Actix
++ Axum
++ Async GraphQL
++ jsonrpsee
++ Loco
++ Poem
++ Salvo
++ Tonic
 
-+ [Actix Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/actix_example)
-+ [Axum Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/axum_example)
-+ [GraphQL Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/graphql_example)
-+ [jsonrpsee Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/jsonrpsee_example)
-+ [Loco Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_example)
-+ [Loco REST Starter Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_starter)
-+ [Poem Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/poem_example)
-+ [Salvo Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/salvo_example)
-+ [Tonic Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/tonic_example)
+Happy Coding!
