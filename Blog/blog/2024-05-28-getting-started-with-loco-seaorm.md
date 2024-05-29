@@ -17,7 +17,7 @@ The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/m
 
 ## What is Loco?
 
-Loco is a Rails inspired web framework for Rust. It includes almost every Rails feature with best-effort Rust ergonomics. It integrates seamlessly with SeaORM, offering a first-class development experience!
+[Loco](https://loco.rs/) is a Rails inspired web framework for Rust. It includes many Rails feature with Rust ergonomics. Loco integrates seamlessly with SeaORM, offering a first-class development experience!
 
 - Controllers and routing via [axum](https://github.com/tokio-rs/axum)
 - Models, migration, and ActiveRecord via [SeaORM](https://www.sea-ql.org/SeaORM/)
