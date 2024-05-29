@@ -5,8 +5,11 @@ author: Billy Chan
 author_title: SeaQL Team
 author_url: https://github.com/billy1624
 author_image_url: https://avatars.githubusercontent.com/u/30400950?v=4
+image: https://www.sea-ql.org/blog/img/Loco%20x%20SeaORM.png
 tags: [news]
 ---
+
+<img src="/blog/img/Loco%20x%20SeaORM.png" />
 
 In this tutorial, we would create a REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads in Loco.
 
