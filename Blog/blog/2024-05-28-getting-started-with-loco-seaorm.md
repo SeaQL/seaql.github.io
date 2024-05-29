@@ -8,13 +8,13 @@ author_image_url: https://avatars.githubusercontent.com/u/30400950?v=4
 tags: [news]
 ---
 
-In this tutorial, we would create a REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads.
+In this tutorial, we would create a REST notepad backend starting from scratch and adding a new REST endpoint to handle file uploads in Loco.
 
 The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter). The documentation of the REST API is available [here](https://documenter.getpostman.com/view/34752358/2sA3QmEF5q).
 
 ## What is Loco?
 
-Loco is a Rails inspired web framework for Rust. It includes almost every Rails feature with best-effort Rust ergonomics:
+Loco is a Rails inspired web framework for Rust. It includes almost every Rails feature with best-effort Rust ergonomics. It integrates seamlessly with SeaORM, offering a first-class development experience!
 
 - Controllers and routing via [axum](https://github.com/tokio-rs/axum)
 - Models, migration, and ActiveRecord via [SeaORM](https://www.sea-ql.org/SeaORM/)
@@ -135,7 +135,7 @@ The starter template comes with a basic user management module.
 
 ### Registration
 
-It is a common practice to send a verification email to the provided email. However, that would requires a SMTP server and this is not the focus of this blo post. So, I will skip the email verification:
+It is a common practice to send a verification email to the provided email. However, that would requires a SMTP server and this is not the focus of this blog post. So, I will skip the email verification:
 
 ```diff title="loco_starter/src/controllers/auth.rs"
 #[debug_handler]
@@ -628,7 +628,7 @@ mssql://username:password@host/database?currentSchema=my_schema
 mssql://username:password@host/database?trustCertificate=true
 ```
 
-SeaORM X has full Loco support and integrate seamlessly with all web frameworks:
+SeaORM X has full Loco support and integrate seamlessly with many web frameworks:
 
 + Actix
 + Axum
