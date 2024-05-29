@@ -440,7 +440,7 @@ The following upload handler allows multiple files to be uploaded in a single PO
 ```rust title="loco_starter/src/controllers/files.rs"
 #[debug_handler]
 pub async fn upload(
-    auth: auth::JWT,
+    _auth: auth::JWT,
     Path(notes_id): Path<i32>,
     State(ctx): State<AppContext>,
     mut multipart: Multipart,
@@ -471,23 +471,24 @@ pub async fn upload(
             .to_string();
         let uuid = uuid::Uuid::new_v4().to_string();
         let folder = format!("{now}_{uuid}");
-        let upload_folder = PathBuf::from(upload_dir).join(&folder);
-        fs::create_dir_all(&upload_folder)?;
+        let upload_folder = PathBuf::from(UPLOAD_DIR).join(&folder);
+        fs::create_dir_all(&upload_folder).await?;
 
         // Write the file into the newly created folder
         let path = upload_folder.join(file_name);
         let mut f = fs::OpenOptions::new()
             .create_new(true)
             .write(true)
-            .open(&path)?;
-        f.write_all(&content)?;
-        f.flush()?;
+            .open(&path)
+            .await?;
+        f.write_all(&content).await?;
+        f.flush().await?;
 
         // Record the file upload in database
         let file = files::ActiveModel {
             notes_id: ActiveValue::Set(notes_id),
             file_path: ActiveValue::Set(
-                path.strip_prefix(upload_dir)
+                path.strip_prefix(UPLOAD_DIR)
                     .unwrap()
                     .to_str()
                     .unwrap()
@@ -505,6 +506,14 @@ pub async fn upload(
 }
 ```
 
+Try uploading multiple files in a single POST request:
+
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM upload file.png>)
+
+All uploaded files are saved into the `uploads` directory:
+
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM upload directory.png>)
+
 #### List File
 
 List all `files` that are related to a specific `notes_id`.
@@ -512,7 +521,7 @@ List all `files` that are related to a specific `notes_id`.
 ```rust title="loco_starter/src/controllers/files.rs"
 #[debug_handler]
 pub async fn list(
-    auth: auth::JWT,
+    _auth: auth::JWT,
     Path(notes_id): Path<i32>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
@@ -527,6 +536,8 @@ pub async fn list(
 }
 ```
 
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM view file.png>)
+
 #### View File
 
 View a specific `files`.
@@ -534,7 +545,7 @@ View a specific `files`.
 ```rust title="loco_starter/src/controllers/files.rs"
 #[debug_handler]
 pub async fn view(
-    auth: auth::JWT,
+    _auth: auth::JWT,
     Path(files_id): Path<i32>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
@@ -545,13 +556,15 @@ pub async fn view(
         .expect("File not found");
 
     // Stream the file
-    let file = tokio::fs::File::open(format!("{upload_dir}/{}", file.file_path)).await?;
+    let file = fs::File::open(format!("{UPLOAD_DIR}/{}", file.file_path)).await?;
     let stream = ReaderStream::new(file);
     let body = Body::from_stream(stream);
 
     Ok(format::render().response().body(body)?)
 }
 ```
+
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM list file.png>)
 
 #### File Controller Routes
 
