@@ -536,7 +536,7 @@ pub async fn list(
 }
 ```
 
-![](<https://www.sea-ql.org/blog/img/Loco x SeaORM view file.png>)
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM list file.png>)
 
 #### View File
 
@@ -564,7 +564,7 @@ pub async fn view(
 }
 ```
 
-![](<https://www.sea-ql.org/blog/img/Loco x SeaORM list file.png>)
+![](<https://www.sea-ql.org/blog/img/Loco x SeaORM view file.png>)
 
 #### File Controller Routes
 
