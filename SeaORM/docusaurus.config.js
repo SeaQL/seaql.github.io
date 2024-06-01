@@ -118,10 +118,6 @@ module.exports = {
               label: 'Twitter',
               to: 'https://twitter.com/sea_ql',
             },
-            {
-              label: 'GSoC',
-              to: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
-            },
           ],
         },
         {
