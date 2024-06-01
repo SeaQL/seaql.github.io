@@ -52,7 +52,7 @@ pub struct Model { ... }
 ```
 
 <details>
-    <summary>You can find a list of valid values for the `rename_all` attribute below</summary>
+    <summary>You can find a list of valid values for the `rename_all` attribute here</summary>
 
 - camelCase
 - kebab-case
