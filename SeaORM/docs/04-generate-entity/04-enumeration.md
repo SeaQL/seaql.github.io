@@ -4,6 +4,10 @@ You can use Rust enums in model where the values are mapped to a database string
 
 ### String
 
+For string enums, in addition to being able to specify the string value for each variant, you can also specify the `rename_all` attribute on the Enum if all the values should have string values based on case-transformations.
+
+#### Manual string values
+
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
@@ -14,6 +18,48 @@ pub enum Category {
     Small,
 }
 ```
+
+#### Derived string values from variants
+
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+pub enum Category {
+    #[sea_orm(string_value = "bigTask")]
+    BigTask,
+    #[sea_orm(string_value = "smallBreak")]
+    SmallWork,
+}
+```
+Alternatively, you could write:
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(
+    rs_type = "String",
+    db_type = "String(Some(1))",
+    rename_all = "camelCase"
+)]
+pub enum Category {
+    BigTask,
+    SmallWork,
+}
+```
+
+<details>
+    <summary>You can find a list of valid values for the `rename_all` attribute below</summary>
+
+- camelCase
+- kebab-case
+- mixed_case
+- SCREAMING_SNAKE_CASE
+- snake_case
+- title_case
+- UPPERCASE
+- lowercase
+- SCREAMING-KEBAB-CASE
+- PascalCase
+
+</details>
 
 ### Integers
 

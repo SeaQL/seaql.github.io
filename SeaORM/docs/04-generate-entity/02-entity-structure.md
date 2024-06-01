@@ -42,8 +42,28 @@ The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity`
 The `table_name` attribute specifies the corresponding table in the database.
 Optionally, you can also specify the database schema or database name by `schema_name`.
 
+### Column Names
+
+By default, all column names are assumed to be in snake_case. You can override this behaviour for all columns in a model by specifying the `rename_all` attribute.
+
+<details>
+    <summary>You can find a list of valid values for the `rename_all` attribute below</summary>
+
+- camelCase
+- kebab-case
+- mixed_case
+- SCREAMING_SNAKE_CASE
+- snake_case
+- title_case
+- UPPERCASE
+- lowercase
+- SCREAMING-KEBAB-CASE
+- PascalCase
+
+</details>
+
 ```rust
-#[sea_orm(table_name = "cake", schema_name = "public")]
+#[sea_orm(rename_all = "camelCase")]
 pub struct Model { ... }
 ```
 
@@ -51,7 +71,7 @@ pub struct Model { ... }
 
 ### Column Name
 
-All column names are assumed to be in snake-case. You can override the column name by specifying the `column_name` attribute.
+All column names are assumed to be in snake-case, unless overridden by the [`rename_all`](#column-names) attribute on Model. You can override the column name by specifying the `column_name` attribute.
 
 ```rust
 #[sea_orm(column_name = "name")]
