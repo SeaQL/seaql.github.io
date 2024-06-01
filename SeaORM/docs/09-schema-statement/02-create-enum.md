@@ -19,7 +19,7 @@ pub struct Model {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
     #[sea_orm(string_value = "B")]
     Big,
@@ -69,7 +69,7 @@ assert_eq!(
 
 ```rust
 #[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(None)")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)")]
 pub enum StringValue {
     #[sea_orm(string_value = "")]
     Member1,

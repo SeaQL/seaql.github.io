@@ -10,7 +10,7 @@ For string enums, in addition to being able to specify the string value for each
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
     #[sea_orm(string_value = "B")]
     Big,
@@ -23,7 +23,7 @@ pub enum Category {
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)")]
 pub enum Category {
     #[sea_orm(string_value = "bigTask")]
     BigTask,
@@ -31,14 +31,12 @@ pub enum Category {
     SmallWork,
 }
 ```
-Alternatively, you could write:
+
+The above is equivalent to:
+
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(
-    rs_type = "String",
-    db_type = "String(Some(1))",
-    rename_all = "camelCase"
-)]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)", rename_all = "camelCase")]
 pub enum Category {
     BigTask,
     SmallWork,
@@ -159,7 +157,7 @@ use sea_orm::entity::prelude::*;
 #[derive(Debug, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(
     rs_type = "String",
-    db_type = "String(Some(1))",
+    db_type = "String(StringLen::N(1))",
     enum_name = "category"
 )]
 pub enum Category {
@@ -230,7 +228,7 @@ use sea_orm::entity::prelude::*;
 
 // Define the `Category` active enum
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
     #[sea_orm(string_value = "B")]
     Big,

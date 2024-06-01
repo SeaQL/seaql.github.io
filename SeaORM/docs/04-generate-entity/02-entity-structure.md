@@ -46,6 +46,11 @@ Optionally, you can also specify the database schema or database name by `schema
 
 By default, all column names are assumed to be in snake_case. You can override this behaviour for all columns in a model by specifying the `rename_all` attribute.
 
+```rust
+#[sea_orm(rename_all = "camelCase")]
+pub struct Model { ... }
+```
+
 <details>
     <summary>You can find a list of valid values for the `rename_all` attribute below</summary>
 
@@ -62,20 +67,22 @@ By default, all column names are assumed to be in snake_case. You can override t
 
 </details>
 
-```rust
-#[sea_orm(rename_all = "camelCase")]
-pub struct Model { ... }
-```
-
 ## Column
 
 ### Column Name
 
-All column names are assumed to be in snake-case, unless overridden by the [`rename_all`](#column-names) attribute on Model. You can override the column name by specifying the `column_name` attribute.
+You can override the column name by specifying the `column_name` attribute.
 
 ```rust
-#[sea_orm(column_name = "name")]
-pub name: String
+#[derive(DeriveEntityModel)]
+#[sea_orm(table_name = "user", rename_all = "camelCase")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    id: i32,
+    first_name: String, // firstName
+    #[sea_orm(column_name = "lAsTnAmE")]
+    last_name: String, // lAsTnAmE
+}
 ```
 
 ### Column Type
