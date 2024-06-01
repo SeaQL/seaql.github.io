@@ -132,7 +132,21 @@ manager
 ```
 
 #### 2. `create_enum_from_active_enum`
+This method will provide an interface for adding the type to the database, using the type for table columns, and adding values of this type to rows when seeding data. 
 
+##### 1. Define a native database `ActiveEnum`
+```rust
+#[derive(EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea_type")]
+pub enum TeaType {
+    #[sea_orm(string_value = "EverydayTea")]
+    EverydayTea,
+    #[sea_orm(string_value = "BreakfastTea")]
+    BreakfastTea,
+}
+```
+
+##### 2. Create the type in the database:
 ```rust
 // we can do this in migration:
 
@@ -141,11 +155,38 @@ let schema = Schema::new(DbBackend::Postgres);
 
 manager
     .create_type(
-        // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
-        schema.create_enum_from_active_enum::<Tea>(),
+        // CREATE TYPE "tea_type" AS ENUM ('EverydayTea', 'BreakfastTea')
+        schema.create_enum_from_active_enum::<TeaType>(),
     )
     .await?;
 ```
+
+##### 3. Use the type as a table column type when creating a table:
+```rust diff
+// in a migration
+
+manager::create()
+    .table(Tea::Table)
+    .if_not_exists()
+    .col(Column::new(Tea::Type).custom(TeaType::name())) // use the type for a table column 
+    // ... more columns
+```
+* see also [Schema Creation Methods - Create Table](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
+
+##### 4. Use the type when populating the database:
+```rust
+// in a migration
+
+let insert = Query::insert()
+    .into_table(Tea::Table)
+    .columns([Tea::TeaType])
+    .values_panic([TeaType::EverydayTea.as_enum()]) // call `as_enum` to convert the variant into a SimpleExpr
+    .to_owned();
+
+manager.exec_stmt(insert).await?;
+// ...
+```
+* see also [Seeding Data - with sea_query statement](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)
 
 ## Implementations
 
