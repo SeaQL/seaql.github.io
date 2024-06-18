@@ -32,7 +32,7 @@ impl MigratorTrait for Migrator {
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-cargo install sea-orm-cli
+cargo install sea-orm-cli@1.0.0-rc.5
 ```
 
 :::tip SQL Server (MSSQL) backend
@@ -85,7 +85,7 @@ Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and
 async-std = { version = "1", features = ["attributes", "tokio1"] }
 
 [dependencies.sea-orm-migration]
-version = "0.12"
+version = "1.0.0-rc.5"
 features = [
   # Enable at least one `ASYNC_RUNTIME` and `DATABASE_DRIVER` feature if you want to run migration via CLI.
   # View the list of supported features at https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime.
@@ -146,7 +146,7 @@ Specify SeaORM dependency.
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
-sea-orm = { version = "0.12" }
+sea-orm = { version = "1.0.0-rc.5" }
 ```
 
 ### App Crate
@@ -166,7 +166,7 @@ entity = { path = "entity" }
 migration = { path = "migration" } # depends on your needs
 
 [dependencies]
-sea-orm = { version = "0.12", features = [..] }
+sea-orm = { version = "1.0.0-rc.5", features = [..] }
 ```
 
 In your app, you can then run the migrator on startup.

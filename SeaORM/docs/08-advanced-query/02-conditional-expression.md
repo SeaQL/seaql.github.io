@@ -1,6 +1,6 @@
 # Conditional Expressions
 
-You can add conditions to SeaORM find with the `filter` method. You can also restrict the aggregated result with `having` method. Both of them take [`sea_query::Condition`](https://docs.rs/sea-query/0.12.7/sea_query/query/struct.Condition.html) as a parameter.
+You can add conditions to SeaORM find with the `filter` method. You can also restrict the aggregated result with `having` method. Both of them take [`sea_query::Condition`](https://docs.rs/sea-query/*/sea_query/query/struct.Condition.html) as a parameter.
 
 ## AND Condition
 
