@@ -43,7 +43,7 @@ You can do it manually, or with the help of `sea-orm-cli`
 sea-orm-cli generate entity -o src/models/_entities -u postgres://loco:loco@localhost:5432/loco_seaography_development --seaography
 ```
 
-```rust title="loco_seaography/src/models/_entities/notes.rs"
+```diff title="loco_seaography/src/models/_entities/notes.rs"
 use sea_orm::entity::prelude::*;
 use serde::{Serialize, Deserialize};
 
@@ -70,12 +70,12 @@ impl Related<super::files::Entity> for Entity {
     }
 }
 
-// Defining `RelatedEntity` to relate one entity with another
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelatedEntity)]
-pub enum RelatedEntity {
-    #[sea_orm(entity = "super::files::Entity")]
-    Files,
-}
++ // Defining `RelatedEntity` to relate one entity with another
++ #[derive(Copy, Clone, Debug, EnumIter, DeriveRelatedEntity)]
++ pub enum RelatedEntity {
++     #[sea_orm(entity = "super::files::Entity")]
++     Files,
++ }
 ```
 
 ## Implementing GraphQL Query Root
@@ -93,8 +93,8 @@ lazy_static::lazy_static! { static ref CONTEXT: BuilderContext = BuilderContext:
 
 pub fn schema(
     database: DatabaseConnection,
-    depth: Option<usize>,
-    complexity: Option<usize>,
+    depth: usize,
+    complexity: usize,
 ) -> Result<Schema, SchemaError> {
     // Builder of Seaography query root
     let mut builder = Builder::new(&CONTEXT, database.clone());
@@ -102,24 +102,15 @@ pub fn schema(
     seaography::register_entities!(
         builder,
         // List all models we want to include in the GraphQL endpoint here
-        [
-            files,
-            notes,
-            users,
-        ]
+        [files, notes, users]
     );
     // Configure async GraphQL limits
-    let schema = builder.schema_builder();
-    let schema = if let Some(depth) = depth {
-        schema.limit_depth(depth)
-    } else {
-        schema
-    };
-    let schema = if let Some(complexity) = complexity {
-        schema.limit_complexity(complexity)
-    } else {
-        schema
-    };
+    let schema = builder
+        .schema_builder()
+        // The depth is the number of nesting levels of the field
+        .limit_depth(depth)
+        // The complexity is the number of fields in the query
+        .limit_complexity(complexity);
     // Finish up with including SeaORM database connection
     schema.data(database).finish()
 }
@@ -131,7 +122,7 @@ For convenience we use the build in GraphQL playground UI in `async-graphql` to 
 
 ```rust title="loco_seaography/src/controllers/graphql.rs"
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
-use axum::{extract::Request, body::Body};
+use axum::{body::Body, extract::Request};
 use loco_rs::prelude::*;
 use tower_service::Service;
 
@@ -139,15 +130,21 @@ use crate::graphql::query_root;
 
 // GraphQL playground UI
 async fn graphql_playground() -> Result<Response> {
-    // The `GraphQLPlaygroundConfig` take one parameter which is the URL of the GraphQL handler: `/api/graphql`
+    // The `GraphQLPlaygroundConfig` take one parameter
+    // which is the URL of the GraphQL handler: `/api/graphql`
     let res = playground_source(GraphQLPlaygroundConfig::new("/api/graphql"));
 
     Ok(Response::new(res.into()))
 }
 
-async fn graphql_handler(State(ctx): State<AppContext>, req: Request<Body>) -> Result<Response> {
+async fn graphql_handler(
+    State(ctx): State<AppContext>,
+    req: Request<Body>,
+) -> Result<Response> {
+    const DEPTH: usize = 10;
+    const COMPLEXITY: usize = 100;
     // Construct the the GraphQL query root
-    let schema = query_root::schema(ctx.db.clone(), None, None).unwrap();
+    let schema = query_root::schema(ctx.db.clone(), DEPTH, COMPLEXITY).unwrap();
     // GraphQL handler
     let mut graphql_handler = async_graphql_axum::GraphQL::new(schema);
     // Execute GraphQL request and fetch the results
@@ -235,11 +232,49 @@ listening on [::]:3000
 
 Create a new notes with the GraphQL mutator.
 
+```graphql
+mutation {
+  notesCreateOne(
+    data: {
+      id: 1
+      title: "Notes 001"
+      content: "Content 001"
+      createdAt: "2024-06-24 00:00:00"
+      updatedAt: "2024-06-24 00:00:00"
+    }
+  ) {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+```
+
 ![](<https://www.sea-ql.org/blog/img/Loco x Seaography create.png>)
 
 ## Querying Notes
 
 Query notes with its related files.
+
+```graphql
+query {
+  notes {
+    nodes {
+      id
+      title
+      content
+      files {
+        nodes {
+          id
+          filePath
+        }
+      }
+    }
+  }
+}
+```
 
 ![](<https://www.sea-ql.org/blog/img/Loco x Seaography query.png>)
 
@@ -250,10 +285,15 @@ Our GraphQL handler can be accessed without user authentication. Next, we want t
 To do so, we add `_auth: auth::JWT` to the `graphql_handler` function.
 
 ```diff title="loco_seaography/src/controllers/graphql.rs"
-- async fn graphql_handler(State(ctx): State<AppContext>, req: Request<Body>) -> Result<Response> {
-+ async fn graphql_handler(_auth: auth::JWT, State(ctx): State<AppContext>, req: Request<Body>) -> Result<Response> {
+async fn graphql_handler(
++   _auth: auth::JWT,
+    State(ctx): State<AppContext>,
+    req: Request<Body>,
+) -> Result<Response> {
+    const DEPTH: usize = 10;
+    const COMPLEXITY: usize = 100;
     // Construct the the GraphQL query root
-    let schema = query_root::schema(ctx.db.clone(), None, None).unwrap();
+    let schema = query_root::schema(ctx.db.clone(), DEPTH, COMPLEXITY).unwrap();
     // GraphQL handler
     let mut graphql_handler = async_graphql_axum::GraphQL::new(schema);
     // Execute GraphQL request and fetch the results
@@ -293,6 +333,10 @@ Go to the setting page of GraphQL playground. And add a new header under `reques
 Then, we can access GraphQL handler as usual.
 
 ![](<https://www.sea-ql.org/blog/img/Loco x Seaography query.png>)
+
+## Conclusion
+
+Adding GraphQL support to Loco application is easy with the help of Seaography. It is an ergonomic library that turns SeaORM entities into GraphQL nodes and provides a set of utilities and combined with a code generator makes GraphQL API building a breeze.
 
 ## SQL Server Support
 
