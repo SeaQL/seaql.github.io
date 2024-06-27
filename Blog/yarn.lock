@@ -7743,6 +7743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"medium-zoom@npm:^1.0.4":
+  version: 1.1.0
+  resolution: "medium-zoom@npm:1.1.0"
+  checksum: c58ea2d3335c3b5d4625b4fa70d09925e35d2eb15e9906f41586e7016aa3059ca9b01656ae6d35e70219c7e3e94dda0e9528cd354fcd2f6614231b529654b0b9
+  languageName: node
+  linkType: hard
+
 "memfs@npm:^3.1.2, memfs@npm:^3.4.3":
   version: 3.4.7
   resolution: "memfs@npm:3.4.7"
@@ -8642,6 +8649,15 @@ __metadata:
   dependencies:
     find-up: ^3.0.0
   checksum: 5bac346b7c7c903613c057ae3ab722f320716199d753f4a7d053d38f2b5955460f3e6ab73b4762c62fd3e947f58e04f1343e92089e7bb6091c90877406fcd8c8
+  languageName: node
+  linkType: hard
+
+"plugin-image-zoom@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "plugin-image-zoom@npm:1.2.0"
+  dependencies:
+    medium-zoom: ^1.0.4
+  checksum: fc2efbaea83e7f44dae127cc978519176c25c331f0c7f77dede7ccc46112a31b213aae3090ba05acea5f2971a8df979380ac65627ffa7e88b27babb6c01419f1
   languageName: node
   linkType: hard
 
@@ -10039,6 +10055,7 @@ __metadata:
     chartjs-plugin-deferred: ^2.0.0
     clsx: ^1.1.1
     file-loader: ^6.2.0
+    plugin-image-zoom: ^1.2.0
     prism-react-renderer: ^1.2.1
     react: ^17.0.1
     react-dom: ^17.0.1

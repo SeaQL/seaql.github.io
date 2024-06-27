@@ -141,4 +141,7 @@ module.exports = {
   scripts: [
     '/sea-ql.js',
   ],
+  plugins: [
+    'plugin-image-zoom'
+  ],
 };
