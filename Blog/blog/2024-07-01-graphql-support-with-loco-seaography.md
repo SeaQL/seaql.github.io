@@ -33,9 +33,9 @@ tower-service = { version = "0.3" }
 
 ## Setting up SeaORM Entities for Seaography
 
-Seaography support relational query by defining `RelatedEntity` to relate one entity with another.
+Seaography Entities are basically SeaORM Entities with some additions. They are fully compatible with SeaORM.
 
-You can do it manually, or with the help of `sea-orm-cli`
+You can generate Seaography Entities by using `sea-orm-cli` with the extra `--seaography` flag.
 
 ```sh
 sea-orm-cli generate entity -o src/models/_entities -u postgres://loco:loco@localhost:5432/loco_seaography_development --seaography
