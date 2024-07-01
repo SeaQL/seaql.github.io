@@ -1,5 +1,5 @@
 ---
-slug: 2024-06-24-graphql-support-with-loco-seaography
+slug: 2024-07-01-graphql-support-with-loco-seaography
 title: Adding GraphQL Support to Loco with Seaography
 author: Billy Chan
 author_title: SeaQL Team
@@ -32,8 +32,6 @@ tower-service = { version = "0.3" }
 ```
 
 ## Setting up SeaORM Entities for Seaography
-
-via sea-orm-cli / adding RelatedEntity manually
 
 Seaography support relational query by defining `RelatedEntity` to relate one entity with another.
 
@@ -77,6 +75,8 @@ impl Related<super::files::Entity> for Entity {
 +     Files,
 + }
 ```
+
+We can see that a new enum `RelatedEntity` is generated in the Entity files. This helps Seaography to locate the related Entities for making relational queries.
 
 ## Implementing GraphQL Query Root
 
