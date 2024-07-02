@@ -118,7 +118,7 @@ pub fn schema(
 
 ## Writing Loco Controller to Handle GraphQL Endpoint
 
-For convenience we use the build in GraphQL playground UI in `async-graphql` to test the GraphQL endpoint. And handle the GraphQL request with `async_graphql_axum` and Seaography.
+For convenience we use the built-in GraphQL playground UI in `async-graphql` to test the GraphQL endpoint. And handle the GraphQL request with `async_graphql_axum` and Seaography.
 
 ```rust title="loco_seaography/src/controllers/graphql.rs"
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
