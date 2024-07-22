@@ -11,6 +11,8 @@ tags: [news]
 
 <img alt="SeaORM 1.0 Banner" src="/blog/img/SeaORM%201.0%20Banner.png"/>
 
+🎉 We are pleased to release SeaORM [`1.0`](https://github.com/SeaQL/sea-orm/releases/tag/1.0)!
+
 This blog post summarizes the new features and enhancements introduced in SeaORM `1.0`:
 
 ## New Features
