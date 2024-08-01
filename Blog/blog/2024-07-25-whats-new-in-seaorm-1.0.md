@@ -452,18 +452,6 @@ A big shout out to our [sponsors](https://github.com/sponsors/SeaQL) 😇:
     </div>
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/trevormerritt">
-                <img src="https://avatars.githubusercontent.com/u/3418965?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Trevor Merritt
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/ktanaka101">
                 <img src="https://avatars.githubusercontent.com/u/10344925?v=4" />
             </a>
@@ -482,6 +470,18 @@ A big shout out to our [sponsors](https://github.com/sponsors/SeaQL) 😇:
             <div class="avatar__intro">
                 <div class="avatar__name">
                     Naoki Ikeguchi
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/milesgranger">
+                <img src="https://avatars.githubusercontent.com/u/13764397?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Miles Granger
                 </div>
             </div>
         </div>
@@ -565,7 +565,7 @@ A big shout out to our [sponsors](https://github.com/sponsors/SeaQL) 😇:
             </a>
             <div class="avatar__intro">
                 <div class="avatar__name">
-                    ul
+                    ellik159
                 </div>
             </div>
         </div>
