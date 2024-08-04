@@ -1,6 +1,6 @@
 ---
 slug: 2023-08-12-announcing-seaorm-0.12
-title: Announcing SeaORM 0.12 🐚
+title: Announcing SeaORM 0.12
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
