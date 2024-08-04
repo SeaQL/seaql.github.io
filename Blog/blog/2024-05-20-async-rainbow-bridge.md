@@ -318,7 +318,9 @@ In this article we discussed:
 
 Now you already learnt the powers of `flume`, but there is more!
 
-In the next episode, hopefully we will get to discuss other interesting features of `flume` - bounded channels and 'rendezvous channels'. Follow our [X / Twitter](https://twitter.com/sea_ql) for updates!
+In the next episode, hopefully we will get to discuss other interesting features of `flume` - bounded channels and 'rendezvous channels'.
+
++ [FizzBuzz Multithreaded - synchronization with rendezvous channels](https://firedbg.sea-ql.org/blog/2024-06-30-fizzbuzz-multithread/)
 
 ## Rustacean Sticker Pack 🦀
 
