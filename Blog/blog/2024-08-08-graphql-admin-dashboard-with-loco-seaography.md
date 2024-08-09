@@ -1,5 +1,5 @@
 ---
-slug: 2024-08-01-graphql-admin-dashboard-with-loco-seaography
+slug: 2024-08-08-graphql-admin-dashboard-with-loco-seaography
 title: GraphQL based Admin Dashboard with Loco and Seaography
 author: Billy Chan
 author_title: SeaQL Team
