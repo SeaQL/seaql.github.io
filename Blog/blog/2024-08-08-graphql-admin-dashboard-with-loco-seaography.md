@@ -15,7 +15,7 @@ In this tutorial, we would develop a GraphQL based admin dashboard with [Seaogra
 
 Read our first and second tutorial of the series, [Getting Started with Loco & SeaORM](https://www.sea-ql.org/blog/2024-05-28-getting-started-with-loco-seaorm/), [Adding GraphQL Support to Loco with Seaography](https://www.sea-ql.org/blog/2024-07-01-graphql-support-with-loco-seaography/), if you haven't.
 
-The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/master/examples/react_admin).
+The full source code can be found [here](https://github.com/SeaQL/sea-orm/tree/1.0.x/examples/react_admin).
 
 ## What is Seaography
 
