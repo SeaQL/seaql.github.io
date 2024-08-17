@@ -21,7 +21,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 ## Find with Conditions and Orders
 
-In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
+In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
 
 > Read more about [conditional expression](08-advanced-query/02-conditional-expression.md).
 
@@ -39,7 +39,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ### Lazy Loading
 
-Use the [`find_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_related) method.
+Use the [`find_related`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ModelTrait.html#method.find_related) method.
 
 Related models are loaded on demand when you ask for them, preferable if you want to load related models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
@@ -58,7 +58,7 @@ All related models are loaded at once. This provides minimum database round trip
 
 #### One to One
 
-Use the [`find_also_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_related) method.
+Use the [`find_also_related`](https://docs.rs/sea-orm/*/sea_orm/query/struct.Select.html#method.find_also_related) method.
 
 ```rust
 let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().find_also_related(Cake).all(db).await?;
@@ -66,7 +66,7 @@ let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().f
 
 #### One to Many / Many to Many
 
-Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
+Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/query/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
