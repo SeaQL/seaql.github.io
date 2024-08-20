@@ -148,7 +148,8 @@ export const dataProvider: DataProvider = {
                 nodes {
                   id
                   title
-                  content
+                  createdAt
+                  updatedAt
                 }
                 paginationInfo {
                   pages
@@ -182,6 +183,8 @@ export const dataProvider: DataProvider = {
                   id
                   title
                   content
+                  createdAt
+                  updatedAt
                 }
               }
             }
@@ -238,6 +241,8 @@ const PostList = () => (
             <TextField source="id" />
             <TextField source="title" />
             <TextField source="content" />
+            <TextField source="createdAt" />
+            <TextField source="updatedAt" />
         </Datagrid>
     </List>
 );
@@ -248,6 +253,8 @@ const PostShow = () => (
             <TextField source="id" />
             <TextField source="title" />
             <TextField source="content" />
+            <TextField source="createdAt" />
+            <TextField source="updatedAt" />
         </SimpleShowLayout>
     </Show>
 );
