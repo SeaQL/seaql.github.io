@@ -59,7 +59,7 @@ pub struct Model {
 Set the attributes in `ActiveModel` with `set_from_json` method.
 
 ```rust
-// A ActiveModel with primary key set
+// An ActiveModel with primary key set
 let mut fruit = fruit::ActiveModel {
     id: ActiveValue::Set(1),
     name: ActiveValue::NotSet,
