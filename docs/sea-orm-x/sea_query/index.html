@@ -1,0 +1,715 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This is proprietary software. If you are granted an “Evaluation License” to this library, you can develop software using this library until the specified expiry date of the license. However, to deploy the software, please purchase a “Production License” from us."><title>sea_query - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="sea_query" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt="logo"></a><h2><a href="../sea_query/index.html">sea_query</a><span class="version">0.32.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#attributes">Attribute Macros</a></li><li><a href="#derives">Derive Macros</a></li></ul></section></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">sea_query</a><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><span class="out-of-band"><button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><blockquote>
+<p>This is proprietary software. If you are granted an “Evaluation License” to this library, you can develop software
+using this library until the specified expiry date of the license. However, to deploy the software,
+please purchase a “Production License” from us.</p>
+</blockquote>
+<div align="center">
+  <img src="https://github.com/SeaQL/sea-orm-x/blob/main/sea-query-x/docs/SeaQuery%20X%20logo.png?raw=true" width="280" alt="SeaQuery X logo"/>
+  <p>
+    <strong>🔱 A dynamic query builder for MySQL, Postgres, SQLite and SQL Server</strong>
+  </p>
+<p><a href="https://crates.io/crates/sea-query"><img src="https://img.shields.io/crates/v/sea-query.svg" alt="crate" /></a>
+<a href="https://docs.rs/sea-query"><img src="https://docs.rs/sea-query/badge.svg" alt="docs" /></a>
+<a href="https://github.com/SeaQL/sea-query/actions/workflows/rust.yml"><img src="https://github.com/SeaQL/sea-query/actions/workflows/rust.yml/badge.svg" alt="build status" /></a></p>
+</div>
+<h3 id="seaquery-x"><a class="doc-anchor" href="#seaquery-x">§</a>SeaQuery X</h3>
+<p>SeaQuery X is a query builder to help you construct dynamic SQL queries in Rust.
+You can construct expressions, queries and schema as abstract syntax trees using an ergonomic API.
+We support MySQL, Postgres, SQLite and SQL Server behind a common interface that aligns their behaviour where appropriate.</p>
+<p>We provide integration for <a href="https://github.com/SeaQL/sea-orm-x/tree/main/sqlz">SQLz</a>.
+See the <a href="https://github.com/SeaQL/sea-orm-x/tree/main/sea-query-x/examples/sqlz_mssql">example</a> for usage.</p>
+<h3 id="install"><a class="doc-anchor" href="#install">§</a>Install</h3><div class="example-wrap"><pre class="language-toml"><code># Cargo.toml
+[dependencies]
+sea-query-x = &quot;0&quot;
+</code></pre></div>
+<p>SeaQuery is very lightweight, all dependencies are optional (except <code>inherent</code>).</p>
+<h4 id="feature-flags"><a class="doc-anchor" href="#feature-flags">§</a>Feature flags</h4>
+<p>Macro: <code>derive</code></p>
+<p>Async support: <code>thread-safe</code> (use <code>Arc</code> inplace of <code>Rc</code>)</p>
+<p>SQL engine: <code>backend-mssql</code>, <code>backend-mysql</code>, <code>backend-postgres</code>, <code>backend-sqlite</code></p>
+<p>Type support: <code>with-chrono</code>, <code>with-time</code>, <code>with-json</code>, <code>with-rust_decimal</code>, <code>with-bigdecimal</code>, <code>with-uuid</code>,
+<code>with-ipnetwork</code>, <code>with-mac_address</code>, <code>postgres-array</code>, <code>postgres-interval</code></p>
+<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
+<p>Table of Content</p>
+<ol>
+<li>
+<p>Basics</p>
+<ol>
+<li><a href="#iden">Iden</a></li>
+<li><a href="#expression">Expression</a></li>
+<li><a href="#condition">Condition</a></li>
+<li><a href="#statement-builders">Statement Builders</a></li>
+</ol>
+</li>
+<li>
+<p>Query Statement</p>
+<ol>
+<li><a href="#query-select">Query Select</a></li>
+<li><a href="#query-insert">Query Insert</a></li>
+<li><a href="#query-update">Query Update</a></li>
+<li><a href="#query-delete">Query Delete</a></li>
+</ol>
+</li>
+<li>
+<p>Advanced</p>
+<ol>
+<li><a href="#aggregate-functions">Aggregate Functions</a></li>
+<li><a href="#casting">Casting</a></li>
+<li><a href="#custom-function">Custom Function</a></li>
+</ol>
+</li>
+<li>
+<p>Schema Statement</p>
+<ol>
+<li><a href="#table-create">Table Create</a></li>
+<li><a href="#table-alter">Table Alter</a></li>
+<li><a href="#table-drop">Table Drop</a></li>
+<li><a href="#table-rename">Table Rename</a></li>
+<li><a href="#table-truncate">Table Truncate</a></li>
+<li><a href="#foreign-key-create">Foreign Key Create</a></li>
+<li><a href="#foreign-key-drop">Foreign Key Drop</a></li>
+<li><a href="#index-create">Index Create</a></li>
+<li><a href="#index-drop">Index Drop</a></li>
+</ol>
+</li>
+</ol>
+<h4 id="motivation"><a class="doc-anchor" href="#motivation">§</a>Motivation</h4>
+<p>Why would you want to use a dynamic query builder?</p>
+<ol>
+<li>Parameter bindings</li>
+</ol>
+<p>One of the headaches when using raw SQL is parameter binding. With SeaQuery you can:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(
+    Query::select()
+        .column(Glyph::Image)
+        .from(Glyph::Table)
+        .and_where(Expr::col(Glyph::Image).like(<span class="string">"A"</span>))
+        .and_where(Expr::col(Glyph::Id).is_in([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))
+        .build(MsSqlQueryBuilder),
+    (
+        <span class="string">"SELECT [image] FROM [glyph] WHERE [image] LIKE @P1 AND [id] IN (@P2, @P3, @P4)"
+            </span>.to_owned(),
+        Values(<span class="macro">vec!</span>[
+            Value::String(<span class="prelude-val">Some</span>(Box::new(<span class="string">"A"</span>.to_owned()))),
+            Value::Int(<span class="prelude-val">Some</span>(<span class="number">1</span>)),
+            Value::Int(<span class="prelude-val">Some</span>(<span class="number">2</span>)),
+            Value::Int(<span class="prelude-val">Some</span>(<span class="number">3</span>))
+        ])
+    )
+);</code></pre></div>
+<ol start="2">
+<li>Dynamic query</li>
+</ol>
+<p>You can construct the query at runtime based on user inputs:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>Query::select()
+    .column(Char::Character)
+    .from(Char::Table)
+    .conditions(
+        <span class="comment">// some runtime condition
+        </span><span class="bool-val">true</span>,
+        <span class="comment">// if condition is true then add the following condition
+        </span>|q| {
+            q.and_where(Expr::col(Char::Id).eq(<span class="number">1</span>));
+        },
+        <span class="comment">// otherwise leave it as is
+        </span>|q| {},
+    );</code></pre></div>
+<h4 id="iden"><a class="doc-anchor" href="#iden">§</a>Iden</h4>
+<p><code>Iden</code> is a trait for identifiers used in any query statement.</p>
+<p>Commonly implemented by Enum where each Enum represents a table found in a database,
+and its variants include table name and column name.</p>
+<p><a href="types/trait.Iden.html#tymethod.unquoted" title="method sea_query::types::Iden::unquoted"><code>Iden::unquoted()</code></a> must be implemented to provide a mapping between Enum variants and its
+corresponding string value.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::<span class="kw-2">*</span>;
+
+<span class="comment">// For example Character table with column id, character, font_size...
+</span><span class="kw">pub enum </span>Character {
+    Table,
+    Id,
+    FontId,
+    FontSize,
+}
+
+<span class="comment">// Mapping between Enum variant and its corresponding string value
+</span><span class="kw">impl </span>Iden <span class="kw">for </span>Character {
+    <span class="kw">fn </span>unquoted(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>std::fmt::Write) {
+        <span class="macro">write!</span>(
+            s,
+            <span class="string">"{}"</span>,
+            <span class="kw">match </span><span class="self">self </span>{
+                <span class="self">Self</span>::Table =&gt; <span class="string">"character"</span>,
+                <span class="self">Self</span>::Id =&gt; <span class="string">"id"</span>,
+                <span class="self">Self</span>::FontId =&gt; <span class="string">"font_id"</span>,
+                <span class="self">Self</span>::FontSize =&gt; <span class="string">"font_size"</span>,
+            }
+        )
+        .unwrap();
+    }
+}</code></pre></div>
+<p>If you’re okay with running another procedural macro, you can activate
+the <code>derive</code> feature on the crate to save you some boilerplate.
+For more usage information, look at
+<a href="https://github.com/SeaQL/sea-orm-x/tree/main/sea-query-x/sea-query-derive/tests/pass">the derive examples</a>
+or <a href="https://github.com/SeaQL/sea-orm-x/tree/main/sea-query-x/sea-query-attr/tests/pass">the attribute examples</a>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(feature = <span class="string">"derive"</span>)]
+</span><span class="kw">use </span>sea_query::Iden;
+
+<span class="comment">// This will implement Iden exactly as shown above
+</span><span class="attr">#[derive(Iden)]
+</span><span class="kw">enum </span>Character {
+    Table,
+}
+<span class="macro">assert_eq!</span>(Character::Table.to_string(), <span class="string">"character"</span>);
+
+<span class="comment">// You can also derive a unit struct
+</span><span class="attr">#[derive(Iden)]
+</span><span class="kw">struct </span>Glyph;
+<span class="macro">assert_eq!</span>(Glyph.to_string(), <span class="string">"glyph"</span>);</code></pre></div>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(feature = <span class="string">"derive"</span>)]
+</span><span class="kw">use </span>sea_query::{enum_def, Iden};
+
+<span class="attr">#[enum_def]
+</span><span class="kw">struct </span>Character {
+    <span class="kw">pub </span>foo: u64,
+}
+
+<span class="comment">// It generates the following along with Iden impl
+</span><span class="kw">enum </span>CharacterIden {
+    Table,
+    Foo,
+}
+
+<span class="macro">assert_eq!</span>(CharacterIden::Table.to_string(), <span class="string">"character"</span>);
+<span class="macro">assert_eq!</span>(CharacterIden::Foo.to_string(), <span class="string">"foo"</span>);</code></pre></div>
+<h4 id="expression"><a class="doc-anchor" href="#expression">§</a>Expression</h4>
+<p>Use <a href="expr/struct.Expr.html" title="struct sea_query::expr::Expr"><code>Expr</code></a> to construct select, join, where and having expression in query.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(
+    Query::select()
+        .column(Char::Character)
+        .from(Char::Table)
+        .and_where(
+            Expr::expr(Expr::col(Char::SizeW).add(<span class="number">1</span>))
+                .mul(<span class="number">2</span>)
+                .eq(Expr::expr(Expr::col(Char::SizeH).div(<span class="number">2</span>)).sub(<span class="number">1</span>))
+        )
+        .and_where(
+            Expr::col(Char::SizeW).in_subquery(
+                Query::select()
+                    .expr(Expr::cust_with_values(<span class="string">"ln($1 ^ $2)"</span>, [<span class="number">2.4</span>, <span class="number">1.2</span>]))
+                    .take()
+            )
+        )
+        .and_where(
+            Expr::col(Char::Character)
+                .like(<span class="string">"D"</span>)
+                .and(Expr::col(Char::Character).like(<span class="string">"E"</span>))
+        )
+        .to_string(MsSqlQueryBuilder),
+    [
+        <span class="string">r#"SELECT [character] FROM [character]"#</span>,
+        <span class="string">r#"WHERE ([size_w] + 1) * 2 = ([size_h] / 2) - 1"#</span>,
+        <span class="string">r#"AND [size_w] IN (SELECT ln($1 ^ $2))"#</span>,
+        <span class="string">r#"AND ([character] LIKE 'D' AND [character] LIKE 'E')"#</span>,
+    ]
+    .join(<span class="string">" "</span>)
+);</code></pre></div>
+<h4 id="condition"><a class="doc-anchor" href="#condition">§</a>Condition</h4>
+<p>If you have complex conditions to express, you can use the <a href="query/struct.Condition.html" title="struct sea_query::query::Condition"><code>Condition</code></a> builder,
+usable for <a href="query/trait.ConditionalStatement.html#tymethod.cond_where" title="method sea_query::query::ConditionalStatement::cond_where"><code>ConditionalStatement::cond_where</code></a> and <a href="query/struct.SelectStatement.html#method.cond_having" title="method sea_query::query::SelectStatement::cond_having"><code>SelectStatement::cond_having</code></a>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(
+    Query::select()
+        .column(Glyph::Id)
+        .from(Glyph::Table)
+        .cond_where(
+            Cond::any()
+                .add(
+                    Cond::all()
+                        .add(Expr::col(Glyph::Aspect).is_null())
+                        .add(Expr::col(Glyph::Image).is_null())
+                )
+                .add(
+                    Cond::all()
+                        .add(Expr::col(Glyph::Aspect).is_in([<span class="number">3</span>, <span class="number">4</span>]))
+                        .add(Expr::col(Glyph::Image).like(<span class="string">"A%"</span>))
+                )
+        )
+        .to_string(MsSqlQueryBuilder),
+    [
+        <span class="string">r#"SELECT [id] FROM [glyph]"#</span>,
+        <span class="string">r#"WHERE ([aspect] IS NULL AND [image] IS NULL)"#</span>,
+        <span class="string">r#"OR ([aspect] IN (3, 4) AND [image] LIKE 'A%')"#</span>,
+    ]
+    .join(<span class="string">" "</span>)
+);</code></pre></div>
+<p>There is also the <a href="query/macro.any.html" title="macro sea_query::query::any"><code>any!</code></a> and <a href="query/macro.all.html" title="macro sea_query::query::all"><code>all!</code></a> macro at your convenience:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>Query::select().cond_where(<span class="macro">any!</span>[
+    Expr::col(Glyph::Aspect).is_in([<span class="number">3</span>, <span class="number">4</span>]),
+    <span class="macro">all!</span>[
+        Expr::col(Glyph::Aspect).is_null(),
+        Expr::col(Glyph::Image).like(<span class="string">"A%"</span>)
+    ]
+]);</code></pre></div>
+<h4 id="statement-builders"><a class="doc-anchor" href="#statement-builders">§</a>Statement Builders</h4>
+<p>Statements are divided into 2 categories: Query and Schema, and to be serialized into SQL
+with <a href="query/trait.QueryStatementBuilder.html" title="trait sea_query::query::QueryStatementBuilder"><code>QueryStatementBuilder</code></a> and <a href="schema/trait.SchemaStatementBuilder.html" title="trait sea_query::schema::SchemaStatementBuilder"><code>SchemaStatementBuilder</code></a> respectively.</p>
+<p>Schema statement has the following interface:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">fn </span>build&lt;T: SchemaBuilder&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, schema_builder: T) -&gt; String;</code></pre></div>
+<p>Query statement has the following interfaces:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">fn </span>build&lt;T: QueryBuilder&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, query_builder: T) -&gt; (String, Values);
+
+<span class="kw">fn </span>to_string&lt;T: QueryBuilder&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, query_builder: T) -&gt; String;</code></pre></div>
+<p><code>build</code> builds a SQL statement as string and parameters to be passed to the database driver
+through the binary protocol. This is the preferred way as it has less overhead and is more secure.</p>
+<p><code>to_string</code> builds a SQL statement as string with parameters injected. This is good for testing
+and debugging.</p>
+<h4 id="query-select"><a class="doc-anchor" href="#query-select">§</a>Query Select</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::select()
+    .column(Char::Character)
+    .column((Font::Table, Font::Name))
+    .from(Char::Table)
+    .left_join(Font::Table, Expr::col((Char::Table, Char::FontId)).equals((Font::Table, Font::Id)))
+    .and_where(Expr::col(Char::SizeW).is_in([<span class="number">3</span>, <span class="number">4</span>]))
+    .and_where(Expr::col(Char::Character).like(<span class="string">"A%"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [font].[name] FROM [character] LEFT JOIN [font] ON [character].[font_id] = [font].[id] WHERE [size_w] IN (3, 4) AND [character] LIKE 'A%'"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT `character`, `font`.`name` FROM `character` LEFT JOIN `font` ON `character`.`font_id` = `font`.`id` WHERE `size_w` IN (3, 4) AND `character` LIKE 'A%'"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "character", "font"."name" FROM "character" LEFT JOIN "font" ON "character"."font_id" = "font"."id" WHERE "size_w" IN (3, 4) AND "character" LIKE 'A%'"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT "character", "font"."name" FROM "character" LEFT JOIN "font" ON "character"."font_id" = "font"."id" WHERE "size_w" IN (3, 4) AND "character" LIKE 'A%'"#
+</span>);</code></pre></div>
+<h4 id="query-insert"><a class="doc-anchor" href="#query-insert">§</a>Query Insert</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::insert()
+    .into_table(Glyph::Table)
+    .columns([Glyph::Aspect, Glyph::Image])
+    .values_panic([<span class="number">5.15</span>.into(), <span class="string">"12A"</span>.into()])
+    .values_panic([<span class="number">4.21</span>.into(), <span class="string">"123"</span>.into()])
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"INSERT INTO [glyph] ([aspect], [image]) VALUES (5.15, '12A'), (4.21, '123')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"INSERT INTO `glyph` (`aspect`, `image`) VALUES (5.15, '12A'), (4.21, '123')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"INSERT INTO "glyph" ("aspect", "image") VALUES (5.15, '12A'), (4.21, '123')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"INSERT INTO "glyph" ("aspect", "image") VALUES (5.15, '12A'), (4.21, '123')"#
+</span>);</code></pre></div>
+<h4 id="query-update"><a class="doc-anchor" href="#query-update">§</a>Query Update</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::update()
+    .table(Glyph::Table)
+    .values([(Glyph::Aspect, <span class="number">1.23</span>.into()), (Glyph::Image, <span class="string">"123"</span>.into())])
+    .and_where(Expr::col(Glyph::Id).eq(<span class="number">1</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"UPDATE [glyph] SET [aspect] = 1.23, [image] = '123' WHERE [id] = 1"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"UPDATE `glyph` SET `aspect` = 1.23, `image` = '123' WHERE `id` = 1"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"UPDATE "glyph" SET "aspect" = 1.23, "image" = '123' WHERE "id" = 1"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"UPDATE "glyph" SET "aspect" = 1.23, "image" = '123' WHERE "id" = 1"#
+</span>);</code></pre></div>
+<h4 id="query-delete"><a class="doc-anchor" href="#query-delete">§</a>Query Delete</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::delete()
+    .from_table(Glyph::Table)
+    .cond_where(
+        Cond::any()
+            .add(Expr::col(Glyph::Id).lt(<span class="number">1</span>))
+            .add(Expr::col(Glyph::Id).gt(<span class="number">10</span>)),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"DELETE FROM [glyph] WHERE [id] &lt; 1 OR [id] &gt; 10"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"DELETE FROM `glyph` WHERE `id` &lt; 1 OR `id` &gt; 10"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"DELETE FROM "glyph" WHERE "id" &lt; 1 OR "id" &gt; 10"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"DELETE FROM "glyph" WHERE "id" &lt; 1 OR "id" &gt; 10"#
+</span>);</code></pre></div>
+<h4 id="aggregate-functions"><a class="doc-anchor" href="#aggregate-functions">§</a>Aggregate Functions</h4>
+<p><code>max</code>, <code>min</code>, <code>sum</code>, <code>avg</code>, <code>count</code> etc</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::select()
+    .expr(Func::sum(Expr::col((Char::Table, Char::SizeH))))
+    .from(Char::Table)
+    .to_owned();
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT SUM([character].[size_h]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT SUM(`character`.`size_h`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT SUM("character"."size_h") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT SUM("character"."size_h") FROM "character""#
+</span>);</code></pre></div>
+<h4 id="casting"><a class="doc-anchor" href="#casting">§</a>Casting</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>query = Query::select()
+    .expr(Func::cast_as(<span class="string">"hello"</span>, Alias::new(<span class="string">"MyType"</span>)))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT CAST('hello' AS MyType)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT CAST('hello' AS MyType)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT CAST('hello' AS MyType)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT CAST('hello' AS MyType)"#
+</span>);</code></pre></div>
+<h4 id="custom-function"><a class="doc-anchor" href="#custom-function">§</a>Custom Function</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>MyFunction;
+
+<span class="kw">impl </span>Iden <span class="kw">for </span>MyFunction {
+    <span class="kw">fn </span>unquoted(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Write) {
+        <span class="macro">write!</span>(s, <span class="string">"MY_FUNCTION"</span>).unwrap();
+    }
+}
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Func::cust(MyFunction).arg(Expr::val(<span class="string">"hello"</span>)))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT MY_FUNCTION('hello')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT MY_FUNCTION('hello')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT MY_FUNCTION('hello')"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT MY_FUNCTION('hello')"#
+</span>);</code></pre></div>
+<h4 id="table-create"><a class="doc-anchor" href="#table-create">§</a>Table Create</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>table = Table::create()
+    .table(Char::Table)
+    .if_not_exists()
+    .col(ColumnDef::new(Char::Id).integer().not_null().auto_increment().primary_key())
+    .col(ColumnDef::new(Char::FontSize).integer().not_null())
+    .col(ColumnDef::new(Char::Character).string().not_null())
+    .col(ColumnDef::new(Char::SizeW).integer().not_null())
+    .col(ColumnDef::new(Char::SizeH).integer().not_null())
+    .col(ColumnDef::new(Char::FontId).integer().default(Value::Int(<span class="prelude-val">None</span>)))
+    .foreign_key(
+        ForeignKey::create()
+            .name(<span class="string">"FK_2e303c3a712662f1fc2a4d0aad6"</span>)
+            .from(Char::Table, Char::FontId)
+            .to(Font::Table, Font::Id)
+            .on_delete(ForeignKeyAction::Cascade)
+            .on_update(ForeignKeyAction::Cascade)
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    table.to_string(MsSqlQueryBuilder),
+    [
+        <span class="string">r#"CREATE TABLE [character] ("#</span>,
+            <span class="string">r#"[id] int NOT NULL IDENTITY PRIMARY KEY,"#</span>,
+            <span class="string">r#"[font_size] int NOT NULL,"#</span>,
+            <span class="string">r#"[character] nvarchar(255) NOT NULL,"#</span>,
+            <span class="string">r#"[size_w] int NOT NULL,"#</span>,
+            <span class="string">r#"[size_h] int NOT NULL,"#</span>,
+            <span class="string">r#"[font_id] int DEFAULT NULL,"#</span>,
+            <span class="string">r#"CONSTRAINT [FK_2e303c3a712662f1fc2a4d0aad6]"#</span>,
+                <span class="string">r#"FOREIGN KEY ([font_id]) REFERENCES [font] ([id])"#</span>,
+                <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+        <span class="string">r#")"#</span>,
+    ].join(<span class="string">" "</span>)
+);
+<span class="macro">assert_eq!</span>(
+    table.to_string(MysqlQueryBuilder),
+    [
+        <span class="string">r#"CREATE TABLE IF NOT EXISTS `character` ("#</span>,
+            <span class="string">r#"`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,"#</span>,
+            <span class="string">r#"`font_size` int NOT NULL,"#</span>,
+            <span class="string">r#"`character` varchar(255) NOT NULL,"#</span>,
+            <span class="string">r#"`size_w` int NOT NULL,"#</span>,
+            <span class="string">r#"`size_h` int NOT NULL,"#</span>,
+            <span class="string">r#"`font_id` int DEFAULT NULL,"#</span>,
+            <span class="string">r#"CONSTRAINT `FK_2e303c3a712662f1fc2a4d0aad6`"#</span>,
+                <span class="string">r#"FOREIGN KEY (`font_id`) REFERENCES `font` (`id`)"#</span>,
+                <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+        <span class="string">r#")"#</span>,
+    ].join(<span class="string">" "</span>)
+);
+<span class="macro">assert_eq!</span>(
+    table.to_string(PostgresQueryBuilder),
+    [
+        <span class="string">r#"CREATE TABLE IF NOT EXISTS "character" ("#</span>,
+            <span class="string">r#""id" serial NOT NULL PRIMARY KEY,"#</span>,
+            <span class="string">r#""font_size" integer NOT NULL,"#</span>,
+            <span class="string">r#""character" varchar NOT NULL,"#</span>,
+            <span class="string">r#""size_w" integer NOT NULL,"#</span>,
+            <span class="string">r#""size_h" integer NOT NULL,"#</span>,
+            <span class="string">r#""font_id" integer DEFAULT NULL,"#</span>,
+            <span class="string">r#"CONSTRAINT "FK_2e303c3a712662f1fc2a4d0aad6""#</span>,
+                <span class="string">r#"FOREIGN KEY ("font_id") REFERENCES "font" ("id")"#</span>,
+                <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+        <span class="string">r#")"#</span>,
+    ].join(<span class="string">" "</span>)
+);
+<span class="macro">assert_eq!</span>(
+    table.to_string(SqliteQueryBuilder),
+    [
+       <span class="string">r#"CREATE TABLE IF NOT EXISTS "character" ("#</span>,
+           <span class="string">r#""id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,"#</span>,
+           <span class="string">r#""font_size" integer NOT NULL,"#</span>,
+           <span class="string">r#""character" varchar NOT NULL,"#</span>,
+           <span class="string">r#""size_w" integer NOT NULL,"#</span>,
+           <span class="string">r#""size_h" integer NOT NULL,"#</span>,
+           <span class="string">r#""font_id" integer DEFAULT NULL,"#</span>,
+           <span class="string">r#"FOREIGN KEY ("font_id") REFERENCES "font" ("id") ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+       <span class="string">r#")"#</span>,
+    ].join(<span class="string">" "</span>)
+);</code></pre></div>
+<h4 id="table-alter"><a class="doc-anchor" href="#table-alter">§</a>Table Alter</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>table = Table::alter()
+    .table(Font::Table)
+    .add_column(
+        ColumnDef::new(Alias::new(<span class="string">"new_col"</span>))
+            .integer()
+            .not_null()
+            .default(<span class="number">100</span>),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    table.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"ALTER TABLE [font] ADD [new_col] int NOT NULL DEFAULT 100"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(MysqlQueryBuilder),
+    <span class="string">r#"ALTER TABLE `font` ADD COLUMN `new_col` int NOT NULL DEFAULT 100"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(PostgresQueryBuilder),
+    <span class="string">r#"ALTER TABLE "font" ADD COLUMN "new_col" integer NOT NULL DEFAULT 100"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(SqliteQueryBuilder),
+    <span class="string">r#"ALTER TABLE "font" ADD COLUMN "new_col" integer NOT NULL DEFAULT 100"#</span>,
+);</code></pre></div>
+<h4 id="table-drop"><a class="doc-anchor" href="#table-drop">§</a>Table Drop</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>table = Table::drop()
+    .table(Glyph::Table)
+    .table(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    table.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"DROP TABLE [glyph], [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(MysqlQueryBuilder),
+    <span class="string">r#"DROP TABLE `glyph`, `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(PostgresQueryBuilder),
+    <span class="string">r#"DROP TABLE "glyph", "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(SqliteQueryBuilder),
+    <span class="string">r#"DROP TABLE "glyph", "character""#
+</span>);</code></pre></div>
+<h4 id="table-rename"><a class="doc-anchor" href="#table-rename">§</a>Table Rename</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>table = Table::rename()
+    .table(Font::Table, Alias::new(<span class="string">"font_new"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    table.to_string(MysqlQueryBuilder),
+    <span class="string">r#"RENAME TABLE `font` TO `font_new`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(PostgresQueryBuilder),
+    <span class="string">r#"ALTER TABLE "font" RENAME TO "font_new""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(SqliteQueryBuilder),
+    <span class="string">r#"ALTER TABLE "font" RENAME TO "font_new""#
+</span>);
+<span class="comment">// For MSSQL, please use `sp_rename` to rename a table</span></code></pre></div>
+<h4 id="table-truncate"><a class="doc-anchor" href="#table-truncate">§</a>Table Truncate</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>table = Table::truncate().table(Font::Table).to_owned();
+
+<span class="macro">assert_eq!</span>(
+    table.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"TRUNCATE TABLE [font]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(MysqlQueryBuilder),
+    <span class="string">r#"TRUNCATE TABLE `font`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    table.to_string(PostgresQueryBuilder),
+    <span class="string">r#"TRUNCATE TABLE "font""#
+</span>);
+<span class="comment">// Sqlite does not support the TRUNCATE statement</span></code></pre></div>
+<h4 id="foreign-key-create"><a class="doc-anchor" href="#foreign-key-create">§</a>Foreign Key Create</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>foreign_key = ForeignKey::create()
+    .name(<span class="string">"FK_character_font"</span>)
+    .from(Char::Table, Char::FontId)
+    .to(Font::Table, Font::Id)
+    .on_delete(ForeignKeyAction::Cascade)
+    .on_update(ForeignKeyAction::Cascade)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(MsSqlQueryBuilder),
+    [
+        <span class="string">r#"ALTER TABLE [character]"#</span>,
+        <span class="string">r#"ADD CONSTRAINT [FK_character_font]"#</span>,
+        <span class="string">r#"FOREIGN KEY ([font_id]) REFERENCES [font] ([id])"#</span>,
+        <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+    ]
+    .join(<span class="string">" "</span>)
+);
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(MysqlQueryBuilder),
+    [
+        <span class="string">r#"ALTER TABLE `character`"#</span>,
+        <span class="string">r#"ADD CONSTRAINT `FK_character_font`"#</span>,
+        <span class="string">r#"FOREIGN KEY (`font_id`) REFERENCES `font` (`id`)"#</span>,
+        <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+    ]
+    .join(<span class="string">" "</span>)
+);
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(PostgresQueryBuilder),
+    [
+        <span class="string">r#"ALTER TABLE "character" ADD CONSTRAINT "FK_character_font""#</span>,
+        <span class="string">r#"FOREIGN KEY ("font_id") REFERENCES "font" ("id")"#</span>,
+        <span class="string">r#"ON DELETE CASCADE ON UPDATE CASCADE"#</span>,
+    ]
+    .join(<span class="string">" "</span>)
+);
+<span class="comment">// Sqlite does not support modification of foreign key constraints to existing tables</span></code></pre></div>
+<h4 id="foreign-key-drop"><a class="doc-anchor" href="#foreign-key-drop">§</a>Foreign Key Drop</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>foreign_key = ForeignKey::drop()
+    .name(<span class="string">"FK_character_font"</span>)
+    .table(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"ALTER TABLE [character] DROP CONSTRAINT [FK_character_font]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(MysqlQueryBuilder),
+    <span class="string">r#"ALTER TABLE `character` DROP FOREIGN KEY `FK_character_font`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    foreign_key.to_string(PostgresQueryBuilder),
+    <span class="string">r#"ALTER TABLE "character" DROP CONSTRAINT "FK_character_font""#
+</span>);
+<span class="comment">// Sqlite does not support modification of foreign key constraints to existing tables</span></code></pre></div>
+<h4 id="index-create"><a class="doc-anchor" href="#index-create">§</a>Index Create</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>index = Index::create()
+    .name(<span class="string">"idx-glyph-aspect"</span>)
+    .table(Glyph::Table)
+    .col(Glyph::Aspect)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    index.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"CREATE INDEX [idx-glyph-aspect] ON [glyph] ([aspect])"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(MysqlQueryBuilder),
+    <span class="string">r#"CREATE INDEX `idx-glyph-aspect` ON `glyph` (`aspect`)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(PostgresQueryBuilder),
+    <span class="string">r#"CREATE INDEX "idx-glyph-aspect" ON "glyph" ("aspect")"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(SqliteQueryBuilder),
+    <span class="string">r#"CREATE INDEX "idx-glyph-aspect" ON "glyph" ("aspect")"#
+</span>);</code></pre></div>
+<h4 id="index-drop"><a class="doc-anchor" href="#index-drop">§</a>Index Drop</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>index = Index::drop()
+    .name(<span class="string">"idx-glyph-aspect"</span>)
+    .table(Glyph::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    index.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"DROP INDEX [idx-glyph-aspect] ON [glyph]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(MysqlQueryBuilder),
+    <span class="string">r#"DROP INDEX `idx-glyph-aspect` ON `glyph`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(PostgresQueryBuilder),
+    <span class="string">r#"DROP INDEX "idx-glyph-aspect""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    index.to_string(SqliteQueryBuilder),
+    <span class="string">r#"DROP INDEX "idx-glyph-aspect""#
+</span>);</code></pre></div>
+</div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><code>pub use <a class="mod" href="backend/index.html" title="mod sea_query::backend">backend</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="expr/index.html" title="mod sea_query::expr">expr</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="foreign_key/index.html" title="mod sea_query::foreign_key">foreign_key</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="func/index.html" title="mod sea_query::func">func</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="index/index.html" title="mod sea_query::index">index</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="prepare/index.html" title="mod sea_query::prepare">prepare</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="query/index.html" title="mod sea_query::query">query</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="schema/index.html" title="mod sea_query::schema">schema</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="table/index.html" title="mod sea_query::table">table</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="token/index.html" title="mod sea_query::token">token</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="types/index.html" title="mod sea_query::types">types</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="value/index.html" title="mod sea_query::value">value</a>::*;</code></div></li></ul><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="backend/index.html" title="mod sea_query::backend">backend</a></div><div class="desc docblock-short">Translating the SQL AST into engine-specific SQL statements.</div></li><li><div class="item-name"><a class="mod" href="error/index.html" title="mod sea_query::error">error</a></div><div class="desc docblock-short">Error types used in sea-query.</div></li><li><div class="item-name"><a class="mod" href="expr/index.html" title="mod sea_query::expr">expr</a></div><div class="desc docblock-short">Building blocks of SQL statements.</div></li><li><div class="item-name"><a class="mod" href="extension/index.html" title="mod sea_query::extension">extension</a></div><div class="desc docblock-short">Engine specific SQL features.</div></li><li><div class="item-name"><a class="mod" href="foreign_key/index.html" title="mod sea_query::foreign_key">foreign_key</a></div><div class="desc docblock-short">Foreign key definition &amp; alternations statements.</div></li><li><div class="item-name"><a class="mod" href="func/index.html" title="mod sea_query::func">func</a></div><div class="desc docblock-short">For calling built-in SQL functions.</div></li><li><div class="item-name"><a class="mod" href="index/index.html" title="mod sea_query::index">index</a></div><div class="desc docblock-short">Index definition &amp; alternations statements.</div></li><li><div class="item-name"><a class="mod" href="prepare/index.html" title="mod sea_query::prepare">prepare</a></div><div class="desc docblock-short">Helper for preparing SQL statements.</div></li><li><div class="item-name"><a class="mod" href="query/index.html" title="mod sea_query::query">query</a></div><div class="desc docblock-short">Query statements (select, insert, update &amp; delete).</div></li><li><div class="item-name"><a class="mod" href="schema/index.html" title="mod sea_query::schema">schema</a></div><div class="desc docblock-short">Schema definition &amp; alternations statements</div></li><li><div class="item-name"><a class="mod" href="table/index.html" title="mod sea_query::table">table</a></div><div class="desc docblock-short">Table definition &amp; alternations statements.</div></li><li><div class="item-name"><a class="mod" href="token/index.html" title="mod sea_query::token">token</a></div><div class="desc docblock-short">Tokenizer for processing SQL.</div></li><li><div class="item-name"><a class="mod" href="types/index.html" title="mod sea_query::types">types</a></div><div class="desc docblock-short">Base types used throughout sea-query.</div></li><li><div class="item-name"><a class="mod" href="value/index.html" title="mod sea_query::value">value</a></div><div class="desc docblock-short">Container for all SQL value types.</div></li></ul><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="macro" href="macro.all.html" title="macro sea_query::all">all</a></div><div class="desc docblock-short">Macro to easily create an <a href="query/struct.Condition.html#method.all" title="associated function sea_query::query::Condition::all"><code>Condition::all</code></a>.</div></li><li><div class="item-name"><a class="macro" href="macro.any.html" title="macro sea_query::any">any</a></div><div class="desc docblock-short">Macro to easily create an <a href="query/struct.Condition.html#method.any" title="associated function sea_query::query::Condition::any"><code>Condition::any</code></a>.</div></li></ul><h2 id="attributes" class="section-header">Attribute Macros<a href="#attributes" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="attr" href="attr.enum_def.html" title="attr sea_query::enum_def">enum_def</a></div></li></ul><h2 id="derives" class="section-header">Derive Macros<a href="#derives" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="derive" href="derive.Iden.html" title="derive sea_query::Iden">Iden</a></div></li><li><div class="item-name"><a class="derive" href="derive.IdenStatic.html" title="derive sea_query::IdenStatic">IdenStatic</a></div></li></ul></section></div></main></body></html>
