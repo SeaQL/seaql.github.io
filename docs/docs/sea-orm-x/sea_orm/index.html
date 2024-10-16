@@ -4,7 +4,7 @@ using this library until the specified expiry date of the license. However, to d
 please purchase a “Production License” from us.</p>
 </blockquote>
 <div align="center">
-  <img src="https://github.com/SeaQL/sea-orm-x/blob/main/sea-orm-x/docs/SeaORM X banner.png?raw=true"/>
+  <img src="https://www.sea-ql.org/SeaORM-X/img/SeaORM%20X%20banner.png"/>
   <h1>SeaORM X</h1>
   <h3>🐚 An async & dynamic ORM for Rust</h3>
 <p><a href="https://crates.io/crates/sea-orm"><img src="https://img.shields.io/crates/v/sea-orm.svg" alt="crate" /></a>
@@ -534,6 +534,18 @@ ctx.db
     .<span class="kw">await</span>;
 
 <span class="macro">assert_eq!</span>(Bakery::find().all(txn).<span class="kw">await</span><span class="question-mark">?</span>.len(), <span class="number">4</span>);</code></pre></div>
+<h3 id="-seaography-instant-graphql-api"><a class="doc-anchor" href="#-seaography-instant-graphql-api">§</a>🧭 Seaography: instant GraphQL API</h3>
+<p><a href="https://github.com/SeaQL/seaography">Seaography</a> is a GraphQL framework built on top of SeaORM. Seaography allows you to build GraphQL resolvers quickly. With just a few commands, you can launch a GraphQL server from SeaORM entities!</p>
+<p>Look at the <a href="https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example">Seaography Example</a> to learn more.</p>
+<img src="https://raw.githubusercontent.com/SeaQL/sea-orm/master/examples/seaography_example/Seaography%20example.png"/>
+<h3 id="-admin-dashboard"><a class="doc-anchor" href="#-admin-dashboard">§</a>🖥️ Admin Dashboard</h3>
+<p>Making use of Seaography, it will be a breeze to create admin dashboard with your favourite frontend framework. Check out our examples and tutorials:</p>
+<ol>
+<li><a href="https://github.com/SeaQL/sea-orm/tree/master/examples/react_admin">React Admin Example</a></li>
+<li><a href="https://www.sea-ql.org/blog/2024-07-01-graphql-support-with-loco-seaography/">Adding GraphQL Support to Loco with Seaography</a></li>
+<li><a href="https://www.sea-ql.org/blog/2024-08-08-graphql-admin-dashboard-with-loco-seaography/">GraphQL based Admin Dashboard with Loco and Seaography</a></li>
+</ol>
+<img src="https://www.sea-ql.org/blog/img/Loco%20x%20Seaography%20Dashboard%20Demo.png"/>
 <h3 id="learn-more"><a class="doc-anchor" href="#learn-more">§</a>Learn More</h3>
 <ol>
 <li><a href="https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/DESIGN.md">Design</a></li>
@@ -542,7 +554,24 @@ ctx.db
 <li><a href="https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/CHANGELOG.md">Change Log</a></li>
 </ol>
 <h4 id="whos-using-seaorm"><a class="doc-anchor" href="#whos-using-seaorm">§</a>Who’s using SeaORM?</h4>
-<p>See <a href="https://github.com/SeaQL/sea-orm-x/blob/main/sea-orm-x/COMMUNITY.md#built-with-seaorm">Built with SeaORM</a>. Feel free to <a href="https://github.com/SeaQL/sea-orm/issues/403">submit yours</a>!</p>
+<p>See <a href="https://github.com/SeaQL/sea-orm/blob/master/COMMUNITY.md#built-with-seaorm">Built with SeaORM</a>. Feel free to <a href="https://github.com/SeaQL/sea-orm/issues/403">submit yours</a>!</p>
+<h3 id="sponsorship"><a class="doc-anchor" href="#sponsorship">§</a>Sponsorship</h3>
+<p><a href="https://www.sea-ql.org/">SeaQL.org</a> is an independent open-source organization run by passionate developers. If you enjoy using our libraries, please star and share our repositories. If you feel generous, a small donation via <a href="https://github.com/sponsors/SeaQL">GitHub Sponsor</a> will be greatly appreciated, and goes a long way towards sustaining the organization.</p>
+<h4 id="gold-sponsors"><a class="doc-anchor" href="#gold-sponsors">§</a>Gold Sponsors</h4><a href="https://osmos.io/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.sea-ql.org/static/sponsors/Osmos-dark.svg">
+    <img src="https://www.sea-ql.org/static/sponsors/Osmos.svg" width="240">
+  </picture>
+</a>
+<h4 id="silver-sponsors"><a class="doc-anchor" href="#silver-sponsors">§</a>Silver Sponsors</h4><table><tr>
+<td><a href="https://www.digitalocean.com/">
+  <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="125">
+</a></td>
+<td><a href="https://www.jetbrains.com/">
+  <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="125">
+</a></td>
+</tr></table>
+<p>We’re immensely grateful to our sponsors: Osmos, for their gold-tier sponsorship and trust in the tools we develop. Digital Ocean, for sponsoring our servers. And JetBrains, for sponsoring our IDE.</p>
 <h3 id="mascot"><a class="doc-anchor" href="#mascot">§</a>Mascot</h3>
 <p>A friend of Ferris, Terres the hermit crab is the official mascot of SeaORM. His hobby is collecting shells.</p>
 <img alt="Terres" src="https://www.sea-ql.org/SeaORM/img/Terres.png" width="400"/></div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name" id="reexport.sea_query"><code>pub use <a class="mod" href="../sea_query/index.html" title="mod sea_query">sea_query</a>;</code></div></li><li><div class="item-name" id="reexport.strum"><code>pub use <a class="mod" href="../strum/index.html" title="mod strum">strum</a>;</code></div></li><li><div class="item-name" id="reexport.sqlx"><code>pub use <a class="mod" href="../sqlx/index.html" title="mod sqlx">sqlx</a>;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="entity/index.html" title="mod sea_orm::entity">entity</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="error/index.html" title="mod sea_orm::error">error</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="query/index.html" title="mod sea_orm::query">query</a>::*;</code></div></li><li><div class="item-name"><code>pub use <a class="mod" href="schema/index.html" title="mod sea_orm::schema">schema</a>::*;</code></div></li></ul><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="entity/index.html" title="mod sea_orm::entity">entity</a></div><div class="desc docblock-short">Module for the Entity type and operations</div></li><li><div class="item-name"><a class="mod" href="error/index.html" title="mod sea_orm::error">error</a></div><div class="desc docblock-short">Error types for all database operations</div></li><li><div class="item-name"><a class="mod" href="metric/index.html" title="mod sea_orm::metric">metric</a></div><div class="desc docblock-short">Holds types and methods to perform metric collection</div></li><li><div class="item-name"><a class="mod" href="query/index.html" title="mod sea_orm::query">query</a></div><div class="desc docblock-short">Holds types and methods to perform queries</div></li><li><div class="item-name"><a class="mod" href="schema/index.html" title="mod sea_orm::schema">schema</a></div><div class="desc docblock-short">Holds types that defines the schemas of an Entity</div></li></ul><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="macro" href="macro.debug_print.html" title="macro sea_orm::debug_print">debug_print</a></div><div class="desc docblock-short">Non-debug version</div></li><li><div class="item-name"><a class="macro" href="macro.debug_query.html" title="macro sea_orm::debug_query">debug_query</a></div><div class="desc docblock-short">Helper to get a raw SQL string from an object that impl <code>QueryTrait</code>.</div></li><li><div class="item-name"><a class="macro" href="macro.debug_query_stmt.html" title="macro sea_orm::debug_query_stmt">debug_query_stmt</a></div><div class="desc docblock-short">Helper to get a <code>Statement</code> from an object that impl <code>QueryTrait</code>.</div></li></ul><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.ConnectOptions.html" title="struct sea_orm::ConnectOptions">ConnectOptions</a></div><div class="desc docblock-short">Defines the configuration options of a database</div></li><li><div class="item-name"><a class="struct" href="struct.Cursor.html" title="struct sea_orm::Cursor">Cursor</a></div><div class="desc docblock-short">Cursor pagination</div></li><li><div class="item-name"><a class="struct" href="struct.Database.html" title="struct sea_orm::Database">Database</a></div><div class="desc docblock-short">Defines a database</div></li><li><div class="item-name"><a class="struct" href="struct.DatabaseTransaction.html" title="struct sea_orm::DatabaseTransaction">DatabaseTransaction</a></div><div class="desc docblock-short">Defines a database transaction, whether it is an open transaction and the type of
