@@ -203,7 +203,7 @@ struct PartialUser {
 let query = User::find().into_partial_model::<PartialUser>();
 ```
 
-:::tip Since `1.0.0-rc.2`
+:::tip Since `1.0.0`
 `DerivePartialModel` macro attribute `entity` supports complex types
 ```rust
 #[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
