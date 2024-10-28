@@ -27,8 +27,12 @@ Multiple queries will execute in parallel as you `await` on them.
 Here are some tips for database specific options:
 
 ### MySQL
-
-Can't think of any
+```
+mysql://username:password@host/database_name
+```
+```
+Example: mysql://root:root1234@localhost:3306/test_rust
+```
 
 ### Postgres
 
