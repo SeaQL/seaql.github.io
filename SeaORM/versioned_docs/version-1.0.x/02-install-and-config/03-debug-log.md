@@ -6,7 +6,7 @@ You can enable SeaORM's logging with the `debug-print` feature flag:
 
 ```toml
 [dependencies.sea-orm]
-version = "1.0.0-rc.5"
+version = "1.0.0"
 features = ["debug-print"]
 ```
 

@@ -9,7 +9,7 @@ To get started, all you need is a live SQL database with schema. You can code ev
 ## Install Seaography
 
 ```bash
-cargo install seaography-cli@^1.0.0-rc.2
+cargo install seaography-cli@^1.0.0
 ```
 
 ## Generate Seaography Entities
@@ -34,4 +34,4 @@ cd graphql
 cargo run
 ```
 
-You are of course free to modify the project to suit your needs. But the interesting bit starts at the `seaography::register_entity!` macro and the [seaography::Builder](https://docs.rs/seaography/1.0.0-rc.2/seaography/builder/struct.Builder.html).
+You are of course free to modify the project to suit your needs. But the interesting bit starts at the `seaography::register_entity!` macro and the [seaography::Builder](https://docs.rs/seaography/1.0.0/seaography/builder/struct.Builder.html).
