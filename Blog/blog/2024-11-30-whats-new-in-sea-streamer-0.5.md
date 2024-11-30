@@ -80,7 +80,7 @@ let merged: Merged<SeaMessageStream<'a>> = streams.merge();
 
 `stream_a` and `stream_b` can be heterogeneous, meaning they can be Kafka, Redis or even File.
 
-But how about in replay? In replay, different streams can flow at different pace, and thus if we try to naively merge them, the messages would come out-of-order.
+How about in replay? In replay, different streams can flow at different pace, and thus if we try to naively merge them, the messages would come out-of-order.
 
 To solve this problem, you can use [`StreamJoin::muxed`](https://docs.rs/sea-streamer-fuse/latest/sea_streamer_fuse/struct.StreamJoin.html#method.muxed):
 
