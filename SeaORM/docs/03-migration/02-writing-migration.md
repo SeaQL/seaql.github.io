@@ -341,7 +341,7 @@ Since this syntax is not available on MySQL, you can:
 
 ```rust
 async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-    if manager.has_column("my_table", "col_to_add").await? {
+    if !manager.has_column("my_table", "col_to_add").await? {
         // ALTER TABLE `my_table` ADD COLUMN `col_to_add` ..
     }
 
