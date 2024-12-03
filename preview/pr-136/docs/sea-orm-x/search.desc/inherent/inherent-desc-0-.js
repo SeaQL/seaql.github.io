@@ -1,0 +1,1 @@
+searchState.loadedDescShard("inherent", 0, "github crates-io docs-rs")
