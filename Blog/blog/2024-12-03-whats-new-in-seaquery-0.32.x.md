@@ -231,7 +231,7 @@ SeaQuery plays well with the other crates in the rust ecosystem.
 
 SeaQL.org is an independent open-source organization run by passionate ️developers. If you like our projects, please star ⭐ and share our repositories. If you feel generous, a small donation via [GitHub Sponsor](https://github.com/sponsors/SeaQL) will be greatly appreciated, and goes a long way towards sustaining the organization 🚢.
 
-SeaStreamer is a community driven project. We welcome you to participate, contribute and together build for Rust's future 🦀.
+SeaQuery is a community driven project. We welcome you to participate, contribute and together build for Rust's future 🦀.
 
 ## Rustacean Sticker Pack 🦀
 
