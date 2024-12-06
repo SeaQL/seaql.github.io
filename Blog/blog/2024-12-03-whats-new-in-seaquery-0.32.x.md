@@ -1,13 +1,13 @@
 ---
-slug: 2024-12-03-whats-new-in-seaquery-0.32.0
-title: What's new in SeaQuery 0.32.0
+slug: 2024-12-03-whats-new-in-seaquery-0.32.x
+title: What's new in SeaQuery 0.32.x
 author: SeaQL Team
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
 tags: [news]
 ---
 
-🎉 We are pleased to release SeaQuery [`0.32.0`](https://github.com/SeaQL/sea-query/releases/tag/0.32.0)! Here are some feature highlights 🌟:
+🎉 We are pleased to release SeaQuery [`0.32.0`](https://github.com/SeaQL/sea-query/releases/tag/0.32.0) / [`0.32.1`](https://github.com/SeaQL/sea-query/releases/tag/0.32.1)! Here are some feature highlights 🌟:
 
 ## New Features
 
