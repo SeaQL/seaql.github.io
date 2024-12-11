@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="pgvector-rust"><title>pgvector - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="pgvector" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../pgvector/index.html">pgvector</a><span class="version">0.4.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#structs">Structs</a></li></ul></section></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">pgvector</a><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><span class="out-of-band"><a class="src" href="../src/pgvector/lib.rs.html#1-41">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="pgvector-rust"><a class="doc-anchor" href="#pgvector-rust">§</a>pgvector-rust</h2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="pgvector-rust"><title>pgvector - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="pgvector" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../pgvector/index.html">pgvector</a><span class="version">0.4.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#pgvector-rust" title="pgvector-rust">pgvector-rust</a><ul><li><a href="#getting-started" title="Getting Started">Getting Started</a></li><li><a href="#rust-postgres" title="Rust-Postgres">Rust-Postgres</a></li><li><a href="#sqlx" title="SQLx">SQLx</a></li><li><a href="#diesel" title="Diesel">Diesel</a></li><li><a href="#serialization" title="Serialization">Serialization</a></li><li><a href="#half-vectors" title="Half Vectors">Half Vectors</a></li><li><a href="#reference" title="Reference">Reference</a></li><li><a href="#history" title="History">History</a></li><li><a href="#contributing" title="Contributing">Contributing</a></li></ul></li></ul><h3><a href="#structs">Crate Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>pgvector</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/pgvector/lib.rs.html#1-41">source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="pgvector-rust"><a class="doc-anchor" href="#pgvector-rust">§</a>pgvector-rust</h2>
 <p><a href="https://github.com/pgvector/pgvector">pgvector</a> support for Rust</p>
 <p>Supports <a href="https://github.com/sfackler/rust-postgres">Rust-Postgres</a>, <a href="https://github.com/launchbadge/sqlx">SQLx</a>, and <a href="https://github.com/diesel-rs/diesel">Diesel</a></p>
 <p><a href="https://github.com/pgvector/pgvector-rust/actions"><img src="https://github.com/pgvector/pgvector-rust/actions/workflows/build.yml/badge.svg" alt="Build Status" /></a></p>
@@ -20,8 +20,7 @@
 </ul>
 <h3 id="rust-postgres"><a class="doc-anchor" href="#rust-postgres">§</a>Rust-Postgres</h3>
 <p>Add this line to your application’s <code>Cargo.toml</code> under <code>[dependencies]</code>:</p>
-<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;postgres&quot;] }
-</code></pre></div>
+<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;postgres&quot;] }</code></pre></div>
 <p>Enable the extension</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code>client.execute(<span class="string">"CREATE EXTENSION IF NOT EXISTS vector"</span>, <span class="kw-2">&amp;</span>[])<span class="question-mark">?</span>;</code></pre></div>
@@ -51,8 +50,7 @@
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>embedding: <span class="prelude-ty">Option</span>&lt;Vector&gt; = row.get(<span class="number">0</span>);</code></pre></div>
 <h3 id="sqlx"><a class="doc-anchor" href="#sqlx">§</a>SQLx</h3>
 <p>Add this line to your application’s <code>Cargo.toml</code> under <code>[dependencies]</code>:</p>
-<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;sqlx&quot;] }
-</code></pre></div>
+<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;sqlx&quot;] }</code></pre></div>
 <p>For SQLx &lt; 0.8, use <code>version = "0.3"</code> and <a href="https://github.com/pgvector/pgvector-rust/blob/v0.3.4/README.md">this readme</a>.</p>
 <p>Enable the extension</p>
 
@@ -87,30 +85,23 @@
 <span class="kw">let </span>embedding: Vector = row.try_get(<span class="string">"embedding"</span>)<span class="question-mark">?</span>;</code></pre></div>
 <h3 id="diesel"><a class="doc-anchor" href="#diesel">§</a>Diesel</h3>
 <p>Add this line to your application’s <code>Cargo.toml</code> under <code>[dependencies]</code>:</p>
-<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;diesel&quot;] }
-</code></pre></div>
+<div class="example-wrap"><pre class="language-toml"><code>pgvector = { version = &quot;0.4&quot;, features = [&quot;diesel&quot;] }</code></pre></div>
 <p>And update your application’s <code>diesel.toml</code> under <code>[print_schema]</code>:</p>
 <div class="example-wrap"><pre class="language-toml"><code>import_types = [&quot;diesel::sql_types::*&quot;, &quot;pgvector::sql_types::*&quot;]
-generate_missing_sql_type_definitions = false
-</code></pre></div>
+generate_missing_sql_type_definitions = false</code></pre></div>
 <p>Create a migration</p>
-<div class="example-wrap"><pre class="language-sh"><code>diesel migration generate create_vector_extension
-</code></pre></div>
+<div class="example-wrap"><pre class="language-sh"><code>diesel migration generate create_vector_extension</code></pre></div>
 <p>with <code>up.sql</code>:</p>
-<div class="example-wrap"><pre class="language-sql"><code>CREATE EXTENSION vector
-</code></pre></div>
+<div class="example-wrap"><pre class="language-sql"><code>CREATE EXTENSION vector</code></pre></div>
 <p>and <code>down.sql</code>:</p>
-<div class="example-wrap"><pre class="language-sql"><code>DROP EXTENSION vector
-</code></pre></div>
+<div class="example-wrap"><pre class="language-sql"><code>DROP EXTENSION vector</code></pre></div>
 <p>Run the migration</p>
-<div class="example-wrap"><pre class="language-sql"><code>diesel migration run
-</code></pre></div>
+<div class="example-wrap"><pre class="language-sql"><code>diesel migration run</code></pre></div>
 <p>You can now use the <code>vector</code> type in future migrations</p>
 <div class="example-wrap"><pre class="language-sql"><code>CREATE TABLE items (
   id SERIAL PRIMARY KEY,
   embedding VECTOR(3)
-)
-</code></pre></div>
+)</code></pre></div>
 <p>For models, use:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>pgvector::Vector;
@@ -156,8 +147,7 @@ diesel::insert_into(items::table)
 <p>Add an approximate index in a migration</p>
 <div class="example-wrap"><pre class="language-sql"><code>CREATE INDEX my_index ON items USING hnsw (embedding vector_l2_ops)
 -- or
-CREATE INDEX my_index ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)
-</code></pre></div>
+CREATE INDEX my_index ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)</code></pre></div>
 <p>Use <code>vector_ip_ops</code> for inner product and <code>vector_cosine_ops</code> for cosine distance</p>
 <h3 id="serialization"><a class="doc-anchor" href="#serialization">§</a>Serialization</h3>
 <p>Use the <code>serde</code> feature to enable serialization</p>
@@ -184,5 +174,4 @@ CREATE INDEX my_index ON items USING ivfflat (embedding vector_l2_ops) WITH (lis
 <div class="example-wrap"><pre class="language-sh"><code>git clone https://github.com/pgvector/pgvector-rust.git
 cd pgvector-rust
 createdb pgvector_rust_test
-cargo test --all-features
-</code></pre></div></div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Bit.html" title="struct pgvector::Bit">Bit</a></div><div class="desc docblock-short">A bit string.</div></li><li><div class="item-name"><a class="struct" href="struct.SparseVector.html" title="struct pgvector::SparseVector">SparseVector</a></div><div class="desc docblock-short">A sparse vector.</div></li><li><div class="item-name"><a class="struct" href="struct.Vector.html" title="struct pgvector::Vector">Vector</a></div><div class="desc docblock-short">A vector.</div></li></ul></section></div></main></body></html>
+cargo test --all-features</code></pre></div></div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Bit.html" title="struct pgvector::Bit">Bit</a></div><div class="desc docblock-short">A bit string.</div></li><li><div class="item-name"><a class="struct" href="struct.SparseVector.html" title="struct pgvector::SparseVector">Sparse<wbr>Vector</a></div><div class="desc docblock-short">A sparse vector.</div></li><li><div class="item-name"><a class="struct" href="struct.Vector.html" title="struct pgvector::Vector">Vector</a></div><div class="desc docblock-short">A vector.</div></li></ul></section></div></main></body></html>
