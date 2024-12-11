@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.5/src/impl_fmt.rs`."><title>impl_fmt.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.6/src/impl_fmt.rs`."><title>impl_fmt.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">bigdecimal/</div>impl_fmt.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1200,11 +1201,197 @@
 <a href="#1200" id="1200">1200</a>
 <a href="#1201" id="1201">1201</a>
 <a href="#1202" id="1202">1202</a>
-</pre></div><pre class="rust"><code><span class="doccomment">//! Implementation of std::fmt traits &amp; other stringification functions
+<a href="#1203" id="1203">1203</a>
+<a href="#1204" id="1204">1204</a>
+<a href="#1205" id="1205">1205</a>
+<a href="#1206" id="1206">1206</a>
+<a href="#1207" id="1207">1207</a>
+<a href="#1208" id="1208">1208</a>
+<a href="#1209" id="1209">1209</a>
+<a href="#1210" id="1210">1210</a>
+<a href="#1211" id="1211">1211</a>
+<a href="#1212" id="1212">1212</a>
+<a href="#1213" id="1213">1213</a>
+<a href="#1214" id="1214">1214</a>
+<a href="#1215" id="1215">1215</a>
+<a href="#1216" id="1216">1216</a>
+<a href="#1217" id="1217">1217</a>
+<a href="#1218" id="1218">1218</a>
+<a href="#1219" id="1219">1219</a>
+<a href="#1220" id="1220">1220</a>
+<a href="#1221" id="1221">1221</a>
+<a href="#1222" id="1222">1222</a>
+<a href="#1223" id="1223">1223</a>
+<a href="#1224" id="1224">1224</a>
+<a href="#1225" id="1225">1225</a>
+<a href="#1226" id="1226">1226</a>
+<a href="#1227" id="1227">1227</a>
+<a href="#1228" id="1228">1228</a>
+<a href="#1229" id="1229">1229</a>
+<a href="#1230" id="1230">1230</a>
+<a href="#1231" id="1231">1231</a>
+<a href="#1232" id="1232">1232</a>
+<a href="#1233" id="1233">1233</a>
+<a href="#1234" id="1234">1234</a>
+<a href="#1235" id="1235">1235</a>
+<a href="#1236" id="1236">1236</a>
+<a href="#1237" id="1237">1237</a>
+<a href="#1238" id="1238">1238</a>
+<a href="#1239" id="1239">1239</a>
+<a href="#1240" id="1240">1240</a>
+<a href="#1241" id="1241">1241</a>
+<a href="#1242" id="1242">1242</a>
+<a href="#1243" id="1243">1243</a>
+<a href="#1244" id="1244">1244</a>
+<a href="#1245" id="1245">1245</a>
+<a href="#1246" id="1246">1246</a>
+<a href="#1247" id="1247">1247</a>
+<a href="#1248" id="1248">1248</a>
+<a href="#1249" id="1249">1249</a>
+<a href="#1250" id="1250">1250</a>
+<a href="#1251" id="1251">1251</a>
+<a href="#1252" id="1252">1252</a>
+<a href="#1253" id="1253">1253</a>
+<a href="#1254" id="1254">1254</a>
+<a href="#1255" id="1255">1255</a>
+<a href="#1256" id="1256">1256</a>
+<a href="#1257" id="1257">1257</a>
+<a href="#1258" id="1258">1258</a>
+<a href="#1259" id="1259">1259</a>
+<a href="#1260" id="1260">1260</a>
+<a href="#1261" id="1261">1261</a>
+<a href="#1262" id="1262">1262</a>
+<a href="#1263" id="1263">1263</a>
+<a href="#1264" id="1264">1264</a>
+<a href="#1265" id="1265">1265</a>
+<a href="#1266" id="1266">1266</a>
+<a href="#1267" id="1267">1267</a>
+<a href="#1268" id="1268">1268</a>
+<a href="#1269" id="1269">1269</a>
+<a href="#1270" id="1270">1270</a>
+<a href="#1271" id="1271">1271</a>
+<a href="#1272" id="1272">1272</a>
+<a href="#1273" id="1273">1273</a>
+<a href="#1274" id="1274">1274</a>
+<a href="#1275" id="1275">1275</a>
+<a href="#1276" id="1276">1276</a>
+<a href="#1277" id="1277">1277</a>
+<a href="#1278" id="1278">1278</a>
+<a href="#1279" id="1279">1279</a>
+<a href="#1280" id="1280">1280</a>
+<a href="#1281" id="1281">1281</a>
+<a href="#1282" id="1282">1282</a>
+<a href="#1283" id="1283">1283</a>
+<a href="#1284" id="1284">1284</a>
+<a href="#1285" id="1285">1285</a>
+<a href="#1286" id="1286">1286</a>
+<a href="#1287" id="1287">1287</a>
+<a href="#1288" id="1288">1288</a>
+<a href="#1289" id="1289">1289</a>
+<a href="#1290" id="1290">1290</a>
+<a href="#1291" id="1291">1291</a>
+<a href="#1292" id="1292">1292</a>
+<a href="#1293" id="1293">1293</a>
+<a href="#1294" id="1294">1294</a>
+<a href="#1295" id="1295">1295</a>
+<a href="#1296" id="1296">1296</a>
+<a href="#1297" id="1297">1297</a>
+<a href="#1298" id="1298">1298</a>
+<a href="#1299" id="1299">1299</a>
+<a href="#1300" id="1300">1300</a>
+<a href="#1301" id="1301">1301</a>
+<a href="#1302" id="1302">1302</a>
+<a href="#1303" id="1303">1303</a>
+<a href="#1304" id="1304">1304</a>
+<a href="#1305" id="1305">1305</a>
+<a href="#1306" id="1306">1306</a>
+<a href="#1307" id="1307">1307</a>
+<a href="#1308" id="1308">1308</a>
+<a href="#1309" id="1309">1309</a>
+<a href="#1310" id="1310">1310</a>
+<a href="#1311" id="1311">1311</a>
+<a href="#1312" id="1312">1312</a>
+<a href="#1313" id="1313">1313</a>
+<a href="#1314" id="1314">1314</a>
+<a href="#1315" id="1315">1315</a>
+<a href="#1316" id="1316">1316</a>
+<a href="#1317" id="1317">1317</a>
+<a href="#1318" id="1318">1318</a>
+<a href="#1319" id="1319">1319</a>
+<a href="#1320" id="1320">1320</a>
+<a href="#1321" id="1321">1321</a>
+<a href="#1322" id="1322">1322</a>
+<a href="#1323" id="1323">1323</a>
+<a href="#1324" id="1324">1324</a>
+<a href="#1325" id="1325">1325</a>
+<a href="#1326" id="1326">1326</a>
+<a href="#1327" id="1327">1327</a>
+<a href="#1328" id="1328">1328</a>
+<a href="#1329" id="1329">1329</a>
+<a href="#1330" id="1330">1330</a>
+<a href="#1331" id="1331">1331</a>
+<a href="#1332" id="1332">1332</a>
+<a href="#1333" id="1333">1333</a>
+<a href="#1334" id="1334">1334</a>
+<a href="#1335" id="1335">1335</a>
+<a href="#1336" id="1336">1336</a>
+<a href="#1337" id="1337">1337</a>
+<a href="#1338" id="1338">1338</a>
+<a href="#1339" id="1339">1339</a>
+<a href="#1340" id="1340">1340</a>
+<a href="#1341" id="1341">1341</a>
+<a href="#1342" id="1342">1342</a>
+<a href="#1343" id="1343">1343</a>
+<a href="#1344" id="1344">1344</a>
+<a href="#1345" id="1345">1345</a>
+<a href="#1346" id="1346">1346</a>
+<a href="#1347" id="1347">1347</a>
+<a href="#1348" id="1348">1348</a>
+<a href="#1349" id="1349">1349</a>
+<a href="#1350" id="1350">1350</a>
+<a href="#1351" id="1351">1351</a>
+<a href="#1352" id="1352">1352</a>
+<a href="#1353" id="1353">1353</a>
+<a href="#1354" id="1354">1354</a>
+<a href="#1355" id="1355">1355</a>
+<a href="#1356" id="1356">1356</a>
+<a href="#1357" id="1357">1357</a>
+<a href="#1358" id="1358">1358</a>
+<a href="#1359" id="1359">1359</a>
+<a href="#1360" id="1360">1360</a>
+<a href="#1361" id="1361">1361</a>
+<a href="#1362" id="1362">1362</a>
+<a href="#1363" id="1363">1363</a>
+<a href="#1364" id="1364">1364</a>
+<a href="#1365" id="1365">1365</a>
+<a href="#1366" id="1366">1366</a>
+<a href="#1367" id="1367">1367</a>
+<a href="#1368" id="1368">1368</a>
+<a href="#1369" id="1369">1369</a>
+<a href="#1370" id="1370">1370</a>
+<a href="#1371" id="1371">1371</a>
+<a href="#1372" id="1372">1372</a>
+<a href="#1373" id="1373">1373</a>
+<a href="#1374" id="1374">1374</a>
+<a href="#1375" id="1375">1375</a>
+<a href="#1376" id="1376">1376</a>
+<a href="#1377" id="1377">1377</a>
+<a href="#1378" id="1378">1378</a>
+<a href="#1379" id="1379">1379</a>
+<a href="#1380" id="1380">1380</a>
+<a href="#1381" id="1381">1381</a>
+<a href="#1382" id="1382">1382</a>
+<a href="#1383" id="1383">1383</a>
+<a href="#1384" id="1384">1384</a>
+<a href="#1385" id="1385">1385</a>
+<a href="#1386" id="1386">1386</a>
+<a href="#1387" id="1387">1387</a></pre></div><pre class="rust"><code><span class="doccomment">//! Implementation of std::fmt traits &amp; other stringification functions
 //!
 
 </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>rounding::{NonDigitRoundingData, InsigData};
 <span class="kw">use </span>stdlib::fmt::Write;
+<span class="kw">use </span>stdlib::num::NonZeroUsize;
 
 
 <span class="comment">// const EXPONENTIAL_FORMAT_LEADING_ZERO_THRESHOLD: usize = ${RUST_BIGDECIMAL_FMT_EXPONENTIAL_LOWER_THRESHOLD} or 5;
@@ -1327,28 +1514,33 @@
     <span class="kw">use </span>stdlib::cmp::Ordering::<span class="kw-2">*</span>;
 
     <span class="kw">let </span><span class="kw-2">mut </span>digits = abs_int.into_bytes();
-    <span class="kw">let </span><span class="kw-2">mut </span>exp = (this.scale <span class="kw">as </span>i128).neg();
+    <span class="kw">let </span><span class="kw-2">mut </span>exp = <span class="number">0</span>;
     <span class="kw">let </span>non_negative = <span class="macro">matches!</span>(this.sign, Sign::Plus | Sign::NoSign);
 
     <span class="macro">debug_assert_ne!</span>(digits.len(), <span class="number">0</span>);
 
+    <span class="kw">let </span>rounder = NonDigitRoundingData::default_with_sign(this.sign);
+
     <span class="kw">if </span>this.scale &lt;= <span class="number">0 </span>{
-        <span class="comment">// formatting an integer value (add trailing zeros to the right)
+        exp = (this.scale <span class="kw">as </span>i128).neg();
+        <span class="comment">// format an integer value by adding trailing zeros to the right
         </span>zero_right_pad_integer_ascii_digits(<span class="kw-2">&amp;mut </span>digits, <span class="kw-2">&amp;mut </span>exp, f.precision());
     } <span class="kw">else </span>{
         <span class="kw">let </span>scale = this.scale <span class="kw">as </span>u64;
-        <span class="comment">// no-precision behaves the same as precision matching scale (i.e. no padding or rounding)
-        </span><span class="kw">let </span>prec = f.precision().and_then(|prec| prec.to_u64()).unwrap_or(scale);
+
+        <span class="comment">// std::fmt 'precision' has same meaning as bigdecimal 'scale'
+        //
+        // interpret 'no-precision' to mean the same as matching the scale
+        // of the deicmal (i.e. no padding or rounding)
+        </span><span class="kw">let </span>target_scale = f.precision().and_then(|prec| prec.to_u64()).unwrap_or(scale);
 
         <span class="kw">if </span>scale &lt; digits.len() <span class="kw">as </span>u64 {
             <span class="comment">// format both integer and fractional digits (always 'trim' to precision)
-            </span>trim_ascii_digits(<span class="kw-2">&amp;mut </span>digits, scale, prec, <span class="kw-2">&amp;mut </span>exp, this.sign);
+            </span>format_ascii_digits_with_integer_and_fraction(<span class="kw-2">&amp;mut </span>digits, scale, target_scale, rounder);
         } <span class="kw">else </span>{
             <span class="comment">// format only fractional digits
-            </span>shift_or_trim_fractional_digits(<span class="kw-2">&amp;mut </span>digits, scale, prec, <span class="kw-2">&amp;mut </span>exp, this.sign);
+            </span>format_ascii_digits_no_integer(<span class="kw-2">&amp;mut </span>digits, scale, target_scale, rounder);
         }
-        <span class="comment">// never print exp when in this branch
-        </span>exp = <span class="number">0</span>;
     }
 
     <span class="comment">// move digits back into String form
@@ -1370,123 +1562,218 @@
 </span><span class="kw">fn </span>zero_right_pad_integer_ascii_digits(
     digits: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
     exp: <span class="kw-2">&amp;mut </span>i128,
-    precision: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    <span class="comment">// number of zeros after the decimal point
+    </span>target_scale: <span class="prelude-ty">Option</span>&lt;usize&gt;,
 ) {
     <span class="macro">debug_assert!</span>(<span class="kw-2">*</span>exp &gt;= <span class="number">0</span>);
+    <span class="macro">debug_assert_ne!</span>(digits.len(), <span class="number">0</span>);
 
-    <span class="kw">let </span>trailing_zero_count = <span class="kw">match </span>exp.to_usize() {
+    <span class="kw">let </span>integer_zero_count = <span class="kw">match </span>exp.to_usize() {
         <span class="prelude-val">Some</span>(n) =&gt; n,
         <span class="prelude-val">None </span>=&gt; { <span class="kw">return</span>; }
     };
-    <span class="kw">let </span>total_additional_zeros = trailing_zero_count.saturating_add(precision.unwrap_or(<span class="number">0</span>));
-    <span class="kw">if </span>total_additional_zeros &gt; FMT_MAX_INTEGER_PADDING {
+
+    <span class="comment">// did not explicitly request precision, so we'll only
+    // implicitly right-pad if less than this threshold.
+    </span><span class="kw">if </span><span class="macro">matches!</span>(target_scale, <span class="prelude-val">None</span>) &amp;&amp; integer_zero_count &gt; <span class="number">20 </span>{
+        <span class="comment">// no padding
+        </span><span class="kw">return</span>;
+    }
+
+    <span class="kw">let </span>fraction_zero_char_count;
+    <span class="kw">let </span>decimal_place_idx;
+
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(frac_zero_count) = target_scale.and_then(NonZeroUsize::new) {
+        <span class="comment">// add one char for '.' if target_scale is not zero
+        </span>fraction_zero_char_count = frac_zero_count.get() + <span class="number">1</span>;
+        <span class="comment">// indicate we'll need to add a decimal point
+        </span>decimal_place_idx = <span class="prelude-val">Some</span>(digits.len() + integer_zero_count);
+    } <span class="kw">else </span>{
+        fraction_zero_char_count = <span class="number">0</span>;
+        decimal_place_idx = <span class="prelude-val">None</span>;
+    }
+
+    <span class="kw">let </span>total_additional_zeros = integer_zero_count.saturating_add(fraction_zero_char_count);
+
+    <span class="comment">// no padding if out of bounds
+    </span><span class="kw">if </span>total_additional_zeros &gt; FMT_MAX_INTEGER_PADDING {
         <span class="kw">return</span>;
     }
 
-    <span class="comment">// requested 'prec' digits of precision after decimal point
-    </span><span class="kw">match </span>precision {
-        <span class="prelude-val">None </span><span class="kw">if </span>trailing_zero_count &gt; <span class="number">20 </span>=&gt; {
-        }
-        <span class="prelude-val">None </span>| <span class="prelude-val">Some</span>(<span class="number">0</span>) =&gt; {
-            digits.resize(digits.len() + trailing_zero_count, <span class="string">b'0'</span>);
-            <span class="kw-2">*</span>exp = <span class="number">0</span>;
-        }
-        <span class="prelude-val">Some</span>(prec) =&gt; {
-            digits.resize(digits.len() + trailing_zero_count, <span class="string">b'0'</span>);
-            digits.push(<span class="string">b'.'</span>);
-            digits.resize(digits.len() + prec, <span class="string">b'0'</span>);
-            <span class="kw-2">*</span>exp = <span class="number">0</span>;
-        }
+    digits.resize(digits.len() + total_additional_zeros, <span class="string">b'0'</span>);
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(decimal_place_idx) = decimal_place_idx {
+        digits[decimal_place_idx] = <span class="string">b'.'</span>;
     }
+
+    <span class="comment">// set exp to zero so it won't be written in `format_full_scale`
+    </span><span class="kw-2">*</span>exp = <span class="number">0</span>;
 }
 
-<span class="doccomment">/// Fill zeros into utf-8 digits
-</span><span class="kw">fn </span>trim_ascii_digits(
-    digits: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
+
+<span class="doccomment">/// Insert decimal point into digits_ascii_be, rounding or padding with zeros when necessary
+///
+/// (digits_ascii_be, scale) represents a decimal with both integer and fractional digits.
+///
+</span><span class="kw">fn </span>format_ascii_digits_with_integer_and_fraction(
+    digits_ascii_be: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
     scale: u64,
-    prec: u64,
-    exp: <span class="kw-2">&amp;mut </span>i128,
-    sign: Sign,
+    target_scale: u64,
+    rounder: NonDigitRoundingData,
 ) {
-    <span class="macro">debug_assert!</span>(scale &lt; digits.len() <span class="kw">as </span>u64);
-    <span class="comment">// there are both integer and fractional digits
-    </span><span class="kw">let </span>integer_digit_count = (digits.len() <span class="kw">as </span>u64 - scale)
-                              .to_usize()
-                              .expect(<span class="string">"Number of digits exceeds maximum usize"</span>);
+    <span class="macro">debug_assert!</span>(scale &lt; digits_ascii_be.len() <span class="kw">as </span>u64, <span class="string">"No integer digits"</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>digit_scale = scale;
 
-    <span class="kw">if </span>prec &lt; scale {
-        <span class="kw">let </span>prec = prec.to_usize()
-                       .expect(<span class="string">"Precision exceeds maximum usize"</span>);
-        apply_rounding_to_ascii_digits(
-            digits, exp, integer_digit_count + prec, sign
-        );
+    <span class="comment">// decimal has more fractional digits than requested: round (trimming insignificant digits)
+    </span><span class="kw">if </span>target_scale &lt; scale {
+        <span class="kw">let </span>digit_count_to_remove = (scale - target_scale)
+                                    .to_usize()
+                                    .expect(<span class="string">"Precision exceeds maximum usize"</span>);
+
+        <span class="kw">let </span>rounding_idx = NonZeroUsize::new(digits_ascii_be.len() - digit_count_to_remove)
+                           .expect(<span class="string">"decimal must have integer digits"</span>);
+
+        <span class="comment">// round and trim the digits at the 'rounding index'
+        </span><span class="kw">let </span>scale_diff = round_ascii_digits(digits_ascii_be, rounding_idx, rounder);
+
+        <span class="kw">match </span>scale_diff.checked_sub(digit_scale <span class="kw">as </span>usize) {
+            <span class="prelude-val">None </span>| <span class="prelude-val">Some</span>(<span class="number">0</span>) =&gt; {
+                digit_scale -= scale_diff <span class="kw">as </span>u64;
+            }
+            <span class="prelude-val">Some</span>(zeros_to_add) =&gt; {
+                <span class="macro">debug_assert_eq!</span>(zeros_to_add, <span class="number">1</span>);
+                digits_ascii_be.resize(digits_ascii_be.len() + zeros_to_add, <span class="string">b'0'</span>);
+                digit_scale = <span class="number">0</span>;
+            }
+        }
     }
 
-    <span class="kw">if </span>prec != <span class="number">0 </span>{
-        digits.insert(integer_digit_count, <span class="string">b'.'</span>);
+    <span class="comment">// ignore the decimal point if the target scale is zero
+    </span><span class="kw">if </span>target_scale != <span class="number">0 </span>{
+        <span class="comment">// there are both integer and fractional digits
+        </span><span class="kw">let </span>integer_digit_count = (digits_ascii_be.len() <span class="kw">as </span>u64 - digit_scale)
+                                  .to_usize()
+                                  .expect(<span class="string">"Number of digits exceeds maximum usize"</span>);
+
+
+        digits_ascii_be.insert(integer_digit_count, <span class="string">b'.'</span>);
     }
 
-    <span class="kw">if </span>scale &lt; prec {
-        <span class="kw">let </span>trailing_zero_count = (prec - scale)
+    <span class="kw">if </span>digit_scale &lt; target_scale {
+        <span class="kw">let </span>trailing_zero_count = (target_scale - digit_scale)
                                   .to_usize()
                                   .expect(<span class="string">"Too Big"</span>);
 
         <span class="comment">// precision required beyond scale
-        </span>digits.resize(digits.len() + trailing_zero_count, <span class="string">b'0'</span>);
+        </span>digits_ascii_be.resize(digits_ascii_be.len() + trailing_zero_count, <span class="string">b'0'</span>);
+        digit_scale += trailing_zero_count <span class="kw">as </span>u64;
     }
+
+    <span class="macro">debug_assert_eq!</span>(digit_scale, target_scale);
 }
 
 
-<span class="kw">fn </span>shift_or_trim_fractional_digits(
-    digits: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
+<span class="doccomment">/// Insert decimal point into digits_ascii_be, rounding or padding with zeros when necessary
+///
+/// (digits_ascii_be, scale) represents a decimal with only fractional digits.
+///
+</span><span class="kw">fn </span>format_ascii_digits_no_integer(
+    digits_ascii_be: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
     scale: u64,
-    prec: u64,
-    exp: <span class="kw-2">&amp;mut </span>i128,
-    sign: Sign,
+    target_scale: u64,
+    rounder: NonDigitRoundingData,
 ) {
-    <span class="macro">debug_assert!</span>(scale &gt;= digits.len() <span class="kw">as </span>u64);
-    <span class="comment">// there are no integer digits
-    </span><span class="kw">let </span>leading_zeros = scale - digits.len() <span class="kw">as </span>u64;
+    <span class="kw">use </span>stdlib::cmp::Ordering::<span class="kw-2">*</span>;
 
-    <span class="kw">match </span>prec.checked_sub(leading_zeros) {
-        <span class="prelude-val">None </span>=&gt; {
-            digits.clear();
-            digits.push(<span class="string">b'0'</span>);
-            <span class="kw">if </span>prec &gt; <span class="number">0 </span>{
-                digits.push(<span class="string">b'.'</span>);
-                digits.resize(<span class="number">2 </span>+ prec <span class="kw">as </span>usize, <span class="string">b'0'</span>);
+    <span class="macro">debug_assert!</span>(scale &gt;= digits_ascii_be.len() <span class="kw">as </span>u64);
+    <span class="kw">let </span>leading_zeros = scale - digits_ascii_be.len() <span class="kw">as </span>u64;
+
+    <span class="kw">match </span>arithmetic::diff(target_scale, leading_zeros) {
+        <span class="comment">// handle rounding point before the start of digits
+        </span>(Less, intermediate_zeros) | (Equal, intermediate_zeros)  =&gt; {
+            <span class="comment">// get insignificant digit
+            </span><span class="kw">let </span>(insig_digit, trailing_digits) = <span class="kw">if </span>intermediate_zeros &gt; <span class="number">0 </span>{
+                (<span class="number">0</span>, digits_ascii_be.as_slice())
+            } <span class="kw">else </span>{
+                (digits_ascii_be[<span class="number">0</span>] - <span class="string">b'0'</span>, <span class="kw-2">&amp;</span>digits_ascii_be[<span class="number">1</span>..])
+            };
+
+            <span class="kw">let </span>insig_data = InsigData::from_digit_and_lazy_trailing_zeros(
+                rounder, insig_digit, || trailing_digits.iter().all(|<span class="kw-2">&amp;</span>d| d == <span class="string">b'0'</span>)
+            );
+
+            <span class="kw">let </span>rounded_digit = insig_data.round_digit(<span class="number">0</span>);
+            <span class="macro">debug_assert_ne!</span>(rounded_digit, <span class="number">10</span>);
+
+            digits_ascii_be.clear();
+
+            <span class="kw">if </span>target_scale &gt; <span class="number">0 </span>{
+                digits_ascii_be.resize(target_scale <span class="kw">as </span>usize + <span class="number">1</span>, <span class="string">b'0'</span>);
+            }
+
+            digits_ascii_be.push(rounded_digit + <span class="string">b'0'</span>);
+
+            <span class="kw">if </span>target_scale &gt; <span class="number">0 </span>{
+                digits_ascii_be[<span class="number">1</span>] = <span class="string">b'.'</span>;
             }
         }
-        <span class="prelude-val">Some</span>(<span class="number">0</span>) =&gt; {
-            <span class="comment">// precision is at the decimal digit boundary, round one value
-            </span><span class="kw">let </span>insig_digit = digits[<span class="number">0</span>] - <span class="string">b'0'</span>;
-            <span class="kw">let </span>trailing_zeros = digits[<span class="number">1</span>..].iter().all(|<span class="kw-2">&amp;</span>d| d == <span class="string">b'0'</span>);
-            <span class="kw">let </span>rounded_value = Context::default().round_pair(sign, <span class="number">0</span>, insig_digit, trailing_zeros);
+        (Greater, sig_digit_count) =&gt; {
+            <span class="kw">let </span>significant_digit_count = sig_digit_count
+                                          .to_usize()
+                                          .and_then(NonZeroUsize::new)
+                                          .expect(<span class="string">"Request overflow in sig_digit_count"</span>);
 
-            digits.clear();
-            <span class="kw">if </span>leading_zeros != <span class="number">0 </span>{
-                digits.push(<span class="string">b'0'</span>);
-                digits.push(<span class="string">b'.'</span>);
-                digits.resize(<span class="number">1 </span>+ leading_zeros <span class="kw">as </span>usize, <span class="string">b'0'</span>);
-            }
-            digits.push(rounded_value + <span class="string">b'0'</span>);
-        }
-        <span class="prelude-val">Some</span>(digit_prec) =&gt; {
-            <span class="kw">let </span>digit_prec = digit_prec <span class="kw">as </span>usize;
-            <span class="kw">let </span>leading_zeros = leading_zeros
-                                .to_usize()
-                                .expect(<span class="string">"Number of leading zeros exceeds max usize"</span>);
-            <span class="kw">let </span>trailing_zeros = digit_prec.saturating_sub(digits.len());
-            <span class="kw">if </span>digit_prec &lt; digits.len() {
-                apply_rounding_to_ascii_digits(digits, exp, digit_prec, sign);
-            }
-            digits.extend_from_slice(<span class="string">b"0."</span>);
-            digits.resize(digits.len() + leading_zeros, <span class="string">b'0'</span>);
-            digits.rotate_right(leading_zeros + <span class="number">2</span>);
+            <span class="kw">let </span><span class="kw-2">mut </span>digit_scale = scale;
 
-            <span class="comment">// add any extra trailing zeros
-            </span>digits.resize(digits.len() + trailing_zeros, <span class="string">b'0'</span>);
+            <span class="comment">// if 'digits_ascii_be' has more digits than requested, round
+            </span><span class="kw">if </span>significant_digit_count.get() &lt; digits_ascii_be.len() {
+                <span class="kw">let </span>removed_digit_count = round_ascii_digits(
+                    digits_ascii_be, significant_digit_count, rounder
+                );
+
+                digit_scale -= removed_digit_count <span class="kw">as </span>u64;
+            }
+
+            <span class="comment">// number of zeros to keep after the significant digits
+            </span><span class="kw">let </span>trailing_zeros = target_scale - digit_scale;
+
+            <span class="comment">// expected length is target scale (number of digits after decimal point) + "0."
+            </span><span class="kw">let </span>dest_len = target_scale <span class="kw">as </span>usize + <span class="number">2</span>;
+
+            <span class="comment">// number of significant digits is whatever is left in the digit vector
+            </span><span class="kw">let </span>sig_digit_count = digits_ascii_be.len();
+
+            <span class="comment">// index where to store significant digits
+            </span><span class="kw">let </span>sig_digit_idx = dest_len - trailing_zeros <span class="kw">as </span>usize - sig_digit_count;
+
+            <span class="comment">// fill output with zeros
+            </span>digits_ascii_be.resize(dest_len, <span class="string">b'0'</span>);
+
+            <span class="comment">// very likely case where there are digits after the decimal point
+            </span><span class="kw">if </span>digit_scale != <span class="number">0 </span>{
+                <span class="comment">// copy significant digits to their index location
+                </span>digits_ascii_be.copy_within(..sig_digit_count, sig_digit_idx);
+
+                <span class="comment">// clear copied values
+                </span>fill_slice(<span class="kw-2">&amp;mut </span>digits_ascii_be[..sig_digit_count.min(sig_digit_idx)], <span class="string">b'0'</span>);
+            } <span class="kw">else </span>{
+                <span class="macro">debug_assert_eq!</span>(sig_digit_count, <span class="number">1</span>);
+            }
+
+            <span class="comment">// add decimal point
+            </span>digits_ascii_be[<span class="number">1</span>] = <span class="string">b'.'</span>;
         }
+    }
+}
+
+<span class="attr">#[cfg(rust_1_50)]
+</span><span class="kw">fn </span>fill_slice&lt;T: Clone&gt;(v: <span class="kw-2">&amp;mut </span>[T], value: T) {
+    v.fill(value);
+}
+
+<span class="attr">#[cfg(not(rust_1_50))]
+</span><span class="kw">fn </span>fill_slice&lt;T: Clone&gt;(v: <span class="kw-2">&amp;mut </span>[T], value: T) {
+    <span class="kw">for </span>i <span class="kw">in </span>v.iter_mut() {
+        <span class="kw-2">*</span>i = value.clone();
     }
 }
 
@@ -1543,21 +1830,16 @@
     <span class="kw">if let </span><span class="prelude-val">Some</span>(prec) = f.precision() {
         <span class="comment">// 'prec' is number of digits after the decimal point
         </span><span class="kw">let </span>total_prec = prec + <span class="number">1</span>;
-        <span class="kw">let </span>digit_count = digits.len();
 
-        <span class="kw">match </span>total_prec.cmp(<span class="kw-2">&amp;</span>digit_count) {
-            Ordering::Equal =&gt; {
-                <span class="comment">// digit count is one more than precision - do nothing
-            </span>}
-            Ordering::Less =&gt; {
-                <span class="comment">// round to smaller precision
-                </span>apply_rounding_to_ascii_digits(<span class="kw-2">&amp;mut </span>digits, <span class="kw-2">&amp;mut </span>exp, total_prec, sign);
-            }
-            Ordering::Greater =&gt; {
-                <span class="comment">// increase number of zeros to add to end of digits
-                </span>extra_trailing_zero_count = total_prec - digit_count;
-            }
+        <span class="kw">if </span>total_prec &lt; digits.len() {
+            <span class="comment">// round to smaller precision
+            </span><span class="kw">let </span>rounder = NonDigitRoundingData::default_with_sign(sign);
+            <span class="kw">let </span>target_scale = NonZeroUsize::new(total_prec).unwrap();
+            <span class="kw">let </span>delta_exp = round_ascii_digits(<span class="kw-2">&amp;mut </span>digits, target_scale, rounder);
+            exp += delta_exp <span class="kw">as </span>i128;
         }
+
+        extra_trailing_zero_count = total_prec - digits.len();
     }
 
     <span class="kw">let </span>needs_decimal_point = digits.len() &gt; <span class="number">1 </span>|| extra_trailing_zero_count &gt; <span class="number">0</span>;
@@ -1622,6 +1904,77 @@
     <span class="kw">let </span>non_negative = <span class="macro">matches!</span>(sign, Sign::Plus | Sign::NoSign);
     <span class="comment">//pad_integral does the right thing although we have a decimal
     </span>f.pad_integral(non_negative, <span class="string">""</span>, <span class="kw-2">&amp;</span>abs_int)
+}
+
+
+<span class="doccomment">/// Round big-endian ascii digits to given significant digit count,
+/// updating the scale appropriately
+///
+/// Returns the number of digits removed; this should be treated as the
+/// change in the decimal's scale, and should be subtracted from the scale
+/// when appropriate.
+///
+</span><span class="kw">fn </span>round_ascii_digits(
+    <span class="comment">// bigendian ascii digits
+    </span>digits_ascii_be: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
+    <span class="comment">// number of significant digits to keep
+    </span>significant_digit_count: NonZeroUsize,
+    <span class="comment">// how to round
+    </span>rounder: NonDigitRoundingData,
+) -&gt; usize {
+    <span class="macro">debug_assert!</span>(significant_digit_count.get() &lt; digits_ascii_be.len());
+
+    <span class="kw">let </span>(sig_digits, insig_digits) = digits_ascii_be.split_at(significant_digit_count.get());
+    <span class="kw">let </span>(<span class="kw-2">&amp;</span>insig_digit, trailing_digits) = insig_digits.split_first().unwrap_or((<span class="kw-2">&amp;</span><span class="string">b'0'</span>, <span class="kw-2">&amp;</span>[]));
+
+    <span class="kw">let </span>insig_data = InsigData::from_digit_and_lazy_trailing_zeros(
+        rounder, insig_digit - <span class="string">b'0'</span>, || trailing_digits.iter().all(|<span class="kw-2">&amp;</span>d| d == <span class="string">b'0'</span>)
+    );
+
+    <span class="kw">let </span>rounding_digit_pos = significant_digit_count.get() - <span class="number">1</span>;
+    <span class="kw">let </span>sig_digit = sig_digits[rounding_digit_pos] - <span class="string">b'0'</span>;
+    <span class="kw">let </span>rounded_digit = insig_data.round_digit(sig_digit);
+
+    <span class="comment">// record how many digits to remove (changes the 'scale')
+    </span><span class="kw">let </span><span class="kw-2">mut </span>removed_digit_count = insig_digits.len();
+
+    <span class="comment">// discard insignificant digits (and rounding digit)
+    </span>digits_ascii_be.truncate(rounding_digit_pos);
+
+    <span class="kw">if </span>rounded_digit &lt; <span class="number">10 </span>{
+        <span class="comment">// simple case: no carrying/overflow, push rounded digit
+        </span>digits_ascii_be.push(rounded_digit + <span class="string">b'0'</span>);
+        <span class="kw">return </span>removed_digit_count;
+    }
+
+    <span class="comment">// handle carrying the 1
+    </span><span class="macro">debug_assert!</span>(rounded_digit == <span class="number">10</span>);
+
+    <span class="comment">// carry the one past trailing 9's: replace them with zeros
+    </span><span class="kw">let </span>next_non_nine_rev_pos = digits_ascii_be.iter().rev().position(|<span class="kw-2">&amp;</span>d| d != <span class="string">b'9'</span>);
+    <span class="kw">match </span>next_non_nine_rev_pos {
+        <span class="comment">// number of nines to remove
+        </span><span class="prelude-val">Some</span>(backwards_nine_count) =&gt; {
+            <span class="kw">let </span>digits_to_trim = backwards_nine_count + <span class="number">1</span>;
+            <span class="kw">let </span>idx = digits_ascii_be.len() - digits_to_trim;
+            <span class="comment">// increment least significant non-nine zero
+            </span>digits_ascii_be[idx] += <span class="number">1</span>;
+            <span class="comment">// remove trailing nines
+            </span>digits_ascii_be.truncate(idx + <span class="number">1</span>);
+            <span class="comment">// count truncation
+            </span>removed_digit_count += digits_to_trim;
+        }
+        <span class="comment">// all nines! overflow to 1.000
+        </span><span class="prelude-val">None </span>=&gt; {
+            digits_ascii_be.clear();
+            digits_ascii_be.push(<span class="string">b'1'</span>);
+            <span class="comment">// count digit clearning
+            </span>removed_digit_count += significant_digit_count.get();
+        }
+    }
+
+    <span class="comment">// return the number of removed digits
+    </span><span class="kw">return </span>removed_digit_count;
 }
 
 
@@ -1691,67 +2044,6 @@
     }
 
     <span class="kw">return </span><span class="macro">write!</span>(out, <span class="string">"e{}"</span>, exp);
-}
-
-
-<span class="doccomment">/// Round big-endian digits in ascii
-</span><span class="kw">fn </span>apply_rounding_to_ascii_digits(
-    ascii_digits: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
-    exp: <span class="kw-2">&amp;mut </span>i128,
-    prec: usize,
-    sign: Sign
-) {
-    <span class="kw">if </span>ascii_digits.len() &lt; prec {
-        <span class="kw">return</span>;
-    }
-
-    <span class="comment">// shift exp to align with new length of digits
-    </span><span class="kw-2">*</span>exp += (ascii_digits.len() - prec) <span class="kw">as </span>i128;
-
-    <span class="comment">// true if all ascii_digits after precision are zeros
-    </span><span class="kw">let </span>trailing_zeros = ascii_digits[prec + <span class="number">1</span>..].iter().all(|<span class="kw-2">&amp;</span>d| d == <span class="string">b'0'</span>);
-
-    <span class="kw">let </span>sig_digit = ascii_digits[prec - <span class="number">1</span>] - <span class="string">b'0'</span>;
-    <span class="kw">let </span>insig_digit = ascii_digits[prec] - <span class="string">b'0'</span>;
-    <span class="kw">let </span>rounded_digit = Context::default().round_pair(sign, sig_digit, insig_digit, trailing_zeros);
-
-    <span class="comment">// remove insignificant digits
-    </span>ascii_digits.truncate(prec - <span class="number">1</span>);
-
-    <span class="comment">// push rounded value
-    </span><span class="kw">if </span>rounded_digit &lt; <span class="number">10 </span>{
-        ascii_digits.push(rounded_digit + <span class="string">b'0'</span>);
-        <span class="kw">return
-    </span>}
-
-    <span class="macro">debug_assert_eq!</span>(rounded_digit, <span class="number">10</span>);
-
-    <span class="comment">// push zero and carry-the-one
-    </span>ascii_digits.push(<span class="string">b'0'</span>);
-
-    <span class="comment">// loop through digits in reverse order (skip the 0 we just pushed)
-    </span><span class="kw">let </span>digits = ascii_digits.iter_mut().rev().skip(<span class="number">1</span>);
-    <span class="kw">for </span>digit <span class="kw">in </span>digits {
-        <span class="kw">if </span><span class="kw-2">*</span>digit &lt; <span class="string">b'9' </span>{
-            <span class="comment">// we've carried the one as far as it will go
-            </span><span class="kw-2">*</span>digit += <span class="number">1</span>;
-            <span class="kw">return</span>;
-        }
-
-        <span class="macro">debug_assert_eq!</span>(<span class="kw-2">*</span>digit, <span class="string">b'9'</span>);
-
-        <span class="comment">// digit was a 9, set to zero and carry the one
-        // to the next digit
-        </span><span class="kw-2">*</span>digit = <span class="string">b'0'</span>;
-    }
-
-    <span class="comment">// at this point all digits have become zero
-    // just set significant digit to 1 and increase exponent
-    //
-    // eg: 9999e2 ~&gt; 0000e2 ~&gt; 1000e3
-    //
-    </span>ascii_digits[<span class="number">0</span>] = <span class="string">b'1'</span>;
-    <span class="kw-2">*</span>exp += <span class="number">1</span>;
 }
 
 
@@ -1923,6 +2215,32 @@
             <span class="macro">impl_case!</span>(fmt_p05d1:  <span class="string">"{:+05.7}" </span>=&gt; <span class="string">"+123456.0000000"</span>);
         }
 
+        <span class="kw">mod </span>dec_d099995 {
+            <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+            <span class="kw">fn </span>test_input() -&gt; BigDecimal {
+                <span class="string">".099995"</span>.parse().unwrap()
+            }
+
+            <span class="macro">impl_case!</span>(fmt_default:  <span class="string">"{}" </span>=&gt; <span class="string">"0.099995"</span>);
+            <span class="macro">impl_case!</span>(fmt_d0:  <span class="string">"{:.0}" </span>=&gt; <span class="string">"0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:  <span class="string">"{:.1}" </span>=&gt; <span class="string">"0.1"</span>);
+            <span class="macro">impl_case!</span>(fmt_d3:  <span class="string">"{:.3}" </span>=&gt; <span class="string">"0.100"</span>);
+        }
+
+        <span class="kw">mod </span>dec_d9999999 {
+            <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+            <span class="kw">fn </span>test_input() -&gt; BigDecimal {
+                <span class="string">".9999999"</span>.parse().unwrap()
+            }
+
+            <span class="macro">impl_case!</span>(fmt_default:  <span class="string">"{}" </span>=&gt; <span class="string">"0.9999999"</span>);
+            <span class="macro">impl_case!</span>(fmt_d0:  <span class="string">"{:.0}" </span>=&gt; <span class="string">"1"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:  <span class="string">"{:.1}" </span>=&gt; <span class="string">"1.0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d3:  <span class="string">"{:.3}" </span>=&gt; <span class="string">"1.000"</span>);
+        }
+
         <span class="kw">mod </span>dec_9999999 {
             <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
@@ -1976,9 +2294,29 @@
             <span class="macro">impl_case!</span>(fmt_d0:        <span class="string">"{:.0}" </span>=&gt; <span class="string">"-90037660"</span>);
             <span class="macro">impl_case!</span>(fmt_d3:        <span class="string">"{:.3}" </span>=&gt; <span class="string">"-90037659.690"</span>);
             <span class="macro">impl_case!</span>(fmt_d4:        <span class="string">"{:.4}" </span>=&gt; <span class="string">"-90037659.6905"</span>);
-            <span class="macro">impl_case!</span>(fmt_14d4:      <span class="string">"{:14.4}" </span>=&gt; <span class="string">"-90037659.6905"</span>);
+            <span class="macro">impl_case!</span>(fmt_14d4:    <span class="string">"{:14.4}" </span>=&gt; <span class="string">"-90037659.6905"</span>);
             <span class="macro">impl_case!</span>(fmt_15d4:    <span class="string">"{:15.4}" </span>=&gt; <span class="string">" -90037659.6905"</span>);
             <span class="macro">impl_case!</span>(fmt_l17d5:  <span class="string">"{:&lt;17.5}" </span>=&gt; <span class="string">"-90037659.69050  "</span>);
+        }
+
+        <span class="kw">mod </span>dec_0d0002394899999500 {
+            <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+            <span class="kw">fn </span>test_input() -&gt; BigDecimal {
+                <span class="string">"0.0002394899999500"</span>.parse().unwrap()
+            }
+
+            <span class="macro">impl_case!</span>(fmt_default:    <span class="string">"{}" </span>=&gt; <span class="string">"0.0002394899999500"</span>);
+            <span class="macro">impl_case!</span>(fmt_d0:      <span class="string">"{:.0}" </span>=&gt; <span class="string">"0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:      <span class="string">"{:.1}" </span>=&gt; <span class="string">"0.0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d3:      <span class="string">"{:.3}" </span>=&gt; <span class="string">"0.000"</span>);
+            <span class="macro">impl_case!</span>(fmt_d4:      <span class="string">"{:.4}" </span>=&gt; <span class="string">"0.0002"</span>);
+            <span class="macro">impl_case!</span>(fmt_d5:      <span class="string">"{:.5}" </span>=&gt; <span class="string">"0.00024"</span>);
+            <span class="macro">impl_case!</span>(fmt_d10:    <span class="string">"{:.10}" </span>=&gt; <span class="string">"0.0002394900"</span>);
+            <span class="macro">impl_case!</span>(fmt_d13:    <span class="string">"{:.13}" </span>=&gt; <span class="string">"0.0002394900000"</span>);
+            <span class="macro">impl_case!</span>(fmt_d14:    <span class="string">"{:.14}" </span>=&gt; <span class="string">"0.00023948999995"</span>);
+            <span class="macro">impl_case!</span>(fmt_d20:    <span class="string">"{:.20}" </span>=&gt; <span class="string">"0.00023948999995000000"</span>);
+
         }
 
         <span class="kw">mod </span>dec_1764031078en13 {
@@ -2050,6 +2388,8 @@
 
             <span class="macro">impl_case!</span>(fmt_default: <span class="string">"{}" </span>=&gt; <span class="string">"0.00003102564500"</span>);
             <span class="macro">impl_case!</span>(fmt_d0:   <span class="string">"{:.0}" </span>=&gt; <span class="string">"0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:   <span class="string">"{:.1}" </span>=&gt; <span class="string">"0.0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d2:   <span class="string">"{:.2}" </span>=&gt; <span class="string">"0.00"</span>);
             <span class="macro">impl_case!</span>(fmt_d4:   <span class="string">"{:.4}" </span>=&gt; <span class="string">"0.0000"</span>);
             <span class="macro">impl_case!</span>(fmt_d5:   <span class="string">"{:.5}" </span>=&gt; <span class="string">"0.00003"</span>);
             <span class="macro">impl_case!</span>(fmt_d10:  <span class="string">"{:.10}" </span>=&gt; <span class="string">"0.0000310256"</span>);
@@ -2126,6 +2466,36 @@
 
             <span class="macro">impl_case!</span>(fmt_default: <span class="string">"{}" </span>=&gt; <span class="string">"13400476439814628800e+2502"</span>);
             <span class="macro">impl_case!</span>(fmt_d1: <span class="string">"{:.1}" </span>=&gt; <span class="string">"13400476439814628800e+2502"</span>);
+        }
+
+        <span class="kw">mod </span>dec_d9999 {
+            <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+            <span class="kw">fn </span>test_input() -&gt; BigDecimal {
+                <span class="string">"0.9999"</span>.parse().unwrap()
+            }
+
+            <span class="macro">impl_case!</span>(fmt_default:      <span class="string">"{}" </span>=&gt; <span class="string">"0.9999"</span>);
+            <span class="macro">impl_case!</span>(fmt_d0:        <span class="string">"{:.0}" </span>=&gt; <span class="string">"1"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:        <span class="string">"{:.1}" </span>=&gt; <span class="string">"1.0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d2:        <span class="string">"{:.2}" </span>=&gt; <span class="string">"1.00"</span>);
+            <span class="macro">impl_case!</span>(fmt_d3:        <span class="string">"{:.3}" </span>=&gt; <span class="string">"1.000"</span>);
+            <span class="macro">impl_case!</span>(fmt_d4:        <span class="string">"{:.4}" </span>=&gt; <span class="string">"0.9999"</span>);
+            <span class="macro">impl_case!</span>(fmt_d6:        <span class="string">"{:.6}" </span>=&gt; <span class="string">"0.999900"</span>);
+        }
+
+        <span class="kw">mod </span>dec_9d99 {
+            <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+            <span class="kw">fn </span>test_input() -&gt; BigDecimal {
+                <span class="string">"9.99"</span>.parse().unwrap()
+            }
+
+            <span class="macro">impl_case!</span>(fmt_default:      <span class="string">"{}" </span>=&gt; <span class="string">"9.99"</span>);
+            <span class="macro">impl_case!</span>(fmt_d0:        <span class="string">"{:.0}" </span>=&gt; <span class="string">"10"</span>);
+            <span class="macro">impl_case!</span>(fmt_d1:        <span class="string">"{:.1}" </span>=&gt; <span class="string">"10.0"</span>);
+            <span class="macro">impl_case!</span>(fmt_d2:        <span class="string">"{:.2}" </span>=&gt; <span class="string">"9.99"</span>);
+            <span class="macro">impl_case!</span>(fmt_d3:        <span class="string">"{:.3}" </span>=&gt; <span class="string">"9.990"</span>);
         }
     }
 

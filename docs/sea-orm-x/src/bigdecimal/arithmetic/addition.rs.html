@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.5/src/arithmetic/addition.rs`."><title>addition.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.6/src/arithmetic/addition.rs`."><title>addition.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">bigdecimal/arithmetic/</div>addition.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -108,7 +109,49 @@
 <a href="#108" id="108">108</a>
 <a href="#109" id="109">109</a>
 <a href="#110" id="110">110</a>
-</pre></div><pre class="rust"><code><span class="doccomment">//! addition routines
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
+<a href="#116" id="116">116</a>
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a></pre></div><pre class="rust"><code><span class="doccomment">//! addition routines
 //!
 
 </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
@@ -119,18 +162,12 @@
     <span class="kw-2">mut </span>b: BigDecimal,
 ) -&gt; BigDecimal {
     <span class="kw">if </span>b.is_zero() {
-        <span class="kw">if </span>a.scale &lt; b.scale {
-            a.int_val <span class="kw-2">*</span>= ten_to_the((b.scale - a.scale) <span class="kw">as </span>u64);
-            a.scale = b.scale;
-        }
+        a.extend_scale_to(b.scale);
         <span class="kw">return </span>a;
     }
 
     <span class="kw">if </span>a.is_zero() {
-        <span class="kw">if </span>b.scale &lt; a.scale {
-            b.int_val <span class="kw-2">*</span>= ten_to_the((a.scale - b.scale) <span class="kw">as </span>u64);
-            b.scale = a.scale;
-        }
+        b.extend_scale_to(a.scale);
         <span class="kw">return </span>b;
     }
 
@@ -161,23 +198,35 @@
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>add_bigdecimal_refs&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>, Lhs, Rhs&gt;(
     lhs: Lhs,
     rhs: Rhs,
+    ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Context&gt;,
 ) -&gt; BigDecimal
 <span class="kw">where
     </span>Rhs: Into&lt;BigDecimalRef&lt;<span class="lifetime">'a</span>&gt;&gt;,
     Lhs: Into&lt;BigDecimalRef&lt;<span class="lifetime">'b</span>&gt;&gt;,
 {
+    <span class="kw">use </span>stdlib::cmp::Ordering::<span class="kw-2">*</span>;
+
     <span class="kw">let </span>lhs = lhs.into();
     <span class="kw">let </span>rhs = rhs.into();
     <span class="kw">if </span>rhs.is_zero() {
-        <span class="kw">return </span>lhs.to_owned();
+        <span class="kw">let </span>scale_diff = rhs.scale.saturating_sub(lhs.scale).max(<span class="number">0</span>).min(<span class="number">15</span>);
+        <span class="kw">return </span>lhs.to_owned_with_scale(lhs.scale + scale_diff);
     }
     <span class="kw">if </span>lhs.is_zero() {
-        <span class="kw">return </span>rhs.to_owned();
+        <span class="kw">let </span>scale_diff = lhs.scale.saturating_sub(rhs.scale).max(<span class="number">0</span>).min(<span class="number">15</span>);
+        <span class="kw">return </span>rhs.to_owned_with_scale(rhs.scale + scale_diff);
     }
-    <span class="kw">if </span>lhs.scale &gt;= rhs.scale {
-        lhs.to_owned() + rhs
-    } <span class="kw">else </span>{
-        rhs.to_owned() + lhs
+
+    <span class="kw">match </span>lhs.scale.cmp(<span class="kw-2">&amp;</span>rhs.scale) {
+        Equal =&gt; {
+            add_aligned_bigdecimal_ref_ref(lhs, rhs)
+        }
+        Greater =&gt; {
+            add_unaligned_bigdecimal_ref_ref(lhs, rhs, ctx)
+        }
+        Less =&gt; {
+            add_unaligned_bigdecimal_ref_ref(rhs, lhs, ctx)
+        }
     }
 }
 
@@ -217,5 +266,42 @@
             lhs.int_val += <span class="kw-2">&amp;</span>rhs.int_val;
         }
     }
+}
+
+<span class="doccomment">/// Add BigDecimal references which have the same scale (integer addition)
+</span><span class="kw">fn </span>add_aligned_bigdecimal_ref_ref(
+    lhs: BigDecimalRef, rhs: BigDecimalRef
+) -&gt; BigDecimal {
+    <span class="macro">debug_assert!</span>(!lhs.is_zero() &amp;&amp; !rhs.is_zero());
+    <span class="macro">debug_assert_eq!</span>(lhs.scale, rhs.scale);
+
+    <span class="kw">if </span>lhs.digits.bits() &gt;= rhs.digits.bits() {
+        lhs.to_owned() + rhs
+    } <span class="kw">else </span>{
+        rhs.to_owned() + lhs
+    }
+}
+
+<span class="kw">fn </span>add_unaligned_bigdecimal_ref_ref(
+    lhs: BigDecimalRef, rhs: BigDecimalRef, _ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Context&gt;,
+) -&gt; BigDecimal {
+    <span class="macro">debug_assert!</span>(!lhs.is_zero() &amp;&amp; !rhs.is_zero());
+    <span class="macro">debug_assert!</span>(lhs.scale &gt;= rhs.scale);
+
+    <span class="kw">let </span>scale_diff = (lhs.scale - rhs.scale) <span class="kw">as </span>u64;
+
+    <span class="kw">let </span>shifted_rhs_digits = rhs.digits * ten_to_the_uint(scale_diff);
+    <span class="kw">let </span>shifted_rhs_int = BigInt::from_biguint(rhs.sign, shifted_rhs_digits);
+    <span class="kw">let </span>shifted_rhs = BigDecimal::new(shifted_rhs_int, lhs.scale);
+
+    shifted_rhs + lhs
+}
+
+
+<span class="attr">#[cfg(test)]
+</span><span class="kw">mod </span>test {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+    <span class="macro">include!</span>(<span class="string">"addition.tests.rs"</span>);
 }
 </code></pre></div></section></main></body></html>

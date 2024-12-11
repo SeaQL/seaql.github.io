@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/libc-0.2.158/src/unix/bsd/apple/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="libc" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/libc-0.2.161/src/unix/bsd/apple/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="libc" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">libc/unix/bsd/apple/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -6605,7 +6606,29 @@
 <a href="#6605" id="6605">6605</a>
 <a href="#6606" id="6606">6606</a>
 <a href="#6607" id="6607">6607</a>
-</pre></div><pre class="rust"><code><span class="doccomment">//! Apple (ios/darwin)-specific definitions
+<a href="#6608" id="6608">6608</a>
+<a href="#6609" id="6609">6609</a>
+<a href="#6610" id="6610">6610</a>
+<a href="#6611" id="6611">6611</a>
+<a href="#6612" id="6612">6612</a>
+<a href="#6613" id="6613">6613</a>
+<a href="#6614" id="6614">6614</a>
+<a href="#6615" id="6615">6615</a>
+<a href="#6616" id="6616">6616</a>
+<a href="#6617" id="6617">6617</a>
+<a href="#6618" id="6618">6618</a>
+<a href="#6619" id="6619">6619</a>
+<a href="#6620" id="6620">6620</a>
+<a href="#6621" id="6621">6621</a>
+<a href="#6622" id="6622">6622</a>
+<a href="#6623" id="6623">6623</a>
+<a href="#6624" id="6624">6624</a>
+<a href="#6625" id="6625">6625</a>
+<a href="#6626" id="6626">6626</a>
+<a href="#6627" id="6627">6627</a>
+<a href="#6628" id="6628">6628</a>
+<a href="#6629" id="6629">6629</a>
+<a href="#6630" id="6630">6630</a></pre></div><pre class="rust"><code><span class="doccomment">//! Apple (ios/darwin)-specific definitions
 //!
 //! This covers *-apple-* triples currently
 </span><span class="kw">pub type </span>c_char = i8;
@@ -6663,6 +6686,7 @@
 <span class="kw">pub type </span>thread_act_t = ::mach_port_t;
 <span class="kw">pub type </span>thread_act_array_t = <span class="kw-2">*mut </span>::thread_act_t;
 <span class="kw">pub type </span>policy_t = ::c_int;
+<span class="kw">pub type </span>mach_error_t = ::kern_return_t;
 <span class="kw">pub type </span>mach_vm_address_t = u64;
 <span class="kw">pub type </span>mach_vm_offset_t = u64;
 <span class="kw">pub type </span>mach_vm_size_t = u64;
@@ -10224,6 +10248,7 @@
 <span class="kw">pub const </span>F_TRIM_ACTIVE_FILE: ::c_int = <span class="number">100</span>;
 <span class="kw">pub const </span>F_SPECULATIVE_READ: ::c_int = <span class="number">101</span>;
 <span class="kw">pub const </span>F_GETPATH_NOFIRMLINK: ::c_int = <span class="number">102</span>;
+<span class="kw">pub const </span>F_TRANSFEREXTENTS: ::c_int = <span class="number">110</span>;
 
 <span class="kw">pub const </span>F_ALLOCATECONTIG: ::c_uint = <span class="number">0x02</span>;
 <span class="kw">pub const </span>F_ALLOCATEALL: ::c_uint = <span class="number">0x04</span>;
@@ -10394,6 +10419,19 @@
 <span class="kw">pub const </span>PTHREAD_PROCESS_SHARED: ::c_int = <span class="number">1</span>;
 <span class="kw">pub const </span>PTHREAD_CREATE_JOINABLE: ::c_int = <span class="number">1</span>;
 <span class="kw">pub const </span>PTHREAD_CREATE_DETACHED: ::c_int = <span class="number">2</span>;
+<span class="kw">pub const </span>PTHREAD_INHERIT_SCHED: ::c_int = <span class="number">1</span>;
+<span class="kw">pub const </span>PTHREAD_EXPLICIT_SCHED: ::c_int = <span class="number">2</span>;
+<span class="kw">pub const </span>PTHREAD_CANCEL_ENABLE: ::c_int = <span class="number">0x01</span>;
+<span class="kw">pub const </span>PTHREAD_CANCEL_DISABLE: ::c_int = <span class="number">0x00</span>;
+<span class="kw">pub const </span>PTHREAD_CANCEL_DEFERRED: ::c_int = <span class="number">0x02</span>;
+<span class="kw">pub const </span>PTHREAD_CANCEL_ASYNCHRONOUS: ::c_int = <span class="number">0x00</span>;
+<span class="kw">pub const </span>PTHREAD_CANCELED: <span class="kw-2">*mut </span>::c_void = <span class="number">1 </span><span class="kw">as </span><span class="kw-2">*mut </span>::c_void;
+<span class="kw">pub const </span>PTHREAD_SCOPE_SYSTEM: ::c_int = <span class="number">1</span>;
+<span class="kw">pub const </span>PTHREAD_SCOPE_PROCESS: ::c_int = <span class="number">2</span>;
+<span class="kw">pub const </span>PTHREAD_PRIO_NONE: ::c_int = <span class="number">0</span>;
+<span class="kw">pub const </span>PTHREAD_PRIO_INHERIT: ::c_int = <span class="number">1</span>;
+<span class="kw">pub const </span>PTHREAD_PRIO_PROTECT: ::c_int = <span class="number">2</span>;
+
 <span class="attr">#[cfg(target_arch = <span class="string">"aarch64"</span>)]
 </span><span class="kw">pub const </span>PTHREAD_STACK_MIN: ::size_t = <span class="number">16384</span>;
 <span class="attr">#[cfg(not(target_arch = <span class="string">"aarch64"</span>))]
@@ -10788,11 +10826,18 @@
 
 <span class="kw">pub const </span>SOL_LOCAL: ::c_int = <span class="number">0</span>;
 
-<span class="kw">pub const </span>LOCAL_PEERCRED: ::c_int = <span class="number">0x001</span>;
-<span class="kw">pub const </span>LOCAL_PEERPID: ::c_int = <span class="number">0x002</span>;
-<span class="kw">pub const </span>LOCAL_PEEREPID: ::c_int = <span class="number">0x003</span>;
-<span class="kw">pub const </span>LOCAL_PEERUUID: ::c_int = <span class="number">0x004</span>;
-<span class="kw">pub const </span>LOCAL_PEEREUUID: ::c_int = <span class="number">0x005</span>;
+<span class="doccomment">/// Retrieve peer credentials.
+</span><span class="kw">pub const </span>LOCAL_PEERCRED: ::c_int = <span class="number">0x001</span>;
+<span class="doccomment">/// Retrieve peer PID.
+</span><span class="kw">pub const </span>LOCAL_PEERPID: ::c_int = <span class="number">0x002</span>;
+<span class="doccomment">/// Retrieve effective peer PID.
+</span><span class="kw">pub const </span>LOCAL_PEEREPID: ::c_int = <span class="number">0x003</span>;
+<span class="doccomment">/// Retrieve peer UUID.
+</span><span class="kw">pub const </span>LOCAL_PEERUUID: ::c_int = <span class="number">0x004</span>;
+<span class="doccomment">/// Retrieve effective peer UUID.
+</span><span class="kw">pub const </span>LOCAL_PEEREUUID: ::c_int = <span class="number">0x005</span>;
+<span class="doccomment">/// Retrieve peer audit token.
+</span><span class="kw">pub const </span>LOCAL_PEERTOKEN: ::c_int = <span class="number">0x006</span>;
 
 <span class="kw">pub const </span>SOL_SOCKET: ::c_int = <span class="number">0xffff</span>;
 
@@ -11129,6 +11174,8 @@
 <span class="kw">pub const </span>NOTE_LEEWAY: u32 = <span class="number">0x00000010</span>;
 <span class="kw">pub const </span>NOTE_CRITICAL: u32 = <span class="number">0x00000020</span>;
 <span class="kw">pub const </span>NOTE_BACKGROUND: u32 = <span class="number">0x00000040</span>;
+<span class="kw">pub const </span>NOTE_MACH_CONTINUOUS_TIME: u32 = <span class="number">0x00000080</span>;
+<span class="kw">pub const </span>NOTE_MACHTIME: u32 = <span class="number">0x00000100</span>;
 <span class="kw">pub const </span>NOTE_TRACK: u32 = <span class="number">0x00000001</span>;
 <span class="kw">pub const </span>NOTE_TRACKERR: u32 = <span class="number">0x00000002</span>;
 <span class="kw">pub const </span>NOTE_CHILD: u32 = <span class="number">0x00000004</span>;
@@ -11523,22 +11570,11 @@
 <span class="kw">pub const </span>NET_RT_IFLIST2: ::c_int = <span class="number">0x0006</span>;
 
 <span class="comment">// net/route.h
-</span><span class="kw">pub const </span>RTF_UP: ::c_int = <span class="number">0x1</span>;
-<span class="kw">pub const </span>RTF_GATEWAY: ::c_int = <span class="number">0x2</span>;
-<span class="kw">pub const </span>RTF_HOST: ::c_int = <span class="number">0x4</span>;
-<span class="kw">pub const </span>RTF_REJECT: ::c_int = <span class="number">0x8</span>;
-<span class="kw">pub const </span>RTF_DYNAMIC: ::c_int = <span class="number">0x10</span>;
-<span class="kw">pub const </span>RTF_MODIFIED: ::c_int = <span class="number">0x20</span>;
-<span class="kw">pub const </span>RTF_DONE: ::c_int = <span class="number">0x40</span>;
-<span class="kw">pub const </span>RTF_DELCLONE: ::c_int = <span class="number">0x80</span>;
+</span><span class="kw">pub const </span>RTF_DELCLONE: ::c_int = <span class="number">0x80</span>;
 <span class="kw">pub const </span>RTF_CLONING: ::c_int = <span class="number">0x100</span>;
 <span class="kw">pub const </span>RTF_XRESOLVE: ::c_int = <span class="number">0x200</span>;
 <span class="kw">pub const </span>RTF_LLINFO: ::c_int = <span class="number">0x400</span>;
-<span class="kw">pub const </span>RTF_STATIC: ::c_int = <span class="number">0x800</span>;
-<span class="kw">pub const </span>RTF_BLACKHOLE: ::c_int = <span class="number">0x1000</span>;
 <span class="kw">pub const </span>RTF_NOIFREF: ::c_int = <span class="number">0x2000</span>;
-<span class="kw">pub const </span>RTF_PROTO2: ::c_int = <span class="number">0x4000</span>;
-<span class="kw">pub const </span>RTF_PROTO1: ::c_int = <span class="number">0x8000</span>;
 <span class="kw">pub const </span>RTF_PRCLONING: ::c_int = <span class="number">0x10000</span>;
 <span class="kw">pub const </span>RTF_WASCLONED: ::c_int = <span class="number">0x20000</span>;
 <span class="kw">pub const </span>RTF_PROTO3: ::c_int = <span class="number">0x40000</span>;
@@ -11557,14 +11593,7 @@
 <span class="kw">pub const </span>RTM_VERSION: ::c_int = <span class="number">5</span>;
 
 <span class="comment">// Message types
-</span><span class="kw">pub const </span>RTM_ADD: ::c_int = <span class="number">0x1</span>;
-<span class="kw">pub const </span>RTM_DELETE: ::c_int = <span class="number">0x2</span>;
-<span class="kw">pub const </span>RTM_CHANGE: ::c_int = <span class="number">0x3</span>;
-<span class="kw">pub const </span>RTM_GET: ::c_int = <span class="number">0x4</span>;
-<span class="kw">pub const </span>RTM_LOSING: ::c_int = <span class="number">0x5</span>;
-<span class="kw">pub const </span>RTM_REDIRECT: ::c_int = <span class="number">0x6</span>;
-<span class="kw">pub const </span>RTM_MISS: ::c_int = <span class="number">0x7</span>;
-<span class="kw">pub const </span>RTM_LOCK: ::c_int = <span class="number">0x8</span>;
+</span><span class="kw">pub const </span>RTM_LOCK: ::c_int = <span class="number">0x8</span>;
 <span class="kw">pub const </span>RTM_OLDADD: ::c_int = <span class="number">0x9</span>;
 <span class="kw">pub const </span>RTM_OLDDEL: ::c_int = <span class="number">0xa</span>;
 <span class="kw">pub const </span>RTM_RESOLVE: ::c_int = <span class="number">0xb</span>;
@@ -11587,25 +11616,6 @@
 <span class="kw">pub const </span>RTV_RTT: ::c_int = <span class="number">0x40</span>;
 <span class="kw">pub const </span>RTV_RTTVAR: ::c_int = <span class="number">0x80</span>;
 
-<span class="comment">// Bitmask values for rtm_addrs.
-</span><span class="kw">pub const </span>RTA_DST: ::c_int = <span class="number">0x1</span>;
-<span class="kw">pub const </span>RTA_GATEWAY: ::c_int = <span class="number">0x2</span>;
-<span class="kw">pub const </span>RTA_NETMASK: ::c_int = <span class="number">0x4</span>;
-<span class="kw">pub const </span>RTA_GENMASK: ::c_int = <span class="number">0x8</span>;
-<span class="kw">pub const </span>RTA_IFP: ::c_int = <span class="number">0x10</span>;
-<span class="kw">pub const </span>RTA_IFA: ::c_int = <span class="number">0x20</span>;
-<span class="kw">pub const </span>RTA_AUTHOR: ::c_int = <span class="number">0x40</span>;
-<span class="kw">pub const </span>RTA_BRD: ::c_int = <span class="number">0x80</span>;
-
-<span class="comment">// Index offsets for sockaddr array for alternate internal encoding.
-</span><span class="kw">pub const </span>RTAX_DST: ::c_int = <span class="number">0</span>;
-<span class="kw">pub const </span>RTAX_GATEWAY: ::c_int = <span class="number">1</span>;
-<span class="kw">pub const </span>RTAX_NETMASK: ::c_int = <span class="number">2</span>;
-<span class="kw">pub const </span>RTAX_GENMASK: ::c_int = <span class="number">3</span>;
-<span class="kw">pub const </span>RTAX_IFP: ::c_int = <span class="number">4</span>;
-<span class="kw">pub const </span>RTAX_IFA: ::c_int = <span class="number">5</span>;
-<span class="kw">pub const </span>RTAX_AUTHOR: ::c_int = <span class="number">6</span>;
-<span class="kw">pub const </span>RTAX_BRD: ::c_int = <span class="number">7</span>;
 <span class="kw">pub const </span>RTAX_MAX: ::c_int = <span class="number">8</span>;
 
 <span class="kw">pub const </span>KERN_PROCARGS2: ::c_int = <span class="number">49</span>;
@@ -12362,6 +12372,40 @@
     </span><span class="kw">pub fn </span>mach_timebase_info(info: <span class="kw-2">*mut </span>::mach_timebase_info) -&gt; ::c_int;
     <span class="kw">pub fn </span>mach_host_self() -&gt; mach_port_t;
     <span class="kw">pub fn </span>mach_thread_self() -&gt; mach_port_t;
+    <span class="kw">pub fn </span>pthread_once(
+        once_control: <span class="kw-2">*mut </span>::pthread_once_t,
+        init_routine: ::Option&lt;<span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_getinheritsched(
+        attr: <span class="kw-2">*const </span>::pthread_attr_t,
+        inheritsched: <span class="kw-2">*mut </span>::c_int,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_getschedpolicy(
+        attr: <span class="kw-2">*const </span>::pthread_attr_t,
+        policy: <span class="kw-2">*mut </span>::c_int,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_getscope(
+        attr: <span class="kw-2">*const </span>::pthread_attr_t,
+        contentionscope: <span class="kw-2">*mut </span>::c_int,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_getstackaddr(
+        attr: <span class="kw-2">*const </span>::pthread_attr_t,
+        stackaddr: <span class="kw-2">*mut *mut </span>::c_void,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_getdetachstate(
+        attr: <span class="kw-2">*const </span>::pthread_attr_t,
+        detachstate: <span class="kw-2">*mut </span>::c_int,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_setinheritsched(
+        attr: <span class="kw-2">*mut </span>::pthread_attr_t,
+        inheritsched: ::c_int,
+    ) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_setschedpolicy(attr: <span class="kw-2">*mut </span>::pthread_attr_t, policy: ::c_int) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_setscope(attr: <span class="kw-2">*mut </span>::pthread_attr_t, contentionscope: ::c_int) -&gt; ::c_int;
+    <span class="kw">pub fn </span>pthread_attr_setstackaddr(
+        attr: <span class="kw-2">*mut </span>::pthread_attr_t,
+        stackaddr: <span class="kw-2">*mut </span>::c_void,
+    ) -&gt; ::c_int;
     <span class="kw">pub fn </span>pthread_setname_np(name: <span class="kw-2">*const </span>::c_char) -&gt; ::c_int;
     <span class="kw">pub fn </span>pthread_getname_np(thread: ::pthread_t, name: <span class="kw-2">*mut </span>::c_char, len: ::size_t) -&gt; ::c_int;
     <span class="kw">pub fn </span>pthread_mach_thread_np(thread: ::pthread_t) -&gt; ::mach_port_t;
@@ -12880,6 +12924,8 @@
     <span class="kw">pub fn </span>copyfile_state_alloc() -&gt; copyfile_state_t;
     <span class="kw">pub fn </span>copyfile_state_get(s: copyfile_state_t, flags: u32, dst: <span class="kw-2">*mut </span>::c_void) -&gt; ::c_int;
     <span class="kw">pub fn </span>copyfile_state_set(s: copyfile_state_t, flags: u32, src: <span class="kw-2">*const </span>::c_void) -&gt; ::c_int;
+
+    <span class="kw">pub fn </span>mach_error_string(error_value: ::mach_error_t) -&gt; <span class="kw-2">*mut </span>::c_char;
 
     <span class="comment">// Added in macOS 10.13
     // ISO/IEC 9899:2011 ("ISO C11") K.3.7.4.1

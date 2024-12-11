@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/security-framework-sys-2.11.1/src/key.rs`."><title>key.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="security_framework_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/security-framework-sys-2.12.0/src/key.rs`."><title>key.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="security_framework_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">security_framework_sys/</div>key.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -184,8 +185,7 @@
 <a href="#184" id="184">184</a>
 <a href="#185" id="185">185</a>
 <a href="#186" id="186">186</a>
-<a href="#187" id="187">187</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>core_foundation_sys::base::CFTypeID;
+<a href="#187" id="187">187</a></pre></div><pre class="rust"><code><span class="kw">use </span>core_foundation_sys::base::CFTypeID;
 <span class="kw">use </span>core_foundation_sys::data::CFDataRef;
 <span class="kw">use </span>core_foundation_sys::dictionary::CFDictionaryRef;
 <span class="kw">use </span>core_foundation_sys::error::CFErrorRef;
@@ -296,11 +296,11 @@
     ECIESEncryptionCofactorVariableIVX963SHA384AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA384AESGCM,
     ECIESEncryptionCofactorVariableIVX963SHA512AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA512AESGCM,
 
-    #<span class="string">"OSX_10_13" </span>ECIESEncryptionCofactorX963SHA1AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM,
-    #<span class="string">"OSX_10_13" </span>ECIESEncryptionCofactorX963SHA224AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM,
-    #<span class="string">"OSX_10_13" </span>ECIESEncryptionCofactorX963SHA256AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM,
-    #<span class="string">"OSX_10_13" </span>ECIESEncryptionCofactorX963SHA384AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM,
-    #<span class="string">"OSX_10_13" </span>ECIESEncryptionCofactorX963SHA512AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM,
+    #"OSX_10_13<span class="string">" ECIESEncryptionCofactorX963SHA1AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM,
+    #"OSX_10_13" ECIESEncryptionCofactorX963SHA224AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM,
+    #"OSX_10_13" ECIESEncryptionCofactorX963SHA256AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM,
+    #"OSX_10_13" ECIESEncryptionCofactorX963SHA384AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM,
+    #"OSX_10_13" ECIESEncryptionCofactorX963SHA512AESGCM =&gt; kSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM,
 
     ECDSASignatureRFC4754 =&gt; kSecKeyAlgorithmECDSASignatureRFC4754,
 
@@ -372,4 +372,4 @@
     RSASignatureMessagePSSSHA384 =&gt; kSecKeyAlgorithmRSASignatureMessagePSSSHA384,
     RSASignatureMessagePSSSHA512 =&gt; kSecKeyAlgorithmRSASignatureMessagePSSSHA512
 }
-</code></pre></div></section></main></body></html>
+</span></code></pre></div></section></main></body></html>

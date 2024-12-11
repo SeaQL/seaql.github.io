@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.5/src/arithmetic/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/billy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bigdecimal-0.4.6/src/arithmetic/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bigdecimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">bigdecimal/arithmetic/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -123,7 +124,74 @@
 <a href="#123" id="123">123</a>
 <a href="#124" id="124">124</a>
 <a href="#125" id="125">125</a>
-</pre></div><pre class="rust"><code><span class="doccomment">//! arithmetic routines
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a></pre></div><pre class="rust"><code><span class="doccomment">//! arithmetic routines
 
 </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use </span>num_traits::CheckedSub;
@@ -187,6 +255,18 @@
     }
 }
 
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>multiply_by_ten_to_the_uint&lt;T, P&gt;(n: <span class="kw-2">&amp;mut </span>T, pow: P)
+    <span class="kw">where </span>T: MulAssign&lt;u64&gt; + MulAssign&lt;BigUint&gt;,
+          P: ToPrimitive
+{
+    <span class="kw">let </span>pow = pow.to_u64().expect(<span class="string">"exponent overflow error"</span>);
+    <span class="kw">if </span>pow &lt; <span class="number">20 </span>{
+        <span class="kw-2">*</span>n <span class="kw-2">*</span>= <span class="number">10u64</span>.pow(pow <span class="kw">as </span>u32);
+    } <span class="kw">else </span>{
+        <span class="kw-2">*</span>n <span class="kw-2">*</span>= ten_to_the_uint(pow);
+    }
+
+}
 
 <span class="doccomment">/// Return number of decimal digits in integer
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>count_decimal_digits(int: <span class="kw-2">&amp;</span>BigInt) -&gt; u64 {
@@ -247,5 +327,61 @@
         Greater =&gt; (Greater, a - b),
         Equal =&gt; (Equal, <span class="number">0</span>),
     }
+}
+
+
+<span class="doccomment">/// Add carry to given number, returning trimmed value and storing overflow back in carry
+///
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>add_carry(n: u8, carry: <span class="kw-2">&amp;mut </span>u8) -&gt; u8 {
+    <span class="kw">let </span>s = n + <span class="kw-2">*</span>carry;
+    <span class="kw">if </span>s &lt; <span class="number">10 </span>{
+        <span class="kw-2">*</span>carry = <span class="number">0</span>;
+        s
+    } <span class="kw">else </span>{
+        <span class="macro">debug_assert!</span>(s &lt; <span class="number">20</span>);
+        <span class="kw-2">*</span>carry = <span class="number">1</span>;
+        s - <span class="number">10
+    </span>}
+}
+
+
+<span class="doccomment">/// If n is greater than 10, split and store overflow in carry
+///
+/// No action if n is less than 10.
+///
+/// Carry is not allowed to be 1 if n is two digits
+///
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>store_carry(n: u8, carry: <span class="kw-2">&amp;mut </span>u8) -&gt; u8 {
+    <span class="kw">if </span>n &lt; <span class="number">10 </span>{
+        n
+    } <span class="kw">else </span>{
+        <span class="macro">debug_assert!</span>(n &lt; <span class="number">20</span>);
+        <span class="macro">debug_assert_eq!</span>(carry, <span class="kw-2">&amp;</span><span class="number">0</span>);
+        <span class="kw-2">*</span>carry = <span class="number">1</span>;
+        n - <span class="number">10
+    </span>}
+}
+
+
+<span class="doccomment">/// Extend destination vector with values in D, adding carry while carry is not zero
+///
+/// If carry overflows, it is NOT pushed into the destination vector.
+///
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>extend_adding_with_carry&lt;D: Iterator&lt;Item=u8&gt;&gt;(
+    dest: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
+    <span class="kw-2">mut </span>digits: D,
+    carry: <span class="kw-2">&amp;mut </span>u8,
+) {
+    <span class="kw">while </span><span class="kw-2">*</span>carry != <span class="number">0 </span>{
+        <span class="kw">match </span>digits.next() {
+            <span class="prelude-val">Some</span>(d) =&gt; {
+                dest.push(add_carry(d, carry))
+            }
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return</span>;
+            }
+        }
+    }
+    dest.extend(digits);
 }
 </code></pre></div></section></main></body></html>
