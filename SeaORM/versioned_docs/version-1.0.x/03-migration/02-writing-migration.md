@@ -167,6 +167,7 @@ Here are some common DDL snippets you may find useful.
 - Create Data Type (PostgreSQL only)
     ```rust
     use sea_orm::{EnumIter, Iterable};
+    use sea_orm_migration::prelude::extension::postgres::Type;
 
     #[derive(DeriveIden)]
     struct CategoryEnum;
@@ -183,6 +184,7 @@ Here are some common DDL snippets you may find useful.
             Type::create()
                 .as_enum(CategoryEnum)
                 .values(CategoryVariants::iter())
+                .to_owned()
         )
         .await?;
     ```
