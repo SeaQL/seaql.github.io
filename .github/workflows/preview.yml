@@ -34,6 +34,9 @@ jobs:
             SeaORM-X/node_modules
             SeaORM-X/.docusaurus
             SeaORM-X/build
+            SeaORM-Pro/node_modules
+            SeaORM-Pro/.docusaurus
+            SeaORM-Pro/build
             Blog/node_modules
             Blog/.docusaurus
             Blog/build

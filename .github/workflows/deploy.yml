@@ -38,6 +38,9 @@ jobs:
             SeaORM-X/node_modules
             SeaORM-X/.docusaurus
             SeaORM-X/build
+            SeaORM-Pro/node_modules
+            SeaORM-Pro/.docusaurus
+            SeaORM-Pro/build
             Blog/node_modules
             Blog/.docusaurus
             Blog/build
@@ -58,6 +61,9 @@ jobs:
 
       - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-X]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaORM-X SeaORM-X
+
+      - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-Pro]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh SeaORM-Pro SeaORM-Pro
 
       - if: ${{ contains(steps.git-log.outputs.message, '[Blog]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh Blog blog
