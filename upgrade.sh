@@ -27,8 +27,8 @@ yarn build
 rm -rf build
 cd ..
 
-# Upgrade SeaORM-Pro docs
-cd SeaORM-Pro
+# Upgrade sea-orm-pro docs
+cd sea-orm-pro
 [[ -d .docusaurus ]] && rm -rf .docusaurus
 [[ -d node_modules ]] && rm -rf node_modules
 [[ -d .yarn ]] && rm -rf .yarn

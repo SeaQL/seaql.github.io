@@ -16,8 +16,8 @@ function HomepageHeader() {
   return (
     <header className={styles.heroBanner}>
       <div className="container">
-        <img className={styles.homepageLogo} width="90%" src="/SeaORM-Pro/img/SeaORM logo.png" />
-        <img className={styles.homepageBanner} width="90%" src="/SeaORM-Pro/img/SeaORM Pro banner.png" />
+        <img className={styles.homepageLogo} width="90%" src="/sea-orm-pro/img/SeaORM logo.png" />
+        <img className={styles.homepageBanner} width="90%" src="/sea-orm-pro/img/SeaORM Pro banner.png" />
         <h2 className="hero__subtitle">{siteConfig.tagline}</h2>
         <br/>
         <div className={styles.buttons}>

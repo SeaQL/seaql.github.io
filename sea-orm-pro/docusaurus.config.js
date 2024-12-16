@@ -3,7 +3,7 @@ module.exports = {
   title: 'SeaORM Pro 🐚 An admin dashboard built on top of SeaORM & Seaography',
   tagline: '🐚 SeaORM Pro is an admin dashboard built on top of SeaORM & Seaography',
   url: 'https://www.sea-ql.org',
-  baseUrl: '/SeaORM-Pro/',
+  baseUrl: '/sea-orm-pro/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
@@ -147,7 +147,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM-Pro/',
+          editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/sea-orm-pro/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
