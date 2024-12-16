@@ -1,4 +1,5 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+const tailwindPlugin = require('./plugins/tailwind-config.cjs');
+
 module.exports = {
   title: 'SeaORM Pro 🐚 An admin dashboard built on top of SeaORM & Seaography',
   tagline: '🐚 SeaORM Pro is an admin dashboard built on top of SeaORM & Seaography',
@@ -137,7 +138,7 @@ module.exports = {
     // },
     announcementBar: {
       id: 'sea-orm-bar',
-      content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; If you are interested, please join our <a href="https://forms.office.com/r/gWk7CU9yjV" target="_blank">waiting list</a>. &nbsp; 🚧',
+      content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; If you are interested, please complete our <a href="https://forms.office.com/r/gWk7CU9yjV" target="_blank">License Inquiry Form</a>. &nbsp; 🚧',
       isCloseable: false,
     },
   },
@@ -164,5 +165,8 @@ module.exports = {
   ],
   scripts: [
     '/sea-ql.js',
+  ],
+  plugins: [
+    tailwindPlugin,
   ],
 };
