@@ -1,4 +1,14 @@
 # Create
 
-* `enable`: is create allowed for this table?
-* `hidden_columns`: list of columns that are hidden on the create form
+```toml
+[create]
+
+# Is create allowed for this table?
+enable = true
+
+# List of columns that are hidden on the create form
+hidden_columns = [
+    "created_at",
+    "updated_at",
+]
+```

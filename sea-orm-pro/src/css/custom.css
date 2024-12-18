@@ -72,3 +72,12 @@ div[class^=announcementBar_] {
 .theme-admonition-tip > div:first-of-type {
   text-transform: initial !important;
 }
+
+.request-license-btn {
+  background: linear-gradient(90deg, #3d2fc2, #0d9ef1);
+  color: #fff;
+}
+
+.hover-btn:hover {
+  color: #fff;
+}

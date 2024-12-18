@@ -39,6 +39,12 @@ module.exports = {
           position: 'left'
         },
         {
+          to: 'https://github.com/SeaQL/sea-orm-pro-free',
+          target: '_self',
+          label: 'Free Trial',
+          position: 'left'
+        },
+        {
           to: 'https://crates.io/crates/sea-orm',
           label: 'Crate',
           position: 'right',
@@ -138,7 +144,7 @@ module.exports = {
     // },
     announcementBar: {
       id: 'sea-orm-bar',
-      content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; If you are interested, please complete our <a href="https://forms.office.com/r/gWk7CU9yjV" target="_blank">License Inquiry Form</a>. &nbsp; 🚧',
+      content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; 🚧',
       isCloseable: false,
     },
   },

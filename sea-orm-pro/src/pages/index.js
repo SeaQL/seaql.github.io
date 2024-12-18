@@ -5,6 +5,12 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageMascot from '../components/HomepageMascot';
 
+import { IoIosFlash } from "react-icons/io";
+import { FaReact } from "react-icons/fa";
+import { GrGraphQl } from "react-icons/gr";
+import { FiDatabase } from "react-icons/fi";
+import { MdBackupTable, MdCode, MdSpeed } from "react-icons/md";
+
 function HomepageHeader() {
   return (
     <section class="relative flex max-w-7xl flex-col gap-12 md:mt-10 md:block md:max-w-none sm:mt-10">
@@ -12,17 +18,16 @@ function HomepageHeader() {
         <div class="px-8 md:mx-auto md:w-full md:max-w-7xl">
           <div class="md:w-3/5 md:pr-8 xl:w-1/2 xl:pr-12">
             <h1 class="text-5xl font-bold text-gray-800 dark:text-white md:text-6xl lg:text-7xl xl:text-[100px]">
-              Master your data.
+              Harness your data.
             </h1>
             <p class="mt-8 text-lg font-medium text-gray-600 dark:text-gray-400">
-              SeaORM Pro is the simplest and fastest way to build
-              production-ready administration panels using SeaORM.
+              Build production-ready admin panels effortlessly with SeaORM Pro.
             </p>
             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-              <a href="https://forms.office.com/r/gWk7CU9yjV" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8">
-                Request a license
+              <a href="https://github.com/SeaQL/sea-orm-pro-free" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
+                Free Trial
               </a>
-              <a href="docs/index" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8">
+              <a href="docs/index" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
                 Read the docs
               </a>
             </div>
@@ -32,10 +37,10 @@ function HomepageHeader() {
       <div class="flex w-full justify-end">
         <div class="relative overflow-hidden pl-8 md:w-2/5 md:pl-0 xl:w-1/2 xl:pl-16" x-data="{ modalIsOpen: false }">
           <div class="relative">
-            <img class="hidden max-w-none rounded-xl border-2 border-gray-200 md:block dark:md:hidden" width="1008" src="img/demo_table_view.png" />
-            <img class="max-w-none rounded-xl border-2 border-gray-200 dark:hidden md:hidden" width="720" src="img/demo_table_view.png" />
-            <img class="hidden max-w-none rounded-xl border-2 border-transparent dark:hidden dark:md:block" width="1008" src="img/demo_table_view.png" />
-            <img class="hidden max-w-none rounded-xl border-2 border-transparent dark:block dark:md:hidden" width="720" src="img/demo_table_view.png" />
+            <img class="hidden max-w-none rounded-xl border-2 border-gray-200 md:block dark:md:hidden" width="1008" src="img/01_banner.png" />
+            <img class="max-w-none rounded-xl border-2 border-gray-200 dark:hidden md:hidden" width="720" src="img/01_banner.png" />
+            <img class="hidden max-w-none rounded-xl border-2 border-transparent dark:hidden dark:md:block" width="1008" src="img/01_banner.png" />
+            <img class="hidden max-w-none rounded-xl border-2 border-transparent dark:block dark:md:hidden" width="720" src="img/01_banner.png" />
           </div>
         </div>
       </div>
@@ -52,7 +57,7 @@ function HomepageSlogan() {
       <div class="mx-auto w-full max-w-2xl px-8 lg:max-w-7xl">
         <div class="relative grid items-center gap-12 overflow-hidden rounded-xl bg-gray-800 bg-[url()] bg-[length:640px] bg-right-bottom bg-no-repeat px-8 py-12 dark:bg-gray-900 md:p-20 lg:grid-cols-2">
           <div class="relative">
-            <img src="img/SeaQL.png" class="h-16 w-16" loading="lazy" />
+            <IoIosFlash color="#0d9ef1" size="64" />
             <h2 class="mt-6 text-3xl font-semibold text-white sm:text-4xl md:text-5xl/tight xl:text-6xl/tight">
               Launch complete Admin Dashboard in minutes.
             </h2>
@@ -72,16 +77,16 @@ function HomepageSlogan() {
 
           <div class="relative">
             <div class="aspect-[4/5] w-[240px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:w-[320px] overflow-hidden">
-              <img class="dark:hidden object-cover" src="img/SeaQL.png" />
-              <img class="hidden dark:block object-cover" src="img/SeaQL.png" />
+              <img class="dark:hidden object-cover" src="img/02_login.png" />
+              <img class="hidden dark:block object-cover" src="img/02_login.png" />
             </div>
             <div class="absolute right-0 top-56 aspect-[5/4] w-[240px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:top-64 sm:w-[320px] md:-right-8 lg:top-64 overflow-hidden">
-              <img class="dark:hidden object-cover" src="img/SeaQL.png" />
-              <img class="hidden dark:block object-cover" src="img/SeaQL.png" />
+              <img class="dark:hidden object-cover" src="img/03_toml_config.png" />
+              <img class="hidden dark:block object-cover" src="img/03_toml_config.png" />
             </div>
             <div class="relative ml-4 mt-12 aspect-[4/3] w-[220px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:ml-12 sm:w-[240px] md:ml-24 overflow-hidden">
-              <img class="dark:hidden object-cover" src="img/SeaQL.png" />
-              <img class="hidden dark:block object-cover" src="img/SeaQL.png" />
+              <img class="dark:hidden object-cover" src="img/04_nested_table.png" />
+              <img class="hidden dark:block object-cover" src="img/04_nested_table.png" />
             </div>
           </div>
         </div>
@@ -99,8 +104,7 @@ function HomepageFeatures() {
             Out-of-the-box features
           </h2>
           <p class="mx-auto mt-6 max-w-2xl text-gray-600 dark:text-gray-400 sm:text-lg">
-            Resource management, actions, filters, lenses, metrics, and more. You can use SeaORM Pro to easily craft a powerful, robust backend
-            administration panel in minutes.
+            SeaORM Pro simplifies the process of crafting a resilient backend admin panel.
           </p>
         </div>
         <div class="mt-12 grid gap-8 lg:grid-cols-2">
@@ -108,7 +112,7 @@ function HomepageFeatures() {
             <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
             <div class="relative lg:p-10 lg:pl-20">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
+                <FiDatabase color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
                 CRUD - Covered
@@ -119,8 +123,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/demo_table_view.png" />
-                <img class="hidden dark:block object-cover" src="img/demo_table_view.png" />
+                <img class="dark:hidden object-cover object-left" src="img/demo_table_view.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/demo_table_view.png" />
               </div>
             </div>
           </div>
@@ -128,7 +132,7 @@ function HomepageFeatures() {
             <div class="absolute inset-0 dark:opacity-20"></div>
             <div class="relative">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
+                <FaReact color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
                 Build on industry standard
@@ -141,8 +145,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
+                <img class="dark:hidden object-cover object-left" src="img/05_ui_design.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/05_ui_design.png" />
               </div>
             </div>
           </div>
@@ -150,7 +154,7 @@ function HomepageFeatures() {
             <div class="absolute inset-0 dark:opacity-20 bg-[url()] bg-[length:94%] bg-bottom bg-no-repeat"></div>
             <div class="relative">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
+                <GrGraphQl color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
                 GraphQL resolver? built-in
@@ -161,8 +165,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-white dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
+                <img class="dark:hidden object-cover object-left" src="img/06_graphql_api.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/06_graphql_api.png" />
               </div>
             </div>
           </div>
@@ -170,7 +174,7 @@ function HomepageFeatures() {
             <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-left-bottom sm:bg-no-repeat md:bg-[length:480px]"></div>
             <div class="relative">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
+                <MdCode color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
                 (Almost) Low Code
@@ -183,8 +187,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:mx-auto lg:h-[600px] lg:w-[85%] bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/demo_table_view.png" />
-                <img class="hidden dark:block object-cover" src="img/demo_table_view.png" />
+                <img class="dark:hidden object-cover object-left" src="img/07_low_code.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/07_low_code.png" />
               </div>
             </div>
           </div>
@@ -192,7 +196,7 @@ function HomepageFeatures() {
             <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
             <div class="relative lg:p-10 lg:pl-20">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
+                <MdBackupTable color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
                 Nested table for relational entities
@@ -206,151 +210,11 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/demo_table_view.png" />
-                <img class="hidden dark:block object-cover" src="img/demo_table_view.png" />
+                <img class="dark:hidden object-cover object-left" src="img/08_nested.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/08_nested.png" />
               </div>
             </div>
           </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20 bg-[url()] bg-[length:94%] bg-bottom bg-no-repeat"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                CRUD - Covered
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                SeaORM Pro provides a full CRUD interface for your SeaORM models.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-gray-100 dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20 bg-[url()] bg-[length:94%] bg-bottom bg-no-repeat"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Instant Deployment
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Launch complete Admin Dashboard in minutes.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-white dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div>
-          {/* <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:col-span-2 lg:pt-20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Custom Fields
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Need a field type that isn’t included with SeaORM Pro? No problem - use the SeaORM Pro CLI to generate a custom field and take total control over its implementation and design.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:mx-auto lg:h-[600px] lg:w-[85%] bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/demo_table_view.png" />
-                <img class="hidden dark:block object-cover" src="img/demo_table_view.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Powerful Search
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Feel the power of the SeaQL ecosystem by linking your SeaORM Pro administration panel with SeaQL Scout. Once you do, you’ll get blazing fast search results powered by Algolia and the cloud.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Notifications
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Notify your admins about important events like new sales, cancellations, and more by sending notifications directly to your SeaORM Pro admin.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Inline Relationships
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Manage relations in the same form you create and edit resources. SeaORM Pro’s powerful relationship support allows you to define painless editing workflows.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20"></div>
-            <div class="relative">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <img src="img/SeaQL.png" class="h-8 w-8 drop-shadow sm:h-10 sm:w-10" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Conditional Fields
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                SeaORM Pro’s robust field dependency support allows you to show fields based on the values of other fields with a few lines of code - no custom fields required.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover" src="img/SeaORM Pro banner.png" />
-                <img class="hidden dark:block object-cover" src="img/SeaORM Pro banner.png" />
-              </div>
-            </div>
-          </div> */}
         </div>
         <div class="mt-12 rounded-xl border border-gray-400/30 bg-gray-100 p-12 text-center dark:border-gray-600/20 dark:bg-gray-900 sm:mt-12 sm:p-20 lg:mt-16 xl:p-24">
           <h3 class="text-4xl font-semibold text-gray-900 dark:text-white lg:text-5xl">
@@ -360,18 +224,12 @@ function HomepageFeatures() {
             SeaORM Pro has much more to offer. To get the full scoop, head over to the documentation to learn about all
             the cosmic possibilities.
           </p>
-          <a href="docs/index" class="mx-auto mt-12 inline-flex items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-8 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50">
+          <a href="docs/index" class="mx-auto mt-12 inline-flex items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-8 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 request-license-btn hover-btn">
             Read documentation
           </a>
         </div>
       </div>
     </section>
-  );
-}
-
-function _() {
-  return (
-    <></>
   );
 }
 

@@ -1,3 +1,8 @@
 # Delete
 
-* `enable`: is delete allowed for this table?
+```toml
+[delete]
+
+# Is delete allowed for this table?
+enable = true
+```

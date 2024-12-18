@@ -1,6 +1,6 @@
 # SeaORM Pro Free
 
-* Free trial
+[SeaORM Pro Free](https://github.com/SeaQL/sea-orm-pro-free) is a free trial of SeaORM Pro with following limitations:
+
 * Readonly admin dashboard
 * No access to frontend source code
-* Supported database: MSSQL, MySQL, PostgreSQL, SQLite

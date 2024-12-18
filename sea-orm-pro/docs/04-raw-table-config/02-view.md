@@ -1,6 +1,24 @@
 # View
 
-* `hidden_columns`: list of columns that are hidden on the view table
-* `order_by`: sorter of the view table
-    * `field`: sort by which column
-    * `order`: in ASC / DESC direction
+```toml
+[view]
+
+# List of columns that are hidden on the view table
+hidden_columns = [
+    "name_style",
+    "suffix",
+    "email_address",
+    "phone",
+    "rowguid",
+    "modified_date",
+]
+
+# Sorter of the view table
+order_by = {
+    # Sort by which column
+    field = "customer_id",
+
+    # Sort in ASC / DESC direction
+    order = "desc"
+}
+```
