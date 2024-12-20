@@ -81,3 +81,8 @@ div[class^=announcementBar_] {
 .hover-btn:hover {
   color: #fff;
 }
+
+/* Tailwind and Prism both use the .table class. This resets the display:table property set by Tailwind. https://github.com/EmaApps/emanote/issues/320 */
+code span.token.table {
+  display:inline;
+}

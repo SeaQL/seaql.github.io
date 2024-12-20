@@ -1,5 +1,11 @@
 # Delete
 
+## Enable Delete
+
+* Is delete enabled in the admin dashboard?
+
+## Full Spec
+
 ```toml
 [delete]
 

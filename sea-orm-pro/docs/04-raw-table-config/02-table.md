@@ -1,5 +1,26 @@
 # Table
 
+## Title
+
+* Use title case of the TOML file name as the title by default, can be override
+
+## Table Display
+
+* Display density
+* Items per page
+
+## Table Columns
+
+* Show all columns by default, can be disabled
+* Set column title
+* Set column width
+* Set column content ellipsis
+* Set column input type for custom rendering
+* Join one-to-one relation
+* Column display sequence
+
+## Full Spec
+
 ```toml
 [table]
 

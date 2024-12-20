@@ -1,5 +1,15 @@
 # View
 
+## Hidden Columns
+
+* Columns that are hidden on the view table
+
+## Table Sorter
+
+* Sort by which column in ASC / DESC direction
+
+## Full Spec
+
 ```toml
 [view]
 

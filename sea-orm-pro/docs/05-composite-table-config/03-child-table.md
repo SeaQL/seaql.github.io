@@ -1,9 +1,19 @@
 # Child Table
 
+## Name of Child Table
+
+* Specify name of the child table
+
+## Child Table is-a Raw Table
+
+* All raw table config can be applied to child table
+
+## Full Spec
+
 ```toml
 [[children]]
 
-# name of the SeaORM relation
+# Name of the SeaORM relation
 relation = "customer"
 
 

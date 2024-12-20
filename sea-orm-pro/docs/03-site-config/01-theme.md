@@ -1,5 +1,7 @@
 # Theme
 
+## Full Spec
+
 ```toml
 [site.theme]
 

@@ -1,5 +1,19 @@
 # Update
 
+## Enable Update
+
+* Is update enabled in the admin dashboard?
+
+## Hidden Columns
+
+* Columns that are hidden on the update form
+
+## Readonly Columns
+
+* Columns that are readonly on the update form
+
+## Full Spec
+
 ```toml
 [update]
 
