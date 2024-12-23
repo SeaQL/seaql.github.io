@@ -2,11 +2,11 @@
 
 ## Enable Create
 
-* Is create enabled in the admin dashboard?
+Enable create operation on this database table, this is disabled by default.
 
 ## Hidden Columns
 
-* Columns that are hidden on the create form
+Hide columns from the create form but it's still visible on the view table.
 
 ## Full Spec
 

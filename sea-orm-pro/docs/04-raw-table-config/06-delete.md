@@ -2,7 +2,7 @@
 
 ## Enable Delete
 
-* Is delete enabled in the admin dashboard?
+Enable delete on this database table, this is disabled by default.
 
 ## Full Spec
 

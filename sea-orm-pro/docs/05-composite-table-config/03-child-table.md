@@ -2,11 +2,11 @@
 
 ## Name of Child Table
 
-* Specify name of the child table
+Specify the name of the SeaORM relation.
 
 ## Child Table is-a Raw Table
 
-* All raw table config can be applied to child table
+All raw table config can be applied to child table.
 
 ## Full Spec
 

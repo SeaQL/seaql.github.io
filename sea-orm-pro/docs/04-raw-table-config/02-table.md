@@ -2,22 +2,44 @@
 
 ## Title
 
-* Use title case of the TOML file name as the title by default, can be override
+By default, name of the TOML file in title case as the title, can be override.
+
+```toml
+[table]
+name = "Products"
+```
 
 ## Table Display
 
-* Display density
-* Items per page
+Display density of the table rows and number of rows on each page.
+
+```toml
+[table]
+table_size = "middle"
+page_size = 20
+```
 
 ## Table Columns
 
-* Show all columns by default, can be disabled
-* Set column title
-* Set column width
-* Set column content ellipsis
-* Set column input type for custom rendering
-* Join one-to-one relation
-* Column display sequence
+By default, the `all_columns` is turned on, meaning all columns will be shown, you can override this in the config.
+
+The sequence of item in which the `columns` array is the same as the table displayed in the admin dashboard.
+
+The `title` is optional, if it's not set it will use the title case of the `field` as the title.
+
+Set `input_type` to render column data in custom renderer.
+
+Field of the one-to-one relation can be displayed via providing the name of the SeaORM `relation` and the `field` of the related table.
+
+```toml
+[table]
+all_columns = false
+columns = [
+    { title = "ID", field = "product_id", width = 80 },
+    { title = "Thumbnail", field = "thumb_nail_photo", input_type = "image", width = 120 },
+    { title = "Product Category", field = "name", relation = "product_category", ellipsis = false, width = 180 },
+]
+```
 
 ## Full Spec
 

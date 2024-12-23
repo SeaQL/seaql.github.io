@@ -2,11 +2,11 @@
 
 ## Hidden Columns
 
-* Columns that are hidden on the view table
+Hide columns from the view table but it's still visible on the detail modal.
 
 ## Table Sorter
 
-* Sort by which column in ASC / DESC direction
+Sort table by a column in ASC / DESC direction.
 
 ## Full Spec
 

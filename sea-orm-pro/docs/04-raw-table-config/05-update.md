@@ -2,15 +2,15 @@
 
 ## Enable Update
 
-* Is update enabled in the admin dashboard?
+Enable update on this database table, this is disabled by default.
 
 ## Hidden Columns
 
-* Columns that are hidden on the update form
+Hide columns from the update form but it's still visible on the view table.
 
 ## Readonly Columns
 
-* Columns that are readonly on the update form
+Readonly fields on the update form.
 
 ## Full Spec
 

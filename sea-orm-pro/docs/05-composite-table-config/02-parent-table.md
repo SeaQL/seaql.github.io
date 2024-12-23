@@ -2,11 +2,11 @@
 
 ## Name of Parent Table
 
-* Specify name of the parent table
+Specify the database table name of the parent table.
 
 ## Parent Table is-a Raw Table
 
-* All raw table config can be applied to parent table
+All raw table config can be applied to parent table.
 
 ## Full Spec
 
