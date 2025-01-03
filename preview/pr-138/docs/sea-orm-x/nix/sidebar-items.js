@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["errno","fcntl","ifaddrs","net","sys","unistd"],"trait":["NixPath"],"type":["Error","Result"]};
