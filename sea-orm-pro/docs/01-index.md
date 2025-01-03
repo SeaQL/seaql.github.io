@@ -16,6 +16,8 @@
 
     2.2 [Admin Dashboard Frontend](02-install-and-config/02-frontend.md)
 
+    2.3 [Getting Started](02-install-and-config/03-getting-started.md)
+
 3. Site Config
 
     3.1 [Theme](03-site-config/01-theme.md)

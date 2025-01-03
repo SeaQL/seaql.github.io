@@ -4,7 +4,7 @@ You can override the login procedure in `src/controllers/auth.rs`.
 
 ```rust
 // Login with email and password
-async fn password_login(
+async fn login(
     State(ctx): State<AppContext>,
     Json(params): Json<PasswordLoginParams>,
 ) -> Result<Response> {
