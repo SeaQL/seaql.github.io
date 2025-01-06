@@ -6,7 +6,7 @@
 
     1.1 [What is SeaORM Pro](01-introduction/01-sea-orm-pro.md)
 
-    1.2 [SeaORM Pro Free](01-introduction/02-sea-orm-pro-free.md)
+    1.2 [SeaORM Pro Plus](01-introduction/02-sea-orm-pro-plus.md)
 
 ## Basics
 

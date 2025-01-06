@@ -39,18 +39,12 @@ module.exports = {
           position: 'left'
         },
         {
-          to: 'https://github.com/SeaQL/sea-orm-pro-free',
-          target: '_self',
-          label: 'Free Trial',
-          position: 'left'
-        },
-        {
-          to: 'https://crates.io/crates/sea-orm',
+          to: 'https://crates.io/crates/sea-orm-pro',
           label: 'Crate',
           position: 'right',
         },
         {
-          to: 'https://github.com/SeaQL/sea-orm',
+          to: 'https://github.com/SeaQL/sea-orm-pro',
           label: 'GitHub',
           position: 'right',
         },
@@ -67,16 +61,8 @@ module.exports = {
               to: '/docs/index',
             },
             {
-              label: 'SeaORM Tutorial',
-              to: 'https://www.sea-ql.org/sea-orm-tutorial/',
-            },
-            {
-              label: 'SeaORM Cookbook',
-              to: 'https://www.sea-ql.org/sea-orm-cookbook/',
-            },
-            {
               label: 'API Reference',
-              to: 'https://docs.rs/sea-orm/latest/sea_orm/',
+              to: 'https://docs.rs/sea-orm-pro/latest/sea_orm_pro/',
             },
           ],
         },
@@ -85,7 +71,7 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              to: 'https://github.com/SeaQL/sea-orm/discussions',
+              to: 'https://github.com/SeaQL/sea-orm-pro/discussions',
             },
             {
               label: 'Discord',
@@ -112,10 +98,6 @@ module.exports = {
             {
               label: 'About Us',
               to: '/about-us',
-            },
-            {
-              label: 'Seaography',
-              to: 'https://www.sea-ql.org/Seaography/',
             },
           ],
         },

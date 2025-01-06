@@ -16,7 +16,7 @@ cd sea-orm/examples/loco_starter
 mkdir assets
 
 # Use the `download_frontend.sh` to download SeaORM Pro FREE admin dashboard to `assets/admin` directory
-curl "https://raw.githubusercontent.com/SeaQL/sea-orm-pro-free/refs/heads/main/build_tools/download_frontend.sh" -sSf | sh
+curl "https://raw.githubusercontent.com/SeaQL/sea-orm-pro/refs/heads/main/build_tools/download_frontend.sh" -sSf | sh
 ```
 
 ## Serve Frontend via Static Middleware
