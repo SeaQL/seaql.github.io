@@ -5,15 +5,15 @@
 ```toml
 [site.theme]
 
-# Title of admin dashboard
+# Title of admin panel
 title = "SeaORM Pro FREE"
 
-# File path of admin dashboard logo
+# File path of admin panel logo
 logo = "/admin/favicon.ico"
 
-# File path of admin dashboard login banner
+# File path of admin panel login banner
 login_banner = "/admin/logo.png"
 
-# Copyright of admin dashboard
+# Copyright of admin panel
 copyright = "Powered by SeaORM Pro"
 ```

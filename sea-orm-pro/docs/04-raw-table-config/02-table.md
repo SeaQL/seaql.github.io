@@ -23,7 +23,7 @@ page_size = 20
 
 By default, the `all_columns` is turned on, meaning all columns will be shown, you can override this in the config.
 
-The sequence of item in which the `columns` array is the same as the table displayed in the admin dashboard.
+The sequence of item in which the `columns` array is the same as the table displayed in the admin panel.
 
 The `title` is optional, if it's not set it will use the title case of the `field` as the title.
 

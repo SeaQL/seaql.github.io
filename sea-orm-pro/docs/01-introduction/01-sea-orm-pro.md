@@ -1,6 +1,6 @@
 # What is SeaORM Pro
 
-SeaORM Pro is an admin dashboard that provides full CRUD interface for your SeaORM entities, includes a GraphQL interface to handles CRUD request.
+SeaORM Pro is an admin panel that provides full CRUD interface for your SeaORM entities, includes a GraphQL interface to handles CRUD request.
 
 The source code of the frontend and backend are fully customizable and accessible. The tech stack includes a sleek Ant Design React frontend admin panel, Loco.rs Rust backend server, SeaORM object relational mapper to interact with your relational database and Seaography to extends entity that defines in SeaORM to serve as a GraphQL interface.
 

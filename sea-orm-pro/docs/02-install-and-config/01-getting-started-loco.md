@@ -1,12 +1,12 @@
-# Getting Started
-
-## Start with Loco Starter Example
+# Getting Started with Loco
 
 We use the [`loco_starter`](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter) example as the base, it contains basic REST API to handle basic user management such as user registration, login and user info of current session.
 
-We will extends the SeaORM entities in the example to define a GraphQL schema, handle GraphQL request and serve SeaORM Pro admin dashboard.
+## 1. Setup Admin Endpoint
 
-## Download Admin Dashboard Frontend
+We will extends the SeaORM entities in the example to define a GraphQL schema, handle GraphQL request and serve SeaORM Pro admin panel.
+
+### 1.1 Download frontend assets
 
 ```sh
 # Go to the root of `loco_starter` example
@@ -15,13 +15,13 @@ cd sea-orm/examples/loco_starter
 # Create a directory for the static assets
 mkdir assets
 
-# Use the `download_frontend.sh` to download SeaORM Pro FREE admin dashboard to `assets/admin` directory
+# Use the `download_frontend.sh` to download SeaORM Pro FREE admin panel to `assets/admin` directory
 curl "https://raw.githubusercontent.com/SeaQL/sea-orm-pro/refs/heads/main/build_tools/download_frontend.sh" -sSf | sh
 ```
 
-## Serve Frontend via Static Middleware
+### 1.2 Serve frontend via `static` middleware
 
-Open Loco.rs config file, add `static` middlewares. The admin dashboard frontend is located in `/assets/admin` and we want to serve it under `http://localhost:3000/admin`, so we set the path as `assets`. Also, the admin dashboard frontend is a single page application, so we set a fallback route to the index file, `./assets/admin/index.html`.
+Open Loco.rs config file, add `static` middlewares. The admin panel frontend is located in `/assets/admin` and we want to serve it under `http://localhost:3000/admin`, so we set the path as `assets`. Also, the admin panel frontend is a single page application, so we set a fallback route to the index file, `./assets/admin/index.html`.
 
 ```diff title=loco_starter/config/development.yaml
 server:
@@ -36,7 +36,62 @@ server:
 +     fallback: ./assets/admin/index.html
 ```
 
-## Define GraphQL Schema
+### 1.3 Setup admin API endpoint
+
+The admin panel frontend is customizable and it read the configuration from the `api/admin/config` endpoint.
+
+```rust title=loco_starter/src/controllers/admin.rs
+use loco_rs::prelude::*;
+
+pub async fn config(State(_ctx): State<AppContext>) -> Result<Response> {
+    format::json(serde_json::json!({
+        "site": {
+            "theme": {
+                "title": "SeaORM Pro FREE",
+                "logo": "/admin/favicon.ico",
+                "login_banner": "/admin/logo.png",
+            }
+        },
+        "raw_tables": {},
+        "composite_tables": {},
+    }))
+}
+
+pub fn routes() -> Routes {
+    Routes::new().prefix("admin").add("/config", get(config))
+}
+```
+
+Use the admin controller and register the `/api/admin` route.
+
+```diff title=loco_starter/src/controllers/mod.rs
++ pub mod admin;
+pub mod auth;
+pub mod files;
+pub mod notes;
+pub mod user;
+```
+
+```diff title=loco_starter/src/app.rs
+pub struct App;
+
+#[async_trait]
+impl Hooks for App {
+    fn routes(_ctx: &AppContext) -> AppRoutes {
+        AppRoutes::with_default_routes()
+            .prefix("/api")
+            .add_route(controllers::notes::routes())
+            .add_route(controllers::auth::routes())
+            .add_route(controllers::user::routes())
+            .add_route(controllers::files::routes())
++           .add_route(controllers::admin::routes())
+    }
+}
+```
+
+## 2. Setup GraphQL Endpoint
+
+### 2.1 Define GraphQL schema
 
 Add the dependencies for defining GraphQL schema: `async-graphql`, `seaography` and `lazy_static`.
 
@@ -214,7 +269,7 @@ pub mod workers;
 + pub mod graphql;
 ```
 
-## Setup GraphQL Endpoint
+### 2.2 Setup GraphQL playground and query root
 
 Add dependencies for serving GraphQL playground and handling GraphQL request.
 
@@ -276,11 +331,12 @@ pub fn routes() -> Routes {
 Use the GraphQL controller and register the `/api/graphql` route.
 
 ```diff title=loco_starter/src/controllers/mod.rs
+pub mod admin;
 pub mod auth;
 pub mod files;
++ pub mod graphql;
 pub mod notes;
 pub mod user;
-+ pub mod graphql;
 ```
 
 ```diff title=loco_starter/src/app.rs
@@ -295,70 +351,13 @@ impl Hooks for App {
             .add_route(controllers::auth::routes())
             .add_route(controllers::user::routes())
             .add_route(controllers::files::routes())
+            .add_route(controllers::admin::routes())
 +           .add_route(controllers::graphql::routes())
     }
 }
 ```
 
-## Setup Library Endpoint
-
-The admin dashboard frontend is customizable and it read the configuration from the `api/library/config` endpoint.
-
-```rust title=loco_starter/src/controllers/library.rs
-use loco_rs::prelude::*;
-
-pub async fn config(State(_ctx): State<AppContext>) -> Result<Response> {
-    format::json(serde_json::json!({
-        "site": {
-            "theme": {
-                "title": "SeaORM Pro FREE",
-                "logo": "/admin/favicon.ico",
-                "login_banner": "/admin/logo.png",
-                "copyright": "Powered by SeaORM Pro",
-            }
-        },
-        "raw_tables": {},
-        "composite_tables": {},
-    }))
-}
-
-pub fn routes() -> Routes {
-    Routes::new()
-        .prefix("library")
-        .add("/config", get(config))
-}
-```
-
-Use the library controller and register the `/api/library` route.
-
-```diff title=loco_starter/src/controllers/mod.rs
-pub mod auth;
-pub mod files;
-pub mod notes;
-pub mod user;
-pub mod graphql;
-+ pub mod library;
-```
-
-```diff title=loco_starter/src/app.rs
-pub struct App;
-
-#[async_trait]
-impl Hooks for App {
-    fn routes(_ctx: &AppContext) -> AppRoutes {
-        AppRoutes::with_default_routes()
-            .prefix("/api")
-            .add_route(controllers::notes::routes())
-            .add_route(controllers::auth::routes())
-            .add_route(controllers::user::routes())
-            .add_route(controllers::files::routes())
-            .add_route(controllers::graphql::routes())
-+           .add_route(controllers::library::routes())
-    }
-}
-```
-
-## Compile and Run
+## 3. Launch!
 
 ```sh
 $ cargo run start
@@ -386,7 +385,7 @@ $ cargo run start
 2025-01-03T08:48:32.471041Z  INFO app: loco_rs::controller::app_routes: [POST] /api/files/upload/:notes_id environment=development
 2025-01-03T08:48:32.471090Z  INFO app: loco_rs::controller::app_routes: [GET] /api/files/list/:notes_id environment=development
 2025-01-03T08:48:32.471144Z  INFO app: loco_rs::controller::app_routes: [GET] /api/files/view/:files_id environment=development
-2025-01-03T08:48:32.471195Z  INFO app: loco_rs::controller::app_routes: [GET] /api/library/config environment=development
+2025-01-03T08:48:32.471195Z  INFO app: loco_rs::controller::app_routes: [GET] /api/admin/config environment=development
 2025-01-03T08:48:32.471239Z  INFO app: loco_rs::controller::app_routes: [GET] /api/graphql environment=development
 2025-01-03T08:48:32.471319Z  INFO app: loco_rs::controller::app_routes: [POST] /api/graphql environment=development
 2025-01-03T08:48:32.472125Z  INFO app: loco_rs::controller::app_routes: [Middleware] Adding static environment=development

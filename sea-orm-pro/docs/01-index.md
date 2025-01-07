@@ -12,11 +12,9 @@
 
 2. Installation & Configuration
 
-    2.1 [Database & Async Runtime](02-install-and-config/01-database.md)
+    2.1 [Getting Started with Loco](02-install-and-config/01-getting-started-loco.md)
 
-    2.2 [Admin Dashboard Frontend](02-install-and-config/02-frontend.md)
-
-    2.3 [Getting Started](02-install-and-config/03-getting-started.md)
+    2.2 [Getting Started with Axum](02-install-and-config/02-getting-started-axum.md)
 
 3. Site Config
 
@@ -47,5 +45,3 @@
 6. Deployment
 
     6.1 [Nginx](06-deployment/01-nginx.md)
-
-    6.2 [User Authentication](06-deployment/02-user-auth.md)

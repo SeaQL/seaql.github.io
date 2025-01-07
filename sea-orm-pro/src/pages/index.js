@@ -17,18 +17,18 @@ function HomepageHeader() {
       <div class="md:absolute md:flex md:h-full md:w-full md:items-center">
         <div class="px-8 md:mx-auto md:w-full md:max-w-7xl">
           <div class="md:w-3/5 md:pr-8 xl:w-1/2 xl:pr-12">
-            <h1 class="text-5xl font-bold text-gray-800 dark:text-white md:text-6xl lg:text-7xl xl:text-[100px]">
-              Harness your data.
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white md:text-5xl">
+              Effortless Admin Panel
             </h1>
             <p class="mt-8 text-lg font-medium text-gray-600 dark:text-gray-400">
-              Build production-ready admin panels effortlessly with SeaORM Pro.
+              Build professional admin panels with SeaORM Pro.
             </p>
             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-              <a href="https://github.com/SeaQL/sea-orm-pro" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
+              <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
                 Getting Started
               </a>
-              <a href="docs/index" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
-                Read the docs
+              <a href="https://github.com/SeaQL/sea-orm-pro" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
+                Try the Demo
               </a>
             </div>
           </div>
@@ -59,19 +59,13 @@ function HomepageSlogan() {
           <div class="relative">
             <IoIosFlash color="#0d9ef1" size="64" />
             <h2 class="mt-6 text-3xl font-semibold text-white sm:text-4xl md:text-5xl/tight xl:text-6xl/tight">
-              Launch complete Admin Dashboard in minutes.
+              Launch Admin Panel in minutes.
             </h2>
             <p class="mt-6 font-medium text-gray-400 sm:text-lg">
-              Professional, sleek user interface by Ant Design.
+              Use SeaORM Pro with any Rust web framework, simply follow the 3 easy steps to setup an admin panel for existing SeaORM projects.
             </p>
             <p class="mt-4 font-medium text-gray-400 sm:text-lg">
-              Gone are the days to build GraphQL resolvers by hand!
-            </p>
-            <p class="mt-4 font-medium text-gray-400 sm:text-lg">
-              Customize the UI easily with a simple, elegant toml syntax.
-            </p>
-            <p class="mt-4 font-medium text-gray-400 sm:text-lg">
-              Absolutely no generated code bloat.
+              Or even better, build your next application with our fullstack webapp template!
             </p>
           </div>
 
@@ -104,7 +98,7 @@ function HomepageFeatures() {
             Out-of-the-box features
           </h2>
           <p class="mx-auto mt-6 max-w-2xl text-gray-600 dark:text-gray-400 sm:text-lg">
-            SeaORM Pro simplifies the process of crafting a resilient backend admin panel.
+            SeaORM Pro takes the hassle out of crafting beautiful backend admin panels.
           </p>
         </div>
         <div class="mt-12 grid gap-8 lg:grid-cols-2">
@@ -115,7 +109,7 @@ function HomepageFeatures() {
                 <FiDatabase color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                CRUD - Covered
+                Full CRUD
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
                 SeaORM Pro provides a full CRUD interface for your SeaORM models.
@@ -135,12 +129,10 @@ function HomepageFeatures() {
                 <FaReact color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Build on industry standard
-                <br/>
-                React + GraphQL
+                Built on industry standard React + GraphQL
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Professional, sleek user interface by Ant Design.
+                Build professional, sleek user interface with Ant Design Pro, a feature-rich React component library + framework for building enterprise applications. Use SeaORM Pro as the foundation to bring your vision to life!
               </p>
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
@@ -157,16 +149,36 @@ function HomepageFeatures() {
                 <GrGraphQl color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                GraphQL resolver? built-in
+                GraphQL resolver? Built-in
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Gone are the days to build GraphQL resolvers by hand!
+                Gone are the days of building GraphQL resolvers by hand! With Seaography, your SeaORM schema is automagically transformed into a fully-functional GraphQL schema, enabling you to write, sort, filter, and join GraphQL queries on the frontend.
               </p>
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-white dark:bg-gray-800">
                 <img class="dark:hidden object-cover object-left" src="img/06_graphql_api.png" />
                 <img class="hidden dark:block object-cover object-left" src="img/06_graphql_api.png" />
+              </div>
+            </div>
+          </div>
+          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:flex-row lg:gap-6 lg:px-0 lg:py-16 lg:text-left lg:col-span-2 bg-white dark:bg-gray-900">
+            <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
+            <div class="relative lg:p-10 lg:pl-20">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
+                <MdBackupTable color="#0d9ef1" size="38" />
+              </div>
+              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
+                Dark Mode? Sure!
+              </h3>
+              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
+                Customize the UI theme easily with light / dark mode support.
+              </p>
+            </div>
+            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
+              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
+                <img class="dark:hidden object-cover object-left" src="img/08_nested.png" />
+                <img class="hidden dark:block object-cover object-left" src="img/08_nested.png" />
               </div>
             </div>
           </div>
@@ -192,41 +204,19 @@ function HomepageFeatures() {
               </div>
             </div>
           </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:flex-row lg:gap-6 lg:px-0 lg:py-16 lg:text-left lg:col-span-2 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
-            <div class="relative lg:p-10 lg:pl-20">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <MdBackupTable color="#0d9ef1" size="38" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Nested table for relational entities
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Parent-child relations, e.g. Order-OrderItem, presented in a single table.
-                Every type of SeaORM relationship is fully supported.
-                Need to visualize the data on your polymorphic many-to-many relationship?
-                We have you covered. 
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/08_nested.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/08_nested.png" />
-              </div>
-            </div>
-          </div>
         </div>
         <div class="mt-12 rounded-xl border border-gray-400/30 bg-gray-100 p-12 text-center dark:border-gray-600/20 dark:bg-gray-900 sm:mt-12 sm:p-20 lg:mt-16 xl:p-24">
           <h3 class="text-4xl font-semibold text-gray-900 dark:text-white lg:text-5xl">
-            It's a big universe...
+            Start Building Today
           </h3>
-          <p class="mx-auto mt-6 max-w-xl text-gray-600 dark:text-gray-400 sm:text-lg">
-            SeaORM Pro has much more to offer. To get the full scoop, head over to the documentation to learn about all
-            the cosmic possibilities.
-          </p>
-          <a href="docs/index" class="mx-auto mt-12 inline-flex items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-8 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 request-license-btn hover-btn">
-            Read documentation
-          </a>
+          <div class="mt-8 flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
+            <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
+              Getting Started
+            </a>
+            <a href="https://github.com/SeaQL/sea-orm-pro" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
+              Try the Demo
+            </a>
+          </div>
         </div>
       </div>
     </section>

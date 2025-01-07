@@ -1,6 +1,6 @@
 # Nginx
 
-You can serve the admin dashboard through Nginx.
+You can serve the admin panel through Nginx.
 
 First build the frontend artifact.
 
