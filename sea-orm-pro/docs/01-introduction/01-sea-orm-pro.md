@@ -4,6 +4,8 @@ SeaORM Pro is an admin panel solution ...
 
 ## Architecture
 
+<img src="/sea-orm-pro/img/SeaORM Pro Architecture.png" className="dark-mode" />
+
 The tech stack is **RRLS** (pronounced release!): React, Rust, Loco, SeaQL. These four technologies form a full-stack solution for building data-centric applications.
 
 + Frontend: Ant Design React
