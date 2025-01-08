@@ -6,7 +6,7 @@
 [site.theme]
 
 # Title of admin panel
-title = "SeaORM Pro FREE"
+title = "SeaORM Pro"
 
 # File path of admin panel logo
 logo = "/admin/favicon.ico"

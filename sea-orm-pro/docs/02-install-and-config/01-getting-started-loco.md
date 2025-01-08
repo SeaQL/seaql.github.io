@@ -15,7 +15,7 @@ cd sea-orm/examples/loco_starter
 # Create a directory for the static assets
 mkdir assets
 
-# Use the `download_frontend.sh` to download SeaORM Pro FREE admin panel to `assets/admin` directory
+# Use the `download_frontend.sh` to download SeaORM Pro admin panel to `assets/admin` directory
 curl "https://raw.githubusercontent.com/SeaQL/sea-orm-pro/refs/heads/main/build_tools/download_frontend.sh" -sSf | sh
 ```
 
@@ -47,7 +47,7 @@ pub async fn config(State(_ctx): State<AppContext>) -> Result<Response> {
     format::json(serde_json::json!({
         "site": {
             "theme": {
-                "title": "SeaORM Pro FREE",
+                "title": "SeaORM Pro",
                 "logo": "/admin/favicon.ico",
                 "login_banner": "/admin/logo.png",
             }
@@ -418,12 +418,17 @@ listening on localhost:3000
 
 Visit [http://localhost:3000/admin](http://localhost:3000/admin) and login with your registered user.
 
-![](../../static/img/getting-started-01-login.png)
+```
+Username: demo@sea-ql.org
+Password: demo@sea-ql.org
+```
 
-![](../../static/img/getting-started-02-raw-tables.png)
+![](../../static/img/getting-started-loco-01-login.png)
 
-![](../../static/img/getting-started-03-raw-tables-notes.png)
+![](../../static/img/getting-started-loco-02-raw-tables.png)
 
-![](../../static/img/getting-started-04-raw-tables-notes-details.png)
+![](../../static/img/getting-started-loco-03-raw-tables-notes.png)
 
-![](../../static/img/getting-started-05-composite-tables.png)
+![](../../static/img/getting-started-loco-04-raw-tables-notes-details.png)
+
+![](../../static/img/getting-started-loco-05-composite-tables.png)
