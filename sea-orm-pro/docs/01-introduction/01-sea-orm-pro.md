@@ -1,13 +1,35 @@
 # What is SeaORM Pro
 
-SeaORM Pro is an admin panel that provides full CRUD interface for your SeaORM entities, includes a GraphQL interface to handles CRUD request.
+SeaORM Pro is an admin panel solution ...
 
-The source code of the frontend and backend are fully customizable and accessible. The tech stack includes a sleek Ant Design React frontend admin panel, Loco.rs Rust backend server, SeaORM object relational mapper to interact with your relational database and Seaography to extends entity that defines in SeaORM to serve as a GraphQL interface.
+## Architecture
 
-There are two kinds of table view in SeaORM Pro, raw table view and composite table view.
+The tech stack is **RRLS** (pronounced release!): React, Rust, Loco, SeaQL. These four technologies form a full-stack solution for building data-centric applications.
 
-For raw table view, each raw table corresponds to a table in the relational database, by default it will display all columns with pagination. You can configure the displayed columns and other settings in a TOML file.
++ Frontend: Ant Design React
++ Backend: Loco.rs
++ Data access: Seaography + SeaORM
++ Database: MySQL / PostgreSQL / SQLite / SQL Server*
++ Language: Rust
 
-For composite table view, this is where SeaORM Pro shine, data from parent-child tables are represented in collapsible table view. The configuration of each composite table view is specified in the TOML file.
+## Features
 
-SeaORM Pro is now in closed-beta, and will be based on SeaORM 1.0, so the API surface will be stable and supported long term. We offer an Evaluation License and a Production License with two support tiers.
+### Table View
+
+There are two kinds of table view in SeaORM Pro, raw table and composite table:
+
+#### Raw Table
+
+Each raw table corresponds to a table in the database, by default it will display all columns for all tables. You can configure the displayed columns and other settings via TOML.
+
+#### Composite Table
+
+This is where SeaORM Pro shine. Afterall, SQL is relational! You can construct table views with data joining from multiple related tables. The underlying GraphQL query can be deeply nested.
+
+Data from parent-child relations (e.g. Order -> OrderItem) are represented as collapsible nested tables. You can configure the settings via TOML.
+
+### Editable Form
+
+...
+
+## Upcoming Features
