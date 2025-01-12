@@ -1,6 +1,23 @@
 # What is SeaORM Pro
 
-SeaORM Pro is an admin panel solution ...
+SeaORM Pro is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).
+
+An admin panel is essential for operating backend applications. But it often is an after-thought, or no dedicated resources (aka developer time) is put into developing them.
+
+Frontend engineers are usually focused on developing consumer-facing applications, which often led to insufficient effort being directed towards GUI of internal-facing applications.
+
+SeaORM Pro is designed to bridge this gap, providing a solution that is both quick to implement and reliable for long-term use.
+
+There are several engineering problems we are trying to solve:
+
+1. The tediousness of manually writing query handlers to select, sort, filter and paginate data. While this can be abstracted away for individual tables, custom code is often needed for queries involving joins.
+    + Solution: Seaography removes the need to write GraphQL resolvers manually, all you need to provide is a set of SeaORM entities (which can be generated with `sea-orm-cli`)!
+2. The difficulty in customizing frontend by writing frontend code. Certainly a barrier for us backend engineers to mess with React SPA code!
+    + Solution: SeaORM Pro allows customizing the frontend by writing TOML config, a language Rust developers already know (because of Cargo).
+3. The difficulty in keeping the admin panel in sync with the application's schema after adding new tables and columns.
+    + Solution: develop your application using SeaORM. You can share the same set of entities between your app and the admin panel, so any schema changes are automatically reflected in the GraphQL schema and the admin panel. You only have to touch the config to customize things
+4. The long term viability in managing growth in complexity. Low-code solutions will eventually hit a functionality ceiling, requiring a rewrite to implement new features.
+    + Solution: built using commodity technologies, SeaORM Pro offer a pathway to develop a fully-fledged admin application
 
 ## Architecture
 
