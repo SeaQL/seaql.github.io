@@ -53,7 +53,7 @@ Data is not editable by default. You can configure create, update and delete for
 
 ## Upcoming Features
 
-There's really a lot we want to build, to make SeaORM Pro suit the needs of everybody. Please consider being a sponsor and take part in shaping its future!
+There's really a lot we want to build, to make SeaORM Pro suit the needs of every project. Please consider being a sponsor and take part in shaping its future!
 
 Here's what we have in mind:
 
@@ -69,7 +69,7 @@ Of course we need to share the Admin Portal to multiple users and each of them s
 
 And so, we'd want to keep a record of users' action and being able to audit them.
 
-### Dashboard
+### Advanced Dashboard
 
 We want to make it super easy to design graphs and charts for the Admin Dashboard.
 
