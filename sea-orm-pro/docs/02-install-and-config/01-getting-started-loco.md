@@ -104,6 +104,8 @@ Add the dependencies for defining GraphQL schema: `async-graphql`, `seaography` 
 
 We need to define an `RelatedEntity` enum for each of the SeaORM entity to help `seaography` figure out the parent-child relation between entities.
 
+These can either be added by hand or by re-generating entities with `sea-orm-cli generate entity` using the `--seaography` flag.
+
 ```diff title=loco_starter/src/models/_entities/files.rs
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
