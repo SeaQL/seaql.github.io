@@ -40,21 +40,22 @@ server:
 
 The admin panel frontend is customizable and it read the configuration from the `api/admin/config` endpoint.
 
+Add the dependencies for parsing SeaORM Pro config.
+
+```diff title=loco_starter/Cargo.toml
+[dependencies]
++ sea-orm-pro = { version = "0.1" }
+```
+
 ```rust title=loco_starter/src/controllers/admin.rs
 use loco_rs::prelude::*;
+use sea_orm_pro::ConfigParser;
 
 pub async fn config(State(_ctx): State<AppContext>) -> Result<Response> {
-    format::json(serde_json::json!({
-        "site": {
-            "theme": {
-                "title": "SeaORM Pro",
-                "logo": "/admin/favicon.ico",
-                "login_banner": "/admin/logo.png",
-            }
-        },
-        "raw_tables": {},
-        "composite_tables": {},
-    }))
+    let config = ConfigParser::new()
+        .load_config("pro_admin")
+        .expect("Invalid TOML Config");
+    format::json(config)
 }
 
 pub fn routes() -> Routes {
@@ -93,13 +94,12 @@ impl Hooks for App {
 
 ### 2.1 Define GraphQL schema
 
-Add the dependencies for defining GraphQL schema: `async-graphql`, `seaography` and `lazy_static`.
+Add the dependencies for defining GraphQL schema.
 
 ```diff title=loco_starter/Cargo.toml
 [dependencies]
-+ async-graphql = { version = "7.0", features = ["decimal", "chrono", "dataloader", "dynamic-schema"] }
-+ seaography = { version = "1.1.0", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
-+ lazy_static = { version = "1.4" }
+sea-orm-pro = { version = "0.1" }
++ seaography = { version = "1.1", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
 ```
 
 We need to define an `RelatedEntity` enum for each of the SeaORM entity to help `seaography` figure out the parent-child relation between entities.
@@ -222,7 +222,7 @@ Defining the GraphQL schema.
 ```rust title=loco_starter/src/graphql/query_root.rs
 use async_graphql::dynamic::*;
 use sea_orm::DatabaseConnection;
-use seaography::{Builder, BuilderContext};
+use seaography::{async_graphql, lazy_static, Builder, BuilderContext};
 
 lazy_static::lazy_static! {
     static ref CONTEXT: BuilderContext = BuilderContext::default();
@@ -236,21 +236,15 @@ pub fn schema(
     // Construct GraphQL schema
     let builder = Builder::new(&CONTEXT, database.clone());
     let builder = crate::models::_entities::register_entity_modules(builder);
-    let schema = builder.schema_builder();
-    // Maximum depth of the constructed query
-    let schema = if let Some(depth) = depth {
-        schema.limit_depth(depth)
-    } else {
-        schema
-    };
-    // Maximum complexity of the constructed query
-    let schema = if let Some(complexity) = complexity {
-        schema.limit_complexity(complexity)
-    } else {
-        schema
-    };
-    // GraphQL schema with database connection
-    schema.data(database).finish()
+    builder
+        // Maximum depth of the constructed query
+        .set_depth_limit(depth)
+        // Maximum complexity of the constructed query
+        .set_complexity_limit(complexity)
+        .schema_builder()
+        // GraphQL schema with database connection
+        .data(database)
+        .finish()
 }
 ```
 
@@ -277,11 +271,10 @@ Add dependencies for serving GraphQL playground and handling GraphQL request.
 
 ```diff title=loco_starter/Cargo.toml
 [dependencies]
-async-graphql = { version = "7.0", features = ["decimal", "chrono", "dataloader", "dynamic-schema"] }
+sea-orm-pro = { version = "0.1" }
 + async-graphql-axum = { version = "7.0" }
 + tower-service = { version = "0.3" }
-seaography = { version = "1.1.0", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
-lazy_static = { version = "1.4" }
+seaography = { version = "1.1", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
 ```
 
 The GraphQL controller.
@@ -290,13 +283,19 @@ The GraphQL controller.
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use axum::{body::Body, extract::Request};
 use loco_rs::prelude::*;
+use seaography::async_graphql;
 use tower_service::Service;
 
 use crate::graphql::query_root;
 
 async fn graphql_playground() -> Result<Response> {
     // Setup GraphQL playground web and specify the endpoint for GraphQL resolver
-    let res = playground_source(GraphQLPlaygroundConfig::new("/api/graphql"));
+    let config = GraphQLPlaygroundConfig::new("/api/graphql").with_header("Authorization", "");
+
+    let res = playground_source(config).replace(
+        r#""Authorization":"""#,
+        r#""Authorization":`Bearer ${localStorage.getItem('auth_token')}`"#,
+    );
 
     Ok(Response::new(res.into()))
 }
@@ -427,10 +426,12 @@ Password: demo@sea-ql.org
 
 ![](../../static/img/getting-started-loco-01-login.png)
 
-![](../../static/img/getting-started-loco-02-raw-tables.png)
+![](../../static/img/getting-started-loco-02-dashboard.png)
 
-![](../../static/img/getting-started-loco-03-raw-tables-notes.png)
+![](../../static/img/getting-started-loco-03-raw-tables.png)
 
-![](../../static/img/getting-started-loco-04-raw-tables-notes-details.png)
+![](../../static/img/getting-started-loco-04-raw-tables-notes.png)
 
-![](../../static/img/getting-started-loco-05-composite-tables.png)
+![](../../static/img/getting-started-loco-05-raw-tables-notes-details.png)
+
+![](../../static/img/getting-started-loco-06-composite-tables.png)

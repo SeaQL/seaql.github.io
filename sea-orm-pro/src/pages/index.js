@@ -74,13 +74,13 @@ function HomepageSlogan() {
               <img class="dark:hidden object-cover" src="img/02_login.png" />
               <img class="hidden dark:block object-cover" src="img/02_login.png" />
             </div>
-            <div class="absolute right-0 top-56 aspect-[5/4] w-[240px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:top-64 sm:w-[320px] md:-right-8 lg:top-64 overflow-hidden">
+            <div class="absolute right-0 top-56 aspect-[320/198] w-[240px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:top-64 sm:w-[320px] md:-right-8 lg:top-64 overflow-hidden">
               <img class="dark:hidden object-cover" src="img/03_toml_config.png" />
               <img class="hidden dark:block object-cover" src="img/03_toml_config.png" />
             </div>
             <div class="relative ml-4 mt-12 aspect-[4/3] w-[220px] rounded-xl bg-gray-900 dark:border-gray-900 dark:bg-gray-800 sm:ml-12 sm:w-[240px] md:ml-24 overflow-hidden">
-              <img class="dark:hidden object-cover" src="img/04_nested_table.png" />
-              <img class="hidden dark:block object-cover" src="img/04_nested_table.png" />
+              <img class="dark:hidden object-cover" src="img/04_table.png" />
+              <img class="hidden dark:block object-cover" src="img/04_table.png" />
             </div>
           </div>
         </div>
@@ -115,10 +115,10 @@ function HomepageFeatures() {
                 SeaORM Pro provides a full CRUD interface for your SeaORM models.
               </p>
             </div>
-            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
-              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/demo_table_view.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/demo_table_view.png" />
+            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[60%] lg:flex-auto lg:shrink-0 lg:pt-0">
+              <div class="h-[290px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
+                <img class="dark:hidden object-cover object-top lg:object-left w-full" src="img/05_table_crud.png" />
+                <img class="hidden dark:block object-cover object-top lg:object-left w-full" src="img/05_table_crud.png" />
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/05_ui_design.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/05_ui_design.png" />
+                <img class="dark:hidden object-cover object-top w-full" src="img/01_banner.png" />
+                <img class="hidden dark:block object-cover object-top w-full" src="img/01_banner.png" />
               </div>
             </div>
           </div>
@@ -157,8 +157,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden bg-white dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/06_graphql_api.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/06_graphql_api.png" />
+                <img class="dark:hidden object-cover object-top w-full" src="img/06_graphql_api.png" />
+                <img class="hidden dark:block object-cover object-top w-full" src="img/06_graphql_api.png" />
               </div>
             </div>
           </div>
@@ -175,10 +175,10 @@ function HomepageFeatures() {
                 Customize the UI theme easily with light / dark mode support.
               </p>
             </div>
-            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[51%] lg:flex-auto lg:shrink-0 lg:pt-0">
+            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[60%] lg:flex-auto lg:shrink-0 lg:pt-0">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/08_nested.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/08_nested.png" />
+                <img class="dark:hidden object-cover object-top lg:object-left w-full" src="img/07_dark_mode.png" />
+                <img class="hidden dark:block object-cover object-top lg:object-left w-full" src="img/07_dark_mode.png" />
               </div>
             </div>
           </div>
@@ -199,8 +199,8 @@ function HomepageFeatures() {
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:mx-auto lg:h-[600px] lg:w-[85%] bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-left" src="img/07_low_code.png" />
-                <img class="hidden dark:block object-cover object-left" src="img/07_low_code.png" />
+                <img class="dark:hidden object-cover object-top lg:object-left w-full" src="img/08_low_code.png" />
+                <img class="hidden dark:block object-cover object-top lg:object-left w-full" src="img/08_low_code.png" />
               </div>
             </div>
           </div>
