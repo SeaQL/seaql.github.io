@@ -42,4 +42,6 @@
 
 6. Deployment
 
-    6.1 [Nginx](06-deployment/01-nginx.md)
+    6.1 [Virtual Machine](06-deployment/01-vm.md)
+
+    6.2 [Container](06-deployment/02-container.md)
