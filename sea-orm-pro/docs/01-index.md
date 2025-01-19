@@ -18,6 +18,8 @@
 
     3.2 [Theme](03-site-config/02-theme.md)
 
+AdventureWorks
+
 4. Raw Table Config
 
     4.1 [Overview](04-raw-table-config/01-overview.md)
@@ -45,3 +47,10 @@
     6.1 [Virtual Machine](06-deployment/01-vm.md)
 
     6.2 [Container](06-deployment/02-container.md)
+
+7. GUI Development
+
+    7.1 Overview
+        + Overview of React project
+    7.2 Development and Release
+    7.3 GraphQL Playground
