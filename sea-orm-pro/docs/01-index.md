@@ -50,7 +50,9 @@ AdventureWorks
 
 7. GUI Development
 
-    7.1 Overview
+    7.1 [Overview](07-gui-development/01-overview.md)
         + Overview of React project
-    7.2 Development and Release
-    7.3 GraphQL Playground
+
+    7.2 [Development and Release](07-gui-development/02-dev-and-release.md)
+
+    7.3 [GraphQL Playground](07-gui-development/03-graphql.md)

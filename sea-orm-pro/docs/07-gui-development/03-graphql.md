@@ -1,3 +1,5 @@
+# GraphQL Playground
+
 ```graphql
 query {
   customer(
