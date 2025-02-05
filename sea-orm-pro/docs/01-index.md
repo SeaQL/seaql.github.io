@@ -12,13 +12,15 @@
 
     2.2 [Getting Started with Axum](02-install-and-config/02-getting-started-axum.md)
 
+2. Playground
+
+    2.1 [Live Demo](02-playground/01-live-demo.md)
+
 3. Site Config
 
     3.1 [Overview](03-site-config/01-overview.md)
 
     3.2 [Theme](03-site-config/02-theme.md)
-
-AdventureWorks
 
 4. Raw Table Config
 
