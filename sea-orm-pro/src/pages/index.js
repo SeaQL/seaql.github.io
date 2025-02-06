@@ -27,7 +27,7 @@ function HomepageHeader() {
               <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
                 Getting Started
               </a>
-              <a href="docs/playground/live-demo/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
+              <a href="https://sea-orm-pro-demo.sea-ql.org/admin/" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
                 Try the Demo
               </a>
             </div>
@@ -213,7 +213,7 @@ function HomepageFeatures() {
             <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
               Getting Started
             </a>
-            <a href="docs/playground/live-demo/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
+            <a href="https://sea-orm-pro-demo.sea-ql.org/admin/" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
               Try the Demo
             </a>
           </div>
