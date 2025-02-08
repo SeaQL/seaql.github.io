@@ -98,7 +98,7 @@
 
     8.3 [Aggregate functions](08-advanced-query/03-aggregate-function.md)
 
-    8.4 [Custom Joins](08-advanced-query/04-custom-joins.md)
+    8.4 [Advanced Joins](08-advanced-query/04-advanced-joins.md)
 
     8.5 [Sub Query](08-advanced-query/05-subquery.md)
 
@@ -118,13 +118,11 @@
 
     9.3 [Create Index](09-schema-statement/03-create-index.md)
 
-10. Seaography
+10. GraphQL Support
 
-    10.1 [🧭 Seaography Intro](10-seaography/01-seaography-intro.md)
+    10.1 [🧭 Seaography Intro](10-graph-ql/01-seaography-intro.md)
 
-    10.2 [Getting Started](10-seaography/02-getting-started.md)
-
-    10.3 [Looking Forward](10-seaography/03-looking-forward.md)
+    10.2 [Getting Started](10-graph-ql/02-getting-started.md)
 
 11. Internal Design
 
