@@ -67,7 +67,7 @@ enum ProductType { .. }
 In SQL terms, we have 3 entities and 2 relations among them:
 
 + `BaseProduct` -> `ComplexProduct`
-+ `BaseProduct` -> `ProductTypes`
++ `BaseProduct` -> `ProductType`
 
 Below are the SeaORM Entities:
 
