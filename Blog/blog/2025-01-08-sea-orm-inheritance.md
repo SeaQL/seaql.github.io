@@ -1,6 +1,6 @@
 ---
-slug: 2025-01-08-sea-orm-joins
-title: "Tutorial: Complex Joins in SeaORM"
+slug: 2025-01-08-sea-orm-inheritance
+title: "Tutorial: Modeling Inheritance in SeaORM"
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
