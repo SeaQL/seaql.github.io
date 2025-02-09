@@ -2,7 +2,7 @@
 
 An anatomy of a complex relational query with multiple joins and custom selects.
 
-## Background
+## Schema
 
 Suppose we have a schema design of `BaseProduct` -> `ComplexProduct`, `BaseProduct` -> `ProductTypes`.
 
@@ -103,7 +103,7 @@ pub struct ComplexProduct {
 }
 ```
 
-With `Serialize`, you can transform the select result into JSON directly!
+With `Serialize`, you can transform the select result into JSON directly.
 
 ## 2. Define helper aliases
 
@@ -320,16 +320,4 @@ pub fn associate(
 let products = associate(products, histories);
 ```
 
-This is sometimes called "data loader" pattern, and can be tailoured to fit your schema and needs.
-
-## Conclusion
-
-SeaORM's type system encourages you to write modular and reusable code, embracing the "Don't repeat yourself" principle.
-
-You define the Entities and Relations once.
-
-You define the Aliases and query helpers once.
-
-You can pass the `Select<T>` and `Condition` around.
-
-You then assemble these pieces together to implement any complex API!
+This is sometimes called "data loader" pattern, and can be generalized with generics to work with any model.
