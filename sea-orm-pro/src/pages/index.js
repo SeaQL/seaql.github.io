@@ -217,6 +217,16 @@ function HomepageFeatures() {
               Try the Demo
             </a>
           </div>
+          <div class="mt-8 flex flex-col flex-wrap items-center gap-6 justify-center sm:flex-row lg:gap-10">
+            <img class="dark-mode object-cover h-[80px] lg:h-[120px]" src="img/databases/MariaDB.svg" />
+            <img class="dark-mode object-cover h-[60px] lg:h-[100px]" src="img/databases/MySQL.svg" />
+            <img class="dark-mode object-cover h-[80px] lg:h-[120px]" src="img/databases/SQLite.svg" />
+            <img class="dark-mode object-cover h-[80px] lg:h-[120px]" src="img/databases/PostgreSQL.svg" />
+            <img class="dark-mode object-cover h-[80px] lg:h-[120px]" src="img/databases/MSSQL.svg" />
+          </div>
+          <div class="mt-6">
+            *SQL Server support via <a href="https://www.sea-ql.org/SeaORM-X/" target="_blank">SeaORM X</a>
+          </div>
         </div>
       </div>
     </section>
