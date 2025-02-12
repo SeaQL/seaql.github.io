@@ -10,23 +10,6 @@ export default function HomepageProducts() {
   return (
     <section id="our-users" className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
-        <h2 className="text--center">Gold Sponsors</h2>
-        <div className="row">
-          <div className="col col--12">
-            <div className="row">
-              <div className="col col--4"></div>
-              <div className="col col--4">
-                <p className="text--center">
-                  <a href="https://www.osmos.io/" target="_blank">
-                    <img src={colorMode == 'dark' ? 'https://www.sea-ql.org/static/sponsors/Osmos-dark.svg' : 'https://www.sea-ql.org/static/sponsors/Osmos.svg'} width="238" />
-                  </a>
-                </p>
-              </div>
-              <div className="col col--4"></div>
-            </div>
-          </div>
-        </div>
-        <br />
         <h2 className="text--center">Silver Sponsors</h2>
         <div className="row">
           <div className="col col--12">
