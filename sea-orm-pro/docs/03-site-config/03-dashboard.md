@@ -95,9 +95,9 @@ kind = "pie"
 # ...
 ```
 
-#### Fetching Chart Data
+### Fetching Chart Data
 
-A unique key, `chart`, is defined for each chart to fetch chart data from the backend API. The aggregation query can be found in the admin controller:
+A unique key, `chart`, is defined for each chart to fetch chart data from the backend API. The SQL query can be found in the admin controller:
 
 ```rust title=src/controllers/admin.rs
 pub async fn dashboard(
@@ -107,31 +107,6 @@ pub async fn dashboard(
 ) -> Result<Response> {
     let db = &ctx.db;
     let data = match body.graph.as_str() {
-        "new_customer_by_month" => {
-            customer::Entity::find()
-                .select_only()
-                .column_as(cast_as_year_month(db, customer::Column::CreatedDate), DatumColumn::Key)
-                .column_as(Expr::expr(Func::cast_as(Func::count(Expr::col(Asterisk)), int_keyword(db))), DatumColumn::Val)
-                .filter(customer::Column::CreatedDate.gte(body.from.unwrap()))
-                .filter(customer::Column::CreatedDate.lte(body.to.unwrap()))
-                .group_by(Expr::col(DatumColumn::Key))
-                .into_model::<Datum>()
-                .all(db)
-                .await?
-        },
-        "sales_value_by_day" => {
-            sales_order_detail::Entity::find()
-                .select_only()
-                .column_as(cast_as_day(db, (sales_order_header::Entity, sales_order_header::Column::OrderDate)), DatumColumn::Key)
-                .column_as(Expr::expr(Func::cast_as(Func::sum(Expr::col(sales_order_detail::Column::UnitPrice).mul(Expr::col(sales_order_detail::Column::OrderQty))), int_keyword(db))), DatumColumn::Val)
-                .left_join(sales_order_header::Entity)
-                .filter(Expr::col((sales_order_header::Entity, sales_order_header::Column::OrderDate)).gte(body.from.unwrap()))
-                .filter(Expr::col((sales_order_header::Entity, sales_order_header::Column::OrderDate)).lte(body.to.unwrap()))
-                .group_by(Expr::col(DatumColumn::Key))
-                .into_model::<Datum>()
-                .all(db)
-                .await?
-        },
         "product_by_product_category" => {
             product_category::Entity::find()
                 .select_only()

@@ -124,11 +124,11 @@ module.exports = {
     //   indexName: 'seaorm',
     //   contextualSearch: true,
     // },
-    announcementBar: {
-      id: 'sea-orm-bar',
-      content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; 🚧',
-      isCloseable: false,
-    },
+    // announcementBar: {
+    //   id: 'sea-orm-bar',
+    //   content: '🚧 &nbsp; SeaORM Pro is in closed beta! &nbsp; 🚧',
+    //   isCloseable: false,
+    // },
   },
   presets: [
     [

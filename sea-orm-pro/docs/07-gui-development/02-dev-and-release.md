@@ -1,15 +1,5 @@
 # Development and Release
 
-:::tip SeaORM Pro Plus
-
-<br/>
-
-SeaORM Pro is free-to-use software. All backend source code is MIT Licensed, but the frontend source code is closed for the time being.
-
-[SeaORM Pro Plus](https://github.com/SeaQL/sea-orm-pro-plus) provides additional features and access to the frontend source code.
-
-:::
-
 ## Development
 
 You can start a development server to see the code changes in live.

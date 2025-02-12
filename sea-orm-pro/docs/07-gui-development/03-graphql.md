@@ -1,15 +1,5 @@
 # GraphQL Playground
 
-:::tip SeaORM Pro Plus
-
-<br/>
-
-SeaORM Pro is free-to-use software. All backend source code is MIT Licensed, but the frontend source code is closed for the time being.
-
-[SeaORM Pro Plus](https://github.com/SeaQL/sea-orm-pro-plus) provides additional features and access to the frontend source code.
-
-:::
-
 GraphQL playground and handler is defined in the GraphQL controller:
 
 ```rust title=src/controllers/graphql.rs
@@ -34,24 +24,6 @@ async fn graphql_playground() -> Result<Response> {
     Ok(Response::new(res.into()))
 }
 
-async fn graphql_handler(
-    _auth: auth::JWT,
-    State(ctx): State<AppContext>,
-    req: Request<Body>,
-) -> Result<Response> {
-    // Maximum depth of the constructed query
-    const DEPTH: Option<usize> = None;
-    // Maximum complexity of the constructed query
-    const COMPLEXITY: Option<usize> = None;
-    // GraphQL schema
-    let schema = query_root::schema(ctx.db.clone(), DEPTH, COMPLEXITY).unwrap();
-    // GraphQL handler
-    let mut graphql_handler = async_graphql_axum::GraphQL::new(schema);
-    let res = graphql_handler.call(req).await.unwrap();
-
-    Ok(res)
-}
-
 pub fn routes() -> Routes {
     Routes::new()
         // GraphQL route prefix
@@ -63,11 +35,11 @@ pub fn routes() -> Routes {
 }
 ```
 
-After login, visit the GraphQL playground by clicking GraphQL icon on the top-right corner.
+You can disable the `graphql_playground` endpoint if you don't need it in production.
 
-![](../../static/img/GraphQL-playground-button.png)
+After login, visit the GraphQL playground by clicking GraphQL icon <img style={{'height':'24px'}} src="https://camo.githubusercontent.com/9b220ec2e5024c8399c4ed4da508189a96dbe9d246e8a6d994ad3b922395046e/68747470733a2f2f6772617068716c2e6f72672f696d672f6c6f676f2e737667"/> on the top-right corner.
 
-You should see the "Bearer Token" has been applied automatically.
+You should see the "Bearer Token" has been applied automatically in the bottom panel.
 
 ![](../../static/img/GraphQL-playground.png)
 

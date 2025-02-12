@@ -12,10 +12,10 @@ SeaORM Pro is free-to-use software. All backend source code is MIT Licensed, but
 
 ## Tech Stack
 
-* [UmiJS](https://umijs.org/): An extensible enterprise-level front-end routing framework
+* [UmiJS](https://umijs.org/en-US/docs/introduce/introduce): An extensible enterprise-level front-end routing framework
 * [Ant Design](https://ant.design/): An UI component framework to enrich your web application
 * [Ant Design Pro](https://pro.ant.design/): A production-ready UI component for admin dashboard application
-* [Ant Design Charts](https://ant-design-charts.antgroup.com/): An enterprise data visualization library
+* [Ant Design Charts](https://ant-design-charts.antgroup.com/en/): An enterprise data visualization library
 
 ## Folder Structure
 

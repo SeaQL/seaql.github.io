@@ -17,7 +17,7 @@ There are several engineering problems we are trying to solve:
 3. The difficulty in keeping the admin panel in sync with the application's schema after adding new tables and columns.
     + Solution: develop your application using SeaORM. You can share the same set of entities between your app and the admin panel, so any schema changes are automatically reflected in the GraphQL schema and the admin panel. You only have to touch the config to customize things
 4. The long term viability in managing growth in complexity. Low-code solutions will eventually hit a functionality ceiling, requiring a rewrite to implement new features.
-    + Solution: built using commodity technologies, SeaORM Pro offer a pathway to develop a fully-fledged admin application
+    + Solution: built using open-source and well-understood technologies, SeaORM Pro offer a pathway to develop a fully-fledged admin application
 
 ## Architecture
 

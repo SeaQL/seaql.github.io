@@ -4,7 +4,7 @@ SeaORM Pro is free-to-use software. All backend source code is MIT Licensed, but
 
 [SeaORM Pro Plus](https://github.com/SeaQL/sea-orm-pro-plus) provides additional features and access to the frontend source code.
 
-You can access the repository as a [Pro tier sponsor](https://github.com/sponsors/SeaQL). The license grant is perpetual (you can use the code forever) and you will receive updates while being a sponsor.
+You can access the repository as a [Pro tier sponsor](https://github.com/sponsors/SeaQL). The license grant is perpetual (you can use the software forever) and you will receive updates while being a sponsor.
 
 As of the initial release, there is no additional features unlocked. We would prioritize answering questions and feature requests from sponsors.
 

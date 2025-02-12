@@ -4,7 +4,7 @@
 
 Specify the database table name of the parent table.
 
-## Parent Table is-a Raw Table
+## Parent Table is a Raw Table
 
 All raw table config can be applied to parent table.
 
