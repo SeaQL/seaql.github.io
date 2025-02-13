@@ -18,7 +18,7 @@ The TOML config consists of 5 sections, each section will be explained separatel
 [table]
 # ...
 
-[view]
+[filter]
 # ...
 
 [create]

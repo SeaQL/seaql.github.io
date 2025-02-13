@@ -22,13 +22,15 @@
 
     3.2 [Theme](03-site-config/02-theme.md)
 
+    3.3 [Dashboard](03-site-config/03-dashboard.md)
+
 4. Raw Table Config
 
     4.1 [Overview](04-raw-table-config/01-overview.md)
 
     4.2 [Table](04-raw-table-config/02-table.md)
 
-    4.3 [View](04-raw-table-config/03-view.md)
+    4.3 [Filter](04-raw-table-config/03-filter.md)
 
     4.4 [Create](04-raw-table-config/04-create.md)
 

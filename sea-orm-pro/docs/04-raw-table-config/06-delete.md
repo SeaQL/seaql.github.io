@@ -1,5 +1,8 @@
 # Delete
 
+![](../../static/img/raw-table-config-table-delete.png#light)
+![](../../static/img/raw-table-config-table-delete-dark.png#dark)
+
 ## Enable Delete
 
 Enable delete on this database table, this is disabled by default.
@@ -8,7 +11,6 @@ Enable delete on this database table, this is disabled by default.
 
 ```toml
 [delete]
-
-# Is delete allowed for this table?
+# Enable delete for this table
 enable = true
 ```

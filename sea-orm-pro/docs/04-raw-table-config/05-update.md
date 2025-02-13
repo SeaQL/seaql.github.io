@@ -1,5 +1,8 @@
 # Update
 
+![](../../static/img/raw-table-config-table-update.png#light)
+![](../../static/img/raw-table-config-table-update-dark.png#dark)
+
 ## Enable Update
 
 Enable update on this database table, this is disabled by default.
@@ -16,19 +19,15 @@ Readonly fields on the update form.
 
 ```toml
 [update]
-
-# Is update allowed for this table?
+# Enable update for this table
 enable = true
-
-# List of columns that are hidden on the update form
+# Columns that are hidden on the update form
 hidden_columns = [
-    "created_at",
-    "updated_at",
+    "created_date"
 ]
-
-# List of columns that are readonly on the update form
+# Columns that are readonly on the update form
 readonly_columns = [
-    "id",
+    "product_id"
 ]
 ```
 

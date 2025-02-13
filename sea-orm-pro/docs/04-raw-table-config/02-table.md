@@ -1,25 +1,40 @@
 # Table
 
-## Title
+## Table Layout
 
-By default, name of the TOML file in title case as the title, can be override.
+![](../../static/img/raw-table-config-table-layout.png#light)
+![](../../static/img/raw-table-config-table-layout-dark.png#dark)
 
-```toml
+By default, name of the TOML file in title case will be displayed as the title, can be override.
+
+```toml title=pro_admin/raw_tables/product.toml
 [table]
-name = "Products"
+title = "Products"
 ```
 
-## Table Display
+![](../../static/img/raw-table-config-table-density.png#light)
+![](../../static/img/raw-table-config-table-density-dark.png#dark)
 
 Display density of the table rows and number of rows on each page.
 
-```toml
+```toml title=pro_admin/raw_tables/product.toml
 [table]
+# Available options: "large" / "middle" / "small"
 table_size = "middle"
-page_size = 20
+page_size = 30
+```
+
+Sort table by any column in "asc" or "desc" order.
+
+```toml title=pro_admin/raw_tables/product.toml
+[table]
+order_by = { field = "product_id", order = "desc" }
 ```
 
 ## Table Columns
+
+![](../../static/img/raw-table-config-table-column.png#light)
+![](../../static/img/raw-table-config-table-column-dark.png#dark)
 
 By default, the `all_columns` is turned on, meaning all columns will be shown, you can override this in the config.
 
@@ -31,22 +46,40 @@ Set `input_type` to render column data in custom renderer.
 
 Field of the one-to-one relation can be displayed via providing the name of the SeaORM `relation` and the `field` of the related table.
 
-```toml
+```toml title=pro_admin/raw_tables/product.toml
 [table]
-all_columns = false
 columns = [
     { title = "ID", field = "product_id", width = 80 },
     { title = "Thumbnail", field = "thumb_nail_photo", input_type = "image", width = 120 },
     { title = "Product Category", field = "name", relation = "product_category", ellipsis = false, width = 180 },
+    # ...
 ]
+hidden_columns = [
+    "size",
+    "weight",
+]
+all_columns = false
 ```
 
 ## Full Spec
 
-```toml
+```toml title=pro_admin/raw_tables/product.toml
 [table]
-
-# Column specific config
+# Title on the table header
+title = "Products"
+# Display density of the table view
+# Available options: "large" / "middle" / "small"
+table_size = "middle"
+# Number of rows on each page
+page_size = 30
+# Default table sorter
+order_by = {
+    # Order by which column
+    field = "product_id",
+    # Order by direction: "asc" / "desc"
+    order = "desc",
+}
+# Display following columns in sequence from left to right in the table view
 columns = [
     {
         # Display title
@@ -82,16 +115,11 @@ columns = [
         width = 180
     },
 ]
-
-# Show all columns including column not mention in the `columns` config
+# Hide columns in the table view
+hidden_columns = [
+    "size",
+    "weight",
+]
+# Display all columns that are not included in `columns`, this is on by default
 all_columns = false
-
-# Number of rows per page
-page_size = 20
-
-# Display density, options: large, middle, small
-table_size = "middle"
-
-# Rename table title
-name = "Products"
 ```
