@@ -6,12 +6,12 @@ You can also check out [SeaORM Cookbook](https://www.sea-ql.org/sea-orm-cookbook
 
 If you are so eager and want something grab-and-go, SeaQL maintains a set of official examples:
 
-+ [Actix Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/actix_example)
-+ [Axum Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/axum_example)
-+ [GraphQL Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/graphql_example)
-+ [jsonrpsee Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/jsonrpsee_example)
-+ [Loco Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_example)
-+ [Loco REST Starter Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/loco_starter)
-+ [Poem Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/poem_example)
-+ [Salvo Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/salvo_example)
-+ [Tonic Example](https://github.com/SeaQL/sea-orm-x/tree/main/sea-orm-x/examples/tonic_example)
++ [Actix Example](https://github.com/SeaQL/sea-orm/tree/master/examples/actix_example)
++ [Axum Example](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example)
++ [GraphQL Example](https://github.com/SeaQL/sea-orm/tree/master/examples/graphql_example)
++ [jsonrpsee Example](https://github.com/SeaQL/sea-orm/tree/master/examples/jsonrpsee_example)
++ [Loco Example](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_example)
++ [Loco REST Starter Example](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter)
++ [Poem Example](https://github.com/SeaQL/sea-orm/tree/master/examples/poem_example)
++ [Salvo Example](https://github.com/SeaQL/sea-orm/tree/master/examples/salvo_example)
++ [Tonic Example](https://github.com/SeaQL/sea-orm/tree/master/examples/tonic_example)
