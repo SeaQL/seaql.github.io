@@ -378,4 +378,4 @@ Features:
 * Built in GraphQL resolver
 * Customize the UI with simple TOML
 
-<a href="https://www.sea-ql.org/sea-orm-pro/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png" /></a>
+<a href="https://www.sea-ql.org/sea-orm-pro/"><img style={{borderRadius: "25px"}} alt="SeaORM Pro" src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png" /></a>
