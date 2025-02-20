@@ -1,6 +1,6 @@
 # Getting Started with Loco
 
-We use the [`loco_starter`](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter) example as the base, it contains basic REST API to handle basic user management such as user registration, login and user info of current session.
+We use the [`loco_starter`](https://github.com/SeaQL/sea-orm/tree/master/examples/loco_starter) example as the base, it contains basic REST API to handle basic user management such as user registration, login and user info of current session. Final source code is [here](https://github.com/SeaQL/sea-orm-pro/tree/main/examples/loco_example).
 
 ## 1. Setup Admin Endpoint
 
