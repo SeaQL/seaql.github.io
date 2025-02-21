@@ -48,7 +48,9 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 }
 
 html[data-theme='dark'] canvas.chart-js,
-html[data-theme='dark'] .badge-dark-mode {
+html[data-theme='dark'] .badge-dark-mode,
+html[data-theme='dark'] img.dark-mode
+{
   filter: invert(1) hue-rotate(180deg);
 }
 

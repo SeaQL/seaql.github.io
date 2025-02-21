@@ -1,7 +1,7 @@
 const tailwindPlugin = require('./plugins/tailwind-config.cjs');
 
 module.exports = {
-  title: 'SeaORM Pro 🖥️ an Admin Panel for SeaORM',
+  title: 'SeaORM Pro 🖥️ Admin Panel for SeaORM',
   tagline: '🖥️ SeaORM Pro is an Admin Panel for SeaORM',
   url: 'https://www.sea-ql.org',
   baseUrl: '/sea-orm-pro/',
