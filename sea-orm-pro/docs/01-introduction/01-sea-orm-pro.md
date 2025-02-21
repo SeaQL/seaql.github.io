@@ -43,7 +43,7 @@ Each raw table corresponds to a table in the database, by default it will displa
 
 #### Composite Table
 
-This is where SeaORM Pro shine. Afterall, SQL is relational! You can construct table views with data joining from multiple related tables. The underlying GraphQL query can be deeply nested.
+This is where SeaORM Pro shine. You can construct table views with data joining from multiple related tables. The underlying GraphQL query can be deeply nested.
 
 Data from parent-child relations (e.g. Order -> OrderItem) are represented as collapsible nested tables. You can configure the settings via TOML.
 
