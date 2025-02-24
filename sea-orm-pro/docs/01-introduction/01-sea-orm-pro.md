@@ -31,6 +31,8 @@ The tech stack is **RRLS** (pronounced release!): React, Rust, Loco, SeaQL. Thes
 + Database: MySQL / PostgreSQL / SQLite / SQL Server*
 + Language: Rust
 
+*SQL Server support via [SeaORM X](https://www.sea-ql.org/SeaORM-X/)
+
 ## Features
 
 ### Table View
