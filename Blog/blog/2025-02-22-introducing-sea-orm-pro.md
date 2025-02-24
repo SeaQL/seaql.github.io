@@ -48,16 +48,18 @@ The tech stack is **RRLS** (pronounced release!): React, Rust, Loco, SeaQL. Thes
 + Database: MySQL / PostgreSQL / SQLite / SQL Server*
 + Language: Rust
 
+*SQL Server support via [SeaORM X](https://www.sea-ql.org/SeaORM-X/)
+
 ## Features
 
-SeaORM Pro can be used alongside with your existing Rust backend. It does not interfere with your active application in any way. In fact, you can easily create a SeaORM Pro admin panel to your operating SeaORM applications that you have already built.
+SeaORM Pro can be used alongside with your existing Rust backend. It does not interfere with your active application in any way. In fact, you can easily create a SeaORM Pro admin panel for your operating SeaORM applications that you have already built.
 
 + [Getting Started with Loco](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-loco/)
 + [Getting Started with Axum](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-axum/)
 
 ### Customizable UI
 
-Customize the UI easily with a simple, elegant TOML syntax. You have full control over the style and the layout of admin panel:
+Customize the UI easily with the simple, elegant TOML syntax. You have full control over the style and the layout of admin panel:
 
 + [Theme Config](https://www.sea-ql.org/sea-orm-pro/docs/site-config/theme/): customize site' title, logo, banner and menu item settings
 + [Dashboard Config](https://www.sea-ql.org/sea-orm-pro/docs/site-config/dashboard/): customize dashboard' info cards and charts settings
@@ -66,7 +68,7 @@ Customize the UI easily with a simple, elegant TOML syntax. You have full contro
 
 ### Dashboard
 
-A glance into the metrics. SeaORM Pro visualize your business statistics with charts. For example, numbers of newly acquired customer on each month and sales per week visualize in line chart. The dashboard UI is configurable via TOML syntax, chart data is fetch via by predefined query in the Rust backend.
+A glance into the metrics. SeaORM Pro visualize your business statistics with charts. For example, numbers of newly acquired customer on each month and sales per week visualize in line chart. The dashboard UI is configurable via TOML syntax, chart data is fetch via predefined query in the Rust backend.
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/01_banner_dark.png#dark" />
@@ -77,7 +79,7 @@ The core of SeaORM Pro is its ability to create, read, update, and delete data i
 
 #### Raw Table
 
-Without configuration, each raw table corresponds to a table in the database, by default it will display all columns for all tables. You can configure the displayed columns and other settings via TOML.
+Without any configuration, each raw table corresponds to a table in the database, by default it will display all columns for all tables. You can configure the displayed columns and other settings via TOML. Read [Raw Table Config](https://www.sea-ql.org/sea-orm-pro/docs/raw-table-config/overview/).
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-column.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-column-dark.png#dark" />
@@ -86,7 +88,7 @@ Without configuration, each raw table corresponds to a table in the database, by
 
 This is where SeaORM Pro shine. Afterall, SQL is relational! You can construct table views with data joining from multiple related tables. The underlying GraphQL query can be deeply nested.
 
-Data from parent-child relations (e.g. SalesOrder -> SalesOrderItem) are represented as collapsible nested tables. You can configure the settings via TOML.
+Data from parent-child relations (e.g. SalesOrder -> SalesOrderItem) are represented as collapsible nested tables. You can configure the settings via TOML. Read [Composite Config](https://www.sea-ql.org/sea-orm-pro/docs/composite-table-config/overview/).
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/composite-table-config-child-table.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/composite-table-config-child-table-dark.png#dark" />
@@ -98,15 +100,21 @@ Data is not editable by default. You can configure create, update and delete for
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-create.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-create-dark.png#dark" />
 
+Read [Create Config](https://www.sea-ql.org/sea-orm-pro/docs/raw-table-config/create/).
+
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-update.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-update-dark.png#dark" />
+
+Read [Update Config](https://www.sea-ql.org/sea-orm-pro/docs/raw-table-config/update/).
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-delete.png#light" />
 <img src="https://www.sea-ql.org/sea-orm-pro/img/raw-table-config-table-delete-dark.png#dark" />
 
+Read [Delete Config](https://www.sea-ql.org/sea-orm-pro/docs/raw-table-config/delete/).
+
 ### GraphQL
 
-SeaORM Pro ships data via GraphQL endpoint backed by Seaography.
+SeaORM Pro ships data via GraphQL endpoint backed by Seaography. GraphQL playground is included, feel free to explore the CRUD interfaces that defined in GraphQL.
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/06_graphql_api.png" />
 
@@ -116,10 +124,26 @@ Customize the UI theme easily with light / dark mode support.
 
 <img src="https://www.sea-ql.org/sea-orm-pro/img/07_dark_mode.png" />
 
-## Launch Admin Panel in minutes
+## Launch Admin Panel in Minutes
 
 Use SeaORM Pro with any Rust web framework, simply follow the 3 easy steps to setup an admin panel for existing SeaORM projects.
 
 Or even better, build your next application with our fullstack webapp template!
 
-[Try the Demo](https://sea-orm-pro-demo.sea-ql.org/admin/)!
++ [Getting Started with Loco](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-loco/)
++ [Getting Started with Axum](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-axum/)
++ [Try the Demo](https://sea-orm-pro-demo.sea-ql.org/admin/)!
+
+## SeaORM Pro Plus
+
+SeaORM Pro is free-to-use software. All backend source code is MIT Licensed, but the frontend source code is close-sourced for the time being.
+
+[SeaORM Pro Plus](https://github.com/SeaQL/sea-orm-pro-plus) provides additional features and access to the frontend source code.
+
+You can access the repository as a [Pro tier Sponsor](https://github.com/sponsors/SeaQL/sponsorships?tier_id=249708). The license grant is perpetual (you can use the software forever) and you will receive updates while being a sponsor.
+
+As of the initial release, there is no additional features unlocked. We would prioritize answering questions and feature requests from sponsors.
+
+This should not be viewed as an attempt to monetize, but a means for us to crowd source ideas (and some funding) for the development of new features. So being a sponsor you'd play a role in shaping the product's future!
+
+Eventually, after reaching a certain level of maturity, we'd like to release a community version of SeaORM Pro under an open-source license so that it will be completely free (as in freedom). This is our end goal.
