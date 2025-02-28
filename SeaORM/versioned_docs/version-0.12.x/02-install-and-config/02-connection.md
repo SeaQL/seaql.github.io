@@ -28,7 +28,9 @@ Here are some tips for database specific options:
 
 ### MySQL
 
-Can't think of any
+```
+mysql://username:password@host/database
+```
 
 ### Postgres
 
