@@ -1,0 +1,313 @@
+---
+slug: 2025-01-02-community-survey-2024
+title: SeaQL Community Survey 2024 Results
+author: Billy Chan
+author_title: SeaQL Team
+author_url: https://github.com/billy1624
+author_image_url: https://avatars.githubusercontent.com/u/30400950?v=4
+tags: [news]
+toc_max_heading_level: 2
+---
+
+import * as Chart from '../src/chart-2024.js';
+
+695 members of the SeaQL community from 47 countries kindly contributed their thoughts on using SeaQL libraries, learning Rust and employing Rust in their day to day development lives. From these responses we hope to get an understanding of where the SeaQL and Rust community stands in 2024.
+
+This is our first community survey, we will conduct the survey annually to keep track of how the community evolves over time.
+
+## Developer Profile
+
+### Q. Where are you located in?
+
+Participants are from 47 countries across the world!
+
+<Chart.country>
+    Other: <Chart.badges items={[
+        "Armenia",
+        "Azerbaijan",
+        "Bangladesh",
+        "Cambodia",
+        "Colombia ",
+        "Croatia",
+        "Czech Republic",
+        "Denmark",
+        "Egypt",
+        "Finland",
+        "Guatemala",
+        "Israel",
+        "Italy",
+        "Kazakhstan",
+        "Kenya",
+        "Nepal",
+        "Romania",
+        "Saudi Arabia",
+        "Slovakia",
+        "Slovenia",
+        "South Africa",
+        "Spain",
+        "Sweden",
+        "Syria",
+        "Turkey",
+    ]} />
+</Chart.country>
+
+### Q. Including any education, how many years have you been coding in total?
+
+<Chart.codingYears />
+
+### Q. Which of the following describes your current job, the one you do most of the time?
+
+<Chart.jobTitle>
+    Other: <Chart.badges items={[
+        "Academic researcher",
+        "Marketing or sales professional",
+        "Engineer, data",
+        "Data or business analyst",
+        "Solution Architect",
+        "Developer, QA or test",
+        "Designer",
+        "Developer, game or graphics",
+        "Hobbyist Developer",
+        "Educator",
+    ]} />
+</Chart.jobTitle>
+
+## Using SeaQL Libraries in Building a Project
+
+### Q. Roughly how long have you been using SeaQL libraries?
+
+<Chart.seaqlYears />
+
+### Q. Which SeaQL libraries are you using?
+
+<Chart.seaqlLibs />
+
+### Q. Are you using SeaQL libraries in a personal, academic or professional context?
+
+<Chart.seaqlLibContext />
+
+### Q. How many team members (including you) are working on the project?
+
+<Chart.numTeamMembers />
+
+### Q. Can you categorize the nature of the project?
+
+<Chart.projNature>
+    Other: <Chart.badges items={[
+        "Backend for a Web 3.0 Application",
+        "IoT Application",
+        "Backend System",
+        "A Document Generator",
+        "Mobile Project",
+        "SaaS",
+        "Database for a Cybersecurity Software",
+        "API",
+        "学习项目",
+        "Backend for a Multiplatform Application (Using Tauri)",
+        "Frontend + Backend Work",
+    ]} />
+</Chart.projNature>
+
+### Q. What is your development environment?
+
+<Chart.devEnv />
+
+### Linux Breakdown
+
+<Chart.devEnvLinux />
+
+### Windows Breakdown
+
+<Chart.devEnvWindows />
+
+### macOS Breakdown
+
+<Chart.devEnvMac />
+
+### Q. Which database(s) do you use?
+
+<Chart.databases>
+    Other: <Chart.badges items={[
+        "SurrealDB",
+        "EdgeDB",
+        "MariaDB",
+        "MariaDB Galera Cluster",
+        "MongoDB",
+        "libSQL",
+        "MSSQL",
+        "TImescale",
+        "Yugabyte",
+        "Oracle Database",
+    ]} />
+</Chart.databases>
+
+### Q. Which web framework are you using?
+
+<Chart.webFrameworks>
+    Other: <Chart.badges items={[
+        "SolidJS",
+        "Tauri",
+        "Tonic",
+        "trillium",
+        "Vue",
+        "Warp",
+    ]} />
+</Chart.webFrameworks>
+
+### Q. What is the deployment environment?
+
+<Chart.deploymentEnv>
+    Other: <Chart.badges items={[
+        "DigitalOcean App Platform",
+        "DogYun",
+        "Fly.io",
+        "Oracle Cloud",
+    ]} />
+</Chart.deploymentEnv>
+
+## Using Rust at Work
+
+### Q. Are you using Rust at work?
+
+<Chart.usingRustForWork />
+
+### Q. Which industry your company is in?
+
+<Chart.industry>
+    Other: <Chart.badges items={[
+        "Space Situational Awareness",
+        "Security",
+        "Ads",
+        "Betting",
+        "Construction",
+        "Automotive",
+        "Last Mile Logistics",
+        "IoT",
+    ]} />
+</Chart.industry>
+
+### Q. How many engineers in your company are dedicated to writing Rust?
+
+<Chart.numEngineers />
+
+### Q. What is the size of your company?
+
+<Chart.companySize />
+
+### Q. Which layer(s) of the technology stack are using Rust?
+
+<Chart.techStack>
+    Other: <Chart.badges items={[
+        "Embedded",
+        "Hardware Drivers",
+    ]} />
+</Chart.techStack>
+
+### Q. Would your company be interested in using SeaQL libraries with other databases?
+
+<Chart.otherDatabases />
+
+## Learning Rust
+
+### Q. Are you learning / new to Rust?
+
+<Chart.learningRust />
+
+### Q. Which language(s) are you most familiar with?
+
+<Chart.familiarLang>
+    Other: <Chart.badges items={[
+        "Erlang",
+        "Cobol",
+        "Lua",
+        "Perl",
+        "RPG",
+        "Assembly",
+    ]} />
+</Chart.familiarLang>
+
+### Q. Do you find Rust easy or hard to learn?
+
+<Chart.rustDifficulty />
+
+### Q. What motivates you to learn Rust?
+
+<Chart.rustMotivation>
+    Other: <Chart.badges items={[
+        "School makes me to learn",
+        "Better option to learn than C/C++",
+        "it's fantastic",
+        "Stability of ecosystem, security, speed",
+        "The ease of writing clean code",
+    ]} />
+</Chart.rustMotivation>
+
+### Q. What learning resources do you rely on?
+
+<Chart.learningResources />
+
+### Q. What is your first project built using Rust?
+
+<Chart.firstRustProj />
+
+### Q. Are you familiar with SQL?
+
+<Chart.familiarSql />
+
+## About SeaQL Libraries
+
+### Q. Why did you choose SeaQL libraries?
+
+<Chart.whySeaql>
+    Other: <Chart.badges items={[
+        "sea-orm-cli codegen",
+        "Ergonomic API",
+        "Word of mouth",
+    ]} />
+</Chart.whySeaql>
+
+### Q. Which aspects do you want to see advancement on SeaORM?
+
+<Chart.whatAdvancement>
+    Other: <Chart.badges items={[
+        "Better macros for less boilerplate code",
+        "Automatic migration",
+        "Schema diffing for migrations",
+    ]} />
+</Chart.whatAdvancement>
+
+### Q. What tools would you be interested in using, if developed first-party by SeaQL?
+
+<Chart.whatTool />
+
+## Share Your Thoughts
+
+### Q. Anything else you want to say?
+
+Didn't expect this section to turn into a testimonial, thank you for all the kind words :)
+
+> Love your toolchain, it's awesome to work with!
+
+> Wonderful library! To provide some additional feedback: I found myself missing documentation in certain parts of the API, leading to me having to guess what the method actually does for a given database backend (namely in relation to query builders).
+
+> Schema/migration management would be really nice. I have used Django in the past and loved the automatic migration file generation.
+
+> SeaORM is great - it just replaces existing asp.net entity framework projects at our company.
+
+## Rustacean Sticker Pack 🦀
+
+The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+
+Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
+
+Sticker Pack Contents:
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
+- Mascot of SeaQL: Terres the Hermit Crab
+- Mascot of Rust: Ferris the Crab
+- The Rustacean word
+
+[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+
+<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
