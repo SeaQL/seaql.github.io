@@ -46,7 +46,7 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
 
 + `debug-print` - print every SQL statement to logger
 + `mock` - mock interface for unit testing
-+ `macros` - procedural macros for your convenient
++ `macros` - procedural macros for your convenience
 + `with-chrono` - support [`chrono`](https://crates.io/crates/chrono) types
 + `with-time` - support [`time`](https://crates.io/crates/time) types
 + `with-json` - support [`serde-json`](https://crates.io/crates/serde-json) types
