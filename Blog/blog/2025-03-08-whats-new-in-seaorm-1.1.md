@@ -27,7 +27,6 @@ This blog post summarizes the new features and enhancements introduced in SeaORM
 ### Support Postgres Vector
 
 [#2500](https://github.com/SeaQL/sea-orm/pull/2500)
-
 The popular [pgvector](https://github.com/pgvector/pgvector) extension enables efficient storage and querying of high-dimensional vector data, supporting applications like similarity search, recommendation systems, and other AI tools.
 
 Thanks to the contribution of [@28Smiles](https://github.com/28Smiles), `PgVector` is now integrated nicely into the SeaQL ecosystem.
@@ -115,9 +114,9 @@ assert_eq!(
 );
 ```
 
-Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with `column_as`. Then, in `FromQueryResult` we use `from_alias` to map the query result back to the nested struct.
+Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as). Then, in `FromQueryResult` we use `from_alias` to map the query result back to the nested struct.
 
-You may wonder if there are ways to not do the alias and mapping? Yes! There's where `DerivePartialModel` comes into play. The previous example can be written as:
+You may wonder if there are ways to not do the alias and mapping? Yes! There's where [`DerivePartialModel`](https://docs.rs/sea-orm/latest/sea_orm/derive.DerivePartialModel.html) comes into play. The previous example can be written as:
 ```rust
 #[derive(DerivePartialModel)] // FromQueryResult is no longer needed
 #[sea_orm(entity = "cake::Entity", from_query_result)]
@@ -147,6 +146,17 @@ let cake: Cake = cake::Entity::find()
 ```
 
 Under the hood, `bakery_` prefix will be added to the column alias in the SQL query.
+
+```sql
+SELECT
+    "cake"."id" AS "id",
+    "cake"."name" AS "name",
+    "bakery"."id" AS "bakery_id",
+    "bakery"."name" AS "bakery_brand"
+FROM "cake"
+LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
+ORDER BY "cake"."id" ASC LIMIT 1
+```
 
 Now, let's look at one more advanced three-way join. Our join tree starts from Order:
 
@@ -224,7 +234,8 @@ That's it! Hope you like these new features, and a huge thanks to [@Goodjooy](ht
 
 #### Bonus: PartialModel -> ActiveModel
 
-`DerivePartialModel` got another extension to derive `IntoActiveModel` as well. Absent attributes will be filled with `NotSet`. This allows you to have a cake and eat it!
+[#2517](https://github.com/SeaQL/sea-orm/pull/2517)
+`DerivePartialModel` got another extension to derive [`IntoActiveModel`](https://docs.rs/sea-orm/latest/sea_orm/entity/trait.IntoActiveModel.html) as well. Absent attributes will be filled with `NotSet`. This allows you to have a cake and eat it!
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -255,8 +266,7 @@ assert_eq!(
 ### Three way select
 
 [#2518](https://github.com/SeaQL/sea-orm/pull/2518)
-
-With PartialModel being so powerful, if you still need to do non-nested selects, there's `SelectThree`, an extension to `SelectTwo`:
+With PartialModel being so powerful, if you still need to do non-nested selects, there's [`SelectThree`](https://docs.rs/sea-orm/latest/sea_orm/query/struct.SelectThree.html), an extension to `SelectTwo`:
 
 ```rust
 Order -> Lineitem -> Cake
@@ -276,7 +286,6 @@ let items: Vec<(order::Model, Option<lineitem::Model>, Option<cake::Model>)> =
 ### Insert heterogeneous models
 
 [#2433](https://github.com/SeaQL/sea-orm/pull/2433)
-
 Insert many now allows active models to have different column sets (it previously panics). Missing columns will be filled with `NULL`. This makes seeding data (e.g. [with Loco](https://loco.rs/docs/the-app/models/#seeding)) a seamless operation.
 
 ```rust
@@ -301,7 +310,6 @@ assert_eq!(
 ### Improved Seaography Integration
 
 [#2403](https://github.com/SeaQL/sea-orm/pull/2403)
-
 We've simplified the code by allowing you to register entities into Seaography's GraphQL schema directly within the entity module.
 
 ```rust
@@ -437,9 +445,9 @@ async fn main() {
 * [sea-orm-cli] Added `acquire-timeout` option [#2461](https://github.com/SeaQL/sea-orm/pull/2461)
 * [sea-orm-cli] Added `impl-active-model-behavior` option [#2487](https://github.com/SeaQL/sea-orm/pull/2487)
 * [sea-orm-cli] Added `with-prelude` option [#2322](https://github.com/SeaQL/sea-orm/pull/2322)
-    * `all`: the default value (current behaviour), it will generates the prelude.rs file and add it to mod.rs / lib.rs
-    * `all-allow-unused-imports`: it generates the prelude.rs file and add it to mod.rs, plus adding `#![allow(unused_imports)]` in the module
-    * `none`: it **will not** generates the prelude.rs file and **will not** add it to mod.rs
+    * `all`: the default value (current behaviour), will generate prelude.rs and add it to mod.rs / lib.rs
+    * `all-allow-unused-imports`: will generate prelude.rs and add it to mod.rs, plus adding `#![allow(unused_imports)]` in the module
+    * `none`: **will not** generate prelude.rs
 
 ## Upgrades
 
