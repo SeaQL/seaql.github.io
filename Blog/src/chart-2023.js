@@ -5,7 +5,7 @@ import Chart from 'chart.js/auto'
 
 async function pieChart(id, data) {
     new Chart(
-        document.getElementById(id),
+        document.getElementById('23'+id),
         {
             type: 'pie',
             data: {
@@ -48,7 +48,7 @@ async function pieChart(id, data) {
 
 async function barChart(id, data) {
     new Chart(
-        document.getElementById(id),
+        document.getElementById('23'+id),
         {
             type: 'bar',
             data: {
@@ -102,7 +102,7 @@ export function badges(props) {
 export function Canvas(props) {
     return (
         <div style={{ marginBottom: "60px" }}>
-            <canvas id={props.id} class="chart-js" style={{ width: "100%", margin: "auto auto", marginBottom: "10px" }}></canvas>
+            <canvas id={'23'+props.id} class="chart-js" style={{ width: "100%", margin: "auto auto", marginBottom: "10px" }}></canvas>
             {props.children}
         </div>
     )
