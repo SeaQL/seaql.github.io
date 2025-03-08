@@ -29,7 +29,7 @@ This blog post summarizes the new features and enhancements introduced in SeaORM
 [#2500](https://github.com/SeaQL/sea-orm/pull/2500)
 The popular [pgvector](https://github.com/pgvector/pgvector) extension enables efficient storage and querying of high-dimensional vector data, supporting applications like similarity search, recommendation systems, and other AI tools.
 
-Thanks to the contribution of [@28Smiles](https://github.com/28Smiles), `PgVector` is now integrated nicely into the SeaQL ecosystem.
+Thanks to the contribution of [@28Smiles](https://github.com/28Smiles), `PgVector` is now integrated nicely into the SeaQL ecosystem (under feature flag `postgres-vector`).
 
 ```rust
 // Model
@@ -289,7 +289,6 @@ let items: Vec<(order::Model, Option<lineitem::Model>, Option<cake::Model>)> =
 Insert many now allows active models to have different column sets (it previously panics). Missing columns will be filled with `NULL`. This makes seeding data (e.g. [with Loco](https://loco.rs/docs/the-app/models/#seeding)) a seamless operation.
 
 ```rust
-// this previously panics
 let apple = cake_filling::ActiveModel {
     cake_id: ActiveValue::set(2),
     filling_id: ActiveValue::NotSet,
@@ -336,7 +335,7 @@ seaography::register_active_enums!([
 
 ## Enhancements
 
-* Added `Insert::exec_with_returning_keys` & `Insert::exec_with_returning_many` (Postgres only)
+* Added [`Insert::exec_with_returning_keys`](https://docs.rs/sea-orm/latest/sea_orm/query/struct.Insert.html#method.exec_with_returning_keys) & [`Insert::exec_with_returning_many`](https://docs.rs/sea-orm/latest/sea_orm/query/struct.Insert.html#method.exec_with_returning_many) (Postgres only)
 ```rust
 assert_eq!(
     Entity::insert_many([
@@ -432,10 +431,9 @@ let db: DatabaseConnection = mysql_pool.into();
 #[async_std::main]
 async fn main() {
     cli::run_cli_with_connection(migration::Migrator, |connect_options| async {
-        let db = Database::connect(connect_options)
-             .await?;
+        let db = Database::connect(connect_options).await?;
         if db.get_database_backend() == DatabaseBackend::Sqlite {
-            db::register_sqlite_functions(&db).await;
+            register_sqlite_functions(&db).await;
         }
         Ok(db)
     }).await;
