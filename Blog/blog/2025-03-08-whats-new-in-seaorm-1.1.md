@@ -375,7 +375,7 @@ struct Fruit {
 pub async fn close(self) -> Result<(), DbErr> { .. } // existing
 pub async fn close_by_ref(&self) -> Result<(), DbErr> { .. } // new
 ```
-* Added `Schema::json_schema_from_entity` to construct schema descriptions for Entities
+* Added `Schema::json_schema_from_entity` to construct schema metadata for Entities
 ```rust
 assert_eq!(
     Schema::new(DbBackend::MySql).json_schema_from_entity(lunch_set::Entity),
@@ -410,6 +410,14 @@ assert_eq!(
 );
 ```
 * Construct `DatabaseConnection` directly from `sqlx::PgPool`, `sqlx::SqlitePool` and `sqlx::MySqlPool` [#2348](https://github.com/SeaQL/sea-orm/pull/2348)
+```rust
+// these are implemented:
+impl From<MySqlPool> for SqlxMySqlPoolConnection { .. }
+impl From<MySqlPool> for DatabaseConnection { .. }
+
+// so this is now possible:
+let db: DatabaseConnection = mysql_pool.into();
+```
 * Expose underlying row types (e.g. `sqlx::postgres::PgRow`) [#2265](https://github.com/SeaQL/sea-orm/pull/2265)
 * [sea-orm-migration] Allow modifying the connection in migrations [#2397](https://github.com/SeaQL/sea-orm/pull/2397)
 ```rust
@@ -449,11 +457,11 @@ async fn main() {
 
 ## Release Planning
 
-[SeaORM 1.0](https://www.sea-ql.org/blog/2024-08-04-sea-orm-1.0/) is a stable release. The 1.x version will be updated until at least October 2025, and we'll decide whether to release a 2.0 version or extend the 1.x life cycle.
+[SeaORM 1.0](https://www.sea-ql.org/blog/2024-08-04-sea-orm-1.0/) is a stable release. As demonstrated, we are able to ship many new features without breaking the API. The 1.x version will be updated until at least October 2025, and we'll decide whether to release a 2.0 version or extend the 1.x life cycle.
 
 ## SQL Server Support
 
-We've been beta-testing [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) for a while. If you are interested, please join our [waiting list](https://forms.office.com/r/1MuRPJmYBR).
+We've been beta-testing [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) for a while. If you are building software for your company, please [request early access](https://forms.office.com/r/1MuRPJmYBR).
 
 ## Sponsor
 
@@ -461,6 +469,57 @@ If you feel generous, a small donation will be greatly appreciated, and goes a l
 
 A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
 
+<div class="row">
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/caido-community">
+                <img src="https://avatars.githubusercontent.com/u/168573261?s=200&v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Caido
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/Coolpany-SE">
+                <img src="https://avatars.githubusercontent.com/u/96304487?s=200&v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Coolpany SE
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/anshap1719">
+                <img src="https://avatars.githubusercontent.com/u/19164745?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Anshul Sanghi
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/marcusbuffett">
+                <img src="https://avatars.githubusercontent.com/u/1834328?v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Marcus Buffett
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div class="row">
     <div class="col col--4 margin-bottom--md">
         <div class="avatar">
@@ -590,56 +649,6 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             <div class="avatar__intro">
                 <div class="avatar__name">
                     gnuphie
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/caido-community">
-                <img src="https://avatars.githubusercontent.com/u/168573261?s=200&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Caido
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/Coolpany-SE">
-                <img src="https://avatars.githubusercontent.com/u/96304487?s=200&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Coolpany SE
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/anshap1719">
-                <img src="https://avatars.githubusercontent.com/u/19164745?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Anshul Sanghi
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/marcusbuffett">
-                <img src="https://avatars.githubusercontent.com/u/1834328?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Marcus Buffett
                 </div>
             </div>
         </div>
