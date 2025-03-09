@@ -218,6 +218,79 @@ assert_eq!(
 
 Since Cake is a related Entity of LineItem, not Order, it does not satisfy the trait bound of `left_join`. It is thus necessary to use the more flexible `join` method.
 
+### Alternative shape
+
+In the above, we make the nested structure resembles the topology of the join plan.
+But there is no restriction. Indeed, SQL flattens the select into a flat table, so as long as all columns can be found,
+we can freely arrange the result data structure.
+
+```rust
+#[derive(Debug, DerivePartialModel, PartialEq)]
+#[sea_orm(entity = "order::Entity", from_query_result)]
+struct OrderItem {
+    #[sea_orm(nested)]
+    order: Order,
+    #[sea_orm(nested)]
+    customer: Customer,
+    #[sea_orm(nested)]
+    line: LineItem,
+    #[sea_orm(nested)]
+    cake: Cake,
+}
+
+#[derive(Debug, DerivePartialModel, PartialEq)]
+#[sea_orm(entity = "order::Entity", from_query_result)]
+struct Order {
+    #[sea_orm(from_col = "id")]
+    order_id: i32,
+    total: Decimal,
+}
+
+#[derive(Debug, DerivePartialModel, PartialEq)]
+#[sea_orm(entity = "customer::Entity", from_query_result)]
+struct Customer {
+    name: String,
+}
+
+#[derive(Debug, DerivePartialModel, PartialEq)]
+#[sea_orm(entity = "lineitem::Entity", from_query_result)]
+struct LineItem {
+    price: Decimal,
+    quantity: i32,
+}
+
+#[derive(Debug, DerivePartialModel, PartialEq)]
+#[sea_orm(entity = "cake::Entity", from_query_result)]
+struct Cake {
+    name: String,
+}
+
+// the exact same select query
+
+assert_eq!(
+    items,
+    [
+        OrderItem {
+            order: Order {
+                order_id: 101,
+                total: Decimal::from(10),
+            },
+            customer: Customer {
+                name: "Bob".to_owned()
+            },
+            line: LineItem {
+                price: Decimal::from(2),
+                quantity: 2,
+            },
+            cake: Cake {
+                name: "Cheesecake".to_owned()
+            },
+        },
+        ..
+    ]
+);
+```
+
 ## Three-Model select
 
 ```rust
