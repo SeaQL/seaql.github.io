@@ -82,6 +82,8 @@
 
     6.8 [Bakery Schema](06-relation/08-bakery-schema.md)
 
+    6.9 [Multi Selects](06-relation/09-multi-selects.md)
+
 7. Writing Tests
 
     7.1 [Robust & Correct](07-write-test/01-testing.md)

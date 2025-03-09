@@ -126,6 +126,21 @@ This would make our code much more concise and readable.
 
 Avoid using `Alias::new` because it's error-prone and slightly more expensive.
 
+:::tip
+
+If you need to use many aliases, you can define a enum:
+
+```rust
+#[derive(DeriveIden, Clone, Copy)]
+pub enum Prod {
+    Base,
+    Frame,
+    Package,
+}
+```
+
+:::
+
 ## 3. Custom selects
 
 ```rust
@@ -146,6 +161,24 @@ pub fn query() -> Select<complex_product::Entity> {
 ```
 
 Our query starts from `ComplexProduct`. We join back to `BaseProduct`, alias it as `Base`. We then join to `ProductType` via `Base`.
+
+:::tip
+
+It's possible to join in a diamond topology:
+
+```
+ComplexProduct -> BaseProduct -> Attribute
+               -> Material    -> Attribute
+```
+
+```rust
+.join_as(JoinType::LeftJoin, complex_product::Relation::BaseProduct.def(), Base)
+.join_as(JoinType::LeftJoin, complex_product::Relation::Material.def(), Material)
+.join(JoinType::InnerJoin, base_product::Relation::Attribute.def().from_alias(Base))
+.join(JoinType::InnerJoin, material::Relation::Attribute.def().from_alias(Material))
+```
+
+:::
 
 ### Custom join conditions
 

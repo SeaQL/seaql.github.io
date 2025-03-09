@@ -156,7 +156,7 @@ let rows = cake_filling::Entity::find()
     .before((10, 11))
     .first(3)
     .all(&db)
-    .await?,
+    .await?;
 ```
 
 ## Select custom
