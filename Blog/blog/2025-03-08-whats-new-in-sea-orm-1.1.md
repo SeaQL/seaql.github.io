@@ -478,6 +478,18 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
 <div class="row">
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
+            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/numeusxyz">
+                <img src="https://avatars.githubusercontent.com/u/82152211?s=200&v=4" />
+            </a>
+            <div class="avatar__intro">
+                <div class="avatar__name">
+                    Numeus
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col--6 margin-bottom--md">
+        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/caido-community">
                 <img src="https://avatars.githubusercontent.com/u/168573261?s=200&v=4" />
             </a>
