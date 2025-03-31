@@ -142,7 +142,7 @@ module.exports = {
       copyright: [
         `<br/><a href="https://github.com/SeaQL/sea-orm/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star"/></a>`,
         '<br/>Every ⭐ counts!',
-        `<br/>Copyright © ${new Date().getFullYear()} SeaQL.org`,
+        `<br/>SeaQL.org © ${new Date().getFullYear()} 🇬🇧`,
       ].join(''),
     },
     prism: {

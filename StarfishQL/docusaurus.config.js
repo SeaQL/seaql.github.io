@@ -116,7 +116,7 @@ module.exports = {
       ],
       copyright: [
         `<br/><div style="display: flex; justify-content: center;"><a href="https://github.com/SeaQL/starfish-ql/stargazers/" target="_blank"><img src="https://img.shields.io/github/stars/SeaQL/starfish-ql.svg?style=social&label=Star&maxAge=1"/></a></div>`,
-        `<br/>Copyright © ${new Date().getFullYear()} SeaQL.org`,
+        `<br/>SeaQL.org © ${new Date().getFullYear()} 🇬🇧`,
         `<br/>Built with 🔥 by 🌊🦀🐚`,
       ].join(''),
     },
