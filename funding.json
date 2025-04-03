@@ -10,7 +10,32 @@
       "url": "https://www.sea-ql.org/"
     }
   },
-  "projects": [],
+  "projects": [
+    {
+      "guid": "sea-orm",
+      "name": "SeaORM",
+      "description": "🐚 An async & dynamic ORM for Rust",
+      "webpageUrl": {
+        "url": "https://www.sea-ql.org/SeaORM"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/SeaQL/sea-orm",
+        "wellKnown": "https://github.com/SeaQL/sea-orm/blob/master/.github/.well-known/funding-manifest-urls"
+      },
+      "licenses": [
+        "spdx:Apache-2.0",
+        "spdx:MIT"
+      ],
+      "tags": [
+        "developer-tools",
+        "database",
+        "api",
+        "web-development",
+        "software-engineering",
+        "programming"
+      ]
+    }
+  ],
   "funding": {
     "channels": [
       {
