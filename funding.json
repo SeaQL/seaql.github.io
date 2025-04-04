@@ -5,8 +5,7 @@
     "role": "owner",
     "name": "SeaQL",
     "email": "hello@sea-ql.org",
-    "phone": "",
-    "description": "<div align=\"center\">\n\n  <a href=\"https://www.sea-ql.org\" target=\"_blank\">\n    <img src=\"https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL logo dual.png\" width=\"260\"/>\n  </a>\n\n  <p>\n    <strong>Building developer tools for Ru\n\n\n## Our Journey\n\nSeaQL.org was founded back in 2020. In the past two years, we published and maintained several popular Rust libraries: SeaORM, SeaQuery, and Seaography. Each library is designed to fill a niche in the Rust ecosystem, and they are made to play well with other Rust libraries.\n\nWe're thrilled with the adoption by the Rust community. By 2023, we have accumulated 6,000+ GitHub stars across our projects and accumulated 2.5 million total downloads on crates.io. Several startups and many open source projects were built upon SeaQL libraries.\n\n\n## Our Mission\n\nWe are an independent open-source organization.\nWe develop tools that enable developers to build data intensive applications in Rust.\nWe want to drive Rust adoption in industry and university.\n\n\n## Our Vision\n\nWe believe software can be fast, robust, and versatile.\nWe want to develop and promote software engineering tools and techniques that would improve the productivity of engineers and quality of software.\nWe believe open source can be sustainable if we can balance give and take.\n\n\n## Our Values\n\nCommunity driven. Engineering first. Be multi-lingual. Be multi-modal. Be multi-cultural.\nWe welcome developers from all languages and at all levels.\n\n\n## Our Commitment\n\nWe are committed to nurturing the next generation of open-source developers.\nWe offer unique internship experiences tailored for university students - Seaography and StarfishQL are both excellent projects developed by interns under SeaQL.\n\n\n## Your Support\n\nIf you enjoy using SeaQL libraries or your project depends on them, please become a sponsor today. A small contribution will go a long way towards sustaining the organization, and ensuring that the software will be maintained for the years to come.",
+    "description": "Building developer tools for Rust\n\n\n## Our Journey\n\nSeaQL.org was founded back in 2020. In the past two years, we published and maintained several popular Rust libraries: SeaORM, SeaQuery, and Seaography. Each library is designed to fill a niche in the Rust ecosystem, and they are made to play well with other Rust libraries.\n\nWe're thrilled with the adoption by the Rust community. By 2023, we have accumulated 6,000+ GitHub stars across our projects and accumulated 2.5 million total downloads on crates.io. Several startups and many open source projects were built upon SeaQL libraries.\n\n\n## Our Mission\n\nWe are an independent open-source organization.\nWe develop tools that enable developers to build data intensive applications in Rust.\nWe want to drive Rust adoption in industry and university.\n\n\n## Our Vision\n\nWe believe software can be fast, robust, and versatile.\nWe want to develop and promote software engineering tools and techniques that would improve the productivity of engineers and quality of software.\nWe believe open source can be sustainable if we can balance give and take.\n\n\n## Our Values\n\nCommunity driven. Engineering first. Be multi-lingual. Be multi-modal. Be multi-cultural.\nWe welcome developers from all languages and at all levels.\n\n\n## Our Commitment\n\nWe are committed to nurturing the next generation of open-source developers.\nWe offer unique internship experiences tailored for university students - Seaography and StarfishQL are both excellent projects developed by interns under SeaQL.\n\n\n## Your Support\n\nIf you enjoy using SeaQL libraries or your project depends on them, please become a sponsor today. A small contribution will go a long way towards sustaining the organization, and ensuring that the software will be maintained for the years to come.",
     "webpageUrl": {
       "url": "https://www.sea-ql.org"
     }
@@ -187,8 +186,7 @@
       {
         "guid": "github-sponsors",
         "type": "other",
-        "address": "https://github.com/sponsors/SeaQL",
-        "description": ""
+        "address": "https://github.com/sponsors/SeaQL"
       }
     ],
     "plans": [
@@ -196,10 +194,75 @@
         "guid": "monthly-5",
         "status": "active",
         "name": "🐚 Hobby - you enjoy using SeaQL and learning Rust",
-        "description": "",
         "amount": 5,
         "currency": "USD",
         "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "monthly-10",
+        "status": "active",
+        "name": "🐚🐚 Pro - using SeaQL in professional work",
+        "amount": 10,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "monthly-100",
+        "status": "active",
+        "name": "🐚🐚🐚 Startup - your startup is building a product upon SeaQL",
+        "amount": 100,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "monthly-1000",
+        "status": "active",
+        "name": "🐚🐚🐚🐚 Enterprise - a team of engineers is relying on SeaQL",
+        "amount": 1000,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-10",
+        "status": "active",
+        "name": "🦀 Sticker Pack",
+        "amount": 10,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-1000",
+        "status": "active",
+        "name": "🪙 Gold Sponsor",
+        "amount": 1000,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-10000",
+        "status": "active",
+        "name": "💎 Diamond Sponsor",
+        "amount": 10000,
+        "currency": "USD",
+        "frequency": "one-time",
         "channels": [
           "github-sponsors"
         ]
