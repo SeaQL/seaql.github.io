@@ -200,6 +200,72 @@
         "channels": [
           "github-sponsors"
         ]
+      },
+      {
+        "guid": "monthly-10",
+        "status": "active",
+        "name": "🐚🐚 Pro - using SeaQL in professional work",
+        "amount": 10,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "monthly-100",
+        "status": "active",
+        "name": "🐚🐚🐚 Startup - your startup is building a product upon SeaQL",
+        "amount": 100,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "monthly-1000",
+        "status": "active",
+        "name": "🐚🐚🐚🐚 Enterprise - a team of engineers is relying on SeaQL",
+        "amount": 1000,
+        "currency": "USD",
+        "frequency": "monthly",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-10",
+        "status": "active",
+        "name": "🦀 Sticker Pack",
+        "amount": 10,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-1000",
+        "status": "active",
+        "name": "🪙 Gold Sponsor",
+        "amount": 1000,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors"
+        ]
+      },
+      {
+        "guid": "one-time-10000",
+        "status": "active",
+        "name": "💎 Diamond Sponsor",
+        "amount": 10000,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors"
+        ]
       }
     ],
     "history": []
