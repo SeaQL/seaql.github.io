@@ -38,6 +38,8 @@
 
     4.6 [Delete](04-raw-table-config/06-delete.md)
 
+    4.7 [Editor](04-raw-table-config/07-editor.md)
+
 5. Composite Table Config
 
     5.1 [Overview](05-composite-table-config/01-overview.md)

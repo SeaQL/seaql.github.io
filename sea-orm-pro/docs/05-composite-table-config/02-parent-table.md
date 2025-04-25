@@ -37,6 +37,13 @@ columns = [
 ]
 all_columns = false
 
+[parent.editor]
+enable = true
+title_field = "purchase_order_number"
+fields = [
+    # ...
+]
+
 [parent.create]
 enable = true
 
