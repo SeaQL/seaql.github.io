@@ -14,7 +14,7 @@ Enable editor on this database table, this is disabled by default.
 # Enable editor for this table
 enable = true
 # Title field to be shown
-title_field = "address_type"
+title_field = "address_line1"
 # Display following columns in sequence from left to right in the table view
 fields = [
     {
