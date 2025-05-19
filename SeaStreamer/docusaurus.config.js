@@ -125,7 +125,7 @@ module.exports = {
     // algolia: {
     //   appId: 'F60BRNGE7P',
     //   apiKey: 'cb0fff4f36dcd0f3d6a97e12e494dec7',
-    //   indexName: 'seaorm',
+    //   indexName: 'seastreamer',
     //   contextualSearch: true,
     // },
   },
