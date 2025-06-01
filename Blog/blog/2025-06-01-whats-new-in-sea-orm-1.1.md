@@ -332,7 +332,14 @@ If you have suggestions on breaking changes, you are welcome to post them in the
 
 ## SQL Server Support
 
-We've been beta-testing [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) for a while. SeaORM X offering complete support for MSSQL, and working around the nuances of MSSQL providing the same SeaORM API. We ported all test cases and most examples, complemented by MSSQL specific documentation. If you are building enterprise software for your company, you can [request commercial access](https://forms.office.com/r/1MuRPJmYBR).
+We've been beta-testing [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/) for a while. SeaORM X offers the same SeaORM API for MSSQL. We ported all test cases and most examples, complemented by MSSQL specific documentation. If you are building enterprise software for your company, you can [request commercial access](https://forms.office.com/r/1MuRPJmYBR).
+
+Features:
+
++ SeaQuery + SeaSchema
++ Entity generation with sea-orm-cli
++ GraphQL with Seaography
++ Nested transaction, connection pooling and multi-async runtime
 
 ## 🖥️ SeaORM Pro: Professional Admin Panel
 
