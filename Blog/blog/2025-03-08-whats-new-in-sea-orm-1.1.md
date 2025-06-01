@@ -683,10 +683,8 @@ With this final piece of software, my vision for a complete full-stack Rust envi
 
 ## 🖥️ SeaORM Pro: Professional Admin Panel
 
-<a href="https://www.sea-ql.org/sea-orm-pro/">
-    <img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png#light" />
-    <img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner_dark.png#dark" />
-</a>
+<img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png#light" />
+<img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner_dark.png#dark" />
 
 [SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required, but certainly nice to have!
 

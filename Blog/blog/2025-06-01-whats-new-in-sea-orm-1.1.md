@@ -179,7 +179,7 @@ assert_eq!(
 );
 ```
 
-If you are interested in how this works under the hood, a new method `Value::dummy_value` is added in SeaQuery:
+If you are interested in how this works under the hood, a new method [`Value::dummy_value`](https://docs.rs/sea-query/latest/sea_query/value/enum.Value.html#method.dummy_value) is added in SeaQuery:
 
 ```rust
 use sea_orm::sea_query::Value;
@@ -336,10 +336,8 @@ We've been beta-testing [SQL Server for SeaORM](https://www.sea-ql.org/SeaORM-X/
 
 ## 🖥️ SeaORM Pro: Professional Admin Panel
 
-<a href="https://www.sea-ql.org/sea-orm-pro/">
-    <img src="/blog/img/sea-orm-pro-light.png#light" />
-    <img src="/blog/img/sea-orm-pro-dark.png#dark" />
-</a>
+<img src="/blog/img/sea-orm-pro-light.png#light" />
+<img src="/blog/img/sea-orm-pro-dark.png#dark" />
 
 [SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required, but certainly nice to have!
 
