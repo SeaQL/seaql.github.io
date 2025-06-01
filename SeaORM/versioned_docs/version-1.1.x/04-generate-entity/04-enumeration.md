@@ -1,4 +1,4 @@
-# Enumeration
+# ActiveEnum
 
 You can use Rust enums in model where the values are mapped to a database string, integer or native enum.
 

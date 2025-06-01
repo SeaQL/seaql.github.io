@@ -1,4 +1,4 @@
-# 🧭 Seaography Intro
+# 🧭 Seaography
 
 If you are building a full-stack application with a web GUI these days, it's likely you'd use GraphQL as the communication interface between frontend and backend. However, building GraphQL resolvers is no easy task for backend developers.
 

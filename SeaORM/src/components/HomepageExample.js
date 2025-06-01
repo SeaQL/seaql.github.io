@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import React, { useEffect, useState } from "react";
 import clsx from 'clsx';
-import styles from './HomepageCompare.module.css';
+import styles from './HomepageExample.module.css';
 import Highlight, { defaultProps } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useColorMode } from '@docusaurus/theme-common';
@@ -133,7 +133,7 @@ fruit::Entity::delete_many()
   },
 ];
 
-export default function HomepageCompare() {
+export default function HomepageExample() {
   const {
     siteConfig: {
       themeConfig: { prism = {} },

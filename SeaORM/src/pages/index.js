@@ -5,7 +5,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageExample from '../components/HomepageExample';
-import HomepageCompare from '../components/HomepageCompare';
+import HomepageSeaography from '../components/HomepageSeaography';
+import HomepageSeaOrmPro from '../components/HomepageSeaOrmPro';
 import HomepageProducts from '../components/HomepageProducts';
 import HomepageSponsors from '../components/HomepageSponsors';
 import HomepageMascot from '../components/HomepageMascot';
@@ -40,7 +41,8 @@ export default function Home() {
       <main>
         <HomepageFeatures />
         <HomepageExample />
-        <HomepageCompare />
+        <HomepageSeaography />
+        <HomepageSeaOrmPro />
         <HomepageProducts />
         <HomepageSponsors />
         <HomepageMascot />

@@ -11,6 +11,7 @@ export default function HomepageProducts() {
     <section id="our-users" className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
         <h2 className="text--center">Silver Sponsors</h2>
+        <p className="text--center">We’re immensely grateful to our sponsors: Digital Ocean, for sponsoring our servers. And JetBrains, for sponsoring our IDE.</p>
         <div className="row">
           <div className="col col--12">
             <div className="row">
@@ -19,14 +20,14 @@ export default function HomepageProducts() {
               <div className="col col--2">
                 <p className="text--center">
                   <a href="https://www.digitalocean.com/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="148" />
+                    <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="192" />
                   </a>
                 </p>
               </div>
               <div className="col col--2">
                 <p className="text--center">
                   <a href="https://www.jetbrains.com/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="148" />
+                    <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="192" />
                   </a>
                 </p>
               </div>

@@ -122,20 +122,26 @@
 
 10. GraphQL Support
 
-    10.1 [🧭 Seaography Intro](10-graph-ql/01-seaography-intro.md)
+    10.1 [🧭 Seaography](10-graph-ql/01-seaography-intro.md)
 
     10.2 [Getting Started](10-graph-ql/02-getting-started.md)
 
-11. Internal Design
+11. Admin Panel
 
-    11.1 [Traits and Types](11-internal-design/01-trait-and-type.md)
+    11.1 [🖥️ SeaORM Pro](11-sea-orm-pro/01-sea-orm-pro-intro.md)
 
-    11.2 [Derive Macros](11-internal-design/02-derive-macro.md)
+    11.2 [Getting Started](11-sea-orm-pro/02-getting-started.md)
 
-    11.3 [Compare with Diesel](11-internal-design/03-diesel.md)
+12. Internal Design
 
-    11.4 [Architecture](11-internal-design/04-architecture.md)
+    12.1 [Traits and Types](12-internal-design/01-trait-and-type.md)
 
-12. What's Next
+    12.2 [Derive Macros](12-internal-design/02-derive-macro.md)
 
-    12.1 [What's Next](12-whats-next/01-whats-next.md)
+    12.3 [Compare with Diesel](12-internal-design/03-diesel.md)
+
+    12.4 [Architecture](12-internal-design/04-architecture.md)
+
+13. What's Next
+
+    13.1 [What's Next](13-whats-next/01-whats-next.md)

@@ -23,20 +23,20 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Testable',
-    icon: <MdCheckCircle size={26} />,
-    description: (
-      <>
-        Use mock connections and/or SQLite to write tests for your application logic.
-      </>
-    ),
-  },
-  {
     title: 'Service Oriented',
     icon: <MdCloud size={26} />,
     description: (
       <>
         Quickly build services that join, filter, sort and paginate data in REST, GraphQL and gRPC APIs.
+      </>
+    ),
+  },
+  {
+    title: 'Production Ready',
+    icon: <MdCheckCircle size={26} />,
+    description: (
+      <>
+        SeaORM is feature-rich, well-tested and used in production by companies and startups.
       </>
     ),
   },

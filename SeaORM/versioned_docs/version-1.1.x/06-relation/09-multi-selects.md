@@ -144,7 +144,7 @@ ORDER BY "cake"."id" ASC LIMIT 1
 
 ## Three-way Join
 
-Our join tree starts from Order:
+Our join plan starts from Order:
 
 ```rust
 Order -> Customer

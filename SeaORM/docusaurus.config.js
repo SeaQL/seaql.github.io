@@ -163,7 +163,7 @@ module.exports = {
     },
     announcementBar: {
       id: 'sea-orm-bar',
-      content: '🐚 <a href="https://www.sea-ql.org/blog/2024-08-04-sea-orm-1.0/">SeaORM 1.0 is released</a>! If you like SeaORM, please give us a <a target="_blank" href="https://github.com/SeaQL/sea-orm">⭐️ on GitHub</a> and complete our <a target="_blank" href="https://www.sea-ql.org/community-survey">Community Survey</a>! 🦀',
+      content: '🐚 <a href="https://www.sea-ql.org/sea-orm-pro/">SeaORM Pro</a> is an admin panel for SeaORM! It\'s free to use, and allows you to create professional admin panels easily.',
       isCloseable: false,
     },
   },
