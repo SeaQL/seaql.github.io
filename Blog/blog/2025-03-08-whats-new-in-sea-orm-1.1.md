@@ -1,6 +1,6 @@
 ---
 slug: 2025-03-08-whats-new-in-sea-orm-1.1
-title: What's new in SeaORM 1.1
+title: What's new in SeaORM 1.1.7
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
