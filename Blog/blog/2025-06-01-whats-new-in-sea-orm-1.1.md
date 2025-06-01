@@ -100,7 +100,11 @@ You can override from_str and to_str with custom functions, which is especially 
 
 ```rust
 #[derive(DeriveValueType)]
-#[sea_orm(value_type = "String", from_str = "Tag::from_str", to_str = "Tag::to_str")]
+#[sea_orm(
+    value_type = "String",
+    from_str = "Tag::from_str",
+    to_str = "Tag::to_str"
+)]
 pub enum Tag {
     Color,
     Grey,
