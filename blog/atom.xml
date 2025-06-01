@@ -104,7 +104,14 @@ This allows using <code>RelationDef</code> directly where the query API expects 
 <li><a href="https://github.com/SeaQL/sea-query/discussions/795" target="_blank" rel="noopener noreferrer">Wanted breaking changes in SeaQuery</a></li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_WcNA" id="sql-server-support">SQL Server Support<a href="https://www.sea-ql.org/blog/2025-06-01-whats-new-in-sea-orm-1.1/#sql-server-support" class="hash-link" aria-label="Direct link to SQL Server Support" title="Direct link to SQL Server Support">​</a></h2>
-<p>We've been beta-testing <a href="https://www.sea-ql.org/SeaORM-X/" target="_blank" rel="noopener noreferrer">SQL Server for SeaORM</a> for a while. SeaORM X offering complete support for MSSQL, and working around the nuances of MSSQL providing the same SeaORM API. We ported all test cases and most examples, complemented by MSSQL specific documentation. If you are building enterprise software for your company, you can <a href="https://forms.office.com/r/1MuRPJmYBR" target="_blank" rel="noopener noreferrer">request commercial access</a>.</p>
+<p>We've been beta-testing <a href="https://www.sea-ql.org/SeaORM-X/" target="_blank" rel="noopener noreferrer">SQL Server for SeaORM</a> for a while. SeaORM X offers the same SeaORM API for MSSQL. We ported all test cases and most examples, complemented by MSSQL specific documentation. If you are building enterprise software for your company, you can <a href="https://forms.office.com/r/1MuRPJmYBR" target="_blank" rel="noopener noreferrer">request commercial access</a>.</p>
+<p>Features:</p>
+<ul>
+<li>SeaQuery + SeaSchema</li>
+<li>Entity generation with sea-orm-cli</li>
+<li>GraphQL with Seaography</li>
+<li>Nested transaction, connection pooling and multi-async runtime</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_WcNA" id="️-seaorm-pro-professional-admin-panel">🖥️ SeaORM Pro: Professional Admin Panel<a href="https://www.sea-ql.org/blog/2025-06-01-whats-new-in-sea-orm-1.1/#%EF%B8%8F-seaorm-pro-professional-admin-panel" class="hash-link" aria-label="Direct link to 🖥️ SeaORM Pro: Professional Admin Panel" title="Direct link to 🖥️ SeaORM Pro: Professional Admin Panel">​</a></h2>
 <img src="https://www.sea-ql.org/blog/img/sea-orm-pro-light.png#light">
 <img src="https://www.sea-ql.org/blog/img/sea-orm-pro-dark.png#dark">
