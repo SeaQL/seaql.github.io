@@ -502,30 +502,6 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
     </div>
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/Coolpany-SE">
-                <img src="https://avatars.githubusercontent.com/u/96304487?s=200&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Coolpany SE
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/anshap1719">
-                <img src="https://avatars.githubusercontent.com/u/19164745?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">
-                    Anshul Sanghi
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--m" href="https://github.com/marcusbuffett">
                 <img src="https://avatars.githubusercontent.com/u/1834328?v=4" />
             </a>
