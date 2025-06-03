@@ -669,7 +669,20 @@ Redis's default Stream ID resolution is millisecond, and it can be changed to na
 <p>By the way, SeaStreamer File is used as the tracing file format in <a href="https://firedbg.sea-ql.org/" target="_blank" rel="noopener noreferrer">FireDBG</a>.</p>
 <h2 class="anchor anchorWithStickyNavbar_WcNA" id="community">Community<a href="https://www.sea-ql.org/blog/2024-11-30-whats-new-in-sea-streamer-0.5/#community" class="hash-link" aria-label="Direct link to Community" title="Direct link to Community">​</a></h2>
 <p>SeaQL.org is an independent open-source organization run by passionate ️developers. If you like our projects, please star ⭐ and share our repositories. If you feel generous, a small donation via <a href="https://github.com/sponsors/SeaQL" target="_blank" rel="noopener noreferrer">GitHub Sponsor</a> will be greatly appreciated, and goes a long way towards sustaining the organization 🚢.</p>
-<p>SeaStreamer is a community driven project. We welcome you to participate, contribute and together build for Rust's future 🦀.</p>]]></content>
+<h2 class="anchor anchorWithStickyNavbar_WcNA" id="rustacean-sticker-pack-">Rustacean Sticker Pack 🦀<a href="https://www.sea-ql.org/blog/2024-11-30-whats-new-in-sea-streamer-0.5/#rustacean-sticker-pack-" class="hash-link" aria-label="Direct link to Rustacean Sticker Pack 🦀" title="Direct link to Rustacean Sticker Pack 🦀">​</a></h2>
+<p>The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!</p>
+<p>Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.</p>
+<p>Sticker Pack Contents:</p>
+<ul>
+<li>Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG</li>
+<li>Mascot of SeaQL: Terres the Hermit Crab</li>
+<li>Mascot of Rust: Ferris the Crab</li>
+<li>The Rustacean word</li>
+</ul>
+<p><a href="https://www.sea-ql.org/sticker-pack/" target="_blank" rel="noopener noreferrer">Support SeaQL and get a Sticker Pack!</a></p>
+<a href="https://www.sea-ql.org/sticker-pack/"><img style="border-radius:25px" alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg"></a>]]></content>
         <author>
             <name>Chris Tsang</name>
             <uri>https://github.com/tyt2y3</uri>
