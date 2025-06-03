@@ -300,8 +300,8 @@ assert_eq!(
 ```
 * Fix unicode string enum [#2218](https://github.com/SeaQL/sea-orm/pull/2218)
 ```rust
-#[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(None)")]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)")]
 pub enum SeaORM {
     #[sea_orm(string_value = "씨오알엠")]
     씨오알엠,
