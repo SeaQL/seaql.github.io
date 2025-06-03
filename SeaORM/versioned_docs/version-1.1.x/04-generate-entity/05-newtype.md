@@ -123,7 +123,7 @@ impl sea_orm::sea_query::ValueType for StringVec {
     }
 
     fn column_type() -> sea_orm::sea_query::ColumnType {
-        sea_orm::sea_query::ColumnType::String(None)
+        sea_orm::sea_query::ColumnType::String(StringLen::None)
     }
 }
 

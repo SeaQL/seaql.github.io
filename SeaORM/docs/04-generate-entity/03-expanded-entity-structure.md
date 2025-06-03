@@ -42,7 +42,7 @@ impl ColumnTrait for Column {
     fn def(&self) -> ColumnDef {
         match self {
             Self::Id => ColumnType::Integer.def(),
-            Self::Name => ColumnType::String(None).def(),
+            Self::Name => ColumnType::String(StringLen::None).def(),
         }
     }
 }
@@ -69,7 +69,7 @@ To specify the datatype of each column, the [`ColumnType`](https://docs.rs/sea-o
 - Nullable
 
 ```rust
-ColumnType::String(None).def().default_value("Sam").unique().indexed().nullable()
+ColumnType::String(StringLen::None).def().default_value("Sam").unique().indexed().nullable()
 ```
 
 ### Cast Column Type on Select and Save
