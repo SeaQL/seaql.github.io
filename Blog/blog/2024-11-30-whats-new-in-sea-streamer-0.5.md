@@ -130,4 +130,20 @@ By the way, SeaStreamer File is used as the tracing file format in [FireDBG](htt
 
 SeaQL.org is an independent open-source organization run by passionate ️developers. If you like our projects, please star ⭐ and share our repositories. If you feel generous, a small donation via [GitHub Sponsor](https://github.com/sponsors/SeaQL) will be greatly appreciated, and goes a long way towards sustaining the organization 🚢.
 
-SeaStreamer is a community driven project. We welcome you to participate, contribute and together build for Rust's future 🦀.
+## Rustacean Sticker Pack 🦀
+
+The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+
+Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
+
+Sticker Pack Contents:
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
+- Mascot of SeaQL: Terres the Hermit Crab
+- Mascot of Rust: Ferris the Crab
+- The Rustacean word
+
+[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+
+<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
