@@ -368,17 +368,20 @@ You can pass the [`Select<T>`](https://docs.rs/sea-orm/latest/sea_orm/query/stru
 
 You then assemble these pieces together to implement any complex API!
 
-## Introducing SeaORM Pro
+## Rustacean Sticker Pack 🦀
 
-[SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required, but certainly nice to have!
+The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
 
-Features:
-* Full CRUD
-* Built on React + GraphQL
-* Built in GraphQL resolver
-* Customize the UI with simple TOML
+Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
 
-<a href="https://www.sea-ql.org/sea-orm-pro/">
-    <img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner.png#light" />
-    <img style={{borderRadius: "25px"}} src="https://www.sea-ql.org/sea-orm-pro/img/01_banner_dark.png#dark" />
-</a>
+Sticker Pack Contents:
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
+- Mascot of SeaQL: Terres the Hermit Crab
+- Mascot of Rust: Ferris the Crab
+- The Rustacean word
+
+[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+
+<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
