@@ -188,6 +188,8 @@ If you specified a custom `column_type` for an optional attribute, you must also
 pub name: Option<String>
 ```
 
+These properties are used in [create_table_from_entity](https://docs.rs/sea-orm/latest/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) to generate the table for the entity.
+
 ### Cast Column Type on Select and Save
 
 If you need to select a column as one type but save it into the database as another, you can specify the `select_as` and the `save_as` attributes to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should define the model field as below:
