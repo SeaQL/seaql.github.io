@@ -162,6 +162,10 @@ pub fn query() -> Select<complex_product::Entity> {
 
 Our query starts from `ComplexProduct`. We join back to `BaseProduct`, alias it as `Base`. We then join to `ProductType` via `Base`.
 
+```
+ComplexProduct -> BaseProduct as Base -> ProductType
+```
+
 :::tip
 
 It's possible to join in a diamond topology:
