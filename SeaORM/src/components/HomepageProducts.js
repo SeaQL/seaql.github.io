@@ -14,6 +14,18 @@ const ProductList = [
     logoClassName: null,
   },
   {
+    url: 'https://lap.dev/',
+    logo: 'img/other/lapdev-logo.png',
+    desc: 'Self-hosted remote development enviroment',
+    logoClassName: styles.lapdevLogo,
+  },
+  {
+    url: 'https://openobserve.ai/',
+    logo: 'img/other/openobserve-logo.svg',
+    desc: 'Open-source observability platform',
+    logoClassName: styles.openobserveLogo,
+  },
+  {
     url: 'https://mydatamyconsent.com/',
     logo: 'img/other/mydatamyconsent-logo.png',
     desc: 'Online data sharing simplified',
@@ -26,16 +38,34 @@ const ProductList = [
     logoClassName: styles.prefixdevLogo,
   },
   {
+    url: 'https://risingwave.com/',
+    logo: 'img/other/risingwave-logo.svg',
+    desc: 'Stream processing and management platform',
+    logoClassName: styles.risingwaveLogo,
+  },
+  {
     url: 'https://www.svix.com/',
     logo: 'img/other/svix-logo.svg',
     desc: 'The enterprise ready webhooks service',
     logoClassName: styles.svixLogo,
   },
   {
+    url: 'https://www.systeminit.com/',
+    logo: 'img/other/systeminit-logo.png',
+    desc: 'DevOps Automation Platform',
+    logoClassName: styles.systeminitLogo,
+  },
+  {
     url: 'https://upvpn.app/',
     logo: 'img/other/upvpn-logo.png',
     desc: 'Serverless Pay as you go VPN',
     logoClassName: styles.upvpnLogo,
+  },
+  {
+    url: 'https://zed.dev/',
+    logo: 'img/other/zed-logo.png',
+    desc: 'A high-performance, multiplayer code editor',
+    logoClassName: styles.zedLogo,
   },
 ];
 
