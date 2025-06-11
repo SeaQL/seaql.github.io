@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["config_hex","hex_write","pretty_hex","pretty_hex_write","simple_hex","simple_hex_write"],"struct":["Hex","HexConfig"],"trait":["PrettyHex"]};
