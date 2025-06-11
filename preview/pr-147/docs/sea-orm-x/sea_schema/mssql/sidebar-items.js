@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["def","discovery","parser","probe","query","writer"],"struct":["MsSql"]};
