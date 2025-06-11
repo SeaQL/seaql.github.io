@@ -3,11 +3,11 @@ import TabItem from '@theme/TabItem';
 import React, { useEffect, useState } from "react";
 import clsx from 'clsx';
 import styles from './HomepageCompare.module.css';
-import Highlight, { defaultProps } from "prism-react-renderer";
+import { Highlight, themes } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useColorMode } from '@docusaurus/theme-common';
 
-import Prism from "prism-react-renderer/prism";
+import Prism from 'prismjs/components/prism-core';
 (typeof global !== "undefined" ? global : window).Prism = Prism;
 require("prismjs/components/prism-rust");
 
@@ -512,7 +512,6 @@ export default function HomepageCompare() {
                 {codeBlocks.map(({ title, code, lang }, i) => (
                   <TabItem key={i} value={title}>
                     <Highlight
-                      {...defaultProps}
                       code={code}
                       key={mounted}
                       theme={colorMode == 'dark' ? prismDarkTheme : prismTheme}
