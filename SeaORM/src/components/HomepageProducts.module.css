@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+html[data-theme='dark'] .lapdevLogo,
+html[data-theme='dark'] .openobserveLogo,
+html[data-theme='dark'] .risingwaveLogo,
+html[data-theme='dark'] .systeminitLogo,
 html[data-theme='dark'] .spyglassLogo,
 html[data-theme='dark'] .svixLogo,
 html[data-theme='dark'] .mydatamyconsentLogo,
