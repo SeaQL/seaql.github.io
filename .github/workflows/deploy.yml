@@ -84,4 +84,4 @@ jobs:
           branch: gh-pages
           folder: docs
           clean: false
-          clean-exclude: preview
+          # clean-exclude: preview
