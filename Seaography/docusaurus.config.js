@@ -167,8 +167,8 @@ const config = {
       },
       prism: {
         // Themes: https://github.com/FormidableLabs/prism-react-renderer/tree/master/packages/prism-react-renderer/src/themes
-        theme: require('prism-react-renderer/themes/vsLight'),
-        darkTheme: require('prism-react-renderer/themes/vsDark'),
+        theme: require('prism-react-renderer').themes.vsLight,
+        darkTheme: require('prism-react-renderer').themes.vsDark,
         additionalLanguages: [
           'toml',
           'rust',
