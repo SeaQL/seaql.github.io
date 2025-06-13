@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Error"],"struct":["UnexpectedNullError"],"trait":["DatabaseError"],"type":["BoxDynError","Result"]};

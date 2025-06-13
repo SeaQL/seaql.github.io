@@ -1,1 +1,0 @@
-searchState.loadedDescShard("ouroboros", 0, "A crate for creating safe self-referencing structs.\nThis macro is used to turn a regular struct into a …")

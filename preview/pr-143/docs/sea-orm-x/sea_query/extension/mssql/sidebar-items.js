@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["MsFunction","MsType"],"struct":["Comment","CommentStatement","MsFunc","Rename","RenameStatement","Type","TypeCreateStatement","TypeDropStatement"],"trait":["CommentStatementBuilder","RenameStatementBuilder","TypeStatementBuilder"]};

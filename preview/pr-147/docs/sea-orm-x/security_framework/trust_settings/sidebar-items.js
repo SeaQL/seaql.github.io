@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Domain","TrustSettingsForCertificate"],"struct":["TrustSettings","TrustSettingsIter"]};

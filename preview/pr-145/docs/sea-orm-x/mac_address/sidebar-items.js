@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["MacAddressError","MacParseError"],"fn":["get_mac_address","mac_address_by_name","name_by_mac_address"],"struct":["MacAddress","MacAddressIterator"]};

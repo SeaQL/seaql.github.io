@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["SqlxValues"],"trait":["SqlxBinder"]};

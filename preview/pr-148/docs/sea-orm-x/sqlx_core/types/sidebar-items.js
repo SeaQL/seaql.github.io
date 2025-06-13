@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["JsonValue"],"mod":["chrono","time"],"struct":["Json","JsonRawValue","Text"],"trait":["Type"]};

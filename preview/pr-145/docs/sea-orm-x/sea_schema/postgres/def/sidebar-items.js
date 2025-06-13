@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Constraint","ForeignKeyAction","Type"],"struct":["ArbitraryPrecisionNumericAttr","ArrayDef","BitAttr","Check","ColumnExpression","ColumnInfo","EnumDef","Exclusion","IntervalAttr","NotNull","PrimaryKey","References","Schema","StringAttr","TableDef","TableInfo","TimeAttr","Unique"],"type":["ColumnType"]};

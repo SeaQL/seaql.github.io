@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunksea_ql_blog=self.webpackChunksea_ql_blog||[]).push([[1903],{1912:s=>{s.exports=JSON.parse('{"blogBasePath":"/blog/","blogTitle":"Blog","authorsListPath":"/blog/authors"}')}}]);

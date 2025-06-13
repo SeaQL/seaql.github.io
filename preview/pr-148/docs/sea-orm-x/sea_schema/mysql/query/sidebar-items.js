@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["CharacterSetFields","ColumnFields","InformationSchema","KeyColumnUsageFields","ReferentialConstraintsFields","StatisticsFields","TableType","TablesFields"],"struct":["ColumnQueryResult","ForeignKeyQueryResult","IndexQueryResult","SchemaQueryBuilder","TableQueryResult","VersionQueryResult"]};

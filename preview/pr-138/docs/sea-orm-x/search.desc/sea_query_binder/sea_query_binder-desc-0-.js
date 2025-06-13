@@ -1,1 +1,0 @@
-searchState.loadedDescShard("sea_query_binder", 0, "Driver library for using SeaQuery with SQLx\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.")

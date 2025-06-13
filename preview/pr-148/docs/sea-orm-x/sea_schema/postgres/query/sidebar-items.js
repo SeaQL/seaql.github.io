@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["char_set","column","constraints","enumeration","pg_indexes","schema","table"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["def","discovery","probe","query"],"struct":["Sqlite"]};
