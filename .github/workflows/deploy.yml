@@ -32,37 +32,41 @@ jobs:
           version: 3.6.1
           cache: false
 
-      - uses: actions/cache@v4
-        with:
-          key: ${{ github.repository }}-${{ github.ref_name }}
-          path: |
-            ~/.yarn
-            SeaORM/node_modules
-            SeaORM/.docusaurus
-            SeaORM/build
-            SeaORM-X/node_modules
-            SeaORM-X/.docusaurus
-            SeaORM-X/build
-            sea-orm-pro/node_modules
-            sea-orm-pro/.docusaurus
-            sea-orm-pro/build
-            Blog/node_modules
-            Blog/.docusaurus
-            Blog/build
-            Seaography/node_modules
-            Seaography/.docusaurus
-            Seaography/build
-            SeaStreamer/node_modules
-            SeaStreamer/.docusaurus
-            SeaStreamer/build
-
       - id: git-log
         run: echo "message=$(git log --no-merges -1 --oneline)" >> $GITHUB_OUTPUT
 
       - run: echo $GITHUB_OUTPUT
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM]') || contains(steps.git-log.outputs.message, '[full]') }}
+
+      # Deploy changes to the root
+      - name: Deploy Root
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+          clean-exclude: |
+            SeaORM
+            SeaORM-X
+            sea-orm-pro
+            blog
+            Seaography
+            SeaStreamer
+            preview
+
+
+      - name: Build SeaORM
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaORM SeaORM
+      - name: Deploy SeaORM
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/SeaORM
+          target-folder: SeaORM
+          clean: true
+
 
       - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-X]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaORM-X SeaORM-X
@@ -78,10 +82,3 @@ jobs:
 
       - if: ${{ contains(steps.git-log.outputs.message, '[SeaStreamer]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaStreamer SeaStreamer
-
-      - uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: docs
-          clean: false
-          # clean-exclude: preview
