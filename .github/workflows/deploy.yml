@@ -38,7 +38,6 @@ jobs:
       - run: echo $GITHUB_OUTPUT
 
 
-      # Deploy changes to the root
       - name: Deploy Root
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -68,17 +67,67 @@ jobs:
           clean: true
 
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-X]') || contains(steps.git-log.outputs.message, '[full]') }}
+      - name: Build SeaORM-X
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-X]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaORM-X SeaORM-X
+      - name: Deploy SeaORM-X
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-X]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/SeaORM-X
+          target-folder: SeaORM-X
+          clean: true
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-Pro]') || contains(steps.git-log.outputs.message, '[sea-orm-pro]') || contains(steps.git-log.outputs.message, '[full]') }}
+
+      - name: Build sea-orm-pro
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-Pro]') || contains(steps.git-log.outputs.message, '[sea-orm-pro]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh sea-orm-pro sea-orm-pro
+      - name: Deploy sea-orm-pro
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaORM-Pro]') || contains(steps.git-log.outputs.message, '[sea-orm-pro]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/sea-orm-pro
+          target-folder: sea-orm-pro
+          clean: true
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[Blog]') || contains(steps.git-log.outputs.message, '[full]') }}
+
+      - name: Build blog
+        if: ${{ contains(steps.git-log.outputs.message, '[Blog]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh Blog blog
+      - name: Deploy blog
+        if: ${{ contains(steps.git-log.outputs.message, '[Blog]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/blog
+          target-folder: blog
+          clean: true
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[Seaography]') || contains(steps.git-log.outputs.message, '[full]') }}
+
+      - name: Build Seaography
+        if: ${{ contains(steps.git-log.outputs.message, '[Seaography]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh Seaography Seaography
+      - name: Deploy Seaography
+        if: ${{ contains(steps.git-log.outputs.message, '[Seaography]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/Seaography
+          target-folder: Seaography
+          clean: true
 
-      - if: ${{ contains(steps.git-log.outputs.message, '[SeaStreamer]') || contains(steps.git-log.outputs.message, '[full]') }}
+
+      - name: Build SeaStreamer
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaStreamer]') || contains(steps.git-log.outputs.message, '[full]') }}
         run: sh build-site.sh SeaStreamer SeaStreamer
+      - name: Deploy SeaStreamer
+        if: ${{ contains(steps.git-log.outputs.message, '[SeaStreamer]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/SeaStreamer
+          target-folder: SeaStreamer
+          clean: true
+
