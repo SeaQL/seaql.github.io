@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthefront_js_gatsbyjs=self.webpackChunkthefront_js_gatsbyjs||[]).push([[539],{3945:function(e,t,n){n.r(t),n.d(t,{Head:function(){return a}});var r=n(7294),u=n(3640),s=n(3152);t.default=function(){return r.createElement(u.Z,null)};var a=function(){return r.createElement(s.N,{pageTitle:"About Us"})}}}]);
