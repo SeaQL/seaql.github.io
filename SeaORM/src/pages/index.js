@@ -10,6 +10,7 @@ import HomepageSeaOrmPro from '../components/HomepageSeaOrmPro';
 import HomepageProducts from '../components/HomepageProducts';
 import HomepageSponsors from '../components/HomepageSponsors';
 import HomepageMascot from '../components/HomepageMascot';
+import HomepageStickerPack from '../components/HomepageStickerPack';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -45,6 +46,7 @@ export default function Home() {
         <HomepageSeaOrmPro />
         <HomepageProducts />
         <HomepageSponsors />
+        <HomepageStickerPack />
         <HomepageMascot />
       </main>
     </Layout>
