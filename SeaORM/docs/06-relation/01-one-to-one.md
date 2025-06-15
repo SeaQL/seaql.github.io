@@ -1,7 +1,8 @@
 # One to One
 
-:::tip We need your help! 📝
-Thank you for reading this documentation. While we have you, would you spare a few minutes into completing our [SeaQL Community Survey](https://www.sea-ql.org/community-survey)? This is essential for the continued development and maintenance of SeaORM.
+:::tip Rustacean Sticker Pack 🦀
+[Our stickers](https://www.sea-ql.org/sticker-pack/) are made with a premium water-resistant vinyl with a unique matte finish.
+Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
 :::
 
 A one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
