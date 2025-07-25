@@ -374,6 +374,15 @@ If you feel generous, a small donation will be greatly appreciated, and goes a l
 
 A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
 
+
+#### Gold Sponsors
+
+<a href="https://qdx.co/">
+    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="180" />
+</a>
+
+#### GitHub Sponsors
+
 <div class="row">
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
