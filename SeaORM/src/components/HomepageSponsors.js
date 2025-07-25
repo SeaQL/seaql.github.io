@@ -10,6 +10,23 @@ export default function HomepageProducts() {
   return (
     <section id="our-users" className={clsx('home-section', 'home-section-alt', styles.features)}>
       <div className="container">
+        <h2 className="text--center">Gold Sponsors</h2>
+        <div className="row">
+          <div className="col col--12">
+            <div className="row">
+              <div className="col col--4"></div>
+              <div className="col col--4">
+                <p className="text--center">
+                  <a href="https://qdx.co/" target="_blank">
+                    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="238" />
+                  </a>
+                </p>
+              </div>
+              <div className="col col--4"></div>
+            </div>
+          </div>
+        </div>
+        <br />
         <h2 className="text--center">Silver Sponsors</h2>
         <p className="text--center">We’re immensely grateful to our sponsors: Digital Ocean, for sponsoring our servers. And JetBrains, for sponsoring our IDE.</p>
         <div className="row">
