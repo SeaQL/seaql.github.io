@@ -28,7 +28,6 @@ export default function HomepageProducts() {
         </div>
         <br />
         <h2 className="text--center">Silver Sponsors</h2>
-        <p className="text--center">We’re immensely grateful to our sponsors: Digital Ocean, for sponsoring our servers. And JetBrains, for sponsoring our IDE.</p>
         <div className="row">
           <div className="col col--12">
             <div className="row">
