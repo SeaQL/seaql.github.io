@@ -18,7 +18,7 @@ export default function HomepageProducts() {
               <div className="col col--4">
                 <p className="text--center">
                   <a href="https://qdx.co/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="238" />
+                    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="180" />
                   </a>
                 </p>
               </div>
