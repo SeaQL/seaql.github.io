@@ -59,6 +59,23 @@ pub enum Category {
 
 </details>
 
+:::tip Since `1.1.8`
+
+`DeriveValueType` added support for enums. It offers a simpler alternative to `DeriveActiveEnum` for client-side enums backed by string database types.
+You have to provide custom `from_str` and `to_str` implementations.
+
+```rust
+#[derive(DeriveValueType)]
+#[sea_orm(value_type = "String")]
+pub enum Category {
+    BigTask,
+    SmallWork,
+}
+```
+
+Read the next chapter for more details.
+:::
+
 ### Integers
 
 ```rust
