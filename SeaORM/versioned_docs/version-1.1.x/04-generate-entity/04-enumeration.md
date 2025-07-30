@@ -209,9 +209,9 @@ manager.exec_stmt(insert).await?;
 ```
 > see also [Seeding Data - with sea_query statement](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)
 
-## Implementations
+## Trait impl
 
-You can implement [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) by using the [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro.
+The [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
 
 ```rust
 use sea_orm::entity::prelude::*;
