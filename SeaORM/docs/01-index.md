@@ -36,9 +36,9 @@
 
     4.1 [Using `sea-orm-cli`](04-generate-entity/01-sea-orm-cli.md)
 
-    4.2 [Entity Structure](04-generate-entity/02-entity-structure.md)
+    4.2 [Entity Structure](04-generate-entity/02-entity-format.md)
 
-    4.3 [Expanded Entity Structure](04-generate-entity/03-expanded-entity-structure.md)
+    4.3 [Column Types](04-generate-entity/03-column-types.md)
 
     4.4 [Enumeration](04-generate-entity/04-enumeration.md)
 
@@ -141,6 +141,8 @@
     12.3 [Compare with Diesel](12-internal-design/03-diesel.md)
 
     12.4 [Architecture](12-internal-design/04-architecture.md)
+
+    12.5 [Architecture](12-internal-design/05-expanded-entity-format.md)
 
 13. What's Next
 
