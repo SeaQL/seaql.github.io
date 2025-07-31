@@ -52,6 +52,7 @@ Command line options:
 - `-o` / `--output-dir`: entity file output directory (default: current directory)
 - `-v` / `--verbose`: print debug messages
 - `-l` / `--lib`: generate index file as `lib.rs` instead of `mod.rs`
+- `-t` / `--tables`: Generate entity file for specified tables only (comma separated)
 - `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
 - `--ignore-tables`: skip generating entity file for specified tables (default: `seaql_migrations`)
 - `--compact-format`: generate entity file of [compact format](04-generate-entity/02-entity-format.md) (default: true)
