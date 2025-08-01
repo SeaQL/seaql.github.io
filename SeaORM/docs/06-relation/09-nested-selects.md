@@ -1,4 +1,4 @@
-# Multi Selects
+# Nested Selects
 
 ## Nested Models
 

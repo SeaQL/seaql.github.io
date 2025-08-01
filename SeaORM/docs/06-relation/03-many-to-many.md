@@ -48,6 +48,27 @@ To define the inverse relation:
 1. Define both relations with `Entity::belongs_to()`.
 
 ```rust title="entity/cake_filling.rs"
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::cake::Entity",
+        from = "Column::CakeId",
+        to = "super::cake::Column::Id"
+    )]
+    Cake,
+    #[sea_orm(
+        belongs_to = "super::filling::Entity",
+        from = "Column::FillingId",
+        to = "super::filling::Column::Id"
+    )]
+    Filling,
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
+
+```rust
 #[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Cake,
@@ -69,35 +90,17 @@ impl RelationTrait for Relation {
     }
 }
 ```
+</details>
 
-Alternatively, the definition can be shortened by the `DeriveRelation` macro, where the following eliminates the need for the `RelationTrait` implementation above:
+## Limitation of Codegen
 
-```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::cake::Entity",
-        from = "Column::CakeId",
-        to = "super::cake::Column::Id"
-    )]
-    Cake,
-    #[sea_orm(
-        belongs_to = "super::filling::Entity",
-        from = "Column::FillingId",
-        to = "super::filling::Column::Id"
-    )]
-    Filling,
-}
-```
-
-<details>
-    <summary>Note that the implementation of `Related` with `via` and `to` methods will not be generated if there exists multiple paths via an intermediate table.</summary>
+Note that the implementation of `Related` with `via` and `to` methods will not be generated if there exists multiple paths via an intermediate table.
 
 For example, in the schema defined below, there are two paths:
 + Path 1. `users <-> users_votes <-> bills`
 + Path 2. `users <-> users_saved_bills <-> bills`
 
-Therefore, the implementation of `Related<R>` will not be generated
+Therefore, the implementation of `Related<R>` will not be generated.
 
 ```sql
 CREATE TABLE users
@@ -131,4 +134,3 @@ CREATE TABLE users_saved_bills
   CONSTRAINT users_saved_bills_pkey PRIMARY KEY (user_id, bill_id)
 );
 ```
-</details>

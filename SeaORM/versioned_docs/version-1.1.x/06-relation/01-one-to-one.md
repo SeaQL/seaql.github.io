@@ -11,10 +11,27 @@ A one-to-one relation is the most basic type of database relation. Let say a `Ca
 
 On the `Cake` entity, to define the relation:
 1. Add a new variant `Fruit` to the `Relation` enum.
-1. Define it with `Entity::has_one()`.
+1. Define it with `has_one`.
 1. Implement the `Related<Entity>` trait.
 
-```rust {3,9,14} title="entity/cake.rs"
+```rust title="entity/cake.rs"
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(has_one = "super::fruit::Entity")]
+    Fruit,
+}
+
+impl Related<super::fruit::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Fruit.def()
+    }
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
+
+```rust {3,9,16} title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Fruit,
@@ -34,24 +51,10 @@ impl Related<super::fruit::Entity> for Entity {
     }
 }
 ```
+</details>
 
 Alternatively, the definition can be shortened by the `DeriveRelation` macro,
 where the following eliminates the need for the `RelationTrait` implementation above:
-
-```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_one = "super::fruit::Entity")]
-    Fruit,
-}
-
-// `Related` trait has to be implemented by hand
-impl Related<super::fruit::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Fruit.def()
-    }
-}
-```
 
 ## Defining the Inverse Relation
 
@@ -63,6 +66,27 @@ To define the inverse relation:
 1. Implement the `Related<cake::Entity>` trait.
 
 ```rust title="entity/fruit.rs"
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::cake::Entity",
+        from = "Column::CakeId",
+        to = "super::cake::Column::Id"
+    )]
+    Cake,
+}
+
+impl Related<super::cake::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Cake.def()
+    }
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
+
+```rust
 #[derive(Copy, Clone, Debug, EnumIter)]
 pub enum Relation {
     Cake,
@@ -85,25 +109,4 @@ impl Related<super::cake::Entity> for Entity {
     }
 }
 ```
-
-Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following eliminates the need for the `RelationTrait` implementation above:
-
-```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::cake::Entity",
-        from = "Column::CakeId",
-        to = "super::cake::Column::Id"
-    )]
-    Cake,
-}
-
-// `Related` trait has to be implemented by hand
-impl Related<super::cake::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Cake.def()
-    }
-}
-```
+</details>

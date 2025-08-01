@@ -12,13 +12,11 @@ FROM
     AND `fruit`.`name` LIKE '%tropical%' -- Custom Join Condition
 ```
 
-It can be done via one of the following ways.
+It can be done in several ways.
 
 ## Relation
 
 Add your additional join conditions directly to the relation enum. The easiest way is to provide a `sea_query::SimpleExpr` via `on_condition` procedural macros attribute.
-
-If you want to have an additional `OR` condition, you can use `condition_type = "any"` to alter the relation.
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -31,12 +29,6 @@ pub enum Relation {
         on_condition = r#"super::fruit::Column::Name.like("%tropical%")"#
     )]
     TropicalFruit,
-    #[sea_orm(
-        has_many = "super::fruit::Entity",
-        on_condition = r#"super::fruit::Column::Name.like("%tropical%")"#
-        condition_type = "any",
-    )]
-    OrTropicalFruit,
 }
 ```
 
@@ -132,7 +124,7 @@ assert_eq!(
 );
 ```
 
-## Custom Join
+## On the fly
 
 Lastly, custom join conditions can be defined at the point you construct the join expression.
 
@@ -175,9 +167,48 @@ assert_eq!(
 );
 ```
 
-`OR` condition:
+You can specify table alias in the join statement:
 
 ```rust
+let cf = Alias::new("cf");
+
+assert_eq!(
+    cake::Entity::find()
+        .join_as(
+            JoinType::LeftJoin,
+            cake_filling::Relation::Cake.def().rev(),
+            cf.clone()
+        )
+        .join(
+            JoinType::LeftJoin,
+            cake_filling::Relation::Filling.def().from_alias(cf)
+        )
+        .build(DbBackend::MySql)
+        .to_string(),
+    [
+        "SELECT `cake`.`id`, `cake`.`name` FROM `cake`",
+        "LEFT JOIN `cake_filling` AS `cf` ON `cake`.`id` = `cf`.`cake_id`",
+        "LEFT JOIN `filling` ON `cf`.`filling_id` = `filling`.`id`",
+    ]
+    .join(" ")
+);
+```
+
+## `OR` condition
+
+```rust {6}
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        has_many = "super::fruit::Entity",
+        on_condition = r#"super::fruit::Column::Name.like("%tropical%")"#
+        condition_type = "any",
+    )]
+    OrTropicalFruit,
+}
+```
+
+```rust {7,12}
 assert_eq!(
     cake::Entity::find()
         .column_as(
@@ -203,33 +234,6 @@ assert_eq!(
         "SELECT `cake`.`id`, `cake`.`name`, `cake_filling_alias`.`cake_id` AS `cake_filling_cake_id` FROM `cake`",
         "LEFT JOIN `fruit` ON `cake`.`id` = `fruit`.`cake_id` OR `fruit`.`name` LIKE '%tropical%'",
         "LEFT JOIN `cake_filling` AS `cake_filling_alias` ON `cake_filling_alias`.`cake_id` = `cake`.`id` OR `cake_filling_alias`.`cake_id` > 10",
-    ]
-    .join(" ")
-);
-```
-
-Specify table alias in the join statement:
-
-```rust
-let cf = Alias::new("cf");
-
-assert_eq!(
-    cake::Entity::find()
-        .join_as(
-            JoinType::LeftJoin,
-            cake_filling::Relation::Cake.def().rev(),
-            cf.clone()
-        )
-        .join(
-            JoinType::LeftJoin,
-            cake_filling::Relation::Filling.def().from_alias(cf)
-        )
-        .build(DbBackend::MySql)
-        .to_string(),
-    [
-        "SELECT `cake`.`id`, `cake`.`name` FROM `cake`",
-        "LEFT JOIN `cake_filling` AS `cf` ON `cake`.`id` = `cf`.`cake_id`",
-        "LEFT JOIN `filling` ON `cf`.`filling_id` = `filling`.`id`",
     ]
     .join(" ")
 );

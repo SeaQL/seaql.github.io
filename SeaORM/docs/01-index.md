@@ -74,15 +74,13 @@
 
     6.4 [Chained Relations](06-relation/04-chained-relations.md)
 
-    6.5 [Self Referencing](06-relation/05-self-referencing.md)
+    6.5 [Custom Join Condition](06-relation/06-custom-join-condition.md)
 
-    6.6 [Custom Join Condition](06-relation/06-custom-join-condition.md)
+    6.6 [Data Loader](06-relation/07-data-loader.md)
 
-    6.7 [Data Loader](06-relation/07-data-loader.md)
+    6.7 [Bakery Schema](06-relation/08-bakery-schema.md)
 
-    6.8 [Bakery Schema](06-relation/08-bakery-schema.md)
-
-    6.9 [Multi Selects](06-relation/09-multi-selects.md)
+    6.8 [Nested Selects](06-relation/09-nested-selects.md)
 
 7. Writing Tests
 
