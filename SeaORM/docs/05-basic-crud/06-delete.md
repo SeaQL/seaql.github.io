@@ -36,3 +36,31 @@ let res: DeleteResult = fruit::Entity::delete_many()
 
 assert_eq!(res.rows_affected, 2);
 ```
+
+## Returning Deleted Models
+
+Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+
+```rust
+assert_eq!(
+    fruit::Entity::delete(ActiveModel {
+        id: Set(3),
+        ..Default::default()
+    })
+    .exec_with_returning(db)
+    .await?,
+    Some(fruit::Model {
+        id: 3,
+        name: "Apple".to_owned(),
+    })
+);
+```
+
+```rust
+let deleted_models: Vec<order::Model> = order::Entity::delete_many()
+    .filter(order::Column::CustomerId.eq(22))
+    .exec_with_returning(db)
+    .await?
+
+assert_eq!(deleted_models.len(), 2); // two items deleted
+```

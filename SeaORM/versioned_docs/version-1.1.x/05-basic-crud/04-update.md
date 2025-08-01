@@ -55,9 +55,9 @@ Fruit::update_many()
     .await?;
 ```
 
-### Update with returning (Postgres only)
+## Returning Updated Models
 
-Use `exec_with_returning` to return models that were modified:
+Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
 
 ```rust
 let fruits: Vec<fruit::Model> = Fruit::update_many()
@@ -65,4 +65,13 @@ let fruits: Vec<fruit::Model> = Fruit::update_many()
     .filter(fruit::Column::Name.contains("Apple"))
     .exec_with_returning(db)
     .await?;
+
+assert_eq!(
+    fruits[0],
+    fruit::Model {
+        id: 2,
+        name: "Apple".to_owned(),
+        cake_id: Some(1),
+    }
+);
 ```

@@ -298,3 +298,106 @@ let res = Entity::insert_many([..])
 
 assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
 ```
+
+### MySQL support
+
+Set `ON CONFLICT` on primary key `DO NOTHING`, but with MySQL specific polyfill.
+
+```rust
+let orange = cake::ActiveModel {
+    id: ActiveValue::set(2),
+    name: ActiveValue::set("Orange".to_owned()),
+};
+
+assert_eq!(
+    cake::Entity::insert(orange.clone())
+        .on_conflict_do_nothing()
+        .build(DbBackend::MySql)
+        .to_string(),
+    r#"INSERT INTO `cake` (`id`, `name`) VALUES (2, 'Orange') ON DUPLICATE KEY UPDATE `id` = `id`"#,
+);
+assert_eq!(
+    cake::Entity::insert(orange.clone())
+        .on_conflict_do_nothing()
+        .build(DbBackend::Postgres)
+        .to_string(),
+    r#"INSERT INTO "cake" ("id", "name") VALUES (2, 'Orange') ON CONFLICT ("id") DO NOTHING"#,
+);
+assert_eq!(
+    cake::Entity::insert(orange)
+        .on_conflict_do_nothing()
+        .build(DbBackend::Sqlite)
+        .to_string(),
+    r#"INSERT INTO "cake" ("id", "name") VALUES (2, 'Orange') ON CONFLICT ("id") DO NOTHING"#,
+);
+```
+
+## Returning Inserted Models
+
+Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+
+```rust
+assert_eq!(
+    cake::Entity::insert(cake::ActiveModel {
+        id: NotSet,
+        name: Set("Apple Pie".to_owned()),
+    })
+    .exec_with_returning(&db)
+    .await?,
+    cake::Model {
+        id: 1,
+        name: "Apple Pie".to_owned(),
+    }
+);
+```
+
+:::tip Since `1.1.6`
+
+Added `exec_with_returning_many` and `exec_with_returning_keys`
+:::
+
+```rust
+assert_eq!(
+    cake::Entity::insert_many([
+        cake::ActiveModel {
+            id: NotSet,
+            name: Set("Apple Pie".to_owned()),
+        },
+        cake::ActiveModel {
+            id: NotSet,
+            name: Set("Choco Pie".to_owned()),
+        },
+    ])
+    .exec_with_returning_many(&db)
+    .await?,
+    [
+        cake::Model {
+            id: 1,
+            name: "Apple Pie".to_owned(),
+        },
+        cake::Model {
+            id: 2,
+            name: "Choco Pie".to_owned(),
+        }
+    ]
+);
+```
+
+```rust
+assert_eq!(
+    cakes_bakers::Entity::insert_many([
+        cakes_bakers::ActiveModel {
+            cake_id: Set(1),
+            baker_id: Set(2),
+        },
+        cakes_bakers::ActiveModel {
+            cake_id: Set(2),
+            baker_id: Set(1),
+        },
+    ])
+    .exec_with_returning_keys(db)
+    .await
+    .unwrap(),
+    [(1, 2), (2, 1)]
+);
+```
