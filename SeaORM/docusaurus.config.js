@@ -4,7 +4,10 @@ function getNextMinorVersionName() {
   const lastVersion = versions[0];
   let majorVersion = parseInt(lastVersion.split('.')[0]);
   let minorVersion = parseInt(lastVersion.split('.')[1]);
-  if (majorVersion >= 1) {
+  if (majorVersion == 1) {
+    majorVersion = 2;
+    minorVersion = 0;
+  } else if (majorVersion >= 1) {
     minorVersion += 1;
   } else {
     majorVersion = 1;
