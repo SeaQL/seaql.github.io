@@ -41,6 +41,8 @@ For the mappings of Rust non-primitive data types. You can check [`entity/prelud
 | `Uuid`: uuid::Uuid, uuid::fmt::Braced, uuid::fmt::Hyphenated, uuid::fmt::Simple, uuid::fmt::Urn | Uuid | uuid_text | binary(16) | uuid |
 | `Json`: serde_json::Value | Json | json_text | json | json |
 | `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
+| `PgVector`: pgvector::Vector | Vector | N/A | N/A | vector |
+| `IpNetwork`: ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
 
 You can override the default mappings between a Rust type and `ColumnType` with the `column_type` attribute.
 
@@ -118,9 +120,7 @@ pub struct Model {
 
 ## Postgres Vector
 
-:::tip Since `1.1.6`
-PgVector support is added. Requires `postgres-vector` feature flag.
-:::
+Since `1.1.6`, PgVector support is added. Requires `postgres-vector` feature flag.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -133,3 +133,18 @@ pub struct Model {
 ```
 
 For a complete example, see [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs).
+
+## IpNetwork (Postgres)
+
+Since `1.1.8`, IpNetwork support is added. Requires `with-ipnetwork` feature flag.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "host_network")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub ipaddress: IpNetwork,
+    #[sea_orm(column_type = "Cidr")]
+    pub network: IpNetwork,
+}

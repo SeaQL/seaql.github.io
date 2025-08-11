@@ -42,14 +42,19 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ### Set ActiveModel from JSON Value
 
-If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. Note that you might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) JSON's primary key attribute, you can config that as shown below.
+If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. You might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) some of the unwanted attributes.
+
+:::tip Since `2.0.0`
+
+Not all fields of the Model need to be present in the JSON input, undefined fields will simply become `ActiveValue::NotSet`.
+
+:::
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "fruit")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    #[serde(skip_deserializing)] // Skip deserializing
     pub id: i32,
     pub name: String,
     pub cake_id: Option<i32>,
@@ -83,7 +88,7 @@ assert_eq!(
 );
 ```
 
-Create a new `ActiveModel` from JSON value with the `from_json` method.
+You can also create a new `ActiveModel` from JSON value with the `from_json` method.
 
 ```rust
 let fruit = fruit::ActiveModel::from_json(json!({
@@ -334,7 +339,7 @@ assert_eq!(
 
 ## Returning Inserted Models
 
-Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+Supported by Postgres and SQLite, the following returns the newly inserted models after insert.
 
 ```rust
 assert_eq!(
@@ -351,11 +356,6 @@ assert_eq!(
 );
 ```
 
-:::tip Since `1.1.6`
-
-Added `exec_with_returning_many` and `exec_with_returning_keys`
-:::
-
 ```rust
 assert_eq!(
     cake::Entity::insert_many([
@@ -368,7 +368,7 @@ assert_eq!(
             name: Set("Choco Pie".to_owned()),
         },
     ])
-    .exec_with_returning_many(&db)
+    .exec_with_returning(&db)
     .await?,
     [
         cake::Model {
@@ -382,6 +382,8 @@ assert_eq!(
     ]
 );
 ```
+
+There is also a `exec_with_returning_keys` if you only need the primary keys after insert.
 
 ```rust
 assert_eq!(

@@ -108,6 +108,21 @@ If you specified a custom `column_type` for an optional attribute, you must also
 pub name: Option<String>
 ```
 
+You can define unique keys that span multiple columns, the following will result in a unique index on `(order_id, cake_id)`.
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "lineitem")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(unique_key = "item")]
+    pub order_id: i32,
+    #[sea_orm(unique_key = "item")]
+    pub cake_id: i32,
+}
+```
+
 These properties are used in [create_table_from_entity](https://docs.rs/sea-orm/latest/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) to generate the table for the entity.
 
 ### Cast Column Type on Select and Save

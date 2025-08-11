@@ -2,24 +2,20 @@
 
 You can use Rust enums in model where the values are mapped to a database string, integer or native enum.
 
-### String
+## String
 
 For string enums, in addition to being able to specify the string value for each variant, you can also specify the `rename_all` attribute on the Enum if all the values should have string values based on case-transformations.
 
-#### Manual string values
-
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
+#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)", rename_all = "camelCase")]
 pub enum Category {
-    #[sea_orm(string_value = "B")]
-    Big,
-    #[sea_orm(string_value = "S")]
-    Small,
+    BigTask,
+    SmallWork,
 }
 ```
 
-#### Derived string values from variants
+The above is equivalent to:
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -32,19 +28,10 @@ pub enum Category {
 }
 ```
 
-The above is equivalent to:
-
-```rust
-#[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "String(StringLen::None)", rename_all = "camelCase")]
-pub enum Category {
-    BigTask,
-    SmallWork,
-}
-```
+Which specify the string values manually with `string_value`.
 
 <details>
-    <summary>You can find a list of valid values for the `rename_all` attribute here</summary>
+    <summary>You can find a list of valid values for the `rename_all` attribute here:</summary>
 
 - camelCase
 - kebab-case
@@ -59,7 +46,7 @@ pub enum Category {
 
 </details>
 
-:::tip Since `1.1.8`
+### Simple enum strings
 
 `DeriveValueType` added support for enums. It offers a simpler alternative to `DeriveActiveEnum` for client-side enums backed by string database types.
 You have to provide custom `from_str` and `to_str` implementations.
@@ -74,9 +61,8 @@ pub enum Category {
 ```
 
 Read the next chapter for more details.
-:::
 
-### Integers
+## Integers
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -111,7 +97,7 @@ pub enum Tea {
 }
 ```
 
-### MySQL
+## MySQL
 
 MySQL enum is just part of the column definition, and cannot be reused for different tables.
 
@@ -126,11 +112,11 @@ Table::create()
 "CREATE TABLE `table_name` (`column_name` ENUM('EverydayTea', 'BreakfastTea'))",
 ```
 
-### Postgres
+## Postgres
 
 If you are using Postgres, the enum has to be created in a separate `Type` statement in a migration, you can create it with:
 
-#### 1. `TYPE` statement
+### 1. `TYPE` statement
 
 [Full example](https://github.com/SeaQL/sea-orm/blob/master/sea-orm-migration/tests/common/migration/m20220118_000004_create_tea_enum.rs).
 
@@ -148,7 +134,7 @@ manager
     .await?;
 ```
 
-#### 2. `create_enum_from_active_enum`
+### 2. `create_enum_from_active_enum`
 This method will provide an interface for adding the type to the database, using the type for table columns, and adding values of this type to rows when seeding data. 
 
 1. Define an `ActiveEnum`

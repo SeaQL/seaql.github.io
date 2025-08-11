@@ -59,6 +59,25 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> =
     Cake::find().find_with_related(Fruit).all(db).await?;`,
   },
   {
+    title: 'Nested Select',
+    code: `use sea_orm::DerivePartialModel;
+
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity")]
+struct CakeWithFruit {
+    id: i32,
+    name: String,
+    #[sea_orm(nested)]
+    fruit: Option<fruit::Model>,
+}
+
+let cakes: Vec<CakeWithFruit> = cake::Entity::find()
+    .left_join(fruit::Entity)
+    .into_partial_model()
+    .all(db)
+    .await?;`,
+  },
+  {
     title: 'Insert',
     code: `let apple = fruit::ActiveModel {
     name: Set("Apple".to_owned()),
@@ -73,8 +92,31 @@ let pear = fruit::ActiveModel {
 // insert one
 let pear = pear.insert(db).await?;
 
-// insert many
-Fruit::insert_many([apple, pear]).exec(db).await?;`,
+// insert many returning last insert id
+let result = Fruit::insert_many([apple, pear]).exec(db).await?;
+result.last_insert_id == Some(2);`,
+  },
+  {
+    title: 'Insert (advanced)',
+    code: `// insert many with returning (if supported by database)
+let models: Vec<fruit::Model> = Fruit::insert_many([apple, pear])
+    .exec_with_returning(db)
+    .await?;
+
+models[0]
+    == fruit::Model {
+        id: 1,
+        name: "Apple".to_owned(),
+        cake_id: None,
+    };
+
+// insert with ON CONFLICT on primary key do nothing, with MySQL specific polyfill
+let result = Fruit::insert_many([apple, pear])
+    .on_conflict_do_nothing()
+    .exec(db)
+    .await?;
+
+matches!(result, TryInsertResult::Conflicted);`
   },
   {
     title: 'Update',

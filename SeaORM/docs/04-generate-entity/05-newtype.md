@@ -73,6 +73,22 @@ impl sea_orm::sea_query::Nullable for Integer {
 ```
 </details>
 
+### Using wrapped types as primary keys
+
+:::tip Since `2.0.0`
+:::
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "custom_value_type")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: Integer,
+}
+```
+
+Only for `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64`.
+
 ## Wrapping `Vec<T>` (Postgres only)
 
 ```rust

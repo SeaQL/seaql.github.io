@@ -192,7 +192,7 @@ let query = User::find()
 You can define a partial model, and the corresponding columns will be automatically selected:
 
 ```rust
-#[derive(DerivePartialModel, FromQueryResult)]
+#[derive(DerivePartialModel)]
 #[sea_orm(entity = "User")]
 struct PartialUser {
     pub id: i32,
@@ -216,7 +216,7 @@ struct PartialUser {
 Advanced usages include column remap and custom expression:
 
 ```rust
-#[derive(DerivePartialModel, FromQueryResult)]
+#[derive(DerivePartialModel)]
 #[sea_orm(entity = "User")]
 struct PartialRow {
     #[sea_orm(from_col = "id")]

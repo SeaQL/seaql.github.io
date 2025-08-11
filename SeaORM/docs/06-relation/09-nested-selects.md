@@ -1,8 +1,8 @@
 # Nested Selects
 
-## Nested Models
-
 `FromQueryResult` and `DerivePartialModel` macros allows you to nest objects easily, simplifying the construction of complex queries.
+
+## Nested FromQueryResult
 
 As a simple first example, we'd like to select `Cake` with `Bakery`:
 
@@ -51,11 +51,13 @@ assert_eq!(
 
 Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as). Then, in `FromQueryResult` we use `from_alias` to map the query result back to the nested struct.
 
+## Nested Models
+
 [`DerivePartialModel`](https://docs.rs/sea-orm/latest/sea_orm/derive.DerivePartialModel.html) allows you to omit the custom selects and aliases.
 The previous example can be written as:
 ```rust
-#[derive(DerivePartialModel)] // FromQueryResult is no longer needed
-#[sea_orm(entity = "cake::Entity", from_query_result)]
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity")]
 struct Cake {
     id: i32,
     name: String,
@@ -64,7 +66,7 @@ struct Cake {
 }
 
 #[derive(DerivePartialModel)]
-#[sea_orm(entity = "bakery::Entity", from_query_result)]
+#[sea_orm(entity = "bakery::Entity")]
 struct Bakery {
     id: i32,
     #[sea_orm(from_col = "Name")]
@@ -94,22 +96,42 @@ LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
+### Regular Models can be nested!
+
+:::tip Since `2.0.0`
+:::
+
+So the previous example can also be:
+
+```rust
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity")]
+struct Cake {
+    id: i32,
+    name: String,
+    #[sea_orm(nested)]
+    bakery: Option<bakery::Model>, // <- a regular full Model
+}
+```
+
+Where all columns of the nested model are selected.
+
 ### Join with alias
 
 When the same table is joined more than once in the same query, it's necessary to use an alias. You can use the `alias` attribute to select columns from an alias.
 
 ```rust
 #[derive(DerivePartialModel)]
-#[sea_orm(entity = "cake::Entity", from_query_result)]
+#[sea_orm(entity = "cake::Entity")]
 struct CakeFactory {
     id: i32,
     name: String,
-    #[sea_orm(nested)]
+    #[sea_orm(nested, alias = "factory")]
     bakery: Option<Factory>,
 }
 
 #[derive(DerivePartialModel)]
-#[sea_orm(entity = "bakery::Entity", alias = "factory", from_query_result)]
+#[sea_orm(entity = "bakery::Entity")]
 struct Factory {
     id: i32,
     #[sea_orm(from_col = "name")]
@@ -142,6 +164,37 @@ LEFT JOIN "bakery" AS "factory" ON "cake"."bakery_id" = "factory"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
+:::tip
+
+You can join the same Entity twice via two relations and have different aliases for each of them in the same query.
+
+```rust
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "bakery::Entity")]
+struct Bakery {
+    name: String,
+    #[sea_orm(nested, alias = "manager")]
+    manager: Worker,
+    #[sea_orm(nested, alias = "cashier")]
+    cashier: Worker,
+}
+
+let bakery: Bakery = bakery::Entity::find()
+    .join_as(
+        sea_orm::JoinType::LeftJoin,
+        bakery::Relation::Manager.def(),
+        "manager",
+    )
+    .join_as(
+        sea_orm::JoinType::LeftJoin,
+        bakery::Relation::Cashier.def(),
+        "cashier",
+    )
+    ..
+```
+
+:::
+
 ## Three-way Join
 
 Our join plan starts from Order:
@@ -153,7 +206,7 @@ Order -> Customer
 
 ```rust
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "order::Entity", from_query_result)]
+#[sea_orm(entity = "order::Entity")]
 struct Order {
     id: i32,
     total: Decimal,
@@ -164,13 +217,13 @@ struct Order {
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "customer::Entity", from_query_result)]
+#[sea_orm(entity = "customer::Entity")]
 struct Customer {
     name: String,
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "lineitem::Entity", from_query_result)]
+#[sea_orm(entity = "lineitem::Entity")]
 struct LineItem {
     price: Decimal,
     quantity: i32,
@@ -179,7 +232,7 @@ struct LineItem {
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "cake::Entity", from_query_result)]
+#[sea_orm(entity = "cake::Entity")]
 struct Cake {
     name: String,
 }
@@ -226,7 +279,7 @@ we can freely arrange the result data structure.
 
 ```rust
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "order::Entity", from_query_result)]
+#[sea_orm(entity = "order::Entity")]
 struct OrderItem {
     #[sea_orm(nested)]
     order: Order,
@@ -239,7 +292,7 @@ struct OrderItem {
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "order::Entity", from_query_result)]
+#[sea_orm(entity = "order::Entity")]
 struct Order {
     #[sea_orm(from_col = "id")]
     order_id: i32,
@@ -247,20 +300,20 @@ struct Order {
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "customer::Entity", from_query_result)]
+#[sea_orm(entity = "customer::Entity")]
 struct Customer {
     name: String,
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "lineitem::Entity", from_query_result)]
+#[sea_orm(entity = "lineitem::Entity")]
 struct LineItem {
     price: Decimal,
     quantity: i32,
 }
 
 #[derive(Debug, DerivePartialModel, PartialEq)]
-#[sea_orm(entity = "cake::Entity", from_query_result)]
+#[sea_orm(entity = "cake::Entity")]
 struct Cake {
     name: String,
 }
