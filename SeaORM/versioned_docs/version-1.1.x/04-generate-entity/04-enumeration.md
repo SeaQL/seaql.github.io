@@ -188,7 +188,7 @@ manager
 manager::create()
     .table(Tea::Table)
     .if_not_exists()
-    .col(Column::new(Tea::Type).custom(TeaType::name())) // use the type for a table column 
+    .col(ColumnDef::new(Tea::Type).custom(TeaType::name())) // use the type for a table column 
     // ... more columns
 ```
 > see also [Schema Creation Methods - Create Table](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
