@@ -64,7 +64,7 @@ While SeaQuery has long offered a way to build dynamic queries solving basically
 
 I recently came across this [SQLx issue](https://github.com/launchbadge/sqlx/issues/875), and was enticed to solve it.
 
-I am heavily inspired by Rust's `format!` macro and other languages template literals for string interpolation, and figured it could probably be achieved in Rust as well!
+I am heavily inspired by Rust's `format!` macro and other languages' template literals for string interpolation, and figured it could probably be achieved in Rust as well!
 
 ## Challenges
 
@@ -114,7 +114,7 @@ let query = {
 
 I created `RawSqlQueryBuilder` that is somewhat similar to SeaQuery's query building backend. It serializes the query string in a single pass.
 
-The derive macro first tokenized and parsed the raw SQL to identify the splice points, and then call a special method `push_parameters` to push a variable number of parameters. This can be numbered, i.e. for Postgres.
+The derive macro first tokenize and parse the raw SQL to identify the splice points, and then call a special method `push_parameters` to push a variable number of parameters. This can be numbered, i.e. for Postgres.
 
 After finishing the SQL building part, it then proceeds to bind the parameters. This mechanism is designed around SQLx's query API.
 
