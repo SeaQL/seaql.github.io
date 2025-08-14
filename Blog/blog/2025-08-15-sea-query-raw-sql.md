@@ -17,7 +17,7 @@ We've created a new `raw_query!` macro with neat features to make writing raw SQ
 
 The biggest headache when crafting complex queries is parameter binding, whether you use `?` or `$N` assigning parameters manually is laborious and error-prone.
 
-SeaQuery's new `raw_query!` macro is designed to solve this exact problem.
+SeaQuery's new [`raw_query!`](https://docs.rs/sea-query/1.0.0-rc.9/sea_query/index.html#4-improved-raw-sql-ergonomics) macro is designed to solve this exact problem.
 
 ## Gist
 
