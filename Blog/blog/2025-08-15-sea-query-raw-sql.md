@@ -5,17 +5,21 @@ author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
-image: https://www.sea-ql.org/blog/img/SeaORM%201.0-rc%20Banner.png
+image: https://www.sea-ql.org/blog/img/SeaQuery%201.0%20Banner.png
 tags: [news]
 ---
 
+<img alt="SeaQuery 1.0 Banner" src="/blog/img/SeaQuery%201.0%20Banner.png"/>
+
 You enjoy writing raw SQL queries, SeaQuery just made it better!
 
-We've created a new `raw_query` macro with neat features to make writing raw SQL queries more ergononmic.
+We've created a new `raw_query!` macro with neat features to make writing raw SQL queries more ergononmic.
 
 The biggest headache when crafting complex queries is parameter binding, whether you use `?` or `$N` assigning parameters manually is laborious and error-prone.
 
-SeaQuery's new `raw_query` macro is designed to solve this exact problem.
+SeaQuery's new `raw_query!` macro is designed to solve this exact problem.
+
+## Gist
 
 ```rust
 let a = 1;
@@ -49,7 +53,7 @@ Let's have a quick overview and we'll dive into the details:
 2. nested parameter access: `{b.b}` inner access
 3. array expansion: `{..d}` expanded into three parameters
 
-There are two more features that will be showcased below:
+There are two more features that will be showcased later:
 
 4. tuple expansion: `{values.0:2}`
 5. repeating group: `{..(values.0),}`
@@ -94,14 +98,14 @@ let query = {
         .push_fragment(" FROM \"glyph\"\n        WHERE \"image\" LIKE ")
         .push_parameters(1)
         .push_fragment(" AND \"id\" IN (")
-        .push_parameters((&d).p_len())
+        .push_parameters((&d).len())
         .push_fragment(")");
     let sql = builder.finish();
     let mut query = seaql::query(&sql);
     query = query.bind(&a);
     query = query.bind(&b.b);
     query = query.bind(&c);
-    for v in (&d).iter_p().iter() {
+    for v in (&d).iter() {
         query = query.bind(v);
     }
     query
@@ -146,7 +150,7 @@ We can already support accessing tuple members, why not offer a range operator?
 
 The `:` token is chosen because it somewhat resembles the Python operator. `[0:2]` is un-natural because tuple members in Rust can only be accessed by `.0`. Feel free to offer your thoughts!
 
-It's not possible to automatically expand a tuple like an array because its arity—the number of elements—is not known at the time the macro is expanded. If the tuple consists of elements with a uniform type, it can be made iterable like a vector by implementing the appropriate traits. However, that approach doesn't apply in the case above, where the tuple's structure is not uniform.
+It's not possible to automatically expand a tuple like an array because its arity (the number of elements) is not known at the time the macro is expanded. If the tuple consists of elements with a uniform type, it can be made iterable like a vector by implementing the appropriate traits. However, that approach doesn't apply in the case above, where the tuple's structure is not uniform.
 
 You can do inserts with this:
 
@@ -183,7 +187,7 @@ assert_eq!(
 );
 ```
 
-This syntax almost look like regex now. Please let me explain:
+This syntax almost looks like regex now. Please let me explain:
 
 It's expanded upon the previous example, in which `values.0:2` means tuple expansion. We want to repeat this tuple as a group, surrounded by parenthesis, so we wrap it with `()`. Then we apply the same spread operator `..` to expand the vector of tuples. Finally, the trailing `,` means they should be connected with `,`.
 
@@ -253,6 +257,9 @@ This is just one of many new features we've added while preparing SeaQuery 1.0. 
 If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
 
 A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
+
+<img src="/blog/img/github-sponsors-20250812.jpg#light" />
+<img src="/blog/img/github-sponsors-20250812-dark.jpg#dark" />
 
 #### Gold Sponsor
 
