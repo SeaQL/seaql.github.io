@@ -216,7 +216,7 @@ This is equivalent to the previous example.
 
 ## SQLx Integration
 
-SeaQuery offers tight SQLx integration. So in practice you can do:
+SeaQuery offers tight SQLx integration. So in practice you can do (requires `sqlx-utils` feature flag):
 
 ```rust
 let mut sql;
