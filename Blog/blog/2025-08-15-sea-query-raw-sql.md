@@ -250,7 +250,7 @@ It almost feels like a mini ORM ... although [SeaORM 🐚](https://github.com/Se
 
 ## SeaQuery 1.0
 
-This is just one of many new features we've added while preparing SeaQuery 1.0. This is currently an `rc` release, if you have ideas please [join the discussion](https://github.com/SeaQL/sea-query/discussions/795).
+This is just one of many new features we've added while preparing [SeaQuery 1.0](https://github.com/SeaQL/sea-query/blob/master/CHANGELOG.md#100---pending). This is currently an `rc` release, if you have ideas please [join the discussion](https://github.com/SeaQL/sea-query/discussions/795).
 
 ## Sponsor
 
