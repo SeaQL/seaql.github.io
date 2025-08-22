@@ -65,11 +65,11 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 Use `build` and `to_string` methods on any CRUD operations to get the database-specific raw SQL for debugging purposes.
 
 ```rust
-use sea_orm::DatabaseBackend;
+use sea_orm::{DbBackend, QueryTrait};
 
 assert_eq!(
     cake_filling::Entity::find_by_id((6, 8))
-        .build(DatabaseBackend::MySql)
+        .build(DbBackend::MySql)
         .to_string(),
     [
         "SELECT `cake_filling`.`cake_id`, `cake_filling`.`filling_id` FROM `cake_filling`",
@@ -87,7 +87,7 @@ You can build SQL statements using `sea-query` and query / execute it directly o
 ```rust
 let query_res: Option<QueryResult> = db
     .query_one_raw(Statement::from_string(
-        DatabaseBackend::MySql,
+        DbBackend::MySql,
         "SELECT * FROM `cake`;",
     ))
     .await?;
@@ -96,7 +96,7 @@ let id: i32 = query_res.try_get("", "id")?;
 
 let query_res_vec: Vec<QueryResult> = db
     .query_all_raw(Statement::from_string(
-        DatabaseBackend::MySql,
+        DbBackend::MySql,
         "SELECT * FROM `cake`;",
     ))
     .await?;
@@ -107,7 +107,7 @@ let query_res_vec: Vec<QueryResult> = db
 ```rust
 let exec_res: ExecResult = db
     .execute(Statement::from_string(
-        DatabaseBackend::MySql,
+        DbBackend::MySql,
         "DROP DATABASE IF EXISTS `sea`;",
     ))
     .await?;
