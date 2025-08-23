@@ -17,9 +17,9 @@ struct Cake {
 
 #[derive(FromQueryResult)]
 struct Bakery {
-    #[sea_orm(from_alias = "bakery_id")]
+    #[sea_orm(alias = "bakery_id")]
     id: i32,
-    #[sea_orm(from_alias = "bakery_name")]
+    #[sea_orm(alias = "bakery_name")]
     brand: String,
 }
 
@@ -49,7 +49,7 @@ assert_eq!(
 );
 ```
 
-Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as). Then, in `FromQueryResult` we use `from_alias` to map the query result back to the nested struct.
+Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as). Then, in `FromQueryResult` we use `alias` to map the query result back to the nested struct.
 
 ## Nested Models
 

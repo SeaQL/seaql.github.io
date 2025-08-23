@@ -1,66 +1,80 @@
 # Raw SQL
 
-## Query by raw SQL
+:::tip Since `2.0.0`
 
-You can select `Model` from raw query, with appropriate syntax for binding parameters, i.e. `?` for MySQL and SQLite, and `$N` for PostgreSQL.
+A new macro `raw_sql` is added, with many neat features to make writing raw SQL queries more ergononmic.
+
+In particular, you can expand arrays with `({..ids})` into `(?, ?, ?)`.
+
+Learn more in [SeaQuery just made writing raw SQL more enjoyable](https://www.sea-ql.org/blog/2025-08-15-sea-query-raw-sql/).
+
+:::
+
+## Find Model by raw SQL
 
 ```rust
-let cheese: Option<cake::Model> = cake::Entity::find()
-    .from_raw_sql(Statement::from_sql_and_values(
-        DbBackend::Postgres,
-        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
-        [1.into()],
+let id = 1;
+
+let cake: Option<cake::Model> = cake::Entity::find()
+    .from_raw_sql(raw_sql!(
+        Postgres,
+        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = {id}"#
     ))
     .one(&db)
     .await?;
 ```
 
-You can also select a custom model. Here, we select all unique names from cake.
+## Select into custom struct by raw SQL
+
+Here nested select is also demonstrated.
 
 ```rust
-#[derive(Debug, FromQueryResult)]
-pub struct UniqueCake {
+#[derive(FromQueryResult)]
+struct Cake {
+    name: String,
+    #[sea_orm(nested)]
+    bakery: Option<Bakery>,
+}
+
+#[derive(FromQueryResult)]
+struct Bakery {
+    #[sea_orm(alias = "bakery_name")]
     name: String,
 }
 
-let unique: Vec<UniqueCake> = UniqueCake::find_by_statement(Statement::from_sql_and_values(
-        DbBackend::Postgres,
-        r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
-        [],
-    ))
-    .all(&db)
-    .await?;
+let cake_ids = [2, 3, 4];
+
+let cake: Option<Cake> = Cake::find_by_statement(raw_sql!(
+    Sqlite,
+    r#"SELECT "cake"."name", "bakery"."name" AS "bakery_name"
+       FROM "cake"
+       LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
+       WHERE "cake"."id" IN ({..cake_ids})"#
+))
+.one(db)
+.await?;
 ```
 
-If you do not know what your model looks like beforehand, you can use `JsonValue`.
-
-```rust
-let unique: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
-        DbBackend::Postgres,
-        r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
-        [],
-    ))
-    .all(&db)
-    .await?;
- ```
+## Paginate raw SQL query
 
 You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
 
 ```rust
+let ids = vec![1, 2, 3, 4];
+
 let mut cake_pages = cake::Entity::find()
-    .from_raw_sql(Statement::from_sql_and_values(
-        DbBackend::Postgres,
-        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" = $1"#,
-        [1.into()],
+    .from_raw_sql(raw_sql!(
+        Postgres,
+        r#"SELECT "cake"."id", "cake"."name" FROM "cake" WHERE "id" IN ({..ids})"#
     ))
-    .paginate(db, 50);
- 
+    .paginate(db, 10);
+
 while let Some(cakes) = cake_pages.fetch_and_next().await? {
     // Do something on cakes: Vec<cake::Model>
 }
 ```
 
-## Get raw SQL query
+## Inspect raw SQL from queries
 
 Use `build` and `to_string` methods on any CRUD operations to get the database-specific raw SQL for debugging purposes.
 

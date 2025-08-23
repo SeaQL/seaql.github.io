@@ -53,6 +53,18 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 }
 ```
 
+## Select JSON from raw SQL
+
+```rust
+let result: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
+        DbBackend::Postgres,
+        r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
+        [],
+    ))
+    .all(&db)
+    .await?;
+```
+
 ## Convert JSON to ActiveModel
 
 If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. You might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) some of the unwanted attributes.
