@@ -60,6 +60,12 @@ where the following eliminates the need for the `RelationTrait` implementation a
 
 On the `Fruit` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity.
 
+:::tip
+
+The rule of thumb is, always define a `belongs_to` on the Entity with a foreign key `xxx_id`.
+
+:::
+
 To define the inverse relation:
 1. Add a new enum variant `Relation::Cake` to the `Fruit` entity.
 1. Write the definition of it with the `Entity::belongs_to()` method, we always define the inverse relation using this method.

@@ -1,4 +1,6 @@
-# Chained Relations
+# Complex Relations
+
+## Linked
 
 The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
 
@@ -8,7 +10,7 @@ The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on
 Implementing `Linked` trait is completely optional, as there are other ways of doing relational queries in SeaORM, which will be explained in later chapters.
 With `Linked` implemented, several `find_*_linked` helper methods become available, and relationships can be defined in a single place.
 
-## Defining the Link
+### Defining the Link
 
 Take [this](https://github.com/SeaQL/sea-orm/blob/1.1.x/src/tests_cfg/entity_linked.rs) as an example, where we join cake and filling via an intermediate `cake_filling` table.
 
@@ -51,7 +53,7 @@ impl Linked for CakeToFilling {
 }
 ```
 
-## Lazy Loading
+### Lazy Loading
 
 Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
@@ -77,7 +79,7 @@ assert_eq!(
 );
 ```
 
-## Eager Loading
+### Eager Loading
 
 [`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
 
@@ -98,7 +100,7 @@ assert_eq!(
 );
 ```
 
-## Self Referencing
+## Self Referencing Relations
 
 The `Link` trait can also define self referencing relations.
 
@@ -132,5 +134,61 @@ impl Linked for SelfReferencingLink {
     fn link(&self) -> Vec<RelationDef> {
         vec![Relation::SelfReferencing.def()]
     }
+}
+```
+
+## Diamond Relations
+
+Sometimes there exist multiple relations between a pair of entities. Here we take the simplest example, where `Cake` can have multiple `Fruit`.
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "cake")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+    pub topping: i32,
+    pub filling: i32,
+}
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::fruit::Entity",
+        from = "Column::Topping",
+        to = "super::fruit::Column::Id"
+    )]
+    Topping,
+    #[sea_orm(
+        belongs_to = "super::fruit::Entity",
+        from = "Column::Filling",
+        to = "super::fruit::Column::Id"
+    )]
+    Filling,
+}
+```
+
+How can we define the `Fruit` Entity?
+By default, `has_many` invokes the `Related` trait to define the relation.
+As a consequence, it's not possible to define the Relation without `Related` impl.
+
+Here we have to specify the Relation variant manually with the `via` attribute.
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "fruit")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+}
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(has_many = "super::cake::Entity", via = "Relation::Topping")]
+    CakeTopping,
+    #[sea_orm(has_many = "super::cake::Entity", via = "Relation::Filling")]
+    CakeFilling,
 }
 ```

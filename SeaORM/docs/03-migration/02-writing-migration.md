@@ -121,7 +121,7 @@ Here are some common DDL snippets you may find useful.
     // Remember to import `sea_orm_migration::schema::*` schema helpers into scope
     use sea_orm_migration::{prelude::*, schema::*};
 
-    // Defining the schema with helpers
+    // Defining the table schema
     manager
         .create_table(
             Table::create()
@@ -130,29 +130,26 @@ Here are some common DDL snippets you may find useful.
                 .col(pk_auto(Post::Id))
                 .col(string(Post::Title))
                 .col(string(Post::Text))
-                .col(enumeration_null(Post::Category, Alias::new("category"), Category::iter()))
+                .col(enumeration_null(Post::Category, "category", Category::iter()))
         )
         .await
 
-    // Or, you can define the schema without the helpers
+    // above is equivalent to:
     manager
         .create_table(
             Table::create()
                 .table(Post::Table)
                 .if_not_exists()
-                .col(
-                    ColumnDef::new(Post::Id)
+                .col(ColumnDef::new(Post::Id)
                         .integer()
                         .not_null()
                         .auto_increment()
-                        .primary_key(),
+                        .primary_key()
                 )
                 .col(ColumnDef::new(Post::Title).string().not_null())
                 .col(ColumnDef::new(Post::Text).string().not_null())
-                .col(
-                    ColumnDef::new(Post::Category)
-                        .enumeration(Alias::new("category"), Category::iter()),
-                )
+                .col(ColumnDef::new(Post::Category)
+                        .enumeration("category", Category::iter()))
         )
         .await
     ```

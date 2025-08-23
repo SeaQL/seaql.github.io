@@ -87,7 +87,7 @@ impl ColumnTrait for Column {
     /// Cast column expression used in select statement.
     fn select_as(&self, expr: Expr) -> SimpleExpr {
         match self {
-            Column::CaseInsensitiveText => expr.cast_as(Alias::new("text")),
+            Column::CaseInsensitiveText => expr.cast_as("text"),
             _ => self.select_enum_as(expr),
         }
     }
@@ -95,7 +95,7 @@ impl ColumnTrait for Column {
     /// Cast value of a column into the correct type for database storage.
     fn save_as(&self, val: Expr) -> SimpleExpr {
         match self {
-            Column::CaseInsensitiveText => val.cast_as(Alias::new("citext")),
+            Column::CaseInsensitiveText => val.cast_as("citext"),
             _ => self.save_enum_as(val),
         }
     }

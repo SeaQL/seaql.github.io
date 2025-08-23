@@ -104,10 +104,8 @@ MySQL enum is just part of the column definition, and cannot be reused for diffe
 ```rust
 Table::create()
     .table(Posts::TableName)
-    .col(
-        ColumnDef::new(Posts::ColumnName)
-            .enumeration(Alias::new("tea"), [Alias::new("EverydayTea"), Alias::new("BreakfastTea")]),
-    )
+    .col(ColumnDef::new(Posts::ColumnName)
+            .enumeration("tea", ["EverydayTea", "BreakfastTea"]))
 
 "CREATE TABLE `table_name` (`column_name` ENUM('EverydayTea', 'BreakfastTea'))",
 ```
@@ -127,8 +125,8 @@ manager
     .create_type(
         // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
         Type::create()
-            .as_enum(Alias::new("tea"))
-            .values([Alias::new("EverydayTea"), Alias::new("BreakfastTea")])
+            .as_enum("tea")
+            .values(["EverydayTea", "BreakfastTea"])
             .to_owned(),
     )
     .await?;
@@ -190,7 +188,7 @@ let insert = Query::insert()
     .values_panic([TeaType::EverydayTea.as_enum()]) // call `as_enum` to convert the variant into a SimpleExpr
     .to_owned();
 
-manager.exec_stmt(insert).await?;
+manager.execute(insert).await?;
 // ...
 ```
 > see also [Seeding Data - with sea_query statement](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)

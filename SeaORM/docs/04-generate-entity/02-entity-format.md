@@ -136,7 +136,7 @@ pub case_insensitive_text: String
 
 ### Ignore Attribute
 
-If you want to ignore a particular model attribute such that it maps to no database column, you can use the `ignore` annotation.
+If you want to ignore a particular model attribute such that it maps to no database column, you can use the `ignore` macro attribute.
 
 ```rust
 #[sea_orm(ignore)]

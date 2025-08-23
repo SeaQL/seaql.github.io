@@ -74,7 +74,7 @@
 
     6.3 [Many to Many](06-relation/03-many-to-many.md)
 
-    6.4 [Chained Relations](06-relation/04-chained-relations.md)
+    6.4 [Complex Relations](06-relation/04-complex-relations.md)
 
     6.5 [Custom Join Condition](06-relation/06-custom-join-condition.md)
 

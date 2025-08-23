@@ -124,7 +124,7 @@ type ProdRel = <Prod as EntityTrait>::Relation;
 
 This would make our code much more concise and readable.
 
-Avoid using `Alias::new` because it's error-prone and slightly more expensive.
+Avoid using string literals because it's prone to typo.
 
 :::tip
 
@@ -196,7 +196,7 @@ assert_eq!(
     cake::Entity::find()
         .column_as(filling::Column::Id.count(), "count")
         .column_as(
-            Expr::col((Alias::new("fruit_alias"), fruit::Column::Name)).into_simple_expr(),
+            Expr::col(("fruit_alias", fruit::Column::Name)).into_simple_expr(),
             "fruit_name"
         )
         // construct `RelationDef` on the fly
@@ -219,7 +219,7 @@ assert_eq!(
                         .like("%tropical%")
                         .into_condition()
                 }),
-            Alias::new("fruit_alias")
+            "fruit_alias"
         )
         .group_by(cake::Column::Id)
         .having(filling::Column::Id.count().equals(Expr::value(2)))

@@ -170,7 +170,7 @@ assert_eq!(
 You can specify table alias in the join statement:
 
 ```rust
-let cf = Alias::new("cf");
+let cf = "cf";
 
 assert_eq!(
     cake::Entity::find()
@@ -212,7 +212,7 @@ pub enum Relation {
 assert_eq!(
     cake::Entity::find()
         .column_as(
-            Expr::col((Alias::new("cake_filling_alias"), cake_filling::Column::CakeId)),
+            Expr::col(("cake_filling_alias", cake_filling::Column::CakeId)),
             "cake_filling_cake_id"
         )
         .join(JoinType::LeftJoin, cake::Relation::OrTropicalFruit.def())
@@ -226,7 +226,7 @@ assert_eq!(
                         .gt(10)
                         .into_condition()
                 }),
-            Alias::new("cake_filling_alias")
+            "cake_filling_alias"
         )
         .build(DbBackend::MySql)
         .to_string(),

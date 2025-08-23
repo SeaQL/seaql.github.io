@@ -41,11 +41,7 @@ async fn setup_schema(db: &DbConn) {
         stmt.build(SqliteQueryBuilder),
         Table::create()
             .table(MyEntity)
-            .col(
-                ColumnDef::new(MyEntity::Column::Id)
-                    .integer()
-                    .not_null()
-            )
+            .col(integer(MyEntity::Column::Id))
             //...
             .build(SqliteQueryBuilder)
     );

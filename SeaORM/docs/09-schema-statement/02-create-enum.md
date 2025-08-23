@@ -50,15 +50,9 @@ assert_eq!(
     builder.build(
         &sea_query::Table::create()
             .table(active_enum::Entity.table_ref())
-            .col(
-                sea_query::ColumnDef::new(active_enum::Column::Id)
-                    .integer()
-                    .not_null()
-                    .auto_increment()
-                    .primary_key(),
-            )
-            .col(sea_query::ColumnDef::new(active_enum::Column::Category).string_len(1))
-            .col(sea_query::ColumnDef::new(active_enum::Column::Color).integer())
+            .col(pk_auto(active_enum::Column::Id))
+            .col(string_len(active_enum::Column::Category, 1))
+            .col(integer(active_enum::Column::Color))
             .to_owned()
     )
 );

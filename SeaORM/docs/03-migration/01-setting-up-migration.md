@@ -21,7 +21,7 @@ A table will be created in your database to keep track of the applied migrations
 impl MigratorTrait for Migrator {
     // Override the name of migration table
     fn migration_table_name() -> sea_orm::DynIden {
-        Alias::new("override_migration_table_name").into_iden()
+        "override_migration_table_name".into_iden()
     }
     ..
 }

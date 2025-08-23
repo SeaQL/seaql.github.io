@@ -22,21 +22,9 @@ assert_eq!(
     builder.build(
         &Table::create()
             .table(CakeFillingPrice.table_ref())
-            .col(
-                ColumnDef::new(cake_filling_price::Column::CakeId)
-                    .integer()
-                    .not_null(),
-            )
-            .col(
-                ColumnDef::new(cake_filling_price::Column::FillingId)
-                    .integer()
-                    .not_null(),
-            )
-            .col(
-                ColumnDef::new(cake_filling_price::Column::Price)
-                    .decimal()
-                    .not_null(),
-            )
+            .col(integer(cake_filling_price::Column::CakeId))
+            .col(integer(cake_filling_price::Column::FillingId))
+            .col(decimal(cake_filling_price::Column::Price))
             .primary_key(
                 Index::create()
                     .name("pk-cake_filling_price")
