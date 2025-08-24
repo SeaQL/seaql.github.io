@@ -89,7 +89,7 @@ impl ActiveModelBehavior for ActiveModel {}
 Generating a fresh project is the easiest way to launch a GraphQL server.
 However, Seaography can easily be integrated to an existing web server built with any web framework.
 
-Seaography supports Actix, Poem and Axum out of the box.
+Seaography supports Poem, Actix, and Axum out of the box.
 
 Run the following command:
 
