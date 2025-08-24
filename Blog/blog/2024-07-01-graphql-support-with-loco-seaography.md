@@ -41,7 +41,7 @@ You can generate Seaography Entities by using `sea-orm-cli` with the extra `--se
 sea-orm-cli generate entity -o src/models/_entities -u postgres://loco:loco@localhost:5432/loco_seaography_development --seaography
 ```
 
-```diff title="loco_seaography/src/models/_entities/notes.rs"
+```rust title="loco_seaography/src/models/_entities/notes.rs"
 use sea_orm::entity::prelude::*;
 use serde::{Serialize, Deserialize};
 

@@ -5,15 +5,17 @@ You can create indices from entities using [`Schema::create_index_from_entity`](
 Example [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity:
 
 ```rust title="indexes.rs"
-impl ColumnTrait for Column {
-    type EntityName = Entity;
-
-    fn def(&self) -> ColumnDef {
-        match self {
-            Self::Index1Attr => ColumnType::Integer.def().indexed(),
-            Self::Index2Attr => ColumnType::Integer.def().indexed().unique(),
-        }
-    }
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(indexed)]
+    pub index1_attr: i32,
+    #[sea_orm(unique, indexed)]
+    pub index2_attr: i32,
+    #[sea_orm(unique_key = "my_unique")]
+    pub unique_key_a: String,
+    #[sea_orm(unique_key = "my_unique")]
+    pub unique_key_b: String,
 }
 ```
 
@@ -21,21 +23,30 @@ impl ColumnTrait for Column {
 use sea_orm::{sea_query, tests_cfg::*, Schema};
 
 let builder = db.get_database_backend();
-let schema = Schema::new(builder);
 
-let stmts = schema.create_index_from_entity(indexes::Entity);
+let stmts = Schema::new(builder).create_index_from_entity(indexes::Entity);
 
-let idx = sea_query::Index::create()
+let idx: IndexCreateStatement = Index::create()
     .name("idx-indexes-index1_attr")
     .table(indexes::Entity)
     .col(indexes::Column::Index1Attr)
     .to_owned();
 assert_eq!(builder.build(&stmts[0]), builder.build(&idx));
 
-let idx = sea_query::Index::create()
+let idx: IndexCreateStatement = Index::create()
     .name("idx-indexes-index2_attr")
     .table(indexes::Entity)
     .col(indexes::Column::Index2Attr)
-    .to_owned();
+    .unique()
+    .take();
 assert_eq!(builder.build(&stmts[1]), builder.build(&idx));
+
+let idx: IndexCreateStatement = Index::create()
+    .name("idx-indexes-my_unique")
+    .table(indexes::Entity)
+    .col(indexes::Column::UniqueKeyA)
+    .col(indexes::Column::UniqueKeyB)
+    .unique()
+    .take();
+assert_eq!(builder.build(&stmts[2]), builder.build(&idx));
 ```

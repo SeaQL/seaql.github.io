@@ -47,7 +47,7 @@ assert_eq!(
 );
 ```
 
-To further illustrate it, we will show the SQL statement as string below.
+To further illustrate, we will show the SQL statements as string below.
 
 - PostgreSQL
     ```rust
