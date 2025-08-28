@@ -1,0 +1,58 @@
+{
+  "version.label": {
+    "message": "2.0.x 🚧",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Introduction": {
+    "message": "Introduction",
+    "description": "The label for category Introduction in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Installation & Configuration": {
+    "message": "Installation & Configuration",
+    "description": "The label for category Installation & Configuration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Migration": {
+    "message": "Migration",
+    "description": "The label for category Migration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Generating Entities": {
+    "message": "Generating Entities",
+    "description": "The label for category Generating Entities in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Basic CRUD": {
+    "message": "Basic CRUD",
+    "description": "The label for category Basic CRUD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Relations": {
+    "message": "Relations",
+    "description": "The label for category Relations in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Writing Tests": {
+    "message": "Writing Tests",
+    "description": "The label for category Writing Tests in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced Queries": {
+    "message": "Advanced Queries",
+    "description": "The label for category Advanced Queries in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Schema Statement": {
+    "message": "Schema Statement",
+    "description": "The label for category Schema Statement in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.GraphQL Support": {
+    "message": "GraphQL Support",
+    "description": "The label for category GraphQL Support in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Admin Panel": {
+    "message": "Admin Panel",
+    "description": "The label for category Admin Panel in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Internal Design": {
+    "message": "Internal Design",
+    "description": "The label for category Internal Design in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.What's Next": {
+    "message": "What's Next",
+    "description": "The label for category What's Next in sidebar tutorialSidebar"
+  }
+}
