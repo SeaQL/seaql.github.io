@@ -28,6 +28,10 @@ module.exports = {
   organizationName: 'SeaQL',
   projectName: 'sea-orm',
   trailingSlash: true,
+    i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
+  },
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,
@@ -79,6 +83,10 @@ module.exports = {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
       ],
     },
