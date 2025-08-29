@@ -1,13 +1,13 @@
-# What is an ORM
+# 什么是 ORM
 
-An Object Relational Mapper (ORM) is a programming library to help you interact with a relational database from an Object-Oriented Programming (OOP) language.
+对象关系映射器（ORM）是一类编程库，用于帮助你在面向对象编程（OOP）语言中与关系数据库交互。
 
-Tables and columns in a database are mapped to objects and attributes, while additional methods allow you to load and store data from and to the database.
+数据库中的表和列会被映射到对象与属性，同时提供额外的方法，让你可以从数据库加载数据或将数据存储到数据库中。。
 
-Services built in Rust are lightweight (small binary size, low memory usage), safe (with compile-time guarantee), correct (if unit tests are well-designed), and fast (compile-time optimizations minimize runtime overhead).
+使用 Rust 构建的服务具有以下特点：轻量（二进制文件小，内存使用率低）、安全（具有编译时保证）、正确（前提是单元测试设计良好）且快速（编译时优化能够最大限度地减少运行时开销）。
 
-Due to Rust being a static, strongly typed, compiled, thread-safe, non-garbage-collected, and unconventional object-oriented language, working with an ORM in Rust is a bit different from other scripting languages you are already familiar with.
+由于 Rust 是一种静态类型、强类型、编译型、线程安全、非垃圾回收，并且面向对象方式不常规的语言，因此在 Rust 中 ORM 的使用与你熟悉的其他脚本语言中有所不同。
 
-SeaORM tries to help you in reaping the above benefits while avoiding the hiccups when programming in Rust.
+SeaORM 旨在帮助你获得上述优势，同时规避在 Rust 中编程可能遇到的问题。
 
-Let's get started.
+让我们开始吧。
