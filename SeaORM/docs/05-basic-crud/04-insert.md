@@ -191,6 +191,12 @@ assert_eq!(
 
 ## Returning Inserted Models
 
+:::tip Since `2.0.0`
+
+`Entity::insert` and `Entity::insert_many` are now separate types, the `exec_with_returning` method have the appropriate return type. So `exec_with_returning_many` is now deprecated.
+
+:::
+
 Supported by Postgres and SQLite, the following returns the newly inserted models after insert.
 
 ```rust

@@ -53,6 +53,16 @@ Because the tables `cake` and `bakery` have some duplicate column names, we'd ha
 
 ## Nested Models
 
+:::tip Since `2.0.0`
+
+```rust
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity", from_query_result)]
+//                                 ^^^^^^^^^^^^^^^^^ no longer needed
+```
+
+:::
+
 [`DerivePartialModel`](https://docs.rs/sea-orm/latest/sea_orm/derive.DerivePartialModel.html) allows you to omit the custom selects and aliases.
 The previous example can be written as:
 ```rust
