@@ -7,7 +7,7 @@ You can define a New Type (`T`) and use it as model field. The following traits 
 3. Implement [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html) for `T`
 4. Implement [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html) for `T`
 
-## Wrapper Type
+## Wrapping scalar types
 
 You can create new types wrapping any type supported by SeaORM.
 
@@ -154,7 +154,7 @@ impl sea_orm::sea_query::Nullable for Integer {
 
 ## Wrapping `Vec<T>` (backend generic)
 
-You can also define a backend-generic `Vec<T>` field by serialize / deserialize the object to / from JSON:
+You can also wrap a `Vec<T>` field by serialize / deserialize the object to / from JSON. This is a backend-generic way of supporting array types across databases.
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -219,6 +219,33 @@ impl sea_orm::sea_query::Nullable for ObjectVec {
 }
 ```
 </details>
+
+## Treat any type as JSON
+
+In addition to wrapping `Vec<T>`, the `FromJsonQueryResult` macro can be used on any type that implements `serde`'s `Serialize` and `Deserialize`, and they will be converted to/from JSON when interacting with databases.
+
+```rust
+use sea_orm::FromJsonQueryResult;
+use sea_orm::entity::prelude::*;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "json_struct")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub json_value: Metadata,
+    pub json_value_opt: Option<Metadata>,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+pub struct Metadata {
+    pub id: i32,
+    pub name: String,
+    pub price: f32,
+    pub notes: Option<String>,
+}
+```
 
 ## Enum String
 
