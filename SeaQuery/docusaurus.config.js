@@ -153,7 +153,15 @@ module.exports = {
       },
     ],
   ],
+  stylesheets: [
+    '/cookieconsent/cookieconsent.css',
+  ],
   scripts: [
     '/sea-ql.js',
+    {
+      type: 'module',
+      src: '/cookieconsent/cookieconsent.js',
+      async: true,
+    },
   ],
 };
