@@ -187,9 +187,17 @@ const config = {
         },
       },
     }),
-    scripts: [
-      '/sea-ql.js',
-    ],
+  stylesheets: [
+    '/cookieconsent/cookieconsent.css',
+  ],
+  scripts: [
+    '/sea-ql.js',
+    {
+      type: 'module',
+      src: '/cookieconsent/cookieconsent.js',
+      async: true,
+    },
+  ],
 };
 
 module.exports = config;
