@@ -268,7 +268,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
 </a>
 
 [QDX](https://qdx.co/) pioneers quantum dynamics–powered drug discovery, leveraging AI and supercomputing to accelerate molecular modeling.
-We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit that powers their data engineering workflows.
+We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit that powers their data intensive applications.
 
 ## Rustacean Sticker Pack 🦀
 
