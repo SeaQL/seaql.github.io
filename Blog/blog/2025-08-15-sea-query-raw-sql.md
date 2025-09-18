@@ -250,25 +250,7 @@ It almost feels like a mini ORM ... although [SeaORM 🐚](https://github.com/Se
 
 ## SeaQuery 1.0
 
-This is just one of many new features we've added while preparing [SeaQuery 1.0](https://github.com/SeaQL/sea-query/blob/master/CHANGELOG.md#100---pending). This is currently an `rc` release, if you have ideas please [join the discussion](https://github.com/SeaQL/sea-query/discussions/795).
-
-## Sponsor
-
-If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
-
-A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
-
-<img src="/blog/img/github-sponsors-20250812.jpg#light" />
-<img src="/blog/img/github-sponsors-20250812-dark.jpg#dark" />
-
-#### Gold Sponsor
-
-<a href="https://qdx.co/">
-    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="128" />
-</a>
-
-[QDX](https://qdx.co/) pioneers quantum dynamics–powered drug discovery, leveraging AI and supercomputing to accelerate molecular modeling.
-We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit that powers their data intensive applications.
+This is just one of many new features we've added while preparing [SeaQuery 1.0](https://www.sea-ql.org/blog/2025-08-30-sea-query-1.0/). This is currently an `rc` release, but we plan to finalize it soon. If you have ideas please [join the discussion](https://github.com/SeaQL/sea-query/discussions/795).
 
 ## Rustacean Sticker Pack 🦀
 
