@@ -1,7 +1,7 @@
 # 数据库与异步运行时
 
-:::caution 我们需要您的支持！⭐
-感谢您使用 SeaORM。请为我们的 [GitHub 仓库](https://github.com/SeaQL/sea-orm) 标星！您的支持对 SeaORM 的持续开发和维护至关重要。
+:::caution 我们需要你的支持！⭐
+感谢你使用 SeaORM。请为我们的 [GitHub 仓库](https://github.com/SeaQL/sea-orm) 标星！你的支持对 SeaORM 的持续开发和维护至关重要。
 :::
 
 首先，将 `sea-orm` 添加到 `Cargo.toml` 的 `[dependencies]` 中。
@@ -10,7 +10,7 @@
 sea-orm = { version = "1.1.0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
 ```
 
-您必须选择一个 `DATABASE_DRIVER` 和一个 `ASYNC_RUNTIME`。如果您使用 SeaORM 生成的实体，则需要 `macros`。
+你必须选择一个 `DATABASE_DRIVER` 和一个 `ASYNC_RUNTIME`。如果你使用 SeaORM 生成的实体，则需要 `macros`。
 
 ## DATABASE_DRIVER
 

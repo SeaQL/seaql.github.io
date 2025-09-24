@@ -1,30 +1,30 @@
-# Writing Migration
+# 编写迁移
 
-Each migration contains two methods: `up` and `down`. The `up` method is used to alter the database schema, such as adding new tables, columns or indexes, while the `down` method revert the actions performed in the `up` method.
+每个迁移包含两个方法：`up` 和 `down`。`up` 方法用于更改数据库模式，例如添加新表、列或索引，而 `down` 方法则用于回滚 `up` 方法中执行的操作。
 
-The SeaORM migration system has the following advantages:
+SeaORM 迁移系统具有以下优点：
 
-1. Write DDL statements with SeaQuery or SQL
-2. Execute multiple DDL (with conditions)
-3. Seed data using the SeaORM API
+1. 使用 SeaQuery 或 SQL 编写 DDL 语句
+2. 执行多个 DDL（带条件）
+3. 使用 SeaORM API 填充（seed）数据
 
-## Creating Migrations
+## 创建迁移
 
-Generate a new migration file by executing `sea-orm-cli migrate generate` command.
+通过执行 `sea-orm-cli migrate generate` 命令来生成新的迁移文件。
 
-If you name the file with spaces, it will be converted according to the convention automatically. 
+如果你在文件名中使用空格，它会自动按约定进行转换。
 
 ```shell
 sea-orm-cli migrate generate NAME_OF_MIGRATION [--local-time]
 
-# E.g. to generate `migration/src/m20220101_000001_create_table.rs` shown below
+# 例如，生成如下所示的 `migration/src/m20220101_000001_create_table.rs`
 sea-orm-cli migrate generate create_table
 
-# This create the same migration file as above command
+# 这将创建与上述命令相同的迁移文件
 sea-orm-cli migrate generate "create table"
 ```
 
-Or you can create a migration file using the template below. Name the file according to the naming convention `mYYYYMMDD_HHMMSS_migration_name.rs`.
+或者你可以使用下面的模板创建迁移文件。按照命名约定 `mYYYYMMDD_HHMMSS_migration_name.rs` 命名文件。
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm_migration::prelude::*;
@@ -48,7 +48,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-Additionally, you have to include the new migration in the [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) method. Note that the migrations should be sorted in chronological order.
+此外，你必须在 [`MigratorTrait::migrations`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html#tymethod.migrations) 方法中包含新的迁移。迁移应按时间顺序排序。
 
 ```rust title="migration/src/lib.rs"
 pub use sea_orm_migration::*;
@@ -67,23 +67,23 @@ impl MigratorTrait for Migrator {
 }
 ```
 
-## Defining Migration
+## 定义迁移
 
-See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) for API reference.
+请参阅 [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/manager/struct.SchemaManager.html) 获取 API 参考。
 
-### Using SeaQuery
+### 使用 SeaQuery
 
-Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
+点击[此处](https://github.com/SeaQL/sea-query#table-create)快速了解 SeaQuery 的 DDL 语句。
 
-You can use the [`DeriveIden`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveIden.html) macro to define identifiers that will be used in your migration.
+你可以使用 [`DeriveIden`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveIden.html) 宏来定义将在迁移中使用的标识符。
 
 ```rust
 #[derive(DeriveIden)]
 enum Post {
-    Table, // this is a special case; will be mapped to `post`
+    Table, // 这是一个特殊情况；将映射到 `post`
     Id,
     Title,
-    #[sea_orm(iden = "full_text")] // Renaming the identifier
+    #[sea_orm(iden = "full_text")] // 重命名标识符
     Text,
 }
 
@@ -93,10 +93,10 @@ assert_eq!(Post::Title.to_string(), "title");
 assert_eq!(Post::Text.to_string(), "full_text");
 ```
 
-Here are some common DDL snippets you may find useful.
+以下是一些你可能会觉得有用的常见 DDL 片段。
 
-#### Schema Creation Methods
-- Create Table
+#### Schema 创建方法
+- 创建表
     ```rust
     use sea_orm::{EnumIter, Iterable};
 
@@ -105,7 +105,7 @@ Here are some common DDL snippets you may find useful.
         Table,
         Id,
         Title,
-        #[sea_orm(iden = "text")] // Renaming the identifier
+        #[sea_orm(iden = "text")] // 重命名标识符
         Text,
         Category,
     }
@@ -118,10 +118,10 @@ Here are some common DDL snippets you may find useful.
         Story,
     }
 
-    // Remember to import `sea_orm_migration::schema::*` schema helpers into scope
+    // 记得将 `sea_orm_migration::schema::*` schema 助手导入作用域
     use sea_orm_migration::{prelude::*, schema::*};
 
-    // Defining the table schema
+    // 定义表 schema
     manager
         .create_table(
             Table::create()
@@ -134,7 +134,7 @@ Here are some common DDL snippets you may find useful.
         )
         .await
 
-    // above is equivalent to:
+    // 上述等同于：
     manager
         .create_table(
             Table::create()
@@ -153,15 +153,15 @@ Here are some common DDL snippets you may find useful.
         )
         .await
     ```
-- Create Index
+- 创建索引
     ```rust
     manager.create_index(sea_query::Index::create()..)
     ```
-- Create Foreign Key
+- 创建外键
     ```rust
     manager.create_foreign_key(sea_query::ForeignKey::create()..)
     ```
-- Create Data Type (PostgreSQL only)
+- 创建数据类型 (仅限 PostgreSQL)
     ```rust
     use sea_orm::{EnumIter, Iterable};
     use sea_orm_migration::prelude::extension::postgres::Type;
@@ -186,60 +186,60 @@ Here are some common DDL snippets you may find useful.
         .await?;
     ```
 
-#### Schema Mutation Methods
-- Drop Table
+#### Schema 变更方法
+- 删除表
     ```rust
     use entity::post;
 
     manager.drop_table(sea_query::Table::drop()..)
     ```
-- Alter Table
+- 更改表
     ```rust
     manager.alter_table(sea_query::Table::alter()..)
     ```
-- Rename Table
+- 重命名表
     ```rust
     manager.rename_table(sea_query::Table::rename()..)
     ```
-- Truncate Table
+- 清空表
     ```rust
     manager.truncate_table(sea_query::Table::truncate()..)
     ```
-- Drop Index
+- 删除索引
     ```rust
     manager.drop_index(sea_query::Index::drop()..)
     ```
-- Drop Foreign Key
+- 删除外键
     ```rust
     manager.drop_foreign_key(sea_query::ForeignKey::drop()..)
     ```
-- Alter Data Type (PostgreSQL only)
+- 更改数据类型 (仅限 PostgreSQL)
     ```rust
     manager.alter_type(sea_query::Type::alter()..)
     ```
-- Drop Data Type (PostgreSQL only)
+- 删除数据类型 (仅限 PostgreSQL)
     ```rust
     manager.drop_type(sea_query::extension::postgres::Type()..)
     ```
 
-#### Schema Inspection Methods
+#### Schema 检查方法
 
-- Has Table
+- 检查表是否存在
     ```rust
     manager.has_table("table_name")
     ```
-- Has Column
+- 检查列是否存在
     ```rust
     manager.has_column("table_name", "column_name")
     ```
-- Has Index
+- 检查索引是否存在
     ```rust
     manager.has_index("table_name", "index_name")
     ```
 
-### Using raw SQL
+### 使用原始 SQL
 
-You can write migration files in raw SQL, but then you lost the multi-backend compatibility SeaQuery offers.
+你可以在迁移文件中使用原始 SQL，但这样会失去 SeaQuery 提供的多后端兼容性。
 
 ```rust title="migration/src/m20220101_000001_create_table.rs"
 use sea_orm::Statement;
@@ -253,7 +253,7 @@ impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         let db = manager.get_connection();
 
-        // Use `execute_unprepared` if the SQL statement doesn't have value bindings
+        // 如果 SQL 语句没有值绑定，则应使用 `execute_unprepared`
         db.execute_unprepared(
             "CREATE TABLE `cake` (
                 `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -262,7 +262,7 @@ impl MigrationTrait for Migration {
         )
         .await?;
 
-        // Construct a `Statement` if the SQL contains value bindings
+        // 如果 SQL 包含值绑定，则应构造一个 `Statement`
         let stmt = Statement::from_sql_and_values(
             manager.get_database_backend(),
             r#"INSERT INTO `cake` (`name`) VALUES (?)"#,
@@ -284,12 +284,12 @@ impl MigrationTrait for Migration {
 }
 ```
 
-## Tip 1: combining multiple schema changes in one migration
+## 技巧 1：在一个迁移中组合多个 schema 更改
 
-You can combine multiple changes within both up and down migration functions. Here is a complete example:
+你可以在 up 和 down 迁移函数中组合多个更改。这是一个完整的示例：
 
 ```rust
-// Remember to import `sea_orm_migration::schema::*` schema helpers into scope
+// 记得将 `sea_orm_migration::schema::*` schema 助手导入作用域
 use sea_orm_migration::{prelude::*, schema::*};
 
 async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -304,39 +304,39 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
                 .col(string(Post::Text))
         )
         .await?;
-    
+
     manager
         .create_index(
             Index::create()
                 .if_not_exists()
                 .name("idx-post_title")
                 .table(Post::Table)
-                .col(Post::Title)                        
+                .col(Post::Title)
         )
         .await?;
-    
-    Ok(()) // All good!
+
+    Ok(()) // 一切顺利！
 }
 ```
 
-and here we have the matching down function:
+这是匹配的 down 函数：
 
 ```rust
 async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-    
+
     manager.drop_index(Index::drop().name("idx-post-title"))
     .await?;
-    
+
     manager.drop_table(Table::drop().table(Post::Table))
     .await?;
 
-    Ok(()) // All good!
+    Ok(()) // 一切顺利！
 }
 ```
 
-## Tip 2: `ADD COLUMN IF NOT EXISTS`
+## 技巧 2：`ADD COLUMN IF NOT EXISTS`
 
-Since this syntax is not available on MySQL, you can:
+由于 MySQL 不支持此语法，你可以这么做：
 
 ```rust
 async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -348,7 +348,7 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
 }
 ```
 
-## Tip 3: Seed data with Entity
+## 技巧 3：使用实体填充数据
 
 ```rust
 async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -365,18 +365,18 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
 }
 ```
 
-[Full example](https://github.com/SeaQL/sea-orm/blob/master/examples/seaography_example/migration/src/m20230102_000001_seed_bakery_data.rs).
+[完整示例](https://github.com/SeaQL/sea-orm/blob/master/examples/seaography_example/migration/src/m20230102_000001_seed_bakery_data.rs)。
 
-## Atomic Migration
+## 原子迁移
 
-Migration will be executed in Postgres atomically that means migration scripts will be executed inside a transaction. Changes done to the database will be rolled back if the migration failed. However, atomic migration is not supported in MySQL and SQLite.
+在 Postgres 中，迁移会以原子方式执行，这意味着迁移脚本将在事务内执行。如果迁移失败，对数据库所做的更改将回滚。但是，MySQL 和 SQLite 不支持原子迁移。
 
-You can start a transaction inside each migration to perform operations like [seeding sample data](03-migration/04-seeding-data.md#seeding-data-transactionally) for a newly created table.
+你可以在迁移内启动事务，以执行诸如为新创建的表[填充示例数据](03-migration/04-seeding-data.md#seeding-data-transactionally)之类的操作。
 
-## Schema first or Entity first?
+## Schema 优先还是实体优先？
 
-In the grand scheme of things, we recommend a schema first approach: you write migrations first and then generate entities from a live database.
+总体而言，我们推荐 schema 优先的方法：先编写迁移，然后从运行中的数据库生成实体
 
-At times, you might want to use the [`create_*_from_entity`](09-schema-statement/01-create-table.md) methods to bootstrap your database with several hand written entity files.
+但有时，你可能希望使用 [`create_*_from_entity`](09-schema-statement/01-create-table.md) 方法从手写的实体文件引导（bootstrap）数据库。
 
-That's perfectly fine if you intend to never change the entity schema. Or, you can keep the original entity and embed a copy in the migration file.
+如果你打算永远不修改实体的 schema，这完全没问题。或者，你可以保留原始实体并将其副本嵌入到迁移文件中。

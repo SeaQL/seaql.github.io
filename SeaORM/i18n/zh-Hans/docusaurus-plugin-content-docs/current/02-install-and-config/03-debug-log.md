@@ -1,6 +1,6 @@
 # 调试日志
 
-SeaORM 通过 [`tracing`](https://crates.io/crates/tracing) crate 记录调试消息。
+SeaORM 通过 [`tracing`](https://crates.io/crates/tracing) crate 记录调试信息。
 
 你可以通过 `debug-print` 功能标志（feature flag）启用 SeaORM 的日志记录功能：
 
@@ -10,7 +10,7 @@ version = "1.1.0"
 features = ["debug-print"]
 ```
 
-您需要设置 [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) 来捕获和查看调试日志。请参阅以下的代码片段和此处的[完整示例](https://github.com/SeaQL/sea-orm/blob/master/examples/actix_example/src/main.rs)。
+你需要设置 [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) 来捕获和查看调试日志。请参阅以下的代码片段和此处的[完整示例](https://github.com/SeaQL/sea-orm/blob/master/examples/actix_example/src/main.rs)。
 
 ```rust
 pub async fn main() {
