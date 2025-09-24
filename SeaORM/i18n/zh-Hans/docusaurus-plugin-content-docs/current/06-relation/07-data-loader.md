@@ -1,8 +1,8 @@
-# Data Loader
+# 数据加载器
 
-The [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) provides an API to load related entities in batches.
+[LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) 提供了一个 API，用于批量加载相关实体。
 
-Consider this one to many relation:
+考虑以下一对多关系：
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
@@ -11,7 +11,7 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-The SQL query generated is:
+生成的 SQL 查询是：
 
 ```sql
 SELECT
@@ -25,9 +25,9 @@ LEFT JOIN "fruit" ON "cake"."id" = "fruit"."cake_id"
 ORDER BY "cake"."id" ASC
 ```
 
-This is great, but if the N is a large number, the 1 side's (Cake) data will be duplicated a lot. This results in more data being transferred over the wire. In the many to many case, both sides may duplicate. Using the Loader would ensure each model is transferred only once.
+这很好，但是如果 N 是一个很大的数字，1 端（Cake）的数据会被大量复制。这会导致更多数据通过网络传输。在多对多关系中，两端都可能重复。使用数据加载器将确保每个模型只传输一次。
 
-The following loads the same data as above, but with two queries:
+以下加载与上述相同的数据，但使用两个查询：
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
@@ -41,7 +41,7 @@ SELECT "cake"."id", "cake"."name" FROM "cake"
 SELECT "fruit"."id", "fruit"."name", "fruit"."cake_id" FROM "fruit" WHERE "fruit"."cake_id" IN (..)
 ```
 
-You can stack these together:
+你可以将它们堆叠在一起：
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
@@ -49,7 +49,7 @@ let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 let fillings: Vec<Vec<filling::Model>> = cakes.load_many_to_many(Filling, CakeFilling, db).await?;
 ```
 
-In an advanced use case, you can apply filters on the related entity:
+在高级用例中，你可以对相关实体应用过滤器：
 
 ```rust
 let fruits_in_stock: Vec<Vec<fruit::Model>> = cakes.load_many(

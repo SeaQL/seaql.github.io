@@ -1,8 +1,8 @@
-# Create Index
+# 创建索引
 
-You can create indices from entities using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_index_from_entity), or construct [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually.
+你可以使用 [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_index_from_entity) 从实体创建索引，或者手动构造 [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html)。
 
-Example [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity:
+[`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) 实体示例：
 
 ```rust title="indexes.rs"
 pub struct Model {
@@ -49,4 +49,3 @@ let idx: IndexCreateStatement = Index::create()
     .unique()
     .take();
 assert_eq!(builder.build(&stmts[2]), builder.build(&idx));
-```

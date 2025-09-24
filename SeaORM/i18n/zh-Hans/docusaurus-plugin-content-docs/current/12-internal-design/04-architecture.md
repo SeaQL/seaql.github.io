@@ -1,43 +1,43 @@
-# Architecture
+# 架构
 
-> Let's dive under the Sea 🤿
+> 让我们潜入海底 🤿
 
-<img width="100%" src="/SeaORM/img/SeaORM Architecture.svg" />
+<img width=&#34;100%&#34; src=&#34;/SeaORM/img/SeaORM Architecture.svg&#34; />
 
-To understand the architecture of SeaORM, let's discuss what is an ORM. ORM exists to provide abstractions over common operations you would do against a database and hide the implementation details like the actual SQL queries.
+要理解 SeaORM 的架构，我们首先要讨论什么是 ORM。ORM 的存在是为了对数据库的通用操作提供抽象，并隐藏诸如实际 SQL 查询之类的实现细节。
 
-With a good ORM, you shouldn't bother to look under the API surface. Until you do. I hear you say *'abstraction leaks'*, and yes, it does.
+有了一个好的 ORM，你就不应该费心去研究 API 表层之下的东西。直到你需要这样做。我听到你说“抽象泄漏”，是的，它确实会。
 
-The approach SeaORM takes is **'layered abstraction'**, where you'd dig one layer beneath if you want to. That's why we made SeaQuery into a standalone repository. It's useful on its own, and with a public API surface and a separate namespace, it's far more difficult to create confusing internal APIs than a monolithic approach.
+SeaORM 采用的方法是“分层抽象”，如果你愿意，可以深入一层。这就是为什么我们把 SeaQuery 做成一个独立的仓库。它本身就很有用，而且有了一个公共的 API 接口和一个独立的命名空间，与单体方法相比，创建令人困惑的内部 API 要困难得多。
 
-The central idea in SeaORM is nearly everything is runtime configurable. At compile time, it does not know what the underlying database is.
+SeaORM 的中心思想是几乎所有东西都是运行时可配置的。在编译时，它不知道底层数据库是什么。
 
-What benefits does database-agnostic bring? For example, you can:
+数据库无关带来了什么好处？例如，你可以：
 
-1. Make your app work on any database, depending on runtime configuration
-1. Use the same models and transfer them across different databases
-1. Share entities across different projects by creating a 'data structure crate', where the database is chosen by downstream 'behaviour crates'
+1. 让你的应用程序在任何数据库上工作，具体取决于运行时配置
+2. 使用相同的模型并在不同数据库之间迁移
+3. 通过创建一个“数据结构 crate”在不同项目之间共享实体，其中数据库由下游的“行为 crate”选择
 
-The API of SeaORM is not a thin shell, but consist of layers, with each layer underneath being less abstract.
+SeaORM 的 API 不是一个薄壳，而是由多个层次组成的，每个下层都更不抽象。
 
-There are different stages when the API is being utilized.
+API 的使用有不同的阶段。
 
-So there are two dimensions to navigate the SeaORM code base, **'stage'** and **'abstractness'**.
+因此，在 SeaORM 代码库中有两个维度可以导航，“阶段”和“抽象性”。
 
-First is the declaration stage. Entities and relations among them are being defined with the `EntityTrait`, `ColumnTrait` & `RelationTrait` etc.
+首先是声明阶段。实体以及它们之间的关系是使用 `EntityTrait`、`ColumnTrait` 和 `RelationTrait` 等定义的。
 
-Second is the query building stage.
+其次是查询构建阶段。
 
-The top most layer is `Entity`'s `find*`, `insert`, `update` & `delete` methods, where you can intuitively perform basic CRUD operations.
+最顶层是 `Entity` 的 `find*`、`insert`、`update` 和 `delete` 方法，你可以直观地执行基本的 CRUD 操作。
 
-One layer down, is the `Select`, `Insert`, `Update` & `Delete` structs, where they each have their own API for more advanced operations.
+下一层是 `Select`、`Insert`、`Update` 和 `Delete` 结构体，它们各自都有自己的 API 用于更高级的操作。
 
-One layer down, is the SeaQuery `SelectStatement`, `InsertStatement`, `UpdateStatement` & `DeleteStatement`, where they have a rich API for you to fiddle with the SQL syntax tree.
+再下一层是 SeaQuery 的 `SelectStatement`、`InsertStatement`、`UpdateStatement` 和 `DeleteStatement`，它们有丰富的 API 供你摆弄 SQL 语法树。
 
-Third is the execution stage. A separate set of structs, `Selector`, `Inserter`, `Updater` & `Deleter`, are responsible for executing the statements against a database connection.
+第三是执行阶段。一组独立的结构体，`Selector`、`Inserter`、`Updater` 和 `Deleter`，负责对数据库连接执行语句。
 
-Finally is the resolution stage, when query results are converted into Rust types and shoved into structs. Subsequently, if it is a relational query, the structs will be pieced together according to their relations.
+最后是解析阶段，当查询结果被转换成 Rust 类型并塞进结构体时。随后，如果它是一个关系查询，结构体将根据它们的关系被拼凑在一起。
 
-Because only the execution and resolution stages are database specific, we have the possibility to use a different driver by replacing those.
+因为只有执行和解析阶段是数据库特定的，所以我们有可能通过替换它们来使用不同的驱动程序。
 
-I imagine some day, we will support a number of databases, with a matrix of different syntaxes, protocols and form-factors.
+我想象有一天，我们将支持许多数据库，它们具有不同的语法、协议和形式。

@@ -1,6 +1,6 @@
-# Entity Format
+# 实体格式
 
-Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) entity.
+让我们看一个简单的 [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake.rs) 实体。
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -25,26 +25,25 @@ impl Related<super::fruit::Entity> for Entity {
     }
 }
 
-impl ActiveModelBehavior for ActiveModel {}
-```
+impl ActiveModelBehavior for ActiveModel {}```
 
 :::info
 
-Do not delete the `Relation` enum or `ActiveModelBehavior` impl block even if they are empty.
+即使 `Relation` 枚举或 `ActiveModelBehavior` impl 块为空，也不要删除它们。
 :::
 
-## Entity
+## 实体
 
-The `DeriveEntityModel` macro does all the heavy lifting of defining an `Entity` with associating `Model`, `Column` and `PrimaryKey`.
+`DeriveEntityModel` 宏完成了定义 `Entity` 以及关联 `Model`、`Column` 和 `PrimaryKey` 的所有繁重工作。
 
-### Table Name
+### 表名
 
-The `table_name` attribute specifies the corresponding table in the database.
-Optionally, you can also specify the database schema or database name by `schema_name`.
+`table_name` 属性指定数据库中对应的表。
+可选地，你还可以通过 `schema_name` 指定数据库 schema 或数据库名称。
 
-### Column Names
+### 列名
 
-By default, all column names are assumed to be in snake_case. You can override this behaviour for all columns in a model by specifying the `rename_all` attribute.
+默认情况下，所有列名都假定为 snake_case。你可以通过指定 `rename_all` 属性来覆盖模型中所有列的此行为。
 
 ```rust
 #[sea_orm(rename_all = "camelCase")]
@@ -52,7 +51,7 @@ pub struct Model { ... }
 ```
 
 <details>
-    <summary>You can find a list of valid values for the `rename_all` attribute here</summary>
+    <summary>你可以在此处找到 `rename_all` 属性的有效值列表</summary>
 
 - camelCase
 - kebab-case
@@ -67,11 +66,11 @@ pub struct Model { ... }
 
 </details>
 
-## Column
+## 列
 
-### Column Name
+### 列名
 
-You can override the column name by specifying the `column_name` attribute.
+你可以通过指定 `column_name` 属性来覆盖列名。
 
 ```rust
 #[derive(DeriveEntityModel)]
@@ -85,30 +84,30 @@ pub struct Model {
 }
 ```
 
-### Column Type
+### 列类型
 
-The `column_type` attribute defines the database type backing the attribute. Usually you don't have to specify this, as it will inferred from the rust type. For example, `i32` maps to `integer` and `String` maps to `varchar` by default. You can read more about type mappings in the next chapter.
+`column_type` 属性定义了支持该属性的数据库类型。通常你不必指定此项，因为它将从 rust 类型推断出来。例如，`i32` 默认映射到 `integer`，`String` 映射到 `varchar`。你可以在下一章中阅读有关类型映射的更多信息。
 
 ```rust
-pub quantity: i32,  // integer by default
+pub quantity: i32,  // 默认整数
 #[sea_orm(column_type = "Decimal(Some((16, 4)))")]
-pub price: Decimal, // have to specify numeric precision
+pub price: Decimal, // 必须指定数字精度
 ```
 
-Because Postgres does not natively support unsigned integer types, using unsigned types (such as `u64`) is not recommended if you want to maintain compatibility.
+由于 Postgres 不原生支持无符号整数类型，因此如果你想保持兼容性，不建议使用无符号类型（例如 `u64`）。
 
-### Additional Properties
+### 附加属性
 
-You can add additional properties `default_value`, `unique`, `indexed` and `nullable` to a column.
+你可以为列添加附加属性 `default_value`、`unique`、`indexed` 和 `nullable`。
 
-If you specified a custom `column_type` for an optional attribute, you must also specify `nullable`.
+如果你为可选属性指定了自定义 `column_type`，则还必须指定 `nullable`。
 
 ```rust
 #[sea_orm(column_type = "Text", default_value = "Sam", unique, indexed, nullable)]
 pub name: Option<String>
 ```
 
-You can define unique keys that span multiple columns, the following will result in a unique index on `(order_id, cake_id)`.
+你可以定义跨多列的唯一键，以下将导致 `(order_id, cake_id)` 上的唯一索引。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -123,49 +122,49 @@ pub struct Model {
 }
 ```
 
-These properties are used in [create_table_from_entity](https://docs.rs/sea-orm/latest/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) to generate the table for the entity.
+这些属性用于 [create_table_from_entity](https://docs.rs/sea-orm/latest/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) 以生成实体的表。
 
-### Cast Column Type on Select and Save
+### 在 Select 和 Save 上转换列类型
 
-If you need to select a column as one type but save it into the database as another, you can specify the `select_as` and the `save_as` attributes to perform the casting. A typical use case is selecting a column of type `citext` (case-insensitive text) as `String` in Rust and saving it into the database as `citext`. One should define the model field as below:
+如果你需要将列选择为一种类型，但将其保存到数据库中为另一种类型，你可以指定 `select_as` 和 `save_as` 属性来执行转换。一个典型的用例是将 `citext`（不区分大小写的文本）类型的列在 Rust 中选择为 `String`，并将其保存到数据库中为 `citext`。应该如下定义模型字段：
 
 ```rust
 #[sea_orm(select_as = "text", save_as = "citext")]
 pub case_insensitive_text: String
 ```
 
-### Ignore Attribute
+### 忽略属性
 
-If you want to ignore a particular model attribute such that it maps to no database column, you can use the `ignore` macro attribute.
+如果你想忽略某个特定的模型属性，使其不映射到任何数据库列，你可以使用 `ignore` 宏属性。
 
 ```rust
 #[sea_orm(ignore)]
 pub ignore_me: String
 ```
 
-## Primary Key
+## 主键
 
-Use the `primary_key` attribute to mark a column as the primary key.
+使用 `primary_key` 属性将列标记为主键。
 
 ```rust
 #[sea_orm(primary_key)]
 pub id: i32
 ```
 
-### Auto Increment
+### 自动递增
 
-By default, `auto_increment` is implied for `primary_key` column. Override it by specifying `false`.
+默认情况下，`primary_key` 列隐含 `auto_increment`。通过指定 `false` 来覆盖它。
 
 ```rust
 #[sea_orm(primary_key, auto_increment = false)]
 pub id: i32
 ```
 
-### Composite Key
+### 复合键
 
-This is usually the case in junction tables, where a two-column tuple is used as the primary key. Simply annotate multiple columns to define a composite primary key. `auto_increment` is `false` for composite key.
+这通常发生在连接表中，其中两列元组用作主键。只需注释多列即可定义复合主键。复合键的 `auto_increment` 为 `false`。
 
-The max arity of a primary key is 12.
+主键的最大元数为 12。
 
 ```rust
 pub struct Model {
@@ -176,9 +175,9 @@ pub struct Model {
 }
 ```
 
-## Relation
+## 关系
 
-`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html).
+`DeriveRelation` 是一个宏，可帮助你实现 [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html)。
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -188,25 +187,25 @@ pub enum Relation {
 }
 ```
 
-If there are no relations, simply write:
+如果没有关系，只需编写：
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {}
 ```
 
-The [Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
+[Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait 将实体连接在一起，以便你可以构建选择两个实体的查询。
 
-Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapter.
+在[关系](06-relation/01-one-to-one.md)一章中了解更多关于关系的信息。
 
-## Active Model Behavior
+## Active Model 行为
 
-Hooks for different actions on an `ActiveModel`. For example, you can perform custom validation logic or trigger side effects. Inside a transaction, you can even abort an action after it is done, preventing it from saving into the database.
+`ActiveModel` 上不同操作的钩子。例如，你可以执行自定义验证逻辑或触发副作用。在事务内部，你甚至可以在操作完成后中止操作，防止其保存到数据库中。
 
 ```rust
 #[async_trait]
 impl ActiveModelBehavior for ActiveModel {
-    /// Create a new ActiveModel with default values. Also used by `Default::default()`.
+    /// 使用默认值创建新的 ActiveModel。也由 `Default::default()` 使用。
     fn new() -> Self {
         Self {
             uuid: Set(Uuid::new_v4()),
@@ -214,7 +213,7 @@ impl ActiveModelBehavior for ActiveModel {
         }
     }
 
-    /// Will be triggered before insert / update
+    /// 将在插入/更新之前触发
     async fn before_save<C>(self, db: &C, insert: bool) -> Result<Self, DbErr>
     where
         C: ConnectionTrait,
@@ -229,7 +228,7 @@ impl ActiveModelBehavior for ActiveModel {
         }
     }
 
-    /// Will be triggered after insert / update
+    /// 将在插入/更新之后触发
     async fn after_save<C>(model: Model, db: &C, insert: bool) -> Result<Model, DbErr>
     where
         C: ConnectionTrait,
@@ -237,7 +236,7 @@ impl ActiveModelBehavior for ActiveModel {
         Ok(model)
     }
 
-    /// Will be triggered before delete
+    /// 将在删除之前触发
     async fn before_delete<C>(self, db: &C) -> Result<Self, DbErr>
     where
         C: ConnectionTrait,
@@ -245,7 +244,7 @@ impl ActiveModelBehavior for ActiveModel {
         Ok(self)
     }
 
-    /// Will be triggered after delete
+    /// 将在删除之后触发
     async fn after_delete<C>(self, db: &C) -> Result<Self, DbErr>
     where
         C: ConnectionTrait,
@@ -255,8 +254,7 @@ impl ActiveModelBehavior for ActiveModel {
 }
 ```
 
-If no customization is needed, simply write:
+如果不需要自定义，只需编写：
 
 ```rust
 impl ActiveModelBehavior for ActiveModel {}
-```

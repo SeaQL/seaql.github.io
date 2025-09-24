@@ -1,11 +1,11 @@
-# Custom Active Model
+# 自定义 Active Model
 
-Creating your own struct with partial fields of a model, which implements `IntoActiveModel` that can be converted into an `ActiveModel` with the method `into_active_model`. For example, it can be used as a form submission in a REST API.
+创建你自己的结构体，其中包含模型的部分字段，并实现 `IntoActiveModel`，可以通过 `into_active_model` 方法将其转换为 `ActiveModel`。例如，它可以用作 REST API 中的表单提交。
 
-`IntoActiveValue` trait allows converting `Option<T>` into `ActiveValue<T>` with the method `into_active_value`.
+`IntoActiveValue` trait 允许使用 `into_active_value` 方法将 `Option<T>` 转换为 `ActiveValue<T>`。
 
 ```rust
-// Define regular model as usual
+// 像往常一样定义常规模型
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "fruit")]
 pub struct Model {
@@ -16,16 +16,16 @@ pub struct Model {
 }
 ```
 
-Create a new struct with some fields omitted.
+创建一个省略部分字段的新结构体。
 
 ```rust
 use sea_orm::ActiveValue::NotSet;
 
 #[derive(DeriveIntoActiveModel)]
 pub struct NewFruit {
-    // id is omitted
+    // id 被省略
     pub name: String,
-    // it is required as opposed to optional in Model
+    // 它是必需的，与 Model 中的可选字段相反
     pub cake_id: i32,
 }
 
@@ -43,7 +43,7 @@ assert_eq!(
 );
 ```
 
-`Option<Option<T>>` allows for `Some(None)` to update the column to be NULL.
+`Option<Option<T>>` 允许 `Some(None)` 将列更新为 NULL。
 
 ```rust
 use sea_orm::ActiveValue::NotSet;
@@ -88,4 +88,3 @@ assert_eq!(
         cake_id: NotSet,
     }
 );
-```

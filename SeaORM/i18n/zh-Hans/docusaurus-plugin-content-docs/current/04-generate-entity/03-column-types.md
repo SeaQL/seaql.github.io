@@ -1,18 +1,18 @@
-# Column Types
+# 列类型
 
-## Type mappings
+## 类型映射
 
-The column type will be derived automatically with the following mapping.
+列类型将通过以下映射自动派生。
 
-:::tip SQL Server (MSSQL) backend
+:::tip SQL Server (MSSQL) 后端
 
-The type mappings of MSSQL can be found [here](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/).
+MSSQL 的类型映射可以在[这里](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/)找到。
 
 :::
 
-For the mappings of Rust primitive data types:
+Rust 原始数据类型的映射：
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust 类型 | 数据库类型 <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> 数据类型 | MySQL <br/> 数据类型 | PostgreSQL <br/> 数据类型 |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | char | char | char |
 | `String` | String | varchar | varchar | varchar |
@@ -29,31 +29,31 @@ For the mappings of Rust primitive data types:
 | `bool` | Boolean | boolean | bool | bool |
 | `Vec<u8>` | Binary | blob | blob | bytea |
 
-For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
+Rust 非原始数据类型的映射。你可以查看 [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) 以获取所有重新导出的类型。
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust 类型 | 数据库类型 <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> 数据类型 | MySQL <br/> 数据类型 | PostgreSQL <br/> 数据类型 |
 | --------- | --------- | --------- | --------- | --------- |
-| `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | date_text | date | date |
-| `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | time_text | time | time |
-| `DateTime`: chrono::NaiveDateTime <br/>`TimeDateTime`: time::PrimitiveDateTime | DateTime | datetime_text | datetime | timestamp |
-| `DateTimeLocal`: chrono::DateTime&lt;Local&gt; <br/>`DateTimeUtc`: chrono::DateTime&lt;Utc&gt; | Timestamp | timestamp_text | timestamp | N/A |
-| `DateTimeWithTimeZone`: chrono::DateTime&lt;FixedOffset&gt; <br/>`TimeDateTimeWithTimeZone`: time::OffsetDateTime | TimestampWithTimeZone | timestamp_with_timezone_text | timestamp | timestamp with time zone |
-| `Uuid`: uuid::Uuid, uuid::fmt::Braced, uuid::fmt::Hyphenated, uuid::fmt::Simple, uuid::fmt::Urn | Uuid | uuid_text | binary(16) | uuid |
-| `Json`: serde_json::Value | Json | json_text | json | json |
-| `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
-| `PgVector`: pgvector::Vector | Vector | N/A | N/A | vector |
-| `IpNetwork`: ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
+| `Date`：chrono::NaiveDate <br/>`TimeDate`：time::Date | Date | date_text | date | date |
+| `Time`：chrono::NaiveTime <br/>`TimeTime`：time::Time | Time | time_text | time | time |
+| `DateTime`：chrono::NaiveDateTime <br/>`TimeDateTime`：time::PrimitiveDateTime | DateTime | datetime_text | datetime | timestamp |
+| `DateTimeLocal`：chrono::DateTime<Local> <br/>`DateTimeUtc`：chrono::DateTime<Utc> | Timestamp | timestamp_text | timestamp | N/A |
+| `DateTimeWithTimeZone`：chrono::DateTime<FixedOffset> <br/>`TimeDateTimeWithTimeZone`：time::OffsetDateTime | TimestampWithTimeZone | timestamp_with_timezone_text | timestamp | timestamp with time zone |
+| `Uuid`：uuid::Uuid, uuid::fmt::Braced, uuid::fmt::Hyphenated, uuid::fmt::Simple, uuid::fmt::Urn | Uuid | uuid_text | binary(16) | uuid |
+| `Json`：serde_json::Value | Json | json_text | json | json |
+| `Decimal`：rust_decimal::Decimal | Decimal | real | decimal | decimal |
+| `PgVector`：pgvector::Vector | Vector | N/A | N/A | vector |
+| `IpNetwork`：ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
 
-You can override the default mappings between a Rust type and `ColumnType` with the `column_type` attribute.
+你可以使用 `column_type` 属性覆盖 Rust 类型和 `ColumnType` 之间的默认映射。
 
 ```rust
 #[sea_orm(column_type = "Text")]
 pub name: String
 ```
 
-## JSON column
+## JSON 列
 
-If you need your JSON field to be deserialized into a struct. You would need to derive `FromJsonQueryResult` for it.
+如果你需要将 JSON 字段反序列化为结构体。你需要为其派生 `FromJsonQueryResult`。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -61,18 +61,18 @@ If you need your JSON field to be deserialized into a struct. You would need to 
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    // JSON column as `serde_json::Value`
+    // JSON 列作为 `serde_json::Value`
     pub json: Json,
-    // JSON column as custom struct
+    // JSON 列作为自定义结构体
     pub json_value: KeyValue,
-    // nullable JSON column as custom struct, backed by jsonb (Postgres only)
+    // 可空 JSON 列作为自定义结构体，由 jsonb 支持（仅限 Postgres）
     #[sea_orm(column_type = "JsonBinary")]
     pub json_value_opt: Option<KeyValue>,
-    // JSON column storing a vector of objects
+    // 存储对象向量的 JSON 列
     pub json_value_vec: Vec<KeyValue>,
 }
 
-// The custom struct must derive `FromJsonQueryResult`, `Serialize` and `Deserialize`
+// 自定义结构体必须派生 `FromJsonQueryResult`、`Serialize` 和 `Deserialize`
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, FromJsonQueryResult)]
 pub struct KeyValue {
     pub id: i32,
@@ -82,7 +82,7 @@ pub struct KeyValue {
 }
 ```
 
-If you want a cross-database way of implementing array column, you can wrap it with a wrapper type.
+如果你想要一种跨数据库实现数组列的方法，你可以用包装类型将其包装起来。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -90,7 +90,7 @@ If you want a cross-database way of implementing array column, you can wrap it w
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    // nullable JSON column storing a vector of string
+    // 可空 JSON 列存储字符串向量
     pub str_vec: Option<StringVec>,
 }
 
@@ -98,11 +98,11 @@ pub struct Model {
 pub struct StringVec(pub Vec<String>);
 ```
 
-More details and examples in the next chapter.
+更多详细信息和示例在下一章。
 
-## Postgres Array
+## Postgres 数组
 
-Array datatype is a Postgres-only feature. You can define a vector of primitive types that is already supported by SeaORM.
+数组数据类型是 Postgres 独有的功能。你可以定义一个 SeaORM 已支持的原始类型向量。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -118,9 +118,9 @@ pub struct Model {
 }
 ```
 
-## Postgres Vector
+## Postgres 向量
 
-Since `1.1.6`, PgVector support is added. Requires `postgres-vector` feature flag.
+自 `1.1.6` 起，添加了 PgVector 支持。需要 `postgres-vector` 功能标志。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -132,11 +132,11 @@ pub struct Model {
 }
 ```
 
-For a complete example, see [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs).
+有关完整示例，请参阅 [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs)。
 
 ## IpNetwork (Postgres)
 
-Since `1.1.8`, IpNetwork support is added. Requires `with-ipnetwork` feature flag.
+自 `1.1.8` 起，添加了 IpNetwork 支持。需要 `with-ipnetwork` 功能标志。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]

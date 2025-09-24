@@ -1,7 +1,7 @@
-# What's Next for SeaORM?
+# SeaORM 的未来展望
 
-We still remember the time when we first [introduced SeaORM](https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm/) to the Rust community two years ago.
+我们仍然记得两年前首次向 Rust 社区[介绍 SeaORM](https://www.sea-ql.org/blog/2021-09-20-introducing-sea-orm/) 的情景。
 
-Today, many open-source projects, many startups and companies are using SeaORM. If your company is using SeaORM and would like to be featured, please [submit a testimonial](https://forms.office.com/r/YbeqfTAgkJ).
+如今，许多开源项目、初创公司和企业都在使用 SeaORM。如果你的公司正在使用 SeaORM 并希望被推荐，请[提交推荐信](https://forms.office.com/r/YbeqfTAgkJ)。
 
-Open-source project is a never-ending work, and we are actively looking for ways to sustain the project. SeaQL.org is an independent open-source organization run by passionate developers. You can support us by starring and sharing our repositories and making a donation via [GitHub Sponsor](https://github.com/sponsors/SeaQL).
+开源项目是一项永无止境的工作，我们正在积极寻找维持项目的方法。SeaQL.org 是一个由充满热情的开发人员运营的独立开源组织。你可以通过为我们的存储库加星和分享以及通过 [GitHub Sponsor](https://github.com/sponsors/SeaQL) 捐款来支持我们。

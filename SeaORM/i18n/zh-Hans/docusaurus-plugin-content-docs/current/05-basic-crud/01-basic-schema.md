@@ -1,9 +1,9 @@
-# Basic Schema
+# 基本 Schema
 
-We will be using this [basic schema](https://github.com/SeaQL/sea-orm/tree/master/src/tests_cfg) for demonstration:
+我们将使用这个[基本 schema](https://github.com/SeaQL/sea-orm/tree/master/src/tests_cfg) 进行演示：
 
-+ `cake` one-to-many `fruit`
-+ `cake` many-to-many `filling`
-+ `cake_filling` is the junction table between `cake` and `filling`
++ `cake` 一对多 `fruit`
++ `cake` 多对多 `filling`
++ `cake_filling` 是 `cake` 和 `filling` 之间的连接表
 
-![Basic Schema](https://raw.githubusercontent.com/SeaQL/sea-orm/master/src/tests_cfg/basic_schema.svg)
+![基本 Schema](https://raw.githubusercontent.com/SeaQL/sea-orm/master/src/tests_cfg/basic_schema.svg)

@@ -1,10 +1,10 @@
-# Nested Selects
+# 嵌套查询
 
-`FromQueryResult` and `DerivePartialModel` macros allows you to nest objects easily, simplifying the construction of complex queries.
+`FromQueryResult` 和 `DerivePartialModel` 宏允许你轻松地嵌套对象，从而简化复杂查询的构建。
 
-## Nested FromQueryResult
+## 嵌套 FromQueryResult
 
-As a simple first example, we'd like to select `Cake` with `Bakery`:
+作为一个简单的第一个例子，我们想选择带有 `Bakery` 的 `Cake`：
 
 ```rust
 #[derive(FromQueryResult)]
@@ -49,12 +49,11 @@ assert_eq!(
 );
 ```
 
-Because the tables `cake` and `bakery` have some duplicate column names, we'd have to do custom selects. `select_only` here clears the default select list, and we apply aliases with [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as). Then, in `FromQueryResult` we use `alias` to map the query result back to the nested struct.
+因为 `cake` 和 `bakery` 表有一些重复的列名，我们必须进行自定义选择。这里的 `select_only` 清除了默认的选择列表，我们使用 [`column_as`](https://docs.rs/sea-orm/latest/sea_orm/query/trait.QuerySelect.html#method.column_as) 应用别名。然后，在 `FromQueryResult` 中，我们使用 `alias` 将查询结果映射回嵌套结构。
 
-## Nested Models
+## 嵌套模型
 
-[`DerivePartialModel`](https://docs.rs/sea-orm/latest/sea_orm/derive.DerivePartialModel.html) allows you to omit the custom selects and aliases.
-The previous example can be written as:
+[`DerivePartialModel`](https://docs.rs/sea-orm/latest/sea_orm/derive.DerivePartialModel.html) 允许你省略自定义选择和别名。前面的例子可以写成：
 ```rust
 #[derive(DerivePartialModel)]
 #[sea_orm(entity = "cake::Entity")]
@@ -73,7 +72,7 @@ struct Bakery {
     brand: String,
 }
 
-// same as previous example, but without the custom selects
+// 与前面的例子相同，但没有自定义选择
 let cake: Cake = cake::Entity::find()
     .left_join(bakery::Entity)
     .order_by_asc(cake::Column::Id)
@@ -83,7 +82,7 @@ let cake: Cake = cake::Entity::find()
     .unwrap();
 ```
 
-Under the hood, `bakery_` prefix will be added to the column alias in the SQL query.
+在底层，`bakery_` 前缀将被添加到 SQL 查询中的列别名。
 
 ```sql
 SELECT
@@ -96,12 +95,12 @@ LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
-### Regular Models can be nested!
+### 常规模型可以嵌套！
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 版本起
 :::
 
-So the previous example can also be:
+所以前面的例子也可以是：
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -110,15 +109,15 @@ struct Cake {
     id: i32,
     name: String,
     #[sea_orm(nested)]
-    bakery: Option<bakery::Model>, // <- a regular full Model
+    bakery: Option<bakery::Model>, // <- 一个常规的完整模型
 }
 ```
 
-Where all columns of the nested model are selected.
+其中选择了嵌套模型的所有列。
 
-### Join with alias
+### 带别名的连接
 
-When the same table is joined more than once in the same query, it's necessary to use an alias. You can use the `alias` attribute to select columns from an alias.
+当同一个表在同一个查询中多次连接时，需要使用别名。你可以使用 `alias` 属性从别名中选择列。
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -151,7 +150,7 @@ let cake_factory: CakeFactory = cake::Entity::find()
     .unwrap();
 ```
 
-Results in:
+结果是：
 
 ```sql
 SELECT
@@ -166,7 +165,7 @@ ORDER BY "cake"."id" ASC LIMIT 1
 
 :::tip
 
-You can join the same Entity twice via two relations and have different aliases for each of them in the same query.
+你可以通过两个关系将同一个实体连接两次，并在同一个查询中为它们设置不同的别名。
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -195,9 +194,9 @@ let bakery: Bakery = bakery::Entity::find()
 
 :::
 
-## Three-way Join
+## 三向连接
 
-Our join plan starts from Order:
+我们的连接计划从 Order 开始：
 
 ```rust
 Order -> Customer
@@ -269,13 +268,11 @@ assert_eq!(
 );
 ```
 
-Since Cake is a related Entity of LineItem, not Order, it does not satisfy the trait bound of `left_join`. It is thus necessary to use the more flexible `join` method.
+由于 Cake 是 LineItem 的相关实体，而不是 Order 的相关实体，因此它不满足 `left_join` 的 trait 约束。因此，有必要使用更灵活的 `join` 方法。
 
-### Alternative shape
+### 替代结构
 
-In the above, we make the nested structure resembles the topology of the join plan.
-But there is no restriction. Indeed, SQL flattens the select into a flat table, so as long as all columns can be found,
-we can freely arrange the result data structure.
+在上面，我们使嵌套结构类似于连接计划的拓扑。但没有限制。实际上，SQL 将选择展平为一个平面表，因此只要能找到所有列，我们就可以自由地安排结果数据结构。
 
 ```rust
 #[derive(Debug, DerivePartialModel, PartialEq)]
@@ -318,7 +315,7 @@ struct Cake {
     name: String,
 }
 
-// the exact same select query
+// 完全相同的选择查询
 
 assert_eq!(
     items,
@@ -344,7 +341,7 @@ assert_eq!(
 );
 ```
 
-## Three-Model select
+## 三模型选择
 
 ```rust
 Order -> Lineitem -> Cake
@@ -361,10 +358,10 @@ let items: Vec<(order::Model, Option<lineitem::Model>, Option<cake::Model>)> =
         .await?;
 ```
 
-`find_also_related` is based on relations of the first entity.
-`and_also_related` is based on relations of the second entity.
+`find_also_related` 基于第一个实体的关系。
+`and_also_related` 基于第二个实体的关系。
 
-To do this instead, you can write:
+要改为这样做，你可以这样写：
 
 ```rust
 Order -> Customer

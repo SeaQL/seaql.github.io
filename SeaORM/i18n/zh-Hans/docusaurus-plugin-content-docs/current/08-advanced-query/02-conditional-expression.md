@@ -1,10 +1,10 @@
-# Conditional Expressions
+# 条件表达式
 
-You can add conditions to SeaORM find with the `filter` method. You can also restrict the aggregated result with `having` method. Both of them take [`sea_query::Condition`](https://docs.rs/sea-query/*/sea_query/query/struct.Condition.html) as a parameter.
+你可以使用 `filter` 方法向 SeaORM 查询添加条件。你还可以使用 `having` 方法限制聚合结果。两者都接受 [`sea_query::Condition`](https://docs.rs/sea-query/*/sea_query/query/struct.Condition.html) 作为参数。
 
-## AND Condition
+## AND 条件
 
-Construct the AND conditional expression with `Condition::all` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
+使用 `Condition::all` 方法构造 AND 条件表达式，并使用 `add` 方法附加任何以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 表示的条件。
 
 ```rust
 assert_eq!(
@@ -23,9 +23,9 @@ assert_eq!(
 );
 ```
 
-## OR Condition
+## OR 条件
 
-Construct the OR conditional expression with `Condition::any` method, and append any condition represented in [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) with the `add` method.
+使用 `Condition::any` 方法构造 OR 条件表达式，并使用 `add` 方法附加任何以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 表示的条件。
 
 ```rust
 assert_eq!(
@@ -44,9 +44,9 @@ assert_eq!(
 );
 ```
 
-## Nested Condition
+## 嵌套条件
 
-The `add` method can also take another conditional expression. By doing this, we can construct complex nested conditions flexibly.
+`add` 方法也可以接受另一个条件表达式。通过这样做，我们可以灵活地构造复杂的嵌套条件。
 
 ```rust
 assert_eq!(
@@ -74,9 +74,9 @@ assert_eq!(
 );
 ```
 
-## Fluent conditional query
+## 流式条件查询
 
-Apply an operation on the QueryStatement if the given `Option<T>` is `Some(_)`. It keeps your query expression fluent!
+如果给定的 `Option<T>` 是 `Some(_)`，则对 QueryStatement 应用操作。它使你的查询表达式保持流畅！
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake, DbBackend};

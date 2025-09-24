@@ -1,21 +1,21 @@
-# Streaming
+# 流式处理
 
-Use async stream from [futures](https://crates.io/crates/futures) crate on any `Select` for reducing memory allocation to improve efficiency.
+在任何 `Select` 上使用来自 [futures](https://crates.io/crates/futures) crate 的异步流，以减少内存分配，提高效率。
 
 ```rust
 use futures::TryStreamExt;
 
-// Stream all fruits
+// 流式处理所有水果
 let mut stream = Fruit::find().stream(db).await?;
 
 while let Some(item) = stream.try_next().await? {
     let item: fruit::ActiveModel = item.into();
-    // do something with item
+    // 对 item 进行操作
 }
 ```
 
 ```rust
-// Stream all fruits with name contains character "a"
+// 流式处理所有名称包含字符 "a" 的水果
 let mut stream = Fruit::find()
     .filter(fruit::Column::Name.contains("a"))
     .order_by_asc(fruit::Column::Name)
@@ -23,14 +23,13 @@ let mut stream = Fruit::find()
     .await?;
 ```
 
-Note that the stream object will exclusively hold onto the connection until dropped, preventing the connection to be borrowed by others.
+请注意，流对象将独占连接直到被丢弃，从而阻止连接被其他对象借用。
 
 ```rust
 {
     let s1 = Fruit::find().stream(db).await?;
     let s2 = Fruit::find().stream(db).await?;
     let s3 = Fruit::find().stream(db).await?;
-    // 3 connections are held
+    // 3 个连接被持有
 }
-// All streams are dropped and connections are returned to the connection pool
-```
+// 所有流都被丢弃，连接返回到连接池

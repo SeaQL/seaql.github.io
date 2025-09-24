@@ -1,10 +1,10 @@
-# Custom Select
+# 自定义选择
 
-:::caution We need your support! ⭐
-Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)! Your support is vital to the continued development and maintenance of SeaORM.
+:::caution 我们需要你的支持！⭐
+感谢你使用 SeaORM。请给我们的 [GitHub 仓库](https://github.com/SeaQL/sea-orm) 点赞！你的支持对 SeaORM 的持续开发和维护至关重要。
 :::
 
-By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to select certain columns only.
+默认情况下，SeaORM 将选择 `Column` 枚举中定义的所有列。如果你只想选择某些列，可以覆盖默认设置。
 
 ```rust
 // Selecting all columns
@@ -16,9 +16,9 @@ assert_eq!(
 );
 ```
 
-## Select Partial Attributes
+## 选择部分属性
 
-Clear the default selection by calling the `select_only` method. Then, you can select some of the attributes or custom expressions afterwards.
+通过调用 `select_only` 方法清除默认选择。然后，你可以选择部分属性或自定义表达式。
 
 ```rust
 // Selecting the name column only
@@ -32,7 +32,7 @@ assert_eq!(
 );
 ```
 
-If you want to select multiple attributes at once, you can supply an array.
+如果你想一次选择多个属性，可以提供一个数组。
 
 ```rust
 assert_eq!(
@@ -45,7 +45,7 @@ assert_eq!(
 );
 ```
 
-Advanced example: conditionally select all columns except a specific column.
+高级示例：有条件地选择除特定列之外的所有列。
 
 ```rust
 assert_eq!(
@@ -61,9 +61,9 @@ assert_eq!(
 );
 ```
 
-### Optional fields
+### 可选字段
 
-Since 0.12, SeaORM supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
+从 0.12 版本开始，SeaORM 支持 `Option<T>` 模型字段的部分选择。当选择结果不包含 `Option<T>` 字段时，将填充 `None` 值，而不会抛出错误。
 
 ```rust
 customer::ActiveModel {
@@ -74,7 +74,7 @@ customer::ActiveModel {
 .save(db)
 .await?;
 
-// The `notes` field was intentionally left out
+// `notes` 字段被有意省略
 let customer = Customer::find()
     .select_only()
     .column(customer::Column::Id)
@@ -83,14 +83,14 @@ let customer = Customer::find()
     .await
     .unwrap();
 
-// The select result does not contain `notes` field.
-// Since it's of type `Option<String>`, it'll be `None` and no error will be thrown.
+// 选择结果不包含 `notes` 字段。
+// 由于它是 `Option<String>` 类型，它将是 `None` 并且不会抛出错误。
 assert_eq!(customers.notes, None);
 ```
 
-## Select Custom Expressions
+## 选择自定义表达式
 
-Select any custom expression with `column_as` / `expr_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
+使用 `column_as` / `expr_as` 方法选择任何自定义表达式，它接受任何 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 和一个别名。使用 [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) 助手构建 `SimpleExpr`。
 
 ```rust
 use sea_query::{Alias, Expr, Func};
@@ -113,11 +113,11 @@ assert_eq!(
 );
 ```
 
-## Handling Select Results
+## 处理选择结果
 
-### Custom Struct
+### 自定义结构体
 
-You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of a complex query. It is especially useful when dealing with custom columns or multiple joins which cannot directly be converted into models. It may be used to receive the result of any query, even raw SQL.
+你可以使用从 `FromQueryResult` trait 派生的自定义 `struct` 来处理复杂查询的结果。这在处理无法直接转换为模型的自定义列或多个连接时特别有用。它可用于接收任何查询的结果，甚至是原始 SQL。
 
 ```rust
 use sea_orm::{FromQueryResult, JoinType, RelationTrait};
@@ -133,14 +133,14 @@ struct CakeAndFillingCount {
 let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
     .column_as(filling::Column::Id.count(), "count")
     .join_rev(
-        // construct `RelationDef` on the fly
+        // 动态构建 `RelationDef`
         JoinType::InnerJoin,
         cake_filling::Entity::belongs_to(cake::Entity)
             .from(cake_filling::Column::CakeId)
             .to(cake::Column::Id)
             .into()
     )
-    // reuse a `Relation` from existing Entity
+    // 重用现有实体中的 `Relation`
     .join(JoinType::InnerJoin, cake_filling::Relation::Filling.def())
     .group_by(cake::Column::Id)
     .into_model::<CakeAndFillingCount>()
@@ -148,9 +148,9 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
     .await?;
 ```
 
-### Unstructured Tuple
+### 非结构化元组
 
-You can select a tuple (or single value) with the `into_tuple` method.
+你可以使用 `into_tuple` 方法选择一个元组（或单个值）。
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
@@ -165,11 +165,11 @@ let res: Vec<(String, i64)> = cake::Entity::find()
     .await?;
 ```
 
-## Select Partial Model
+## 选择部分模型
 
-In `0.12`, we introduced a new trait `PartialModelTrait` and pairing macro `DerivePartialModel` for improving the ergonomic of custom selects.
+在 `0.12` 版本中，我们引入了一个新的 trait `PartialModelTrait` 和配对宏 `DerivePartialModel`，以改善自定义选择的人体工程学。
 
-Instead of:
+而不是：
 
 ```rust
 use user::Entity as User;
@@ -189,7 +189,7 @@ let query = User::find()
     .into_model::<PartialUser>();
 ```
 
-You can define a partial model, and the corresponding columns will be automatically selected:
+你可以定义一个部分模型，相应的列将自动选择：
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -203,8 +203,8 @@ struct PartialUser {
 let query = User::find().into_partial_model::<PartialUser>();
 ```
 
-:::tip Since `1.0.0`
-`DerivePartialModel` macro attribute `entity` supports complex types
+:::tip 自 `1.0.0` 起
+`DerivePartialModel` 宏属性 `entity` 支持复杂类型
 ```rust
 #[sea_orm(entity = "<entity::Model as ModelTrait>::Entity")]
 struct PartialUser {
@@ -213,7 +213,7 @@ struct PartialUser {
 ```
 :::
 
-Advanced usages include column remap and custom expression:
+高级用法包括列重映射和自定义表达式：
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -225,7 +225,7 @@ struct PartialRow {
     next_id: i32,
 }
 
-// The above is equivalent to:
+// 上述等同于：
 User::find()
     .column_as(user::Column::Id, "user_id")
     .column_as(Expr::col(user::Column::Id).add(1), "next_id")

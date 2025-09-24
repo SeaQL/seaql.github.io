@@ -1,10 +1,10 @@
-# Aggregate Functions
+# 聚合函数
 
-You can group results selected from SeaORM find with the `group_by` method. If you wish to further restrict the grouped result set, the `having` method can help you achieve that.
+你可以使用 `group_by` 方法对从 SeaORM find 中选择的结果进行分组。如果你希望进一步限制分组结果集，`having` 方法可以帮助你实现这一点。
 
-## Group By
+## 分组 (Group By)
 
-The `group_by` method can take a column of the entity or a complex [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html).
+`group_by` 方法可以接受实体的一个列或一个复杂的 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html)。
 
 ```rust
 assert_eq!(
@@ -29,9 +29,9 @@ assert_eq!(
 );
 ```
 
-## Having
+## 筛选 (Having)
 
-The `having` method can take any conditional expressions introduced in the previous section.
+`having` 方法可以接受上一节中介绍的任何条件表达式。
 
 ```rust
 assert_eq!(
@@ -58,6 +58,6 @@ assert_eq!(
 
 :::info
 
-Aggregation functions such as `max`, `min`, `sum`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ColumnTrait.html).
+聚合函数，例如 `max`、`min`、`sum`、`count`，在 [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ColumnTrait.html) 中可用。
 
 :::

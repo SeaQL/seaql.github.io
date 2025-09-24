@@ -1,6 +1,6 @@
-# Custom Join Condition
+# 自定义连接条件
 
-Sometimes you might want to join on another table with custom conditions, such as:
+有时你可能希望使用自定义条件连接到另一个表，例如：
 
 ```sql
 SELECT
@@ -9,14 +9,14 @@ SELECT
 FROM
     `cake`
     LEFT JOIN `fruit` ON `cake`.`id` = `fruit`.`cake_id`
-    AND `fruit`.`name` LIKE '%tropical%' -- Custom Join Condition
+    AND `fruit`.`name` LIKE '%tropical%' -- 自定义连接条件
 ```
 
-It can be done in several ways.
+这可以通过几种方式完成。
 
-## Relation
+## 关系
 
-Add your additional join conditions directly to the relation enum. The easiest way is to provide a `sea_query::SimpleExpr` via `on_condition` procedural macros attribute.
+将你的附加连接条件直接添加到关系枚举中。最简单的方法是通过 `on_condition` 过程宏属性提供 `sea_query::SimpleExpr`。
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -25,14 +25,13 @@ pub enum Relation {
     Fruit,
     #[sea_orm(
         has_many = "super::fruit::Entity",
-        // Additional on_condition, accept anything that implements `sea_query::IntoCondition`
+        // 附加的 on_condition，接受任何实现 `sea_query::IntoCondition` 的内容
         on_condition = r#"super::fruit::Column::Name.like("%tropical%")"#
     )]
     TropicalFruit,
-}
-```
+}```
 
-The procedural macros above will be expanded into:
+上面的过程宏将扩展为：
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter)]
@@ -56,7 +55,7 @@ impl RelationTrait for Relation {
 }
 ```
 
-The resulting SQL will be:
+生成的 SQL 将是：
 
 ```rust
 assert_eq!(
@@ -72,9 +71,9 @@ assert_eq!(
 );
 ```
 
-## Linked
+## 链接
 
-You can also define custom join conditions on `Linked`.
+你还可以在 `Linked` 上定义自定义连接条件。
 
 ```rust
 #[derive(Debug)]
@@ -89,8 +88,7 @@ impl Linked for CheeseCakeToFillingVendor {
         vec![
             super::cake_filling::Relation::Cake
                 .def()
-                // The `on_condition` method takes a closure with parameters
-                // denoting the left-hand side and right-hand side table in the join expression.
+                // `on_condition` 方法接受一个闭包，其参数表示连接表达式中的左侧和右侧表。
                 .on_condition(|left, _right| {
                     Expr::col((left, super::cake::Column::Name))
                         .like("%cheese%")
@@ -104,7 +102,7 @@ impl Linked for CheeseCakeToFillingVendor {
 }
 ```
 
-The resulting SQL will be:
+生成的 SQL 将是：
 
 ```rust
 assert_eq!(
@@ -124,9 +122,9 @@ assert_eq!(
 );
 ```
 
-## On the fly
+## 动态
 
-Lastly, custom join conditions can be defined at the point you construct the join expression.
+最后，可以在构建连接表达式时定义自定义连接条件。
 
 ```rust
 assert_eq!(
@@ -167,7 +165,7 @@ assert_eq!(
 );
 ```
 
-You can specify table alias in the join statement:
+你可以在连接语句中指定表别名：
 
 ```rust
 let cf = "cf";
@@ -191,10 +189,9 @@ assert_eq!(
         "LEFT JOIN `filling` ON `cf`.`filling_id` = `filling`.`id`",
     ]
     .join(" ")
-);
-```
+);```
 
-## `OR` condition
+## `OR` 条件
 
 ```rust {6}
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -205,8 +202,7 @@ pub enum Relation {
         condition_type = "any",
     )]
     OrTropicalFruit,
-}
-```
+}```
 
 ```rust {7,12}
 assert_eq!(
@@ -237,4 +233,3 @@ assert_eq!(
     ]
     .join(" ")
 );
-```

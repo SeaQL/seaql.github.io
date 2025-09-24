@@ -1,24 +1,23 @@
-# Getting Started
+# 入门
 
-This example can be found on [SeaORM + Seaography Example](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example).
+此示例可在 [SeaORM + Seaography 示例](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example) 中找到。
 
 ![](https://raw.githubusercontent.com/SeaQL/sea-orm/master/examples/seaography_example/Seaography%20example.png)
 
-To get started, all you need is a live SQL database with schema. You can code everything in Rust by writing SeaORM migrations, or design the schema with a GUI tool (e.g. [DataGrip](https://www.jetbrains.com/datagrip/)).
+要开始使用，你只需要一个带有模式的实时 SQL 数据库。你可以通过编写 SeaORM 迁移在 Rust 中编写所有代码，或者使用 GUI 工具（例如 [DataGrip](https://www.jetbrains.com/datagrip/)）设计模式。
 
-## Install Seaography CLI
+## 安装 Seaography CLI
 
 ```sh
-cargo install seaography-cli@^1.1.0
-```
+cargo install seaography-cli@^1.1.0```
 
-## Generate Seaography Entities
+## 生成 Seaography 实体
 
 ```sh
 sea-orm-cli generate entity --output-dir graphql/src/entities --seaography
 ```
 
-Generate entities with `sea-orm-cli` like you normally do, but with an additional `--seaography` flag. The entities are basically good-old SeaORM entities, but with an additional `RelatedEntity` enum.
+像往常一样使用 `sea-orm-cli` 生成实体，但需要添加一个额外的 `--seaography` 标志。这些实体基本上是旧的 SeaORM 实体，但带有一个额外的 `RelatedEntity` 枚举。
 
 ```rust title="examples/seaography_example/graphql/src/entities/cake.rs"
 use sea_orm::entity::prelude::*;
@@ -72,7 +71,7 @@ impl Related<super::baker::Entity> for Entity {
 
 impl ActiveModelBehavior for ActiveModel {}
 
-// Additional schema meta exposed to Seaography
+// 暴露给 Seaography 的额外模式元数据
 + #[derive(Copy, Clone, Debug, EnumIter, DeriveRelatedEntity)]
 + pub enum RelatedEntity {
 +     #[sea_orm(entity = "super::bakery::Entity")]
@@ -84,65 +83,65 @@ impl ActiveModelBehavior for ActiveModel {}
 + }
 ```
 
-## Generate GraphQL Project
+## 生成 GraphQL 项目
 
-Generating a fresh project is the easiest way to launch a GraphQL server.
-However, Seaography can easily be integrated to an existing web server built with any web framework.
+生成一个全新的项目是启动 GraphQL 服务器最简单的方法。
+然而，Seaography 可以轻松集成到使用任何 Web 框架构建的现有 Web 服务器中。
 
-Seaography supports Poem, Actix, and Axum out of the box.
+Seaography 开箱即用地支持 Poem、Actix 和 Axum。
 
-Run the following command:
+运行以下命令：
 
 ```sh
 seaography-cli graphql graphql/src/entities $DATABASE_URL sea-orm-seaography-example
 ```
 
-Full help:
+完整帮助：
 
 ```sh
-🧭 A dynamic GraphQL framework for SeaORM
+🧭 SeaORM 的动态 GraphQL 框架
 
-Usage: seaography-cli [OPTIONS] <DESTINATION> <ENTITIES> <DATABASE_URL> <CRATE_NAME>
+用法：seaography-cli [OPTIONS] <DESTINATION> <ENTITIES> <DATABASE_URL> <CRATE_NAME>
 
-Arguments:
-  <DESTINATION>   Project destination folder
-  <ENTITIES>      SeaORM entities folder
-  <DATABASE_URL>  Database URL to write in .env
-  <CRATE_NAME>    Crate name for generated project
+参数：
+  <DESTINATION>   项目目标文件夹
+  <ENTITIES>      SeaORM 实体文件夹
+  <DATABASE_URL>  要写入 .env 的数据库 URL
+  <CRATE_NAME>    生成项目的 crate 名称
 
-Options:
+选项：
   -f, --framework <FRAMEWORK>
-          Which web framework to use [default: poem] [possible values: actix, poem, axum]
+          要使用的 Web 框架 [默认值: poem] [可能的值: actix, poem, axum]
       --depth-limit <DEPTH_LIMIT>
-          GraphQL depth limit
+          GraphQL 深度限制
       --complexity-limit <COMPLEXITY_LIMIT>
-          GraphQL complexity limit
+          GraphQL 复杂度限制
   -h, --help
-          Print help
+          打印帮助信息
   -V, --version
-          Print version
+          打印版本信息
 ```
 
-## Start the server
+## 启动服务器
 
 ```sh
 cd graphql
 cargo run
 ```
 
-You are of course free to modify the project to suit your needs.
-The interesting bit starts at the `seaography::register_entities!` macro in `query_root.rs`.
-You can add custom entities, queries and mutations to the GraphQL schema.
+你当然可以自由修改项目以满足你的需求。
+有趣的部分从 `query_root.rs` 中的 `seaography::register_entities!` 宏开始。
+你可以向 GraphQL 模式添加自定义实体、查询和突变。
 
-## Run some queries
+## 运行一些查询
 
 ```sh
-Visit GraphQL Playground at http://localhost:8000
+访问 GraphQL Playground：http://localhost:8000
 ```
 
-Navigate to the GraphQL Playground, and then start running some queries!
+导航到 GraphQL Playground，然后开始运行一些查询！
 
-### Bakery -> Cake -> Baker
+### 面包店 -> 蛋糕 -> 烘焙师
 
 ```graphql
 {
@@ -165,7 +164,7 @@ Navigate to the GraphQL Playground, and then start running some queries!
 }
 ```
 
-### List gluten-free cakes and know where to buy them
+### 列出无麸质蛋糕并了解在哪里购买
 
 ```graphql
 {
@@ -180,4 +179,3 @@ Navigate to the GraphQL Playground, and then start running some queries!
     }
   }
 }
-```

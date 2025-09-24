@@ -1,10 +1,10 @@
-# One to Many
+# 一对多关系
 
-A one-to-many relation is similar to a one-to-one relation. In the previous section, we gave the example of "a `Cake` entity has at most one `Fruit` topping". To make it a one-to-many relation, we remove the "at most one" constraint. So, we have a `Cake` entity that might have many `Fruit` toppings.
+一对多关系类似于一对一关系。在上一节中，我们举例说明了“一个 `Cake` 实体最多有一个 `Fruit` 配料”。为了使其成为一对多关系，我们删除了“最多一个”的约束。因此，我们有一个 `Cake` 实体，它可能有许多 `Fruit` 配料。
 
-## Defining the Relation
+## 定义关系
 
-This is almost identical to defining a one-to-one relation; the only difference is that we use `Entity::has_many()` method here.
+这与定义一对一关系几乎相同；唯一的区别是我们在这里使用 `Entity::has_many()` 方法。
 
 ```rust title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -21,7 +21,7 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 
 <details>
-    <summary>It's expanded to:</summary>
+    <summary>它展开为：</summary>
 
 ```rust {3,9,16}
 #[derive(Copy, Clone, Debug, EnumIter)]
@@ -45,9 +45,9 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 </details>
 
-## Defining the Inverse Relation
+## 定义反向关系
 
-It is the same as defining the one-to-one inverse relation.
+它与定义一对一反向关系相同。
 
 ```rust title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -68,7 +68,7 @@ impl Related<super::cake::Entity> for Entity {
 ```
 
 <details>
-    <summary>It's expanded to:</summary>
+    <summary>它展开为：</summary>
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter)]

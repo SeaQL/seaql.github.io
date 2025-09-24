@@ -1,16 +1,16 @@
-# Raw SQL
+# 原始 SQL
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 
-A new macro `raw_sql` is added, with many neat features to make writing raw SQL queries more ergononmic.
+新增了 `raw_sql` 宏，它具有许多简洁的特性，使编写原始 SQL 查询更加符合人体工程学。
 
-In particular, you can expand arrays with `({..ids})` into `(?, ?, ?)`.
+特别是，你可以使用 `({..ids})` 将数组扩展为 `(?, ?, ?)`。
 
-Learn more in [SeaQuery just made writing raw SQL more enjoyable](https://www.sea-ql.org/blog/2025-08-15-sea-query-raw-sql/).
+在 [SeaQuery 刚刚让编写原始 SQL 变得更加愉快](https://www.sea-ql.org/blog/2025-08-15-sea-query-raw-sql/) 中了解更多。
 
 :::
 
-## Find Model by raw SQL
+## 通过原始 SQL 查找模型
 
 ```rust
 let id = 1;
@@ -24,9 +24,9 @@ let cake: Option<cake::Model> = cake::Entity::find()
     .await?;
 ```
 
-## Select into custom struct by raw SQL
+## 通过原始 SQL 选择到自定义结构体
 
-Here nested select is also demonstrated.
+这里也演示了嵌套选择。
 
 ```rust
 #[derive(FromQueryResult)]
@@ -55,9 +55,9 @@ let cake: Option<Cake> = Cake::find_by_statement(raw_sql!(
 .await?;
 ```
 
-## Paginate raw SQL query
+## 分页原始 SQL 查询
 
-You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
+你可以对 [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) 进行分页并批量获取 `Model`。
 
 ```rust
 let ids = vec![1, 2, 3, 4];
@@ -70,13 +70,13 @@ let mut cake_pages = cake::Entity::find()
     .paginate(db, 10);
 
 while let Some(cakes) = cake_pages.fetch_and_next().await? {
-    // Do something on cakes: Vec<cake::Model>
+    // 对 cakes: Vec<cake::Model> 进行操作
 }
 ```
 
-## Inspect raw SQL from queries
+## 从查询中检查原始 SQL
 
-Use `build` and `to_string` methods on any CRUD operations to get the database-specific raw SQL for debugging purposes.
+在任何 CRUD 操作上使用 `build` 和 `to_string` 方法来获取特定于数据库的原始 SQL，用于调试目的。
 
 ```rust
 use sea_orm::{DbBackend, QueryTrait};
@@ -92,11 +92,11 @@ assert_eq!(
 );
 ```
 
-## Use Raw Query & Execute Interface
+## 使用原始查询和执行接口
 
-You can build SQL statements using `sea-query` and query / execute it directly on the `DatabaseConnection` interface inside SeaORM.
+你可以使用 `sea-query` 构建 SQL 语句，并直接在 SeaORM 内部的 `DatabaseConnection` 接口上查询/执行它。
 
-### Get Custom Result using `query_one` and `query_all` methods
+### 使用 `query_one` 和 `query_all` 方法获取自定义结果
 
 ```rust
 let query_res: Option<QueryResult> = db
@@ -116,7 +116,7 @@ let query_res_vec: Vec<QueryResult> = db
     .await?;
 ```
 
-### Execute Query using `execute` method
+### 使用 `execute` 方法执行查询
 
 ```rust
 let exec_res: ExecResult = db
@@ -128,11 +128,10 @@ let exec_res: ExecResult = db
 assert_eq!(exec_res.rows_affected(), 1);
 ```
 
-## Execute Unprepared SQL Statement
+## 执行未预处理的 SQL 语句
 
-You can execute an unprepared SQL statement with [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/*/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared).
+你可以使用 [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/*/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared) 执行未预处理的 SQL 语句。
 
 ```rust
 let exec_res: ExecResult =
     db.execute_unprepared("CREATE EXTENSION IF NOT EXISTS citext").await?;
-```

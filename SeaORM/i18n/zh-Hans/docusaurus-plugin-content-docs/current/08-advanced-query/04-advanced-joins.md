@@ -1,10 +1,10 @@
-# Advanced Joins
+# 高级连接
 
-An anatomy of a complex relational query with multiple joins and custom selects.
+一个包含多个连接和自定义选择的复杂关系查询的剖析。
 
-## Schema
+## 模式
 
-Suppose we have a schema design of `BaseProduct` -> `ComplexProduct`, `BaseProduct` -> `ProductTypes`.
+假设我们有一个 `BaseProduct` -> `ComplexProduct`，`BaseProduct` -> `ProductTypes` 的模式设计。
 
 #### `BaseProduct`
 
@@ -16,7 +16,7 @@ pub struct Model {
     pub id: i64,
     #[sea_orm(unique)]
     pub name: String,
-    pub type_id: i32, // linking to product_type
+    pub type_id: i32, // 链接到 product_type
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -43,7 +43,7 @@ pub enum Relation {
 #[sea_orm(table_name = "complex_product")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
-    pub product_id: i64, // linking to base_product
+    pub product_id: i64, // 链接到 base_product
     #[sea_orm(column_type = "Decimal(Some((30, 15)))", nullable)]
     pub price: Option<Decimal>,
     #[sea_orm(column_type = "Decimal(Some((30, 15)))", nullable)]
@@ -67,7 +67,7 @@ pub enum Relation {
 
 #### `ProductType`
 
-Basically a 'enum table'.
+基本上是一个“枚举表”。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
@@ -86,7 +86,7 @@ pub enum Relation {
 }
 ```
 
-## 1. Define result data structure
+## 1. 定义结果数据结构
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, FromQueryResult, Serialize)]
@@ -103,9 +103,9 @@ pub struct ComplexProduct {
 }
 ```
 
-With `Serialize`, you can transform the select result into JSON directly.
+使用 `Serialize`，你可以直接将选择结果转换为 JSON。
 
-## 2. Define helper aliases
+## 2. 定义辅助别名
 
 ```rust
 #[derive(DeriveIden, Clone, Copy)]
@@ -122,13 +122,13 @@ pub type ProdCol = <Prod as EntityTrait>::Column;
 type ProdRel = <Prod as EntityTrait>::Relation;
 ```
 
-This would make our code much more concise and readable.
+这将使我们的代码更加简洁和可读。
 
-Avoid using string literals because it's prone to typo.
+避免使用字符串字面量，因为它容易出错。
 
 :::tip
 
-If you need to use many aliases, you can define a enum:
+如果你需要使用许多别名，可以定义一个枚举：
 
 ```rust
 #[derive(DeriveIden, Clone, Copy)]
@@ -141,7 +141,7 @@ pub enum Prod {
 
 :::
 
-## 3. Custom selects
+## 3. 自定义选择
 
 ```rust
 pub fn query() -> Select<complex_product::Entity> {
@@ -160,7 +160,7 @@ pub fn query() -> Select<complex_product::Entity> {
 }
 ```
 
-Our query starts from `ComplexProduct`. We join back to `BaseProduct`, alias it as `Base`. We then join to `ProductType` via `Base`.
+我们的查询从 `ComplexProduct` 开始。我们连接回 `BaseProduct`，并将其别名为 `Base`。然后我们通过 `Base` 连接到 `ProductType`。
 
 ```
 ComplexProduct -> BaseProduct as Base -> ProductType
@@ -168,7 +168,7 @@ ComplexProduct -> BaseProduct as Base -> ProductType
 
 :::tip
 
-It's possible to join in a diamond topology:
+可以以菱形拓扑结构进行连接：
 
 ```
 ComplexProduct -> BaseProduct -> Attribute
@@ -184,9 +184,9 @@ ComplexProduct -> BaseProduct -> Attribute
 
 :::
 
-### Custom join conditions
+### 自定义连接条件
 
-You can use the `join` method to construct complex joins in select queries. It takes any `RelationDef`, and you can further customize the join conditions. Below is an illustration (albeit it's from the Bakery schema):
+你可以使用 `join` 方法在选择查询中构建复杂的连接。它接受任何 `RelationDef`，并且你可以进一步自定义连接条件。下面是一个示例（尽管它来自 Bakery 模式）：
 
 ```rust
 use sea_orm::{JoinType, RelationTrait};
@@ -199,7 +199,7 @@ assert_eq!(
             Expr::col(("fruit_alias", fruit::Column::Name)).into_simple_expr(),
             "fruit_name"
         )
-        // construct `RelationDef` on the fly
+        // 动态构建 `RelationDef`
         .join_rev(
             JoinType::InnerJoin,
             cake_filling::Entity::belongs_to(cake::Entity)
@@ -207,9 +207,9 @@ assert_eq!(
                 .to(cake::Column::Id)
                 .into()
         )
-        // reuse a `Relation` from existing Entity
+        // 重用现有实体的 `Relation`
         .join(JoinType::InnerJoin, cake_filling::Relation::Filling.def())
-        // join with table alias and custom on condition
+        // 使用表别名和自定义条件进行连接
         .join_as(
             JoinType::LeftJoin,
             cake::Relation::Fruit
@@ -237,9 +237,9 @@ assert_eq!(
 );
 ```
 
-## 4. Filter Conditions
+## 4. 过滤条件
 
-Suppose we support the following query parameters on the API:
+假设我们在 API 上支持以下查询参数：
 
 ```rust
 
@@ -263,7 +263,7 @@ fn condition(query: Query) -> Condition {
 }
 ```
 
-Bonus tip: if you're only using Postgres you can replace `is_in` with `any`:
+额外提示：如果你只使用 Postgres，可以将 `is_in` 替换为 `any`：
 
 ```rust
 use sea_orm::sea_query::extension::postgres::PgFunc;
@@ -279,9 +279,9 @@ let products = query()
     .await?;
 ```
 
-## 5. Extra: associated models
+## 5. 额外：关联模型
 
-Now, suppose we have a data structure associated with each `BaseProduct` recording its history:
+现在，假设我们有一个与每个 `BaseProduct` 关联的数据结构，用于记录其历史：
 
 #### `ProductHistory`
 
@@ -311,7 +311,7 @@ pub enum Relation {
 }
 ```
 
-Let's make a helper function to query the histories associated to a set of products:
+让我们创建一个辅助函数来查询与一组产品关联的历史记录：
 
 ```rust
 pub fn history_of(ids: Vec<i64>) -> Select<product_history::Entity> {
@@ -325,7 +325,7 @@ let histories = history_of(products.iter().map(|s| s.id).collect::<Vec<_>>())
     .await?;
 ```
 
-The final step is to associate `product_history::Model` to `ComplexProduct`:
+最后一步是将 `product_history::Model` 与 `ComplexProduct` 关联：
 
 ```rust
 pub fn associate(
@@ -344,7 +344,7 @@ pub fn associate(
         .map(|(i, s)| (s.id, i))
         .collect();
 
-    // put children into associated parent
+    // 将子项放入关联的父项中
     for item in children {
         if let Some(index) = parent_id_map.get(&item.product_id) {
             parent[*index].history.push(item);
@@ -357,4 +357,4 @@ pub fn associate(
 let products = associate(products, histories);
 ```
 
-This is sometimes called "data loader" pattern, and can be generalized with generics to work with any model.
+这有时被称为“数据加载器”模式，并且可以通过泛型进行推广以适用于任何模型。
