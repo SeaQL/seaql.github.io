@@ -1,46 +1,45 @@
-# Update
+# 更新
 
-## Update One
+## 更新一条
 
-You will get a `Model` from find result. If you want to save the model back into the database, you need to convert it into an `ActiveModel` *first*. The generated query will only include the `Set` attributes.
+你将从查找结果中获得一个 `Model`。如果你想将模型保存回数据库，你需要*首先*将其转换为 `ActiveModel`。生成的查询将只包含 `Set` 属性。
 
 ```rust
 let pear: Option<fruit::Model> = Fruit::find_by_id(28).one(db).await?;
 
-// Into ActiveModel
+// 转换为 ActiveModel
 let mut pear: fruit::ActiveModel = pear.unwrap().into();
 
-// Update name attribute
+// 更新名称属性
 pear.name = Set("Sweet pear".to_owned());
 
 // SQL: `UPDATE "fruit" SET "name" = 'Sweet pear' WHERE "id" = 28`
-let pear: fruit::Model = pear.update(db).await?;
-```
+let pear: fruit::Model = pear.update(db).await?;```
 
-To update all attributes, you can convert `Unchanged` into `Set`.
+要更新所有属性，你可以将 `Unchanged` 转换为 `Set`。
 
 ```rust
-// Into ActiveModel
+// 转换为 ActiveModel
 let mut pear: fruit::ActiveModel = pear.into();
 
-// Update name attribute
+// 更新名称属性
 pear.name = Set("Sweet pear".to_owned());
 
-// Set a specific attribute as "dirty" (force update)
+// 将特定属性设置为“脏”（强制更新）
 pear.reset(fruit::Column::CakeId);
-// Or, set all attributes as "dirty" (force update)
+// 或者，将所有属性设置为“脏”（强制更新）
 pear.reset_all();
 
 // SQL: `UPDATE "fruit" SET "name" = 'Sweet pear', "cake_id" = 10 WHERE "id" = 28`
 let pear: fruit::Model = pear.update(db).await?;
 ```
 
-## Update Many
+## 更新多条
 
-You can also update multiple rows in the database without finding each `Model` with SeaORM select.
+你还可以更新数据库中的多行，而无需使用 SeaORM select 查找每个 `Model`。
 
 ```rust
-// Bulk set attributes using ActiveModel
+// 使用 ActiveModel 批量设置属性
 let update_result: UpdateResult = Fruit::update_many()
     .set(pear)
     .filter(fruit::Column::Id.eq(1))
@@ -55,9 +54,9 @@ Fruit::update_many()
     .await?;
 ```
 
-## Returning Updated Models
+## 返回更新的模型
 
-Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+仅 Postgres 支持，SQLite 需要 `sqlite-use-returning-for-3_35` 功能标志。
 
 ```rust
 let fruits: Vec<fruit::Model> = Fruit::update_many()
@@ -74,4 +73,3 @@ assert_eq!(
         cake_id: Some(1),
     }
 );
-```

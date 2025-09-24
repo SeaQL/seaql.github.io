@@ -1,32 +1,31 @@
-# Save
+# 保存
 
-This is a helper method to save (insert / update) `ActiveModel` into the database.
+这是一个帮助方法，用于将 `ActiveModel` 保存（插入/更新）到数据库中。
 
-## Save Behaviour
+## 保存行为
 
-When saving an `ActiveModel`, it will perform either insert or update depending on the primary key attribute:
+保存 `ActiveModel` 时，它将根据主键属性执行插入或更新：
 
-- Insert if primary key is `NotSet`
-- Update if primary key is `Set` or `Unchanged`
+- 如果主键是 `NotSet`，则插入
+- 如果主键是 `Set` 或 `Unchanged`，则更新
 
-## Usage
+## 用法
 
-Calling `save` to insert or update an `ActiveModel`.
+调用 `save` 插入或更新 `ActiveModel`。
 
 ```rust
 use sea_orm::ActiveValue::NotSet;
 
 let banana = fruit::ActiveModel {
-    id: NotSet, // primary key is NotSet
+    id: NotSet, // 主键是 NotSet
     name: Set("Banana".to_owned()),
-    ..Default::default() // all other attributes are `NotSet`
+    ..Default::default() // 所有其他属性都是 `NotSet`
 };
 
-// Insert, because primary key `id` is `NotSet`
+// 插入，因为主键 `id` 是 `NotSet`
 let banana: fruit::ActiveModel = banana.save(db).await?;
 
 banana.name = Set("Banana Mongo".to_owned());
 
-// Update, because primary key `id` is `Unchanged`
+// 更新，因为主键 `id` 是 `Unchanged`
 let banana: fruit::ActiveModel = banana.save(db).await?;
-```

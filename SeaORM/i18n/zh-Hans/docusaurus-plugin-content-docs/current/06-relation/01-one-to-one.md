@@ -1,18 +1,18 @@
-# One to One
+# 一对一关系
 
-:::tip Rustacean Sticker Pack 🦀
-[Our stickers](https://www.sea-ql.org/sticker-pack/) are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+:::tip Rustacean 贴纸包 🦀
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/) 采用优质防水乙烯基材料制成，具有独特的哑光表面。
+将它们贴在你的笔记本电脑、记事本或任何小工具上，以展示你对 Rust 的热爱！
 :::
 
-A one-to-one relation is the most basic type of database relation. Let say a `Cake` entity has at most one `Fruit` topping.
+一对一关系是最基本的数据库关系类型。假设一个 `Cake` 实体最多有一个 `Fruit` 配料。
 
-## Defining the Relation
+## 定义关系
 
-On the `Cake` entity, to define the relation:
-1. Add a new variant `Fruit` to the `Relation` enum.
-1. Define it with `has_one`.
-1. Implement the `Related<Entity>` trait.
+在 `Cake` 实体上，定义关系：
+1. 向 `Relation` 枚举添加一个新的变体 `Fruit`。
+2. 使用 `has_one` 定义它。
+3. 实现 `Related<Entity>` trait。
 
 ```rust title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -29,7 +29,7 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 
 <details>
-    <summary>It's expanded to:</summary>
+    <summary>它展开为：</summary>
 
 ```rust {3,9,16} title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter)]
@@ -53,23 +53,23 @@ impl Related<super::fruit::Entity> for Entity {
 ```
 </details>
 
-Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following eliminates the need for the `RelationTrait` implementation above:
+或者，可以使用 `DeriveRelation` 宏缩短定义，
+其中以下内容消除了对上述 `RelationTrait` 实现的需求：
 
-## Defining the Inverse Relation
+## 定义反向关系
 
-On the `Fruit` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity.
+在 `Fruit` 实体上，其 `cake_id` 属性引用 `Cake` 实体的主键。
 
 :::tip
 
-The rule of thumb is, always define a `belongs_to` on the Entity with a foreign key `xxx_id`.
+经验法则是，始终在外键 `xxx_id` 的实体上定义 `belongs_to`。
 
 :::
 
-To define the inverse relation:
-1. Add a new enum variant `Relation::Cake` to the `Fruit` entity.
-1. Write the definition of it with the `Entity::belongs_to()` method, we always define the inverse relation using this method.
-1. Implement the `Related<cake::Entity>` trait.
+要定义反向关系：
+1. 向 `Fruit` 实体添加一个新的枚举变体 `Relation::Cake`。
+2. 使用 `Entity::belongs_to()` 方法编写其定义，我们始终使用此方法定义反向关系。
+3. 实现 `Related<cake::Entity>` trait。
 
 ```rust title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -90,7 +90,7 @@ impl Related<super::cake::Entity> for Entity {
 ```
 
 <details>
-    <summary>It's expanded to:</summary>
+    <summary>它展开为：</summary>
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter)]

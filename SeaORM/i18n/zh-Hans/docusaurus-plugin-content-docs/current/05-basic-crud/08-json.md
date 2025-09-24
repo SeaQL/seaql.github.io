@@ -1,11 +1,11 @@
 # JSON
 
-## Select JSON Result
+## 选择 JSON 结果
 
-All SeaORM selects are capable of returning `serde_json::Value`.
+所有 SeaORM 选择都能够返回 `serde_json::Value`。
 
 ```rust
-// Find by id
+// 按 id 查找
 let cake: Option<serde_json::Value> = Cake::find_by_id(1)
     .into_json()
     .one(db)
@@ -19,7 +19,7 @@ assert_eq!(
     }))
 );
 
-// Find with filter
+// 带过滤器的查找
 let cakes: Vec<serde_json::Value> = Cake::find()
     .filter(cake::Column::Name.contains("chocolate"))
     .order_by_asc(cake::Column::Name)
@@ -41,7 +41,7 @@ assert_eq!(
     ]
 );
 
-// Paginate json result
+// 分页 JSON 结果
 let cake_pages: Paginator<_> = Cake::find()
     .filter(cake::Column::Name.contains("chocolate"))
     .order_by_asc(cake::Column::Name)
@@ -49,11 +49,11 @@ let cake_pages: Paginator<_> = Cake::find()
     .paginate(db, 50);
 
 while let Some(cakes) = cake_pages.fetch_and_next().await? {
-    // Do something on cakes: Vec<serde_json::Value>
+    // 对 cakes: Vec<serde_json::Value> 执行操作
 }
 ```
 
-## Select JSON from raw SQL
+## 从原始 SQL 中选择 JSON
 
 ```rust
 let result: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
@@ -65,13 +65,13 @@ let result: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_an
     .await?;
 ```
 
-## Convert JSON to ActiveModel
+## 将 JSON 转换为 ActiveModel
 
-If you want to save user input into the database you can easily convert JSON value into `ActiveModel`. You might want to [skip deserializing](https://serde.rs/attr-skip-serializing.html) some of the unwanted attributes.
+如果你想将用户输入保存到数据库中，你可以轻松地将 JSON 值转换为 `ActiveModel`。你可能希望[跳过反序列化](https://serde.rs/attr-skip-serializing.html)一些不需要的属性。
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 
-Not all fields of the Model need to be present in the JSON input, undefined fields will simply become `ActiveValue::NotSet`.
+模型的所有字段都不需要存在于 JSON 输入中，未定义的字段将简单地变为 `ActiveValue::NotSet`。
 
 :::
 
@@ -86,17 +86,17 @@ pub struct Model {
 }
 ```
 
-Set the attributes in `ActiveModel` with `set_from_json` method.
+使用 `set_from_json` 方法设置 `ActiveModel` 中的属性。
 
 ```rust
-// An ActiveModel with primary key set
+// 带有主键的 ActiveModel
 let mut fruit = fruit::ActiveModel {
     id: ActiveValue::Set(1),
     name: ActiveValue::NotSet,
     cake_id: ActiveValue::NotSet,
 };
 
-// Note that this method will not alter the primary key values in ActiveModel
+// 请注意，此方法不会更改 ActiveModel 中的主键值
 fruit.set_from_json(json!({
     "id": 8,
     "name": "Apple",
@@ -113,7 +113,7 @@ assert_eq!(
 );
 ```
 
-You can also create a new `ActiveModel` from JSON value with the `from_json` method.
+你还可以使用 `from_json` 方法从 JSON 值创建新的 `ActiveModel`。
 
 ```rust
 let fruit = fruit::ActiveModel::from_json(json!({
@@ -128,4 +128,3 @@ assert_eq!(
         cake_id: ActiveValue::NotSet,
     }
 );
-```

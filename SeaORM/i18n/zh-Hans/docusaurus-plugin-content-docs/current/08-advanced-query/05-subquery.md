@@ -1,8 +1,8 @@
-# Sub Query
+# 子查询
 
-## Conditional Expression With Sub Query
+## 带子查询的条件表达式
 
-Use the `in_subquery` or `not_in_subquery` methods to construct conditional expressions with sub-queries.
+使用 `in_subquery` 或 `not_in_subquery` 方法来构造带子查询的条件表达式。
 
 ```rust
 use sea_orm::Condition;
@@ -28,4 +28,3 @@ assert_eq!(
     ]
     .join(" ")
 );
-```

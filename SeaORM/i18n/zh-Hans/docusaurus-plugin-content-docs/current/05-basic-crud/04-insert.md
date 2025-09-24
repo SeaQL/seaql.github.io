@@ -1,39 +1,39 @@
-# Insert
+# 插入
 
-## Insert One
+## 插入一条
 
-Insert an active model and get back a fresh `Model`. Its value is retrieved from database, so any auto-generated fields will be populated.
+插入一个活动模型并返回一个新的 `Model`。其值从数据库中检索，因此任何自动生成的字段都将被填充。
 
 ```rust
 let pear = fruit::ActiveModel {
     name: Set("Pear".to_owned()),
-    ..Default::default() // all other attributes are `NotSet`
+    ..Default::default() // 所有其他属性都是 `NotSet`
 };
 
 let pear: fruit::Model = pear.insert(db).await?;
 ```
 
-Insert an active model and get back the last insert id. Its type matches the model's primary key type, so it could be a tuple if the model has a composite primary key.
+插入一个活动模型并返回最后插入的 id。其类型与模型的主键类型匹配，因此如果模型具有复合主键，它可能是一个元组。
 
 ```rust
 let pear = fruit::ActiveModel {
     name: Set("Pear".to_owned()),
-    ..Default::default() // all other attributes are `NotSet`
+    ..Default::default() // 所有其他属性都是 `NotSet`
 };
 
 let res: InsertResult = fruit::Entity::insert(pear).exec(db).await?;
 assert_eq!(res.last_insert_id, 28)
 ```
 
-:::tip SQL Server (MSSQL) backend
+:::tip SQL Server (MSSQL) 后端
 
-The `IDENTITY INSERT` of MSSQL is documented [here](https://www.sea-ql.org/SeaORM-X/docs/basic-crud/insert/).
+MSSQL 的 `IDENTITY INSERT` [此处](https://www.sea-ql.org/SeaORM-X/docs/basic-crud/insert/)有文档说明。
 
 :::
 
-## Insert Many
+## 插入多条
 
-Insert many active models and get back the last insert id.
+插入多个活动模型并返回最后插入的 id。
 
 ```rust
 let apple = fruit::ActiveModel {
@@ -50,7 +50,7 @@ let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
 assert_eq!(res.last_insert_id, 30)
 ```
 
-Supplying an empty set to `insert_many` method will result in an error. However, you can change the behaviour with `on_empty_do_nothing` which wraps the `InsertResult` with a `TryInsertResult`.
+向 `insert_many` 方法提供空集将导致错误。但是，你可以使用 `on_empty_do_nothing` 更改行为，它将 `InsertResult` 包装在 `TryInsertResult` 中。
 
 ```rust
 let res = Bakery::insert_many(std::iter::empty())
@@ -61,9 +61,9 @@ let res = Bakery::insert_many(std::iter::empty())
 assert!(matches!(res, Ok(TryInsertResult::Empty)));
 ```
 
-## On Conflict
+## 冲突时
 
-Insert active model with on conflict behaviour.
+插入具有冲突行为的活动模型。
 
 ```rust
 let orange = cake::ActiveModel {
@@ -74,7 +74,7 @@ let orange = cake::ActiveModel {
 assert_eq!(
     cake::Entity::insert(orange.clone())
         .on_conflict(
-            // on conflict do nothing
+            // 冲突时不做任何操作
             sea_query::OnConflict::column(cake::Column::Name)
                 .do_nothing()
                 .to_owned()
@@ -87,7 +87,7 @@ assert_eq!(
 assert_eq!(
     cake::Entity::insert(orange)
         .on_conflict(
-            // on conflict do update
+            // 冲突时更新
             sea_query::OnConflict::column(cake::Column::Name)
                 .update_column(cake::Column::Name)
                 .to_owned()
@@ -98,13 +98,13 @@ assert_eq!(
 );
 ```
 
-Performing an upsert statement without inserting or updating any of the row will result in a `DbErr::RecordNotInserted` error.
+执行 upsert 语句而不插入或更新任何行将导致 `DbErr::RecordNotInserted` 错误。
 
 ```rust
-// When `id` column have conflicting value, do nothing
+// 当 `id` 列有冲突值时，不做任何操作
 let on_conflict = OnConflict::column(Column::Id).do_nothing().to_owned();
 
-// Insert `1`, `2`, `3` into the table
+// 将 `1`、`2`、`3` 插入到表中
 let res = Entity::insert_many([
     ActiveModel { id: Set(1) },
     ActiveModel { id: Set(2) },
@@ -116,7 +116,7 @@ let res = Entity::insert_many([
 
 assert_eq!(res?.last_insert_id, 3);
 
-// Insert `4` into the table together with the previous 3 rows
+// 将 `4` 和之前的 3 行一起插入到表中
 let res = Entity::insert_many([
     ActiveModel { id: Set(1) },
     ActiveModel { id: Set(2) },
@@ -129,8 +129,8 @@ let res = Entity::insert_many([
 
 assert_eq!(res?.last_insert_id, 4);
 
-// Repeat last insert. Since all 4 rows already exist, this essentially did nothing.
-// A `DbErr::RecordNotInserted` error will be thrown.
+// 重复上次插入。由于所有 4 行都已存在，这实际上没有做任何操作。
+// 将抛出 `DbErr::RecordNotInserted` 错误。
 let res = Entity::insert_many([
     ActiveModel { id: Set(1) },
     ActiveModel { id: Set(2) },
@@ -144,7 +144,7 @@ let res = Entity::insert_many([
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
 
-If you want `RecordNotInserted` to be an `Ok` instead of an error, call `.do_nothing()`:
+如果你希望 `RecordNotInserted` 是 `Ok` 而不是错误，请调用 `.do_nothing()`：
 
 ```rust
 let res = Entity::insert_many([..])
@@ -156,9 +156,9 @@ let res = Entity::insert_many([..])
 assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
 ```
 
-### MySQL support
+### MySQL 支持
 
-Set `ON CONFLICT` on primary key `DO NOTHING`, but with MySQL specific polyfill.
+在主键 `ON CONFLICT` 上设置 `DO NOTHING`，但使用 MySQL 特定的 polyfill。
 
 ```rust
 let orange = cake::ActiveModel {
@@ -189,9 +189,9 @@ assert_eq!(
 );
 ```
 
-## Returning Inserted Models
+## 返回插入的模型
 
-Supported by Postgres and SQLite, the following returns the newly inserted models after insert.
+Postgres 和 SQLite 支持，以下在插入后返回新插入的模型。
 
 ```rust
 assert_eq!(
@@ -235,7 +235,7 @@ assert_eq!(
 );
 ```
 
-There is also a `exec_with_returning_keys` if you only need the primary keys after insert.
+如果你只需要插入后的主键，还有一个 `exec_with_returning_keys`。
 
 ```rust
 assert_eq!(
@@ -254,4 +254,3 @@ assert_eq!(
     .unwrap(),
     [(1, 2), (2, 1)]
 );
-```

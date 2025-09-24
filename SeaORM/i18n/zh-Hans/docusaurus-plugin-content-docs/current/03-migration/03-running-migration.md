@@ -1,91 +1,91 @@
-# Running Migration
+# 运行迁移
 
-After you have defined the migrations, you can apply or revert migrations in the terminal or on application startup.
+定义迁移后，你可以在终端或应用程序启动时应用或回滚迁移。
 
-## Command Line Interface (CLI)
+## 命令行界面 (CLI)
 
-Migrations can be run manually in the terminal. `DATABASE_URL` must be set in your environment, follow the instructions [here](04-generate-entity/01-sea-orm-cli.md#configure-environment) to configure it.
+迁移可以在终端中手动运行。`DATABASE_URL` 必须在你的环境中设置，请按照[此处](04-generate-entity/01-sea-orm-cli.md#configure-environment)的说明进行配置。
 
-Supported commands:
-- `init`: Initialize migration directory
-- `generate`: Generate a new migration file
-- `up`: Apply all pending migrations
-- `up -n 10`: Apply 10 pending migrations
-- `down`: Rollback last applied migration
-- `down -n 10`: Rollback last 10 applied migrations
-- `status`: Check the status of all migrations
-- `fresh`: Drop all tables from the database, then reapply all migrations
-- `refresh`: Rollback all applied migrations, then reapply all migrations
-- `reset`: Rollback all applied migrations
+支持的命令：
+- `init`：初始化迁移目录
+- `generate`：生成新的迁移文件
+- `up`：应用所有待处理的迁移
+- `up -n 10`：应用 10 个待处理的迁移
+- `down`：回滚上次应用的迁移
+- `down -n 10`：回滚上次应用的 10 个迁移
+- `status`：检查所有迁移的状态
+- `fresh`：从数据库中删除所有表，然后重新应用所有迁移
+- `refresh`：回滚所有已应用的迁移，然后重新应用所有迁移
+- `reset`：回滚所有已应用的迁移
 
-### Via `sea-orm-cli`
+### 通过 `sea-orm-cli`
 
-The `sea-orm-cli` will execute `cargo run --manifest-path ./migration/Cargo.toml -- COMMAND` under the hood.
+`sea-orm-cli` 将在底层执行 `cargo run --manifest-path ./migration/Cargo.toml -- COMMAND`。
 
 ```shell
 $ sea-orm-cli migrate COMMAND
 ```
 
-You can customize the manifest path.
+你可以自定义清单路径。
 
 ```shell
 $ sea-orm-cli migrate COMMAND -d ./other/migration/dir
 ```
 
-### Via SeaSchema Migrator CLI
+### 通过 SeaSchema Migrator CLI
 
-Run the migrator CLI defined in `migration/main.rs`.
+运行在 `migration/main.rs` 中定义的迁移器 CLI。
 
 ```shell
 cd migration
 cargo run -- COMMAND
 ```
 
-## Migrating Programmatically
+## 以编程方式迁移
 
-You can perform migration on application startup with `Migrator`, which implements the [`MigratorTrait`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html).
+你可以在应用程序启动时使用 `Migrator` 执行迁移，`Migrator` 实现了 [`MigratorTrait`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/migrator/trait.MigratorTrait.html)。
 
 ```rust title="src/main.rs"
 use migration::{Migrator, MigratorTrait};
 
-/// Apply all pending migrations
+/// 应用所有待处理的迁移
 Migrator::up(db, None).await?;
 
-/// Apply 10 pending migrations
+/// 应用 10 个待处理的迁移
 Migrator::up(db, Some(10)).await?;
 
-/// Rollback all applied migrations
+/// 回滚所有已应用的迁移
 Migrator::down(db, None).await?;
 
-/// Rollback last 10 applied migrations
+/// 回滚上次应用的 10 个迁移
 Migrator::down(db, Some(10)).await?;
 
-/// Check the status of all migrations
+/// 检查所有迁移的状态
 Migrator::status(db).await?;
 
-/// Drop all tables from the database, then reapply all migrations
+/// 从数据库中删除所有表，然后重新应用所有迁移
 Migrator::fresh(db).await?;
 
-/// Rollback all applied migrations, then reapply all migrations
+/// 回滚所有已应用的迁移，然后重新应用所有迁移
 Migrator::refresh(db).await?;
 
-/// Rollback all applied migrations
+/// 回滚所有已应用的迁移
 Migrator::reset(db).await?;
 ```
 
-## Running Migration on Any PostgreSQL Schema
+## 在任何 PostgreSQL Schema 上运行迁移
 
-By default migration will be run on the `public` schema, you can now override it when running migration on the CLI or programmatically.
+默认情况下，迁移将在 `public` schema 上运行，你现在可以在 CLI 或以编程方式运行迁移时覆盖它。
 
-For CLI, you can specify the target schema with `-s` / `--database_schema` option:
-* via sea-orm-cli: `sea-orm-cli migrate -u postgres://root:root@localhost/database -s my_schema`
-* via SeaORM migrator: `cargo run -- -u postgres://root:root@localhost/database -s my_schema`
+对于 CLI，你可以使用 `-s` / `--database_schema` 选项指定目标 schema：
+* 通过 sea-orm-cli：`sea-orm-cli migrate -u postgres://root:root@localhost/database -s my_schema`
+* 通过 SeaORM 迁移器：`cargo run -- -u postgres://root:root@localhost/database -s my_schema`
 
-You can also run the migration on the target schema programmatically:
+你还可以以编程方式在目标 schema 上运行迁移：
 
 ```rust
 let connect_options = ConnectOptions::new("postgres://root:root@localhost/database")
-    .set_schema_search_path("my_schema") // Override the default schema
+    .set_schema_search_path("my_schema") // 覆盖默认 schema
     .to_owned();
 
 let db = Database::connect(connect_options).await?
@@ -93,15 +93,15 @@ let db = Database::connect(connect_options).await?
 migration::Migrator::up(&db, None).await?;
 ```
 
-:::tip SQL Server (MSSQL) backend
+:::tip SQL Server (MSSQL) 后端
 
-The configuration of running migration on any MSSQL schema can be found [here](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/).
+在任何 MSSQL schema 上运行迁移的配置可以在[这里](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/)找到。
 
 :::
 
-## Checking Migration Status
+## 检查迁移状态
 
-You can use `MigratorTrait::get_pending_migrations()` and `MigratorTrait::get_applied_migrations()` to retrieve the list of migrations.
+你可以使用 `MigratorTrait::get_pending_migrations()` 和 `MigratorTrait::get_applied_migrations()` 来检索迁移列表。
 
 ```rust
 let migrations = Migrator::get_pending_migrations(db).await?;
@@ -110,4 +110,3 @@ assert_eq!(migrations.len(), 5);
 let migration = migrations[0];
 assert_eq!(migration.name(), "m20220118_000002_create_fruit_table");
 assert_eq!(migration.status(), MigrationStatus::Pending);
-```

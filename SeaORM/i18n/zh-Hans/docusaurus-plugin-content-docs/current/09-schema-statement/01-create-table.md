@@ -1,15 +1,15 @@
-# Create Table
+# 创建表
 
-:::tip Rustacean Sticker Pack 🦀
-[Our stickers](https://www.sea-ql.org/sticker-pack/) are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+:::tip Rustacean 贴纸包 🦀
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/) 采用优质防水乙烯基材料制成，具有独特的哑光效果。
+将它们贴在你的笔记本电脑、笔记本或任何小工具上，以展示你对 Rust 的热爱！
 :::
 
-To create tables in database instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity). This method will help you create a database table including all the columns and foreign key constraints defined in `Entity`.
+要在数据库中创建表，你可以使用 [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) 从 `Entity` 派生，而不是手动编写 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html)。此方法将帮助你创建一个数据库表，其中包括在 `Entity` 中定义的所有列和外键约束。
 
-Below we use [`CakeFillingPrice`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake_filling_price.rs) entity to demo its generated SQL statement. You can construct the same statement with [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html).
+下面我们使用 [`CakeFillingPrice`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/cake_filling_price.rs) 实体来演示其生成的 SQL 语句。你可以使用 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) 构造相同的语句。
 
-Note that since version `0.7.0`, [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) no longer create indexes. If you need to create indexes in database please check [here](09-schema-statement/03-create-index.md) for details.
+请注意，从 `0.7.0` 版本开始，[`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) 不再创建索引。如果你需要在数据库中创建索引，请查看[此处](09-schema-statement/03-create-index.md)了解详细信息。
 
 ```rust
 use sea_orm::{sea_query::*, tests_cfg::*, EntityName, Schema};
@@ -47,7 +47,7 @@ assert_eq!(
 );
 ```
 
-To further illustrate, we will show the SQL statements as string below.
+为了进一步说明，我们将在下面以字符串形式显示 SQL 语句。
 
 - PostgreSQL
     ```rust
@@ -122,4 +122,3 @@ To further illustrate, we will show the SQL statements as string below.
             .join(" ")
         )
     );
-    ```

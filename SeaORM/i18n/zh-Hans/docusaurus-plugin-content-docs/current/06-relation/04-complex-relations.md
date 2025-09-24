@@ -1,18 +1,18 @@
-# Complex Relations
+# 复杂关系
 
-## Linked
+## 链接
 
-The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
+`Related` trait 是我们在实体关系图上绘制的箭头（1-1、1-N、M-N）的表示。[`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) 由关系链组成，在以下情况下很有用：
 
-1. there exist multiple join paths between a pair of entities, making it impossible to impl `Related`
-1. joining across multiple entities in a relational query
+1. 一对实体之间存在多个连接路径，导致无法实现 `Related`
+2. 在关系查询中跨多个实体进行连接
 
-Implementing `Linked` trait is completely optional, as there are other ways of doing relational queries in SeaORM, which will be explained in later chapters.
-With `Linked` implemented, several `find_*_linked` helper methods become available, and relationships can be defined in a single place.
+实现 `Linked` trait 是完全可选的，因为 SeaORM 中还有其他进行关系查询的方法，这将在后面的章节中解释。
+实现 `Linked` 后，可以使用多个 `find_*_linked` 辅助方法，并且可以在一个地方定义关系。
 
-### Defining the Link
+### 定义链接
 
-Take [this](https://github.com/SeaQL/sea-orm/blob/1.1.x/src/tests_cfg/entity_linked.rs) as an example, where we join cake and filling via an intermediate `cake_filling` table.
+以 [此](https://github.com/SeaQL/sea-orm/blob/1.1.x/src/tests_cfg/entity_linked.rs) 为例，我们通过中间 `cake_filling` 表连接蛋糕和馅料。
 
 ```rust title="entity/links.rs"
 pub struct CakeToFilling;
@@ -31,7 +31,7 @@ impl Linked for CakeToFilling {
 }
 ```
 
-Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to the above:
+或者，`RelationDef` 可以在运行时定义，以下内容与上述内容等效：
 
 ```rust
 pub struct CakeToFilling;
@@ -53,9 +53,9 @@ impl Linked for CakeToFilling {
 }
 ```
 
-### Lazy Loading
+### 延迟加载
 
-Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+使用 [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) 方法查找可以填充到蛋糕中的馅料。
 
 ```rust
 let cake_model = cake::Model {
@@ -79,9 +79,9 @@ assert_eq!(
 );
 ```
 
-### Eager Loading
+### 急切加载
 
-[`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
+[`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) 是 `find_also_related` 的对偶；[`find_with_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) 是 `find_with_related` 的对偶；：
 
 ```rust
 assert_eq!(
@@ -100,11 +100,11 @@ assert_eq!(
 );
 ```
 
-## Self Referencing Relations
+## 自引用关系
 
-The `Link` trait can also define self referencing relations.
+`Link` trait 也可以定义自引用关系。
 
-The following example defines an Entity that references itself.
+以下示例定义了一个引用自身的实体。
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -137,9 +137,9 @@ impl Linked for SelfReferencingLink {
 }
 ```
 
-## Diamond Relations
+## 菱形关系
 
-Sometimes there exist multiple relations between a pair of entities. Here we take the simplest example, where `Cake` can have multiple `Fruit`.
+有时一对实体之间存在多个关系。这里我们举一个最简单的例子，`Cake` 可以有多个 `Fruit`。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -169,11 +169,11 @@ pub enum Relation {
 }
 ```
 
-How can we define the `Fruit` Entity?
-By default, `has_many` invokes the `Related` trait to define the relation.
-As a consequence, it's not possible to define the Relation without `Related` impl.
+我们如何定义 `Fruit` 实体？
+默认情况下，`has_many` 调用 `Related` trait 来定义关系。
+因此，在没有 `Related` 实现的情况下无法定义关系。
 
-Here we have to specify the Relation variant manually with the `via` attribute.
+这里我们必须使用 `via` 属性手动指定关系变体。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -191,4 +191,3 @@ pub enum Relation {
     #[sea_orm(has_many = "super::cake::Entity", via = "Relation::Filling")]
     CakeFilling,
 }
-```

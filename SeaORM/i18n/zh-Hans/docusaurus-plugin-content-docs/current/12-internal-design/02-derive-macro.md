@@ -1,53 +1,53 @@
-# Derive Macros
+# 派生宏
 
 ## EntityModel
 
-The [`EntityModel`](#) derive macro is the 'almighty' macro which automatically generates `Entity`, `Column`, and `PrimaryKey` from a given `Model`.
+[`EntityModel`](#) 派生宏是“万能”宏，可根据给定的 `Model` 自动生成 `Entity`、`Column` 和 `PrimaryKey`。
 
 ## Entity
 
-The [`DeriveEntity`](#) derive macro will implement [`EntityTrait`](#) for `Entity` and it assumes `Model`, `Column`, `PrimaryKey` and `Relation` exist in the current scope. It also provides implementation of [`Iden`](#) and [`IdenStatic`](#) for `Entity`.
+[`DeriveEntity`](#) 派生宏将为 `Entity` 实现 [`EntityTrait`](#)，并假定 `Model`、`Column`、`PrimaryKey` 和 `Relation` 存在于当前作用域中。它还为 `Entity` 提供了 [`Iden`](#) 和 [`IdenStatic`](#) 的实现。
 
 ## Column
 
-The [`DeriveColumn`](#) derive macro will implement [`ColumnTrait`](#) for `Columns`. It defines the identifier of each column by implementing [`Iden`](#) and [`IdenStatic`](#). The [`EnumIter`](#) is also derived, allowing iteration over all enum variants.
+[`DeriveColumn`](#) 派生宏将为 `Columns` 实现 [`ColumnTrait`](#)。它通过实现 [`Iden`](#) 和 [`IdenStatic`](#) 来定义每列的标识符。还派生了 [`EnumIter`](#)，从而可以遍历所有枚举变体。
 
 ## Primary Key
 
-The [`DerivePrimaryKey`](#) derive macro will implement [`PrimaryKeyToColumn`](#) for `PrimaryKey` which defines tedious mappings between primary keys and columns. The [`EnumIter`](#) is also derived, allowing iteration over all enum variants.
+[`DerivePrimaryKey`](#) 派生宏将为 `PrimaryKey` 实现 [`PrimaryKeyToColumn`](#)，它定义了主键和列之间繁琐的映射。还派生了 [`EnumIter`](#)，从而可以遍历所有枚举变体。
 
 ## Model
 
-The [`DeriveModel`](#) derive macro will implement [`ModelTrait`](#) for `Model`, which provides setters and getters for all attributes in the model. It also implements [`FromQueryResult`](#) to convert a query result into the corresponding `Model`.
+[`DeriveModel`](#) 派生宏将为 `Model` 实现 [`ModelTrait`](#)，它为模型中的所有属性提供了 setter 和 getter。它还实现了 [`FromQueryResult`](#)，可将查询结果转换为相应的 `Model`。
 
 ## Active Model
 
-The [`DeriveActiveModel`](#) derive macro will implement [`ActiveModelTrait`](#) for `ActiveModel` which provides setters and getters for all active values in the active model.
+[`DeriveActiveModel`](#) 派生宏将为 `ActiveModel` 实现 [`ActiveModelTrait`](#)，它为活动模型中的所有活动值提供了 setter 和 getter。
 
 ## Partial Model
 
-The [`DerivePartialModel`](#) derive macro will implement [`PartialModelTrait`](#) for `Model`.
+[`DerivePartialModel`](#) 派生宏将为 `Model` 实现 [`PartialModelTrait`](#)。
 
 ## Active Enum
 
-The [`DeriveActiveEnum`](#) derive macro will implement [`ActiveEnum`](#) for any enums.
+[`DeriveActiveEnum`](#) 派生宏将为任何枚举实现 [`ActiveEnum`](#)。
 
 ## Relation
 
-The [`DeriveRelation`](#) derive macro will implement [`RelationTrait`](#) for `Relation`.
+[`DeriveRelation`](#) 派生宏将为 `Relation` 实现 [`RelationTrait`](#)。
 
 ## RelatedEntity
 
-The [`DeriveRelatedEntity`](#) derive macro will implement [`seaography::RelationBuilder`](#) for `RelatedEntity` enumeration when the `seaography` feature is enabled
+当启用 `seaography` 功能时，[`DeriveRelatedEntity`](#) 派生宏将为 `RelatedEntity` 枚举实现 [`seaography::RelationBuilder`](#)。
 
 ## Iterable
 
-The [`EnumIter`](#) derive macro will implement [`Iterable`](#) to allow iteration over all enum variants.
+[`EnumIter`](#) 派生宏将实现 [`Iterable`](#)，以允许遍历所有枚举变体。
 
 ## Value Type
 
-The [`DeriveValueType`](#) derive macro will implement `From<T> for Value`, `sea_orm::TryGetable for T` and `sea_query::ValueType for T` for `T`.
+[`DeriveValueType`](#) 派生宏将为 `T` 实现 `From<T> for Value`、`sea_orm::TryGetable for T` 和 `sea_query::ValueType for T`。
 
 ## Display
 
-The [`DeriveDisplay`](#) derive macro will implement `std::fmt::Display` for enums.
+[`DeriveDisplay`](#) 派生宏将为枚举实现 `std::fmt::Display`。

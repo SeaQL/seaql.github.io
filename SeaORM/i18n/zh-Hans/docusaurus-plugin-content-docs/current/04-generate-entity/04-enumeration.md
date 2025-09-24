@@ -1,10 +1,10 @@
 # ActiveEnum
 
-You can use Rust enums in model where the values are mapped to a database string, integer or native enum.
+你可以在模型中使用 Rust 枚举，其中值映射到数据库字符串、整数或原生枚举。
 
-## String
+## 字符串
 
-For string enums, in addition to being able to specify the string value for each variant, you can also specify the `rename_all` attribute on the Enum if all the values should have string values based on case-transformations.
+对于字符串枚举，除了能够为每个变体指定字符串值之外，你还可以为枚举指定 `rename_all` 属性，如果所有值都应基于大小写转换具有字符串值。
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -15,7 +15,7 @@ pub enum Category {
 }
 ```
 
-The above is equivalent to:
+上述等同于：
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -28,10 +28,10 @@ pub enum Category {
 }
 ```
 
-Which specify the string values manually with `string_value`.
+它使用 `string_value` 手动指定字符串值。
 
 <details>
-    <summary>You can find a list of valid values for the `rename_all` attribute here:</summary>
+    <summary>你可以在此处找到 `rename_all` 属性的有效值列表：</summary>
 
 - camelCase
 - kebab-case
@@ -46,10 +46,10 @@ Which specify the string values manually with `string_value`.
 
 </details>
 
-### Simple enum strings
+### 简单枚举字符串
 
-`DeriveValueType` added support for enums. It offers a simpler alternative to `DeriveActiveEnum` for client-side enums backed by string database types.
-You have to provide custom `from_str` and `to_str` implementations.
+`DeriveValueType` 添加了对枚举的支持。它为由字符串数据库类型支持的客户端枚举提供了 `DeriveActiveEnum` 的更简单替代方案。
+你必须提供自定义的 `from_str` 和 `to_str` 实现。
 
 ```rust
 #[derive(DeriveValueType)]
@@ -60,9 +60,9 @@ pub enum Category {
 }
 ```
 
-Read the next chapter for more details.
+阅读下一章了解更多详情。
 
-## Integers
+## 整数
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -74,7 +74,7 @@ pub enum Color {
     White,
 }
 ```
-Alternatively, you could write:
+或者，你可以编写：
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "i32", db_type = "Integer")]
@@ -84,7 +84,7 @@ pub enum Color {
 }
 ```
 
-## Native Database Enum
+## 原生数据库枚举
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -99,7 +99,7 @@ pub enum Tea {
 
 ## MySQL
 
-MySQL enum is just part of the column definition, and cannot be reused for different tables.
+MySQL 枚举只是列定义的一部分，不能用于不同的表。
 
 ```rust
 Table::create()
@@ -112,14 +112,14 @@ Table::create()
 
 ## Postgres
 
-If you are using Postgres, the enum has to be created in a separate `Type` statement in a migration, you can create it with:
+如果你使用 Postgres，枚举必须在迁移中以单独的 `Type` 语句创建，你可以使用以下方式创建它：
 
-### 1. `TYPE` statement
+### 1. `TYPE` 语句
 
-[Full example](https://github.com/SeaQL/sea-orm/blob/master/sea-orm-migration/tests/common/migration/m20220118_000004_create_tea_enum.rs).
+[完整示例](https://github.com/SeaQL/sea-orm/blob/master/sea-orm-migration/tests/common/migration/m20220118_000004_create_tea_enum.rs)。
 
 ```rust
-// run this in migration:
+// 在迁移中运行：
 
 manager
     .create_type(
@@ -133,9 +133,9 @@ manager
 ```
 
 ### 2. `create_enum_from_active_enum`
-This method will provide an interface for adding the type to the database, using the type for table columns, and adding values of this type to rows when seeding data. 
+此方法将提供一个接口，用于将类型添加到数据库、将类型用于表列以及在填充数据时将此类型的值添加到行。
 
-1. Define an `ActiveEnum`
+1. 定义一个 `ActiveEnum`
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -148,12 +148,12 @@ pub enum TeaType {
 }
 ```
 
-2. Create the type in the database
+2. 在数据库中创建类型
 
 ```rust
 use sea_orm::{Schema, DbBackend};
 
-// in a migration:
+// 在迁移中：
 let schema = Schema::new(DbBackend::Postgres);
 
 manager
@@ -164,38 +164,38 @@ manager
     .await?;
 ```
 
-3. Use the type as a table column type when creating a table
+3. 在创建表时将类型用作表列类型
 
 ```rust diff
-// in a migration:
+// 在迁移中：
 
 manager::create()
     .table(Tea::Table)
     .if_not_exists()
-    .col(Column::new(Tea::Type).custom(TeaType::name())) // use the type for a table column 
-    // ... more columns
+    .col(Column::new(Tea::Type).custom(TeaType::name())) // 将类型用于表列
+    // ... 更多列
 ```
-> see also [Schema Creation Methods - Create Table](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
+> 另请参阅 [Schema 创建方法 - 创建表](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
 
-4. Use the type when populating the database
+4. 在填充数据库时使用类型
 
 ```rust
-// in a migration
+// 在迁移中
 
 let insert = Query::insert()
     .into_table(Tea::Table)
     .columns([Tea::TeaType])
-    .values_panic([TeaType::EverydayTea.as_enum()]) // call `as_enum` to convert the variant into a SimpleExpr
+    .values_panic([TeaType::EverydayTea.as_enum()]) // 调用 `as_enum` 将变体转换为 SimpleExpr
     .to_owned();
 
 manager.execute(insert).await?;
 // ...
 ```
-> see also [Seeding Data - with sea_query statement](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)
+> 另请参阅 [填充数据 - 使用 sea_query 语句](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)
 
-## Trait impl
+## Trait 实现
 
-The [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
+[`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) 宏在底层实现了 [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait。
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -215,7 +215,7 @@ pub enum Category {
 ```
 
 <details>
-  <summary>For illustration purpose, this is roughly what the macro implements:</summary>
+  <summary>为了说明目的，这大致是宏实现的内容：</summary>
   <div>
 
 ```rust
@@ -227,17 +227,17 @@ pub enum Category {
     Small,
 }
 
-// Implementing manually
+// 手动实现
 impl ActiveEnum for Category {
-    // The macro attribute `rs_type` is being pasted here
+    // 宏属性 `rs_type` 在此处粘贴
     type Value = String;
 
-    // By default, the name of Rust enum in camel case if `enum_name` was not provided explicitly
+    // 默认情况下，如果未明确提供 `enum_name`，则 Rust 枚举的名称为驼峰式
     fn name() -> String {
         "category".to_owned()
     }
 
-    // Map Rust enum variants to corresponding `num_value` or `string_value`
+    // 将 Rust 枚举变体映射到相应的 `num_value` 或 `string_value`
     fn to_value(&self) -> Self::Value {
         match self {
             Self::Big => "B",
@@ -246,7 +246,7 @@ impl ActiveEnum for Category {
         .to_owned()
     }
 
-    // Map `num_value` or `string_value` to corresponding Rust enum variants
+    // 将 `num_value` 或 `string_value` 映射到相应的 Rust 枚举变体
     fn try_from_value(v: &Self::Value) -> Result<Self, DbErr> {
         match v.as_ref() {
             "B" => Ok(Self::Big),
@@ -258,7 +258,7 @@ impl ActiveEnum for Category {
         }
     }
 
-    // The macro attribute `db_type` is being pasted here
+    // 宏属性 `db_type` 在此处粘贴
     fn db_type() -> ColumnDef {
         ColumnType::String(Some(1)).def()
     }
@@ -267,12 +267,12 @@ impl ActiveEnum for Category {
   </div>
 </details>
 
-## Using ActiveEnum on Model
+## 在模型上使用 ActiveEnum
 
 ```rust
 use sea_orm::entity::prelude::*;
 
-// Define the `Category` active enum
+// 定义 `Category` 活动枚举
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
@@ -287,7 +287,7 @@ pub enum Category {
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    // Represents a db column using `Category` active enum
+    // 表示使用 `Category` 活动枚举的数据库列
     pub category: Category,
     pub category_opt: Option<Category>,
 }
@@ -296,4 +296,3 @@ pub struct Model {
 pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
-```

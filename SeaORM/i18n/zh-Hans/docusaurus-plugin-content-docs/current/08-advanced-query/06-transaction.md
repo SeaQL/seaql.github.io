@@ -1,10 +1,10 @@
-# Transaction
+# 事务
 
-A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs.
+事务是一组以 ACID 保证执行的 SQL 语句。有两种事务 API。
 
-## With a Closure
+## 使用闭包
 
-Perform a [transaction with a closure](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
+使用闭包执行事务。如果闭包返回 `Ok`，事务将被提交；如果返回 `Err`，事务将被回滚。第二个和第三个类型参数分别是 Ok 和 Err 类型。由于 `async_closure` 尚未稳定，你必须将其 `Pin<Box<_>>`。
 
 ```rust
 use sea_orm::TransactionTrait;
@@ -31,14 +31,13 @@ db.transaction::<_, (), DbErr>(|txn| {
         Ok(())
     })
 })
-.await;
-```
+.await;```
 
-This is the preferred way for most cases. However, if you happen to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
+这是大多数情况下的首选方式。但是，如果你在异步块中尝试捕获引用时遇到“不可能的生命周期”，那么以下 API 是解决方案。
 
 ## `begin` & `commit` / `rollback`
 
-[`begin`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin) the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
+`begin` 事务，然后是 `commit` 或 `rollback`。如果 `txn` 超出作用域，事务将自动回滚。
 
 ```rust
 let txn = db.begin().await?;
@@ -62,9 +61,9 @@ bakery::ActiveModel {
 txn.commit().await?;
 ```
 
-## Nested transaction
+## 嵌套事务
 
-Nested transaction is implemented with database's `SAVEPOINT`. The example below illustrates the behavior with the closure API.
+嵌套事务通过数据库的 `SAVEPOINT` 实现。下面的示例说明了使用闭包 API 的行为。
 
 ```rust
 assert_eq!(Bakery::find().all(txn).await?.len(), 0);
@@ -75,13 +74,13 @@ ctx.db.transaction::<_, _, DbErr>(|txn| {
         let _ = bakery::ActiveModel {..}.save(txn).await?;
         assert_eq!(Bakery::find().all(txn).await?.len(), 2);
 
-        // Try nested transaction committed
+        // 尝试提交嵌套事务
         txn.transaction::<_, _, DbErr>(|txn| {
             Box::pin(async move {
                 let _ = bakery::ActiveModel {..}.save(txn).await?;
                 assert_eq!(Bakery::find().all(txn).await?.len(), 3);
 
-                // Try nested-nested transaction rollbacked
+                // 尝试回滚嵌套的嵌套事务
                 assert!(txn.transaction::<_, _, DbErr>(|txn| {
                         Box::pin(async move {
                             let _ = bakery::ActiveModel {..}.save(txn).await?;
@@ -98,7 +97,7 @@ ctx.db.transaction::<_, _, DbErr>(|txn| {
 
                 assert_eq!(Bakery::find().all(txn).await?.len(), 3);
 
-                // Try nested-nested transaction committed
+                // 尝试提交嵌套的嵌套事务
                 txn.transaction::<_, _, DbErr>(|txn| {
                     Box::pin(async move {
                         let _ = bakery::ActiveModel {..}.save(txn).await?;
@@ -124,24 +123,24 @@ ctx.db.transaction::<_, _, DbErr>(|txn| {
 assert_eq!(Bakery::find().all(txn).await?.len(), 4);
 ```
 
-## Isolation Level and Access Mode
+## 隔离级别和访问模式
 
-Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/*/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/*/sea_orm/enum.AccessMode.html).
+在 `0.10.5` 中引入的 [`transaction_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) 和 [`begin_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) 允许你指定 [IsolationLevel](https://docs.rs/sea-orm/*/sea_orm/enum.IsolationLevel.html) 和 [AccessMode](https://docs.rs/sea-orm/*/sea_orm/enum.AccessMode.html)。
 
-For now, they are only implemented for MySQL and Postgres. In order to align their semantic difference, MySQL will execute `SET TRANSACTION` commands before begin transaction, while Postgres will execute `SET TRANSACTION` commands after begin transaction.
+目前，它们仅针对 MySQL 和 Postgres 实现。为了统一它们的语义差异，MySQL 将在事务开始前执行 `SET TRANSACTION` 命令，而 Postgres 将在事务开始后执行 `SET TRANSACTION` 命令。
 
-### IsolationLevel
+### 隔离级别 (IsolationLevel)
 
-`RepeatableRead`: Consistent reads within the same transaction read the snapshot established by the first read.
+`RepeatableRead`：同一事务中的一致性读取会读取由第一次读取建立的快照。
 
-`ReadCommitted`: Each consistent read, even within the same transaction, sets and reads its own fresh snapshot.
+`ReadCommitted`：每次一致性读取，即使在同一事务中，也会设置并读取自己的新快照。
 
-`ReadUncommitted`: SELECT statements are performed in a nonlocking fashion, but a possible earlier version of a row might be used.
+`ReadUncommitted`：SELECT 语句以非锁定方式执行，但可能会使用行的早期版本。
 
-`Serializable`: All statements of the current transaction can only see rows committed before the first query or data-modification statement was executed in this transaction.
+`Serializable`：当前事务的所有语句只能看到在该事务中执行第一个查询或数据修改语句之前提交的行。
 
-### AccessMode
+### 访问模式 (AccessMode)
 
-`ReadOnly`: Data can’t be modified in this transaction
+`ReadOnly`：此事务中不能修改数据。
 
-`ReadWrite`: Data can be modified in this transaction (default)
+`ReadWrite`：此事务中可以修改数据（默认）。

@@ -1,10 +1,10 @@
-# Create Enum
+# 创建枚举
 
-You can generate SQL statement to create database tables with enum columns via the [`Schema`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html) helper struct.
+你可以通过 [`Schema`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html) 辅助结构体生成 SQL 语句来创建带有枚举列的数据库表。
 
-## String & Integer Enum
+## 字符串和整数枚举
 
-This is just an ordinary string / integer column that maps to a Rust enum. Example entity definition:
+这只是一个普通的字符串/整数列，映射到一个 Rust 枚举。实体定义示例：
 
 ```rust title="active_enum.rs"
 use sea_orm::entity::prelude::*;
@@ -37,7 +37,7 @@ pub enum Color {
 }
 ```
 
-As an illustration, the enums are just ordinary database columns.
+为了说明，枚举只是普通的数据库列。
 
 ```rust
 use sea_orm::{sea_query, Schema};
@@ -59,7 +59,7 @@ assert_eq!(
 ```
 
 <details>
-    <summary>Note that non-UAX#31 compliant characters would be converted as illustrated below.</summary>
+    <summary>请注意，不符合 UAX#31 标准的字符将如下所示进行转换。</summary>
 
 ```rust
 #[derive(Clone, Debug, PartialEq, EnumIter, DeriveActiveEnum)]
@@ -81,7 +81,7 @@ pub enum StringValue {
     Member7,
 }
 
-// The following will be generated
+// 将生成以下内容
 pub enum StringValueVariant {
     __Empty,
     _0x24,
@@ -94,11 +94,11 @@ pub enum StringValueVariant {
 ```
 </details>
 
-## Native Database Enum
+## 原生数据库枚举
 
-Enum support is different across databases. Let's go through them one-by-one.
+不同数据库对枚举的支持是不同的。让我们逐一了解。
 
-Consider the following entity:
+考虑以下实体：
 
 ```rust title="active_enum.rs"
 use sea_orm::entity::prelude::*;
@@ -121,13 +121,13 @@ pub enum Tea {
 }
 ```
 
-Note the `db_type` and extra `enum_name` attributes.
+注意 `db_type` 和额外的 `enum_name` 属性。
 
 ### PostgreSQL
 
-Enums in PostgreSQL are defined by [`TypeCreateStatement`](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+PostgreSQL 中的枚举由 [`TypeCreateStatement`](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html) 定义，可以使用 [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) 方法从 `Entity` 创建。
 
-You can also create it from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
+你也可以使用 [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) 方法从 `ActiveEnum` 创建它。
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -172,7 +172,7 @@ assert_eq!(
 
 ### MySQL
 
-In MySQL, enum is defined on table creation so you only need to call [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) once.
+在 MySQL 中，枚举是在表创建时定义的，所以你只需要调用一次 [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity)。
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -197,7 +197,7 @@ assert_eq!(
 
 ### SQLite
 
-Enum is not supported in SQLite so it will be stored as `TEXT`.
+SQLite 不支持枚举，所以它将作为 `TEXT` 存储。
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -218,4 +218,3 @@ assert_eq!(
         .join(" ")
     ),
 );
-```

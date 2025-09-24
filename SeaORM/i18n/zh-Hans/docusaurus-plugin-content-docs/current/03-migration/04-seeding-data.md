@@ -1,6 +1,6 @@
-# Seeding Data
+# 填充数据
 
-You can retrieve a `DbConn` from `SchemaManager` and perform data operations as needed, for example, to seed data.
+你可以从 `SchemaManager` 中检索 `DbConn` 并根据需要执行数据操作，例如填充数据。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -24,7 +24,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-You can also execute any SeaQuery statement.
+你还可以执行任何 SeaQuery 语句。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -54,9 +54,9 @@ pub enum Cake {
 }
 ```
 
-## Seeding Data Transactionally
+## 事务性填充数据
 
-Starts a transaction and execute SQL inside migration up and down.
+启动一个事务并在迁移的 up 和 down 中执行 SQL。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -66,7 +66,7 @@ use sea_orm_migration::sea_orm::{entity::*, query::*};
 #[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        // Get the connection and start a transaction
+        // 获取连接并启动事务
         let db = manager.get_connection();
         let txn = db.begin().await?;
 
@@ -77,10 +77,9 @@ impl MigrationTrait for Migration {
         .insert(&txn)
         .await?;
 
-        // Commit it
+        // 提交
         txn.commit().await?;
 
         Ok(())
     }
 }
-```

@@ -1,15 +1,15 @@
-# New Type
+# 新类型
 
-You can define a New Type (`T`) and use it as model field. The following traits have to be implemented.
+你可以定义一个新类型 (`T`) 并将其用作模型字段。必须实现以下 trait。
 
-1. Implement `From<T>` for [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html)
-2. Implement [`sea_orm::TryGetable`](https://docs.rs/sea-orm/*/sea_orm/trait.TryGetable.html) for `T`
-3. Implement [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html) for `T`
-4. Implement [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html) for `T`
+1. 为 [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html) 实现 `From<T>`
+2. 为 `T` 实现 [`sea_orm::TryGetable`](https://docs.rs/sea-orm/*/sea_orm/trait.TryGetable.html)
+3. 为 `T` 实现 [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html)
+4. 为 `T` 实现 [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html)
 
-## Wrapper Type
+## 包装类型
 
-You can create new types wrapping any type supported by SeaORM.
+你可以创建包装 SeaORM 支持的任何类型的新类型。
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -27,7 +27,7 @@ pub struct Integer(i32);
 ```
 
 <details>
-    <summary>Which `Integer` expands to:</summary>
+    <summary>其中 `Integer` 展开为：</summary>
 
 ```rust
 #[automatically_derived]
@@ -73,9 +73,9 @@ impl sea_orm::sea_query::Nullable for Integer {
 ```
 </details>
 
-### Using wrapped types as primary keys
+### 将包装类型用作主键
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
 ```rust
@@ -87,9 +87,9 @@ pub struct Model {
 }
 ```
 
-Only for `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64`.
+仅适用于 `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64`。
 
-## Wrapping `Vec<T>` (Postgres only)
+## 包装 `Vec<T>` (仅限 Postgres)
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -107,7 +107,7 @@ pub struct StringVec(pub Vec<String>);
 ```
 
 <details>
-    <summary>Which `StringVec` expands to:</summary>
+    <summary>其中 `StringVec` 展开为：</summary>
 
 ```rust
 #[automatically_derived]
@@ -152,9 +152,9 @@ impl sea_orm::sea_query::Nullable for Integer {
 ```
 </details>
 
-## Wrapping `Vec<T>` (backend generic)
+## 包装 `Vec<T>` (后端通用)
 
-You can also define a backend-generic `Vec<T>` field by serialize / deserialize the object to / from JSON:
+你还可以通过将对象序列化/反序列化为 JSON 来定义后端通用的 `Vec<T>` 字段：
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -178,7 +178,7 @@ pub struct MyObject {
 ```
 
 <details>
-    <summary>Which `ObjectVec` expands to:</summary>
+    <summary>其中 `ObjectVec` 展开为：</summary>
 
 ```rust
 impl sea_orm::TryGetableFromJson for ObjectVec {}
@@ -220,9 +220,9 @@ impl sea_orm::sea_query::Nullable for ObjectVec {
 ```
 </details>
 
-## Enum String
+## 枚举字符串
 
-Since `1.1.8`, `DeriveValueType` also supports `enum` types. It offers a simpler alternative to `DeriveActiveEnum` for client-side enums backed by string database types.
+自 `1.1.8` 起，`DeriveValueType` 也支持 `enum` 类型。它为由字符串数据库类型支持的客户端枚举提供了 `DeriveActiveEnum` 的更简单替代方案。
 
 ```rust
 #[derive(DeriveValueType)]
@@ -232,20 +232,20 @@ pub enum Tag {
     Soft,
 }
 
-// `from_str` defaults to `std::str::FromStr::from_str`
+// `from_str` 默认为 `std::str::FromStr::from_str`
 impl std::str::FromStr for Tag {
     type Err = sea_orm::sea_query::ValueTypeErr;
     fn from_str(s: &str) -> Result<Self, Self::Err> { .. }
 }
 
-// `to_str` defaults to `std::string::ToString::to_string`.
+// `to_str` 默认为 `std::string::ToString::to_string`。
 impl std::fmt::Display for Tag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { .. }
 }
 ```
 
 <details>
-    <summary>Which `Tag` expands to:</summary>
+    <summary>其中 `Tag` 展开为：</summary>
 
 ```rust
 #[automatically_derived]
@@ -293,7 +293,7 @@ impl sea_orm::sea_query::Nullable for Tag {
 ```
 </details>
 
-You can override `from_str` and `to_str` with custom functions, which is especially useful if you're using [`strum::Display`](https://docs.rs/strum/latest/strum/derive.Display.html) and [`strum::EnumString`](https://docs.rs/strum/latest/strum/derive.EnumString.html), or manually implemented methods:
+你可以使用自定义函数覆盖 `from_str` 和 `to_str`，这在你使用 [`strum::Display`](https://docs.rs/strum/latest/strum/derive.Display.html) 和 [`strum::EnumString`](https://docs.rs/strum/latest/strum/derive.EnumString.html) 或手动实现方法时特别有用：
 
 ```rust
 #[derive(DeriveValueType)]
@@ -308,4 +308,3 @@ impl Tag {
 
     fn to_str(&self) -> &'static str { .. }
 }
-```

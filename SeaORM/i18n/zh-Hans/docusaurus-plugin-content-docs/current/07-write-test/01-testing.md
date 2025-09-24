@@ -1,64 +1,64 @@
-# Robust & Correct
+# 健壮与正确
 
-Testing is an integral part of programming in Rust. You see, [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html) is built-in.
+测试是 Rust 编程不可或缺的一部分。[`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html) 是内置的。
 
-If you don't use `unsafe` and your code compiles, then your Rust program is *safe*. However, it does not automatically become *robust*. Your program can still panic unexpectedly if you are not careful on error handling.
+如果你不使用 `unsafe` 并且你的代码能够编译，那么你的 Rust 程序是 *安全* 的。然而，它并不会自动变得 *健壮*。如果你在错误处理上不够小心，你的程序仍然可能意外崩溃。
 
-Even if your program does not panic, it does not mean it is *correct*. It can still misbehave and create data chaos.
+即使你的程序没有崩溃，也并不意味着它是 *正确* 的。它仍然可能出现异常行为并导致数据混乱。
 
-You can improve the correctness of your program by writing adequate tests.
+你可以通过编写足够的测试来提高程序的正确性。
 
-## Types of Errors
+## 错误类型
 
-First, let's classify different causes of errors in a data-driven application:
+首先，让我们对数据驱动应用程序中不同错误原因进行分类：
 
-### 1. Type Errors
+### 1. 类型错误
 
-1. misspelled or non-existent symbol (table or column) name
-1. using incompatible functions or operators on data (e.g. add two strings)
-1. invalid SQL query
-	- e.g. ambiguous symbol in a `JOIN` query
-	- e.g. forget to insert data on non-nullable columns
-	- e.g. forget to aggregate every column in a `GROUP BY` query
+1. 拼写错误或不存在的符号（表或列）名称
+1. 对数据使用不兼容的函数或运算符（例如，添加两个字符串）
+1. 无效的 SQL 查询
+	- 例如，`JOIN` 查询中存在歧义符号
+	- 例如，忘记在非空列中插入数据
+	- 例如，忘记在 `GROUP BY` 查询中聚合所有列
 
-### 2. Transaction Errors
+### 2. 事务错误
 
-1. failed to maintain entity relationships
-1. failed to maintain data consistency and constraints
+1. 未能维护实体关系
+1. 未能维护数据一致性和约束
 
-### 3. Behavioural Errors
+### 3. 行为错误
 
-1. joining or filtering on wrong conditions
-1. incomplete or incorrect query results
-1. insert, update or delete operations with unawared side effects
-1. any other behaviour not as intended
+1. 在错误的条件下进行连接或过滤
+1. 不完整或不正确的查询结果
+1. 插入、更新或删除操作产生未知的副作用
+1. 任何其他不符合预期的行为
 
-> A note on 'unawared side effects': do not use `CASCADE` unless the relation is strictly parent-child
+> 关于“未知副作用”的说明：除非关系严格为父子关系，否则不要使用 `CASCADE`
 
-## Mitigations
+## 缓解措施
 
-Now, let's see how we can mitigate these errors:
+现在，让我们看看如何缓解这些错误：
 
-### 1. Type Errors
+### 1. 类型错误
 
-Using Rust automatically saves you from misspelling symbols.
+使用 Rust 可以自动避免拼写错误。
 
-Using a *completely static* query builder can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and runs (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
+使用 *完全静态* 的查询构建器可以消除所有此类错误。然而，它要求每个参数都在编译时静态定义并可用。这是一个 *严苛* 的要求，因为总有一些东西是你直到程序启动（环境变量）和运行（运行时配置更改）后才能知道的。如果你来自类型系统一直是动态的脚本语言背景，这会特别尴尬。
 
-As such, SeaORM does not attempt to check things at compile-time. We intend to (still in development) provide runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
+因此，SeaORM 不会尝试在编译时检查这些问题。我们打算（仍在开发中）针对动态生成的查询提供运行时 linting，以解决上述问题，你可以在单元测试中启用它，但在生产环境中禁用。
 
-### 2. Transaction Errors
+### 2. 事务错误
 
-These problems cannot be eliminated. It usually indicates your code has some logic bugs. When they happen, it is already too late, and your only choice is to abort. Instead, they have to be actively prevented: check beforehand the constraints before attempting data operations.
+这些问题无法消除。它通常表明你的代码存在一些逻辑错误。当它们发生时，为时已晚，你唯一的选择是中止。相反，必须积极预防它们：在尝试数据操作之前，预先检查约束。
 
-You should write a bunch of unit tests that can reject bad data and prevent it from entering your database. Your unit tests should also verify that each *transaction* (in your application domain, not necessarily the database transaction) is sound.
+你应该编写大量的单元测试，以拒绝不良数据并防止其进入数据库。你的单元测试还应该验证每个 *事务*（在你的应用程序领域，不一定是数据库事务）都是健全的。
 
-SeaORM helps you write these unit tests using the `Mock` database interface.
+SeaORM 帮助你使用 `Mock` 数据库接口编写这些单元测试。
 
-### 3. Behavioural Errors
+### 3. 行为错误
 
-This is basically testing your entire program on a domain level, requiring you to provide seed data and simulate the common user operations. Usually, you will do it in CI against a real database. However, SeaORM encourages you to scale down these tests so that the most important data-flow can be tested by Cargo's [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html).
+这基本上是在领域层面测试你的整个程序，要求你提供种子数据并模拟常见的用户操作。通常，你会在 CI 中针对真实数据库进行此操作。然而，SeaORM 鼓励你缩小这些测试的范围，以便最重要的数据流可以通过 Cargo 的[集成测试](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html)进行测试。
 
-Since SeaORM is abstract over MySQL, PostgreSQL, and SQLite, you can use SQLite as a backend to test your program's behaviours. It is lightweight enough to run it frequently, locally, and on CI. The catch is, SQLite lacks some advanced features of MySQL or PostgreSQL, so depending on your use of database-specific features, not all logic can be tested inside SQLite.
+由于 SeaORM 抽象了 MySQL、PostgreSQL 和 SQLite，你可以使用 SQLite 作为后端来测试程序的行为。它足够轻量，可以在本地和 CI 上频繁运行。问题是，SQLite 缺少 MySQL 或 PostgreSQL 的一些高级功能，因此根据你对数据库特定功能的使用情况，并非所有逻辑都可以在 SQLite 中进行测试。
 
-We are looking for SQLite alternatives that can simulate the more advanced features of MySQL and PostgreSQL.
+我们正在寻找可以模拟 MySQL 和 PostgreSQL 更高级功能的 SQLite 替代方案。

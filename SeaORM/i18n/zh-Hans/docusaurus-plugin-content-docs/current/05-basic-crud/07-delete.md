@@ -1,8 +1,8 @@
-# Delete
+# 删除
 
-## Delete One
+## 删除一条
 
-Find a `Model` from the database, then delete the corresponding row from database.
+从数据库中查找 `Model`，然后从数据库中删除相应的行。
 
 ```rust
 use sea_orm::entity::ModelTrait;
@@ -14,18 +14,18 @@ let res: DeleteResult = orange.delete(db).await?;
 assert_eq!(res.rows_affected, 1);
 ```
 
-## Delete by Primary Key
+## 按主键删除
 
-Instead of selecting `Model` from the database then deleting it. You could also delete a row from database directly by its primary key.
+除了从数据库中选择 `Model` 然后删除它之外。你还可以直接通过主键从数据库中删除一行。
 
 ```rust
 let res: DeleteResult = Fruit::delete_by_id(38).exec(db).await?;
 assert_eq!(res.rows_affected, 1);
 ```
 
-## Delete Many
+## 删除多条
 
-You can also delete multiple rows from the database without finding each `Model` with SeaORM select.
+你还可以从数据库中删除多行，而无需使用 SeaORM select 查找每个 `Model`。
 
 ```rust
 // DELETE FROM `fruit` WHERE `fruit`.`name` LIKE '%Orange%'
@@ -37,9 +37,9 @@ let res: DeleteResult = fruit::Entity::delete_many()
 assert_eq!(res.rows_affected, 2);
 ```
 
-## Returning Deleted Models
+## 返回已删除的模型
 
-Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+仅 Postgres 支持，SQLite 需要 `sqlite-use-returning-for-3_35` 功能标志。
 
 ```rust
 assert_eq!(
@@ -62,5 +62,4 @@ let deleted_models: Vec<order::Model> = order::Entity::delete_many()
     .exec_with_returning(db)
     .await?
 
-assert_eq!(deleted_models.len(), 2); // two items deleted
-```
+assert_eq!(deleted_models.len(), 2); // 删除两项

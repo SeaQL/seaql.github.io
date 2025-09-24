@@ -1,24 +1,24 @@
-# Mock Interface
+# 模拟接口
 
-You can unit test your application logic using the mock database interface.
+你可以使用模拟数据库接口对应用程序逻辑进行单元测试。
 
 :::info
-You need to enable the `mock` feature flag in Cargo.toml.
+你需要在 `Cargo.toml` 中启用 `mock` 功能标志。
 :::
 
-The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.
-- The query result should be provided to support select operations
-- The exec result should be provided to support insert, update, and delete operations
+模拟数据库中没有任何数据，因此你必须定义在执行 CRUD 操作时要返回的预期数据。
+- 应提供查询结果以支持选择操作
+- 应提供执行结果以支持插入、更新和删除操作
 
-To ensure the correctness of your application logic, you can also validate the transaction log in the mock database.
+为确保应用程序逻辑的正确性，你还可以验证模拟数据库中的事务日志。
 
-Check out how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L250).
+在此处查看我们如何使用模拟连接编写单元测试[此处](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L250)。
 
-## Mocking Query Result
+## 模拟查询结果
 
-We create a mock database for PostgreSQL with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using the `append_query_results` method. Note that we pass a vector of vectors to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
+我们使用 `MockDatabase::new(DatabaseBackend::Postgres)` 为 PostgreSQL 创建一个模拟数据库。然后，使用 `append_query_results` 方法准备查询结果。请注意，我们向其传递一个向量的向量，表示多个查询结果，每个结果都有多个模型。最后，我们将其转换为连接，并像正常的实时连接一样使用它来执行 CRUD 操作。
 
-One special thing about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded; you can validate each of the log to ensure the correctness of your application logic.
+关于 `MockDatabase` 的一件特别之处是你可以检查其事务日志。在模拟数据库上运行的任何 SQL 查询都将被记录下来；你可以验证每个日志以确保应用程序逻辑的正确性。
 
 ```rust
 #[cfg(test)]
@@ -30,15 +30,15 @@ mod tests {
 
     #[async_std::test]
     async fn test_find_cake() -> Result<(), DbErr> {
-        // Create MockDatabase with mock query results
+        // 使用模拟查询结果创建 MockDatabase
         let db = MockDatabase::new(DatabaseBackend::Postgres)
             .append_query_results([
-                // First query result
+                // 第一个查询结果
                 vec![cake::Model {
                     id: 1,
                     name: "New York Cheese".to_owned(),
                 }],
-                // Second query result
+                // 第二个查询结果
                 vec![
                     cake::Model {
                         id: 1,
@@ -51,7 +51,7 @@ mod tests {
                 ],
             ])
             .append_query_results([
-                // Third query result
+                // 第三个查询结果
                 [(
                     cake::Model {
                         id: 1,
@@ -66,8 +66,8 @@ mod tests {
             ])
             .into_connection();
 
-        // Find a cake from MockDatabase
-        // Return the first query result
+        // 从 MockDatabase 中查找蛋糕
+        // 返回第一个查询结果
         assert_eq!(
             cake::Entity::find().one(&db).await?,
             Some(cake::Model {
@@ -76,8 +76,8 @@ mod tests {
             })
         );
 
-        // Find all cakes from MockDatabase
-        // Return the second query result
+        // 从 MockDatabase 中查找所有蛋糕
+        // 返回第二个查询结果
         assert_eq!(
             cake::Entity::find().all(&db).await?,
             [
@@ -92,7 +92,7 @@ mod tests {
             ]
         );
 
-        // Find all cakes with its related fruits
+        // 查找所有蛋糕及其相关水果
         assert_eq!(
             cake::Entity::find()
                 .find_also_related(fruit::Entity)
@@ -111,7 +111,7 @@ mod tests {
             )]
         );
 
-        // Checking transaction log
+        // 检查事务日志
         assert_eq!(
             db.into_transaction_log(),
             [
@@ -138,9 +138,9 @@ mod tests {
 }
 ```
 
-## Mocking Execution Result
+## 模拟执行结果
 
-This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update, and delete operations here in the unit test. The `append_exec_results` method takes a vector of `MockExecResult`, each representing the exec result of the corresponding operation.
+这与模拟查询结果非常相似，不同之处在于我们在这里使用 `append_exec_results` 方法，并且我们在单元测试中执行插入、更新和删除操作。`append_exec_results` 方法接受一个 `MockExecResult` 的向量，每个都表示相应操作的执行结果。
 
 ```rust
 #[cfg(test)]
@@ -152,7 +152,7 @@ mod tests {
 
     #[async_std::test]
     async fn test_insert_cake() -> Result<(), DbErr> {
-        // Create MockDatabase with mock execution result
+        // 使用模拟执行结果创建 MockDatabase
         let db = MockDatabase::new(DatabaseBackend::Postgres)
             .append_query_results([
                 [cake::Model {
@@ -176,13 +176,13 @@ mod tests {
             ])
             .into_connection();
 
-        // Prepare the ActiveModel
+        // 准备 ActiveModel
         let apple = cake::ActiveModel {
             name: Set("Apple Pie".to_owned()),
             ..Default::default()
         };
 
-        // Insert the ActiveModel into MockDatabase
+        // 将 ActiveModel 插入 MockDatabase
         assert_eq!(
             apple.clone().insert(&db).await?,
             cake::Model {
@@ -191,11 +191,11 @@ mod tests {
             }
         );
 
-        // If you want to check the last insert id
+        // 如果要检查最后插入的 id
         let insert_result = cake::Entity::insert(apple).exec(&db).await?;
         assert_eq!(insert_result.last_insert_id, 16);
 
-        // Checking transaction log
+        // 检查事务日志
         assert_eq!(
             db.into_transaction_log(),
             [
@@ -215,4 +215,3 @@ mod tests {
         Ok(())
     }
 }
-```

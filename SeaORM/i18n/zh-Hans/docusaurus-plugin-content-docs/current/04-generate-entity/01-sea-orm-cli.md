@@ -1,73 +1,72 @@
-# Using `sea-orm-cli`
+# 使用 `sea-orm-cli`
 
-First, install `sea-orm-cli` with `cargo`.
+首先，使用 `cargo` 安装 `sea-orm-cli`。
 
 ```shell
 cargo install sea-orm-cli@1.1.0
 ```
 
-:::tip SQL Server (MSSQL) backend
+:::tip SQL Server (MSSQL) 后端
 
-The installation and the usage of `sea-orm-cli` with MSSQL support can be found [here](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/sea-orm-cli/).
+支持 MSSQL 的 `sea-orm-cli` 的安装和使用可以在[这里](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/sea-orm-cli/)找到。
 
 :::
 
-## Configure Environment
+## 配置环境
 
-Set `DATABASE_URL` in your environment, or create a `.env` file in your project root. Specify your database connection.
+在你的环境中设置 `DATABASE_URL`，或者在你的项目根目录中创建一个 `.env` 文件。指定你的数据库连接。
 
 ```env title=".env"
 DATABASE_URL=protocol://username:password@localhost/database
 ```
 
-## Getting Help
+## 获取帮助
 
-Use `-h` flag on any CLI command or subcommand for help.
+在任何 CLI 命令或子命令上使用 `-h` 标志以获取帮助。
 
 ```shell
-# List all available commands
+# 列出所有可用命令
 sea-orm-cli -h
 
-# List all subcommands available in `generate` command
+# 列出 `generate` 命令中所有可用的子命令
 sea-orm-cli generate -h
 
-# Show how to use `generate entity` subcommand
+# 显示如何使用 `generate entity` 子命令
 sea-orm-cli generate entity -h
 ```
 
-## Generating Entity Files
+## 生成实体文件
 
-Discover all tables in a database and generate a corresponding SeaORM entity file for each table.
+发现数据库中的所有表，并为每个表生成相应的 SeaORM 实体文件。
 
-Supported databases:
+支持的数据库：
 - MySQL
 - PostgreSQL
 - SQLite
 
-Command line options:
-- `-u` / `--database-url`: database URL (default: DATABASE_URL specified in ENV)
-- `-s` / `--database-schema`: database schema (default: DATABASE_SCHEMA specified in ENV)
-    - for MySQL & SQLite, this argument is ignored
-    - for PostgreSQL, this argument is optional with default value 'public'
-- `-o` / `--output-dir`: entity file output directory (default: current directory)
-- `-v` / `--verbose`: print debug messages
-- `-l` / `--lib`: generate index file as `lib.rs` instead of `mod.rs`
-- `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
-- `--ignore-tables`: skip generating entity file for specified tables (default: `seaql_migrations`)
-- `--compact-format`: generate entity file of [compact format](04-generate-entity/02-entity-format.md) (default: true)
-- `--expanded-format`: generate entity file of [expanded format](12-internal-design/05-expanded-entity-format.md)
-- `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
-    - `--serde-skip-deserializing-primary-key`: generate entity model with primary key field labeled as `#[serde(skip_deserializing)]`
-    - `--serde-skip-hidden-column`: generate entity model with hidden column (column name starts with `_`) field labeled as `#[serde(skip)]`
-- `--date-time-crate`: the datetime crate to use for generating entities (`chrono`, `time`) (default: `chrono`)
-- `--max-connections`: maximum number of database connections to be initialized in the connection pool (default: `1`)
-- `--model-extra-derives`: append extra derive macros to the generated model struct
-- `--model-extra-attributes`: append extra attributes to generated model struct
-- `--enum-extra-derives`: append extra derive macros to generated enums
-- `--enum-extra-attributes`: append extra attributes to generated enums
-- `--seaography`: generate addition structs in entities for seaography integration
+命令行选项：
+- `-u` / `--database-url`：数据库 URL（默认：ENV 中指定的 DATABASE_URL）
+- `-s` / `--database-schema`：数据库 schema（默认：ENV 中指定的 DATABASE_SCHEMA）
+    - 对于 MySQL 和 SQLite，此参数将被忽略
+    - 对于 PostgreSQL，此参数是可选的，默认值为“public”
+- `-o` / `--output-dir`：实体文件输出目录（默认：当前目录）
+- `-v` / `--verbose`：打印调试消息
+- `-l` / `--lib`：将索引文件生成为 `lib.rs` 而不是 `mod.rs`
+- `--include-hidden-tables`：从隐藏表（名称以下划线开头的表默认隐藏并忽略）生成实体文件
+- `--ignore-tables`：跳过为指定表生成实体文件（默认：`seaql_migrations`）
+- `--compact-format`：生成[紧凑格式](04-generate-entity/02-entity-format.md)的实体文件（默认：true）
+- `--expanded-format`：生成[扩展格式](12-internal-design/05-expanded-entity-format.md)的实体文件
+- `--with-serde`：自动为实体派生 serde Serialize / Deserialize trait（`none`、`serialize`、`deserialize`、`both`）（默认：`none`）
+    - `--serde-skip-deserializing-primary-key`：生成带有主键字段标记为 `#[serde(skip_deserializing)]` 的实体模型
+    - `--serde-skip-hidden-column`：生成带有隐藏列（列名以下划线开头）字段标记为 `#[serde(skip)]` 的实体模型
+- `--date-time-crate`：用于生成实体的日期时间 crate（`chrono`、`time`）（默认：`chrono`）
+- `--max-connections`：连接池中要初始化的最大数据库连接数（默认：`1`）
+- `--model-extra-derives`：向生成的模型结构体追加额外的派生宏
+- `--model-extra-attributes`：向生成的模型结构体追加额外的属性
+- `--enum-extra-derives`：向生成的枚举追加额外的派生宏
+- `--enum-extra-attributes`：向生成的枚举追加额外的属性
+- `--seaography`：在实体中生成附加结构体以进行 seaography 集成
 
 ```shell
-# Generate entity files of database `bakery` to `entity/src`
+# 将数据库 `bakery` 的实体文件生成到 `entity/src`
 sea-orm-cli generate entity -u protocol://username:password@localhost/bakery -o entity/src
-```

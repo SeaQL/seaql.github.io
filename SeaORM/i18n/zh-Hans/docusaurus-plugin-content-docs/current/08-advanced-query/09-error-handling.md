@@ -1,10 +1,10 @@
-# Error Handling
+# 错误处理
 
-All runtime errors in SeaORM is represented by [`DbErr`](https://docs.rs/sea-orm/*/sea_orm/error/enum.DbErr.html).
+SeaORM 中的所有运行时错误都由 [`DbErr`](https://docs.rs/sea-orm/*/sea_orm/error/enum.DbErr.html) 表示。
 
-## Handling common SQL errors
+## 处理常见的 SQL 错误
 
-You can use `DbErr::sql_err()` method to convert SQL related error into common database errors `SqlErr`, such as unique constraint or foreign key violation errors.
+你可以使用 `DbErr::sql_err()` 方法将 SQL 相关错误转换为常见的数据库错误 `SqlErr`，例如唯一约束或外键冲突错误。
 
 ```rust
 assert!(matches!(
@@ -22,17 +22,17 @@ assert!(matches!(
 ));
 ```
 
-## Handling database specific errors
+## 处理数据库特定错误
 
-You can retrieve the database specific error code from `RuntimeErr`:
+你可以从 `RuntimeErr` 中检索数据库特定的错误代码：
 
 ```rust
 let my_cake = cake::ActiveModel { id: Set(1), .. };
 
-// Insert a new cake with its primary key (`id` column) set to 1.
+// 插入一个主键 (`id` 列) 设置为 1 的新蛋糕。
 let cake = my_cake.save(db).await.expect("could not insert cake");
 
-// Insert the same row again and it failed because primary key of each row should be unique.
+// 再次插入相同的行，但失败了，因为每行的主键应该是唯一的。
 let error: DbErr = cake
     .into_active_model()
     .insert(db)
@@ -42,12 +42,11 @@ let error: DbErr = cake
 match error {
     DbErr::Exec(RuntimeErr::SqlxError(error)) => match error {
         sqlx::Error::Database(e) => {
-            // We check the error code thrown by the database (MySQL in this case),
-            // `23000` means `ER_DUP_KEY`: we have a duplicate key in the table.
+            // 我们检查数据库（本例中为 MySQL）抛出的错误代码，
+            // `23000` 表示 `ER_DUP_KEY`：表中存在重复键。
             assert_eq!(e.code().unwrap(), "23000");
         }
         _ => panic!("Unexpected sqlx::Error kind"),
     },
     _ => panic!("Unexpected DbErr kind"),
 }
-```

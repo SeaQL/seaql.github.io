@@ -1,12 +1,12 @@
-# Using SQLite
+# 使用 SQLite
 
-If you want to test application logic that does not require database-specific features, SQLite will be a good choice for you.
+如果你想测试不需要特定数据库功能的应用程序逻辑，SQLite 将是一个不错的选择。
 
-Check out a simple example [here](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs).
+请在此处查看一个简单示例：[here](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs)。
 
-## Integration Test
+## 集成测试
 
-It is recommended to execute more complex test cases in [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html). The following code snippet illustrates the steps of connecting to a database, setting up schema and performing tests.
+建议在[集成测试](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html)中执行更复杂的测试用例。以下代码片段说明了连接到数据库、设置模式和执行测试的步骤。
 
 ```rust
 async fn main() -> Result<(), DbErr> {
@@ -23,9 +23,9 @@ async fn main() -> Result<(), DbErr> {
 }
 ```
 
-## Setup database schema
+## 设置数据库模式
 
-To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity).
+为了在 SQLite 数据库中创建用于测试的表，你可以不手动编写 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html)，而是使用 [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) 从 `Entity` 派生它。
 
 ```rust
 async fn setup_schema(db: &DbConn) {
@@ -53,9 +53,9 @@ async fn setup_schema(db: &DbConn) {
 }
 ```
 
-## Performing tests
+## 执行测试
 
-Execute test cases and assert against the results.
+执行测试用例并对结果进行断言。
 
 ```rust
 async fn testcase(db: &DbConn) -> Result<(), DbErr> {
