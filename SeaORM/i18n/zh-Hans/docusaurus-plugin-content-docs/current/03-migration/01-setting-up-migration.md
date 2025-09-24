@@ -1,51 +1,51 @@
-# Setting Up Migration
+# 设置迁移
 
-:::tip Rustacean Sticker Pack 🦀
-[Our stickers](https://www.sea-ql.org/sticker-pack/) are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
+:::tip Rustacean 贴纸包 🦀
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/)采用优质防水乙烯基材料制成，具有独特的哑光质感。
+把它们贴在你的笔记本、记事本或任何设备上，展示你对 Rust 的热爱！
 :::
 
-If you are starting from a fresh database, it's better to version control your database schema. SeaORM ships with a migration tool, allowing you to write migrations in SeaQuery or SQL.
+如果你从一个全新的数据库开始，最好对数据库模式进行版本控制。SeaORM 附带了一个迁移工具，允许你使用 SeaQuery 或 SQL 编写迁移。
 
-If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
+如果你已经有一个包含表和数据的数据库，可以跳过本章，直接前往[生成 SeaORM 实体](04-generate-entity/01-sea-orm-cli.md)。
 
-## Migration Table
+## 迁移表
 
-A table will be created in your database to keep track of the applied migrations. It will be created automatically when you run the migration.
+数据库中将创建一个表来跟踪已应用的迁移。这个表会在运行迁移时自动创建。
 
 <details>
-    <summary>By default, it will be named `seaql_migrations`. You can also use a custom name for your migration table.</summary>
+    <summary>默认情况下，迁移表名称为 `seaql_migrations` 。你也可以自定义迁移表的名称。</summary>
 
 ```rust
 #[async_trait::async_trait]
 impl MigratorTrait for Migrator {
-    // Override the name of migration table
+    // 覆盖迁移表的名称
     fn migration_table_name() -> sea_orm::DynIden {
         "override_migration_table_name".into_iden()
     }
     ..
 }
-```  
+```
 </details>
 
-## Creating Migration Directory
+## 创建迁移目录
 
-First, install `sea-orm-cli` with `cargo`.
+首先，使用 `cargo` 安装 `sea-orm-cli`。
 
 ```shell
 cargo install sea-orm-cli@1.1.0
 ```
 
-:::tip SQL Server (MSSQL) backend
+:::tip SQL Server (MSSQL) 后端
 
-The installation of `sea-orm-cli` with MSSQL support can be found [here](https://www.sea-ql.org/SeaORM-X/docs/migration/setting-up-migration/).
+支持 MSSQL 的 `sea-orm-cli` 的安装说明在[这里](https://www.sea-ql.org/SeaORM-X/docs/migration/setting-up-migration/)。
 
 :::
 
-Then, setup the migration directory by executing `sea-orm-cli migrate init`.
+然后，执行 `sea-orm-cli migrate init` 来设置迁移目录。
 
 ```shell
-# Setup the migration directory in `./migration`
+# 在 `./migration` 中设置迁移目录
 $ sea-orm-cli migrate init
 Initializing migration directory...
 Creating file `./migration/src/lib.rs`
@@ -55,31 +55,31 @@ Creating file `./migration/Cargo.toml`
 Creating file `./migration/README.md`
 Done!
 
-# If you want to setup the migration directory in else where
+# 如果你想在其他地方设置迁移目录
 $ sea-orm-cli migrate init -d ./other/migration/dir
 ```
 
-You should have a migration directory with a structure like below.
+你应该会看到如下结构的迁移目录。
 
 ```
 migration
 ├── Cargo.toml
 ├── README.md
 └── src
-    ├── lib.rs                              # Migrator API, for integration
-    ├── m20220101_000001_create_table.rs    # A sample migration file
-    └── main.rs                             # Migrator CLI, for running manually
+    ├── lib.rs                              # Migrator API，用于集成迁移
+    ├── m20220101_000001_create_table.rs    # 示例迁移文件
+    └── main.rs                             # Migrator CLI，用于手动运行迁移
 ```
 
-Note that if you setup the migration directory directly within a Git repository, a `.gitignore` file will also be created.
+请注意，如果你直接在 Git 仓库中设置迁移目录，还会创建一个 `.gitignore` 文件。
 
-## Workspace Structure
+## 工作区结构
 
-It is recommended to structure your cargo workspace as follows to share SeaORM entities between the app crate and the migration crate. Checkout the [integration examples](https://github.com/SeaQL/sea-orm/tree/master/examples) for demonstration.
+建议你按如下方式组织 cargo 工作区，以便在应用程序 crate 和迁移 crate 之间共享 SeaORM 实体。请查看[集成示例](https://github.com/SeaQL/sea-orm/tree/master/examples)以获取演示。
 
-### Migration Crate
+### 迁移 crate
 
-Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and [`async-std`](https://crates.io/crates/async-std) crate.
+导入 [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) 和 [`async-std`](https://crates.io/crates/async-std) crate。
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
@@ -88,15 +88,15 @@ async-std = { version = "1", features = ["attributes", "tokio1"] }
 [dependencies.sea-orm-migration]
 version = "1.1.0"
 features = [
-  # Enable at least one `ASYNC_RUNTIME` and `DATABASE_DRIVER` feature if you want to run migration via CLI.
-  # View the list of supported features at https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime.
-  # e.g.
-  # "runtime-tokio-rustls",  # `ASYNC_RUNTIME` feature
-  # "sqlx-postgres",         # `DATABASE_DRIVER` feature
+  # 如果你想通过 CLI 运行迁移，请至少启用一个 `ASYNC_RUNTIME` 和 `DATABASE_DRIVER` 功能。
+  # 支持的特性列表见 https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime
+  # 例如：
+  # "runtime-tokio-rustls",  # `ASYNC_RUNTIME` 功能
+  # "sqlx-postgres",         # `DATABASE_DRIVER` 功能
 ]
 ```
 
-Let's write a migration. Detailed instructions in the next section.
+让我们编写一个迁移。详细说明在下一节。
 
 ```rust title="migration/src/m20220120_000001_create_post_table.rs"
 use sea_orm_migration::prelude::*;
@@ -107,27 +107,27 @@ pub struct Migration;
 #[async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        // Replace the sample below with your own migration scripts
+        // 将下面的示例替换为你自己的迁移脚本
         todo!();
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
-        // Replace the sample below with your own migration scripts
+        // 将下面的示例替换为你自己的迁移脚本
         todo!();
     }
 }
 ```
 
-### Entity Crate
+### 实体 crate
 
-Create an entity crate in your root workspace.
+在你的根工作区中创建一个实体 crate。
 
 <details>
-    <summary>You don't have SeaORM entities defined?</summary>
+    <summary>还没有定义 SeaORM 实体？</summary>
 
-You can create an entity crate without any entity files. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](04-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
+你可以创建一个不包含任何实体文件的实体 crate。然后，编写并运行迁移以在数据库中创建表。最后，使用 `sea-orm-cli` [生成 SeaORM 实体](04-generate-entity/01-sea-orm-cli.md)并将实体文件输出到 `entity/src/entities` 文件夹。
 
-After generating the entity files, you can re-export the generated entities by adding following lines in `entity/src/lib.rs`:
+生成实体文件后，可以在 `entity/src/lib.rs` 中添加以下行来重新导出生成的实体：
 
 ```rust
 mod entities;
@@ -137,26 +137,26 @@ pub use entities::*;
 
 ```
 entity
-├── Cargo.toml      # Include SeaORM dependency
+├── Cargo.toml      # 包含 SeaORM 依赖
 └── src
-    ├── lib.rs      # Re-export SeaORM and entities
-    └── post.rs     # Define the `post` entity
+    ├── lib.rs      # 重新导出 SeaORM 和实体
+    └── post.rs     # 定义 `post` 实体
 ```
 
-Specify SeaORM dependency.
+指定 SeaORM 依赖。
 
 ```toml title="entity/Cargo.toml"
 [dependencies]
 sea-orm = { version = "1.1.0" }
 ```
 
-### App Crate
+### 应用程序 crate
 
-This is where the application logic goes.
+这是应用程序逻辑所在的地方。
 
-Create a workspace that contains app, entity and migration crates and import the entity crate into the app crate.
+创建一个包含 app、entity 和 migration crate 的工作区，并在 app crate 中导入 entity crate。
 
-If we want to bundle the migration utility as part of your app, you'd also want to import the migration crate.
+如果你想捆绑迁移工具到应用的中，你也可以导入 migration crate。
 
 ```toml title="./Cargo.toml"
 [workspace]
@@ -164,13 +164,13 @@ members = [".", "entity", "migration"]
 
 [dependencies]
 entity = { path = "entity" }
-migration = { path = "migration" } # depends on your needs
+migration = { path = "migration" } # 视你的需要而定
 
 [dependencies]
 sea-orm = { version = "1.1.0", features = [..] }
 ```
 
-In your app, you can then run the migrator on startup.
+然后，在应用中，你可以在启动时运行迁移。
 
 ```rust title="src/main.rs"
 use migration::{Migrator, MigratorTrait};

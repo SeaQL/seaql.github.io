@@ -2,9 +2,9 @@
 
 在 SeaORM 中，包含多个表的数据库称为 `Schema`。
 
-每个表对应 SeaORM 中的一个 [`Entity`](04-generate-entity/02-entity-format.md#entity)，它帮助您对相关表执行 `CRUD`（创建、读取、更新和删除）操作。
+每个表对应 SeaORM 中的一个 [`Entity`](04-generate-entity/02-entity-format.md#entity)，它帮助你对相关表执行 `CRUD`（创建、读取、更新和删除）操作。
 
-`Entity` trait 提供了一个 API，供您在运行时检查其属性（包括 [`Column`](04-generate-entity/02-entity-format.md#column)、[`Relation`](04-generate-entity/02-entity-format.md#relation) 和 [`PrimaryKey`](04-generate-entity/02-entity-format.md#primary-key)）。
+`Entity` trait 提供了一个 API，供你在运行时检查其属性（包括 [`Column`](04-generate-entity/02-entity-format.md#column)、[`Relation`](04-generate-entity/02-entity-format.md#relation) 和 [`PrimaryKey`](04-generate-entity/02-entity-format.md#primary-key)）。
 
 每个表都有多个列，这些列被称为 `attribute`。
 
