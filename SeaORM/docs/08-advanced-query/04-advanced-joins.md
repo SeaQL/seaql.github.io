@@ -143,6 +143,9 @@ pub enum Prod {
 
 ## 3. Custom selects
 
+Note that you can use `DerivePartialModel` to replace the custom selects below.
+It's just expanded here for illustration.
+
 ```rust
 pub fn query() -> Select<complex_product::Entity> {
     complex_product::Entity::find()
@@ -316,7 +319,7 @@ Let's make a helper function to query the histories associated to a set of produ
 ```rust
 pub fn history_of(ids: Vec<i64>) -> Select<product_history::Entity> {
     product_history::Entity::find()
-        .filter(Expr::col(product_history::Column::ProductId).is_in(ids))
+        .filter(product_history::Column::ProductId.is_in(ids))
         .order_by_asc(product_history::Column::Id)
 }
 

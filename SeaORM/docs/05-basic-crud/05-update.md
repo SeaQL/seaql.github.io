@@ -43,7 +43,7 @@ You can also update multiple rows in the database without finding each `Model` w
 // Bulk set attributes using ActiveModel
 let update_result: UpdateResult = Fruit::update_many()
     .set(pear)
-    .filter(fruit::Column::Id.eq(1))
+    .filter(fruit::Column::Id.is_in(vec![1]))
     .exec(db)
     .await?;
 
@@ -54,6 +54,16 @@ Fruit::update_many()
     .exec(db)
     .await?;
 ```
+
+:::tip Since `2.0.0`
+
+Added `ColumnTrait::eq_any` as a shorthand for the ` = ANY` operator. Postgres only.
+
+```rust
+Fruit::update_many().filter(fruit::Column::Id.eq_any(vec![2, 3]))
+```
+
+:::
 
 ## Returning Updated Models
 

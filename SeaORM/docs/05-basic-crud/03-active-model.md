@@ -59,6 +59,7 @@ assert_eq!(
         name: ActiveValue::NotSet,
         cake_id: ActiveValue::Set(Some(2)),
     })
+    .validate()? // <- required in 2.0
     .build(DbBackend::Postgres)
     .to_string(),
     r#"UPDATE "fruit" SET "cake_id" = 2 WHERE "fruit"."id" = 1"#

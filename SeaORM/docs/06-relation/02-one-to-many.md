@@ -47,7 +47,7 @@ impl Related<super::fruit::Entity> for Entity {
 
 ## Defining the Inverse Relation
 
-It is the same as defining the one-to-one inverse relation.
+It is the same as defining the one-to-one inverse relation. The rule of thumb is, always define a `belongs_to` on the Entity with a foreign key `xxx_id`.
 
 ```rust title="entity/fruit.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
