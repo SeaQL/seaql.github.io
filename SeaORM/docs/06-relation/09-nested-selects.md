@@ -79,7 +79,7 @@ struct Cake {
 #[sea_orm(entity = "bakery::Entity")]
 struct Bakery {
     id: i32,
-    #[sea_orm(from_col = "Name")]
+    #[sea_orm(from_col = "name")]
     brand: String,
 }
 
@@ -125,6 +125,44 @@ struct Cake {
 ```
 
 Where all columns of the nested model are selected.
+
+### Use with Linked
+
+:::tip Since `2.0.0`
+:::
+
+You can select partial model with `Linked` relation as well, however an alias matching the underlying query has to be applied. The following is equivalent to previous example.
+
+```rust
+pub struct ToBakery;
+impl Linked for ToBakery {
+    type FromEntity = super::cake::Entity;
+    type ToEntity = super::bakery::Entity;
+
+    fn link(&self) -> Vec<RelationDef> {
+        vec![Relation::Bakery.def()]
+    }
+}
+```
+
+```rust
+#[derive(Debug, DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity", into_active_model)]
+struct Cake {
+    id: i32,
+    name: String,
+    #[sea_orm(nested, alias = "r0")] // <- alias
+    bakery: Option<Bakery>,
+}
+
+let cake: Cake = cake::Entity::find()
+    .left_join_linked(ToBakery)
+    .order_by_asc(cake::Column::Id)
+    .into_partial_model()
+    .one(&ctx.db)
+    .await?;
+    .unwrap();
+```
 
 ### Join with alias
 
@@ -174,7 +212,7 @@ LEFT JOIN "bakery" AS "factory" ON "cake"."bakery_id" = "factory"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
-:::tip
+### Multiple Aliases
 
 You can join the same Entity twice via two relations and have different aliases for each of them in the same query.
 
@@ -202,8 +240,6 @@ let bakery: Bakery = bakery::Entity::find()
     )
     ..
 ```
-
-:::
 
 ## Three-way Join
 
