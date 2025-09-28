@@ -1,6 +1,6 @@
 # 填充数据
 
-你可以从 `SchemaManager` 中检索 `DbConn` 并根据需要执行数据操作，例如填充数据。
+你可以从 `SchemaManager` 获取 `DbConn`，并根据需要执行数据库操作，例如填充数据。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -24,7 +24,7 @@ impl MigrationTrait for Migration {
 }
 ```
 
-你还可以执行任何 SeaQuery 语句。
+你还可以执行任意 SeaQuery 语句。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -54,9 +54,9 @@ pub enum Cake {
 }
 ```
 
-## 事务性填充数据
+## 在事务中填充数据
 
-启动一个事务并在迁移的 up 和 down 中执行 SQL。
+在迁移中启动事务，并在 up 与 down 中执行 SQL。
 
 ```rust
 use sea_orm_migration::sea_orm::{entity::*, query::*};
@@ -77,7 +77,7 @@ impl MigrationTrait for Migration {
         .insert(&txn)
         .await?;
 
-        // 提交
+        // 提交事务
         txn.commit().await?;
 
         Ok(())
