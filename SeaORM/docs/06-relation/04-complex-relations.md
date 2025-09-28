@@ -19,7 +19,6 @@ pub struct CakeToFilling;
 
 impl Linked for CakeToFilling {
     type FromEntity = cake::Entity;
-
     type ToEntity = filling::Entity;
 
     fn link(&self) -> Vec<RelationDef> {
@@ -38,7 +37,6 @@ pub struct CakeToFilling;
 
 impl Linked for CakeToFilling {
     type FromEntity = cake::Entity;
-
     type ToEntity = filling::Entity;
 
     fn link(&self) -> Vec<RelationDef> {
@@ -128,7 +126,6 @@ pub struct SelfReferencingLink;
 
 impl Linked for SelfReferencingLink {
     type FromEntity = Entity;
-
     type ToEntity = Entity;
 
     fn link(&self) -> Vec<RelationDef> {

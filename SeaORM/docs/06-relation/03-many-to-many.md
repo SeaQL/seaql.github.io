@@ -1,5 +1,7 @@
 # Many to Many
 
+A standout feature of SeaORM is its ability to model many-to-many relationships directly at the Entity level. The intermediate junction table is abstracted away, so traversing an M-N relation feels just like a simple 1-N: a single method call instead of multiple joins.
+
 A many-to-many relation is formed by three tables, where two tables are related via a junction table. As an example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
 
 ## Defining the Relation
@@ -94,7 +96,10 @@ impl RelationTrait for Relation {
 
 ## Limitation of Codegen
 
-Note that the implementation of `Related` with `via` and `to` methods will not be generated if there exists multiple paths via an intermediate table.
+`sea-orm-cli` can generate the `Related` trait implementations for you, so you don't have to write them by hand in most cases.
+
+However, they will not be generated if there exists multiple paths via an intermediate table.
+The solution is to define relations with the `Linked` which will be described in the next chapter.
 
 For example, in the schema defined below, there are two paths:
 + Path 1. `users <-> users_votes <-> bills`
