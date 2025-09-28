@@ -73,11 +73,11 @@ By storing roles and permissions in the same database as your application data, 
 
 2. The hard part isn't expressing rules, it's enforcing them
 
-Most policy engines are great at describing rules in abstract terms, but the real challenge is: how do you actually enforce those rules against SQL queries? With an external library, we still need to analyze raw SQL statements ourselves and match that up with the rule definitions. By embedding RBAC directly into SeaORM's query builder, enforcement happens at the SQL layer as we can analyze the AST directly. Rules can be applied without trying to reparse queries - that means no queries can sieve through.
+Most policy engines are great at describing rules in abstract terms, but the real challenge is: how do you actually enforce those rules against SQL queries? With an external library, we still need to analyze raw SQL statements ourselves and match that up with the rule definitions. By embedding RBAC directly into SeaORM, enforcement happens on the SQL layer. We can analyze the AST directly - that means no queries can sieve through.
 
 3. Lightweight and performance
 
-Because the RBAC engine is part of SeaORM itself, it's lightweight and integrated - no extra runtime or external dependency. Everything is defined in one Rust codebase, so it's easy to audit and reason about. The runtime cost is very miniaml, and most importantly, you don't pay for what you don't use. This feature can be turned off completely.
+Because the RBAC engine is part of SeaORM itself, it's lightweight and integrated - no extra runtime or external dependency. Everything is defined in one Rust codebase, so it's easy to audit and reason about. The runtime cost is also minimal, and most importantly, you don't pay for what you don't use. This feature can be turned off completely.
 
 ## Concepts
 
@@ -105,7 +105,7 @@ The actions we can perform on resources. There are 4 basic permissions, `select`
 
 #### User `<->` Role
 
-As mentioned in the design above, User has a 1-1 relationship with role, mean each user can only be assigned at most 1 role.
+As mentioned in the design above, User has a 1-1 relationship with role, meaning each user can only be assigned at most 1 role.
 
 #### Role Hierarchy
 
@@ -121,18 +121,18 @@ admin <- manager <- sales
 If we add the following to the graph, such that each role can have multiple super roles, then it becomes a DAG.
 
 ```rust
-sourcing <- warehouse
+admin <- sourcing <- warehouse
 ```
 
 Each role has their own set of permissions. On runtime, the engine will walk the role hierarchy and take the union of all permissions of the sub-graph.
 
 #### Role `<->` Permission `<->` Resource
 
-Each role can have many such entries, and permission is set for each resource individually. For example: `manager <-> update <-> order`.
+Each role can have many such entries, and permission is set for each resource individually. For example: `manager - update - order`.
 
 #### User override
 
-The schema is a mirror of above: User - Permission - Resource, with an extra `grant` field, `false` means deny.
+The schema is a mirror of above: User `<->` Permission `<->` Resource, with an extra `grant` field, `false` means deny.
 
 ## Usage
 
@@ -140,7 +140,7 @@ There are two stages: rules definiton when the RBAC rules are defined, and runti
 
 ### Rules Definition
 
-You can actually update the rules using the provided SeaORM entities, but we provide a set of utilities to make mutating RBAC rules easier.
+You can actually update the rules using the provided [SeaORM entities](https://github.com/SeaQL/sea-orm/tree/master/src/rbac/entity), but we provide a set of utilities to make mutating RBAC rules easier.
 
 These methods are idempotent and can be used in migrations.
 
