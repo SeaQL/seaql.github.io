@@ -1,6 +1,6 @@
 ---
 slug: 2025-09-30-sea-orm-rbac
-title: Role Based Access Control in SeaORM
+title: Role Based Access Control in SeaORM 2.0
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
