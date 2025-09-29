@@ -65,7 +65,7 @@ Design: User‑level overrides to grant/deny permissions.
 
 ## Why reinventing the wheel?
 
-Our first thought is to look into the possibility of integrating an existing open-source RBAC engine, but we developed our own in the end, because we want to integrate it tightly and seamlessly with existing applications.
+Our first thought is to look into the possibility of integrating an existing open-source RBAC engine, but we developed our own in the end, because we want to integrate it tightly with SeaORM.
 
 1. Rules and permissions live in the same database as your app
 
@@ -73,15 +73,17 @@ By storing roles and permissions in the same database as your application data, 
 
 2. The hard part isn't expressing rules, it's enforcing them
 
-Most policy engines are great at describing rules in abstract terms, but the real challenge is: how do you actually enforce those rules against SQL queries? With an external library, we still need to analyze raw SQL statements ourselves and match that up with the rule definitions. By embedding RBAC directly into SeaORM, enforcement happens on the SQL layer. We can analyze the AST directly - that means no queries can sieve through.
+Most policy engines are great at describing rules in abstract terms, but the real challenge is: how do you actually enforce those rules against SQL queries? With an external library, we still need to analyze raw SQL statements ourselves and match that up with the rule definitions. By embedding RBAC directly into SeaORM, we can analyze all queries and enforce those rules.
 
-3. Lightweight and performance
+3. Lightweight and performant
 
-Because the RBAC engine is part of SeaORM itself, it's lightweight and integrated - no extra runtime or external dependency. Everything is defined in one Rust codebase, so it's easy to audit and reason about. The runtime cost is also minimal, and most importantly, you don't pay for what you don't use. This feature can be turned off completely.
+Because the RBAC engine is part of SeaORM itself, it's lightweight and integrated - no extra runtime or external dependency. The runtime cost is also minimal, and most importantly, you don't pay for what you don't use. This feature can be turned off completely.
 
 ## Concepts
 
 Let's take a look at the [RBAC schema](https://github.com/SeaQL/sea-orm/tree/master/src/rbac/entity) and go through the entities.
+
+<img src="/blog/img/sea-orm-rbac-schema.png" />
 
 ### Entities
 
@@ -93,13 +95,13 @@ The user table is defined by your application. SeaORM doesn't manage that. Howev
 
 Each role comes with a set of privileges. For example, 'admin', 'sales manager' and 'customer service'.
 
-#### Resources
-
-The resources being accessed. In our case they are database tables.
-
 #### Permissions
 
 The actions we can perform on resources. There are 4 basic permissions, `select`, `insert`, `update` and `delete`. You can define more for your application.
+
+#### Resources
+
+The resources being accessed. In our case they are database tables.
 
 ### Relations
 
@@ -109,7 +111,7 @@ As mentioned in the design above, User has a 1-1 relationship with role, meaning
 
 #### Role Hierarchy
 
-Role have a self-referencing relation, and they form a DAG (Directed Acyclic Graph). Most commonly they form a hierarchy tree that somewhat resembles an organization chart.
+Role has a self-referencing relation, and they form a DAG (Directed Acyclic Graph). Most commonly they form a hierarchy tree that somewhat resembles an organization chart.
 
 A simple tree example:
 
@@ -143,6 +145,12 @@ There are two stages: rules definiton when the RBAC rules are defined, and runti
 You can actually update the rules using the provided [SeaORM entities](https://github.com/SeaQL/sea-orm/tree/master/src/rbac/entity), but we provide a set of utilities to make mutating RBAC rules easier.
 
 These methods are idempotent and can be used in migrations.
+
+#### Create RBAC tables
+
+```rust
+sea_orm::rbac::schema::create_tables(db, Default::default()).await?;
+```
 
 #### Add resources & permissions
 
@@ -255,9 +263,7 @@ The RBAC rules are cached in memory and shared among all database connections vi
 
 #### Authenticate user
 
-This can be done by a web framework, where the user identity is extracted from a JWT token from HTTP requests.
-
-Here we assign them manually.
+This can be done by a web framework, where the user identity is extracted from a JWT token from HTTP requests. Here we assign them manually.
 
 ```rust
 use sea_orm::rbac::RbacUserId;
@@ -272,15 +278,13 @@ This is the key step. Once a `RestrictedConnection` is created, it is bounded to
 
 The `RestrictedConnection` implements the standard `DatabaseConnection` API, so it can be used in place of a normal `DbConn`.
 
-All queries made through SeaORM, including through Entity (ActiveModel) or lower level APIs (`Insert`) are audited. Only queries with matching permissions will be executed. DDL (i.e. `ALTER`) and raw SQL are not supported for now, so they will be rejected.
+All queries made through SeaORM, including through Entity (`ActiveModel`) or lower level APIs (`Insert`) are audited. Only queries with matching permissions will be executed. DDL (i.e. `ALTER`) and raw SQL are not supported for now, so they will be rejected.
 
 ```rust
 let db: RestrictedConnection = db.restricted_for(admin)?;
 ```
 
-By writing functions only accepting `RestrictedConnection`, you can safeguard all operations within the scope of the function, as there is no way from a type system sense for it to degrade into normal `DatabaseConnection`.
-
-(In Rust we normally don't do singleton / global scope, so any operation having global side effects is very obvious)
+By writing functions only accepting `RestrictedConnection`, you can safeguard all operations within the scope of the function, as there is no way from a type system sense for it to degrade into normal `DatabaseConnection`. (In Rust we normally don't do singleton / global scope, so any operation having global side effects is very obvious.)
 
 ```rust
 // admin can create bakery
@@ -396,8 +400,6 @@ We'll dive into GraphQL with Seaography in the next post, so keep an eye out for
 
 [SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required, but certainly nice to have!
 
-SeaORM Pro will be updated to support the latest features in SeaORM 2.0, right now RBAC support is in preview in [SeaORM Pro Plus](https://github.com/sponsors/SeaQL/sponsorships?tier_id=249708).
-
 Features:
 
 + Full CRUD
@@ -406,6 +408,18 @@ Features:
 + Customize the UI with TOML config
 + Custom GraphQL endpoints *(new in 2.0)*
 + Role Based Access Control *(new in 2.0)*
+
+SeaORM Pro will be updated to support the latest features in SeaORM 2.0, RBAC support is now available for preview in [SeaORM Pro Plus](https://github.com/sponsors/SeaQL/sponsorships?tier_id=249708).
+
+<img src="/blog/img/sea-orm-pro-rbac-editor-light.png#light" />
+<img src="/blog/img/sea-orm-pro-rbac-editor-dark.png#dark" />
+
+RBAC-related features in SeaORM Pro Plus:
+
++ Permission editor GUI
++ Role hierarchy visualization
++ User role assignment
++ Add/remove user overrides
 
 ## Sponsors
 
@@ -438,16 +452,6 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
 </div>
 <br/>
 <div class="row">
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/holly-hacker">
-                <img src="https://avatars.githubusercontent.com/u/13605369?u=9566a44f2d869f337a4909836487bb4a29c23b72&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Variant9</div>
-            </div>
-        </div>
-    </div>
     <div class="col col--6 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/ryanswrt">
