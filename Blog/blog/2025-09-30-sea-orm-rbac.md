@@ -11,11 +11,9 @@ tags: [news]
 
 <img alt="SeaORM 2.0 Banner" src="/blog/img/SeaORM%202.0%20Banner.png"/>
 
-SeaORM 2.0 introduces Role-Based Access Control (RBAC), bringing first-class authorization into your data layer. No more bolting on ad-hoc permission checks or scattering business rules across services - SeaORM lets you define roles and permission rules and enforce access policies directly inside the database connection. It's a powerful tool for building complex, multi‑faceted applications that demand robust, built‑in security.
+SeaORM 2.0 introduces Role-Based Access Control (RBAC), bringing first-class authorization into your data layer. No more bolting on ad-hoc permission checks or scattering business rules across services - SeaORM lets you define roles and permission rules and enforce access policies directly inside the database connection. It's a powerful tool for building multi‑faceted applications that demand authorization.
 
 ## Overview of SeaORM RBAC
-
-When we set out to design RBAC for SeaORM, we didn't start with theory-we started with the messy realities of building real-world applications.
 
 Here is a high level overview of the design and the requirements that shaped them:
 
@@ -33,7 +31,7 @@ Design: one user = one role. This prevents complexity of multiple roles per user
 
 3. Role hierarchy and inheritance
 
-You can create roles that inherit from multiple roles like A = B + C where A will have the union of permissions from B and C.
+We want to create roles that inherit from multiple roles like A = B + C where A will have the union of permissions from B and C.
 
 We want to avoid duplicating permission sets across roles. For example, a 'Manager' should automatically get all 'Employee' permissions, plus extras.
 
@@ -53,13 +51,13 @@ Design: Engine is generic - resource + permission abstraction can be applied to 
 
 6. Wildcard for convenience
 
-Sometimes we need to grant superusers or service accounts full access without enumerating every table/permission.
+Sometimes we need to grant superusers full access without enumerating every resource/permission.
 
 Design: Opt‑in `*` wildcard for 'all permissions' or 'all resources.'
 
 7. Per‑user overrides
 
-Occasionally, a single user needs an exception (e.g. a contractor who can only read one table, or an admin who should be denied one sensitive table).
+Occasionally, a single user needs an exception (e.g. a contractor who can only read one table, or a manager who should be denied one sensitive table).
 
 Design: User‑level overrides to grant/deny permissions.
 
@@ -247,7 +245,7 @@ context
 
 ### Runtime Authorization
 
-With these rules defined, we can now use them in applications.
+With these rules defined, we can now use them in our application.
 
 #### Initialize RBAC engine
 
