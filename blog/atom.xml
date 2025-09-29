@@ -8,7 +8,7 @@
     <subtitle>SeaQL Blog</subtitle>
     <icon>https://www.sea-ql.org/blog/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Role Based Access Control in SeaORM]]></title>
+        <title type="html"><![CDATA[Role Based Access Control in SeaORM 2.0]]></title>
         <id>https://www.sea-ql.org/blog/2025-09-30-sea-orm-rbac/</id>
         <link href="https://www.sea-ql.org/blog/2025-09-30-sea-orm-rbac/"/>
         <updated>2025-09-30T00:00:00.000Z</updated>
