@@ -3,7 +3,7 @@
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-cargo install sea-orm-cli@1.1.0
+cargo install sea-orm-cli@^2.0.0-rc
 ```
 
 :::tip SQL Server (MSSQL) backend

@@ -1,6 +1,6 @@
 # Getting Started
 
-This example can be found on [SeaORM + Seaography Example](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example).
+This example can be found on [Seaography Example](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example).
 
 ![](https://raw.githubusercontent.com/SeaQL/sea-orm/master/examples/seaography_example/Seaography%20example.png)
 
@@ -9,7 +9,7 @@ To get started, all you need is a live SQL database with schema. You can code ev
 ## Install Seaography CLI
 
 ```sh
-cargo install seaography-cli@^1.1.0
+cargo install seaography-cli@^2.0.0-rc
 ```
 
 ## Generate Seaography Entities
@@ -94,7 +94,7 @@ Seaography supports Poem, Actix, and Axum out of the box.
 Run the following command:
 
 ```sh
-seaography-cli graphql graphql/src/entities $DATABASE_URL sea-orm-seaography-example
+seaography-cli --framework axum graphql graphql/src/entities $DATABASE_URL sea-orm-seaography-example
 ```
 
 Full help:
@@ -142,6 +142,42 @@ Visit GraphQL Playground at http://localhost:8000
 
 Navigate to the GraphQL Playground, and then start running some queries!
 
+## Run some queries
+
+### Find chocolate cakes and know where to buy them
+
+```graphql
+{
+  cake(filters: { name: { contains: "Chocolate" } }) {
+    nodes {
+      name
+      price
+      bakery {
+        name
+      }
+    }
+  }
+}
+```
+
+### Find all cakes baked by Alice
+
+```graphql
+{
+  cake(having: { baker: { name: { eq: "Alice" } } }) {
+    nodes {
+      name
+      price
+      baker {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
+```
+
 ### Bakery -> Cake -> Baker
 
 ```graphql
@@ -159,23 +195,6 @@ Navigate to the GraphQL Playground, and then start running some queries!
             }
           }
         }
-      }
-    }
-  }
-}
-```
-
-### List gluten-free cakes and know where to buy them
-
-```graphql
-{
-  cake(filters: { glutenFree: { eq: 1 } }) {
-    nodes {
-      name
-      price
-      glutenFree
-      bakery {
-        name
       }
     }
   }
