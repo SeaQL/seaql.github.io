@@ -144,7 +144,7 @@ impl sea_orm::sea_query::ValueType for StringVec {
 }
 
 #[automatically_derived]
-impl sea_orm::sea_query::Nullable for Integer {
+impl sea_orm::sea_query::Nullable for StringVec {
     fn null() -> sea_orm::Value {
         <Vec<String> as sea_orm::sea_query::Nullable>::null()
     }

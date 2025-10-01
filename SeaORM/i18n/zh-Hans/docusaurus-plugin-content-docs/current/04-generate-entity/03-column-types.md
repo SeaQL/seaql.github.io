@@ -2,7 +2,7 @@
 
 ## 类型映射
 
-列类型将通过以下映射自动派生。
+列类型将按照以下映射自动推断。
 
 :::tip SQL Server (MSSQL) 后端
 
@@ -29,7 +29,7 @@ Rust 原始数据类型的映射：
 | `bool` | Boolean | boolean | bool | bool |
 | `Vec<u8>` | Binary | blob | blob | bytea |
 
-Rust 非原始数据类型的映射。你可以查看 [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) 以获取所有重新导出的类型。
+Rust 非原始数据类型的映射。你可以在 [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) 查看所有重新导出的类型。
 
 | Rust 类型 | 数据库类型 <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> 数据类型 | MySQL <br/> 数据类型 | PostgreSQL <br/> 数据类型 |
 | --------- | --------- | --------- | --------- | --------- |
@@ -44,7 +44,7 @@ Rust 非原始数据类型的映射。你可以查看 [`entity/prelude.rs`](http
 | `PgVector`：pgvector::Vector | Vector | N/A | N/A | vector |
 | `IpNetwork`：ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
 
-你可以使用 `column_type` 属性覆盖 Rust 类型和 `ColumnType` 之间的默认映射。
+你可以使用 `column_type` 属性覆盖 Rust 类型与 `ColumnType` 之间的默认映射。
 
 ```rust
 #[sea_orm(column_type = "Text")]
@@ -53,7 +53,7 @@ pub name: String
 
 ## JSON 列
 
-如果你需要将 JSON 字段反序列化为结构体。你需要为其派生 `FromJsonQueryResult`。
+如果需要将 JSON 字段反序列化为结构体，则需要为结构体派生 `FromJsonQueryResult`。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -82,7 +82,7 @@ pub struct KeyValue {
 }
 ```
 
-如果你想要一种跨数据库实现数组列的方法，你可以用包装类型将其包装起来。
+如果你可以使用自定义包装类型实现跨数据库的“数组列”。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -98,7 +98,7 @@ pub struct Model {
 pub struct StringVec(pub Vec<String>);
 ```
 
-更多详细信息和示例在下一章。
+更多详细信息和示例见下一章。
 
 ## Postgres 数组
 
@@ -120,7 +120,7 @@ pub struct Model {
 
 ## Postgres 向量
 
-自 `1.1.6` 起，添加了 PgVector 支持。需要 `postgres-vector` 功能标志。
+自 `1.1.6` 起新增 PgVector 支持，需要启用 `postgres-vector` 功能标志。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -132,11 +132,11 @@ pub struct Model {
 }
 ```
 
-有关完整示例，请参阅 [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs)。
+完整示例参见 [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs)。
 
 ## IpNetwork (Postgres)
 
-自 `1.1.8` 起，添加了 IpNetwork 支持。需要 `with-ipnetwork` 功能标志。
+自 `1.1.8` 起新增 IpNetwork 支持，需要启用 `with-ipnetwork` 功能标志。
 
 ```rust
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]

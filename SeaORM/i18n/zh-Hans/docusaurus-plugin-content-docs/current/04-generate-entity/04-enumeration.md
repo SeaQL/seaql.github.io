@@ -1,10 +1,10 @@
 # ActiveEnum
 
-你可以在模型中使用 Rust 枚举，其中值映射到数据库字符串、整数或原生枚举。
+你可以在模型中使用 Rust 枚举，并将其值映射为数据库中的字符串、整数或原生枚举类型。
 
 ## 字符串
 
-对于字符串枚举，除了能够为每个变体指定字符串值之外，你还可以为枚举指定 `rename_all` 属性，如果所有值都应基于大小写转换具有字符串值。
+对于字符串枚举，除了为每个变体单独指定字符串值之外，你也可以在枚举上直接指定 `rename_all` 属性——如果所有成员的字符串值都基于相同的大小写转换规则。
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
@@ -28,7 +28,7 @@ pub enum Category {
 }
 ```
 
-它使用 `string_value` 手动指定字符串值。
+以上是通过 `string_value` 手动指定字符串值的示例。
 
 <details>
     <summary>你可以在此处找到 `rename_all` 属性的有效值列表：</summary>
@@ -48,8 +48,8 @@ pub enum Category {
 
 ### 简单枚举字符串
 
-`DeriveValueType` 添加了对枚举的支持。它为由字符串数据库类型支持的客户端枚举提供了 `DeriveActiveEnum` 的更简单替代方案。
-你必须提供自定义的 `from_str` 和 `to_str` 实现。
+`DeriveValueType` 为枚举提供支持。对于那些底层由数据库字符串类型支持的客户端枚举而言，它提供了一个比 `DeriveActiveEnum` 更简洁的替代方案。
+你必须提供对应的 `from_str` 和 `to_str` 实现。
 
 ```rust
 #[derive(DeriveValueType)]
@@ -99,7 +99,7 @@ pub enum Tea {
 
 ## MySQL
 
-MySQL 枚举只是列定义的一部分，不能用于不同的表。
+在 MySQL 中，枚举仅是列定义的一部分，无法跨表复用。
 
 ```rust
 Table::create()
@@ -112,7 +112,7 @@ Table::create()
 
 ## Postgres
 
-如果你使用 Postgres，枚举必须在迁移中以单独的 `Type` 语句创建，你可以使用以下方式创建它：
+如果你使用 Postgres，枚举必须在迁移中以单独的 `TYPE` 语句创建，可以按以下方式创建：
 
 ### 1. `TYPE` 语句
 
@@ -133,7 +133,7 @@ manager
 ```
 
 ### 2. `create_enum_from_active_enum`
-此方法将提供一个接口，用于将类型添加到数据库、将类型用于表列以及在填充数据时将此类型的值添加到行。
+此方法提供了一个接口，可将类型添加到数据库、用作数据库表的列类型，或在填充数据时写入该类型的值。
 
 1. 定义一个 `ActiveEnum`
 
@@ -164,7 +164,7 @@ manager
     .await?;
 ```
 
-3. 在创建表时将类型用作表列类型
+3. 在创建表时将类型用作列类型
 
 ```rust diff
 // 在迁移中：
@@ -177,7 +177,7 @@ manager::create()
 ```
 > 另请参阅 [Schema 创建方法 - 创建表](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
 
-4. 在填充数据库时使用类型
+4. 填充数据时使用该类型
 
 ```rust
 // 在迁移中
@@ -215,7 +215,7 @@ pub enum Category {
 ```
 
 <details>
-  <summary>为了说明目的，这大致是宏实现的内容：</summary>
+  <summary>仅用于说明目的：宏大致等价的手动实现如下</summary>
   <div>
 
 ```rust
@@ -232,7 +232,7 @@ impl ActiveEnum for Category {
     // 宏属性 `rs_type` 在此处粘贴
     type Value = String;
 
-    // 默认情况下，如果未明确提供 `enum_name`，则 Rust 枚举的名称为驼峰式
+    // 默认情况下，若未显式提供 `enum_name`，Rust 枚举名称将采用驼峰式
     fn name() -> String {
         "category".to_owned()
     }
@@ -246,7 +246,7 @@ impl ActiveEnum for Category {
         .to_owned()
     }
 
-    // 将 `num_value` 或 `string_value` 映射到相应的 Rust 枚举变体
+    // 将 `num_value` 或 `string_value` 反向映射为对应的 Rust 枚举变体
     fn try_from_value(v: &Self::Value) -> Result<Self, DbErr> {
         match v.as_ref() {
             "B" => Ok(Self::Big),
@@ -272,7 +272,7 @@ impl ActiveEnum for Category {
 ```rust
 use sea_orm::entity::prelude::*;
 
-// 定义 `Category` 活动枚举
+// 定义 `Category` ActiveEnum
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
@@ -287,7 +287,7 @@ pub enum Category {
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    // 表示使用 `Category` 活动枚举的数据库列
+    // 使用 `Category` ActiveEnum 的数据库列
     pub category: Category,
     pub category_opt: Option<Category>,
 }

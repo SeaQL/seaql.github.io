@@ -1,15 +1,15 @@
-# 新类型
+# 新类型 （New Type）
 
-你可以定义一个新类型 (`T`) 并将其用作模型字段。必须实现以下 trait。
+你可以定义一个新类型（记为 `T`），并将其用作模型字段。它需要实现以下 trait：
 
 1. 为 [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html) 实现 `From<T>`
 2. 为 `T` 实现 [`sea_orm::TryGetable`](https://docs.rs/sea-orm/*/sea_orm/trait.TryGetable.html)
 3. 为 `T` 实现 [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html)
 4. 为 `T` 实现 [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html)
 
-## 包装类型
+## 包装标量类型
 
-你可以创建包装 SeaORM 支持的任何类型的新类型。
+你可以创建一个新类型来包装 SeaORM 已支持的任意标量类型。
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -89,7 +89,7 @@ pub struct Model {
 
 仅适用于 `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64`。
 
-## 包装 `Vec<T>` (仅限 Postgres)
+## 包装 `Vec<T>`（仅限 Postgres）
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -144,7 +144,7 @@ impl sea_orm::sea_query::ValueType for StringVec {
 }
 
 #[automatically_derived]
-impl sea_orm::sea_query::Nullable for Integer {
+impl sea_orm::sea_query::Nullable for StringVec {
     fn null() -> sea_orm::Value {
         <Vec<String> as sea_orm::sea_query::Nullable>::null()
     }
@@ -152,9 +152,9 @@ impl sea_orm::sea_query::Nullable for Integer {
 ```
 </details>
 
-## 包装 `Vec<T>` (后端通用)
+## 包装 `Vec<T>`（通用后端）
 
-你还可以通过将对象序列化/反序列化为 JSON 来定义后端通用的 `Vec<T>` 字段：
+你也可以通过将对象序列化/反序列化为 JSON 的方式来定义后端通用的 `Vec<T>` 字段：
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -220,9 +220,36 @@ impl sea_orm::sea_query::Nullable for ObjectVec {
 ```
 </details>
 
+## 将任意类型当作 JSON 处理
+
+除了包装 `Vec<T>` 之外，`FromJsonQueryResult` 宏也可以用于任何实现了 `serde` 的 `Serialize` 与 `Deserialize` 的类型；在与数据库交互时，它们会自动在 JSON 和 Rust 类型之间进行转换。
+
+```rust
+use sea_orm::FromJsonQueryResult;
+use sea_orm::entity::prelude::*;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "json_struct")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub json_value: Metadata,
+    pub json_value_opt: Option<Metadata>,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+pub struct Metadata {
+    pub id: i32,
+    pub name: String,
+    pub price: f32,
+    pub notes: Option<String>,
+}
+```
+
 ## 枚举字符串
 
-自 `1.1.8` 起，`DeriveValueType` 也支持 `enum` 类型。它为由字符串数据库类型支持的客户端枚举提供了 `DeriveActiveEnum` 的更简单替代方案。
+自 `1.1.8` 起，`DeriveValueType` 也支持 `enum` 类型。它为由字符串数据库类型支持的客户端枚举提供了相较 `DeriveActiveEnum` 更为简洁的替代方案。
 
 ```rust
 #[derive(DeriveValueType)]
@@ -293,7 +320,7 @@ impl sea_orm::sea_query::Nullable for Tag {
 ```
 </details>
 
-你可以使用自定义函数覆盖 `from_str` 和 `to_str`，这在你使用 [`strum::Display`](https://docs.rs/strum/latest/strum/derive.Display.html) 和 [`strum::EnumString`](https://docs.rs/strum/latest/strum/derive.EnumString.html) 或手动实现方法时特别有用：
+你可以使用自定义函数覆盖 `from_str` 和 `to_str`。这在你使用 [`strum::Display`](https://docs.rs/strum/latest/strum/derive.Display.html) 和 [`strum::EnumString`](https://docs.rs/strum/latest/strum/derive.EnumString.html)（或手动实现）时尤其方便：
 
 ```rust
 #[derive(DeriveValueType)]
