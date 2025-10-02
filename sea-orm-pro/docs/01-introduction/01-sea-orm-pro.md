@@ -53,6 +53,13 @@ Data from parent-child relations (e.g. Order -> OrderItem) are represented as co
 
 Data is not editable by default. You can configure create, update and delete forms via TOML. You can also configure which columns are editable. Non-editable columns will be shown as read-only.
 
+### Role Based Access Control
+
+:::tip Since `2.0.0`
+:::
+
+RBAC is fully integrated into SeaORM Pro Plus. It offers a GUI editor to edit RBAC permissions and assign user roles. Without the corresponding select permission, users will not be able to see relevant tables in the GUI. Similarly, edit buttons will be hidden if user does not have update permission.
+
 ## Upcoming Features
 
 There's really a lot we want to build, to make SeaORM Pro suit the needs of every project. Please consider being a sponsor and take part in shaping its future!
@@ -63,11 +70,7 @@ Here's what we have in mind:
 
 To be able to sign-in with Google Workspace or Microsoft Business email.
 
-### Role Based Access Control
-
-Of course we need to share the Admin Portal to multiple users and each of them should have a different set of privilege to view or edit data.
-
-### Action History
+### Audit Log
 
 And so, we'd want to keep a record of users' action and being able to audit them.
 
