@@ -8,7 +8,7 @@
 
 2. Installation & Configuration
 
-    2.1 [Getting Started with Loco](02-install-and-config/01-getting-started-loco.md)
+    2.1 [Getting Started](02-install-and-config/01-getting-started.md)
 
     2.2 [Getting Started with Axum](02-install-and-config/02-getting-started-axum.md)
 
