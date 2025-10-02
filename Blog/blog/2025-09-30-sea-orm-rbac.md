@@ -407,7 +407,7 @@ Features:
 + Custom GraphQL endpoints *(new in 2.0)*
 + Role Based Access Control *(new in 2.0)*
 
-SeaORM Pro will be updated to support the latest features in SeaORM 2.0, RBAC support is now available for preview in [SeaORM Pro Plus](https://github.com/sponsors/SeaQL/sponsorships?tier_id=249708).
+SeaORM Pro will be updated to support the latest features in SeaORM 2.0, RBAC support is now available for preview in [SeaORM Pro Plus](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro-plus/).
 
 <img src="/blog/img/sea-orm-pro-rbac-editor-light.png#light" />
 <img src="/blog/img/sea-orm-pro-rbac-editor-dark.png#dark" />
