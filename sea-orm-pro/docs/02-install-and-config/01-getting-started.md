@@ -1,4 +1,4 @@
-# Getting Started with SeaORM Pro
+# Getting Started
 
 SeaORM Pro is a full-stack web framework based on Loco with all the scaffolding so you don't have to start from scratch.
 
