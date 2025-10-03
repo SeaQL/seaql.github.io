@@ -120,7 +120,7 @@ let query_res_vec: Vec<QueryResult> = db
 
 ```rust
 let exec_res: ExecResult = db
-    .execute(Statement::from_string(
+    .execute_raw(Statement::from_string(
         DbBackend::MySql,
         "DROP DATABASE IF EXISTS `sea`;",
     ))

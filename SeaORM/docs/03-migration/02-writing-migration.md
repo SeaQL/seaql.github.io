@@ -263,12 +263,11 @@ impl MigrationTrait for Migration {
         .await?;
 
         // Construct a `Statement` if the SQL contains value bindings
-        let stmt = Statement::from_sql_and_values(
+        db.execute_raw(Statement::from_sql_and_values(
             manager.get_database_backend(),
             r#"INSERT INTO `cake` (`name`) VALUES (?)"#,
             ["Cheese Cake".into()]
-        );
-        db.execute(stmt).await?;
+        )).await?;
 
         Ok(())
     }

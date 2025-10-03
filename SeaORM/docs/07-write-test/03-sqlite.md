@@ -47,9 +47,7 @@ async fn setup_schema(db: &DbConn) {
     );
 
     // Execute create table statement
-    let result = db
-        .execute(db.get_database_backend().build(&stmt))
-        .await;
+    let result = db.execute(&stmt).await;
 }
 ```
 
