@@ -24,7 +24,7 @@ function HomepageHeader() {
               Build professional admin panels with SeaORM Pro.
             </p>
             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-              <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
+              <a href="docs/install-and-config/getting-started/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
                 Getting Started
               </a>
               <a href="https://sea-orm-pro-demo.sea-ql.org/admin/" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
@@ -210,7 +210,7 @@ function HomepageFeatures() {
             Start Building Today
           </h3>
           <div class="mt-8 flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-            <a href="docs/install-and-config/getting-started-loco/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
+            <a href="docs/install-and-config/getting-started/" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-6 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 request-license-btn hover-btn">
               Getting Started
             </a>
             <a href="https://sea-orm-pro-demo.sea-ql.org/admin/" target="_blank" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3.5 text-center font-semibold text-white transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 sm:w-auto sm:px-8 hover-btn">
