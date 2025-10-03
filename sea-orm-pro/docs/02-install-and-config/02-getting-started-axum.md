@@ -72,19 +72,7 @@ async fn start() -> anyhow::Result<()> {
         .route("/api/admin/config", get(admin_panel_config))
         .route("/api/auth/login", post(user_login))
         .route("/api/user/current", get(current_user))
-        .nest_service(
-            "/admin",
-            get_service(
-                ServeDir::new(concat!(
-                    env!("CARGO_MANIFEST_DIR"),
-                    "/../assets/admin"
-                ))
-                .fallback(ServeFile::new(concat!(
-                    env!("CARGO_MANIFEST_DIR"),
-                    "/../assets/admin/index.html"
-                )))
-            )
-        );
+        .nest_service(..);
 
     let listener = tokio::net::TcpListener::bind(&server_url).await.unwrap();
     axum::serve(listener, app).await?;
@@ -233,19 +221,7 @@ async fn start() -> anyhow::Result<()> {
         .route("/api/user/current", get(current_user))
         .route("/api/graphql", get(graphql_playground))
         .route("/api/graphql", post(graphql_handler))
-        .nest_service(
-            "/admin",
-            get_service(
-                ServeDir::new(concat!(
-                    env!("CARGO_MANIFEST_DIR"),
-                    "/assets/admin"
-                ))
-                .fallback(ServeFile::new(concat!(
-                    env!("CARGO_MANIFEST_DIR"),
-                    "/assets/admin/index.html"
-                )))
-            )
-        );
+        .nest_service(..);
 
     let listener = tokio::net::TcpListener::bind(&server_url).await.unwrap();
     axum::serve(listener, app).await?;
