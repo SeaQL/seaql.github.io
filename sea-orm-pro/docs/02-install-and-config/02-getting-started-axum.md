@@ -10,7 +10,7 @@ We will extends the SeaORM entities in the example to define a GraphQL schema, h
 
 ```sh
 # Go to the api crate of `axum_example` example
-cd sea-orm/axum_example/api
+cd sea-orm/axum_example
 
 # Create a directory for the static assets
 mkdir assets
@@ -23,25 +23,25 @@ curl "https://raw.githubusercontent.com/SeaQL/sea-orm-pro/refs/heads/main/build_
 
 Open the `lib.rs` of api crate, add `static` middlewares. The admin panel frontend is located in `/assets/admin` and we want to serve it under `http://localhost:8000/admin`, so we set the path as `/assets/admin`. Also, the admin panel frontend is a single page application, so we set a fallback route to the index file, `/assets/admin/index.html`.
 
-```diff title=axum_example/api/src/lib.rs
+```rust {6-18} title="axum_example/api/src/lib.rs"
 #[tokio::main]
 async fn start() -> anyhow::Result<()> {
     let app = Router::new()
         .route("/api/auth/login", post(user_login))
         .route("/api/user/current", get(current_user))
-+       .nest_service(
-+           "/admin",
-+           get_service(
-+               ServeDir::new(concat!(
-+                   env!("CARGO_MANIFEST_DIR"),
-+                   "/assets/admin"
-+               ))
-+               .fallback(ServeFile::new(concat!(
-+                   env!("CARGO_MANIFEST_DIR"),
-+                   "/assets/admin/index.html"
-+               )))
-+           )
-+       );
+        .nest_service(
+            "/admin",
+            get_service(
+                ServeDir::new(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/../assets/admin"
+                ))
+                .fallback(ServeFile::new(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/../assets/admin/index.html"
+                )))
+            )
+        );
 
     let listener = tokio::net::TcpListener::bind(&server_url).await.unwrap();
     axum::serve(listener, app).await?;
@@ -54,7 +54,7 @@ async fn start() -> anyhow::Result<()> {
 
 The admin panel frontend is customizable and it read the configuration from the `api/admin/config` endpoint.
 
-```rust title=axum_example/api/src/lib.rs
+```rust title="axum_example/api/src/lib.rs"
 async fn admin_panel_config() -> Result<Json<JsonCfg>, (StatusCode, &'static str)> {
     let config = ConfigParser::new()
         .load_config("pro_admin")
@@ -65,11 +65,11 @@ async fn admin_panel_config() -> Result<Json<JsonCfg>, (StatusCode, &'static str
 
 Use the admin controller and register the `/api/admin` route.
 
-```diff title=axum_example/api/src/lib.rs
+```rust {4} title="axum_example/api/src/lib.rs"
 #[tokio::main]
 async fn start() -> anyhow::Result<()> {
     let app = Router::new()
-+       .route("/api/admin/config", get(admin_panel_config))
+        .route("/api/admin/config", get(admin_panel_config))
         .route("/api/auth/login", post(user_login))
         .route("/api/user/current", get(current_user))
         .nest_service(
@@ -77,11 +77,11 @@ async fn start() -> anyhow::Result<()> {
             get_service(
                 ServeDir::new(concat!(
                     env!("CARGO_MANIFEST_DIR"),
-                    "/assets/admin"
+                    "/../assets/admin"
                 ))
                 .fallback(ServeFile::new(concat!(
                     env!("CARGO_MANIFEST_DIR"),
-                    "/assets/admin/index.html"
+                    "/../assets/admin/index.html"
                 )))
             )
         );
@@ -99,14 +99,14 @@ async fn start() -> anyhow::Result<()> {
 
 Add the dependencies for defining GraphQL schema.
 
-```diff title=axum_example/api/Cargo.toml
+```toml {2} title="axum_example/api/Cargo.toml"
 [dependencies]
-+ seaography = { version = "1.1", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
+seaography = { version = "2.0.0-rc", features = ["field-snake-case"] }
 ```
 
 We need to define an `RelatedEntity` enum for each of the SeaORM entity to help `seaography` figure out the parent-child relation between entities.
 
-```diff title=axum_example/entity/src/post.rs
+```rust {20,21} title="axum_example/entity/src/post.rs"
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
@@ -126,17 +126,17 @@ pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
 
-+ #[derive(Copy, Clone, Debug, EnumIter, DeriveRelatedEntity)]
-+ pub enum RelatedEntity {}
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelatedEntity)]
+pub enum RelatedEntity {}
 ```
 
 Use `seaography::register_entity_modules!` macros to define `register_entity_modules` boilerplate function.
 
-```diff title=axum_example/api/src/graphql/query_root.rs
-+ seaography::register_entity_modules!([posts]);
+```rust title="axum_example/api/src/graphql/query_root.rs"
+seaography::register_entity_modules!([posts]);
 ```
 
-```rust title=axum_example/api/src/graphql/query_root.rs
+```rust title="axum_example/api/src/graphql/query_root.rs"
 use async_graphql::dynamic::*;
 use axum_example_service::sea_orm;
 use axum_example_service::sea_orm::DatabaseConnection;
@@ -171,27 +171,27 @@ pub fn schema(
 
 Use the GraphQL schema module.
 
-```rust title=axum_example/api/src/graphql/mod.rs
+```rust title="axum_example/api/src/graphql/mod.rs"
 pub mod query_root;
 ```
 
-```diff title=axum_example/api/src/lib.rs
-+ mod graphql;
+```rust title="axum_example/api/src/lib.rs"
+mod graphql;
 ```
 
 ### 2.2 Setup GraphQL playground and query root
 
 Add dependencies for serving GraphQL playground and handling GraphQL request.
 
-```diff title=
+```toml {2} title="axum_example/api/Cargo.toml"
 [dependencies]
-+ async-graphql-axum = { version = "7.0" }
-seaography = { version = "1.1", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
+async-graphql-axum = { version = "7.0" }
+seaography = { version = "2.0.0-rc", features = ["field-snake-case"] }
 ```
 
 The GraphQL controller.
 
-```rust title=axum_example/api/src/lib.rs
+```rust title="axum_example/api/src/lib.rs"
 async fn graphql_playground() -> impl IntoResponse {
     // Setup GraphQL playground web and specify the endpoint for GraphQL resolver
     let config = GraphQLPlaygroundConfig::new("/api/graphql").with_header("Authorization", "");
@@ -224,15 +224,15 @@ async fn graphql_handler(
 
 Use the GraphQL controller and register the `/api/graphql` route.
 
-```diff title=axum_example/api/src/lib.rs
+```rust {7,8} title="axum_example/api/src/lib.rs"
 #[tokio::main]
 async fn start() -> anyhow::Result<()> {
     let app = Router::new()
         .route("/api/admin/config", get(admin_panel_config))
         .route("/api/auth/login", post(user_login))
         .route("/api/user/current", get(current_user))
-+       .route("/api/graphql", get(graphql_playground))
-+       .route("/api/graphql", post(graphql_handler))
+        .route("/api/graphql", get(graphql_playground))
+        .route("/api/graphql", post(graphql_handler))
         .nest_service(
             "/admin",
             get_service(
