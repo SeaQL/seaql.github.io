@@ -1,6 +1,6 @@
 # Mock Interface
 
-You can unit test your application logic using the mock database interface.
+To unit test more complex application logic with asynchronous interface and multiple underlying queries, you can use the mock database interface.
 
 :::info
 You need to enable the `mock` feature flag in Cargo.toml.

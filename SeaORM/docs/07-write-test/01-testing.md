@@ -1,64 +1,71 @@
-# Robust & Correct
+# Writing Tests
 
-Testing is an integral part of programming in Rust. You see, [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html) is built-in.
+Testing is an integral part of programming in Rust, with [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html) built directly into the toolchain.
 
-If you don't use `unsafe` and your code compiles, then your Rust program is *safe*. However, it does not automatically become *robust*. Your program can still panic unexpectedly if you are not careful on error handling.
+There are two kinds of tests you'd write: unit tests and integration tests.
 
-Even if your program does not panic, it does not mean it is *correct*. It can still misbehave and create data chaos.
+SeaORM is designed to be testable: the core API is a facade that doesn't require a database backend at compile time. That means you can bring in entities and models as plain Rust types, and use them in unit tests. You can even run queries against a mock database for advanced tests, without spinning up a database backend.
 
-You can improve the correctness of your program by writing adequate tests.
+## Logic Tests
 
-## Types of Errors
+Just to give a small example, let's say we have an Entity:
 
-First, let's classify different causes of errors in a data-driven application:
+```rust title="triangle.rs"
+use sea_orm::entity::prelude::*;
+use serde::{Deserialize, Serialize};
 
-### 1. Type Errors
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "triangle")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub p1: Point,
+    pub p2: Point,
+    pub p3: Point,
+}
 
-1. misspelled or non-existent symbol (table or column) name
-1. using incompatible functions or operators on data (e.g. add two strings)
-1. invalid SQL query
-	- e.g. ambiguous symbol in a `JOIN` query
-	- e.g. forget to insert data on non-nullable columns
-	- e.g. forget to aggregate every column in a `GROUP BY` query
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
 
-### 2. Transaction Errors
+// ..
+```
 
-1. failed to maintain entity relationships
-1. failed to maintain data consistency and constraints
+You can write unit tests for the logic around this entity:
 
-### 3. Behavioural Errors
+```rust
+use triangle::{Model as Triangle, Point};
 
-1. joining or filtering on wrong conditions
-1. incomplete or incorrect query results
-1. insert, update or delete operations with unawared side effects
-1. any other behaviour not as intended
+impl Triangle {
+    fn area(&self) -> f64 {
+        let a = self.p1.distance_to(&self.p2);
+        let b = self.p2.distance_to(&self.p3);
+        let c = self.p3.distance_to(&self.p1);
+        let s = (a + b + c) / 2.0;
+        (s * (s - a) * (s - b) * (s - c)).sqrt()
+    }
+}
 
-> A note on 'unawared side effects': do not use `CASCADE` unless the relation is strictly parent-child
+impl Point {
+    fn distance_to(&self, p: &Point) -> f64 {
+        let dx = self.x - p.x;
+        let dy = self.y - p.y;
+        (dx * dx + dy * dy).sqrt()
+    }
+}
 
-## Mitigations
+assert!(
+    (Triangle {
+        id: 1,
+        p1: Point { x: 0., y: 0. },
+        p2: Point { x: 2., y: 0. },
+        p3: Point { x: 0., y: 2. },
+    }
+    .area() - 2.) .abs() < 0.00000001
+);
+```
 
-Now, let's see how we can mitigate these errors:
-
-### 1. Type Errors
-
-Using Rust automatically saves you from misspelling symbols.
-
-Using a *completely static* query builder can eliminate this entire class of errors. However, it requires that every parameter be defined statically and available compile-time. This is a *harsh* requirement, as there is always something you could not know until your program starts (environment variables) and runs (runtime configuration change). This is especially awkward if you come from a scripting language background where the type system has always been dynamic.
-
-As such, SeaORM does not attempt to check things at compile-time. We intend to (still in development) provide runtime linting on the dynamically generated queries against the mentioned problems that you can enable in unit tests but disable in production.
-
-### 2. Transaction Errors
-
-These problems cannot be eliminated. It usually indicates your code has some logic bugs. When they happen, it is already too late, and your only choice is to abort. Instead, they have to be actively prevented: check beforehand the constraints before attempting data operations.
-
-You should write a bunch of unit tests that can reject bad data and prevent it from entering your database. Your unit tests should also verify that each *transaction* (in your application domain, not necessarily the database transaction) is sound.
-
-SeaORM helps you write these unit tests using the `Mock` database interface.
-
-### 3. Behavioural Errors
-
-This is basically testing your entire program on a domain level, requiring you to provide seed data and simulate the common user operations. Usually, you will do it in CI against a real database. However, SeaORM encourages you to scale down these tests so that the most important data-flow can be tested by Cargo's [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html).
-
-Since SeaORM is abstract over MySQL, PostgreSQL, and SQLite, you can use SQLite as a backend to test your program's behaviours. It is lightweight enough to run it frequently, locally, and on CI. The catch is, SQLite lacks some advanced features of MySQL or PostgreSQL, so depending on your use of database-specific features, not all logic can be tested inside SQLite.
-
-We are looking for SQLite alternatives that can simulate the more advanced features of MySQL and PostgreSQL.
+This can be done in a pure crate without `tokio` or `sqlx` dependency.
+These entities will be the exact same ones you use in database interaction.

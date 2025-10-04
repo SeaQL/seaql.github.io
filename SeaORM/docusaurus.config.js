@@ -44,26 +44,16 @@ module.exports = {
       },
       items: [
         {
-          type: 'doc',
-          docId: 'index',
-          position: 'left',
+          to: '/docs/index',
+          target: '_self',
           label: 'Docs',
+          position: 'left'
         },
         {
           to: 'https://www.sea-ql.org/blog/',
           target: '_self',
           label: 'Blog',
           position: 'left'
-        },
-        {
-          to: 'https://www.sea-ql.org/sea-orm-tutorial/',
-          label: 'Tutorial',
-          position: 'left',
-        },
-        {
-          to: 'https://www.sea-ql.org/sea-orm-cookbook/',
-          label: 'Cookbook',
-          position: 'left',
         },
         {
           to: 'https://crates.io/crates/sea-orm',
@@ -179,9 +169,11 @@ module.exports = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/SeaORM/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          lastVersion: 'current',
           versions: {
             current: {
-              label: `${getNextMinorVersionName()} 🚧`,
+              label: `${getNextMinorVersionName()}`,
+              path: '',
             },
           },
         },

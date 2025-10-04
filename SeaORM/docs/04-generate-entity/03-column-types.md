@@ -132,7 +132,7 @@ pub struct Model {
 }
 ```
 
-For a complete example, see [embedding_tests](https://github.com/SeaQL/sea-orm/blob/1.1.x/tests/embedding_tests.rs).
+For a complete example, see [embedding_tests](https://github.com/SeaQL/sea-orm/blob/master/tests/embedding_tests.rs).
 
 ## IpNetwork (Postgres)
 

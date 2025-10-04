@@ -12,7 +12,7 @@ With `Linked` implemented, several `find_*_linked` helper methods become availab
 
 ### Defining the Link
 
-Take [this](https://github.com/SeaQL/sea-orm/blob/1.1.x/src/tests_cfg/entity_linked.rs) as an example, where we join cake and filling via an intermediate `cake_filling` table.
+Take [this](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/entity_linked.rs) as an example, where we join cake and filling via an intermediate `cake_filling` table.
 
 ```rust title="entity/links.rs"
 pub struct CakeToFilling;
