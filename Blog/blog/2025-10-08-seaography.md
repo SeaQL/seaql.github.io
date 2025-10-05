@@ -5,19 +5,19 @@ author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
-image: https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png
+image: https://www.sea-ql.org/blog/img/Seaography%202.0%20Banner.png
 tags: [news]
 ---
 
-<img alt="SeaORM 2.0 Banner" src="/blog/img/SeaORM%202.0%20Banner.png"/>
+<img alt="Seaography 2.0 Banner" src="/blog/img/Seaography%202.0%20Banner.png"/>
 
 GraphQL has become a favorite among frontend developers - its flexibility, type-safety, and ability to fetch exactly the data you need make it a joy to work with. But on the backend, things aren't always so easy. Implementing a relational resolver that can traverse complex schemas is difficult and time-consuming.
 
-Yes, there are libraries that can spin up a GraphQL resolver instantly, but they often come with trade-offs: they're hard to customize, making it painful to add additional endpoints when your application grows beyond the basics.
+Yes, there are libraries that can spin up a GraphQL resolver quickly, but they often come with trade-offs: they're hard to customize, making it painful to add additional endpoints when your application grows beyond the basics.
 
 And perhaps the hardest challenge is access control and business logic. Real-world applications need fine-grained permissions and conditional query logic based on context - things that no technology currently on the market can easily solve.
 
-Seaography + SeaORM is designed to solve this problem.
+Seaography is designed to solve this problem.
 
 ## 🧭 What is Seaography
 
@@ -361,7 +361,7 @@ pub enum Shape {
 }
 ```
 
-This will appear like below in the GraphQL schema:
+After registering as `complex_custom_outputs`, they will appear like below in the GraphQL schema:
 
 ```graphql
 union Shape = Rectangle | Circle | Triangle
@@ -487,7 +487,7 @@ In another sense, Seaography is like PostGraphile, offering instant GraphQL API 
 
 This Seaography release has been made possible through the generous sponsorship of [QDX](https://qdx.co/) and their close collaboration with SeaQL.org. QDX has built their data‑driven applications with the Seaography + SeaORM stack, and we are deeply grateful for their contributions - both financial and technical - that helped bring this release to reality.
 
-We welcome companies to collaborate with SeaQL.org to adopt and unlock the full potential of the Rust + SeaQL ecosystem, with our team providing expert technical consulting to support their software development.
+We welcome companies to [collaborate with SeaQL.org](mailto:hello@sea-ql.org) to adopt and unlock the full potential of the Rust + SeaQL ecosystem, with our team providing expert technical consulting to support their software development.
 
 ### Gold Sponsor
 
