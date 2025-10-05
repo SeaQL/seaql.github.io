@@ -377,6 +377,8 @@ The `area` method will only be invoked when a query includes this field. Note th
 
 The union type definition allows you to use union types in input / output, a very natural construct in Rust.
 
+Full example can be found [here](https://github.com/SeaQL/seaography/blob/main/examples/sqlite/src/query_root.rs).
+
 ## Lifecycle hooks
 
 In Seaography, all logic is centralized in the same process, and it allows you to inject arbitrary custom logic throughout the request lifecycle using hooks. You can even implement access control this way.
@@ -481,7 +483,7 @@ In another sense, Seaography is like PostGraphile, offering instant GraphQL API 
 | MySQL, Postgres, SQLite, [SQL Server*](https://www.sea-ql.org/SeaORM-X/) | Postgres |
 | Compiled schema | Runtime generated schema |
 | SeaORM's RBAC | Postgres' RLS |
-| Lifecycle hooks | Plugins |
+| Lifecycle hooks, builder context | Plugins |
 
 ## Sponsors
 
