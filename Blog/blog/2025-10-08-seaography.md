@@ -17,7 +17,7 @@ Yes, there are libraries that can spin up a GraphQL resolver quickly, but they o
 
 And perhaps the hardest challenge is access control and business logic. Real-world applications need fine-grained permissions and conditional query logic based on context - things that no technology currently on the market can easily solve.
 
-Seaography is designed to solve this problem.
+[Seaography](https://github.com/SeaQL/seaography) is designed to solve this problem.
 
 ## 🧭 What is Seaography
 
