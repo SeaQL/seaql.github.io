@@ -12,12 +12,16 @@
         <id>https://www.sea-ql.org/blog/2025-10-08-seaography/</id>
         <link href="https://www.sea-ql.org/blog/2025-10-08-seaography/"/>
         <updated>2025-10-08T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[GraphQL has become a favorite among frontend developers - its flexibility, type-safety, and ability to fetch exactly the data you need make it a joy to work with. But on the backend, things aren't always so easy. Implementing a relational resolver that can traverse complex schemas is difficult and time-consuming.]]></summary>
+        <summary type="html"><![CDATA[GraphQL has become the preferred interface for product teams. Both frontend and backend developers benefit from its type-safety, contractual guarantees, and composability. Yet the real challenge lies on the backend: implementing relational resolvers that can traverse complex schemas is often difficult and time-consuming.]]></summary>
         <content type="html"><![CDATA[<img alt="Seaography 2.0 Banner" src="https://www.sea-ql.org/blog/img/Seaography%202.0%20Banner.png">
-<p>GraphQL has become a favorite among frontend developers - its flexibility, type-safety, and ability to fetch exactly the data you need make it a joy to work with. But on the backend, things aren't always so easy. Implementing a relational resolver that can traverse complex schemas is difficult and time-consuming.</p>
+<p>GraphQL has become the preferred interface for product teams. Both frontend and backend developers benefit from its type-safety, contractual guarantees, and composability. Yet the real challenge lies on the backend: implementing relational resolvers that can traverse complex schemas is often difficult and time-consuming.</p>
 <p>Yes, there are libraries that can spin up a GraphQL resolver quickly, but they often come with trade-offs: they're hard to customize, making it painful to add additional endpoints when your application grows beyond the basics.</p>
-<p>And perhaps the hardest challenge is access control and business logic. Real-world applications need fine-grained permissions and conditional query logic based on context - things that no technology currently on the market can easily solve.</p>
-<p><a href="https://github.com/SeaQL/seaography" target="_blank" rel="noopener noreferrer">Seaography</a> is designed to solve this problem.</p>
+<p>The hardest challenge is customization. Real-world applications demand fine-grained permissions and context-dependent business logic. <a href="https://github.com/SeaQL/seaography" target="_blank" rel="noopener noreferrer">Seaography</a> is designed to solve this exact problem, offering:</p>
+<ul>
+<li>Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem</li>
+<li>Extensive customization options and the ability to add custom endpoints easily</li>
+<li>Role-Based Access Control (RBAC) for authorization</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-what-is-seaography">🧭 What is Seaography<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#-what-is-seaography" class="hash-link" aria-label="Direct link to 🧭 What is Seaography" title="Direct link to 🧭 What is Seaography">​</a></h2>
 <p>A video is worth a thousand words, so let's look at a quick demo.</p>
 <video width="100%" muted="" playsinline="" controls=""><source src="/blog/img/Seaography%20Demo.mp4" type="video/mp4"><p>Your browser does not support the video tag.</p></video>
@@ -101,7 +105,7 @@ But the heavylifting is done by Seaography + SeaORM.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-seaorm-pro-a-seaography-showcase">🖥️ SeaORM Pro: A Seaography Showcase<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#%EF%B8%8F-seaorm-pro-a-seaography-showcase" class="hash-link" aria-label="Direct link to 🖥️ SeaORM Pro: A Seaography Showcase" title="Direct link to 🖥️ SeaORM Pro: A Seaography Showcase">​</a></h2>
 <img src="https://www.sea-ql.org/blog/img/sea-orm-pro-light.png#light">
 <img src="https://www.sea-ql.org/blog/img/sea-orm-pro-dark.png#dark">
-<p>With <a href="https://www.sea-ql.org/sea-orm-pro/" target="_blank" rel="noopener noreferrer">SeaORM Pro</a>, you can launch a ready-to-use admin panel in minutes. Built on Seaography, it demonstrates the seamless integration of the full technology stack - async Rust backend, React frontend, and GraphQL as the bridge.</p>
+<p>With <a href="https://www.sea-ql.org/sea-orm-pro/" target="_blank" rel="noopener noreferrer">SeaORM Pro</a>, you can launch a ready-to-use admin panel in minutes. Built on Seaography, it demonstrates the seamless integration of the full technology stack - async Rust backend, React frontend, and GraphQL as the protocol.</p>
 <p>SeaORM Pro has been updated to support the latest features in SeaORM 2.0, with <a href="https://www.sea-ql.org/blog/2025-09-30-sea-orm-rbac/" target="_blank" rel="noopener noreferrer">RBAC</a> support now available for preview in <a href="https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro-plus/" target="_blank" rel="noopener noreferrer">SeaORM Pro Plus</a>.</p>
 <p>Features:</p>
 <ul>
@@ -119,7 +123,7 @@ But the heavylifting is done by Seaography + SeaORM.</p>
 <p>In another sense, Seaography is like PostGraphile, offering instant GraphQL API for SQL databases:</p>
 <table><thead><tr><th>Seaography</th><th>PostGraphile</th></tr></thead><tbody><tr><td>MySQL, Postgres, SQLite, <a href="https://www.sea-ql.org/SeaORM-X/" target="_blank" rel="noopener noreferrer">SQL Server*</a></td><td>Postgres</td></tr><tr><td>Compiled schema</td><td>Runtime generated schema</td></tr><tr><td>SeaORM's RBAC</td><td>Postgres' RLS</td></tr><tr><td>Lifecycle hooks, builder context</td><td>Plugins</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="sponsors">Sponsors<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#sponsors" class="hash-link" aria-label="Direct link to Sponsors" title="Direct link to Sponsors">​</a></h2>
-<p>This Seaography release has been made possible through the generous sponsorship of <a href="https://qdx.co/" target="_blank" rel="noopener noreferrer">QDX</a> and their close collaboration with SeaQL.org. QDX has built their data‑driven applications with the Seaography + SeaORM stack, and we are deeply grateful for their contributions - both financial and technical - that helped bring this release to reality.</p>
+<p>This Seaography release has been made possible through the generous sponsorship of <a href="https://qdx.co/" target="_blank" rel="noopener noreferrer">QDX</a> and their close collaboration with SeaQL.org. QDX has built their data-driven applications with the Seaography + SeaORM stack, and we are deeply grateful for their contributions - both financial and technical - that helped bring this release to reality.</p>
 <p>We welcome companies to <a href="mailto:hello@sea-ql.org" target="_blank" rel="noopener noreferrer">collaborate with SeaQL.org</a> to adopt and unlock the full potential of the Rust + SeaQL ecosystem, with our team providing expert technical consulting to support their software development.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="gold-sponsor">Gold Sponsor<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#gold-sponsor" class="hash-link" aria-label="Direct link to Gold Sponsor" title="Direct link to Gold Sponsor">​</a></h3>
 <a href="https://qdx.co/"><img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="128"></a>
