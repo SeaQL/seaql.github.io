@@ -19,7 +19,7 @@ The hardest challenge is customization. Real-world applications demand fine-grai
 
 + Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem
 + Extensive customization options and the ability to add custom endpoints easily
-+ Authorization: Role-Based Access Control (RBAC) and Entity hooks / guards
++ Authorization: Role-Based Access Control (RBAC) and fine-grained control with hooks / guards
 
 ## 🧭 What is Seaography
 
@@ -280,7 +280,7 @@ Then we can define the mutation endpoint:
 ```rust
 #[CustomFields]
 impl Operations {
-    async fn maybe_rental_request(
+    async fn rental_request(
         ctx: &Context<'_>,
         rental_request: RentalRequest,
         //              ⬆ our custom input struct
@@ -385,7 +385,7 @@ Full example can be found [here](https://github.com/SeaQL/seaography/blob/main/e
 
 In Seaography, all logic is centralized in the same process, and it allows you to inject arbitrary custom logic throughout the request lifecycle using hooks. You can even implement access control this way.
 
-### Access Control
+### Fine‑grained Access Control
 
 Imagine you have a drawing app, and users can only access projects they own. You can implement the access control logic like the following:
 
