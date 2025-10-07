@@ -1,6 +1,6 @@
 ---
 slug: 2025-10-08-seaography
-title: "Seaography 2.0: Quick to Set Up, Easy to Extend GraphQL Framework"
+title: "Seaography 2.0: A Powerful and Extensible GraphQL Framework"
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
@@ -19,7 +19,7 @@ The hardest challenge is customization. Real-world applications demand fine-grai
 
 + Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem
 + Extensive customization options and the ability to add custom endpoints easily
-+ Role-Based Access Control (RBAC) for authorization
++ Authorization: Role-Based Access Control (RBAC) and Entity hooks / guards
 
 ## 🧭 What is Seaography
 
