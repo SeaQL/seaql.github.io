@@ -8,7 +8,7 @@
     <subtitle>SeaQL Blog</subtitle>
     <icon>https://www.sea-ql.org/blog/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Seaography 2.0: Quick to Set Up, Easy to Extend GraphQL Framework]]></title>
+        <title type="html"><![CDATA[Seaography 2.0: A Powerful and Extensible GraphQL Framework]]></title>
         <id>https://www.sea-ql.org/blog/2025-10-08-seaography/</id>
         <link href="https://www.sea-ql.org/blog/2025-10-08-seaography/"/>
         <updated>2025-10-08T00:00:00.000Z</updated>
@@ -20,7 +20,7 @@
 <ul>
 <li>Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem</li>
 <li>Extensive customization options and the ability to add custom endpoints easily</li>
-<li>Role-Based Access Control (RBAC) for authorization</li>
+<li>Authorization: Role-Based Access Control (RBAC) and Entity hooks / guards</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-what-is-seaography">🧭 What is Seaography<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#-what-is-seaography" class="hash-link" aria-label="Direct link to 🧭 What is Seaography" title="Direct link to 🧭 What is Seaography">​</a></h2>
 <p>A video is worth a thousand words, so let's look at a quick demo.</p>

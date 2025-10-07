@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Seaography 2.0: Quick to Set Up, Easy to Extend GraphQL Framework]]></title>
+            <title><![CDATA[Seaography 2.0: A Powerful and Extensible GraphQL Framework]]></title>
             <link>https://www.sea-ql.org/blog/2025-10-08-seaography/</link>
             <guid>https://www.sea-ql.org/blog/2025-10-08-seaography/</guid>
             <pubDate>Wed, 08 Oct 2025 00:00:00 GMT</pubDate>
@@ -21,7 +21,7 @@
 <ul>
 <li>Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem</li>
 <li>Extensive customization options and the ability to add custom endpoints easily</li>
-<li>Role-Based Access Control (RBAC) for authorization</li>
+<li>Authorization: Role-Based Access Control (RBAC) and Entity hooks / guards</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-what-is-seaography">🧭 What is Seaography<a href="https://www.sea-ql.org/blog/2025-10-08-seaography/#-what-is-seaography" class="hash-link" aria-label="Direct link to 🧭 What is Seaography" title="Direct link to 🧭 What is Seaography">​</a></h2>
 <p>A video is worth a thousand words, so let's look at a quick demo.</p>
