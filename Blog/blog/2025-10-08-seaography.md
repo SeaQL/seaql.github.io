@@ -19,7 +19,7 @@ And perhaps the hardest challenge is access control and business logic. Real-wor
 
 Seaography + SeaORM is designed to solve this problem.
 
-## What is Seaography
+## 🧭 What is Seaography
 
 A video is worth a thousand words, so let's look at a quick demo.
 
@@ -30,10 +30,10 @@ A video is worth a thousand words, so let's look at a quick demo.
 
 In under a minute, we've done the following:
 1. Generate SeaORM entities from an existing sakila database (SQLite in demo)
-2. Generate a GraphQL web server around the entities
+2. Generate a GraphQL web server around the entities (supports Axum, Actix, Poem)
 3. Launch it and run some queries with GraphQL playground
 
-This is of course a speed run, but you can follow the same steps easily, and the generated framework is fully customizable.
+This is of course a speed run, but you can follow the [same steps](https://github.com/SeaQL/seaography#quick-start---ready-to-serve-in-3-minutes) easily, and the generated framework is fully customizable.
 
 ### What kinds of queries are supported?
 
@@ -43,13 +43,14 @@ This is of course a speed run, but you can follow the same steps easily, and the
 {
   film(
     filters: {
-      title: { contains: "sea" }
-      # composable attribute filters
+      title: { contains: "sea" } # ⬅ like '%sea%'
       and: [{ releaseYear: { gt: "2000" } }, { length: { gt: 120 } }]
+      # ⬆ composable attribute filters
     }
     orderBy: { filmId: ASC }
-    # cursor based pagination is also supported
     pagination: { page: { page: 0, limit: 10 } }
+    # ⬆ cursor based pagination is also supported:
+    #    pagination: { cursor: { limit: 10, cursor: "Int[10]:100" } }
   ) {
     nodes {
       filmId
@@ -66,27 +67,28 @@ This is of course a speed run, but you can follow the same steps easily, and the
 
 #### Nested Relational Query
 
-The following query finds us all the documentaries starred by the actor "Bob" along with the stores having it in stock so that we can go rent it.
+The following query finds us all the documentaries starred by the actor "David" along with the stores having it in stock so that we can go rent it.
 
 ```graphql
 {
   film(
-    # filter by related entity
-    having: {
-      actor: { firstName: { eq: "Bob" } }
+    # ⬇ filter by related entity
+    having: { # ⬅ where exists (..) AND (..)
+      actor: { firstName: { eq: "David" } }
       category: { name: { eq: "Documentary" } }
     }
   ) {
     nodes {
       filmId
       title
-      # skipped the film_actor junction
+      # ⬇ skipped the film_actor junction
       actor {
         nodes {
           firstName
           lastName
         }
       }
+      # ⬇ nested relational query
       inventory {
         nodes {
           store {
@@ -111,7 +113,7 @@ film -> film_actor -> actor
      -> inventory -> store -> address -> city
 ```
 
-A data loader is used for resolving the relations, such that it does not suffers from N+1 problem.
+A data loader is used for resolving the relations, such that it does not suffers from the N+1 problem.
 
 #### Mutations: create, update, delete
 
@@ -119,6 +121,7 @@ Full CRUD is supported, including `CreateOne` `CreateBatch` `Update` and `Delete
 
 ```graphql
 mutation {
+  # ⬇ operations will be executed inside a transaction
   filmTextCreateBatch(
     data: [
       { filmId: 1, title: "Foo bar", description: "Lorem ipsum dolor sit amet" }
@@ -132,9 +135,9 @@ mutation {
 }
 ```
 
-## Custom Endpoints
+## Custom Query
 
-The above is not something entirely new, most features already exist in Seaography 1.0. The real game-changer is how you can implement custom endpoints and mix and match them with SeaORM entities. Let's dive into it!
+The above is not something entirely new, as some features already exist in [Seaography 1.0](https://www.sea-ql.org/blog/2024-07-01-graphql-support-with-loco-seaography/). The real game-changer is how you can implement custom endpoints and mix-and-match them with SeaORM entities. Let's dive into it!
 
 ### Custom Query with pagination
 
@@ -158,7 +161,7 @@ pub struct Model {
 }
 ```
 
-We want to create a custom endpoint, like the one Seaography already provides, but with a additional requirement: only return customers of the current store from which the user makes request from.
+We want to create a custom endpoint, like the one Seaography already provides, but with an additional requirement: only return customers of the current store from which the user makes request from.
 
 ```rust
 use seaography::{apply_pagination, Connection, CustomFields, PaginationInput};
@@ -199,7 +202,7 @@ customer_of_current_store(
 ): CustomerConnection!
 ```
 
-Query it like to following:
+Query it like the following:
 
 ```graphql
 {
@@ -222,6 +225,8 @@ Query it like to following:
 It's almost effortless, right? In just a few lines of code, we've added a new API endpoint that does a lot under the hood.
 But the heavylifting is done by Seaography + SeaORM.
 
+## How does it work?
+
 On a very high-level, how it all works:
 
 1. Seaography bridges SeaORM types with Async GraphQL, such that any SeaORM entity can be used as GraphQL output
@@ -239,29 +244,250 @@ The lifecycle of a GraphQL request:
 
 You may wonder, isn't the above kind of already possible by using Async GraphQL's derive macros, for example, by deriving [`SimpleObject`](https://docs.rs/async-graphql/latest/async_graphql/derive.SimpleObject.html) on a SeaORM entity?
 
-Actually this is how Seaography 0.1 works in the initial release. However, the complex queries we shown you in the beginning is only achievable with a dynamic schema, but in Async GraphQL the static and dynamic schemas are completely different type systems - they can't inter-operate. And there was no way to reuse generic components like above without generating tons of code underneath the surface... until now!
+Actually this is how [Seaography 0.1](https://www.sea-ql.org/blog/2022-09-17-introducing-seaography/) worked in its initial release. However, the complex queries we shown you in the beginning is only achievable with a dynamic schema, but in Async GraphQL the static and dynamic schemas are completely different type systems - they can't inter-operate ... until now!
 
-## 🖥️ SeaORM Pro: Professional Admin Panel
+The difference is, the transformation between SeaORM Model `<->` GraphQL Model happens dynamically, so there's not a ton of code generated beneath the surface.
+
+## Custom Mutation
+
+Let's continue on making custom mutation endpoints. Say now we want to create a transactional endpoint for staff members in store to handle customer rentals.
+
+First we can design the data structures for the input form:
+
+```rust
+use sea_orm::entity::prelude::{DateTimeUtc};
+use seaography::{async_graphql, CustomFields, CustomInputType};
+
+#[derive(Clone, CustomInputType)]
+pub struct RentalRequest {
+    pub customer: String,
+    pub film: String,
+    pub coupon: Option<Coupon>,
+    pub timestamp: DateTimeUtc,
+}
+
+#[derive(Clone, CustomInputType)]
+pub struct Coupon {
+    pub code: String,
+    pub points: Option<Decimal>,
+}
+```
+
+Then we can define the mutation endpoint:
+
+```rust
+#[CustomFields]
+impl Operations {
+    async fn maybe_rental_request(
+        ctx: &Context<'_>,
+        rental_request: RentalRequest,
+        //              ⬆ our custom input struct
+    ) -> async_graphql::Result<rental::Model> {
+        //                     ⬆ a normal SeaORM Model
+        let db = ctx.data::<DatabaseConnection>()?;
+        let session = ctx.data::<Session>()?;
+        let txn = db.begin().await?;
+        //  ⬆ create a transaction to make operation atomic
+
+        let customer = Customer::find_by_name(rental_request.customer, &txn).await?;
+        let film = Film::find_by_name(rental_request.film, &txn).await?;
+        //  ⬆ helper methods to find the corresponding customer and film
+
+        //  ⬇ find if there is inventory in current store
+        let inventory = Inventory::find()
+            .filter(inventory::Column::FilmId.eq(film.id))
+            .filter(inventory::Column::StoreId.eq(session.store_id))
+            .one(&txn)
+            .unwrap_or(Error::NoInventory)?;
+        //  ⬆ return error if no inventory
+
+        let rental = rental::ActiveModel {
+            rental_date: Set(rental_request.timestamp),
+            inventory_id: Set(inventory.id),
+            customer_id: Set(customer.id),
+            staff_id: Set(session.staff_id), // ⬅ current staff
+            last_update: Set(Utc::now()),
+            ..Default::default()
+        }.insert(&txn).await?;
+
+        inventory.delete(&txn).await?;
+        //       ⬆ now remove it from inventory
+        txn.commit().await?;
+        // ⬇ return the newly created rental record
+        Ok(rental)
+    }
+}
+```
+
+The `Coupon` object is used to demonstrate that nested objects are supported, and it will be reflected in the GraphQL schema. I will leave it as an exercise for you to fit in the logic for handling it.
+
+### Custom methods and unions
+
+The GraphQL type system is very expressive (so is Rust), and so I want to demonstrate two more advanced features:
+
+```rust
+#[derive(Clone, CustomInputType, CustomOutputType)]
+pub struct Rectangle {
+    pub origin: Point,
+    pub size: Size,
+}
+
+#[CustomFields]
+impl Rectangle {
+    pub async fn area(&self) -> async_graphql::Result<f64> {
+        //            ⬆ this is an instance method
+        Ok(self.size.width * self.size.height)
+    }
+}
+
+#[derive(Clone, CustomInputType, CustomOutputType)]
+pub struct Circle {
+    pub center: Point,
+    pub radius: f64,
+}
+
+#[CustomFields]
+impl Circle {
+    pub async fn area(&self) -> async_graphql::Result<f64> {
+        Ok(std::f64::consts::PI * self.radius * self.radius)
+    }
+}
+
+#[derive(Clone, CustomInputType, CustomOutputType)]
+pub enum Shape {
+    Rectangle(Rectangle),
+    Circle(Circle),
+    Triangle(Triangle),
+}
+```
+
+This will appear like below in the GraphQL schema:
+
+```graphql
+union Shape = Rectangle | Circle | Triangle
+
+type Rectangle {
+  origin: Point!
+  size: Size!
+  area: Float! # ⬅ as a 'computed property'
+}
+```
+
+The `area` method will only be invoked when a query includes this field. Note that it is an async function, so you can even do database queries inside the function. For example, you can return a `SimpleObject` from a related model.
+
+The union type definition allows you to use union types in input / output, a very natural construct in Rust.
+
+## Lifecycle hooks
+
+In Seaography, all logic is centralized in the same process, and it allows you to inject arbitrary custom logic throughout the request lifecycle using hooks. You can even implement access control this way.
+
+### Access Control
+
+Imagine you have a drawing app, and users can only access projects they own. You can implement the access control logic like the following:
+
+```rust
+struct AccessControlHook;
+
+impl LifecycleHooksInterface for AccessControlHook {
+    fn entity_filter(
+        &self,
+        ctx: &ResolverContext,
+        entity: &str,
+        _action: OperationType, // ⬅ Read, Create, Update, Delete
+    ) -> Option<Condition> {
+        let session = ctx.data::<Session>()?;
+        //  ⬆ extract user session
+        match entity {
+            "Project" => Some(
+                Condition::all()
+                    .add(project::Column::OwnerId.eq(session.user_id))
+                //  ⬆ add custom filter condition
+            ),
+            _ => None,
+        }
+    }
+}
+```
+
+By registering that into Seaography, this function will be called every time an Entity is being accessed:
+
+```rust
+lazy_static::lazy_static! {
+    static ref CONTEXT : BuilderContext = {
+        BuilderContext {
+            hooks: LifecycleHooks::new(AccessControlHook),
+            ..Default::default()
+        }
+    };
+}
+```
+
+### Other hooks
+
+There are many useful hooks for type conversion, access guard, event notification, etc.
+
+```rust
+pub trait LifecycleHooksInterface: Send + Sync {
+    /// This happens before an Entity is accessed
+    fn entity_guard(
+        &self, ctx: &ResolverContext, entity: &str, action: OperationType
+    ) -> GuardAction {
+        GuardAction::Allow
+    }
+
+    /// This happens after an Entity is mutated
+    async fn entity_watch(
+        &self, ctx: &ResolverContext, entity: &str, action: OperationType
+    ) {}
+}
+```
+
+## 🖥️ SeaORM Pro: A Seaography Showcase
 
 <img src="/blog/img/sea-orm-pro-light.png#light" />
 <img src="/blog/img/sea-orm-pro-dark.png#dark" />
 
-[SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required, but certainly nice to have!
+With [SeaORM Pro](https://www.sea-ql.org/sea-orm-pro/), you can launch a ready-to-use admin panel in minutes. Built on Seaography, it demonstrates the seamless integration of the full technology stack - async Rust backend, React frontend, and GraphQL as the bridge.
+
+SeaORM Pro has been updated to support the latest features in SeaORM 2.0, with [RBAC](https://www.sea-ql.org/blog/2025-09-30-sea-orm-rbac/) support now available for preview in [SeaORM Pro Plus](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro-plus/).
 
 Features:
 
 + Full CRUD
 + Built on React + GraphQL
-+ Built-in GraphQL resolver
 + Customize the UI with TOML config
++ GraphQL resolver using Seaography
 + Custom GraphQL endpoints *(new in 2.0)*
 + Role Based Access Control *(new in 2.0)*
 
-SeaORM Pro has been updated to support the latest features in SeaORM 2.0, with RBAC support now available for preview in [SeaORM Pro Plus](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro-plus/).
+## Conclusion
+
+It took us a long time to get here, but this is our vision for application development in Rust: a framework that makes it effortless to get started, gives developers a ton of functionality out of the box, and still provides the power and flexibility to build complex applications.
+
+We're heavily inspired by tools in the Python, Ruby and node.js ecosystem. You can draw some parallels between Seaography and FastAPI:
+
+| Seaography | FastAPI |
+|--------|-------|
+| GraphQL API | Rest API |
+| GraphQL schema | JSON Schema |
+| GraphQL Playground | Swagger UI |
+| Rust native types | Pydantic |
+| SeaORM | SQLModel |
+
+In another sense, Seaography is like PostGraphile, offering instant GraphQL API for SQL databases:
+
+| Seaography | PostGraphile |
+|--------|-------|
+| MySQL, Postgres, SQLite, [SQL Server*](https://www.sea-ql.org/SeaORM-X/) | Postgres |
+| Compiled schema | Runtime generated schema |
+| SeaORM's RBAC | Postgres' RLS |
+| Lifecycle hooks | Plugins |
 
 ## Sponsors
 
-If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
+This Seaography release has been made possible through the generous sponsorship of [QDX](https://qdx.co/) and their close collaboration with SeaQL.org. QDX has built their data‑driven applications with the Seaography + SeaORM stack, and we are deeply grateful for their contributions - both financial and technical - that helped bring this release to reality.
+
+We welcome companies to collaborate with SeaQL.org to adopt and unlock the full potential of the Rust + SeaQL ecosystem, with our team providing expert technical consulting to support their software development.
 
 ### Gold Sponsor
 
@@ -270,27 +496,16 @@ If you feel generous, a small donation will be greatly appreciated, and goes a l
 </a>
 
 [QDX](https://qdx.co/) pioneers quantum dynamics–powered drug discovery, leveraging AI and supercomputing to accelerate molecular modeling.
-We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit that powers their data intensive applications.
+We're grateful to QDX for sponsoring SeaQL.org.
 
 ### GitHub Sponsors
+
+If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
 
 A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
 
 <div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--lg" href="https://github.com/subscribepro">
-                <img src="https://avatars.githubusercontent.com/u/8466133?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Subscribe Pro</div>
-            </div>
-        </div>
-    </div>
-</div>
-<br/>
-<div class="row">
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/ryanswrt">
                 <img src="https://avatars.githubusercontent.com/u/87781?u=10a9d256e741f905f3dd2cf641de8b325720732e&v=4" />
@@ -300,7 +515,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/OteroRafael">
                 <img src="https://avatars.githubusercontent.com/u/175388115?v=4" />
@@ -310,7 +525,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/higumachan">
                 <img src="https://avatars.githubusercontent.com/u/1011298?u=de4c2f0d0929c2c6dc433981912f794d0e50f2cd&v=4" />
@@ -320,7 +535,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/wh7f">
                 <img src="https://avatars.githubusercontent.com/u/59872041?v=4" />
@@ -330,7 +545,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcson909">
                 <img src="https://avatars.githubusercontent.com/u/16665353?v=4" />
@@ -340,7 +555,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/numeusxyz">
                 <img src="https://avatars.githubusercontent.com/u/82152211?v=4" />
@@ -350,7 +565,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/data-intuitive">
                 <img src="https://avatars.githubusercontent.com/u/15045722?v=4" />
@@ -360,7 +575,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/caido-community">
                 <img src="https://avatars.githubusercontent.com/u/168573261?v=4" />
@@ -370,7 +585,7 @@ A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇
             </div>
         </div>
     </div>
-    <div class="col col--6 margin-bottom--md">
+    <div class="col col--4 margin-bottom--md">
         <div class="avatar">
             <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcusbuffett">
                 <img src="https://avatars.githubusercontent.com/u/1834328?u=fd066d99cf4a6333bfb3927d1c756af4bb8baf7e&v=4" />

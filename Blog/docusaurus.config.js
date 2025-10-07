@@ -62,14 +62,6 @@ module.exports = {
               label: 'LinkedIn',
               to: 'https://www.linkedin.com/company/sea-ql',
             },
-            {
-              label: 'DEV',
-              to: 'https://dev.to/seaql',
-            },
-            {
-              label: 'GSoC',
-              to: 'https://summerofcode.withgoogle.com/programs/2022/organizations/seaql',
-            },
           ],
         },
         {
@@ -82,10 +74,6 @@ module.exports = {
             {
               label: 'SeaQuery',
               to: 'https://github.com/SeaQL/sea-query',
-            },
-            {
-              label: 'StarfishQL',
-              to: 'https://www.sea-ql.org/StarfishQL/',
             },
             {
               label: 'Seaography',
