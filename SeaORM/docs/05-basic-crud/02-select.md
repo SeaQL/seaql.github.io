@@ -29,6 +29,7 @@ In addition to retrieving a model by primary key, you can also retrieve one or m
 let chocolate: Vec<cake::Model> = Cake::find()
     .filter(cake::Column::Name.contains("chocolate"))
     .order_by_asc(cake::Column::Name)
+    // shorthand for .order_by(cake::Column::Name, Order::Asc)
     .all(db)
     .await?;
 ```

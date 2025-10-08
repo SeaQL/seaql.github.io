@@ -84,7 +84,9 @@
 
     6.8 [Nested Selects](06-relation/09-nested-selects.md)
 
-    6.9 [Relational Query](06-relation/10-related-query.md)
+    6.9 [Multi Selects](06-relation/10-multi-selects.md)
+
+    6.10 [Relational Query](06-relation/11-relational-query.md)
 
 7. Writing Tests
 
