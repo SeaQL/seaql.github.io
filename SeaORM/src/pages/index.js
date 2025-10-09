@@ -41,10 +41,10 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <HomepageProducts />
         <HomepageExample />
         <HomepageSeaography />
         <HomepageSeaOrmPro />
-        <HomepageProducts />
         <HomepageSponsors />
         <HomepageStickerPack />
         <HomepageMascot />

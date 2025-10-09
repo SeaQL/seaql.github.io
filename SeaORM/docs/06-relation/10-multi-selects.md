@@ -1,8 +1,8 @@
-## Multi Selects
+# Multi Selects
 
 In the previous chapter, we used partial models for querying multiple entities together. We can achieve the same using the multi-select API.
 
-### Select Three Models
+## Select Three Models
 
 ```rust
 Order -> LineItem -> Cake
