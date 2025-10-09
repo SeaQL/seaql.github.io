@@ -365,6 +365,15 @@ struct Cake {
 }
 
 // the exact same select query
+let items: Vec<Order> = order::Entity::find()
+    .left_join(customer::Entity)
+    .left_join(lineitem::Entity)
+    .join(JoinType::LeftJoin, lineitem::Relation::Cake.def())
+    .order_by_asc(order::Column::Id)
+    .order_by_asc(lineitem::Column::Id)
+    .into_partial_model()
+    .all(db)
+    .await?;
 
 assert_eq!(
     items,
