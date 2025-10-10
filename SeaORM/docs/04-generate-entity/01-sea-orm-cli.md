@@ -67,6 +67,14 @@ Command line options:
 - `--enum-extra-attributes`: append extra attributes to generated enums
 - `--seaography`: generate addition structs in entities for seaography integration
 
+since 1.1.6:
+- `--with-prelude`:
+    - `all`: the default value, cli tool behaves as it does right now (so no breaking changes), it will generates the prelude.rs file and add it to mod.rs (or lib.rs).
+    - `none`: it WILL NOT generates the prelude.rs file and it WILL NOT add it to mod.rs.
+    - `all-allow-unused-imports`: it generates the prelude.rs file and add it to mod.rs, BUT the following inner attribute `#![allow(unused_imports)]` is appended to prelude.rs heading.
+- `--impl-active-model-behavior`: generate empty `ActiveModelBehavior` impls
+- `--acquire_timeout`: acquire timeout in seconds of the connection used for schema discovery
+
 ```shell
 # Generate entity files of database `bakery` to `entity/src`
 sea-orm-cli generate entity -u protocol://username:password@localhost/bakery -o entity/src
