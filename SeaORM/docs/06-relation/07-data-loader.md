@@ -46,8 +46,10 @@ You can stack these together:
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
 let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
-let fillings: Vec<Vec<filling::Model>> = cakes.load_many_to_many(Filling, CakeFilling, db).await?;
+let fillings: Vec<Vec<filling::Model>> = cakes.load_many(Filling, db).await?;
 ```
+
+## Load related entity with additional filter condition
 
 In an advanced use case, you can apply filters on the related entity:
 

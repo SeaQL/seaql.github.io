@@ -102,11 +102,15 @@ let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 
 #### Many to Many
 
-Use the [load_many_to_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many_to_many) method. You have to provide the junction Entity.
+Use the same [load_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
+
+:::tip Since `2.0.0`
+You don't have to provide the junction Entity. It's where SeaORM shines!
+:::
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
-let fillings: Vec<Vec<filling::Model>> = cakes.load_many_to_many(Filling, CakeFilling, db).await?;
+let fillings: Vec<Vec<filling::Model>> = cakes.load_many(Filling, db).await?;
 ```
 
 ## Paginate Result
