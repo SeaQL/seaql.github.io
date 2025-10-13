@@ -94,3 +94,19 @@ impl Related<super::cake::Entity> for Entity {
 }
 ```
 </details>
+
+## Composite Foreign Key
+
+Composite foreign key is supported using a tuple syntax.
+
+```rust
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::cake::Entity",
+        from = "(Column::CakeId, Column::VariantId)",
+        to = "(super::cake::Column::Id, super::cake::Column::VariantId)",
+    )]
+    CakeFilling,
+}
+```

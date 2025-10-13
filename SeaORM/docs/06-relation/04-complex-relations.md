@@ -170,7 +170,7 @@ How can we define the `Fruit` Entity?
 By default, `has_many` invokes the `Related` trait to define the relation.
 As a consequence, it's not possible to define the Relation without `Related` impl.
 
-Here we have to specify the Relation variant of the related entity manually with the `via` attribute.
+Here we have to specify the Relation variant of the related entity manually with the `via_rel` attribute.
 
 ```rust
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
@@ -183,9 +183,9 @@ pub struct Model {
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
-    #[sea_orm(has_many = "super::cake::Entity", via = "Relation::Topping")]
+    #[sea_orm(has_many = "super::cake::Entity", via_rel = "Relation::Topping")]
     CakeTopping,
-    #[sea_orm(has_many = "super::cake::Entity", via = "Relation::Filling")]
+    #[sea_orm(has_many = "super::cake::Entity", via_rel = "Relation::Filling")]
     CakeFilling,
 }
 ```
