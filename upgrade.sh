@@ -10,6 +10,7 @@ cd SeaORM
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer prismjs
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
@@ -25,6 +26,7 @@ cd SeaORM-X
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer prismjs
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
@@ -40,6 +42,7 @@ cd sea-orm-pro
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer prismjs
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
@@ -55,6 +58,7 @@ cd Blog
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
@@ -70,6 +74,7 @@ cd Seaography
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
@@ -85,6 +90,7 @@ cd SeaStreamer
 [[ -d .pnp.loader.mjs ]] && rm -rf .pnp.loader.mjs
 [[ -d build ]] && rm -rf build
 yarn up @docusaurus/core @docusaurus/plugin-content-docs @docusaurus/preset-classic @docusaurus/theme-common
+yarn up prism-react-renderer prismjs
 npx -y update-browserslist-db@latest
 yarn install
 yarn build
