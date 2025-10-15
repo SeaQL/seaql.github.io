@@ -205,6 +205,9 @@ function HomepageFeatures() {
             </div>
           </div>
         </div>
+
+        {/* TODO: add a new section to mention RBAC */}
+
         <div class="mt-12 rounded-xl border border-gray-400/30 bg-gray-100 p-12 text-center dark:border-gray-600/20 dark:bg-gray-900 sm:mt-12 sm:p-20 lg:mt-16 xl:p-24">
           <h3 class="text-4xl font-semibold text-gray-900 dark:text-white lg:text-5xl">
             Start Building Today

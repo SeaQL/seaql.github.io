@@ -24,6 +24,10 @@
 
     3.3 [Dashboard](03-site-config/03-dashboard.md)
 
+    3.4 [Navbar](03-site-config/04-navbar.md)
+
+    3.5 [Role Based Access Control](03-site-config/05-rbac.md)
+
 4. Raw Table Config
 
     4.1 [Overview](04-raw-table-config/01-overview.md)

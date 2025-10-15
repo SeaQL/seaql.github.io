@@ -251,7 +251,7 @@ $ cargo run
 Visit [http://localhost:8000/admin](http://localhost:8000/admin) and login with your registered user.
 
 ```
-Username: demo@sea-ql.org
+Username: admin@sea-ql.org
 Password: demo@sea-ql.org
 ```
 

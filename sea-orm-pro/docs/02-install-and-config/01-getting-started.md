@@ -9,6 +9,15 @@ It involves:
 2. Generate entities
 3. Launch!
 
+Download the source code from [SeaORM Pro](https://github.com/SeaQL/sea-orm-pro) / [SeaORM Pro Plus](https://github.com/SeaQL/sea-orm-pro-plus) then follow the steps below.
+
+```sh
+# Clone the source code then go into the directory
+git clone https://github.com/SeaQL/sea-orm-pro.git && cd sea-orm-pro
+# Or
+git clone https://github.com/SeaQL/sea-orm-pro-plus.git && cd sea-orm-pro-plus
+```
+
 ## 1. Environment setup
 
 1. Modify `.env` with your database credentials, here it uses SQLite as the default database, so you don't have to setup anything.
