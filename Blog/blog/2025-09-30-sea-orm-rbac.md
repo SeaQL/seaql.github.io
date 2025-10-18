@@ -421,8 +421,6 @@ RBAC-related features in SeaORM Pro Plus:
 
 ## Sponsors
 
-If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
-
 ### Gold Sponsor
 
 <a href="https://qdx.co/">
@@ -434,180 +432,95 @@ We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit 
 
 ### GitHub Sponsors
 
+If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
+
 A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL) 😇:
 
-<div class="row">
-    <div class="col col--12 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--lg" href="https://github.com/subscribepro">
-                <img src="https://avatars.githubusercontent.com/u/8466133?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Subscribe Pro</div>
-            </div>
-        </div>
+<div class="row margin-left--sm">
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/ryanswrt">
+            <img src="https://avatars.githubusercontent.com/u/87781?u=10a9d256e741f905f3dd2cf641de8b325720732e&v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/OteroRafael">
+            <img src="https://avatars.githubusercontent.com/u/175388115?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/higumachan">
+            <img src="https://avatars.githubusercontent.com/u/1011298?u=de4c2f0d0929c2c6dc433981912f794d0e50f2cd&v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/wh7f">
+            <img src="https://avatars.githubusercontent.com/u/59872041?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcson909">
+            <img src="https://avatars.githubusercontent.com/u/16665353?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/numeusxyz">
+            <img src="https://avatars.githubusercontent.com/u/82152211?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/data-intuitive">
+            <img src="https://avatars.githubusercontent.com/u/15045722?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/caido-community">
+            <img src="https://avatars.githubusercontent.com/u/168573261?v=4" />
+        </a>
+    </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcusbuffett">
+            <img src="https://avatars.githubusercontent.com/u/1834328?u=fd066d99cf4a6333bfb3927d1c756af4bb8baf7e&v=4" />
+        </a>
     </div>
 </div>
 <br/>
-<div class="row">
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/ryanswrt">
-                <img src="https://avatars.githubusercontent.com/u/87781?u=10a9d256e741f905f3dd2cf641de8b325720732e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Ryan Swart</div>
-            </div>
-        </div>
+<div class="row margin-left--sm">
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/yuly3">
+            <img src="https://avatars.githubusercontent.com/u/25814001?u=4b57756e7d8060e48262a9edba687927fe7934a6&v=4" />
+        </a>
     </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/OteroRafael">
-                <img src="https://avatars.githubusercontent.com/u/175388115?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">OteroRafael</div>
-            </div>
-        </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/kallydev">
+            <img src="https://avatars.githubusercontent.com/u/36319157?u=5be882aa4dbe7eea97b1a80a6473857369146df6&v=4" />
+        </a>
     </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/higumachan">
-                <img src="https://avatars.githubusercontent.com/u/1011298?u=de4c2f0d0929c2c6dc433981912f794d0e50f2cd&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Yuta Hinokuma</div>
-            </div>
-        </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/manfredcml">
+            <img src="https://avatars.githubusercontent.com/u/27536502?u=b71636bdabbc698458b32e2ac05c5771ad41097e&v=4" />
+        </a>
     </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/wh7f">
-                <img src="https://avatars.githubusercontent.com/u/59872041?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">wh7f</div>
-            </div>
-        </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tugascript">
+            <img src="https://avatars.githubusercontent.com/u/64930104?u=ad9f63e8e221dbe71bf23de59e3611c99cda1181&v=4" />
+        </a>
     </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcson909">
-                <img src="https://avatars.githubusercontent.com/u/16665353?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">MS</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/numeusxyz">
-                <img src="https://avatars.githubusercontent.com/u/82152211?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Numeus</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/data-intuitive">
-                <img src="https://avatars.githubusercontent.com/u/15045722?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Data Intuitive</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/caido-community">
-                <img src="https://avatars.githubusercontent.com/u/168573261?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Caido Community</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcusbuffett">
-                <img src="https://avatars.githubusercontent.com/u/1834328?u=fd066d99cf4a6333bfb3927d1c756af4bb8baf7e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Marcus Buffett</div>
-            </div>
-        </div>
-    </div>
-</div>
-<br/>
-<div class="row">
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/yuly3">
-                <img src="https://avatars.githubusercontent.com/u/25814001?u=4b57756e7d8060e48262a9edba687927fe7934a6&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">MasakiMiyazaki</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/kallydev">
-                <img src="https://avatars.githubusercontent.com/u/36319157?u=5be882aa4dbe7eea97b1a80a6473857369146df6&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">KallyDev</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/manfredcml">
-                <img src="https://avatars.githubusercontent.com/u/27536502?u=b71636bdabbc698458b32e2ac05c5771ad41097e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Manfred Lee</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tugascript">
-                <img src="https://avatars.githubusercontent.com/u/64930104?u=ad9f63e8e221dbe71bf23de59e3611c99cda1181&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Afonso Barracha</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/deansheather">
-                <img src="https://avatars.githubusercontent.com/u/11241812?u=260538c7d8b8c3c5350dba175ebb8294358441e0&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Dean Sheather</div>
-            </div>
-        </div>
+    <div class="avatar">
+        <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/deansheather">
+            <img src="https://avatars.githubusercontent.com/u/11241812?u=260538c7d8b8c3c5350dba175ebb8294358441e0&v=4" />
+        </a>
     </div>
 </div>
 
-## Rustacean Sticker Pack 🦀
+## 🦀 Rustacean Sticker Pack
 
 The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
 Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
-
-Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
 
 Sticker Pack Contents:
-- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
-- Mascot of SeaQL: Terres the Hermit Crab
-- Mascot of Rust: Ferris the Crab
-- The Rustacean word
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography
+- Mascots: Ferris the Crab x 3, Terres the Hermit Crab
+- The Rustacean wordmark
 
 [Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
 

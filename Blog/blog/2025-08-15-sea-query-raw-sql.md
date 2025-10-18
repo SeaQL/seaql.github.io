@@ -252,19 +252,15 @@ It almost feels like a mini ORM ... although [SeaORM 🐚](https://github.com/Se
 
 This is just one of many new features we've added while preparing [SeaQuery 1.0](https://www.sea-ql.org/blog/2025-08-30-sea-query-1.0/). This is currently an `rc` release, but we plan to finalize it soon. If you have ideas please [join the discussion](https://github.com/SeaQL/sea-query/discussions/795).
 
-## Rustacean Sticker Pack 🦀
+## 🦀 Rustacean Sticker Pack
 
 The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
 Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
-Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
-
-Moreover, all proceeds contributes directly to the ongoing development of SeaQL projects.
 
 Sticker Pack Contents:
-- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography, FireDBG
-- Mascot of SeaQL: Terres the Hermit Crab
-- Mascot of Rust: Ferris the Crab
-- The Rustacean word
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography
+- Mascots: Ferris the Crab x 3, Terres the Hermit Crab
+- The Rustacean wordmark
 
 [Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
 
