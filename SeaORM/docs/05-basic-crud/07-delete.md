@@ -39,7 +39,7 @@ assert_eq!(res.rows_affected, 2);
 
 ## Returning Deleted Models
 
-Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+Postgres and SQLite only, MariaDB requires the `mariadb-use-returning` feature flag.
 
 ```rust
 assert_eq!(

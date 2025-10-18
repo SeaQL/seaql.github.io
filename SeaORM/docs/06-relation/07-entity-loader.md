@@ -57,7 +57,7 @@ impl EntityLoader {
         let mut select = self.select;
 
         if self.with.fruit {
-            select = select.find_also(Entity, super::fruit::Entity)
+            select = select.find_also(Entity, super::fruit::Entity);
         }
 
         let mut cakes = Vec::new();

@@ -67,7 +67,7 @@ Fruit::update_many().filter(fruit::Column::Id.eq_any(vec![2, 3]))
 
 ## Returning Updated Models
 
-Postgres only, SQLite requires the `sqlite-use-returning-for-3_35` feature flag.
+Postgres and SQLite only, MariaDB requires the `mariadb-use-returning` feature flag.
 
 ```rust
 let fruits: Vec<fruit::Model> = Fruit::update_many()
