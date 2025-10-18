@@ -5,24 +5,17 @@ Let's look at a simple [Cake](https://github.com/SeaQL/sea-orm/blob/master/src/t
 ```rust
 use sea_orm::entity::prelude::*;
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "cake")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::fruit::Entity")]
-    Fruit,
-}
-
-impl Related<super::fruit::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Fruit.def()
-    }
+    #[sea_orm(has_one)]
+    pub fruit: Option<super::fruit::Entity>,
+    #[sea_orm(has_many, via = "cake_filling")]
+    pub fillings: Vec<super::filling::Entity>,
 }
 
 impl ActiveModelBehavior for ActiveModel {}
@@ -30,7 +23,7 @@ impl ActiveModelBehavior for ActiveModel {}
 
 :::info
 
-Do not delete the `Relation` enum or `ActiveModelBehavior` impl block even if they are empty.
+Do not delete the `ActiveModelBehavior` impl block even if it is empty.
 :::
 
 ## Entity
@@ -177,25 +170,6 @@ pub struct Model {
 ```
 
 ## Relation
-
-`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html).
-
-```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::fruit::Entity")]
-    Fruit,
-}
-```
-
-If there are no relations, simply write:
-
-```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
-```
-
-The [Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
 
 Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapter.
 

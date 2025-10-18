@@ -10,11 +10,25 @@ A one-to-one relation is the most basic type of database relation. Let say a `Ca
 ## Defining the Relation
 
 On the `Cake` entity, to define the relation:
-1. Add a new variant `Fruit` to the `Relation` enum.
-1. Define it with `has_one`.
-1. Implement the `Related<Entity>` trait.
+1. Add a new field `fruit` to the `Model`.
+1. Annotate it with `has_one`.
 
-```rust title="entity/cake.rs"
+```rust {7,8} title="entity/cake.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "cake")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(has_one)]
+    pub fruit: HasOne<super::fruit::Entity>,
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
+
+```rust {3,4,9} title="entity/cake.rs"
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(has_one = "super::fruit::Entity")]
@@ -27,34 +41,7 @@ impl Related<super::fruit::Entity> for Entity {
     }
 }
 ```
-
-<details>
-    <summary>It's expanded to:</summary>
-
-```rust {3,9,16} title="entity/cake.rs"
-#[derive(Copy, Clone, Debug, EnumIter)]
-pub enum Relation {
-    Fruit,
-}
-
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::Fruit => Entity::has_one(super::fruit::Entity).into(),
-        }
-    }
-}
-
-impl Related<super::fruit::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Fruit.def()
-    }
-}
-```
 </details>
-
-Alternatively, the definition can be shortened by the `DeriveRelation` macro,
-where the following eliminates the need for the `RelationTrait` implementation above:
 
 ## Defining the Inverse Relation
 
@@ -67,25 +54,21 @@ The rule of thumb is, always define a `belongs_to` on the Entity with a foreign 
 :::
 
 To define the inverse relation:
-1. Add a new enum variant `Relation::Cake` to the `Fruit` entity.
-1. Write the definition of it with the `Entity::belongs_to()` method, we always define the inverse relation using this method.
+1. Add a new field `cake` to the fruit `Model`.
+1. Annotate the relation with `belongs_to`.
 1. Implement the `Related<cake::Entity>` trait.
 
-```rust title="entity/fruit.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::cake::Entity",
-        from = "Column::CakeId",
-        to = "super::cake::Column::Id"
-    )]
-    Cake,
-}
-
-impl Related<super::cake::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Cake.def()
-    }
+```rust {9,10} title="entity/fruit.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "fruit")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(unique)]
+    pub cake_id: Option<i32>,
+    #[sea_orm(belongs_to, from = "cake_id", to = "id")]
+    pub cake: HasOne<super::cake::Entity>,
 }
 ```
 

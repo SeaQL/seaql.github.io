@@ -149,3 +149,24 @@ assert_eq!(
     )]
 );
 ```
+
+## Select up to six Models
+
+:::tip Since `2.0.0`
+:::
+
+```rust
+// join paths:
+// one -> two -> three -> four -> five
+// one -> six
+let (one, two, three, four, five, six) = one::Entity::find()
+    //         from entity -> to entity
+    .find_also(one::Entity,   two::Entity)   // same as .find_also_related(two::Entity)
+    .find_also(two::Entity,   three::Entity) // same as .and_also_related(three::Entity)
+    .find_also(three::Entity, four::Entity)
+    .find_also(four::Entity,  five::Entity)
+    .find_also(one::Entity,   six::Entity)
+    .one(db)
+    .await?
+    .unwrap();
+```

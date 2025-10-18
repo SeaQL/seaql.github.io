@@ -55,7 +55,7 @@ let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 ### Eager Loading
 
-All related models are loaded at once. This provides minimum database round trips compared to lazy loading.
+All related models are loaded in the same query with join.
 
 #### One to One
 
@@ -76,11 +76,44 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-### Batch Loading
+### Entity Loader
 
-Since 0.11, we introduced a [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) to load related entities in batches.
+You can load related Entities into a nested struct called `ModelEx`.
 
-Compared to eager loading, it saves bandwidth (consider the one to many case, the one side rows may duplicate) at the cost of one (or two, in the case of many to many) more database roundtrip.
+:::tip Since `2.0.0`
+This requires the `#[sea_orm::model]` or `#[sea_orm::compact_model]` macro on entity definition. Learn more [here](https://www.sea-ql.org/blog/2025-10-20-sea-orm-2.0/).
+:::
+
+```rust
+// join paths:
+// cake -> fruit
+// cake -> cake_filling -> filling
+
+let super_cake = cake::Entity::load()
+    .with(fruit::Entity) // 1-1 uses join
+    .with(filling::Entity) // M-N uses data loader
+    .one(db)
+    .await?
+    .unwrap();
+
+super_cake
+    == cake::ModelEx {
+        id: 12,
+        name: "Black Forest".into(),
+        fruit: Some(fruit::ModelEx {
+            name: "Cherry".into(),
+        }.into()),
+        fillings: vec![filling::ModelEx {
+            name: "Chocolate".into(),
+        }],
+    };
+```
+
+### Model Loader
+
+Use the [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) to load related entities in batches.
+
+Compared to eager loading, it saves bandwidth (consider the one to many case, the one side rows may duplicate) at the cost of one more database query.
 
 #### One to One
 
@@ -151,7 +184,7 @@ for cake in cursor.last(10).all(db).await? {
 }
 ```
 
-Paginate rows based on a composite primary key is also available.
+Paginate rows based on a composite primary keys are also supported.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake_filling};
@@ -164,6 +197,24 @@ let rows = cake_filling::Entity::find()
     .await?;
 ```
 
-## Select custom
+## Select Partial Model
 
-If you want to select custom columns and expressions, read the [custom select](08-advanced-query/01-custom-select.md) section.
+If you want to select just a subset of columns, you can define a Partial Model.
+
+```rust
+use sea_orm::DerivePartialModel;
+
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity")]
+struct CakeWithFruit {
+    name: String,
+    #[sea_orm(nested)]
+    fruit: Option<fruit::Model>, // this can be a regular or another partial model
+}
+
+let cakes: Vec<CakeWithFruit> = Cake::find()
+    .left_join(fruit::Entity)
+    .into_partial_model() // only the columns in the partial model will be selected
+    .all(db)
+    .await?;
+```

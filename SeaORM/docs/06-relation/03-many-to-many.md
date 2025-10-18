@@ -6,7 +6,27 @@ A many-to-many relation is formed by three tables, where two tables are related 
 
 ## Defining the Relation
 
-On the `Cake` entity, implement the `Related<filling::Entity>` trait.
+On the `Cake` entity, to define the relation:
+1. Add a new field `filling` to the `Model`.
+1. Annotate it with `has_many`, and specify the junction table with `via`.
+
+```rust {10,11} title="entity/cake.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "cake")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+    #[sea_orm(has_one)]
+    pub fruit: HasOne<super::fruit::Entity>,
+    #[sea_orm(has_many, via = "cake_filling")] // M-N relation with junction
+    pub fillings: HasMany<super::filling::Entity>,
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
 
 `Relation` in SeaORM is an arrow: it has `from` and `to`. `cake_filling::Relation::Cake` defines `CakeFilling -> Cake`. Calling [`rev`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) reverses it into `Cake -> CakeFilling`.
 
@@ -26,30 +46,51 @@ impl Related<super::filling::Entity> for Entity {
     }
 }
 ```
+</details>
 
-Similarly, on the `Filling` entity, implement the `Related<cake::Entity>` trait. First, join with intermediate table `via` the inverse of `cake_filling::Relation::Filling` relation, then join `to` `Cake` entity  with `cake_filling::Relation::Cake` relation.
+Similarly, on the `Filling` entity:
 
-```rust {3,7} title="entity/filling.rs"
-impl Related<super::cake::Entity> for Entity {
-    fn to() -> RelationDef {
-        super::cake_filling::Relation::Cake.def()
-    }
-
-    fn via() -> Option<RelationDef> {
-        Some(super::cake_filling::Relation::Filling.def().rev())
-    }
+```rust {8,9} title="entity/cake.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "filling")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+    #[sea_orm(has_many, via = "cake_filling")]
+    pub cakes: HasMany<super::cake::Entity>,
 }
 ```
 
-## Defining the Inverse Relation
+## Defining the Junction Table
 
 On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity, and its `filling_id` attribute is referencing the primary key of `Filling` entity.
 
 To define the inverse relation:
-1. Add two new variants `Cake` and `Filling` to the `Relation` enum.
-1. Define both relations with `Entity::belongs_to()`.
+1. Add two new fields `cake` and `filling` to the `Model`.
+1. Define both relations with `belongs_to`.
 
-```rust title="entity/cake_filling.rs"
+```rust {9-12} title="entity/cake_filling.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "cake_filling")]
+pub struct Model {
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub cake_id: i32,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub filling_id: i32,
+    #[sea_orm(belongs_to, from = "cake_id", to = "id")]
+    pub cake: Option<super::cake::Entity>,
+    #[sea_orm(belongs_to, from = "filling_id", to = "id")]
+    pub filling: Option<super::filling::Entity>,
+}
+```
+
+<details>
+    <summary>It's expanded to:</summary>
+
+```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
@@ -66,76 +107,38 @@ pub enum Relation {
     Filling,
 }
 ```
-
-<details>
-    <summary>It's expanded to:</summary>
-
-```rust
-#[derive(Copy, Clone, Debug, EnumIter)]
-pub enum Relation {
-    Cake,
-    Filling,
-}
-
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::Cake => Entity::belongs_to(super::cake::Entity)
-                .from(Column::CakeId)
-                .to(super::cake::Column::Id)
-                .into(),
-            Self::Filling => Entity::belongs_to(super::filling::Entity)
-                .from(Column::FillingId)
-                .to(super::filling::Column::Id)
-                .into(),
-        }
-    }
-}
-```
 </details>
 
 ## Limitation of Codegen
 
-`sea-orm-cli` can generate the `Related` trait implementations for you, so you don't have to write them by hand in most cases.
+Usually, the `Related` trait implementations are automatically generated. However, they will not be generated if there exists multiple relations to a related Entity.
 
-However, they will not be generated if there exists multiple paths via an intermediate table.
+The relation enum variant will still be generated, so they can be used in joins.
+
+```rust
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "cake_with_many_fruits")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub fruit_id1: i32,
+    pub fruit_id2: i32,
+    #[sea_orm(belongs_to, relation_enum = "Fruit1", from = "fruit_id1", to = "id")]
+    pub fruit_1: HasOne<super::fruit::Entity>,
+    #[sea_orm(belongs_to, relation_enum = "Fruit2", from = "fruit_id2", to = "id")]
+    pub fruit_2: HasOne<super::fruit::Entity>,
+}
+
+// expands to:
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(belongs_to = ..)]
+    Fruit1,
+    #[sea_orm(belongs_to = ..)]
+    Fruit2,
+}
+```
+
 The solution is to define relations with the `Linked` which will be described in the next chapter.
-
-For example, in the schema defined below, there are two paths:
-+ Path 1. `users <-> users_votes <-> bills`
-+ Path 2. `users <-> users_saved_bills <-> bills`
-
-Therefore, the implementation of `Related<R>` will not be generated.
-
-```sql
-CREATE TABLE users
-(
-  id uuid  PRIMARY KEY  DEFAULT uuid_generate_v1mc(),
-  email TEXT UNIQUE NOT NULL,
-  ...
-);
-```
-```sql
-CREATE TABLE bills
-(
-  id uuid  PRIMARY KEY  DEFAULT uuid_generate_v1mc(),
-  ...
-);
-```
-```sql
-CREATE TABLE users_votes
-(
-  user_id uuid REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  bill_id uuid REFERENCES bills (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  vote boolean NOT NULL,
-  CONSTRAINT users_bills_pkey PRIMARY KEY (user_id, bill_id)
-);
-```
-```sql
-CREATE TABLE users_saved_bills
-(
-  user_id uuid REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  bill_id uuid REFERENCES bills (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT users_saved_bills_pkey PRIMARY KEY (user_id, bill_id)
-);
-```

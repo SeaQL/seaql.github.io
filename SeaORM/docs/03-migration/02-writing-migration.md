@@ -1,5 +1,31 @@
 # Writing Migration
 
+In this chapter we will illustrate a schema first approach: you write migrations first and then generate entities from a live database.
+
+## Schema first vs Entity first
+
+SeaORM also supports an Entity first approach: your entities are the source of truth, and you run run DDL on the database to match your entity definition. 
+
+:::tip Since `2.0.0`
+The following requires the `schema-sync` feature flag.
+:::
+
+```rust
+// it doesn't matter which order you register entities.
+// SeaORM figures out the foreign key dependencies and
+// creates the tables in the right order along with foreign keys
+db.get_schema_builder()
+    .register(cake::Entity)
+    .register(cake_filling::Entity)
+    .register(filling::Entity)
+    .sync(db) // synchronize the schema with database, 
+              // will create missing tables, columns, indexes, foreign keys.
+              // this operation is addition only, will not drop anything.
+    .await?;
+```
+
+## The basics of Migrations
+
 Each migration contains two methods: `up` and `down`. The `up` method is used to alter the database schema, such as adding new tables, columns or indexes, while the `down` method revert the actions performed in the `up` method.
 
 The SeaORM migration system has the following advantages:
@@ -75,49 +101,11 @@ See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/mana
 
 Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
-You can use the [`DeriveIden`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveIden.html) macro to define identifiers that will be used in your migration.
-
-```rust
-#[derive(DeriveIden)]
-enum Post {
-    Table, // this is a special case; will be mapped to `post`
-    Id,
-    Title,
-    #[sea_orm(iden = "full_text")] // Renaming the identifier
-    Text,
-}
-
-assert_eq!(Post::Table.to_string(), "post");
-assert_eq!(Post::Id.to_string(), "id");
-assert_eq!(Post::Title.to_string(), "title");
-assert_eq!(Post::Text.to_string(), "full_text");
-```
-
 Here are some common DDL snippets you may find useful.
 
 #### Schema Creation Methods
 - Create Table
     ```rust
-    use sea_orm::{EnumIter, Iterable};
-
-    #[derive(DeriveIden)]
-    enum Post {
-        Table,
-        Id,
-        Title,
-        #[sea_orm(iden = "text")] // Renaming the identifier
-        Text,
-        Category,
-    }
-
-    #[derive(Iden, EnumIter)]
-    pub enum Category {
-        #[iden = "Feed"]
-        Feed,
-        #[iden = "Story"]
-        Story,
-    }
-
     // Remember to import `sea_orm_migration::schema::*` schema helpers into scope
     use sea_orm_migration::{prelude::*, schema::*};
 
@@ -125,31 +113,12 @@ Here are some common DDL snippets you may find useful.
     manager
         .create_table(
             Table::create()
-                .table(Post::Table)
+                .table("post")
                 .if_not_exists()
-                .col(pk_auto(Post::Id))
-                .col(string(Post::Title))
-                .col(string(Post::Text))
-                .col(enumeration_null(Post::Category, "category", Category::iter()))
-        )
-        .await
-
-    // above is equivalent to:
-    manager
-        .create_table(
-            Table::create()
-                .table(Post::Table)
-                .if_not_exists()
-                .col(ColumnDef::new(Post::Id)
-                        .integer()
-                        .not_null()
-                        .auto_increment()
-                        .primary_key()
-                )
-                .col(ColumnDef::new(Post::Title).string().not_null())
-                .col(ColumnDef::new(Post::Text).string().not_null())
-                .col(ColumnDef::new(Post::Category)
-                        .enumeration("category", Category::iter()))
+                .col(pk_auto("id"))
+                .col(string("title"))
+                .col(string("text"))
+                .col(enumeration_null("category", "category", ["Feed", "Store"]))
         )
         .await
     ```
@@ -163,24 +132,13 @@ Here are some common DDL snippets you may find useful.
     ```
 - Create Data Type (PostgreSQL only)
     ```rust
-    use sea_orm::{EnumIter, Iterable};
     use sea_orm_migration::prelude::extension::postgres::Type;
-
-    #[derive(DeriveIden)]
-    struct CategoryEnum;
-
-    #[derive(DeriveIden, EnumIter)]
-    enum CategoryVariants {
-        Feed,
-        #[sea_orm(iden = "story")]
-        Story,
-    }
 
     manager
         .create_type(
             Type::create()
                 .as_enum(CategoryEnum)
-                .values(CategoryVariants::iter())
+                .values(["feed", "story"])
                 .to_owned()
         )
         .await?;
@@ -371,11 +329,3 @@ async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
 Migration will be executed in Postgres atomically that means migration scripts will be executed inside a transaction. Changes done to the database will be rolled back if the migration failed. However, atomic migration is not supported in MySQL and SQLite.
 
 You can start a transaction inside each migration to perform operations like [seeding sample data](03-migration/04-seeding-data.md#seeding-data-transactionally) for a newly created table.
-
-## Schema first or Entity first?
-
-In the grand scheme of things, we recommend a schema first approach: you write migrations first and then generate entities from a live database.
-
-At times, you might want to use the [`create_*_from_entity`](09-schema-statement/01-create-table.md) methods to bootstrap your database with several hand written entity files.
-
-That's perfectly fine if you intend to never change the entity schema. Or, you can keep the original entity and embed a copy in the migration file.

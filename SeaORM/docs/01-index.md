@@ -76,9 +76,9 @@
 
     6.4 [Complex Relations](06-relation/04-complex-relations.md)
 
-    6.5 [Custom Join Condition](06-relation/06-custom-join-condition.md)
+    6.5 [Model Loader](06-relation/06-model-loader.md)
 
-    6.6 [Data Loader](06-relation/07-data-loader.md)
+    6.6 [Entity Loader](06-relation/07-entity-loader.md)
 
     6.7 [Bakery Schema](06-relation/08-bakery-schema.md)
 
@@ -115,6 +115,8 @@
     8.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
 
     8.9 [Error Handling](08-advanced-query/09-error-handling.md)
+
+    8.10 [Custom Join Condition](08-advanced-query/10-custom-join-condition.md)
 
 9. Schema Statement
 

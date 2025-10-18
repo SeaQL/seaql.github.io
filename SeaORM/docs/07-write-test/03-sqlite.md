@@ -27,29 +27,30 @@ async fn main() -> Result<(), DbErr> {
 
 ## Setup database schema
 
-To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can derive it from `Entity` using [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity).
+To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can construct a complex schema using [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.11/sea_orm/schema/struct.SchemaBuilder.html).
 
 ```rust
-async fn setup_schema(db: &DbConn) {
+async fn setup_schema(db: &DbConn) -> Result<()> {
 
-    // Setup Schema helper
-    let schema = Schema::new(DbBackend::Sqlite);
+    // it doesn't matter which order you register entities.
+    // SeaORM figures out the foreign key dependencies and
+    // creates the tables in the right order along with foreign keys
+    db.get_schema_builder()
+        .register(cake::Entity)
+        .register(cake_filling::Entity)
+        .register(filling::Entity)
+        .apply(db)
+        .await?;
 
-    // Derive from Entity
-    let stmt: TableCreateStatement = schema.create_table_from_entity(MyEntity);
-
-    // Or write DDL manually
-    assert_eq!(
-        stmt.build(SqliteQueryBuilder),
+    // or, write DDL manually
+    db.execute(
         Table::create()
-            .table(MyEntity)
-            .col(integer(MyEntity::Column::Id))
-            //...
-            .build(SqliteQueryBuilder)
-    );
+            .table(cake::Entity)
+            .col(pk_auto(cake::Column::Id))
+            .col(string(cake::Column::Name))
+        ).await?;
 
-    // Execute create table statement
-    let result = db.execute(&stmt).await;
+    Ok(())
 }
 ```
 
