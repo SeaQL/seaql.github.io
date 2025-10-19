@@ -52,7 +52,7 @@ This is of course a speed run, but you can follow the [same steps](https://githu
     orderBy: { filmId: ASC }
     pagination: { page: { page: 0, limit: 10 } }
     # ⬆ cursor based pagination is also supported:
-    #    pagination: { cursor: { limit: 10, cursor: "Int[10]:100" } }
+    #    pagination: { cursor: { limit: 10, cursor: "Int[3]:100" } }
   ) {
     nodes {
       filmId

@@ -1,17 +1,15 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-
 const versions = require('./versions.json');
 
 function getNextMinorVersionName() {
-  const minorVersion = parseInt(versions[0].split('.')[1], 10);
-  return `0.${minorVersion + 1}.x`;
+  let majorVersion = 2;
+  let minorVersion = 0;
+  return `${majorVersion}.${minorVersion}.x`;
 }
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Seaography 🧭 A GraphQL framework and code generator for SeaORM',
-  tagline: '🧭 Seaography is a GraphQL framework and code generator for SeaORM',
+  title: 'Seaography 🧭 A GraphQL framework for SeaORM',
+  tagline: '🧭 Seaography is a GraphQL framework for SeaORM',
   url: 'https://www.sea-ql.org',
   baseUrl: '/Seaography/',
   onBrokenLinks: 'throw',
@@ -44,19 +42,15 @@ const config = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/Seaography/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          lastVersion: 'current',
           versions: {
             current: {
-              label: `${getNextMinorVersionName()} 🚧`,
+              label: `${getNextMinorVersionName()}`,
+              path: '',
             },
           },
         },
-        // blog: {
-          // showReadingTime: true,
-          // // Please change this to your repo.
-          // // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        // },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -83,7 +77,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'getting-started',
+            docId: 'index',
             position: 'left',
             label: 'Docs',
           },
@@ -117,8 +111,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Getting Started',
-                to: '/docs/getting-started',
+                label: 'Documentation',
+                to: '/docs/index',
               },
               {
                 label: 'API Reference',
