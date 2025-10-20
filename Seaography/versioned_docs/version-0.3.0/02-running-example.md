@@ -81,7 +81,7 @@ cargo install seaography-cli
 
 ## Extending and configuring code
 
-You are free to modify the code and change things to fit your needs. For more info [How to extend generated code](/docs/extending-code).
+You are free to modify the code and change things to fit your needs. For more info [How to extend generated code](/docs/0.3.0/extending-code).
 
 ## Running server
 
