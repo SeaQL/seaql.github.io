@@ -75,7 +75,7 @@ Note that if you setup the migration directory directly within a Git repository,
 
 ## Workspace Structure
 
-It is recommended to structure your cargo workspace as follows to share SeaORM entities between the app crate and the migration crate. Checkout the [integration examples](https://github.com/SeaQL/sea-orm/tree/master/examples) for demonstration.
+It is recommended to structure your project as a cargo workspace to separate the app crate and the migration crate. Checkout the [integration examples](https://github.com/SeaQL/sea-orm/tree/master/examples) for demonstration.
 
 ### Migration Crate
 
@@ -83,16 +83,14 @@ Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
-async-std = { version = "1", features = ["attributes", "tokio1"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [dependencies.sea-orm-migration]
-version = "2.0.0-rc"
+version = "~2.0.0-rc" # sea-orm-migration version
 features = [
-  # Enable at least one `ASYNC_RUNTIME` and `DATABASE_DRIVER` feature if you want to run migration via CLI.
-  # View the list of supported features at https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime.
-  # e.g.
-  # "runtime-tokio-rustls",  # `ASYNC_RUNTIME` feature
-  # "sqlx-postgres",         # `DATABASE_DRIVER` feature
+  # Enable following runtime and db backend features if you want to run migration via CLI
+  # "runtime-tokio-native-tls",
+  # "sqlx-postgres",
 ]
 ```
 
@@ -118,41 +116,9 @@ impl MigrationTrait for Migration {
 }
 ```
 
-### Entity Crate
-
-Create an entity crate in your root workspace.
-
-<details>
-    <summary>You don't have SeaORM entities defined?</summary>
-
-You can create an entity crate without any entity files. Then, write the migration and run it to create tables in the database. Finally, [generate SeaORM entities](04-generate-entity/01-sea-orm-cli.md) with `sea-orm-cli` and output the entity files to `entity/src/entities` folder.
-
-After generating the entity files, you can re-export the generated entities by adding following lines in `entity/src/lib.rs`:
-
-```rust
-mod entities;
-pub use entities::*;
-```
-</details>
-
-```
-entity
-├── Cargo.toml      # Include SeaORM dependency
-└── src
-    ├── lib.rs      # Re-export SeaORM and entities
-    └── post.rs     # Define the `post` entity
-```
-
-Specify SeaORM dependency.
-
-```toml title="entity/Cargo.toml"
-[dependencies]
-sea-orm = { version = "2.0.0-rc" }
-```
-
 ### App Crate
 
-This is where the application logic goes.
+This is where the application logic belongs.
 
 Create a workspace that contains app, entity and migration crates and import the entity crate into the app crate.
 
@@ -160,11 +126,10 @@ If we want to bundle the migration utility as part of your app, you'd also want 
 
 ```toml title="./Cargo.toml"
 [workspace]
-members = [".", "entity", "migration"]
+members = [".", "migration"]
 
 [dependencies]
-entity = { path = "entity" }
-migration = { path = "migration" } # depends on your needs
+migration = { path = "migration" }
 
 [dependencies]
 sea-orm = { version = "2.0.0-rc", features = [..] }

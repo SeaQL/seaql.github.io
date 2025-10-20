@@ -10,7 +10,7 @@ In order to extend the existing code first you need to be comfortable with the l
 * [sea_orm](https://github.com/SeaQL/sea-orm)
 * [poem](https://github.com/poem-web/poem)
 
-Studying the generated code structure provides valuable information on where to find important features, for more info [here](/docs/generated-project-structure).
+Studying the generated code structure provides valuable information on where to find important features, for more info [here](/docs/0.3.0/generated-project-structure).
 
 When you are comfortable enough with all the terms, you can jump into the folders and add new features or logic based on your objectives.
 

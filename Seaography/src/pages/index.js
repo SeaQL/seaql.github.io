@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -16,7 +17,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
-            to="/docs/getting-started">
+            to="/docs/index">
             Getting Started
           </Link>
         </div>
@@ -31,34 +32,39 @@ export default function Home() {
     <Layout
       description={siteConfig.tagline}>
       <HomepageHeader />
-      <main style={{ margin: '5%' }}>
-        <p>Seaography is a GraphQL framework for building GraphQL resolvers using SeaORM entities.
-          It ships with a CLI tool that can generate ready-to-compile Rust GraphQL servers from existing
-          MySQL, Postgres and SQLite databases.</p>
-
-        <p><img src="img/playground_example_database.png" alt="Application preview" /></p>
-
-        <h3>Benefits</h3>
-
-        <ul>
-          <li>Quick and easy to get started</li>
-          <li>Generates readable code</li>
-          <li>Extensible project structure</li>
-          <li>Based on popular async libraries:&nbsp;
-            <a href="https://github.com/async-graphql/async-graphql">async-graphql</a>&nbsp;
-            and <a href="https://github.com/SeaQL/sea-orm">SeaORM</a></li>
-        </ul>
-
-        <h3>Features</h3>
-
-        <ul>
-          <li>Relational query (1-to-1, 1-to-N)</li>
-          <li>Pagination on query's root entity</li>
-          <li>Filter with operators (e.g. gt, lt, eq)</li>
-          <li>Order by any column</li>
-        </ul>
-
-        (Right now there is no mutation, but it's on our plan!)
+      <main>
+        <div className="container">
+          <div className="row">
+            <div className={clsx('col col--12')}>
+              <video width="100%" autoplay muted playsInline controls>
+                <source src="https://www.sea-ql.org/blog/img/Seaography%20Demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <h3>In under a minute, we've done the following:</h3>
+              <ol>
+                <li>Generate SeaORM entities from an existing sakila database</li>
+                <li>Generate a GraphQL web server around the entities</li>
+                <li>Launch it and run some queries with GraphQL playground</li>
+              </ol>
+              <p>The generated framework is fully customizable!</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className={clsx('col col--12')}>
+              <h3>Seaography is a GraphQL framework that offers:</h3>
+              <ul>
+                <li>Automatic GraphQL resolver generation with data loader integration to solve the N+1 problem</li>
+                <li>Extensive customization options and the ability to add custom endpoints easily</li>
+                <li>Authorization: Role-Based Access Control (RBAC) and fine-grained control with hooks / guards</li>
+              </ul>
+            </div>
+          </div>
+          <div className="row">
+            <div className={clsx('col col--12')}>
+              <p></p>
+            </div>
+          </div>
+        </div>
       </main>
     </Layout>
   );

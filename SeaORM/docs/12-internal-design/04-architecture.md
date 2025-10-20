@@ -4,19 +4,19 @@
 
 <img width="100%" src="/SeaORM/img/SeaORM Architecture.svg" />
 
-To understand the architecture of SeaORM, let's discuss what is an ORM. ORM exists to provide abstractions over common operations you would do against a database and hide the implementation details like the actual SQL queries.
+To understand the architecture of SeaORM, let's discuss what is an ORM. ORMs exists to provide abstractions over common operations you would do against a database and hide the implementation details like the actual SQL queries.
 
 With a good ORM, you shouldn't bother to look under the API surface. Until you do. I hear you say *'abstraction leaks'*, and yes, it does.
 
 The approach SeaORM takes is **'layered abstraction'**, where you'd dig one layer beneath if you want to. That's why we made SeaQuery into a standalone repository. It's useful on its own, and with a public API surface and a separate namespace, it's far more difficult to create confusing internal APIs than a monolithic approach.
 
-The central idea in SeaORM is nearly everything is runtime configurable. At compile time, it does not know what the underlying database is.
+The central idea in SeaORM is nearly everything is runtime configurable. At compile time, entities and query builders does not know what database it is connecting to.
 
 What benefits does database-agnostic bring? For example, you can:
 
 1. Make your app work on any database, depending on runtime configuration
 1. Use the same models and transfer them across different databases
-1. Share entities across different projects by creating a 'data structure crate', where the database is chosen by downstream 'behaviour crates'
+1. Share entities across different projects by creating a 'data structure crate', where the database is chosen by downstream 'application crates'
 
 The API of SeaORM is not a thin shell, but consist of layers, with each layer underneath being less abstract.
 

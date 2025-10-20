@@ -1,4 +1,4 @@
-# Data Loader
+# Model Loader
 
 The [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) provides an API to load related entities in batches.
 
@@ -15,11 +15,8 @@ The SQL query generated is:
 
 ```sql
 SELECT
-    "cake"."id" AS "A_id",
-    "cake"."name" AS "A_name",
-    "fruit"."id" AS "B_id",
-    "fruit"."name" AS "B_name",
-    "fruit"."cake_id" AS "B_cake_id"
+    "cake"."id" AS "A_id", "cake"."name" AS "A_name",
+    "fruit"."id" AS "B_id", "fruit"."name" AS "B_name", "fruit"."cake_id" AS "B_cake_id"
 FROM "cake"
 LEFT JOIN "fruit" ON "cake"."id" = "fruit"."cake_id"
 ORDER BY "cake"."id" ASC
@@ -33,7 +30,9 @@ The following loads the same data as above, but with two queries:
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
 let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 
-for (cake, fruits) in cakes.into_iter().zip(fruits.into_iter()) { .. }
+for (cake, fruits) in cakes.into_iter().zip(fruits.into_iter()) {
+    // cake and its associated fruits
+}
 ```
 
 ```sql
@@ -41,7 +40,7 @@ SELECT "cake"."id", "cake"."name" FROM "cake"
 SELECT "fruit"."id", "fruit"."name", "fruit"."cake_id" FROM "fruit" WHERE "fruit"."cake_id" IN (..)
 ```
 
-You can stack these together:
+You can stack these up:
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;

@@ -1,6 +1,10 @@
 # Advanced Joins
 
-An anatomy of a complex relational query with multiple joins and custom selects.
+:::tip Since `2.0.0`
+Most of the motivation of needing the following has been addressed in 2.0 with nested select and entity loader.
+:::
+
+A case study of a complex relational query with multiple joins and custom selects.
 
 ## Schema
 

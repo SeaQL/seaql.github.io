@@ -23,29 +23,8 @@ impl Linked for CakeToFilling {
 
     fn link(&self) -> Vec<RelationDef> {
         vec![
-            cake_filling::Relation::Cake.def().rev(),
-            cake_filling::Relation::Filling.def(),
-        ]
-    }
-}
-```
-
-Alternatively, the `RelationDef` can be defined on the fly, where the following is equivalent to the above:
-
-```rust
-pub struct CakeToFilling;
-
-impl Linked for CakeToFilling {
-    type FromEntity = cake::Entity;
-    type ToEntity = filling::Entity;
-
-    fn link(&self) -> Vec<RelationDef> {
-        vec![
-            cake_filling::Relation::Cake.def().rev(),
-            cake_filling::Entity::belongs_to(filling::Entity)
-                .from(cake_filling::Column::FillingId)
-                .to(filling::Column::Id)
-                .into(),
+            cake_filling::Relation::Cake.def().rev(), // cake -> cake_filling
+            cake_filling::Relation::Filling.def(),    // cake_filling -> filling
         ]
     }
 }
@@ -58,7 +37,7 @@ Find fillings that can be filled into a cake with the [`find_linked`](https://do
 ```rust
 let cake_model = cake::Model {
     id: 12,
-    name: "".to_owned(),
+    name: "Chocolate".into(),
 };
 
 assert_eq!(
@@ -88,11 +67,11 @@ assert_eq!(
         .build(DbBackend::MySql)
         .to_string(),
     [
-        r#"SELECT `cake`.`id` AS `A_id`, `cake`.`name` AS `A_name`,"#,
-        r#"`r1`.`id` AS `B_id`, `r1`.`name` AS `B_name`, `r1`.`vendor_id` AS `B_vendor_id`"#,
-        r#"FROM `cake`"#,
-        r#"LEFT JOIN `cake_filling` AS `r0` ON `cake`.`id` = `r0`.`cake_id`"#,
-        r#"LEFT JOIN `filling` AS `r1` ON `r0`.`filling_id` = `r1`.`id`"#,
+        "SELECT `cake`.`id` AS `A_id`, `cake`.`name` AS `A_name`,",
+        "`r1`.`id` AS `B_id`, `r1`.`name` AS `B_name`, `r1`.`vendor_id` AS `B_vendor_id`",
+        "FROM `cake`",
+        "LEFT JOIN `cake_filling` AS `r0` ON `cake`.`id` = `r0`.`cake_id`",
+        "LEFT JOIN `filling` AS `r1` ON `r0`.`filling_id` = `r1`.`id`",
     ]
     .join(" ")
 );
@@ -100,13 +79,12 @@ assert_eq!(
 
 ## Self Referencing Relations
 
-The `Link` trait can also define self referencing relations.
+The `Link` trait can also define self referencing relations. The following example defines an Entity that references itself.
 
-The following example defines an Entity that references itself.
-
-```rust
+```rust title="self_join.rs"
 use sea_orm::entity::prelude::*;
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "self_join")]
 pub struct Model {
@@ -114,12 +92,8 @@ pub struct Model {
     pub uuid: Uuid,
     pub uuid_ref: Option<Uuid>,
     pub time: Option<Time>,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(belongs_to = "Entity", from = "Column::UuidRef", to = "Column::Uuid")]
-    SelfReferencing,
+    #[sea_orm(self_ref, relation_enum = "SelfRef", from = "uuid_ref", to = "uuid")]
+    pub other: HasOne<Entity>,
 }
 
 pub struct SelfReferencingLink;
@@ -129,9 +103,21 @@ impl Linked for SelfReferencingLink {
     type ToEntity = Entity;
 
     fn link(&self) -> Vec<RelationDef> {
-        vec![Relation::SelfReferencing.def()]
+        vec![Relation::SelfRef.def()] // <- use the relation here
     }
 }
+
+impl ActiveModelBehavior for ActiveModel {}
+```
+
+### Querying model pairs
+
+```rust
+let models: Vec<(self_join::Model, Option<self_join::Model>)> = self_join::Entity::find()
+    .find_also_linked(self_join::SelfReferencingLink)
+    .order_by_asc(self_join::Column::Time)
+    .all(db)
+    .await?;
 ```
 
 ## Diamond Relations
@@ -139,53 +125,43 @@ impl Linked for SelfReferencingLink {
 Sometimes there exist multiple relations between a pair of entities. Here we take the simplest example, where `Cake` can have multiple `Fruit`.
 
 ```rust
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm::model]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "cake")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-    pub topping: i32,
-    pub filling: i32,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::fruit::Entity",
-        from = "Column::Topping",
-        to = "super::fruit::Column::Id"
-    )]
-    Topping,
-    #[sea_orm(
-        belongs_to = "super::fruit::Entity",
-        from = "Column::Filling",
-        to = "super::fruit::Column::Id"
-    )]
-    Filling,
+    pub topping_id: i32,
+    pub filling_id: i32,
+    #[sea_orm(belongs_to, relation_enum = "Topping", from = "topping_id", to = "id")]
+    pub topping: HasOne<super::fruit::Entity>,
+    #[sea_orm(belongs_to, relation_enum = "Filling", from = "filling_id", to = "id")]
+    pub filling: HasOne<super::fruit::Entity>,
 }
 ```
 
 How can we define the `Fruit` Entity?
 By default, `has_many` invokes the `Related` trait to define the relation.
-As a consequence, it's not possible to define the Relation without `Related` impl.
-
-Here we have to specify the Relation variant of the related entity manually with the `via_rel` attribute.
+As a consequence, we have to specify the `Relation` variant of the related entity manually with the `via_rel` attribute.
 
 ```rust
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "fruit")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
+    #[sea_orm(has_many, relation_enum = "ToppingOf", via_rel = "Topping")]
+    pub topping_of: HasMany<super::cake::Entity>,
+    #[sea_orm(has_many, relation_enum = "FillingOf", via_rel = "Filling")]
+    pub filling_of: HasMany<super::cake::Entity>,
 }
+```
 
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::cake::Entity", via_rel = "Relation::Topping")]
-    CakeTopping,
-    #[sea_orm(has_many = "super::cake::Entity", via_rel = "Relation::Filling")]
-    CakeFilling,
-}
+Then you can use the relations like:
+
+```rust
+fruit::Entity::find().join(JoinType::LeftJoin, fruit::Relation::ToppingOf.def());
 ```

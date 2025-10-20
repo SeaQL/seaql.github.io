@@ -75,7 +75,16 @@ since 1.1.6:
 - `--impl-active-model-behavior`: generate empty `ActiveModelBehavior` impls
 - `--acquire_timeout`: acquire timeout in seconds of the connection used for schema discovery
 
+since 2.0.0:
+- `--entity-format`:
+    - `dense`: the new entity format
+    - `compact`: the entity format in 1.0
+    - `expanded`: the entity format in 0.x
+
 ```shell
-# Generate entity files of database `bakery` to `entity/src`
-sea-orm-cli generate entity -u protocol://username:password@localhost/bakery -o entity/src
+# Generate entity files of database `bakery` to `./src/entity`
+sea-orm-cli generate entity \
+    --database-url protocol://username:password@localhost/bakery \
+    --output-dir ./src/entity \
+    --entity-format dense
 ```

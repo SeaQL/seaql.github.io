@@ -368,7 +368,7 @@ You can pass the [`Select<T>`](https://docs.rs/sea-orm/latest/sea_orm/query/stru
 
 You then assemble these pieces together to implement any complex API!
 
-## Rustacean Sticker Pack 🦀
+## 🦀 Rustacean Sticker Pack
 
 The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
 Our stickers are made with a premium water-resistant vinyl with a unique matte finish.

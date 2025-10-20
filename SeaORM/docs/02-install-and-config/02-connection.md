@@ -72,19 +72,19 @@ opt.max_connections(100)
     .acquire_timeout(Duration::from_secs(8))
     .idle_timeout(Duration::from_secs(8))
     .max_lifetime(Duration::from_secs(8))
-    .sqlx_logging(true)
+    .sqlx_logging(false) // disable SQLx logging
     .sqlx_logging_level(log::LevelFilter::Info)
-    .set_schema_search_path("my_schema"); // Setting default PostgreSQL schema
+    .set_schema_search_path("my_schema"); // set default Postgres schema
 
 let db = Database::connect(opt).await?;
 ```
 
-## Checking Connection is Valid
+## Check if connection is valid
 
 Checks if a connection to the database is still valid.
 
 ```rust
-|db: DatabaseConnection| {
+async fn check(db: DatabaseConnection) {
     assert!(db.ping().await.is_ok());
     db.clone().close().await;
     assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire)));

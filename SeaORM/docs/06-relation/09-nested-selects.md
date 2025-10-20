@@ -140,18 +140,18 @@ impl Linked for ToBakery {
     type ToEntity = super::bakery::Entity;
 
     fn link(&self) -> Vec<RelationDef> {
-        vec![Relation::Bakery.def()]
+        vec![cake::Relation::Bakery.def()]
     }
 }
 ```
 
 ```rust
 #[derive(Debug, DerivePartialModel)]
-#[sea_orm(entity = "cake::Entity", into_active_model)]
+#[sea_orm(entity = "cake::Entity")]
 struct Cake {
     id: i32,
     name: String,
-    #[sea_orm(nested, alias = "r0")] // <- alias
+    #[sea_orm(nested, alias = "r0")] // <- apply alias
     bakery: Option<Bakery>,
 }
 

@@ -40,7 +40,7 @@ impl MigrationTrait for Migration {
             .values_panic(["Tiramisu".into()])
             .to_owned();
 
-        manager.execute(stmt).await?;
+        manager.execute(&stmt).await?;
 
         Ok(())
     }

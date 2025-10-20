@@ -36,7 +36,7 @@ db.transaction::<_, (), DbErr>(|txn| {
 
 This is the preferred way for most cases. However, if you happen to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
 
-## `begin` & `commit` / `rollback`
+## `begin` & `commit`
 
 [`begin`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin) the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
 

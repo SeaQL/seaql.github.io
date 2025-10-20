@@ -4,37 +4,28 @@ A one-to-many relation is similar to a one-to-one relation. In the previous sect
 
 ## Defining the Relation
 
-This is almost identical to defining a one-to-one relation; the only difference is that we use `Entity::has_many()` method here.
+This is almost identical to defining a one-to-one relation; the only difference is that we use `has_many` annotation here.
 
-```rust title="entity/cake.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::fruit::Entity")]
-    Fruit,
-}
-
-impl Related<super::fruit::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Fruit.def()
-    }
+```rust {7,8} title="entity/cake.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "cake")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(has_many)]
+    pub fruit: HasMany<super::fruit::Entity>,
 }
 ```
 
 <details>
     <summary>It's expanded to:</summary>
 
-```rust {3,9,16}
-#[derive(Copy, Clone, Debug, EnumIter)]
+```rust {3,4,9}
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    #[sea_orm(has_many = "super::fruit::Entity")]
     Fruit,
-}
-
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::Fruit => Entity::has_many(super::fruit::Entity).into(),
-        }
-    }
 }
 
 impl Related<super::fruit::Entity> for Entity {
@@ -49,21 +40,17 @@ impl Related<super::fruit::Entity> for Entity {
 
 It is the same as defining the one-to-one inverse relation. The rule of thumb is, always define a `belongs_to` on the Entity with a foreign key `xxx_id`.
 
-```rust title="entity/fruit.rs"
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::cake::Entity",
-        from = "Column::CakeId",
-        to = "super::cake::Column::Id"
-    )]
-    Cake,
-}
-
-impl Related<super::cake::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Cake.def()
-    }
+```rust {9,10} title="entity/fruit.rs"
+#[sea_orm::model]
+#[derive(DeriveEntityModel, ..)]
+#[sea_orm(table_name = "fruit")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    // without unique
+    pub cake_id: Option<i32>,
+    #[sea_orm(belongs_to, from = "cake_id", to = "id")]
+    pub cake: HasOne<super::cake::Entity>,
 }
 ```
 
@@ -100,13 +87,31 @@ impl Related<super::cake::Entity> for Entity {
 Composite foreign key is supported using a tuple syntax.
 
 ```rust
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::cake::Entity",
-        from = "(Column::CakeId, Column::VariantId)",
-        to = "(super::cake::Column::Id, super::cake::Column::VariantId)",
-    )]
-    CakeFilling,
+mod composite_a {
+    #[sea_orm::model]
+    #[sea_orm(table_name = "composite_a")]
+    pub struct Model {
+        #[sea_orm(primary_key)]
+        pub id: i32,
+        #[sea_orm(unique_key = "pair")]
+        pub left_id: i32,
+        #[sea_orm(unique_key = "pair")]
+        pub right_id: i32,
+        #[sea_orm(has_one)]
+        pub b: Option<super::composite_b::Entity>,
+    }
+}
+
+mod composite_b {
+    #[sea_orm::model]
+    #[sea_orm(table_name = "composite_b")]
+    pub struct Model {
+        #[sea_orm(primary_key)]
+        pub id: i32,
+        pub left_id: i32,
+        pub right_id: i32,
+        #[sea_orm(belongs_to, from = "(left_id, right_id)", to = "(left_id, right_id)")]
+        pub a: Option<super::composite_a::Entity>,
+    }
 }
 ```
