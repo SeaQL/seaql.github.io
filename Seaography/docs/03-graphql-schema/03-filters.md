@@ -83,7 +83,33 @@ Postgres only.
 }
 ```
 
-### Examples
+### Chaining Filters
+
+You can specify multi fields in `filters` and they will be chained with `AND`.
+
+You can also combine multiple filters with `AND` / `OR`:
+
+```graphql
+{
+  film(
+    filters: {
+      or: [{ title: { contains: "LIFE" } }, { title: { contains: "WAR" } }]
+    }
+  ) {
+    nodes {
+      title
+    }
+  }
+}
+```
+
+Results in following SQL:
+
+```sql
+WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
+```
+
+### Some Examples
 
 ```graphql
 {
@@ -110,30 +136,4 @@ Postgres only.
     }
   }
 }
-```
-
-### Chaining Filters
-
-You can specify multi fields in `filters` and they will be chained with `AND`.
-
-You can also combine multiple filters with `AND` / `OR`:
-
-```graphql
-{
-  film(
-    filters: {
-      or: [{ title: { contains: "LIFE" } }, { title: { contains: "WAR" } }]
-    }
-  ) {
-    nodes {
-      title
-    }
-  }
-}
-```
-
-Results in following SQL:
-
-```sql
-WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
 ```
