@@ -119,7 +119,7 @@ Try a query:
     shape: {
       Rectangle: {
         origin: { x: 3, y: 12 },
-        size: { width: 20, height: 10},
+        size: { width: 20, height: 10 },
       }
     }
   ) {
