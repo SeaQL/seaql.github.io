@@ -89,9 +89,9 @@ pub fn schema_builder(
 ### `Cargo.toml`
 
 ```toml
-[dependencies]
-sea-orm = { version = "~2.0.0-rc", features = ["sqlx-postgres", "runtime-tokio-native-tls", "seaography"] }
-..
+[dependencies.sea-orm]
+version = "~2.0.0-rc"
+features = ["sqlx-postgres", "runtime-tokio-native-tls", "seaography"]
 
 [dependencies.seaography]
 version = "~2.0.0-rc" # seaography version

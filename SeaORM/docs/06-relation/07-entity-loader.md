@@ -13,7 +13,8 @@ For nested queries, it uses the data loader. It consolidates the id of all the m
 ```rust
 // join paths:
 // cake -> fruit
-// cake -> cake_filling -> filling -> ingredient
+// cake -> cake_filling -> filling
+//                         filling -> ingredient
 
 let super_cake = cake::Entity::load()
     .filter_by_id(42) // shorthand for .filter(cake::Column::Id.eq(42))

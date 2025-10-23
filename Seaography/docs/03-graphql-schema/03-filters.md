@@ -2,6 +2,8 @@
 
 Seaography has a rich set of built-in filters for different data types.
 
+## Operators
+
 | Operator | GraphQL Field | Supported Types |
 | :-: | :-: | :-: |
 | `=` / `!=` | `eq` / `ne` | String, String-like, Integer, Float, Boolean, Json |
@@ -21,6 +23,34 @@ Seaography has a rich set of built-in filters for different data types.
 | overlap `&&` (Postgres) | `array_overlap` | Array |
 
 `Date`, `DateTime`, `Decimal` etc are String-like.
+
+## Chaining Filters
+
+You can specify multi fields in `filters` and they will be chained with `AND`.
+
+You can also combine multiple filters with `AND` / `OR`:
+
+```graphql
+{
+  film(
+    filters: {
+      or: [{ title: { contains: "LIFE" } }, { title: { contains: "WAR" } }]
+    }
+  ) {
+    nodes {
+      title
+    }
+  }
+}
+```
+
+Results in following SQL:
+
+```sql
+WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
+```
+
+## Examples
 
 ### `IS NULL`
 
@@ -65,51 +95,7 @@ EntityQueryFieldConfig {
 }
 ```
 
-### `array_*`
-
-Postgres only.
-
-```graphql
-{
-  film(filters: {
-    title: { contains: "LIFE" }
-    specialFeatures: { array_contains: ["Trailers"] }
-  }) {
-    nodes {
-      title
-      specialFeatures
-    }
-  }
-}
-```
-
-### Chaining Filters
-
-You can specify multi fields in `filters` and they will be chained with `AND`.
-
-You can also combine multiple filters with `AND` / `OR`:
-
-```graphql
-{
-  film(
-    filters: {
-      or: [{ title: { contains: "LIFE" } }, { title: { contains: "WAR" } }]
-    }
-  ) {
-    nodes {
-      title
-    }
-  }
-}
-```
-
-Results in following SQL:
-
-```sql
-WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
-```
-
-### Some Examples
+### `IN`
 
 ```graphql
 {
@@ -126,6 +112,8 @@ WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
 }
 ```
 
+### String `contains`
+
 ```graphql
 {
   address(filters: { address: { contains: "Lane" } }) {
@@ -133,6 +121,100 @@ WHERE `film`.`title` LIKE '%LIFE%' OR `film`.`title` LIKE '%WAR%'
       address
       address2
       postalCode
+    }
+  }
+}
+```
+
+### `array_contains`
+
+Postgres only, requires `with-postgres-array` feature.
+
+```graphql
+{
+  film(filters: {
+    title: { contains: "LIFE" }
+    specialFeatures: { array_contains: ["Trailers"] }
+  }) {
+    nodes {
+      title
+      specialFeatures
+    }
+  }
+}
+```
+
+### JSON `=`
+
+Requires `with-json` feature. Let's say you've added a `metadata` field to the `film` table:
+
+```rust
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
+#[sea_orm(table_name = "film")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub film_id: i32,
+    pub title: String,
+    #[sea_orm(column_type = "JsonBinary", nullable)]
+    pub metadata: Option<Json>,
+}
+```
+
+You can then filter by JSON value:
+
+```graphql
+{
+  film(
+    filters: {
+      metadata: { eq: { imax: true, dolby: "Atmos" } }
+    }
+  ) {
+    nodes {
+      filmId
+      title
+      metadata
+    }
+  }
+}
+```
+
+### MySQL / Postgres Enums
+
+You can filter using MySQL / Postgres enums. The filter operands are typed:
+
+```graphql
+input FilmFilterInput {
+  rating: MpaaRatingEnumFilterInput
+  ..
+}
+
+input MpaaRatingEnumFilterInput {
+  eq: MpaaRatingEnum
+  ne: MpaaRatingEnum
+  ..
+}
+
+enum MpaaRatingEnum {
+  G
+  PG
+  PG13
+  R
+  NC17
+}
+```
+
+Such that you can do the following:
+
+```graphql
+{
+  film(
+    filters: { rating: { eq: NC17 } }
+    pagination: { page: { page: 1, limit: 5 } }
+  ) {
+    nodes {
+      filmId
+      title
+      rating
     }
   }
 }

@@ -65,12 +65,10 @@ async fn main() {
     let db = &Database::connect("sqlite::memory:").await.unwrap();
 
     // setup schema
-    db.execute(
-        &Schema::new(db.get_database_backend())
-            .create_table_from_entity(post::Entity)
-    )
-    .await
-    .unwrap();
+    db.get_schema_builder()
+        .register(post::Entity)
+        .apply(db)
+        .await?;
 
     // this is your application request handler
     let post = Mutation::create_post(

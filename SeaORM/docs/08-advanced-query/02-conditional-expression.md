@@ -46,7 +46,8 @@ assert_eq!(
 
 ## Nested Condition
 
-The `add` method can also take another conditional expression. By doing this, we can construct complex nested conditions flexibly.
+The `add` method can also take another conditional expression, allowing us to construct complex nested conditions easily.
+There is no superfluous parentheses `((((` cluttering the query, because SeaQuery respects operator precedence when injecting them.
 
 ```rust
 assert_eq!(

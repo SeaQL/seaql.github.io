@@ -93,7 +93,14 @@ And the query result is the model itself, so wouldn't be nested under `nodes`:
 
 ## Order By
 
-You can apply order by on any fields of the Model. By default, the type for `Film` is `FilmOrderInput`.
+You can apply order by on any fields of the Model. By default, the type for `Film` is `FilmOrderInput`. The order by value is an enum:
+
+```graphql
+enum OrderByEnum {
+  ASC
+  DESC
+}
+```
 
 ## Offset-based Pagination
 
