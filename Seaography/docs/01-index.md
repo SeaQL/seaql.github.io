@@ -37,5 +37,5 @@
 2. [Schema Restrictions](06-access-control/02-schema-restrictions.md)
 3. [Entity / Field Guards](06-access-control/03-guards.md)
 4. [Fine-grained Filters](06-access-control/04-filters.md)
-5. [Role Based Access Control](06-access-control/05-RBAC.md)
+5. [Role Based Access Control](06-access-control/05-rbac.md)
 6. [Considerations](06-access-control/06-considerations.md)

@@ -37,7 +37,7 @@ pub enum RelatedEntity {
 
 ## No mutation
 
-You can also register entities without mutation if you intend to implement all mutations with custom endpoints:
+You can also register entities without mutation if you intend to implement all mutations with custom operations:
 
 ```rust
 seaography::register_entity!(builder, actor, mutation: false);
@@ -58,6 +58,6 @@ pub struct Model {
 }
 ```
 
-This column will still be usable in other parts of the application, for example in custom endpoints. But it will not be visible to clients.
+This column will still be usable in other parts of the application, for example in custom operations. But it will not be visible to clients.
 
 If you remove this field from the struct, then this column will not be visible to the entire application.

@@ -25,7 +25,7 @@ Combining RBAC with Entity Filters, it lets you implement rules such as "admins 
 For **end‑user facing applications**, resources often have an *owner* (e.g. a user's own posts, orders, or profile).  
 In these cases, you can enforce access by:
 - Adding **Filters** to queries so users only see their own data.
-- Using **Guards** on mutations to ensure a user can only read, update or delete resources they own.
+- Using **Guards** on queries / mutations to ensure a user can only read, update or delete resources they own.
 
 This pattern is common in SaaS where each user should only interact with their own records.
 

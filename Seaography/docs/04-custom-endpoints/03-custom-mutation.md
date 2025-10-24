@@ -69,7 +69,11 @@ pub struct Coupon {
 }
 ```
 
-Then we can define the mutation endpoint:
+Then we can define the mutation endpoint. The business logic is:
+
+1. Look up the specifc customer and film
+2. Find if there is inventory in store. If not, return error
+3. Create a new rental record and remove the item from inventory
 
 ```rust
 #[CustomFields]
@@ -86,7 +90,7 @@ impl Operations {
         //  ⬆ create a transaction to make operation atomic
 
         let customer = Customer::find_by_name(rental_request.customer, &txn).await?;
-        let film = Film::find_by_name(rental_request.film, &txn).await?;
+        let film = Film::find_by_title(rental_request.film, &txn).await?;
         //  ⬆ helper methods to find the corresponding customer and film
 
         //  ⬇ find if there is inventory in current store
