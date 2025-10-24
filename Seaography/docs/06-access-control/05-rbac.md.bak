@@ -20,9 +20,19 @@ db.load_rbac().await?;
 let schema = query_root::schema(db, ..)?;
 ```
 
+In the GraphQL handler, you have to inject a `UserContext`:
+
+```rust
+async fn graphql_handler(..) -> Result<..> {
+    let mut req = req.into_inner();
+    req = req.data(seaography::UserContext { user_id }); // ⬅ this user id is used in RBAC
+    schema.execute(req).await.into()
+}
+```
+
 ## RBAC Editor
 
-If you need a GUI editor to manage RBAC rules that tightly integrates with Seaography, then checkout [SeaORM Pro Plus](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro-plus/).
+If you need a GUI editor to manage RBAC rules that tightly integrates with Seaography, then checkout [SeaORM Pro Plus](https://www.sea-ql.org/preview/pr-154/sea-orm-pro/docs/rbac/role-permissions/).
 
 RBAC-related features in SeaORM Pro Plus:
 
