@@ -26,7 +26,7 @@
 
     3.4 [Navbar](03-site-config/04-navbar.md)
 
-    3.5 [Role Based Access Control](03-site-config/05-rbac.md)
+    3.5 [RBAC](03-site-config/05-rbac.md)
 
 4. Raw Table Config
 

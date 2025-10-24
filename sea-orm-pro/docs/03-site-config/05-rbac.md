@@ -1,4 +1,4 @@
-# Role Based Access Control
+# RBAC
 
 ![](../../static/img/site-config-rbac.png#light)
 ![](../../static/img/site-config-rbac-dark.png#dark)
