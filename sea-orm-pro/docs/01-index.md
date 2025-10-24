@@ -24,6 +24,10 @@
 
     3.3 [Dashboard](03-site-config/03-dashboard.md)
 
+    3.4 [Navbar](03-site-config/04-navbar.md)
+
+    3.5 [Role Based Access Control](03-site-config/05-rbac.md)
+
 4. Raw Table Config
 
     4.1 [Overview](04-raw-table-config/01-overview.md)
@@ -61,3 +65,15 @@
     7.2 [Development and Release](07-gui-development/02-dev-and-release.md)
 
     7.3 [GraphQL Playground](07-gui-development/03-graphql.md)
+
+8. Role Based Access Control
+
+    8.1 [Overview](08-rbac/01-overview.md)
+
+    8.2 [Role Permissions](08-rbac/02-role-permissions.md)
+    
+    8.3 [Role Hierarchy](08-rbac/03-role-hierarchy.md)
+    
+    8.4 [User Role](08-rbac/04-user-role.md)
+    
+    8.5 [User Override](08-rbac/05-user-override.md)
