@@ -5,9 +5,11 @@
 Stick them on your laptop, notebook, or any gadget to show off your love for Rust!
 :::
 
-If you are starting from a fresh database, it's better to version control your database schema. SeaORM ships with a migration tool, allowing you to write migrations in SeaQuery or SQL.
+SeaORM provides a powerful migration system that lets you create tables, modify schemas, and seed data with SeaQuery statements or raw SQL.
 
 If you already have a database with tables and data, you can skip this chapter and move on to [generating SeaORM entities](04-generate-entity/01-sea-orm-cli.md).
+
+If you intend to adopt an Entity-first workflow, you can skip this chapter and move on to [Entity Format](04-generate-entity/02-entity-format.md).
 
 ## Migration Table
 

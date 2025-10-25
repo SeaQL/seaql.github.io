@@ -104,7 +104,7 @@
 
     8.3 [Aggregate functions](08-advanced-query/03-aggregate-function.md)
 
-    8.4 [Advanced Joins](08-advanced-query/04-advanced-joins.md)
+    8.4 [Custom Join Condition](08-advanced-query/04-custom-join-condition.md)
 
     8.5 [Sub Query](08-advanced-query/05-subquery.md)
 
@@ -116,7 +116,7 @@
 
     8.9 [Error Handling](08-advanced-query/09-error-handling.md)
 
-    8.10 [Custom Join Condition](08-advanced-query/10-custom-join-condition.md)
+    8.10 [Advanced Joins](08-advanced-query/10-advanced-joins.md)
 
 9. Schema Statement
 
@@ -144,11 +144,11 @@
 
     12.2 [Derive Macros](12-internal-design/02-derive-macro.md)
 
-    12.3 [Compare with Diesel](12-internal-design/03-diesel.md)
+    12.3 [Architecture](12-internal-design/03-architecture.md)
 
-    12.4 [Architecture](12-internal-design/04-architecture.md)
+    12.4 [Compare with Diesel](12-internal-design/04-diesel.md)
 
-    12.5 [Architecture](12-internal-design/05-expanded-entity-format.md)
+    12.5 [Expanded Entity Format](12-internal-design/05-expanded-entity-format.md)
 
 13. What's Next
 

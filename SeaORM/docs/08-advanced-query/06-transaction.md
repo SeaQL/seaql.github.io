@@ -1,6 +1,6 @@
 # Transaction
 
-A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs.
+A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs supported in SeaORM, and you can pick one best suited to your programming paradigm.
 
 ## With a Closure
 
@@ -64,10 +64,14 @@ txn.commit().await?;
 
 ## Nested transaction
 
-Nested transaction is implemented with database's `SAVEPOINT`. The example below illustrates the behavior with the closure API.
+Nested transaction is implemented with database's `SAVEPOINT`.
+
+### With Closures
+
+The example below illustrates the behavior with the closure API.
 
 ```rust
-assert_eq!(Bakery::find().all(txn).await?.len(), 0);
+assert_eq!(Bakery::find().all(db).await?.len(), 0);
 
 ctx.db.transaction::<_, _, DbErr>(|txn| {
     Box::pin(async move {
@@ -121,7 +125,57 @@ ctx.db.transaction::<_, _, DbErr>(|txn| {
 })
 .await;
 
-assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+assert_eq!(Bakery::find().all(db).await?.len(), 4);
+```
+
+### `begin` & `commit`
+
+```rust
+assert_eq!(Bakery::find().all(db).await?.len(), 0);
+
+let txn = db.begin().await?;
+
+// First create 2 bakeries
+seaside_bakery().save(&txn).await?;
+lakeside_bakery().save(&txn).await?;
+
+assert_eq!(Bakery::find().all(&txn).await?.len(), 2);
+
+// Try nested transaction committed
+{
+    let txn = txn.begin().await?;
+    let _ = bakery::ActiveModel {
+        name: Set("Hillside Bakery".to_owned()),
+        profit_margin: Set(88.88),
+        ..Default::default()
+    }
+    .save(&txn)
+    .await?;
+
+    assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+
+    // Try nested-nested transaction rollbacked
+    {
+        let txn = txn.begin().await?;
+        let _ = bakery::ActiveModel {
+            name: Set("Canalside Bakery".to_owned()),
+            profit_margin: Set(28.8),
+            ..Default::default()
+        }
+        .save(&txn)
+        .await?;
+
+        assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+    }
+
+    txn.commit().await?;
+}
+
+assert_eq!(Bakery::find().all(&txn).await?.len(), 3);
+
+txn.commit().await?;
+
+assert_eq!(Bakery::find().all(db).await?.len(), 3);
 ```
 
 ## Isolation Level and Access Mode

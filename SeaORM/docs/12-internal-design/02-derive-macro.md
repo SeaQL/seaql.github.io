@@ -47,7 +47,3 @@ The [`EnumIter`](#) derive macro will implement [`Iterable`](#) to allow iterati
 ## Value Type
 
 The [`DeriveValueType`](#) derive macro will implement `From<T> for Value`, `sea_orm::TryGetable for T` and `sea_query::ValueType for T` for `T`.
-
-## Display
-
-The [`DeriveDisplay`](#) derive macro will implement `std::fmt::Display` for enums.

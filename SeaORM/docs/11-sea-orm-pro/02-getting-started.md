@@ -16,7 +16,7 @@ It involves:
 
 ## [Getting Started with Axum](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-axum/)
 
-We use the axum_example example as the base, it contains basic REST API to handle basic user management such as user login and user info of current session.
+We use the `axum_example` example as the base, it contains basic REST API to handle basic user management such as user login and user info of current session.
 
 1. Setup Admin Endpoint
 2. Setup GraphQL Endpoint
