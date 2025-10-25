@@ -170,7 +170,13 @@ assert_eq!(query.values, Values(vec![1.into(), "2".into(), 3.into()]));
 
 You may ask, then how do we insert multiple elements? Which brings us to the next feature:
 
-## Repeating Group
+## Insert Many
+
+When working with Rust and SQL, a common pain point is figuring out how to insert multiple rows efficiently. Writing raw SQL INSERT statements for each row is verbose, and while Postgres supports `UNNEST` for bulk inserts, its columnar API feels awkward and error-prone.
+
+SeaQuery solves this by letting you build multi-row insert statements easily. With the `raw_query!` macro, you can pass in a vector of structs or tuples and generate a single `INSERT INTO .. VALUES (..) , (..) , (..)` query. This keeps your code clean, while still allowing you to do bulk insertions for efficiency. This solution is database agnostic so you can use it for MySQL and SQLite as well.
+
+### With Tuples
 
 ```rust
 let values = vec![(1, "2", 3), (4, "5", 6)];
@@ -187,11 +193,11 @@ assert_eq!(
 );
 ```
 
-This syntax almost looks like regex now. Please let me explain:
+To achieve this we designed the "repeating group" syntax, inspired by regex. Please let me explain:
 
 It's expanded upon the previous example, in which `values.0:2` means tuple expansion. We want to repeat this tuple as a group, surrounded by parenthesis, so we wrap it with `()`. Then we apply the same spread operator `..` to expand the vector of tuples. Finally, the trailing `,` means they should be connected with `,`.
 
-This repeating group is not fully-generalized yet, but is quite flexible:
+### With structs
 
 ```rust
 struct Item {
@@ -212,7 +218,7 @@ let query = sea_query::raw_query!(
 );
 ```
 
-This is equivalent to the previous example.
+This is equivalent to the previous example, but uses named parameters.
 
 ## SQLx Integration
 
@@ -246,7 +252,34 @@ let res = sea_query::sqlx::sqlite::query!(
 
 Full example can be found [here](https://github.com/SeaQL/sea-query/blob/master/examples/sqlx_sqlite/src/main.rs).
 
-It almost feels like a mini ORM ... although [SeaORM 🐚](https://github.com/SeaQL/sea-orm) is still highly recommended by us!
+It almost feels like a mini ORM ... although [SeaORM 🐚](https://github.com/SeaQL/sea-orm) is still highly recommended!
+
+### Lightweightness
+
+SeaQuery without default features only has a handful of dependencies. But if you want to keep dependencies to an absolute minimum, you can depends on `sea-query-derive` directly.
+
+```sh
+$ cargo tree --no-default-features -e normal,build
+sea-query-derive v1.0.0-rc.11 (proc-macro)
+├── proc-macro2 v1.0.94
+│   └── unicode-ident v1.0.12
+├── quote v1.0.40
+│   └── proc-macro2 v1.0.94 (*)
+└── syn v2.0.100
+    ├── proc-macro2 v1.0.94 (*)
+    ├── quote v1.0.40 (*)
+    └── unicode-ident v1.0.12
+```
+
+Then you can use it like:
+
+```rust
+let sql;
+let res: Vec<_> = sea_query_derive::raw_sql!(
+    sqlx::sqlite::query_as,
+    sql = "SELECT {var.0:2}"
+).fetch_all(pool).await?;
+```
 
 ## SeaQuery 1.0
 
