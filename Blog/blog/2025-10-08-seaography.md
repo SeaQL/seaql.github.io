@@ -1,6 +1,6 @@
 ---
 slug: 2025-10-08-seaography
-title: "Seaography 2.0: A Powerful and Extensible GraphQL Framework"
+title: "Seaography 2.0: A Powerful and Extensible GraphQL Framework 🧭"
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
