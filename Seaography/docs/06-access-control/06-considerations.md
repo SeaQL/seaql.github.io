@@ -49,4 +49,4 @@ By layering these approaches, you can tailor Seaography's authorization model to
 
 ## Professional Support
 
-If you need technical advice and support, you’re welcome to [consult with SeaQL.org](mailto:hello@sea-ql.org). Our team can help you adopt and unlock the full potential of the Rust + SeaQL ecosystem by providing expert consulting to support your software development.
+If you need technical advice and support, you're welcome to [consult with SeaQL.org](mailto:hello@sea-ql.org). Our team can help you adopt and unlock the full potential of the Rust + SeaQL ecosystem by providing expert consulting to support your software development.

@@ -38,11 +38,11 @@ impl LifecycleHooksInterface for AccessControlGuard {
         action: OperationType, // ⬅ Read, Create, Update, Delete
     ) -> GuardAction {
         match (entity, field, action) {
-            // block all access on a field
+            // ⬇ block all access on a field
             ("Language", "lastUpdate", _) => GuardAction::Block(None),
-            // block only update on a field
+            // ⬇ block only update on a field
             ("Language", "name", OperationType::Update) => GuardAction::Block(None),
-            // custom logic based on context and object value
+            // ⬇ custom logic based on context and object value
             ("Actor", _, _) => {
                 let permissions = ctx.data::<Permissions>().unwrap();
                 //  ⬆ extract permission from context

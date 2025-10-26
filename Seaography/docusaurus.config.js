@@ -8,8 +8,8 @@ function getNextMinorVersionName() {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Seaography 🧭 A GraphQL framework for SeaORM',
-  tagline: '🧭 Seaography is a GraphQL framework for SeaORM',
+  title: 'Seaography 🧭 A GraphQL framework for Rust',
+  tagline: '🧭 Seaography is a GraphQL framework for Rust',
   url: 'https://www.sea-ql.org',
   baseUrl: '/Seaography/',
   onBrokenLinks: 'throw',

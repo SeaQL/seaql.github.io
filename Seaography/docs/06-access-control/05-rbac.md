@@ -12,7 +12,7 @@ version = "~2.0.0-rc" # seaography version
 features = ["rbac"]
 ```
 
-After connecting to the database, you should initialize RBAC for the connection before creating the schema:
+After connecting to the database, you should initialize RBAC rules for the connection before creating the schema:
 
 ```rust
 let db = Database::connect(db_url).await?;
@@ -25,7 +25,7 @@ In the GraphQL handler, you have to inject a `UserContext`:
 ```rust
 async fn graphql_handler(..) -> Result<..> {
     let mut req = req.into_inner();
-    req = req.data(seaography::UserContext { user_id }); // ⬅ this user id is used in RBAC
+    req = req.data(seaography::UserContext { user_id }); // ⬅ this user id is used by RBAC engine
     schema.execute(req).await.into()
 }
 ```

@@ -12,7 +12,13 @@ pub fn schema_builder(..) -> SchemaBuilder {
 }
 ```
 
-You can register entities individually:
+The `register_entity_modules` function actually expands to:
+
+```rust
+seaography::register_entities!(builder, [actor, address, ..]);
+```
+
+You can remove it and register entities individually instead:
 
 ```rust
 seaography::register_entity!(builder, actor);

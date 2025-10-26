@@ -28,4 +28,4 @@ impl LifecycleHooksInterface for AccessControlHook {
 }
 ```
 
-This method is called on Read, Create, Update, Delete. So you can apply conditional logic based on operation performed and other information from context.
+This method is called on Read, Create, Update, Delete. So you can apply conditional logic based on operation performed and other contextual information.
