@@ -10,7 +10,7 @@ pub struct Model {
     pub id: i32,
     #[sea_orm(indexed)]
     pub index1_attr: i32,
-    #[sea_orm(unique, indexed)]
+    #[sea_orm(unique)]
     pub index2_attr: i32,
     #[sea_orm(unique_key = "my_unique")]
     pub unique_key_a: String,
