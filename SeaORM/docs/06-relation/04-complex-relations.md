@@ -79,84 +79,158 @@ assert_eq!(
 
 ## Self Referencing Relations
 
-The `Link` trait can also define self referencing relations. The following example defines an Entity that references itself.
-
-```rust title="self_join.rs"
+```rust title="staff.rs"
 use sea_orm::entity::prelude::*;
 
 #[sea_orm::model]
-#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
-#[sea_orm(table_name = "self_join")]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
+#[sea_orm(table_name = "staff")]
 pub struct Model {
-    #[sea_orm(primary_key, auto_increment = false)]
-    pub uuid: Uuid,
-    pub uuid_ref: Option<Uuid>,
-    pub time: Option<Time>,
-    #[sea_orm(self_ref, relation_enum = "SelfRef", from = "uuid_ref", to = "uuid")]
-    pub other: HasOne<Entity>,
-}
-
-pub struct SelfReferencingLink;
-
-impl Linked for SelfReferencingLink {
-    type FromEntity = Entity;
-    type ToEntity = Entity;
-
-    fn link(&self) -> Vec<RelationDef> {
-        vec![Relation::SelfRef.def()] // <- use the relation here
-    }
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+    pub reports_to_id: Option<i32>,
+    #[sea_orm(
+        self_ref,
+        relation_enum = "ReportsTo",
+        from = "reports_to_id",
+        to = "id"
+    )]
+    pub reports_to: HasOne<Entity>,
 }
 
 impl ActiveModelBehavior for ActiveModel {}
 ```
 
-### Querying model pairs
+### Entity Loader
 
 ```rust
-let models: Vec<(self_join::Model, Option<self_join::Model>)> = self_join::Entity::find()
-    .find_also_linked(self_join::SelfReferencingLink)
-    .order_by_asc(self_join::Column::Time)
+let staff = staff::Entity::load()
+    .with(staff::Relation::ReportsTo)
     .all(db)
     .await?;
+
+assert_eq!(staff[0].name, "Alan");
+assert_eq!(staff[0].reports_to, None);
+
+assert_eq!(staff[1].name, "Ben");
+assert_eq!(staff[1].reports_to.as_ref().unwrap().name, "Alan");
+
+assert_eq!(staff[2].name, "Alice");
+assert_eq!(staff[2].reports_to.as_ref().unwrap().name, "Alan");
+
+assert_eq!(staff[3].name, "Elle");
+assert_eq!(staff[3].reports_to, None);
+```
+
+### Model Loader
+
+```rust
+let staff = staff::Entity::find()
+    .order_by_asc(staff::Column::Id)
+    .all(db)
+    .await?;
+
+let reports_to = staff
+    .load_self(staff::Entity, staff::Relation::ReportsTo, db)
+    .await?;
+
+assert_eq!(staff[0].name, "Alan");
+assert_eq!(reports_to[0], None);
+
+assert_eq!(staff[1].name, "Ben");
+assert_eq!(reports_to[1].unwrap().name, "Alan");
+
+assert_eq!(staff[2].name, "Alice");
+assert_eq!(reports_to[2].unwrap().name, "Alan");
+
+assert_eq!(staff[3].name, "Elle");
+assert_eq!(reports_to[3], None);
+```
+
+It can works in reverse too.
+
+```rust
+let manages = staff
+    .load_self_rev(
+        staff::Entity::find().order_by_asc(staff::Column::Id),
+        staff::Relation::ReportsTo,
+        db,
+    )
+    .await?;
+
+assert_eq!(staff[0].name, "Alan");
+assert_eq!(manages[0].len(), 2);
+assert_eq!(manages[0][0].name, "Ben");
+assert_eq!(manages[0][1].name, "Alice");
+
+assert_eq!(staff[1].name, "Ben");
+assert_eq!(manages[1].len(), 0);
+
+assert_eq!(staff[2].name, "Alice");
+assert_eq!(manages[2].len(), 0);
+
+assert_eq!(staff[3].name, "Elle");
+assert_eq!(manages[3].len(), 0);
 ```
 
 ## Diamond Relations
 
-Sometimes there exist multiple relations between a pair of entities. Here we take the simplest example, where `Cake` can have multiple `Fruit`.
+Sometimes there exist multiple relations between a pair of entities. Here we take the simplest example, where `Bakery` can have multiple `Worker`.
 
 ```rust
 #[sea_orm::model]
-#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
-#[sea_orm(table_name = "cake")]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "bakery")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-    pub topping_id: i32,
-    pub filling_id: i32,
-    #[sea_orm(belongs_to, relation_enum = "Topping", from = "topping_id", to = "id")]
-    pub topping: HasOne<super::fruit::Entity>,
-    #[sea_orm(belongs_to, relation_enum = "Filling", from = "filling_id", to = "id")]
-    pub filling: HasOne<super::fruit::Entity>,
+    pub manager_id: i32,
+    pub cashier_id: i32,
+    #[sea_orm(belongs_to, relation_enum = "Manager", from = "manager_id", to = "id")]
+    pub manager: HasOne<super::worker::Entity>,
+    #[sea_orm(belongs_to, relation_enum = "Cashier", from = "cashier_id", to = "id")]
+    pub cashier: HasOne<super::worker::Entity>,
 }
 ```
 
-How can we define the `Fruit` Entity?
+How can we define the `Worker` Entity?
 By default, `has_many` invokes the `Related` trait to define the relation.
 As a consequence, we have to specify the `Relation` variant of the related entity manually with the `via_rel` attribute.
 
-```rust
+```rust title="worker.rs"
 #[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
-#[sea_orm(table_name = "fruit")]
+#[sea_orm(table_name = "worker")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-    #[sea_orm(has_many, relation_enum = "ToppingOf", via_rel = "Topping")]
-    pub topping_of: HasMany<super::cake::Entity>,
-    #[sea_orm(has_many, relation_enum = "FillingOf", via_rel = "Filling")]
-    pub filling_of: HasMany<super::cake::Entity>,
+    #[sea_orm(has_many, relation_enum = "BakeryManager", via_rel = "Manager")]
+    pub manager_of: HasMany<super::bakery::Entity>,
+    #[sea_orm(has_many, relation_enum = "BakeryCashier", via_rel = "Cashier")]
+    pub cashier_of: HasMany<super::bakery::Entity>,
+}
+```
+
+For compact Entities, it looks like this:
+
+```rust title="worker.rs"
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "worker")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub name: String,
+}
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {
+    #[sea_orm(has_many = "super::bakery::Entity", via_rel = "Relation::Manager")]
+    BakeryManager,
+    #[sea_orm(has_many = "super::bakery::Entity", via_rel = "Relation::Cashier")]
+    BakeryCashier,
 }
 ```
 

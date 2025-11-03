@@ -165,8 +165,6 @@ assert_eq!(
 );
 ```
 
-Trust me, we'll implement automatic migration soon!
-
 (In Diesel it's not possible to go back from schema description to DDL)
 
 ## Nested select and other ergonomics
