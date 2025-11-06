@@ -1,4 +1,4 @@
-# Entity First Workfllow
+# Entity First Workflow
 
 :::tip Since `2.0.0`
 :::
@@ -231,8 +231,28 @@ The next time you `cargo run`, you'll see the following:
 DROP INDEX "idx-user-name"
 ```
 
-## Footnotes
+### Footnotes
 
 Note that in general schema sync would not attempt to do any destructive actions, so meaning no `DROP` on tables, columns and foreign keys. Dropping index is an exception here.
 
 Every time the application starts, a full schema discovery is performed. This may not be desirable in production, so `sync` is gated behind a feature flag `schema-sync` that can be turned off based on build profile.
+
+## Using `SchemaBuilder` in migrations
+
+You can also use [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.15/sea_orm/schema/struct.SchemaBuilder.html) inside migrations:
+
+```rust
+db.get_schema_builder()
+    .register(comment::Entity)
+    .register(post::Entity)
+    .register(profile::Entity)
+    .register(user::Entity)
+    .apply(db)
+    .await?;
+```
+
+The difference between `apply` and `sync` is, `sync` always check that if the tables / columns already existed, while `apply` does not. So `apply` is intended for use on an empty database.
+
+Because the migration system already prevents applying a migration step twice, it's fine to use `apply` inside migrations.
+
+To ensure that the migrations can always be applied in order, one by one, you can create a "time capsule" for the initial migration, where you preserve a copy of the initial version of the entities in a submodule.
