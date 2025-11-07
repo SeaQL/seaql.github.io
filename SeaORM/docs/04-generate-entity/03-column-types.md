@@ -22,8 +22,8 @@ For the mappings of Rust primitive data types:
 | `u16` | SmallUnsigned | smallint | smallint unsigned | N/A |
 | `i32` | Integer | integer | int | integer |
 | `u32` | Unsigned | integer | int unsigned | N/A |
-| `i64` | BigInteger | bigint | bigint | bigint |
-| `u64` | BigUnsigned | bigint | bigint unsigned | N/A |
+| `i64` | BigInteger | integer | bigint | bigint |
+| `u64` | BigUnsigned | integer | bigint unsigned | N/A |
 | `f32` | Float | float | float | real |
 | `f64` | Double | double | double | double precision |
 | `bool` | Boolean | boolean | bool | bool |
@@ -49,6 +49,8 @@ You can override the default mappings between a Rust type and `ColumnType` with 
 ```rust
 #[sea_orm(column_type = "Text")]
 pub name: String
+#[sea_orm(column_type = "Decimal(Some((16, 4)))")]
+pub price: Decimal,
 ```
 
 ## JSON column

@@ -1,6 +1,12 @@
 # Aggregate Functions
 
-You can group results selected from SeaORM find with the `group_by` method. If you wish to further restrict the grouped result set, the `having` method can help you achieve that.
+You can group results with the `group_by` method. If you wish to further restrict the grouped result set, the `having` method can be applied.
+
+:::info
+
+Aggregation functions including `max`, `min`, `sum`, `avg`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ColumnTrait.html).
+
+:::
 
 ## Sum
 
@@ -62,12 +68,6 @@ assert_eq!(
 ```
 
 ### Using group by with aggregate functions
-
-:::info
-
-Aggregation functions such as `max`, `min`, `sum`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ColumnTrait.html).
-
-:::
 
 ```rust
 #[derive(Debug, FromQueryResult)]

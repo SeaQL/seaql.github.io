@@ -21,6 +21,24 @@ This requires two feature flags `schema-sync` and `entity-registry`, and we're g
 
 ## Entity Registry
 
+:::tip
+
+The "my_crate::entity::*" must match the name of your crate in `Cargo.toml`:
+
+```toml title="Cargo.toml"
+[package]
+name = "my_crate"
+```
+
+Alternatively, you can do the following to get the current crate:
+
+```rust
+// This returns the caller's crate
+db.get_schema_registry(module_path!().split("::").next().unwrap())
+```
+
+:::
+
 The above function `get_schema_registry` unfolds into the following:
 
 ```rust
