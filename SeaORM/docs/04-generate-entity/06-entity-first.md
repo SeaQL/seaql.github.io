@@ -242,16 +242,20 @@ Every time the application starts, a full schema discovery is performed. This ma
 You can also use [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.15/sea_orm/schema/struct.SchemaBuilder.html) inside migrations:
 
 ```rust
-db.get_schema_builder()
-    .register(comment::Entity)
-    .register(post::Entity)
-    .register(profile::Entity)
-    .register(user::Entity)
-    .apply(db)
-    .await?;
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        let db = manager.get_connection();
+
+        db.get_schema_builder()
+            .register(note::Entity)
+            .apply(db)
+            .await
+    }
+}
 ```
 
-The difference between `apply` and `sync` is, `sync` always check that if the tables / columns already existed, while `apply` does not. So `apply` is intended for use on an empty database.
+The difference between `apply` and `sync` is, `sync` always check that if the tables / columns already existed, while `apply` does not. So `apply` is intended for the initialization step.
 
 Because the migration system already prevents applying a migration step twice, it's fine to use `apply` inside migrations.
 
