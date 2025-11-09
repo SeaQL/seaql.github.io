@@ -150,3 +150,21 @@ pub struct Model {
     #[sea_orm(column_type = "Cidr")]
     pub network: IpNetwork,
 }
+```
+
+## Unix Timestamp
+
+Since `2.0.0`, several new wrapper types are added to map chrono / time datetime as `BigInteger`. These values are converted to `i64` before sending to database.
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "access_log")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub ts: ChronoUnixTimestamp,
+    pub ms: ChronoUnixTimestampMillis,
+    pub ts: TimeUnixTimestamp,
+    pub ms: TimeUnixTimestampMillis,
+}
+```
