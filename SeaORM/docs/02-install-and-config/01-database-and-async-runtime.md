@@ -1,7 +1,7 @@
 # Database & Async Runtime
 
 :::caution We need your support! ⭐
-Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)! Your support is vital to the continued development and maintenance of SeaORM.
+Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)!
 :::
 
 First, add `sea-orm` to the `[dependencies]` section of `Cargo.toml`.

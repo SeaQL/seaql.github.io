@@ -6,6 +6,4 @@ The first thing to learn is the [`Future`](https://rust-lang.github.io/async-boo
 
 Second, `async` in Rust is [multi-threaded programming](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) with syntactic sugar. A `Future` may move between threads, so any variables used in async bodies must be able to travel between threads, i.e. [`Send`](https://doc.rust-lang.org/nomicon/send-and-sync.html).
 
-Third, there are multiple async runtimes in Rust. [`async-std`](https://crates.io/crates/async-std) and [`tokio`](https://crates.io/crates/tokio) are the two most widely used. SeaORM's underlying driver, [`SQLx`](https://crates.io/crates/sqlx), supports both.
-
 Knowing these concepts is essential to get you up and running in async Rust.

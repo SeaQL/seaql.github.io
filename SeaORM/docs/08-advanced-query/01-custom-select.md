@@ -1,7 +1,7 @@
 # Custom Select
 
 :::caution We need your support! ⭐
-Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)! Your support is vital to the continued development and maintenance of SeaORM.
+Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)!
 :::
 
 By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to select certain columns only.
