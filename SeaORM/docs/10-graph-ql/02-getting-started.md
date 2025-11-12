@@ -4,12 +4,12 @@ Here we start from the [Seaography Example](https://github.com/SeaQL/sea-orm/tre
 
 There are other examples with more complex schemas:
 
-+ [Sakila](https://github.com/SeaQL/seaography/tree/1.1.x/examples/sqlite)
++ [Sakila](https://github.com/SeaQL/seaography/tree/main/examples/sqlite)
 + [AdventureWorks](https://github.com/SeaQL/sea-orm-pro)
 
 ![](https://raw.githubusercontent.com/SeaQL/sea-orm/master/examples/seaography_example/Seaography%20example.png)
 
-To get started, all you need is a live SQL database with schema. You can code everything in Rust by writing SeaORM migrations, or design the schema with a GUI tool (e.g. [DataGrip](https://www.jetbrains.com/datagrip/)).
+To get started, all you need is a live SQL database with schema. You can code everything in Rust by writing SeaORM entities, or design the schema with a GUI tool (e.g. [DataGrip](https://www.jetbrains.com/datagrip/)).
 
 ## Install Seaography CLI
 
@@ -104,7 +104,7 @@ pub enum RelatedEntity {
 Generating a fresh project is the easiest way to launch a GraphQL server.
 However, Seaography can easily be integrated to an existing web server built with any web framework.
 
-Seaography supports Poem, Actix, and Axum out of the box.
+Seaography supports Actix, Axum, and Poem out of the box.
 
 Run the following command:
 
@@ -221,4 +221,4 @@ Navigate to the GraphQL Playground, and then start running some queries!
 
 Seaography covers all the needs of building complex applications - from data access, access control to [frontend integration](https://www.sea-ql.org/sea-orm-pro).
 
-Learn more about adding custom GraphQL endpoints and customizing resolvers in [Seaography's Official Documentation](https://www.sea-ql.org/Seaography/docs/index/).
+Learn more about adding custom GraphQL endpoints and customizing resolver in [Seaography's Extensive Documentation](https://www.sea-ql.org/Seaography/docs/index/).

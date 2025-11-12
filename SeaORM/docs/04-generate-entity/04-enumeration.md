@@ -1,6 +1,6 @@
 # ActiveEnum
 
-You can use Rust enums in model where the values are mapped to a database string, integer or native enum.
+You can use Rust enums in models where the values are mapped to a database string, integer or native enum.
 
 ## String
 
@@ -97,30 +97,34 @@ pub enum Tea {
 }
 ```
 
-## MySQL
+### MySQL
 
 MySQL enum is just part of the column definition, and cannot be reused for different tables.
 
 ```rust
 Table::create()
-    .table(Posts::TableName)
-    .col(ColumnDef::new(Posts::ColumnName)
+    .table("table_name")
+    .col(ColumnDef::new("column_name")
             .enumeration("tea", ["EverydayTea", "BreakfastTea"]))
 
 "CREATE TABLE `table_name` (`column_name` ENUM('EverydayTea', 'BreakfastTea'))",
 ```
 
-## Postgres
+### Postgres
 
-If you are using Postgres, the enum has to be created in a separate `Type` statement in a migration, you can create it with:
+```rust
+Table::create()
+    .table("table_name")
+    .col(Column::new("column_name").custom("tea"))
+```
 
-### 1. `TYPE` statement
+If you are using Postgres, the enum has to be created in a separate `Type` statement *before defining the table*, there are two ways:
+
+#### 1. `CREATE TYPE` statement
 
 [Full example](https://github.com/SeaQL/sea-orm/blob/master/sea-orm-migration/tests/common/migration/m20220118_000004_create_tea_enum.rs).
 
 ```rust
-// run this in migration:
-
 manager
     .create_type(
         // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
@@ -132,15 +136,14 @@ manager
     .await?;
 ```
 
-### 2. `create_enum_from_active_enum`
-This method will provide an interface for adding the type to the database, using the type for table columns, and adding values of this type to rows when seeding data. 
+#### 2. `create_enum_from_active_enum`
 
 1. Define an `ActiveEnum`
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea_type")]
-pub enum TeaType {
+#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
     #[sea_orm(string_value = "BreakfastTea")]
@@ -148,52 +151,28 @@ pub enum TeaType {
 }
 ```
 
-2. Create the type in the database
+2. Generate `CREATE TYPE` statement
 
 ```rust
 use sea_orm::{Schema, DbBackend};
 
-// in a migration:
 let schema = Schema::new(DbBackend::Postgres);
 
 manager
     .create_type(
-        // CREATE TYPE "tea_type" AS ENUM ('EverydayTea', 'BreakfastTea')
-        schema.create_enum_from_active_enum::<TeaType>(),
+        // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
+        schema.create_enum_from_active_enum::<Tea>(),
     )
     .await?;
 ```
 
-3. Use the type as a table column type when creating a table
+See also [Schema Creation Methods](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods).
 
-```rust diff
-// in a migration:
+### SQLite
 
-manager::create()
-    .table(Tea::Table)
-    .if_not_exists()
-    .col(Column::new(Tea::Type).custom(TeaType::name())) // use the type for a table column 
-    // ... more columns
-```
-> see also [Schema Creation Methods - Create Table](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)
+Enums will be mapped to strings on SQLite.
 
-4. Use the type when populating the database
-
-```rust
-// in a migration
-
-let insert = Query::insert()
-    .into_table(Tea::Table)
-    .columns([Tea::TeaType])
-    .values_panic([TeaType::EverydayTea.as_enum()]) // call `as_enum` to convert the variant into a SimpleExpr
-    .to_owned();
-
-manager.execute(insert).await?;
-// ...
-```
-> see also [Seeding Data - with sea_query statement](https://www.sea-ql.org/SeaORM/docs/migration/seeding-data/#:~:text=write%20SeaQuery%20statement%20to%20seed%20the%20table)
-
-## Trait impl
+## `ActiveEnum` trait
 
 The [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
 
@@ -267,7 +246,7 @@ impl ActiveEnum for Category {
   </div>
 </details>
 
-## Using ActiveEnum on Model
+## Using ActiveEnum in Model
 
 ```rust
 use sea_orm::entity::prelude::*;
