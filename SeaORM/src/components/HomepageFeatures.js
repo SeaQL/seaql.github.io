@@ -5,29 +5,11 @@ import { MdCloud, MdCheckCircle, MdFlashOn, MdFlight } from "react-icons/md";
 
 const FeatureList = [
   {
-    title: 'Async',
-    icon: <MdFlashOn size={26} />,
-    description: (
-      <>
-        Relying on SQLx, SeaORM is a new library with async support from day 1.
-      </>
-    ),
-  },
-  {
-    title: 'Dynamic',
-    icon: <MdFlight size={26} />,
-    description: (
-      <>
-        Built upon SeaQuery, SeaORM allows you to build complex dynamic queries.
-      </>
-    ),
-  },
-  {
-    title: 'Service Oriented',
+    title: 'Feature Rich',
     icon: <MdCloud size={26} />,
     description: (
       <>
-        Quickly build services that join, filter, sort and paginate data in REST, GraphQL and gRPC APIs.
+        SeaORM is a batteries-included ORM with filters, pagination, and nested queries to accelerate building REST, GraphQL, and gRPC APIs.
       </>
     ),
   },
@@ -36,7 +18,7 @@ const FeatureList = [
     icon: <MdCheckCircle size={26} />,
     description: (
       <>
-        SeaORM is feature-rich, well-tested and used in production by companies and startups.
+        With 250k+ weekly downloads, SeaORM is production-ready, trusted by startups and enterprises worldwide.
       </>
     ),
   },

@@ -13,216 +13,91 @@ require("prismjs/components/prism-rust");
 
 const codeBlocks = [
   {
-    title: 'Entity',
+    title: 'Expressive Entity format',
     summary: 'You don\'t have to write this by hand! Entity files can be generated from an existing database with sea-orm-cli.',
     code: `use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "cake")]
+#[sea_orm::model]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "user")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
+    #[sea_orm(unique)]
+    pub email: String,
+    #[sea_orm(has_one)]
+    pub profile: HasOne<super::profile::Entity>,
+    #[sea_orm(has_many)]
+    pub posts: HasMany<super::post::Entity>,
 }
 
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::fruit::Entity")]
-    Fruit,
-}
-
-impl Related<super::fruit::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Fruit.def()
-    }
-}`
+impl ActiveModelBehavior for ActiveModel {}`
   },
   {
-    title: 'Select',
-    summary: 'SeaORM models 1-N and M-N relationships at the Entity level, letting you traverse many-to-many links through a junction table in a single call.',
-    code: `// find all models
-let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
+    title: 'Smart Entity Loader',
+    summary: 'The Entity Loader intelligently uses join for 1-1 and data loader for 1-N relations, eliminating the N+1 problem even when performing nested queries.',
+    code: `// join paths:
+// user -> profile
+// user -> post
+//         post -> post_tag -> tag
+let smart_user = user::Entity::load()
+    .filter_by_id(42) // shorthand for .filter(user::COLUMN.id.eq(42))
+    .with(profile::Entity) // 1-1 uses join
+    .with((post::Entity, tag::Entity)) // 1-N uses data loader
+    .one(db)
+    .await?
+    .unwrap();
 
-// find and filter
-let chocolate: Vec<cake::Model> = Cake::find()
-    .filter(cake::Column::Name.contains("chocolate"))
-    .all(db)
-    .await?;
-
-// find one model
-let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
-let cheese: cake::Model = cheese.unwrap();
-
-// find related models (lazy)
-let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
-
-// find related models (eager): for 1-1 relations
-let cake_with_fruit: Vec<(cake::Model, Option<fruit::Model>)> =
-    Cake::find().find_also_related(Fruit).all(db).await?;
-
-// find related models (eager): works for both 1-N and M-N relations
-let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
-    .find_with_related(Fruit) // for M-N relations, two joins are performed
-    .all(db) // rows are automatically consolidated by left entity
-    .await?;`,
+smart_user
+    == user::ModelEx {
+        id: 42,
+        name: "Bob".into(),
+        email: "bob@sea-ql.org".into(),
+        profile: HasOne::Loaded(profile::ModelEx {
+            picture: "image.jpg".into(),
+        }.into()),
+        posts: HasMany::Loaded(vec![post::ModelEx {
+            title: "Nice weather".into(),
+            tags: HasMany::Loaded(vec![tag::ModelEx {
+                tag: "diary".into(),
+            }]),
+        }]),
+    };`,
   },
   {
-    title: 'Nested Select',
-    summary: 'Partial models prevent overfetching by letting you querying only the fields you need; it also makes writing deeply nested relational queries simple.',
-    code: `use sea_orm::DerivePartialModel;
+    title: 'Entity First Workflow',
+    summary: `SeaORM 2.0 supports a first-class Entity First Workflow: simply define new entities or add columns to existing ones, and SeaORM will automatically detect the changes and create the new tables, columns, unique keys, and foreign keys.`,
+    code: `let item = Item { name: "Bob" }; // nested parameter access
+let ids = [2, 3, 4]; // expanded by the .. operator
 
-#[derive(DerivePartialModel)]
-#[sea_orm(entity = "cake::Entity")]
-struct CakeWithFruit {
-    id: i32,
-    name: String,
-    #[sea_orm(nested)]
-    fruit: Option<fruit::Model>, // this can be a regular or another partial model
-}
-
-let cakes: Vec<CakeWithFruit> = Cake::find()
-    .left_join(fruit::Entity) // no need to specify join condition
-    .into_partial_model() // only the columns in the partial model will be selected
-    .all(db)
-    .await?;`,
-  },
-  {
-    title: 'Insert',
-    summary: "SeaORM's ActiveModel lets you work directly with Rust data structures and persist them through a simple API.",
-    code: `let apple = fruit::ActiveModel {
-    name: Set("Apple".to_owned()),
-    ..Default::default() // no need to set primary key
-};
-
-let pear = fruit::ActiveModel {
-    name: Set("Pear".to_owned()),
-    ..Default::default()
-};
-
-// insert one: Active Record style
-let apple = apple.insert(db).await?;
-apple.id == 1;
-
-// insert one: repository style
-let result = Fruit::insert(apple).exec(db).await?;
-result.last_insert_id == 1;
-
-// insert many returning last insert id
-let result = Fruit::insert_many([apple, pear]).exec(db).await?;
-result.last_insert_id == Some(2);`,
-  },
-  {
-    title: 'Insert (advanced)',
-    summary: 'You can take advantage of database specific features to perform upsert and idempotent insert.',
-    code: `// insert many with returning (if supported by database)
-let models: Vec<fruit::Model> = Fruit::insert_many([apple, pear])
-    .exec_with_returning(db)
-    .await?;
-models[0]
-    == fruit::Model {
-        id: 1, // database assigned value
-        name: "Apple".to_owned(),
-        cake_id: None,
-    };
-
-// insert with ON CONFLICT on primary key do nothing, with MySQL specific polyfill
-let result = Fruit::insert_many([apple, pear])
-    .on_conflict_do_nothing()
-    .exec(db)
-    .await?;
-
-matches!(result, TryInsertResult::Conflicted);`
-  },
-  {
-    title: 'Update',
-    summary: "ActiveModel avoids race conditions by updating only the fields you've changed, never overwriting untouched columns. You can also craft complex bulk update queries with a fluent query building API.",
-    code: `use fruit::Column::CakeId;
-use sea_orm::sea_query::{Expr, Value};
-
-let pear: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let mut pear: fruit::ActiveModel = pear.unwrap().into();
-
-pear.name = Set("Sweet pear".to_owned()); // update value of a single field
-
-// update one: only changed columns will be updated
-let pear: fruit::Model = pear.update(db).await?;
-
-// update many: UPDATE "fruit" SET "cake_id" = "cake_id" + 2
-//               WHERE "fruit"."name" LIKE '%Apple%'
-Fruit::update_many()
-    .col_expr(CakeId, Expr::col(CakeId).add(Expr::val(2)))
-    .filter(fruit::Column::Name.contains("Apple"))
-    .exec(db)
-    .await?;`,
-  },
-  {
-    title: 'Save',
-    summary: 'You can perform "insert or update" operation with ActiveModel, making it easy to compose transactional operations.',
-    code: `let banana = fruit::ActiveModel {
-    id: NotSet,
-    name: Set("Banana".to_owned()),
-    ..Default::default()
-};
-
-// create, because primary key \`id\` is \`NotSet\`
-let mut banana = banana.save(db).await?;
-
-banana.id == Unchanged(2);
-banana.name = Set("Banana Mongo".to_owned());
-
-// update, because primary key \`id\` is present
-let banana = banana.save(db).await?;`,
-  },
-  {
-    title: 'Delete',
-    summary: 'The same ActiveModel API consistent with insert and update.',
-    code: `// delete one: Active Record style
-let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let orange: fruit::Model = orange.unwrap();
-orange.delete(db).await?;
-
-// delete one: repository style
-let orange = fruit::ActiveModel {
-    id: Set(2),
-    ..Default::default()
-};
-fruit::Entity::delete(orange).exec(db).await?;
-
-// delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE '%Orange%'
-fruit::Entity::delete_many()
-    .filter(fruit::Column::Name.contains("Orange"))
-    .exec(db)
-    .await?;`,
+let user: Option<user::Model> = user::Entity::find()
+    .from_raw_sql(raw_sql!(
+        Sqlite,
+        r#"SELECT "id", "name" FROM "user"
+           WHERE "name" LIKE {item.name}
+           AND "id" in ({..ids})
+        "#
+    ))
+    .one(db)
+    .await?;`
   },
   {
     title: 'Ergonomic Raw SQL',
-    summary: `Let SeaORM handle 90% of all the transactional queries.
-When your query is too complex to express, SeaORM still offer convenience in writing raw SQL.`,
-    code: `#[derive(FromQueryResult)]
-struct CakeWithBakery {
-    name: String,
-    #[sea_orm(nested)]
-    bakery: Option<Bakery>,
-}
+    summary: `Let SeaORM handle 95% of your transactional queries. For the remaining cases that are too complex to express, SeaORM still offers convenient support for writing raw SQL.`,
+    code: `let user = Item { name: "Bob" }; // nested parameter access
+let ids = [2, 3, 4]; // expanded by the .. operator
 
-#[derive(FromQueryResult)]
-struct Bakery {
-    #[sea_orm(alias = "bakery_name")]
-    name: String,
-}
-
-let cake_ids = [2, 3, 4]; // expanded by the \`..\` operator
-
-// can use many APIs with raw SQL, including nested select
-let cake: Option<CakeWithBakery> = CakeWithBakery::find_by_statement(raw_sql!(
-    Sqlite,
-    r#"SELECT "cake"."name", "bakery"."name" AS "bakery_name"
-       FROM "cake"
-       LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
-       WHERE "cake"."id" IN ({..cake_ids})"#
-))
-.one(db)
-.await?;`
+let user: Option<user::Model> = user::Entity::find()
+    .from_raw_sql(raw_sql!(
+        Sqlite,
+        r#"SELECT "id", "name" FROM "user"
+           WHERE "name" LIKE {user.name}
+           AND "id" in ({..ids})
+        "#
+    ))
+    .one(db)
+    .await?;`
   }
 ];
 
@@ -255,7 +130,7 @@ export default function HomepageExample() {
         <div className="row">
         <div className={clsx('col col--12')}>
             <div className="padding-horiz--md">
-              <h2 className="text--center">A quick taste of SeaORM</h2>
+              <h2 className="text--center">Unique features of SeaORM</h2>
               <Tabs
                 className={clsx('aa')}
                 defaultValue={codeBlocks[0].title}

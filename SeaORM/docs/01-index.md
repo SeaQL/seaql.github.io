@@ -10,8 +10,6 @@
 
     1.3. [SeaORM Concepts](01-introduction/03-sea-orm.md)
 
-    1.4. [Tutorial & Examples](01-introduction/04-tutorial.md)
-
 ## Basics
 
 2. Installation & Configuration
