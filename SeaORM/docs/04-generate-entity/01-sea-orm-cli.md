@@ -80,6 +80,7 @@ since 2.0.0:
     - `dense`: the new entity format
     - `compact`: the entity format in 1.0
     - `expanded`: the entity format in 0.x
+- `--big-integer-type`: uses `i32` or `i64` for `bigint`, intended for SQLite
 
 ```shell
 # Generate entity files of database `bakery` to `./src/entity`

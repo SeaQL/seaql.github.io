@@ -37,7 +37,7 @@ mysql://username:password@host/database
 #### Specify a schema
 
 ```
-postgres://username:password@host/database?currentSchema=my_schema
+postgres://username:password@host/database?options=--search_path=my_schema
 ```
 
 ### SQLite
