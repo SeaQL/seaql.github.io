@@ -1,6 +1,6 @@
 # Getting Started with Axum
 
-We use the [`axum_example`](https://github.com/SeaQL/sea-orm/tree/master/axum_example) example as the base, it contains basic REST API to handle basic user management such as user login and user info of current session. Final source code is [here](https://github.com/SeaQL/sea-orm-pro/tree/main/examples/axum_example).
+We use the [`axum_example`](https://github.com/SeaQL/sea-orm/tree/master/examples/axum_example) example as the base, it contains basic REST API to handle basic user management such as user login and user info of current session. Final source code is [here](https://github.com/SeaQL/sea-orm-pro/tree/main/examples/axum_example).
 
 ## 1. Setup Admin Endpoint
 
