@@ -35,8 +35,8 @@ use sea_orm_migration::sea_orm::{entity::*, query::*};
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         let stmt = Query::insert()
-            .into_table(Cake::Table)
-            .columns([Cake::Name])
+            .into_table("cake")
+            .columns(["name"])
             .values_panic(["Tiramisu".into()])
             .to_owned();
 
@@ -44,13 +44,6 @@ impl MigrationTrait for Migration {
 
         Ok(())
     }
-}
-
-#[derive(DeriveIden)]
-pub enum Cake {
-    Table,
-    Id,
-    Name,
 }
 ```
 
