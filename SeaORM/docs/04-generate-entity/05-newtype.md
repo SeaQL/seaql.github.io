@@ -7,6 +7,8 @@ You can define a New Type (`T`) and use it as model field. The following traits 
 3. Implement [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html) for `T`
 4. Implement [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html) for `T`
 
+Custom implementation is showcased later in this page.
+
 ## Wrapping scalar types
 
 You can create new types wrapping any type supported by SeaORM.
@@ -334,5 +336,82 @@ impl Tag {
     fn from_str(s: &str) -> Result<Self, ValueTypeErr> { .. }
 
     fn to_str(&self) -> &'static str { .. }
+}
+```
+
+## Custom implementation
+
+To use your custom struct in a Model, you need to be able to (fallibly) construct it from the [`sea_orm::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html)
+stored in the database, and vice-versa. No external variable or state can be used in these operations.
+
+The operation can of course fail, in which case your conversion error should implement `std::error::Error`.
+
+For example, a stringy type `T` that implements `FromStr` and `Display` can implement the required traits like so:
+
+```rust
+use sea_orm::*;
+use sea_orm::sea_query::*;
+use std::str::FromStr;
+
+impl From<T> for Value {
+    fn from(t: T) -> Self {
+        Self::String(Some(t.to_string()))
+    }
+}
+
+impl TryGetable for T {
+    fn try_get_by<I: sea_orm::ColIdx>(
+        res: &sea_orm::QueryResult,
+        index: I,
+    ) -> Result<Self, sea_orm::error::TryGetError> {
+        let val: String = res.try_get_by(index)?;
+        T::from_str(&val).map_err(|e| {
+            TryGetError::DbErr(DbErr::TryIntoErr {
+                from: "String",
+                into: "T",
+                source: std::sync::Arc::new(e),
+            })
+        })
+    }
+}
+
+impl ValueType for T {
+    fn try_from(v: sea_orm::Value) -> Result<Self, ValueTypeErr> {
+        if let Value::String(Some(s)) = v {
+            T::from_str(&s).map_err(|_e| ValueTypeErr)
+        } else {
+            Err(ValueTypeErr)
+        }
+    }
+
+    fn type_name() -> String {
+        "T".to_string()
+    }
+
+    fn array_type() -> ArrayType {
+        ArrayType::String
+    }
+
+    fn column_type() -> ColumnType {
+        ColumnType::String(StringLen::None)
+    }
+}
+
+impl Nullable for T {
+    fn null() -> Value {
+        Value::String(None)
+    }
+}
+```
+
+Then it can be used normally in any model:
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "custom_impl")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    pub t: T,
 }
 ```
