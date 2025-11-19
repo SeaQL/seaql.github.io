@@ -287,7 +287,13 @@ impl sea_orm::TryGetable for Tag {
     fn try_get_by<I: sea_orm::ColIdx>(res: &sea_orm::QueryResult, idx: I)
         -> std::result::Result<Self, sea_orm::TryGetError> {
         let string = String::try_get_by(res, idx)?;
-        std::str::FromStr::from_str(&string).map_err(|err| sea_orm::TryGetError::DbErr(sea_orm::DbErr::Type(format!("{err:?}"))))
+        std::str::FromStr::from_str(&string).map_err(|err| {
+            sea_orm::TryGetError::DbErr(sea_orm::DbErr::TryIntoErr {
+                from: "String",
+                into: stringify!(#name),
+                source: std::sync::Arc::new(err),
+            })
+        })
     }
 }
 
@@ -334,5 +340,32 @@ impl Tag {
     fn from_str(s: &str) -> Result<Self, ValueTypeErr> { .. }
 
     fn to_str(&self) -> &'static str { .. }
+}
+```
+
+## String-like structs
+
+Since `2.0.0`, `DeriveValueType` also supports struct types that can convert to and from strings. It's exactly the same as Enum String.
+
+```rust
+#[derive(Copy, Clone, Debug, PartialEq, Eq, DeriveValueType)]
+#[sea_orm(value_type = "String", column_type = "Text")] // override column type
+pub struct Tag3 {
+    pub i: i64,
+}
+
+impl std::fmt::Display for Tag3 {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.i)
+    }
+}
+
+impl std::str::FromStr for Tag3 {
+    type Err = std::num::ParseIntError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let i: i64 = s.parse()?;
+        Ok(Self { i })
+    }
 }
 ```

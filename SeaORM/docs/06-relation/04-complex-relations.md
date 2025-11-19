@@ -148,7 +148,7 @@ assert_eq!(staff[3].name, "Elle");
 assert_eq!(reports_to[3], None);
 ```
 
-It can works in reverse too.
+It can work in reverse too.
 
 ```rust
 let manages = staff
