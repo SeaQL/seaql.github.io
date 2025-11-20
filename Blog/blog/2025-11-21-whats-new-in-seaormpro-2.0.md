@@ -1,5 +1,5 @@
 ---
-slug: 2025-11-18-whats-new-in-seaormpro-2.0
+slug: 2025-11-21-whats-new-in-seaormpro-2.0
 title: "What's new in SeaORM Pro 2.0"
 author: SeaQL Team
 author_title: Chris Tsang
@@ -13,7 +13,7 @@ tags: [news]
 
 <!-- SeaORM Pro 2.0 Banner? -->
 
-SeaORM Pro is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).
+[SeaORM Pro](https://github.com/SeaQL/sea-orm-pro) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).
 
 An admin panel is essential for operating backend applications. But it often is an after-thought, or no dedicated resources (aka developer time) is put into developing them.
 
