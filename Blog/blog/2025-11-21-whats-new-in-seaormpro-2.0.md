@@ -5,13 +5,12 @@ author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
 author_image_url: https://www.sea-ql.org/blog/img/SeaQL.png
-image: https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png
+image: https://www.sea-ql.org/sea-orm-pro/img/SeaORM%20Pro%20banner.png
 tags: [news]
 ---
 
-<img alt="SeaORM Pro 2.0 Banner" src="/blog/img/SeaORM%202.0%20Banner.png"/>
-
-<!-- SeaORM Pro 2.0 Banner? -->
+<img src="/blog/img/sea-orm-pro-light.png#light" />
+<img src="/blog/img/sea-orm-pro-dark.png#dark" />
 
 [SeaORM Pro](https://github.com/SeaQL/sea-orm-pro) is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).
 
