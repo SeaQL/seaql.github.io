@@ -13,7 +13,8 @@
         <link href="https://www.sea-ql.org/blog/2025-11-21-whats-new-in-seaormpro-2.0/"/>
         <updated>2025-11-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[SeaORM Pro is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).]]></summary>
-        <content type="html"><![CDATA[<img alt="SeaORM Pro 2.0 Banner" src="https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png">
+        <content type="html"><![CDATA[<img src="https://www.sea-ql.org/blog/img/sea-orm-pro-light.png#light">
+<img src="https://www.sea-ql.org/blog/img/sea-orm-pro-dark.png#dark">
 <p><a href="https://github.com/SeaQL/sea-orm-pro" target="_blank" rel="noopener noreferrer">SeaORM Pro</a> is an admin panel solution allowing you to quickly and easily launch an admin panel for your application - frontend development skills not required (but certainly nice to have).</p>
 <p>An admin panel is essential for operating backend applications. But it often is an after-thought, or no dedicated resources is put into developing them.</p>
 <p>SeaORM Pro is designed to bridge this gap, providing a solution that is both quick to implement and reliable for long-term use.</p>
