@@ -114,7 +114,7 @@ module.exports = {
           editUrl: 'https://github.com/SeaQL/seaql.github.io/edit/master/Blog/',
           blogSidebarTitle: 'All Posts',
           blogSidebarCount: 'ALL',
-          postsPerPage: 'ALL',
+          postsPerPage: 12,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
