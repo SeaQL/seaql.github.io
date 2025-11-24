@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[SeaORM 2.0: Nested ActiveModel]]></title>
+            <title><![CDATA[SeaORM 2.0: Nested ActiveModel and Cascade Operations]]></title>
             <link>https://www.sea-ql.org/blog/2025-11-25-sea-orm-2.0/</link>
             <guid>https://www.sea-ql.org/blog/2025-11-25-sea-orm-2.0/</guid>
             <pubDate>Tue, 25 Nov 2025 00:00:00 GMT</pubDate>
