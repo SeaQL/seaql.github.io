@@ -9,7 +9,7 @@ import { IoIosFlash } from "react-icons/io";
 import { FaReact } from "react-icons/fa";
 import { GrGraphQl } from "react-icons/gr";
 import { FiDatabase } from "react-icons/fi";
-import { MdBackupTable, MdCode, MdSpeed } from "react-icons/md";
+import { MdBackupTable, MdCode, MdManageAccounts, MdSpeed } from "react-icons/md";
 
 function HomepageHeader() {
   return (
@@ -102,6 +102,26 @@ function HomepageFeatures() {
           </p>
         </div>
         <div class="mt-12 grid gap-8 lg:grid-cols-2">
+          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:col-span-2 lg:pt-20 bg-white dark:bg-gray-900">
+            <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-left-bottom sm:bg-no-repeat md:bg-[length:480px]"></div>
+            <div class="relative">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
+                <MdManageAccounts color="#0d9ef1" size="38" />
+              </div>
+              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
+                Role-Based Access Control
+              </h3>
+              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
+                Role-Based Access Control (RBAC) is fully integrated into SeaORM Pro Plus. It offers a GUI editor to edit RBAC permissions and assign user roles. Without the corresponding select permission, users will not be able to see relevant tables in the GUI. Similarly, edit buttons will be hidden if user does not have update permission.
+              </p>
+            </div>
+            <div class="relative flex w-full flex-1 items-end pt-12">
+              <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:mx-auto lg:h-[600px] lg:w-[100%] bg-gray-100 dark:bg-gray-800">
+                <img class="dark:hidden object-cover object-top w-full" src="img/09_rbac.png" />
+                <img class="hidden dark:block object-cover object-top w-full" src="img/09_rbac_dark.png" />
+              </div>
+            </div>
+          </div>
           <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:flex-row lg:gap-6 lg:px-0 lg:py-16 lg:text-left lg:col-span-2 bg-white dark:bg-gray-900">
             <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
             <div class="relative lg:p-10 lg:pl-20">
@@ -109,7 +129,7 @@ function HomepageFeatures() {
                 <FiDatabase color="#0d9ef1" size="38" />
               </div>
               <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Full CRUD
+                Modal Editor
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
                 SeaORM Pro provides a full CRUD interface for your SeaORM models.
@@ -142,7 +162,7 @@ function HomepageFeatures() {
               </div>
             </div>
           </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-gray-100 dark:bg-gray-900">
+          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 bg-white dark:bg-gray-900">
             <div class="absolute inset-0 dark:opacity-20 bg-[url()] bg-[length:94%] bg-bottom bg-no-repeat"></div>
             <div class="relative">
               <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
