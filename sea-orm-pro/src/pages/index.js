@@ -9,7 +9,7 @@ import { IoIosFlash } from "react-icons/io";
 import { FaReact } from "react-icons/fa";
 import { GrGraphQl } from "react-icons/gr";
 import { FiDatabase } from "react-icons/fi";
-import { MdBackupTable, MdCode, MdManageAccounts, MdSpeed } from "react-icons/md";
+import { MdBackupTable, MdCode, MdManageAccounts, MdCheckCircleOutline, MdOutlineRemoveCircle, MdCheckCircle } from "react-icons/md";
 
 function HomepageHeader() {
   return (
@@ -62,7 +62,7 @@ function HomepageSlogan() {
               Launch Admin Panel in minutes.
             </h2>
             <p class="mt-6 font-medium text-gray-400 sm:text-lg">
-              Use SeaORM Pro with any Rust web framework, simply follow the 3 easy steps to setup an admin panel for existing SeaORM projects.
+              Use SeaORM Pro with any Rust web framework, simply follow our guide to setup an admin panel for existing SeaORM projects.
             </p>
             <p class="mt-4 font-medium text-gray-400 sm:text-lg">
               Or even better, build your next application with our fullstack webapp template!
@@ -102,6 +102,26 @@ function HomepageFeatures() {
           </p>
         </div>
         <div class="mt-12 grid gap-8 lg:grid-cols-2">
+          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:flex-row lg:gap-6 lg:px-0 lg:py-16 lg:text-left lg:col-span-2 bg-white dark:bg-gray-900">
+            <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
+            <div class="relative lg:p-10 lg:pl-20">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
+                <FiDatabase color="#0d9ef1" size="38" />
+              </div>
+              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
+                Model Editor
+              </h3>
+              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
+                SeaORM Pro provides a full CRUD interface for your SeaORM Models. Choose between pop-up or full page editor. You can customize the layout and input type of each field easily.
+              </p>
+            </div>
+            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[60%] lg:flex-auto lg:shrink-0 lg:pt-0">
+              <div class="h-[290px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
+                <img class="dark:hidden object-cover object-top lg:object-left w-full" src="img/model-editor-light.png" />
+                <img class="hidden dark:block object-cover object-top lg:object-left w-full" src="img/model-editor-dark.png" />
+              </div>
+            </div>
+          </div>
           <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:col-span-2 lg:pt-20 bg-white dark:bg-gray-900">
             <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-left-bottom sm:bg-no-repeat md:bg-[length:480px]"></div>
             <div class="relative">
@@ -112,33 +132,13 @@ function HomepageFeatures() {
                 Role-Based Access Control
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Role-Based Access Control (RBAC) is fully integrated into SeaORM Pro Plus. It offers a GUI editor to edit RBAC permissions and assign user roles. Without the corresponding select permission, users will not be able to see relevant tables in the GUI. Similarly, edit buttons will be hidden if user does not have update permission.
+                A built-in GUI editor allows administrators to configure RBAC permissions and assign user roles. Users without the appropriate permissions will not be able to view the relevant tables in the GUI.
               </p>
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
               <div class="h-[240px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:mx-auto lg:h-[600px] lg:w-[100%] bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-top w-full" src="img/09_rbac.png" />
-                <img class="hidden dark:block object-cover object-top w-full" src="img/09_rbac_dark.png" />
-              </div>
-            </div>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-gray-400/30 px-10 pt-10 text-center dark:border-gray-600/20 lg:flex-row lg:gap-6 lg:px-0 lg:py-16 lg:text-left lg:col-span-2 bg-white dark:bg-gray-900">
-            <div class="absolute inset-0 dark:opacity-20 sm:bg-[url()] sm:bg-right-top sm:bg-no-repeat md:bg-[length:480px]"></div>
-            <div class="relative lg:p-10 lg:pl-20">
-              <div class="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-800 shadow-lg sm:h-20 sm:w-20">
-                <FiDatabase color="#0d9ef1" size="38" />
-              </div>
-              <h3 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white sm:mt-6 sm:text-4xl xl:text-[40px]">
-                Modal Editor
-              </h3>
-              <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                SeaORM Pro provides a full CRUD interface for your SeaORM models.
-              </p>
-            </div>
-            <div class="relative flex w-full flex-1 items-end pt-12 lg:block lg:!w-[60%] lg:flex-auto lg:shrink-0 lg:pt-0">
-              <div class="h-[290px] w-full rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-50 dark:border-gray-600/20 flex overflow-hidden lg:h-[616px] lg:rounded-l-xl lg:rounded-tr-none lg:border-b lg:border-r-0 bg-gray-100 dark:bg-gray-800">
-                <img class="dark:hidden object-cover object-top lg:object-left w-full" src="img/05_table_crud.png" />
-                <img class="hidden dark:block object-cover object-top lg:object-left w-full" src="img/05_table_crud_dark.png" />
+                <img class="dark:hidden object-cover object-top w-full" src="img/sea-orm-pro-rbac-editor-light.png" />
+                <img class="hidden dark:block object-cover object-top w-full" src="img/sea-orm-pro-rbac-editor-dark.png" />
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ function HomepageFeatures() {
                 GraphQL resolver? Built-in
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
-                Gone are the days of building GraphQL resolvers by hand! With Seaography, your SeaORM schema is automagically transformed into a fully-functional GraphQL schema, enabling you to write, sort, filter, and join GraphQL queries on the frontend.
+                Gone are the days of writing GraphQL resolvers by hand! With Seaography, your SeaORM schema is automatically transformed into a fully functional GraphQL schema, allowing you to query, sort, filter, and join data directly from the frontend.
               </p>
             </div>
             <div class="relative flex w-full flex-1 items-end pt-12">
@@ -213,7 +213,7 @@ function HomepageFeatures() {
               </h3>
               <p class="mt-4 max-w-xl text-gray-700 dark:text-gray-400 sm:mt-6 lg:text-lg">
                 Customize the UI easily with a simple, elegant toml syntax.
-                <br/>
+                <br />
                 Absolutely no generated code bloat.
               </p>
             </div>
@@ -225,8 +225,6 @@ function HomepageFeatures() {
             </div>
           </div>
         </div>
-
-        {/* TODO: add a new section to mention RBAC */}
 
         <div class="mt-12 rounded-xl border border-gray-400/30 bg-gray-100 p-12 text-center dark:border-gray-600/20 dark:bg-gray-900 sm:mt-12 sm:p-20 lg:mt-16 xl:p-24">
           <h3 class="text-4xl font-semibold text-gray-900 dark:text-white lg:text-5xl">
@@ -249,6 +247,95 @@ function HomepageFeatures() {
           </div>
           <div class="mt-6">
             *SQL Server support via <a href="https://www.sea-ql.org/SeaORM-X/" target="_blank">SeaORM X</a>
+          </div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-8 pb-16 pt-16">
+          <div class="text-center">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl/tight lg:text-6xl/tight">
+              Shape the Future With Us
+            </h2>
+            <p class="mx-auto mt-6 max-w-2xl text-gray-600 dark:text-gray-400 sm:text-lg">
+              SeaORM Pro is free to use. Our vision is to make it fully open source.
+              <br />
+              Join us in shaping its open source future.
+            </p>
+          </div>
+          <div class="mx-auto mt-16 grid max-w-md lg:max-w-none lg:grid-cols-2">
+            <div class="rounded-t-xl border-l border-r border-t border-gray-400/30 bg-gray-100 p-12 dark:border-gray-600/30 dark:bg-gray-900 lg:rounded-none lg:rounded-l-lg lg:border-b lg:border-r-0">
+              <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                SeaORM Pro Free
+              </h3>
+              <p class="mt-6 flex items-center gap-2">
+                <span class="text-5xl font-bold text-gray-900 dark:text-white">
+                  $0
+                </span>
+                <span class="inline-flex flex-col text-s text-gray-600 dark:text-gray-400">
+                  <span class="ml-2">Free & Open Source</span>
+                </span>
+              </p>
+              <ul class="mt-12 space-y-5">
+                <li class="flex items-center gap-3">
+                  <MdCheckCircle color="#0d9ef1" size="38" />
+                  <span class="text-gray-900 dark:text-white">
+                    Free to Use
+                  </span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <MdCheckCircle color="#0d9ef1" size="38" />
+                  <span class="text-gray-900 dark:text-white">
+                    Full CRUD, Model Editor
+                  </span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <MdOutlineRemoveCircle color="#0d9ef1" size="38" />
+                  <span class="text-gray-900 dark:text-white">
+                    No Frontend Source Code
+                  </span>
+                </li>
+              </ul>
+              <a href="https://github.com/SeaQL/sea-orm-pro" class="mt-8 inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-8 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 request-license-btn hover-btn">
+                Get Started
+              </a>
+            </div>
+            <div class="rounded-b-xl border-b border-l border-r border-gray-600/30 bg-gray-800 bg-[url()] bg-right-top p-12 dark:border-gray-600/30 dark:bg-gray-800 lg:rounded-none lg:rounded-r-xl lg:border-l-0 lg:border-t">
+              <h3 class="max-w-fit bg-gradient-to-r from-blue-400 to-orange-400 bg-clip-text text-2xl font-bold text-transparent">
+                SeaORM Pro Plus
+              </h3>
+              <p class="mt-6 flex items-center gap-2">
+                <span class="text-5xl font-bold text-white">
+                  $10/mo
+                </span>
+                <span class="inline-flex flex-col text-s text-gray-400">
+                  <span class="ml-2">Monthly Sponsorship</span>
+                </span>
+              </p>
+              <ul class="mt-12 space-y-5">
+                <li class="flex items-center gap-3">
+                  <MdCheckCircleOutline color="#0d9ef1" size="38" />
+                  <span class="text-white">Frontend Source Code</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <MdCheckCircleOutline color="#0d9ef1" size="38" />
+                  <span class="text-white">Perpetual License for Single Project</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <MdCheckCircleOutline color="#0d9ef1" size="38" />
+                  <span class="text-white">Feature Updates & Bug Fixes</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <MdCheckCircleOutline color="#0d9ef1" size="38" />
+                  <span class="text-white">Plus Features: Role-Based Access Control</span>
+                </li>
+              </ul>
+              <a href="https://github.com/sponsors/SeaQL/sponsorships?pay_prorated=false&tier_id=249708" class="mt-8 inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gradient-to-br from-green-300 to-blue-green-300 px-8 py-3.5 text-center font-semibold text-gray-900 transition hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300/50 request-license-btn hover-btn">
+                Become a Sponsor
+              </a>
+              <span class="inline-flex flex-col text-xs text-gray-400">
+                <br />
+                <span class="ml-2">Your GitHub account will be invited to the <a href="https://github.com/SeaQL/sea-orm-pro-plus">SeaORM Pro Plus</a> repository automatically.</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
