@@ -126,3 +126,23 @@ assert_eq!(
     Err(DbErr::AttrNotSet(String::from("name")))
 );
 ```
+
+This will fail if any of the fields of the ActiveModel are `NotSet`.
+If you wish to automatically fill remaining fields with their `Default::default()` values (or fallback to `NotSet` if they don't have one), you can use the
+[`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) method.
+This can be useful for quickly creating mock models for testing purposes.
+```rust
+assert_eq!(
+    ActiveModel {
+        id: Set(2),
+        ..ActiveModel::default_values()
+    }
+    .try_into_model()
+    .unwrap(),
+    Model {
+        id: 2,
+        name: String::default(), // empty string,
+        cake_id: Option::default(), // `None`
+    }
+);
+```
