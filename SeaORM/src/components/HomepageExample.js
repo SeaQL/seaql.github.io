@@ -60,27 +60,32 @@ smart_user
         posts: HasMany::Loaded(vec![post::ModelEx {
             title: "Nice weather".into(),
             tags: HasMany::Loaded(vec![tag::ModelEx {
-                tag: "diary".into(),
+                tag: "sunny".into(),
             }]),
         }]),
     };`,
   },
   {
+    title: 'Nested ActiveModel',
+    summary: `Persist an entire object graph: user, profile (1-1), posts (1-N), and tags (M-N) in a single operation using a fluent builder API. SeaORM automatically determines the dependencies and inserts or deletes objects in the correct order.`,
+    code: `let user = user::ActiveModel::builder()
+    .set_name("Bob")
+    .set_email("bob@sea-ql.org")
+    .set_profile(profile::ActiveModel::builder().set_picture("image.jpg"))
+    .add_post(
+        post::ActiveModel::builder()
+            .set_title("Nice weather")
+            .add_tag(tag::ActiveModel::builder().set_tag("sunny")),
+    )
+    .save(db)
+    .await?;`
+  },
+  {
     title: 'Entity First Workflow',
     summary: `SeaORM 2.0 supports a first-class Entity First Workflow: simply define new entities or add columns to existing ones, and SeaORM will automatically detect the changes and create the new tables, columns, unique keys, and foreign keys.`,
-    code: `let item = Item { name: "Bob" }; // nested parameter access
-let ids = [2, 3, 4]; // expanded by the .. operator
-
-let user: Option<user::Model> = user::Entity::find()
-    .from_raw_sql(raw_sql!(
-        Sqlite,
-        r#"SELECT "id", "name" FROM "user"
-           WHERE "name" LIKE {item.name}
-           AND "id" in ({..ids})
-        "#
-    ))
-    .one(db)
-    .await?;`
+    code: `// SeaORM resolves foreign key dependencies and creates the tables in topological order.
+// Requires the entity-registry and schema-sync feature flags.
+db.get_schema_registry("my_crate::entity::*").sync(db).await;`
   },
   {
     title: 'Ergonomic Raw SQL',

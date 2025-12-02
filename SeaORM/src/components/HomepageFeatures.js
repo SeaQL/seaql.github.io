@@ -5,6 +5,24 @@ import { MdCloud, MdCheckCircle, MdFlashOn, MdFlight } from "react-icons/md";
 
 const FeatureList = [
   {
+    title: 'Advanced Relations',
+    icon: <MdFlashOn size={26} />,
+    description: (
+      <>
+        Model complex relationships 1-1, 1-N, M-N, and even self-referential in a high-level, conceptual way.
+      </>
+    ),
+  },
+  {
+    title: 'Familiar Concepts',
+    icon: <MdFlight size={26} />,
+    description: (
+      <>
+        Inspired by popular ORMs in the Ruby, Python, and Node.js ecosystem, SeaORM offers a developer experience that feels instantly recognizable.
+      </>
+    ),
+  },
+  {
     title: 'Feature Rich',
     icon: <MdCloud size={26} />,
     description: (
