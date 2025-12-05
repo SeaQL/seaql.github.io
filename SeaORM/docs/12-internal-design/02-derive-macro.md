@@ -2,7 +2,7 @@
 
 ## EntityModel
 
-The [`EntityModel`](#) derive macro is the 'almighty' macro which automatically generates `Entity`, `Column`, and `PrimaryKey` from a given `Model`.
+The [`DeriveEntityModel`](#) derive macro is the 'almighty' macro which automatically generates `Entity`, `Column`, and `PrimaryKey` from a given `Model`.
 
 ## Entity
 
