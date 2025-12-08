@@ -54,6 +54,7 @@ jobs:
             SeaORM-X
             sea-orm-pro
             blog
+            interview
             Seaography
             SeaStreamer
             preview
@@ -108,6 +109,19 @@ jobs:
           branch: gh-pages
           folder: docs/blog
           target-folder: blog
+          clean: true
+
+
+      - name: Build interview
+        if: ${{ contains(steps.git-log.outputs.message, '[Interview]') || contains(steps.git-log.outputs.message, '[full]') }}
+        run: sh build-site.sh Interview interview
+      - name: Deploy interview
+        if: ${{ contains(steps.git-log.outputs.message, '[Interview]') || contains(steps.git-log.outputs.message, '[full]') }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/interview
+          target-folder: interview
           clean: true
 
 

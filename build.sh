@@ -5,5 +5,6 @@ sh build-site.sh SeaORM SeaORM
 sh build-site.sh SeaORM-X SeaORM-X
 sh build-site.sh sea-orm-pro sea-orm-pro
 sh build-site.sh Blog blog
+sh build-site.sh Interview interview
 sh build-site.sh Seaography Seaography
 sh build-site.sh SeaStreamer SeaStreamer

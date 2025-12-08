@@ -50,6 +50,9 @@ jobs:
             Blog/node_modules
             Blog/.docusaurus
             Blog/build
+            Interview/node_modules
+            Interview/.docusaurus
+            Interview/build
             Seaography/node_modules
             Seaography/.docusaurus
             Seaography/build
