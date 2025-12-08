@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.sea-ql.org/interview/</id>
+    <title>SeaQL Blog</title>
+    <updated>2025-12-08T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://www.sea-ql.org/interview/"/>
+    <subtitle>SeaQL Blog</subtitle>
+    <icon>https://www.sea-ql.org/interview/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Welcome to SeaQL Interview]]></title>
+        <id>https://www.sea-ql.org/interview/2025-12-08-welcome/</id>
+        <link href="https://www.sea-ql.org/interview/2025-12-08-welcome/"/>
+        <updated>2025-12-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Coming Soon!]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_uoKK" id="coming-soon">Coming Soon!<a href="https://www.sea-ql.org/interview/2025-12-08-welcome/#coming-soon" class="hash-link" aria-label="Direct link to Coming Soon!" title="Direct link to Coming Soon!">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Terres" src="https://www.sea-ql.org/interview/assets/images/Terres-3a7ff4e65508cd2064b0035539410b3f.png" class="img_HcDq"></p>]]></content>
+        <author>
+            <name>Chris Tsang</name>
+            <uri>https://github.com/tyt2y3</uri>
+        </author>
+        <category label="news" term="news"/>
+    </entry>
+</feed>

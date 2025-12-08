@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>SeaQL Blog</title>
+        <link>https://www.sea-ql.org/interview/</link>
+        <description>SeaQL Blog</description>
+        <lastBuildDate>Mon, 08 Dec 2025 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Welcome to SeaQL Interview]]></title>
+            <link>https://www.sea-ql.org/interview/2025-12-08-welcome/</link>
+            <guid>https://www.sea-ql.org/interview/2025-12-08-welcome/</guid>
+            <pubDate>Mon, 08 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Coming Soon!]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_uoKK" id="coming-soon">Coming Soon!<a href="https://www.sea-ql.org/interview/2025-12-08-welcome/#coming-soon" class="hash-link" aria-label="Direct link to Coming Soon!" title="Direct link to Coming Soon!">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Terres" src="https://www.sea-ql.org/interview/assets/images/Terres-3a7ff4e65508cd2064b0035539410b3f.png" class="img_HcDq"></p>]]></content:encoded>
+            <category>news</category>
+        </item>
+    </channel>
+</rss>
