@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunksea_ql_interview=self.webpackChunksea_ql_interview||[]).push([[472],{5513:e=>{e.exports=JSON.parse('{"title":"All Interviews","items":[{"title":"Welcome to SeaQL Interview","permalink":"/interview/2025-12-08-welcome","unlisted":false,"date":"2025-12-08T00:00:00.000Z"}]}')}}]);
