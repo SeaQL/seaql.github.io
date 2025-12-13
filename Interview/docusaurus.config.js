@@ -34,9 +34,16 @@ module.exports = {
           position: 'left'
         },
         {
+          to: 'https://www.sea-ql.org/blog/',
+          target: '_self',
+          label: 'Blog',
+          position: 'left'
+        },
+        {
           to: 'https://github.com/SeaQL',
+          target: '_blank',
           label: 'GitHub',
-          position: 'left',
+          position: 'right',
         },
       ],
     },

@@ -61,3 +61,18 @@ html[data-theme='dark'] img.dark-mode
 {
   display: none;
 }
+
+.pull-quote {
+  font-size: 1.2rem;              /* larger than body text */
+  font-style: italic;             /* classic pull quote look */
+  line-height: 1.6;
+  border-left: 4px solid var(--ifm-color-primary);
+  margin: 2rem 0;
+  padding-left: 1rem;
+  background: var(--ifm-background-surface); /* optional subtle background */
+}
+
+.pull-quote-marker {
+  font-size: 2rem;              /* larger than body text */
+  font-style: italic;             /* classic pull quote look */
+}
