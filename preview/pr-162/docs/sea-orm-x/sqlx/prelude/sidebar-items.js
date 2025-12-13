@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":["Acquire","ConnectOptions","Connection","Decode","Encode","Executor","FromRow","IntoArguments","Row","Statement","Type"]};
