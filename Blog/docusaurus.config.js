@@ -34,9 +34,15 @@ module.exports = {
           position: 'left'
         },
         {
+          to: 'https://www.sea-ql.org/interview/',
+          target: '_self',
+          label: 'Interview',
+          position: 'left'
+        },
+        {
           to: 'https://github.com/SeaQL',
           label: 'GitHub',
-          position: 'left',
+          position: 'right',
         },
       ],
     },
