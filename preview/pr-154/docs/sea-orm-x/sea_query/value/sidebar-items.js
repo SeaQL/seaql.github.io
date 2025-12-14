@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["ArrayType","Value","ValueTuple"],"struct":["ValueTypeErr","Values"],"trait":["FromValueTuple","IntoValueTuple","Nullable","ValueType"]};

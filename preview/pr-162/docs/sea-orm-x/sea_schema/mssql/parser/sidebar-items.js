@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["parse_column_default","parse_column_null","parse_column_query_result","parse_column_type","parse_foreign_key_query_results","parse_index_query_result","parse_index_query_results","parse_table_query_result","parse_type_name","parse_version_string"],"struct":["IndexQueryResultParser"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Month","Weekday"],"mod":["format","naive","offset","prelude","round"],"struct":["Date","DateTime","Days","FixedOffset","Local","Months","NaiveDate","NaiveDateTime","NaiveTime","OutOfRange","TimeDelta","Utc"],"trait":["Datelike","Offset","TimeZone","Timelike"],"type":["Duration"]};

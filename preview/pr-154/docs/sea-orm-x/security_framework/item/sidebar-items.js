@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["AddRef","ItemAddValue","Limit","Location","Reference","SearchResult"],"fn":["add_item"],"struct":["ItemAddOptions","ItemClass","ItemSearchOptions","KeyClass"]};

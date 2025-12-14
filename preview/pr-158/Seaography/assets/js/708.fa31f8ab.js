@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkseaography=self.webpackChunkseaography||[]).push([[708],{708:(a,e,s)=>{s.r(e),s.d(e,{DocSearchModal:()=>h.a1});var h=s(1890)}}]);

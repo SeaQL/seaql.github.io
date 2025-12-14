@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["chrono","time"],"struct":["Date","DateTime","DateTime2","DateTimeOffset","SmallDateTime","Time"]};

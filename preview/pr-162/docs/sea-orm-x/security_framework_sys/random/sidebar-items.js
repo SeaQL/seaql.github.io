@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["__SecRandom"],"fn":["SecRandomCopyBytes"],"static":["kSecRandomDefault"],"type":["SecRandomRef"]};
