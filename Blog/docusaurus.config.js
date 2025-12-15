@@ -65,6 +65,10 @@ module.exports = {
               to: 'https://twitter.com/sea_ql',
             },
             {
+              label: 'Bluesky',
+              to: 'https://bsky.app/profile/sea-ql.org',
+            },
+            {
               label: 'LinkedIn',
               to: 'https://www.linkedin.com/company/sea-ql',
             },
