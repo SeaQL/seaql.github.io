@@ -50,7 +50,7 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'Social',
           items: [
             {
               label: 'GitHub',
@@ -82,8 +82,8 @@ module.exports = {
               to: 'https://www.sea-ql.org/SeaORM/',
             },
             {
-              label: 'SeaQuery',
-              to: 'https://github.com/SeaQL/sea-query',
+              label: 'SeaORM Pro',
+              to: 'https://www.sea-ql.org/sea-orm-pro/',
             },
             {
               label: 'Seaography',

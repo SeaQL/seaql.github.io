@@ -51,7 +51,7 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'Social',
           items: [
             {
               label: 'GitHub',
@@ -64,6 +64,10 @@ module.exports = {
             {
               label: 'Twitter',
               to: 'https://twitter.com/sea_ql',
+            },
+            {
+              label: 'Bluesky',
+              to: 'https://bsky.app/profile/sea-ql.org',
             },
             {
               label: 'LinkedIn',
@@ -79,8 +83,8 @@ module.exports = {
               to: 'https://www.sea-ql.org/SeaORM/',
             },
             {
-              label: 'SeaQuery',
-              to: 'https://github.com/SeaQL/sea-query',
+              label: 'SeaORM Pro',
+              to: 'https://www.sea-ql.org/sea-orm-pro/',
             },
             {
               label: 'Seaography',
