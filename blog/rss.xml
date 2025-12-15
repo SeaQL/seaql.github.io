@@ -24,7 +24,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="async---sync">Async -&gt; Sync<a href="https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/#async---sync" class="hash-link" aria-label="Direct link to Async -> Sync" title="Direct link to Async -> Sync">​</a></h2>
 <p>At a high level, async Rust can be seen as a more complex form of sync Rust. So converting an async program is possible by stripping out the runtime and removing all <code>async</code> / <code>await</code> usage.</p>
 <p>However, you can't always go from sync to async. Async Rust tightens lifetime rules and introduces <code>Send</code> / <code>Sync</code> requirements for futures and async closures, so existing sync code may fail those constraints.</p>
-<p>Let's go over all the necessary conversions, in order of complexity:</p>
+<p>Let's examine the required conversions, ordered by their level of complexity.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-async--await">1. <code>async</code> / <code>await</code><a href="https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/#1-async--await" class="hash-link" aria-label="Direct link to 1-async--await" title="Direct link to 1-async--await">​</a></h3>
 <p>Removing all <code>async</code> and <code>.await</code> keywords will almost make it compile.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-main--test">2. <code>#[main]</code> / <code>#[test]</code><a href="https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/#2-main--test" class="hash-link" aria-label="Direct link to 2-main--test" title="Direct link to 2-main--test">​</a></h3>
