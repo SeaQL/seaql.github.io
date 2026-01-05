@@ -81,7 +81,7 @@ It is recommended to structure your project as a cargo workspace to separate the
 
 ### Migration Crate
 
-Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and [`async-std`](https://crates.io/crates/async-std) crate.
+Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and [`tokio`](https://crates.io/crates/tokio) crate.
 
 ```toml title="migration/Cargo.toml"
 [dependencies]
