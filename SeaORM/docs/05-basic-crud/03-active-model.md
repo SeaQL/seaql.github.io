@@ -128,9 +128,11 @@ assert_eq!(
 ```
 
 This will fail if any of the fields of the ActiveModel are `NotSet`.
-If you wish to automatically fill remaining fields with their `Default::default()` values (or fallback to `NotSet` if they don't have one), you can use the
-[`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) method.
+
+If you wish to automatically fill remaining fields with their `Default::default()` values (or fallback to `NotSet` if they don't have one), you can use the [`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) method.
+
 This can be useful for quickly creating mock models for testing purposes.
+
 ```rust
 assert_eq!(
     ActiveModel {
