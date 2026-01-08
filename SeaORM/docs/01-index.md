@@ -136,6 +136,8 @@
 
     11.2 [Getting Started](11-sea-orm-pro/02-getting-started.md)
 
+    11.3 [Role Based Access Control](11-sea-orm-pro/03-role-based-access-control.md)
+
 12. Internal Design
 
     12.1 [Traits and Types](12-internal-design/01-trait-and-type.md)
