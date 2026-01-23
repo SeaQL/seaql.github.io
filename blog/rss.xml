@@ -117,8 +117,9 @@
             <link>https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/</link>
             <guid>https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/</guid>
             <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[SeaORM began as Rust's first async‑first ORM. Now we've come full circle with a synchronous crate: perfect for building lightweight CLI programs with SQLite.]]></description>
+            <description><![CDATA[SeaORM now has an official Rusqlite backend.]]></description>
             <content:encoded><![CDATA[<img alt="SeaORM 2.0 Banner" src="https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png">
+<p>SeaORM now has an official Rusqlite backend.</p>
 <p>SeaORM began as Rust's first async‑first ORM. Now we've come full circle with a synchronous crate: perfect for building lightweight CLI programs with SQLite.</p>
 <p>In this post, we'll share how we ported a complex library like SeaORM, the tricks we learnt along the way, and the steps we're taking to keep it maintainable for the long run.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="gist">Gist<a href="https://www.sea-ql.org/blog/2025-12-12-sea-orm-2.0/#gist" class="hash-link" aria-label="Direct link to Gist" title="Direct link to Gist">​</a></h2>

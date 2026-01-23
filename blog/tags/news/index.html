@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/cookieconsent/cookieconsent.css">
 <script src="/sea-ql.js"></script>
 <script type="module" src="/cookieconsent/cookieconsent.js" async></script><link rel="stylesheet" href="/blog/assets/css/styles.59dab6e9.css">
-<script src="/blog/assets/js/runtime~main.850bb2c1.js" defer="defer"></script>
+<script src="/blog/assets/js/runtime~main.57c65d04.js" defer="defer"></script>
 <script src="/blog/assets/js/main.9ddfe5dd.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -117,6 +117,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="need-help">Need Help?<a href="#need-help" class="hash-link" aria-label="Direct link to Need Help?" title="Direct link to Need Help?">​</a></h2>
 <p>If you&#x27;re using SeaORM in a professional environment, please consider asking your company to become a <a href="https://github.com/sponsors/SeaQL" target="_blank" rel="noopener noreferrer">Startup / Enterprise tier sponsor</a>. Company sponsorship comes with benefits such as direct communication with the SeaQL team, as well as professional technical guidance on SeaORM usage, data engineering and Rust development in general.</p>
 <p>We&#x27;ve helped companies successfully deploy Rust web services in production on high-throughput workloads.</p></div><footer class="row docusaurus-mt-lg"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/news/">news</a></li></ul></div></footer></article><article class="margin-bottom--xl"><header><h2 class="title_f1Hy"><a href="/blog/2025-12-12-sea-orm-2.0/">How we made SeaORM synchronous</a></h2><div class="container_mt6G margin-vert--md"><time datetime="2025-12-12T00:00:00.000Z">December 12, 2025</time> · <!-- -->8 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--12 authorCol_Hf19"><div class="avatar margin-bottom--sm"><a href="https://github.com/SeaQL" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo authorImage_XqGP" src="https://www.sea-ql.org/blog/img/SeaQL.png" alt="SeaQL Team"></a><div class="avatar__intro authorDetails_lV9A"><div class="avatar__name"><a href="https://github.com/SeaQL" target="_blank" rel="noopener noreferrer"><span class="authorName_yefp">SeaQL Team</span></a></div><small class="authorTitle_nd0D" title="Chris Tsang">Chris Tsang</small><div class="authorSocials_rSDt"></div></div></div></div></div></header><div class="markdown"><img alt="SeaORM 2.0 Banner" src="/blog/img/SeaORM%202.0%20Banner.png">
+<p>SeaORM now has an official Rusqlite backend.</p>
 <p>SeaORM began as Rust&#x27;s first async‑first ORM. Now we&#x27;ve come full circle with a synchronous crate: perfect for building lightweight CLI programs with SQLite.</p>
 <p>In this post, we&#x27;ll share how we ported a complex library like SeaORM, the tricks we learnt along the way, and the steps we&#x27;re taking to keep it maintainable for the long run.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="gist">Gist<a href="#gist" class="hash-link" aria-label="Direct link to Gist" title="Direct link to Gist">​</a></h2>
