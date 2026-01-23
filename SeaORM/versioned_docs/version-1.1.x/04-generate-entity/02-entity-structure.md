@@ -97,7 +97,7 @@ The column type mapping of MSSQL can be found [here](https://www.sea-ql.org/SeaO
 
 For the mappings of Rust primitive data types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | char | char | char |
 | `String` | String | varchar | varchar | varchar |
@@ -116,7 +116,7 @@ For the mappings of Rust primitive data types.
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | date_text | date | date |
 | `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | time_text | time | time |
@@ -243,7 +243,7 @@ pub struct Model {
 
 ## Relation
 
-`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html).
+`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.RelationTrait.html).
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -260,7 +260,7 @@ If there are no relations, simply write:
 pub enum Relation {}
 ```
 
-The [Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
+The [Related](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
 
 Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapter.
 

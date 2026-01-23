@@ -3,7 +3,7 @@
 You can define a New Type (`T`) and use it as model field. The following traits have to be implemented.
 
 1. Implement `From<T>` for [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html)
-2. Implement [`sea_orm::TryGetable`](https://docs.rs/sea-orm/*/sea_orm/trait.TryGetable.html) for `T`
+2. Implement [`sea_orm::TryGetable`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TryGetable.html) for `T`
 3. Implement [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html) for `T`
 4. Implement [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html) for `T`
 

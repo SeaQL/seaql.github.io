@@ -44,7 +44,7 @@ let unique: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_an
     .await?;
  ```
 
-You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/*/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
+You can paginate [`SelectorRaw`](https://docs.rs/sea-orm/1.1.19/sea_orm/struct.SelectorRaw.html) and fetch `Model` in batch.
 
 ```rust
 let mut cake_pages = cake::Entity::find()
@@ -116,7 +116,7 @@ assert_eq!(exec_res.rows_affected(), 1);
 
 ## Execute Unprepared SQL Statement
 
-You can execute an unprepared SQL statement with [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/*/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared).
+You can execute an unprepared SQL statement with [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/1.1.19/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared).
 
 ```rust
 let exec_res: ExecResult =

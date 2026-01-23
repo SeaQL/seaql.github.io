@@ -75,7 +75,7 @@ See [`SchemaManager`](https://docs.rs/sea-orm-migration/*/sea_orm_migration/mana
 
 Click [here](https://github.com/SeaQL/sea-query#table-create) to take a quick tour of SeaQuery's DDL statements.
 
-You can use the [`DeriveIden`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveIden.html) macro to define identifiers that will be used in your migration.
+You can use the [`DeriveIden`](https://docs.rs/sea-orm/1.1.19/sea_orm/derive.DeriveIden.html) macro to define identifiers that will be used in your migration.
 
 ```rust
 #[derive(DeriveIden)]

@@ -6,7 +6,7 @@ By default, SeaORM will select all columns defined in the `Column` enum.
 
 ## Find by Primary Key
 
-Find a model by its primary key, it can be a single key or composite key. We start by calling [`find_by_id`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html#method.find_by_id) on [`Entity`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html) which helps you construct the select query and condition automatically. Then, fetch a single model from the database with the `one` method.
+Find a model by its primary key, it can be a single key or composite key. We start by calling [`find_by_id`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html#method.find_by_id) on [`Entity`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html) which helps you construct the select query and condition automatically. Then, fetch a single model from the database with the `one` method.
 
 ```rust
 use super::cake::Entity as Cake;
@@ -21,7 +21,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 ## Find with Conditions and Orders
 
-In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/*/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
+In addition to retrieving a model by primary key, you can also retrieve one or more models matching specific conditions in a certain order. The [`find`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html#method.find) method gives you access to the query builder in SeaORM. It supports the construction of all common select expressions like `where` and `order by`. They can be constructed using [`filter`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.QueryFilter.html#method.filter) and [`order_by_*`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.QueryOrder.html#method.order_by) methods respectively.
 
 > Read more about [conditional expression](08-advanced-query/02-conditional-expression.md).
 
@@ -40,7 +40,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
 
 ### Lazy Loading
 
-Use the [`find_related`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ModelTrait.html#method.find_related) method.
+Use the [`find_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ModelTrait.html#method.find_related) method.
 
 Related models are loaded on demand when you ask for them, preferable if you want to load related models based on some application logic. Note that lazy loading will increase database round trips compared to eager loading.
 
@@ -59,7 +59,7 @@ All related models are loaded in the same query with join.
 
 #### One to One
 
-Use the [`find_also_related`](https://docs.rs/sea-orm/*/sea_orm/query/struct.Select.html#method.find_also_related) method.
+Use the [`find_also_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/struct.Select.html#method.find_also_related) method.
 
 ```rust
 let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().find_also_related(Cake).all(db).await?;
@@ -67,7 +67,7 @@ let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().f
 
 #### One to Many / Many to Many
 
-Using the [`find_with_related`](https://docs.rs/sea-orm/*/sea_orm/query/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
+Using the [`find_with_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/struct.Select.html#method.find_with_related) method, the related models will be grouped by the parent models. This method handles both 1-N and M-N cases, and will perform 2 joins when there is a junction table involved.
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
@@ -111,13 +111,13 @@ super_cake
 
 ### Model Loader
 
-Use the [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) to load related entities in batches.
+Use the [LoaderTrait](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html) to load related entities in batches.
 
 Compared to eager loading, it saves bandwidth (consider the one to many case, the one side rows may duplicate) at the cost of one more database query.
 
 #### One to One
 
-Use the [load_one](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) method.
+Use the [load_one](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) method.
 
 ```rust
 let fruits: Vec<fruit::Model> = Fruit::find().all(db).await?;
@@ -126,7 +126,7 @@ let cakes: Vec<Option<cake::Model>> = fruits.load_one(Cake, db).await?;
 
 #### One to Many
 
-Use the [load_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
+Use the [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
@@ -135,7 +135,7 @@ let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 
 #### Many to Many
 
-Use the same [load_many](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
+Use the same [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) method.
 
 :::tip Since `2.0.0`
 You don't have to provide the junction Entity. It's where SeaORM shines!
@@ -148,7 +148,7 @@ let fillings: Vec<Vec<filling::Model>> = cakes.load_many(Filling, db).await?;
 
 ## Paginate Result
 
-Convert any SeaORM select into a [paginator](https://docs.rs/sea-orm/*/sea_orm/struct.Paginator.html) with custom page size.
+Convert any SeaORM select into a [paginator](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.Paginator.html) with custom page size.
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake};

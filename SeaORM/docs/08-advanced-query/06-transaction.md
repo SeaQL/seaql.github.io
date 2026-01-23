@@ -4,7 +4,7 @@ A transaction is a group of SQL statements executed with ACID guarantee. There a
 
 ## With a Closure
 
-Perform a [transaction with a closure](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
+Perform a [transaction with a closure](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
 
 ```rust
 use sea_orm::TransactionTrait;
@@ -38,7 +38,7 @@ This is the preferred way for most cases. However, if you happen to run into an 
 
 ## `begin` & `commit`
 
-[`begin`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin) the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
+[`begin`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin) the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
 
 ```rust
 let txn = db.begin().await?;
@@ -180,7 +180,7 @@ assert_eq!(Bakery::find().all(db).await?.len(), 3);
 
 ## Isolation Level and Access Mode
 
-Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/*/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/*/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/*/sea_orm/enum.AccessMode.html).
+Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.AccessMode.html).
 
 For now, they are only implemented for MySQL and Postgres. In order to align their semantic difference, MySQL will execute `SET TRANSACTION` commands before begin transaction, while Postgres will execute `SET TRANSACTION` commands after begin transaction.
 

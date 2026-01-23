@@ -1,6 +1,6 @@
 # Data Loader
 
-The [LoaderTrait](https://docs.rs/sea-orm/*/sea_orm/query/trait.LoaderTrait.html) provides an API to load related entities in batches.
+The [LoaderTrait](https://docs.rs/sea-orm/1.1.19/sea_orm/query/trait.LoaderTrait.html) provides an API to load related entities in batches.
 
 Consider this one to many relation:
 
