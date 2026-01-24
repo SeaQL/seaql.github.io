@@ -370,5 +370,5 @@ pub enum Relation {
 Then you can use the relations like:
 
 ```rust
-fruit::Entity::find().join(JoinType::LeftJoin, fruit::Relation::ToppingOf.def());
+worker::Entity::find().join(JoinType::LeftJoin, worker::Relation::BakeryManager.def());
 ```

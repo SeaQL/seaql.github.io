@@ -4,11 +4,9 @@
 
 1. Introduction
 
-    1.1. [What is an ORM](01-introduction/01-orm.md)
+    1.1. [Introduction to SeaORM](01-introduction/01-sea-orm.md)
 
-    1.2. [Async Programming in Rust](01-introduction/02-async.md)
-
-    1.3. [SeaORM Concepts](01-introduction/03-sea-orm.md)
+    1.2. [What's New in SeaORM 2.0](01-introduction/02-whats-new.md)
 
 ## Basics
 

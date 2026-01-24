@@ -8,6 +8,8 @@ For 1-N or M-N relations, it uses the data loader. Note that, it's a single quer
 
 For nested queries, it uses the data loader. It consolidates the id of all the models in the 2nd query and issue one query for the 3rd.
 
+This is a new feature in 2.0, and is only available to Entities defined with `#[sea_orm::model]` or `#[sea_orm::compact_model]`.
+
 ## Using Entity Loader
 
 ```rust
