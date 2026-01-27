@@ -94,8 +94,6 @@ assert_eq!(
 
 ## Use Raw Query & Execute Interface
 
-You can build SQL statements using `sea-query` and query / execute it directly on the `DatabaseConnection` interface inside SeaORM.
-
 ### Get Custom Result using `query_one` and `query_all` methods
 
 ```rust

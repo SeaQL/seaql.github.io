@@ -60,6 +60,8 @@
 
     5.9 [Raw SQL query](05-basic-crud/09-raw-sql.md)
 
+    5.10 [Custom Active Model](05-basic-crud/10-custom-active-model.md)
+
 ## Advanced Topics
 
 6. Relations
@@ -108,7 +110,7 @@
 
     8.7 [Streaming](08-advanced-query/07-streaming.md)
 
-    8.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
+    8.8 [Nested Active Model](08-advanced-query/08-nested-active-model.md)
 
     8.9 [Error Handling](08-advanced-query/09-error-handling.md)
 
