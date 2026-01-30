@@ -56,7 +56,7 @@ while let Some(cakes) = cake_pages.fetch_and_next().await? {
 ## Select JSON from raw SQL
 
 ```rust
-let result: Vec<JsonValue> = JsonValue::find_by_statement(Statement::from_sql_and_values(
+let result: Vec<serde_json::Value> = serde_json::Value::find_by_statement(Statement::from_sql_and_values(
         DbBackend::Postgres,
         r#"SELECT "cake"."name" FROM "cake" GROUP BY "cake"."name"#,
         [],

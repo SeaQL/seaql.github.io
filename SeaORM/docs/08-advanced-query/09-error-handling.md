@@ -1,6 +1,6 @@
 # Error Handling
 
-All runtime errors in SeaORM is represented by [`DbErr`](https://docs.rs/sea-orm/*/sea_orm/error/enum.DbErr.html).
+All runtime errors in SeaORM is represented by [`DbErr`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/error/enum.DbErr.html).
 
 ## Handling common SQL errors
 

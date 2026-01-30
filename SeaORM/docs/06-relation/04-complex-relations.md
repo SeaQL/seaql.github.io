@@ -2,7 +2,7 @@
 
 ## Linked
 
-The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
+The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
 
 1. there exist multiple join paths between a pair of entities, making it impossible to impl `Related`
 1. joining across multiple entities in a relational query
@@ -32,7 +32,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -58,7 +58,7 @@ assert_eq!(
 
 ### Eager Loading
 
-[`find_also_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
+[`find_also_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
 
 ```rust
 assert_eq!(
@@ -370,5 +370,5 @@ pub enum Relation {
 Then you can use the relations like:
 
 ```rust
-fruit::Entity::find().join(JoinType::LeftJoin, fruit::Relation::ToppingOf.def());
+worker::Entity::find().join(JoinType::LeftJoin, worker::Relation::BakeryManager.def());
 ```

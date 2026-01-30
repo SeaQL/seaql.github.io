@@ -163,7 +163,7 @@ pub struct Model {
 
 ## Relation
 
-`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.RelationTrait.html).
+`DeriveRelation` is a macro to help you implement the [`RelationTrait`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.RelationTrait.html).
 
 ```rust
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -180,7 +180,7 @@ If there are no relations, simply write:
 pub enum Relation {}
 ```
 
-The [Related](https://docs.rs/sea-orm/*/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
+The [Related](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.Related.html) trait connects entities together, such that you can build queries selecting both entities.
 
 Learn more about relations in the [Relation](06-relation/01-one-to-one.md) chapter.
 

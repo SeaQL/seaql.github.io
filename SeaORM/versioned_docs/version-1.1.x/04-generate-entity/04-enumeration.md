@@ -211,7 +211,7 @@ manager.exec_stmt(insert).await?;
 
 ## Trait impl
 
-The [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
+The [`DeriveActiveEnum`](https://docs.rs/sea-orm/1.1.19/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
 
 ```rust
 use sea_orm::entity::prelude::*;

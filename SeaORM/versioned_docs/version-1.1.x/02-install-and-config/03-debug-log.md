@@ -27,7 +27,7 @@ SeaORM's debug print injects parameters into the SQL string, which makes it easi
 
 ## SQLx Logging
 
-SQLx also logs by default. If you turned on SeaORM's `debug-print`, you can disable SQLx's log by passing [`ConnectOptions`](https://docs.rs/sea-orm/*/sea_orm/struct.ConnectOptions.html) to `connect()`.
+SQLx also logs by default. If you turned on SeaORM's `debug-print`, you can disable SQLx's log by passing [`ConnectOptions`](https://docs.rs/sea-orm/1.1.19/sea_orm/struct.ConnectOptions.html) to `connect()`.
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());

@@ -54,38 +54,17 @@ pub struct UpdateFruit {
 }
 
 assert_eq!(
-    UpdateFruit {
-        cake_id: Some(Some(1)),
-    }
-    .into_active_model(),
-    fruit::ActiveModel {
-        id: NotSet,
-        name: NotSet,
-        cake_id: Set(Some(1)),
-    }
+    UpdateFruit { cake_id: Some(Some(1)) }.into_active_model(),
+    fruit::ActiveModel { id: NotSet, name: NotSet, cake_id: Set(Some(1)) }
 );
 
 assert_eq!(
-    UpdateFruit {
-        cake_id: Some(None),
-    }
-    .into_active_model(),
-    fruit::ActiveModel {
-        id: NotSet,
-        name: NotSet,
-        cake_id: Set(None),
-    }
+    UpdateFruit { cake_id: Some(None) }.into_active_model(),
+    fruit::ActiveModel { id: NotSet, name: NotSet, cake_id: Set(None) }
 );
 
 assert_eq!(
-    UpdateFruit {
-        cake_id: None,
-    }
-    .into_active_model(),
-    fruit::ActiveModel {
-        id: NotSet,
-        name: NotSet,
-        cake_id: NotSet,
-    }
+    UpdateFruit { cake_id: None }.into_active_model(),
+    fruit::ActiveModel { id: NotSet, name: NotSet, cake_id: NotSet }
 );
 ```

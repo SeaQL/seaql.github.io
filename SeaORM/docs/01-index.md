@@ -4,11 +4,9 @@
 
 1. Introduction
 
-    1.1. [What is an ORM](01-introduction/01-orm.md)
+    1.1. [Introduction to SeaORM](01-introduction/01-sea-orm.md)
 
-    1.2. [Async Programming in Rust](01-introduction/02-async.md)
-
-    1.3. [SeaORM Concepts](01-introduction/03-sea-orm.md)
+    1.2. [What's New in SeaORM 2.0](01-introduction/02-whats-new.md)
 
 ## Basics
 
@@ -62,6 +60,8 @@
 
     5.9 [Raw SQL query](05-basic-crud/09-raw-sql.md)
 
+    5.10 [Custom Active Model](05-basic-crud/10-custom-active-model.md)
+
 ## Advanced Topics
 
 6. Relations
@@ -110,7 +110,7 @@
 
     8.7 [Streaming](08-advanced-query/07-streaming.md)
 
-    8.8 [Custom Active Model](08-advanced-query/08-custom-active-model.md)
+    8.8 [Nested Active Model](08-advanced-query/08-nested-active-model.md)
 
     8.9 [Error Handling](08-advanced-query/09-error-handling.md)
 

@@ -58,6 +58,6 @@ assert_eq!(
 
 :::info
 
-Aggregation functions such as `max`, `min`, `sum`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ColumnTrait.html).
+Aggregation functions such as `max`, `min`, `sum`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/prelude/trait.ColumnTrait.html).
 
 :::

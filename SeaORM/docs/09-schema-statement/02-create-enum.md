@@ -1,6 +1,6 @@
 # Create Enum
 
-You can generate SQL statement to create database tables with enum columns via the [`Schema`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html) helper struct.
+You can generate SQL statement to create database tables with enum columns via the [`Schema`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/schema/struct.Schema.html) helper struct.
 
 ## String & Integer Enum
 
@@ -125,9 +125,9 @@ Note the `db_type` and extra `enum_name` attributes.
 
 ### PostgreSQL
 
-Enums in PostgreSQL are defined by [`TypeCreateStatement`](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
+Enums in PostgreSQL are defined by [`TypeCreateStatement`](https://docs.rs/sea-query/*/sea_query/extension/postgres/struct.TypeCreateStatement.html), which can be created from an `Entity` with the [`Schema::create_enum_from_entity`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/schema/struct.Schema.html#method.create_enum_from_entity) method.
 
-You can also create it from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
+You can also create it from `ActiveEnum` with the [`Schema::create_enum_from_active_enum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/schema/struct.Schema.html#method.create_enum_from_active_enum) method.
 
 ```rust
 use sea_orm::{Schema, Statement};
@@ -148,7 +148,7 @@ assert_eq!(
 );
 
 assert_eq!(
-    db_postgres.build(&schema.create_enum_from_active_enum::<Tea>()),
+    db_postgres.build(&schema.create_enum_from_active_enum::<Tea>().expect("Postgres only")),
     Statement::from_string(
         db_postgres,
         r#"CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')"#
@@ -172,7 +172,7 @@ assert_eq!(
 
 ### MySQL
 
-In MySQL, enum is defined on table creation so you only need to call [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) once.
+In MySQL, enum is defined on table creation so you only need to call [`Schema::create_table_from_entity`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/schema/struct.Schema.html#method.create_table_from_entity) once.
 
 ```rust
 use sea_orm::{Schema, Statement};

@@ -11,9 +11,9 @@ There are three possible states represented by three enum variants:
 - `Set` - A `Value` that's explicitly set by the application and sent to the database.
     Use this to insert or set a specific value.
 
-    When editing an existing value, you can use [`set_if_not_equal`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
+    When editing an existing value, you can use [`set_if_not_equal`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
     to preserve the `Unchanged` state when the new value is the same as the old one.
-    Then you can meaningfully use methods like [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed).
+    Then you can meaningfully use methods like [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed).
 - `Unchanged` - An existing, unchanged `Value` from the database.
 
     You get these when you query an existing `Model`
@@ -86,7 +86,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ### Checking if an ActiveModel is changed
 
-You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
+You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -98,7 +98,7 @@ assert!(fruit.is_changed());
 
 ### Convert ActiveModel back to Model
 
-Using [`try_into_model`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) method you can convert ActiveModel back to Model.
+Using [`try_into_model`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) method you can convert ActiveModel back to Model.
 
 ```rust
 assert_eq!(
@@ -129,7 +129,7 @@ assert_eq!(
 
 This will fail if any of the fields of the ActiveModel are `NotSet`.
 
-If you wish to automatically fill remaining fields with their `Default::default()` values (or fallback to `NotSet` if they don't have one), you can use the [`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) method.
+If you wish to automatically fill remaining fields with their `Default::default()` values (or fallback to `NotSet` if they don't have one), you can use the [`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) method.
 
 This can be useful for quickly creating mock models for testing purposes.
 

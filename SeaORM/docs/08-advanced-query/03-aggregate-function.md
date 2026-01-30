@@ -4,7 +4,7 @@ You can group results with the `group_by` method. If you wish to further restric
 
 :::info
 
-Aggregation functions including `max`, `min`, `sum`, `avg`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ColumnTrait.html).
+Aggregation functions including `max`, `min`, `sum`, `avg`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ColumnTrait.html).
 
 :::
 

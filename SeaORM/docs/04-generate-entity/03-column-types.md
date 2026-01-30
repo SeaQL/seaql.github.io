@@ -12,7 +12,7 @@ The type mappings of MSSQL can be found [here](https://www.sea-ql.org/SeaORM-X/d
 
 For the mappings of Rust primitive data types:
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | char | char | char |
 | `String` | String | varchar | varchar | varchar |
@@ -31,7 +31,7 @@ For the mappings of Rust primitive data types:
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/*/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | date_text | date | date |
 | `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | time_text | time | time |

@@ -161,7 +161,7 @@ let schema = Schema::new(DbBackend::Postgres);
 manager
     .create_type(
         // CREATE TYPE "tea" AS ENUM ('EverydayTea', 'BreakfastTea')
-        schema.create_enum_from_active_enum::<Tea>(),
+        schema.create_enum_from_active_enum::<Tea>().expect("Postgres only"),
     )
     .await?;
 ```
@@ -174,7 +174,7 @@ Enums will be mapped to strings on SQLite.
 
 ## `ActiveEnum` trait
 
-The [`DeriveActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/*/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
+The [`DeriveActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/derive.DeriveActiveEnum.html) macro implements the [`ActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveEnum.html) trait under the hood.
 
 ```rust
 use sea_orm::entity::prelude::*;

@@ -102,7 +102,7 @@ assert_eq!(
 
 ### Checking if an ActiveModel is changed
 
-You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
+You can check whether any field in an `ActiveModel` is `Set` with the [`is_changed`](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) method.
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -114,7 +114,7 @@ assert!(fruit.is_changed());
 
 ### Convert ActiveModel back to Model
 
-Using [try_into_model](https://docs.rs/sea-orm/*/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) method you can convert ActiveModel back to Model.
+Using [try_into_model](https://docs.rs/sea-orm/1.1.19/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) method you can convert ActiveModel back to Model.
 
 ```rust
 assert_eq!(

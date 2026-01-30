@@ -19,8 +19,9 @@ You can choose one or more from:
 + `sqlx-mysql` - SQLx MySQL and MariaDB
 + `sqlx-postgres` - SQLx PostgreSQL
 + `sqlx-sqlite` - SQLx SQLite
++ `rusqlite` - Rusqlite*
 
-See also: [SQLx docs](https://docs.rs/crate/sqlx/latest/features).
+*Rusqlite support is offered by another crate [`sea-orm-sync`](https://github.com/SeaQL/sea-orm/tree/master/sea-orm-sync).
 
 :::tip SQL Server (MSSQL) backend
 
@@ -30,23 +31,23 @@ The installation and configuration of MSSQL driver can be found [here](https://w
 
 ## ASYNC_RUNTIME
 
-You have to choose one from: `runtime-tokio-native-tls`, `runtime-tokio-rustls`
+You have to choose one from: `runtime-tokio-native-tls`, `runtime-tokio-rustls`, or `runtime-tokio` if you're using SQLite only.
 
-Basically, they are in the form of `runtime-ASYNC_RUNTIME-TLS_LIB`:
+Basically, they are in the form of `runtime-ASYNC_RUNTIME[-TLS_LIB]`:
 
 + `ASYNC_RUNTIME` can be [`tokio`](https://crates.io/crates/tokio)
     + `async-std` has been deprecated
-+ `TLS_LIB` can either be [`native-tls`](https://crates.io/crates/native-tls) or [`rustls`](https://crates.io/crates/rustls)
++ `TLS_LIB` is optional, and can either be [`native-tls`](https://crates.io/crates/native-tls) or [`rustls`](https://crates.io/crates/rustls)
     + `native-tls` uses the platform's native security facilities, while `rustls` is an (almost) pure Rust implementation.
 
 ## Extra features
 
 + `debug-print` - print every SQL statement to logger
 + `mock` - mock interface for unit testing
-+ `macros` - procedural macros, e.g. DeriveEntityModel
++ `macros` - procedural macros, e.g. `DeriveEntityModel`
 + `rbac` - role-based access control
 + `seaography` - enable GraphQL support
-+ `schema-sync` - enable sync features in SchemaBuilder
++ `schema-sync` - enable `SchemaBuilder` for Entity-first workflow
 <br/>
 + `with-chrono` - support [`chrono`](https://crates.io/crates/chrono) types
 + `with-time` - support [`time`](https://crates.io/crates/time) types

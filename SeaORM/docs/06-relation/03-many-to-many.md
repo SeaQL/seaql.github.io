@@ -28,7 +28,7 @@ pub struct Model {
 <details>
     <summary>It's expanded to:</summary>
 
-`Relation` in SeaORM is an arrow: it has `from` and `to`. `cake_filling::Relation::Cake` defines `CakeFilling -> Cake`. Calling [`rev`](https://docs.rs/sea-orm/*/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) reverses it into `Cake -> CakeFilling`.
+`Relation` in SeaORM is an arrow: it has `from` and `to`. `cake_filling::Relation::Cake` defines `CakeFilling -> Cake`. Calling [`rev`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) reverses it into `Cake -> CakeFilling`.
 
 Chaining this with `cake_filling::Relation::Filling` which defines `CakeFilling -> Filling` resulting in `Cake -> CakeFilling -> Filling`.
 

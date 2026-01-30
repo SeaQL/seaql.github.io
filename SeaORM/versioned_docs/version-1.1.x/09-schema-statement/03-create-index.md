@@ -1,6 +1,6 @@
 # Create Index
 
-You can create indices from entities using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/*/sea_orm/schema/struct.Schema.html#method.create_index_from_entity), or construct [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually.
+You can create indices from entities using [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/1.1.19/sea_orm/schema/struct.Schema.html#method.create_index_from_entity), or construct [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html) manually.
 
 Example [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity:
 
