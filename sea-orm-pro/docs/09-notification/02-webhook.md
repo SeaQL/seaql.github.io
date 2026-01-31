@@ -123,8 +123,58 @@ https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
 
 ## Insert Webhook into the DB
 
+You can create new webhook using database migration, such as [m20260101_000001_webhook.rs](https://github.com/SeaQL/sea-orm-pro-plus/blob/main/migration/src/m20260101_000001_webhook.rs):
 
+```rust
+use sea_orm::{ActiveModelTrait, EntityName, NotSet, Set};
+use sea_orm_migration::prelude::*;
+use sea_orm_notify::entity::{notification, webhook::{self, WebhookPlatform}};
+use sea_orm_rbac::context::RbacContext;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        let db = manager.get_connection();
+        sea_orm_notify::create_tables(db).await?;
+
+        webhook::ActiveModel {
+            id: NotSet,
+            platform: Set(WebhookPlatform::MsTeams),
+            url: Set("https://teams.microsoft.com/12345678".to_owned()),
+        }
+        .insert(db)
+        .await?;
+
+        webhook::ActiveModel {
+            id: NotSet,
+            platform: Set(WebhookPlatform::Slack),
+            url: Set("https://hooks.slack.com/12345678".to_owned()),
+        }
+        .insert(db)
+        .await?;
+
+        // ...
+    }
+
+    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        // ...
+    }
+}
+```
 
 ## Update Webhook URL in Admin Panel
 
+Login to the admin dashboard. If you have read & update permission of the `sea_orm_webhook` table, you should able to see the "Webhook Settings" page appear on the left:
 
+![](webhook_update_0010.png)
+
+You can perform quick update of webhook URL here.
+
+![](webhook_update_0020.png)
+
+Double check the webhook URL is correct.
+
+![](webhook_update_0030.png)
