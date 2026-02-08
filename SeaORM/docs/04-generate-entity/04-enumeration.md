@@ -115,7 +115,7 @@ Table::create()
 ```rust
 Table::create()
     .table("table_name")
-    .col(Column::new("column_name").custom("tea"))
+    .col(ColumnDef::new("column_name").custom("tea"))
 ```
 
 If you are using Postgres, the enum has to be created in a separate `Type` statement *before defining the table*, there are two ways:
