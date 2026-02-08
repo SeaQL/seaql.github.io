@@ -7,9 +7,6 @@ import { Highlight, themes } from "prism-react-renderer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useColorMode } from '@docusaurus/theme-common';
 
-import Prism from 'prismjs/components/prism-core';
-(typeof global !== "undefined" ? global : window).Prism = Prism;
-require("prismjs/components/prism-rust");
 
 const codeBlocks = [
   {
