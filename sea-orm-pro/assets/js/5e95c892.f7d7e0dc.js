@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunksea_orm_pro=globalThis.webpackChunksea_orm_pro||[]).push([[9647],{8228:(e,r,s)=>{s.r(r),s.d(r,{default:()=>n});s(2374);var a=s(4229),o=s(9384),u=s(7604),c=s(9981),l=s(273),h=s(8790);function n(e){return(0,h.jsx)(o.e3,{className:(0,a.A)(u.G.wrapper.docsPages),children:(0,h.jsx)(l.A,{children:(0,c.v)(e.route.routes)})})}}}]);
