@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunksea_ql_blog=globalThis.webpackChunksea_ql_blog||[]).push([[529],{1344:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/blog/","page":1,"postsPerPage":12,"totalPages":6,"totalCount":64,"nextPage":"/blog/page/2","blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
