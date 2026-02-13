@@ -1,6 +1,6 @@
 ---
 slug: 2026-02-12-sea-orm-pro-notification
-title: 'SeaORM Pro Notification'
+title: 'Notification in SeaORM Pro'
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
@@ -11,7 +11,7 @@ tags: [news]
 
 ![](../static/img/sea-orm-pro-webhook_trigger_0010.png)
 
-SeaORM Pro supports sending notifications to Slack and Microsoft Teams via webhooks. Once configured, applications can send notifications based on triggers: for example, when a new order is created or an order item is updated.
+SeaORM Pro now supports sending notifications to Slack and Microsoft Teams via webhooks. Once configured, applications can send notifications based on triggers: for example, when a new order is created or an order item is updated.
 
 ## The Design
 
@@ -39,7 +39,7 @@ A background worker picks up pending notifications from the queue and delivers t
 
 Design: Notifications are delivered asynchronously by the background worker, avoiding bursts while preserving the order of events.
 
-## The Webhook
+## Configuring Webhooks
 
 ### Schema
 
@@ -75,14 +75,6 @@ Double check the webhook URL is correct.
 You can also create new webhooks using database migration, such as [m20260101_000001_webhook.rs](https://github.com/SeaQL/sea-orm-pro-plus/blob/main/migration/src/m20260101_000001_webhook.rs):
 
 ```rust
-use sea_orm::{ActiveModelTrait, EntityName, NotSet, Set};
-use sea_orm_migration::prelude::*;
-use sea_orm_notify::entity::{notification, webhook::{self, WebhookPlatform}};
-use sea_orm_rbac::context::RbacContext;
-
-#[derive(DeriveMigrationName)]
-pub struct Migration;
-
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -122,7 +114,7 @@ The step-by-step walkthrough is available [here](https://www.sea-ql.org/sea-orm-
 
 The step-by-step walkthrough is available [here](https://www.sea-ql.org/sea-orm-pro/docs/notification/webhook/#setup-webhook-for-microsoft-teams).
 
-## The Trigger
+## Sending Notifications
 
 ### Define `after_save` Trigger
 
@@ -165,9 +157,7 @@ You can format the notification messages with basic markdown.
 Note that Slack has their own [dialect](https://docs.slack.dev/messaging/formatting-message-text/).
 On MS Teams, a subset of [HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/bot-v3/bots-text-formats) is supported. SeaORM Pro automatically compiles markdown to HTML when sending via Teams.
 
-## The Worker
-
-### Notification Queue and Worker
+### Notification Queue and Background Worker
 
 Notification will be stored in the `sea_orm_notification` table and with a column named `sent` to indicate the notification has been sent or not. A background task will send all pending notification in sequence from old to new, the source code is available at [sea-orm-notify/src/lib.rs](https://github.com/SeaQL/sea-orm-pro-plus/blob/main/sea-orm-notify/src/lib.rs).
 
@@ -200,7 +190,11 @@ You can click the `⟳` (Resend) button to resend the notification immediately.
 
 ![](../static/img/sea-orm-pro-webhook_trigger_0010.png)
 
-## What's Next?
+## SeaORM Pro Plus
+
+SeaORM Pro Plus unlocks Role Based Access Control (RBAC), notifications, and the frontend source code. We prioritize answering questions and feature requests from sponsors. You can access the repository as a [Pro tier Sponsor](https://github.com/sponsors/SeaQL/sponsorships?tier_id=249708).
+
+### What's Next?
 
 There's really a lot we want to build, to make SeaORM Pro suit the needs of every project. Please consider being a sponsor and take part in shaping its future!
 
@@ -208,182 +202,4 @@ Here's what we have in mind:
 
  * **Single Sign On**: To be able to sign-in with Google Workspace or Microsoft Business email.
  * **Audit Log**: And so, we'd want to keep a record of users' action and being able to audit them.
- * **Advanced Dashboard**: We want to make it super easy to design graphs and charts for the Admin Dashboard.
  * **Tasks**: To be able to visualize and control scheduled tasks, and kick start once off tasks in ad-hoc way.
- * **Data Export**: Export data to various formats, including CSV, Excel, and DataFrame!
-
-## 🌟 Sponsors
-
-#### Gold Sponsor
-
-<a href="https://qdx.co/">
-    <img src="https://www.sea-ql.org/static/sponsors/QDX.svg" width="128" />
-</a>
-
-[QDX](https://qdx.co/) pioneers quantum dynamics-powered drug discovery, leveraging AI and supercomputing to accelerate molecular modeling.
-We're grateful to QDX for sponsoring the development of SeaORM, the SQL toolkit that powers their data intensive applications.
-
-#### GitHub Sponsors
-
-If you feel generous, a small donation will be greatly appreciated, and goes a long way towards sustaining the organization.
-
-A big shout out to our [GitHub sponsors](https://github.com/sponsors/SeaQL):
-
-<div class="row">
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/sanctusgee">
-                <img src="https://avatars.githubusercontent.com/u/2237695?u=c46344d34b510cb2aea10d4ee2c349277802e408&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Godwin Effiong</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/ryanswrt">
-                <img src="https://avatars.githubusercontent.com/u/87781?u=10a9d256e741f905f3dd2cf641de8b325720732e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Ryan Swart</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/OteroRafael">
-                <img src="https://avatars.githubusercontent.com/u/175388115?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">OteroRafael</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/higumachan">
-                <img src="https://avatars.githubusercontent.com/u/1011298?u=de4c2f0d0929c2c6dc433981912f794d0e50f2cd&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Yuta Hinokuma</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/wh7f">
-                <img src="https://avatars.githubusercontent.com/u/59872041?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">wh7f</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcson909">
-                <img src="https://avatars.githubusercontent.com/u/16665353?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">MS</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/numeusxyz">
-                <img src="https://avatars.githubusercontent.com/u/82152211?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Numeus</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/caido-community">
-                <img src="https://avatars.githubusercontent.com/u/168573261?v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Caido Community</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--6 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--md" href="https://github.com/marcusbuffett">
-                <img src="https://avatars.githubusercontent.com/u/1834328?u=fd066d99cf4a6333bfb3927d1c756af4bb8baf7e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Marcus Buffett</div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/yuly3">
-                <img src="https://avatars.githubusercontent.com/u/25814001?u=4b57756e7d8060e48262a9edba687927fe7934a6&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">MasakiMiyazaki</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/kallydev">
-                <img src="https://avatars.githubusercontent.com/u/36319157?u=5be882aa4dbe7eea97b1a80a6473857369146df6&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">KallyDev</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/manfredcml">
-                <img src="https://avatars.githubusercontent.com/u/27536502?u=b71636bdabbc698458b32e2ac05c5771ad41097e&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Manfred Lee</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/tugascript">
-                <img src="https://avatars.githubusercontent.com/u/64930104?u=ad9f63e8e221dbe71bf23de59e3611c99cda1181&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Afonso Barracha</div>
-            </div>
-        </div>
-    </div>
-    <div class="col col--4 margin-bottom--md">
-        <div class="avatar">
-            <a class="avatar__photo-link avatar__photo avatar__photo--sm" href="https://github.com/deansheather">
-                <img src="https://avatars.githubusercontent.com/u/11241812?u=260538c7d8b8c3c5350dba175ebb8294358441e0&v=4" />
-            </a>
-            <div class="avatar__intro">
-                <div class="avatar__name">Dean Sheather</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-## 🦀 Rustacean Sticker Pack
-
-The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
-Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
-
-Sticker Pack Contents:
-- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography
-- Mascots: Ferris the Crab x 3, Terres the Hermit Crab
-- The Rustacean wordmark
-
-[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
-
-<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
