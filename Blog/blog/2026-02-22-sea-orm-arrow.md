@@ -35,7 +35,7 @@ Enable Arrow support with the `with-arrow` feature flag:
 ```toml
 [dependencies]
 sea-orm = { version = "2.0.0-rc", features = ["with-arrow"] }
-parquet = { version = "54", features = ["arrow"] }
+parquet = { version = "57", features = ["arrow"] }
 ```
 
 Suppose you have a sensor data pipeline. You want to archive today's rows to Parquet for downstream analytics.
