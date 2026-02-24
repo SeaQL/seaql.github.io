@@ -1,1 +1,0 @@
-searchState.loadedDescShard("sea_query_sqlz", 0, "Driver library for using SeaQuery with SQLz\nReturns the argument unchanged.\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.\nCalls <code>U::from(self)</code>.")

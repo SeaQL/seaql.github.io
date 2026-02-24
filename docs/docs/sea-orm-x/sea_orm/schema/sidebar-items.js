@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["Schema"]};
+window.SIDEBAR_ITEMS = {"struct":["EntitySchemaInfo","Schema","SchemaBuilder"]};

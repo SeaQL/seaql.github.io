@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["QuotesKind","WrapperKind"],"struct":["QuotesClause","WrapperClause"]};

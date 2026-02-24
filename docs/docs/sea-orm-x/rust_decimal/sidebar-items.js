@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Error","RoundingStrategy"],"mod":["prelude"],"struct":["Decimal"],"type":["Result"]};
+window.SIDEBAR_ITEMS = {"enum":["Error","RoundingStrategy"],"mod":["prelude","str"],"struct":["Decimal"],"type":["Result"]};

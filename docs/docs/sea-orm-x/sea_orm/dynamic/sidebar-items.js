@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Column","DynSelector","Entity","FieldType","FieldValue","Model","ModelType","SelectModelAndDynModel"],"trait":["DynSelectorTrait"]};

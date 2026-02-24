@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Convert a query result into the corresponding Model."><title>FromQueryResult in sea_orm_macros - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="sea_orm_macros" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc derive"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../sea_orm_macros/index.html">sea_<wbr>orm_<wbr>macros</a><span class="version">1.1.2</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">From<wbr>Query<wbr>Result</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#attributes" title="Attributes">Attributes</a></li><li><a href="#usage" title="Usage">Usage</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="index.html">In crate sea_<wbr>orm_<wbr>macros</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="index.html">sea_orm_macros</a></span><h1>Derive Macro <span class="derive">FromQueryResult</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>#[derive(FromQueryResult)]
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Convert a query result into the corresponding Model."><title>FromQueryResult in sea_orm_macros - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="sea_orm_macros" data-themes="" data-resource-suffix="" data-rustdoc-version="1.92.0 (ded5c06cf 2025-12-08)" data-channel="1.92.0" data-search-js="search-d69d8955.js" data-stringdex-js="stringdex-c3e638e9.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-ce535bd0.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc derive"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">FromQueryResult</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../sea_orm_macros/index.html">sea_<wbr>orm_<wbr>macros</a><span class="version">2.0.0-rc.32</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">From<wbr>Query<wbr>Result</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#attributes" title="Attributes">Attributes</a></li><li><a href="#usage" title="Usage">Usage</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="index.html">In crate sea_<wbr>orm_<wbr>macros</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="index.html">sea_orm_macros</a></div><h1>Derive Macro <span class="derive">From<wbr>Query<wbr>Result</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>#[derive(FromQueryResult)]
 {
     <span class="comment">// Attributes available to this derive:</span>
     #[sea_orm]
@@ -6,16 +6,39 @@
 </code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Convert a query result into the corresponding Model.</p>
 <h4 id="attributes"><a class="doc-anchor" href="#attributes">§</a>Attributes</h4>
 <ul>
-<li><code>skip</code>: Will not try to pull this field from the query result. And set it to the default value of the type.</li>
+<li><code>skip</code>: will not try to pull this field from the query result. And set it to the default value of the type.</li>
+<li><code>nested</code>: allows nesting models. can be any type that implements <code>FromQueryResult</code></li>
+<li><code>alias</code> / <code>from_alias</code>: get the value from this column alias</li>
 </ul>
 <h4 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h4>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_orm::{entity::prelude::<span class="kw-2">*</span>, FromQueryResult};
+<p>For more complete examples, please refer to https://github.com/SeaQL/sea-orm/blob/master/tests/from_query_result_tests.rs</p>
 
-<span class="attr">#[derive(Debug, FromQueryResult)]
-</span><span class="kw">struct </span>SelectResult {
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_orm::{FromQueryResult, entity::prelude::<span class="kw-2">*</span>};
+
+<span class="attr">#[derive(FromQueryResult)]
+</span><span class="kw">struct </span>Cake {
+    id: i32,
     name: String,
-    num_of_fruits: i32,
+    <span class="attr">#[sea_orm(nested)]
+    </span>bakery: <span class="prelude-ty">Option</span>&lt;CakeBakery&gt;,
     <span class="attr">#[sea_orm(skip)]
     </span>skip_me: i32,
+}
+
+<span class="attr">#[derive(FromQueryResult)]
+</span><span class="kw">struct </span>CakeBakery {
+    <span class="attr">#[sea_orm(alias = <span class="string">"bakery_id"</span>)]
+    </span>id: i32,
+    <span class="attr">#[sea_orm(alias = <span class="string">"bakery_name"</span>)]
+    </span>title: String,
 }</code></pre></div>
-</div></details></section></div></main></body></html>
+<p>You can compose this with regular Models, if there’s no column collision:</p>
+
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[derive(FromQueryResult)]
+</span><span class="kw">struct </span>CakePlain {
+    id: i32,
+    name: String,
+    price: Decimal,
+    <span class="attr">#[sea_orm(nested)]
+    </span>baker: <span class="prelude-ty">Option</span>&lt;cakes_bakers::Model&gt;,
+}</code></pre></div></div></details></section></div></main></body></html>

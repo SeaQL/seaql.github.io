@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["IndexOrder","IndexStatement","IndexType"],"struct":["Index","IndexColumn","IndexCreateStatement","IndexDropStatement","TableIndex"],"trait":["IntoIndexColumn"]};
+window.SIDEBAR_ITEMS = {"enum":["IndexColumn","IndexOrder","IndexStatement","IndexType"],"struct":["Index","IndexColumnExpr","IndexColumnTableColumn","IndexCreateStatement","IndexDropStatement","TableIndex"],"trait":["IntoIndexColumn"]};

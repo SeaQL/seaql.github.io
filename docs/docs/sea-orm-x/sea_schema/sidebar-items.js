@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"macro":["debug_print"],"mod":["mssql","mysql","name","postgres","probe","sqlite"]};
+window.SIDEBAR_ITEMS = {"macro":["debug_print"],"mod":["mssql","mysql","name","postgres","probe","sqlite","sqlx_types","sqlz_types"],"trait":["Connection"]};

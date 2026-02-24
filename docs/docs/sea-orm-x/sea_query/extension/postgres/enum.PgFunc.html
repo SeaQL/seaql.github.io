@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Known Postgres-specific functions."><title>PgFunc in sea_query::extension::postgres - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="sea_query" data-themes="" data-resource-suffix="" data-rustdoc-version="1.92.0 (ded5c06cf 2025-12-08)" data-channel="1.92.0" data-search-js="search-d69d8955.js" data-stringdex-js="stringdex-c3e638e9.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-ce535bd0.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc enum"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">PgFunc</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt="logo"></a><h2><a href="../../../sea_query/index.html">sea_<wbr>query</a><span class="version">1.0.0-rc.31</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">PgFunc</a></h2><h3><a href="#variants">Variants</a></h3><ul class="block variant"><li><a href="#variant.All" title="All">All</a></li><li><a href="#variant.Any" title="Any">Any</a></li><li><a href="#variant.ArrayAgg" title="ArrayAgg">ArrayAgg</a></li><li><a href="#variant.DateTrunc" title="DateTrunc">DateTrunc</a></li><li><a href="#variant.GenRandomUUID" title="GenRandomUUID">GenRandomUUID</a></li><li><a href="#variant.JsonAgg" title="JsonAgg">JsonAgg</a></li><li><a href="#variant.JsonBuildObject" title="JsonBuildObject">JsonBuildObject</a></li><li><a href="#variant.PhrasetoTsquery" title="PhrasetoTsquery">PhrasetoTsquery</a></li><li><a href="#variant.PlaintoTsquery" title="PlaintoTsquery">PlaintoTsquery</a></li><li><a href="#variant.Some" title="Some">Some</a></li><li><a href="#variant.StartsWith" title="StartsWith">StartsWith</a></li><li><a href="#variant.ToTsquery" title="ToTsquery">ToTsquery</a></li><li><a href="#variant.ToTsvector" title="ToTsvector">ToTsvector</a></li><li><a href="#variant.TsRank" title="TsRank">TsRank</a></li><li><a href="#variant.TsRankCd" title="TsRankCd">TsRankCd</a></li><li><a href="#variant.WebsearchToTsquery" title="WebsearchToTsquery">WebsearchToTsquery</a></li></ul><h3><a href="#implementations">Methods</a></h3><ul class="block method"><li><a href="#method.all" title="all">all</a></li><li><a href="#method.any" title="any">any</a></li><li><a href="#method.array_agg" title="array_agg">array_agg</a></li><li><a href="#method.array_agg_distinct" title="array_agg_distinct">array_agg_distinct</a></li><li><a href="#method.date_trunc" title="date_trunc">date_trunc</a></li><li><a href="#method.gen_random_uuid" title="gen_random_uuid">gen_random_uuid</a></li><li><a href="#method.json_agg" title="json_agg">json_agg</a></li><li><a href="#method.json_build_object" title="json_build_object">json_build_object</a></li><li><a href="#method.json_exists" title="json_exists">json_exists</a></li><li><a href="#method.json_query" title="json_query">json_query</a></li><li><a href="#method.json_table" title="json_table">json_table</a></li><li><a href="#method.json_value" title="json_value">json_value</a></li><li><a href="#method.phraseto_tsquery" title="phraseto_tsquery">phraseto_tsquery</a></li><li><a href="#method.plainto_tsquery" title="plainto_tsquery">plainto_tsquery</a></li><li><a href="#method.some" title="some">some</a></li><li><a href="#method.starts_with" title="starts_with">starts_with</a></li><li><a href="#method.to_tsquery" title="to_tsquery">to_tsquery</a></li><li><a href="#method.to_tsvector" title="to_tsvector">to_tsvector</a></li><li><a href="#method.ts_rank" title="ts_rank">ts_rank</a></li><li><a href="#method.ts_rank_cd" title="ts_rank_cd">ts_rank_cd</a></li><li><a href="#method.websearch_to_tsquery" title="websearch_to_tsquery">websearch_to_tsquery</a></li></ul><h3><a href="#trait-implementations">Trait Implementations</a></h3><ul class="block trait-implementation"><li><a href="#impl-Clone-for-PgFunc" title="Clone">Clone</a></li><li><a href="#impl-Debug-for-PgFunc" title="Debug">Debug</a></li><li><a href="#impl-PartialEq-for-PgFunc" title="PartialEq">PartialEq</a></li><li><a href="#impl-StructuralPartialEq-for-PgFunc" title="StructuralPartialEq">StructuralPartialEq</a></li></ul><h3><a href="#synthetic-implementations">Auto Trait Implementations</a></h3><ul class="block synthetic-implementation"><li><a href="#impl-Freeze-for-PgFunc" title="Freeze">Freeze</a></li><li><a href="#impl-RefUnwindSafe-for-PgFunc" title="RefUnwindSafe">RefUnwindSafe</a></li><li><a href="#impl-Send-for-PgFunc" title="Send">Send</a></li><li><a href="#impl-Sync-for-PgFunc" title="Sync">Sync</a></li><li><a href="#impl-Unpin-for-PgFunc" title="Unpin">Unpin</a></li><li><a href="#impl-UnwindSafe-for-PgFunc" title="UnwindSafe">UnwindSafe</a></li></ul><h3><a href="#blanket-implementations">Blanket Implementations</a></h3><ul class="block blanket-implementation"><li><a href="#impl-Any-for-T" title="Any">Any</a></li><li><a href="#impl-Borrow%3CT%3E-for-T" title="Borrow&#60;T&#62;">Borrow&#60;T&#62;</a></li><li><a href="#impl-BorrowMut%3CT%3E-for-T" title="BorrowMut&#60;T&#62;">BorrowMut&#60;T&#62;</a></li><li><a href="#impl-CloneToUninit-for-T" title="CloneToUninit">CloneToUninit</a></li><li><a href="#impl-From%3CT%3E-for-T" title="From&#60;T&#62;">From&#60;T&#62;</a></li><li><a href="#impl-Into%3CU%3E-for-T" title="Into&#60;U&#62;">Into&#60;U&#62;</a></li><li><a href="#impl-ToOwned-for-T" title="ToOwned">ToOwned</a></li><li><a href="#impl-TryFrom%3CU%3E-for-T" title="TryFrom&#60;U&#62;">TryFrom&#60;U&#62;</a></li><li><a href="#impl-TryInto%3CU%3E-for-T" title="TryInto&#60;U&#62;">TryInto&#60;U&#62;</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sea_<wbr>query::<wbr>extension::<wbr>postgres</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">sea_query</a>::<wbr><a href="../index.html">extension</a>::<wbr><a href="index.html">postgres</a></div><h1>Enum <span class="enum">PgFunc</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code><div class="code-attribute">#[non_exhaustive]</div>pub enum PgFunc {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 16 variants</span></summary>    ToTsquery,
+    ToTsvector,
+    PhrasetoTsquery,
+    PlaintoTsquery,
+    WebsearchToTsquery,
+    TsRank,
+    TsRankCd,
+    StartsWith,
+    GenRandomUUID,
+    JsonBuildObject,
+    JsonAgg,
+    ArrayAgg,
+    DateTrunc,
+    Any,
+    Some,
+    All,
+</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Known Postgres-specific functions.</p>
+<p>For all supported functions (including the standard ones), see <a href="../../func/type.Function.html" title="type sea_query::func::Function"><code>Function</code></a>.</p>
+<p>If something is not supported, you can use <a href="../../func/enum.Func.html#variant.Custom" title="variant sea_query::func::Func::Custom"><code>Function::Custom</code></a>.</p>
+</div></details><h2 id="variants" class="variants section-header">Variants (Non-exhaustive)<a href="#variants" class="anchor">§</a></h2><details class="toggle non-exhaustive"><summary class="hideme"><span>This enum is marked as non-exhaustive</span></summary><div class="docblock">Non-exhaustive enums could have additional variants added in future. Therefore, when matching against variants of non-exhaustive enums, an extra wildcard arm must be added to account for any future variants.</div></details><div class="variants"><section id="variant.ToTsquery" class="variant"><a href="#variant.ToTsquery" class="anchor">§</a><h3 class="code-header">ToTsquery</h3></section><section id="variant.ToTsvector" class="variant"><a href="#variant.ToTsvector" class="anchor">§</a><h3 class="code-header">ToTsvector</h3></section><section id="variant.PhrasetoTsquery" class="variant"><a href="#variant.PhrasetoTsquery" class="anchor">§</a><h3 class="code-header">PhrasetoTsquery</h3></section><section id="variant.PlaintoTsquery" class="variant"><a href="#variant.PlaintoTsquery" class="anchor">§</a><h3 class="code-header">PlaintoTsquery</h3></section><section id="variant.WebsearchToTsquery" class="variant"><a href="#variant.WebsearchToTsquery" class="anchor">§</a><h3 class="code-header">WebsearchToTsquery</h3></section><section id="variant.TsRank" class="variant"><a href="#variant.TsRank" class="anchor">§</a><h3 class="code-header">TsRank</h3></section><section id="variant.TsRankCd" class="variant"><a href="#variant.TsRankCd" class="anchor">§</a><h3 class="code-header">TsRankCd</h3></section><section id="variant.StartsWith" class="variant"><a href="#variant.StartsWith" class="anchor">§</a><h3 class="code-header">StartsWith</h3></section><section id="variant.GenRandomUUID" class="variant"><a href="#variant.GenRandomUUID" class="anchor">§</a><h3 class="code-header">GenRandomUUID</h3></section><section id="variant.JsonBuildObject" class="variant"><a href="#variant.JsonBuildObject" class="anchor">§</a><h3 class="code-header">JsonBuildObject</h3></section><section id="variant.JsonAgg" class="variant"><a href="#variant.JsonAgg" class="anchor">§</a><h3 class="code-header">JsonAgg</h3></section><section id="variant.ArrayAgg" class="variant"><a href="#variant.ArrayAgg" class="anchor">§</a><h3 class="code-header">ArrayAgg</h3></section><section id="variant.DateTrunc" class="variant"><a href="#variant.DateTrunc" class="anchor">§</a><h3 class="code-header">DateTrunc</h3></section><section id="variant.Any" class="variant"><a href="#variant.Any" class="anchor">§</a><h3 class="code-header">Any</h3></section><section id="variant.Some" class="variant"><a href="#variant.Some" class="anchor">§</a><h3 class="code-header">Some</h3></section><section id="variant.All" class="variant"><a href="#variant.All" class="anchor">§</a><h3 class="code-header">All</h3></section></div><h2 id="implementations" class="section-header">Implementations<a href="#implementations" class="anchor">§</a></h2><div id="implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-PgFunc" class="impl"><a href="#impl-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.json_exists" class="method"><h4 class="code-header">pub fn <a href="#method.json_exists" class="fn">json_exists</a>&lt;C, P&gt;(context_item: C, path_expression: P) -&gt; <a class="struct" href="json_exists/struct.Builder.html" title="struct sea_query::extension::postgres::json_exists::Builder">Builder</a><div class="where">where
+    C: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    P: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/1.92.0/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'static, <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.str.html">str</a>&gt;&gt;,</div></h4></section></summary><div class="docblock"><p>Create a <code>JSON_EXISTS</code> function builder. Postgres only.</p>
+<h5 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h5>
+<p>Basic usage with PASSING parameters:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_exists(
+           Expr::cust(<span class="string">r#"jsonb '{"key1": [1,2,3]}'"#</span>),
+            <span class="string">"strict $.key1[*] ? (@ &gt; $x)"</span>,
+        )
+        .passing(<span class="number">2</span>, <span class="string">"x"</span>),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_EXISTS(jsonb '{"key1": [1,2,3]}' 'strict $.key1[*] ? (@ &gt; $x)' PASSING 2 AS x)"#
+</span>);</code></pre></div>
+<p>With ERROR ON ERROR clause:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_exists(Expr::cust(<span class="string">r#"jsonb '{"a": [1,2,3]}'"#</span>), <span class="string">"lax $.a[5]"</span>)
+            .error_on_error(),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_EXISTS(jsonb '{"a": [1,2,3]}' 'lax $.a[5]' ERROR ON ERROR)"#
+</span>);</code></pre></div>
+<p>With strict mode and ERROR ON ERROR:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_exists(Expr::cust(<span class="string">r#"jsonb '{"a": [1,2,3]}'"#</span>), <span class="string">"strict $.a[5]"</span>)
+            .error_on_error(),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_EXISTS(jsonb '{"a": [1,2,3]}' 'strict $.a[5]' ERROR ON ERROR)"#
+</span>);</code></pre></div></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-PgFunc-1" class="impl"><a href="#impl-PgFunc-1" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.json_query" class="method"><h4 class="code-header">pub fn <a href="#method.json_query" class="fn">json_query</a>&lt;T, P&gt;(context_item: T, path_expression: P) -&gt; <a class="struct" href="json_query/struct.Builder.html" title="struct sea_query::extension::postgres::json_query::Builder">Builder</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    P: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/1.92.0/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'static, <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.str.html">str</a>&gt;&gt;,</div></h4></section></summary><div class="docblock"><p>Create a <code>JSON_QUERY</code> function builder. Postgres only.</p>
+<h5 id="examples-1"><a class="doc-anchor" href="#examples-1">§</a>Examples</h5>
+<p>Basic usage:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_query(Expr::cust(<span class="string">r#"jsonb '[1,[2,3],null]'"#</span>), <span class="string">"lax $[*][$off]"</span>)
+            .passing(<span class="number">1</span>, <span class="string">"off"</span>)
+            .wrapper(json_fn::WrapperKind::WithConditional),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_QUERY(jsonb '[1,[2,3],null]' 'lax $[*][$off]' PASSING 1 AS off WITH CONDITIONAL WRAPPER)"#
+</span>);</code></pre></div>
+<p>With OMIT QUOTES:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_query(Expr::cust(<span class="string">r#"jsonb '{"a": "[1, 2]"}'"#</span>), <span class="string">"lax $.a"</span>)
+            .quotes(json_fn::QuotesKind::Omit),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_QUERY(jsonb '{"a": "[1, 2]"}' 'lax $.a' OMIT QUOTES)"#
+</span>);</code></pre></div></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-PgFunc-2" class="impl"><a href="#impl-PgFunc-2" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.json_table" class="method"><h4 class="code-header">pub fn <a href="#method.json_table" class="fn">json_table</a>&lt;T, P&gt;(context_item: T, path_expression: P) -&gt; <a class="struct" href="json_table/struct.Builder.html" title="struct sea_query::extension::postgres::json_table::Builder">Builder</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    P: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/1.92.0/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'static, <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.str.html">str</a>&gt;&gt;,</div></h4></section></summary><div class="docblock"><p>Create a <code>JSON_TABLE</code> function builder. Postgres only.</p>
+<h5 id="examples-2"><a class="doc-anchor" href="#examples-2">§</a>Examples</h5>
+<p>Basic usage with simple columns:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from_function(
+        PgFunc::json_table(
+            Expr::val(<span class="string">r#"[{"name": "John", "age": 30}, {"name": "Jane", "age": 25}]"#</span>),
+            <span class="string">"$[*]"
+        </span>)
+        .ordinality_column(<span class="string">"row_number"</span>)
+        .column(<span class="string">"name"</span>, <span class="string">"text"</span>).path(<span class="string">"$.name"</span>).build_column()
+        .column(<span class="string">"age"</span>, <span class="string">"int"</span>).path(<span class="string">"$.age"</span>).build_column()
+        .build(),
+        <span class="string">"people"
+    </span>)
+    .column(<span class="string">"*"</span>)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "*" FROM JSON_TABLE('[{"name": "John", "age": 30}, {"name": "Jane", "age": 25}]', '$[*]' COLUMNS (row_number FOR ORDINALITY, name "text" PATH '$.name', age "int" PATH '$.age')) AS "people""#
+</span>);</code></pre></div>
+<p>With PASSING parameters and error handling:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from_function(
+        PgFunc::json_table(
+            Expr::val(<span class="string">r#"{"users": [{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}]}"#</span>),
+            <span class="string">"$.users[*] ? (@.id &gt; $min_id)"
+        </span>)
+        .passing(<span class="number">0</span>, <span class="string">"min_id"</span>)
+        .column(<span class="string">"user_id"</span>, <span class="string">"int"</span>).path(<span class="string">"$.id"</span>).null_on_error().build_column()
+        .column(<span class="string">"user_name"</span>, <span class="string">"text"</span>).path(<span class="string">"$.name"</span>).default_on_empty(Expr::val(<span class="string">"Unknown"</span>)).build_column()
+        .error_on_error()
+        .build(),
+        <span class="string">"filtered_users"
+    </span>)
+    .column(<span class="string">"*"</span>)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "*" FROM JSON_TABLE('{"users": [{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}]}', '$.users[*] ? (@.id &gt; $min_id)' PASSING 0 AS min_id COLUMNS (user_id "int" PATH '$.id' NULL ON ERROR, user_name "text" PATH '$.name' DEFAULT 'Unknown' ON EMPTY) ERROR ON ERROR) AS "filtered_users""#
+</span>);</code></pre></div>
+<p>With NESTED PATH:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from_function(
+        PgFunc::json_table(
+            Expr::val(<span class="string">r#"{"users": [{"name": "John", "phones": ["123", "456"]}, {"name": "Jane", "phones": ["789"]}]}"#</span>),
+            <span class="string">"$.users[*]"
+        </span>)
+        .column(<span class="string">"user_name"</span>, <span class="string">"text"</span>).path(<span class="string">"$.name"</span>).build_column()
+        .nested(<span class="string">"$.phones[*]"</span>)
+            .column(<span class="string">"phone"</span>, <span class="string">"text"</span>).path(<span class="string">"$"</span>).build_column()
+            .build_nested()
+        .build(),
+        <span class="string">"user_phones"
+    </span>)
+    .column(<span class="string">"*"</span>)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "*" FROM JSON_TABLE('{"users": [{"name": "John", "phones": ["123", "456"]}, {"name": "Jane", "phones": ["789"]}]}', '$.users[*]' COLUMNS (user_name "text" PATH '$.name', NESTED '$.phones[*]' COLUMNS (phone "text" PATH '$'))) AS "user_phones""#
+</span>);</code></pre></div></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-PgFunc-3" class="impl"><a href="#impl-PgFunc-3" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.json_value" class="method"><h4 class="code-header">pub fn <a href="#method.json_value" class="fn">json_value</a>&lt;T, P&gt;(context_item: T, path_expression: P) -&gt; <a class="struct" href="json_value/struct.Builder.html" title="struct sea_query::extension::postgres::json_value::Builder">Builder</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    P: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/1.92.0/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'static, <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.str.html">str</a>&gt;&gt;,</div></h4></section></summary><div class="docblock"><p>Create a <code>JSON_VALUE</code> function builder. Postgres only.</p>
+<h5 id="examples-3"><a class="doc-anchor" href="#examples-3">§</a>Examples</h5>
+<p>Basic usage with RETURNING:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_value(Expr::cust(<span class="string">r#"jsonb '"123.45"'"#</span>), <span class="string">"$"</span>)
+            .returning(<span class="string">"float"</span>)
+            .build(),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_VALUE(jsonb '"123.45"' '$' RETURNING "float")"#
+</span>);</code></pre></div>
+<p>With PASSING parameters:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_value(Expr::cust(<span class="string">r#"jsonb '[1,2]'"#</span>), <span class="string">"strict $[$off]"</span>)
+            .passing(<span class="number">1</span>, <span class="string">"off"</span>)
+            .build(),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_VALUE(jsonb '[1,2]' 'strict $[$off]' PASSING 1 AS off)"#
+</span>);</code></pre></div>
+<p>With DEFAULT ON ERROR:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::extension::postgres::<span class="kw-2">*</span>;
+<span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(
+        PgFunc::json_value(Expr::val(<span class="string">r#"[1,2]"#</span>), <span class="string">"strict $[*]"</span>).default_on_error(Expr::val(<span class="number">9</span>)),
+    )
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_VALUE('[1,2]' 'strict $[*]' DEFAULT 9 ON ERROR)"#
+</span>);</code></pre></div></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-PgFunc-4" class="impl"><a href="#impl-PgFunc-4" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.to_tsquery" class="method"><h4 class="code-header">pub fn <a href="#method.to_tsquery" class="fn">to_tsquery</a>&lt;T&gt;(expr: T, regconfig: <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u32.html">u32</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>TO_TSQUERY</code> function. Postgres only.</p>
+<p>The parameter <code>regconfig</code> represents the OID of the text search configuration.
+If the value is <code>None</code> the argument is omitted from the query, and hence the database default used.</p>
+<h5 id="examples-4"><a class="doc-anchor" href="#examples-4">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::to_tsquery(<span class="string">"a &amp; b"</span>, <span class="prelude-val">None</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT TO_TSQUERY('a &amp; b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.to_tsvector" class="method"><h4 class="code-header">pub fn <a href="#method.to_tsvector" class="fn">to_tsvector</a>&lt;T&gt;(expr: T, regconfig: <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u32.html">u32</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>TO_TSVECTOR</code> function. Postgres only.</p>
+<p>The parameter <code>regconfig</code> represents the OID of the text search configuration.
+If the value is <code>None</code> the argument is omitted from the query, and hence the database default used.</p>
+<h5 id="examples-5"><a class="doc-anchor" href="#examples-5">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::to_tsvector(<span class="string">"a b"</span>, <span class="prelude-val">None</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT TO_TSVECTOR('a b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.phraseto_tsquery" class="method"><h4 class="code-header">pub fn <a href="#method.phraseto_tsquery" class="fn">phraseto_tsquery</a>&lt;T&gt;(expr: T, regconfig: <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u32.html">u32</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>PHRASE_TO_TSQUERY</code> function. Postgres only.</p>
+<p>The parameter <code>regconfig</code> represents the OID of the text search configuration.
+If the value is <code>None</code> the argument is omitted from the query, and hence the database default used.</p>
+<h5 id="examples-6"><a class="doc-anchor" href="#examples-6">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::phraseto_tsquery(<span class="string">"a b"</span>, <span class="prelude-val">None</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT PHRASETO_TSQUERY('a b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.plainto_tsquery" class="method"><h4 class="code-header">pub fn <a href="#method.plainto_tsquery" class="fn">plainto_tsquery</a>&lt;T&gt;(expr: T, regconfig: <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u32.html">u32</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>PLAIN_TO_TSQUERY</code> function. Postgres only.</p>
+<p>The parameter <code>regconfig</code> represents the OID of the text search configuration.
+If the value is <code>None</code> the argument is omitted from the query, and hence the database default used.</p>
+<h5 id="examples-7"><a class="doc-anchor" href="#examples-7">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::plainto_tsquery(<span class="string">"a b"</span>, <span class="prelude-val">None</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT PLAINTO_TSQUERY('a b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.websearch_to_tsquery" class="method"><h4 class="code-header">pub fn <a href="#method.websearch_to_tsquery" class="fn">websearch_to_tsquery</a>&lt;T&gt;(expr: T, regconfig: <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u32.html">u32</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>WEBSEARCH_TO_TSQUERY</code> function. Postgres only.</p>
+<p>The parameter <code>regconfig</code> represents the OID of the text search configuration.
+If the value is <code>None</code> the argument is omitted from the query, and hence the database default used.</p>
+<h5 id="examples-8"><a class="doc-anchor" href="#examples-8">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::websearch_to_tsquery(<span class="string">"a b"</span>, <span class="prelude-val">None</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT WEBSEARCH_TO_TSQUERY('a b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.ts_rank" class="method"><h4 class="code-header">pub fn <a href="#method.ts_rank" class="fn">ts_rank</a>&lt;T&gt;(vector: T, query: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>TS_RANK</code> function. Postgres only.</p>
+<h5 id="examples-9"><a class="doc-anchor" href="#examples-9">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::ts_rank(<span class="string">"a b"</span>, <span class="string">"a&amp;b"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT TS_RANK('a b', 'a&amp;b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.ts_rank_cd" class="method"><h4 class="code-header">pub fn <a href="#method.ts_rank_cd" class="fn">ts_rank_cd</a>&lt;T&gt;(vector: T, query: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>TS_RANK_CD</code> function. Postgres only.</p>
+<h5 id="examples-10"><a class="doc-anchor" href="#examples-10">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::ts_rank_cd(<span class="string">"a b"</span>, <span class="string">"a&amp;b"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT TS_RANK_CD('a b', 'a&amp;b')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.any" class="method"><h4 class="code-header">pub fn <a href="#method.any" class="fn">any</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>ANY</code> function. Postgres only.</p>
+<h5 id="examples-11"><a class="doc-anchor" href="#examples-11">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(feature = <span class="string">"postgres-array"</span>)]
+</span><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select().expr(PgFunc::any(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>])).to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT ANY(ARRAY [0,1])"#
+</span>);</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .column(<span class="string">"id"</span>)
+    .from(<span class="string">"post"</span>)
+    .and_where(Expr::col(<span class="string">"tag"</span>).eq(PgFunc::any(Expr::cust(<span class="string">"string_to_array('a,b,c', ',')"</span>))))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "id" FROM "post" WHERE "tag" = ANY(string_to_array('a,b,c', ','))"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.some" class="method"><h4 class="code-header">pub fn <a href="#method.some" class="fn">some</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>SOME</code> function. Postgres only.</p>
+<h5 id="examples-12"><a class="doc-anchor" href="#examples-12">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(feature = <span class="string">"postgres-array"</span>)]
+</span><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select().expr(PgFunc::some(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>])).to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT SOME(ARRAY [0,1])"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.all" class="method"><h4 class="code-header">pub fn <a href="#method.all" class="fn">all</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>ALL</code> function. Postgres only.</p>
+<h5 id="examples-13"><a class="doc-anchor" href="#examples-13">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[cfg(feature = <span class="string">"postgres-array"</span>)]
+</span><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select().expr(PgFunc::all(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>])).to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT ALL(ARRAY [0,1])"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.starts_with" class="method"><h4 class="code-header">pub fn <a href="#method.starts_with" class="fn">starts_with</a>&lt;T, P&gt;(text: T, prefix: P) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    P: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call <code>STARTS_WITH</code> function. Postgres only.</p>
+<h5 id="examples-14"><a class="doc-anchor" href="#examples-14">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::starts_with(<span class="string">"123"</span>, <span class="string">"1"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT STARTS_WITH('123', '1')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.gen_random_uuid" class="method"><h4 class="code-header">pub fn <a href="#method.gen_random_uuid" class="fn">gen_random_uuid</a>() -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a></h4></section></summary><div class="docblock"><p>Call <code>GEN_RANDOM_UUID</code> function. Postgres only.</p>
+<h5 id="examples-15"><a class="doc-anchor" href="#examples-15">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select().expr(PgFunc::gen_random_uuid()).to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT GEN_RANDOM_UUID()"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.json_build_object" class="method"><h4 class="code-header">pub fn <a href="#method.json_build_object" class="fn">json_build_object</a>&lt;T&gt;(pairs: <a class="struct" href="https://doc.rust-lang.org/1.92.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.tuple.html">(T, T)</a>&gt;) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call the <code>JSON_BUILD_OBJECT</code> function. Postgres only.</p>
+<h5 id="examples-16"><a class="doc-anchor" href="#examples-16">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::json_build_object(<span class="macro">vec!</span>[
+        (Expr::val(<span class="string">"a"</span>), Expr::val(<span class="number">1</span>)),
+        (Expr::val(<span class="string">"b"</span>), Expr::val(<span class="string">"2"</span>)),
+    ]))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_BUILD_OBJECT('a', 1, 'b', '2')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.date_trunc" class="method"><h4 class="code-header">pub fn <a href="#method.date_trunc" class="fn">date_trunc</a>&lt;T&gt;(unit: <a class="enum" href="../../table/enum.PgDateTruncUnit.html" title="enum sea_query::table::PgDateTruncUnit">PgDateTruncUnit</a>, expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call the <code>DATE_TRUNC</code> function. Postgres only.</p>
+<h5 id="examples-17"><a class="doc-anchor" href="#examples-17">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::date_trunc(
+        PgDateTruncUnit::Day,
+        Expr::val(<span class="string">"2020-01-01"</span>),
+    ))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT DATE_TRUNC('day', '2020-01-01')"#
+</span>);
+
+<span class="kw">let </span>query = Query::select()
+    .expr(PgFunc::date_trunc(
+        PgDateTruncUnit::Microseconds,
+        Expr::val(<span class="string">"2020-01-01"</span>),
+    ))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT DATE_TRUNC('microseconds', '2020-01-01')"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.json_agg" class="method"><h4 class="code-header">pub fn <a href="#method.json_agg" class="fn">json_agg</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call the <code>JSON_AGG</code> function. Postgres only.</p>
+<h5 id="examples-18"><a class="doc-anchor" href="#examples-18">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from(Char::Table)
+    .expr(PgFunc::json_agg(Expr::col(Char::SizeW)))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT JSON_AGG("size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.array_agg" class="method"><h4 class="code-header">pub fn <a href="#method.array_agg" class="fn">array_agg</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call the <code>ARRAY_AGG</code> function. Postgres only.</p>
+<h5 id="examples-19"><a class="doc-anchor" href="#examples-19">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from(Char::Table)
+    .expr(PgFunc::array_agg(Expr::col(Char::Id)))
+    .group_by_col(Char::Character)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT ARRAY_AGG("id") FROM "character" GROUP BY "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.array_agg_distinct" class="method"><h4 class="code-header">pub fn <a href="#method.array_agg_distinct" class="fn">array_agg_distinct</a>&lt;T&gt;(expr: T) -&gt; <a class="struct" href="../../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a><div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../../expr/enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Call the <code>ARRAY_AGG</code> function with the <code>DISTINCT</code> modifier. Postgres only.</p>
+<h5 id="examples-20"><a class="doc-anchor" href="#examples-20">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .from(Char::Table)
+    .expr(PgFunc::array_agg_distinct(Expr::col(Char::Id)))
+    .group_by_col(Char::Character)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT ARRAY_AGG(DISTINCT "id") FROM "character" GROUP BY "character""#
+</span>);</code></pre></div></div></details></div></details></div><h2 id="trait-implementations" class="section-header">Trait Implementations<a href="#trait-implementations" class="anchor">§</a></h2><div id="trait-implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-Clone-for-PgFunc" class="impl"><a href="#impl-Clone-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.clone" class="method trait-impl"><a href="#method.clone" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html#tymethod.clone" class="fn">clone</a>(&amp;self) -&gt; <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h4></section></summary><div class='docblock'>Returns a duplicate of the value. <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html#tymethod.clone">Read more</a></div></details><details class="toggle method-toggle" open><summary><section id="method.clone_from" class="method trait-impl"><span class="rightside"><span class="since" title="Stable since Rust version 1.0.0">1.0.0</span> · <a class="src" href="https://doc.rust-lang.org/1.92.0/src/core/clone.rs.html#245-247">Source</a></span><a href="#method.clone_from" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html#method.clone_from" class="fn">clone_from</a>(&amp;mut self, source: &amp;Self)</h4></section></summary><div class='docblock'>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html#method.clone_from">Read more</a></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-Debug-for-PgFunc" class="impl"><a href="#impl-Debug-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.fmt" class="method trait-impl"><a href="#method.fmt" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html#tymethod.fmt" class="fn">fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/1.92.0/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>&lt;'_&gt;) -&gt; <a class="type" href="https://doc.rust-lang.org/1.92.0/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></h4></section></summary><div class='docblock'>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></div></details></div></details><details class="toggle implementors-toggle" open><summary><section id="impl-PartialEq-for-PgFunc" class="impl"><a href="#impl-PartialEq-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.eq" class="method trait-impl"><a href="#method.eq" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/cmp/trait.PartialEq.html#tymethod.eq" class="fn">eq</a>(&amp;self, other: &amp;<a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.bool.html">bool</a></h4></section></summary><div class='docblock'>Tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>.</div></details><details class="toggle method-toggle" open><summary><section id="method.ne" class="method trait-impl"><span class="rightside"><span class="since" title="Stable since Rust version 1.0.0">1.0.0</span> · <a class="src" href="https://doc.rust-lang.org/1.92.0/src/core/cmp.rs.html#264">Source</a></span><a href="#method.ne" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/cmp/trait.PartialEq.html#method.ne" class="fn">ne</a>(&amp;self, other: <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.reference.html">&amp;Rhs</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.bool.html">bool</a></h4></section></summary><div class='docblock'>Tests for <code>!=</code>. The default implementation is almost always sufficient,
+and should not be overridden without very good reason.</div></details></div></details><section id="impl-StructuralPartialEq-for-PgFunc" class="impl"><a href="#impl-StructuralPartialEq-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.StructuralPartialEq.html" title="trait core::marker::StructuralPartialEq">StructuralPartialEq</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></div><h2 id="synthetic-implementations" class="section-header">Auto Trait Implementations<a href="#synthetic-implementations" class="anchor">§</a></h2><div id="synthetic-implementations-list"><section id="impl-Freeze-for-PgFunc" class="impl"><a href="#impl-Freeze-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Freeze.html" title="trait core::marker::Freeze">Freeze</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section><section id="impl-RefUnwindSafe-for-PgFunc" class="impl"><a href="#impl-RefUnwindSafe-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/panic/unwind_safe/trait.RefUnwindSafe.html" title="trait core::panic::unwind_safe::RefUnwindSafe">RefUnwindSafe</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section><section id="impl-Send-for-PgFunc" class="impl"><a href="#impl-Send-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section><section id="impl-Sync-for-PgFunc" class="impl"><a href="#impl-Sync-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section><section id="impl-Unpin-for-PgFunc" class="impl"><a href="#impl-Unpin-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Unpin.html" title="trait core::marker::Unpin">Unpin</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section><section id="impl-UnwindSafe-for-PgFunc" class="impl"><a href="#impl-UnwindSafe-for-PgFunc" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/panic/unwind_safe/trait.UnwindSafe.html" title="trait core::panic::unwind_safe::UnwindSafe">UnwindSafe</a> for <a class="enum" href="enum.PgFunc.html" title="enum sea_query::extension::postgres::PgFunc">PgFunc</a></h3></section></div><h2 id="blanket-implementations" class="section-header">Blanket Implementations<a href="#blanket-implementations" class="anchor">§</a></h2><div id="blanket-implementations-list"><details class="toggle implementors-toggle"><summary><section id="impl-Any-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/any.rs.html#138">Source</a><a href="#impl-Any-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/any/trait.Any.html" title="trait core::any::Any">Any</a> for T<div class="where">where
+    T: 'static + ?<a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,</div></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.type_id" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/any.rs.html#139">Source</a><a href="#method.type_id" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/any/trait.Any.html#tymethod.type_id" class="fn">type_id</a>(&amp;self) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.92.0/core/any/struct.TypeId.html" title="struct core::any::TypeId">TypeId</a></h4></section></summary><div class='docblock'>Gets the <code>TypeId</code> of <code>self</code>. <a href="https://doc.rust-lang.org/1.92.0/core/any/trait.Any.html#tymethod.type_id">Read more</a></div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-Borrow%3CT%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/borrow.rs.html#212">Source</a><a href="#impl-Borrow%3CT%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.Borrow.html" title="trait core::borrow::Borrow">Borrow</a>&lt;T&gt; for T<div class="where">where
+    T: ?<a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,</div></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.borrow" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/borrow.rs.html#214">Source</a><a href="#method.borrow" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.Borrow.html#tymethod.borrow" class="fn">borrow</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.reference.html">&amp;T</a></h4></section></summary><div class='docblock'>Immutably borrows from an owned value. <a href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.Borrow.html#tymethod.borrow">Read more</a></div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-BorrowMut%3CT%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/borrow.rs.html#221">Source</a><a href="#impl-BorrowMut%3CT%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.BorrowMut.html" title="trait core::borrow::BorrowMut">BorrowMut</a>&lt;T&gt; for T<div class="where">where
+    T: ?<a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,</div></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.borrow_mut" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/borrow.rs.html#222">Source</a><a href="#method.borrow_mut" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.BorrowMut.html#tymethod.borrow_mut" class="fn">borrow_mut</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.reference.html">&amp;mut T</a></h4></section></summary><div class='docblock'>Mutably borrows from an owned value. <a href="https://doc.rust-lang.org/1.92.0/core/borrow/trait.BorrowMut.html#tymethod.borrow_mut">Read more</a></div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-CloneToUninit-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/clone.rs.html#515">Source</a><a href="#impl-CloneToUninit-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/clone/trait.CloneToUninit.html" title="trait core::clone::CloneToUninit">CloneToUninit</a> for T<div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,</div></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.clone_to_uninit" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/clone.rs.html#517">Source</a><a href="#method.clone_to_uninit" class="anchor">§</a><h4 class="code-header">unsafe fn <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.CloneToUninit.html#tymethod.clone_to_uninit" class="fn">clone_to_uninit</a>(&amp;self, dest: <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.u8.html">u8</a>)</h4></section></summary><span class="item-info"><div class="stab unstable"><span class="emoji">🔬</span><span>This is a nightly-only experimental API. (<code>clone_to_uninit</code>)</span></div></span><div class='docblock'>Performs copy-assignment from <code>self</code> to <code>dest</code>. <a href="https://doc.rust-lang.org/1.92.0/core/clone/trait.CloneToUninit.html#tymethod.clone_to_uninit">Read more</a></div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-From%3CT%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#785">Source</a><a href="#impl-From%3CT%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;T&gt; for T</h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.from" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#788">Source</a><a href="#method.from" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.From.html#tymethod.from" class="fn">from</a>(t: T) -&gt; T</h4></section></summary><div class="docblock"><p>Returns the argument unchanged.</p>
+</div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-Into%3CU%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#767-769">Source</a><a href="#impl-Into%3CU%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;U&gt; for T<div class="where">where
+    U: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;T&gt;,</div></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.into" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#777">Source</a><a href="#method.into" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html#tymethod.into" class="fn">into</a>(self) -&gt; U</h4></section></summary><div class="docblock"><p>Calls <code>U::from(self)</code>.</p>
+<p>That is, this conversion is whatever the implementation of
+<code><a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;T&gt; for U</code> chooses to do.</p>
+</div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-ToOwned-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/alloc/borrow.rs.html#85-87">Source</a><a href="#impl-ToOwned-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html" title="trait alloc::borrow::ToOwned">ToOwned</a> for T<div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,</div></h3></section></summary><div class="impl-items"><details class="toggle" open><summary><section id="associatedtype.Owned" class="associatedtype trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/alloc/borrow.rs.html#89">Source</a><a href="#associatedtype.Owned" class="anchor">§</a><h4 class="code-header">type <a href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html#associatedtype.Owned" class="associatedtype">Owned</a> = T</h4></section></summary><div class='docblock'>The resulting type after obtaining ownership.</div></details><details class="toggle method-toggle" open><summary><section id="method.to_owned" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/alloc/borrow.rs.html#90">Source</a><a href="#method.to_owned" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html#tymethod.to_owned" class="fn">to_owned</a>(&amp;self) -&gt; T</h4></section></summary><div class='docblock'>Creates owned data from borrowed data, usually by cloning. <a href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">Read more</a></div></details><details class="toggle method-toggle" open><summary><section id="method.clone_into" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/alloc/borrow.rs.html#94">Source</a><a href="#method.clone_into" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html#method.clone_into" class="fn">clone_into</a>(&amp;self, target: <a class="primitive" href="https://doc.rust-lang.org/1.92.0/std/primitive.reference.html">&amp;mut T</a>)</h4></section></summary><div class='docblock'>Uses borrowed data to replace owned data, usually by cloning. <a href="https://doc.rust-lang.org/1.92.0/alloc/borrow/trait.ToOwned.html#method.clone_into">Read more</a></div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-TryFrom%3CU%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#827-829">Source</a><a href="#impl-TryFrom%3CU%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;U&gt; for T<div class="where">where
+    U: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;T&gt;,</div></h3></section></summary><div class="impl-items"><details class="toggle" open><summary><section id="associatedtype.Error-1" class="associatedtype trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#831">Source</a><a href="#associatedtype.Error-1" class="anchor">§</a><h4 class="code-header">type <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html#associatedtype.Error" class="associatedtype">Error</a> = <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/convert/enum.Infallible.html" title="enum core::convert::Infallible">Infallible</a></h4></section></summary><div class='docblock'>The type returned in the event of a conversion error.</div></details><details class="toggle method-toggle" open><summary><section id="method.try_from" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#834">Source</a><a href="#method.try_from" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html#tymethod.try_from" class="fn">try_from</a>(value: U) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, &lt;T as <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;U&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a>&gt;</h4></section></summary><div class='docblock'>Performs the conversion.</div></details></div></details><details class="toggle implementors-toggle"><summary><section id="impl-TryInto%3CU%3E-for-T" class="impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#811-813">Source</a><a href="#impl-TryInto%3CU%3E-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryInto.html" title="trait core::convert::TryInto">TryInto</a>&lt;U&gt; for T<div class="where">where
+    U: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;,</div></h3></section></summary><div class="impl-items"><details class="toggle" open><summary><section id="associatedtype.Error" class="associatedtype trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#815">Source</a><a href="#associatedtype.Error" class="anchor">§</a><h4 class="code-header">type <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryInto.html#associatedtype.Error" class="associatedtype">Error</a> = &lt;U as <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a></h4></section></summary><div class='docblock'>The type returned in the event of a conversion error.</div></details><details class="toggle method-toggle" open><summary><section id="method.try_into" class="method trait-impl"><a class="src rightside" href="https://doc.rust-lang.org/1.92.0/src/core/convert/mod.rs.html#818">Source</a><a href="#method.try_into" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryInto.html#tymethod.try_into" class="fn">try_into</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.92.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;U, &lt;U as <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a>&gt;</h4></section></summary><div class='docblock'>Performs the conversion.</div></details></div></details></div></section></div></main></body></html>

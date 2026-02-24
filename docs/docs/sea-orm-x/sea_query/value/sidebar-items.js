@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ArrayType","Value","ValueTuple"],"struct":["ValueTypeErr","Values"],"trait":["FromValueTuple","IntoValueTuple","Nullable","ValueType"]};
+window.SIDEBAR_ITEMS = {"constant":["VALUE_SIZE"],"enum":["ArrayType","Value","ValueTuple"],"mod":["prelude"],"struct":["ValueTupleIter","ValueTypeErr","Values"],"trait":["DateLikeValue","DateLikeValueNullable","DateTimeLikeValue","DateTimeLikeValueNullable","FromValueTuple","IntoValueTuple","Nullable","NumericValue","NumericValueNullable","TimeLikeValue","TimeLikeValueNullable","ValueType"]};

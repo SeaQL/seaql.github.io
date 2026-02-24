@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Conversions between Rust and SQLite types."><title>sqlx_sqlite::types - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sqlx_sqlite" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sqlx_sqlite/index.html">sqlx_<wbr>sqlite</a><span class="version">0.8.2</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module types</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#types" title="Types">Types</a><ul><li><a href="#note-unsigned-integers" title="Note: Unsigned Integers">Note: Unsigned Integers</a></li><li><a href="#chrono" title="`chrono`"><code>chrono</code></a></li><li><a href="#time" title="`time`"><code>time</code></a></li><li><a href="#uuid" title="`uuid`"><code>uuid</code></a></li><li><a href="#json" title="`json`"><code>json</code></a></li></ul></li><li><a href="#nullable" title="Nullable">Nullable</a></li><li><a href="#non-feature-numeric--rust_decimal--bigdecimal-support" title="Non-feature: `NUMERIC` / `rust_decimal` / `bigdecimal` Support">Non-feature: <code>NUMERIC</code> / <code>rust_decimal</code> / <code>bigdecimal</code> Support</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate sqlx_<wbr>sqlite</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sqlx_sqlite</a></span><h1>Module <span>types</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sqlx_sqlite/types/mod.rs.html#1-180">source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Conversions between Rust and <strong>SQLite</strong> types.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Conversions between Rust and SQLite types."><title>sqlx_sqlite::types - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sqlx_sqlite" data-themes="" data-resource-suffix="" data-rustdoc-version="1.92.0 (ded5c06cf 2025-12-08)" data-channel="1.92.0" data-search-js="search-d69d8955.js" data-stringdex-js="stringdex-c3e638e9.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-ce535bd0.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module types</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sqlx_sqlite/index.html">sqlx_<wbr>sqlite</a><span class="version">0.8.6</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module types</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#types" title="Types">Types</a><ul><li><a href="#note-unsigned-integers" title="Note: Unsigned Integers">Note: Unsigned Integers</a></li><li><a href="#chrono" title="`chrono`"><code>chrono</code></a></li><li><a href="#time" title="`time`"><code>time</code></a></li><li><a href="#uuid" title="`uuid`"><code>uuid</code></a></li><li><a href="#json" title="`json`"><code>json</code></a></li></ul></li><li><a href="#nullable" title="Nullable">Nullable</a></li><li><a href="#non-feature-numeric--rust_decimal--bigdecimal-support" title="Non-feature: `NUMERIC` / `rust_decimal` / `bigdecimal` Support">Non-feature: <code>NUMERIC</code> / <code>rust_decimal</code> / <code>bigdecimal</code> Support</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate sqlx_<wbr>sqlite</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">sqlx_sqlite</a></div><h1>Module <span>types</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sqlx_sqlite/types/mod.rs.html#1-240">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Conversions between Rust and <strong>SQLite</strong> types.</p>
 <h2 id="types"><a class="doc-anchor" href="#types">§</a>Types</h2><div><table><thead><tr><th>Rust type</th><th>SQLite type(s)</th></tr></thead><tbody>
 <tr><td><code>bool</code></td><td>BOOLEAN</td></tr>
 <tr><td><code>i8</code></td><td>INTEGER</td></tr>
@@ -11,7 +11,7 @@
 <tr><td><code>u64</code></td><td>INTEGER (Decode only; see note)</td></tr>
 <tr><td><code>f32</code></td><td>REAL</td></tr>
 <tr><td><code>f64</code></td><td>REAL</td></tr>
-<tr><td><code>&amp;str</code>, <a href="https://doc.rust-lang.org/1.83.0/alloc/string/struct.String.html" title="struct alloc::string::String"><code>String</code></a></td><td>TEXT</td></tr>
+<tr><td><code>&amp;str</code>, <a href="https://doc.rust-lang.org/1.92.0/alloc/string/struct.String.html" title="struct alloc::string::String"><code>String</code></a></td><td>TEXT</td></tr>
 <tr><td><code>&amp;[u8]</code>, <code>Vec&lt;u8&gt;</code></td><td>BLOB</td></tr>
 </tbody></table>
 </div><h5 id="note-unsigned-integers"><a class="doc-anchor" href="#note-unsigned-integers">§</a>Note: Unsigned Integers</h5>
@@ -52,7 +52,34 @@ as if returned from the <code>unixepoch()</code> function (without the <code>sub
 November 24, 4714 BCE 12:00 UTC, as if returned from the <code>julianday()</code> function.</li>
 </ul>
 <p>These types will always encode to a datetime string, either
-with (<code>DateTime&lt;Tz&gt;</code> for any <code>Tz: TimeZone</code>) or without (<code>NaiveDateTime</code>) a timezone offset.</p>
+with a timezone offset (<code>DateTime&lt;Tz&gt;</code> for any <code>Tz: TimeZone</code>) or without (<code>NaiveDateTime</code>).</p>
+<h6 id="note-current_timestamp-and-comparisoninteroperability-of-datetime-values"><a class="doc-anchor" href="#note-current_timestamp-and-comparisoninteroperability-of-datetime-values">§</a>NOTE: <code>CURRENT_TIMESTAMP</code> and comparison/interoperability of <code>DATETIME</code> values</h6>
+<p>As stated previously, <code>DateTime&lt;Tz&gt;</code> always encodes to a date-time string
+<em>with</em> a timezone offset,
+in <a href="../../chrono/datetime/struct.DateTime.html#method.to_rfc3339_opts" title="method chrono::datetime::DateTime::to_rfc3339_opts">RFC 3339 format</a> (with <code>use_z: false</code>).</p>
+<p>However, most of SQLite’s datetime functions
+(including <code>datetime()</code> and <code>DEFAULT CURRENT_TIMESTAMP</code>)
+do not use this format. They instead use <code>YYYY-MM-DD HH:MM:SS.SSSS</code> without a timezone offset.</p>
+<p>This may cause problems with interoperability with other applications, and especially
+when comparing datetime values, which compares the actual string values lexicographically.</p>
+<p>Date-time strings in the SQLite format will generally <em>not</em> compare consistently
+with date-time strings in the RFC 3339 format.</p>
+<p>We recommend that you decide up-front whether <code>DATETIME</code> values should be stored
+with explicit time zones or not, and use the corresponding type
+(and its corresponding offset, if applicable) <em>consistently</em> throughout your
+application:</p>
+<ul>
+<li>RFC 3339 format: <code>DateTime&lt;Tz&gt;</code> (e.g. <code>DateTime&lt;Utc&gt;</code>, <code>DateTime&lt;Local&gt;</code>, <code>DateTime&lt;FixedOffset&gt;</code>)
+<ul>
+<li>Changing or mixing and matching offsets may break comparisons with existing timestamps.</li>
+<li><code>DateTime&lt;Local&gt;</code> is <strong>not recommended</strong> for portable applications.</li>
+<li><code>DateTime&lt;FixedOffset&gt;</code> is only recommended if the offset is <strong>constant</strong>.</li>
+</ul>
+</li>
+<li>SQLite format: <code>NaiveDateTime</code></li>
+</ul>
+<p>Note that non-constant offsets may still cause issues when comparing timestamps,
+as the comparison operators are not timezone-aware.</p>
 <h4 id="time"><a class="doc-anchor" href="#time">§</a><a href="https://crates.io/crates/time"><code>time</code></a></h4>
 <p>Requires the <code>time</code> Cargo feature flag.</p>
 <div><table><thead><tr><th>Rust type</th><th>Sqlite type(s)</th></tr></thead><tbody>
@@ -64,6 +91,34 @@ with (<code>DateTime&lt;Tz&gt;</code> for any <code>Tz: TimeZone</code>) or with
 </div><h6 id="note-datetime-conversions-1"><a class="doc-anchor" href="#note-datetime-conversions-1">§</a>NOTE: <code>DATETIME</code> conversions</h6>
 <p>The behavior here is identical to the corresponding <code>chrono</code> types, minus the support for <code>REAL</code>
 values as Julian days (it’s just not implemented).</p>
+<p><code>PrimitiveDateTime</code> and <code>OffsetDateTime</code> will always encode to a datetime string, either
+with a timezone offset (<code>OffsetDateTime</code>) or without (<code>PrimitiveDateTime</code>).</p>
+<h6 id="note-current_timestamp-and-comparisoninteroperability-of-datetime-values-1"><a class="doc-anchor" href="#note-current_timestamp-and-comparisoninteroperability-of-datetime-values-1">§</a>NOTE: <code>CURRENT_TIMESTAMP</code> and comparison/interoperability of <code>DATETIME</code> values</h6>
+<p>As stated previously, <code>OffsetDateTime</code> always encodes to a datetime string <em>with</em> a timezone offset,
+in <a href="../../time/format_description/well_known/rfc3339/struct.Rfc3339.html" title="struct time::format_description::well_known::rfc3339::Rfc3339">RFC 3339 format</a> (using <code>Z</code> for UTC offsets).</p>
+<p>However, most of SQLite’s datetime functions
+(including <code>datetime()</code> and <code>DEFAULT CURRENT_TIMESTAMP</code>)
+do not use this format. They instead use <code>YYYY-MM-DD HH:MM:SS.SSSS</code> without a timezone offset.</p>
+<p>This may cause problems with interoperability with other applications, and especially
+when comparing datetime values, which compares the actual string values lexicographically.</p>
+<p>Date-time strings in the SQLite format will generally <em>not</em> compare consistently
+with date-time strings in the RFC 3339 format.</p>
+<p>We recommend that you decide up-front whether <code>DATETIME</code> values should be stored
+with explicit time zones or not, and use the corresponding type
+(and its corresponding offset, if applicable) <em>consistently</em> throughout your
+application:</p>
+<ul>
+<li>RFC 3339 format: <code>OffsetDateTime</code> with a <strong>constant</strong> offset.
+<ul>
+<li>Changing or mixing and matching offsets may break comparisons with existing timestamps.</li>
+<li><code>OffsetDateTime::now_local()</code> is <strong>not recommended</strong> for portable applications.</li>
+<li>Non-UTC offsets are only recommended if the offset is <strong>constant</strong>.</li>
+</ul>
+</li>
+<li>SQLite format: <code>PrimitiveDateTime</code></li>
+</ul>
+<p>Note that non-constant offsets may still cause issues when comparing timestamps,
+as the comparison operators are not timezone-aware.</p>
 <h4 id="uuid"><a class="doc-anchor" href="#uuid">§</a><a href="https://crates.io/crates/uuid"><code>uuid</code></a></h4>
 <p>Requires the <code>uuid</code> Cargo feature flag.</p>
 <div><table><thead><tr><th>Rust type</th><th>Sqlite type(s)</th></tr></thead><tbody>
