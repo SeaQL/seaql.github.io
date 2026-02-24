@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["sea_orm",[["impl <a class=\"trait\" href=\"sea_query/value/trait.ValueType.html\" title=\"trait sea_query::value::ValueType\">ValueType</a> for <a class=\"struct\" href=\"sea_orm/value/struct.ChronoUnixTimestamp.html\" title=\"struct sea_orm::value::ChronoUnixTimestamp\">ChronoUnixTimestamp</a>"],["impl <a class=\"trait\" href=\"sea_query/value/trait.ValueType.html\" title=\"trait sea_query::value::ValueType\">ValueType</a> for <a class=\"struct\" href=\"sea_orm/value/struct.ChronoUnixTimestampMillis.html\" title=\"struct sea_orm::value::ChronoUnixTimestampMillis\">ChronoUnixTimestampMillis</a>"],["impl <a class=\"trait\" href=\"sea_query/value/trait.ValueType.html\" title=\"trait sea_query::value::ValueType\">ValueType</a> for <a class=\"struct\" href=\"sea_orm/value/struct.TextUuid.html\" title=\"struct sea_orm::value::TextUuid\">TextUuid</a>"],["impl <a class=\"trait\" href=\"sea_query/value/trait.ValueType.html\" title=\"trait sea_query::value::ValueType\">ValueType</a> for <a class=\"struct\" href=\"sea_orm/value/struct.TimeUnixTimestamp.html\" title=\"struct sea_orm::value::TimeUnixTimestamp\">TimeUnixTimestamp</a>"],["impl <a class=\"trait\" href=\"sea_query/value/trait.ValueType.html\" title=\"trait sea_query::value::ValueType\">ValueType</a> for <a class=\"struct\" href=\"sea_orm/value/struct.TimeUnixTimestampMillis.html\" title=\"struct sea_orm::value::TimeUnixTimestampMillis\">TimeUnixTimestampMillis</a>"]]],["sea_query",[]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[1444,17]}
