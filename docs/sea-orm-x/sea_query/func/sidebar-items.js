@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Function"],"struct":["Func","FuncArgMod","FunctionCall"]};
+window.SIDEBAR_ITEMS = {"enum":["Func"],"struct":["FuncArgMod","FunctionCall"],"type":["Function"]};

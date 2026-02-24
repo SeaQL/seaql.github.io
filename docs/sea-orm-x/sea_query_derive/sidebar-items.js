@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"attr":["enum_def"],"derive":["Iden","IdenStatic"]};
+window.SIDEBAR_ITEMS = {"attr":["enum_def"],"derive":["Iden","IdenStatic"],"macro":["raw_query","raw_sql","sqlx_mysql_query","sqlx_mysql_query_as","sqlx_postgres_query","sqlx_postgres_query_as","sqlx_sqlite_query","sqlx_sqlite_query_as","sqlz_mssql_query","sqlz_mssql_query_as"]};

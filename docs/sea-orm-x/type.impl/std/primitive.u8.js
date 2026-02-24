@@ -1,9 +1,9 @@
 (function() {
-    var type_impls = Object.fromEntries([["core_foundation",[]],["core_foundation_sys",[]],["nix",[]],["serde",[]]]);
+    var type_impls = Object.fromEntries([["core_foundation",[]],["core_foundation_sys",[]],["nix",[]],["serde",[]],["serde_core",[]]]);
     if (window.register_type_impls) {
         window.register_type_impls(type_impls);
     } else {
         window.pending_type_impls = type_impls;
     }
 })()
-//{"start":55,"fragment_lengths":[22,27,11,13]}
+//{"start":55,"fragment_lengths":[22,27,11,13,18]}

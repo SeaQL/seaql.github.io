@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SqlxError","SqlxErrorKind","SqlxRow"],"mod":["mysql","postgres","sqlite"],"struct":["MySqlPool","PgPool","SqlitePool"],"trait":["Row"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ConnAcquireErr","DbErr","RuntimeErr","SqlErr","SqlxError"],"struct":["ColumnFromStrErr","SqlxMySqlError","SqlxPostgresError","SqlxSqliteError"]};
+window.SIDEBAR_ITEMS = {"enum":["ConnAcquireErr","DbErr","RuntimeErr","SqlErr","SqlxError","TryGetError"],"struct":["ColumnFromStrErr","SqlxMySqlError","SqlxPostgresError","SqlxSqliteError"]};

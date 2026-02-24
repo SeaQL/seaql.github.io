@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["NormalizerError"],"mod":["properties","provider","uts46"],"struct":["ComposingNormalizer","Composition","DecomposingNormalizer","Decomposition"]};

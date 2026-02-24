@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["BigDecimal","BigInt","Decimal","Numeric"]};
+window.SIDEBAR_ITEMS = {"struct":["Decimal","Numeric"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["def","discovery","probe","query"],"struct":["Sqlite"]};
+window.SIDEBAR_ITEMS = {"enum":["SqliteDiscoveryError"],"mod":["def","discovery","probe","query"],"struct":["Sqlite"],"type":["DiscoveryResult"]};

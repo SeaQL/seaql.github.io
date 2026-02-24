@@ -1,119 +1,141 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="“Operator” methods for building complex expressions."><title>ExprTrait in sea_query::expr - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sea_query" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt="logo"></a><h2><a href="../../sea_query/index.html">sea_<wbr>query</a><span class="version">0.32.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Expr<wbr>Trait</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a></li></ul><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.as_enum" title="as_enum">as_enum</a></li><li><a href="#tymethod.binary" title="binary">binary</a></li><li><a href="#tymethod.cast_as" title="cast_as">cast_as</a></li><li><a href="#tymethod.unary" title="unary">unary</a></li></ul><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.add" title="add">add</a></li><li><a href="#method.and" title="and">and</a></li><li><a href="#method.between" title="between">between</a></li><li><a href="#method.bit_and" title="bit_and">bit_and</a></li><li><a href="#method.bit_or" title="bit_or">bit_or</a></li><li><a href="#method.div" title="div">div</a></li><li><a href="#method.eq" title="eq">eq</a></li><li><a href="#method.equals" title="equals">equals</a></li><li><a href="#method.gt" title="gt">gt</a></li><li><a href="#method.gte" title="gte">gte</a></li><li><a href="#method.in_subquery" title="in_subquery">in_subquery</a></li><li><a href="#method.in_tuples" title="in_tuples">in_tuples</a></li><li><a href="#method.is" title="is">is</a></li><li><a href="#method.is_in" title="is_in">is_in</a></li><li><a href="#method.is_not" title="is_not">is_not</a></li><li><a href="#method.is_not_in" title="is_not_in">is_not_in</a></li><li><a href="#method.is_not_null" title="is_not_null">is_not_null</a></li><li><a href="#method.is_null" title="is_null">is_null</a></li><li><a href="#method.left_shift" title="left_shift">left_shift</a></li><li><a href="#method.like" title="like">like</a></li><li><a href="#method.lt" title="lt">lt</a></li><li><a href="#method.lte" title="lte">lte</a></li><li><a href="#method.modulo" title="modulo">modulo</a></li><li><a href="#method.mul" title="mul">mul</a></li><li><a href="#method.ne" title="ne">ne</a></li><li><a href="#method.not" title="not">not</a></li><li><a href="#method.not_between" title="not_between">not_between</a></li><li><a href="#method.not_equals" title="not_equals">not_equals</a></li><li><a href="#method.not_in_subquery" title="not_in_subquery">not_in_subquery</a></li><li><a href="#method.not_like" title="not_like">not_like</a></li><li><a href="#method.or" title="or">or</a></li><li><a href="#method.right_shift" title="right_shift">right_shift</a></li><li><a href="#method.sub" title="sub">sub</a></li></ul><h3><a href="#object-safety">Object Safety</a></h3><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In sea_<wbr>query::<wbr>expr</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sea_query</a>::<wbr><a href="index.html">expr</a></span><h1>Trait <span class="trait">ExprTrait</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>pub trait ExprTrait: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> {
-<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 37 methods</span></summary>    // Required methods
-    fn <a href="#tymethod.as_enum" class="fn">as_enum</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="“Operator” methods for building expressions."><title>ExprTrait in sea_query::expr - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sea_query" data-themes="" data-resource-suffix="" data-rustdoc-version="1.92.0 (ded5c06cf 2025-12-08)" data-channel="1.92.0" data-search-js="search-d69d8955.js" data-stringdex-js="stringdex-c3e638e9.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-ce535bd0.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">ExprTrait</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../sea_query/index.html"><img src="https://raw.githubusercontent.com/SeaQL/sea-query/master/docs/SeaQL icon dark.png" alt="logo"></a><h2><a href="../../sea_query/index.html">sea_<wbr>query</a><span class="version">1.0.0-rc.31</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Expr<wbr>Trait</a></h2><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.as_enum" title="as_enum">as_enum</a></li><li><a href="#tymethod.avg" title="avg">avg</a></li><li><a href="#tymethod.binary" title="binary">binary</a></li><li><a href="#tymethod.cast_as" title="cast_as">cast_as</a></li><li><a href="#tymethod.count" title="count">count</a></li><li><a href="#tymethod.count_distinct" title="count_distinct">count_distinct</a></li><li><a href="#tymethod.if_null" title="if_null">if_null</a></li><li><a href="#tymethod.max" title="max">max</a></li><li><a href="#tymethod.min" title="min">min</a></li><li><a href="#tymethod.sum" title="sum">sum</a></li><li><a href="#tymethod.unary" title="unary">unary</a></li></ul><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.add" title="add">add</a></li><li><a href="#method.and" title="and">and</a></li><li><a href="#method.between" title="between">between</a></li><li><a href="#method.bit_and" title="bit_and">bit_and</a></li><li><a href="#method.bit_or" title="bit_or">bit_or</a></li><li><a href="#method.div" title="div">div</a></li><li><a href="#method.eq" title="eq">eq</a></li><li><a href="#method.equals" title="equals">equals</a></li><li><a href="#method.gt" title="gt">gt</a></li><li><a href="#method.gte" title="gte">gte</a></li><li><a href="#method.in_subquery" title="in_subquery">in_subquery</a></li><li><a href="#method.in_tuples" title="in_tuples">in_tuples</a></li><li><a href="#method.is" title="is">is</a></li><li><a href="#method.is_in" title="is_in">is_in</a></li><li><a href="#method.is_not" title="is_not">is_not</a></li><li><a href="#method.is_not_in" title="is_not_in">is_not_in</a></li><li><a href="#method.is_not_null" title="is_not_null">is_not_null</a></li><li><a href="#method.is_null" title="is_null">is_null</a></li><li><a href="#method.left_shift" title="left_shift">left_shift</a></li><li><a href="#method.like" title="like">like</a></li><li><a href="#method.lt" title="lt">lt</a></li><li><a href="#method.lte" title="lte">lte</a></li><li><a href="#method.modulo" title="modulo">modulo</a></li><li><a href="#method.mul" title="mul">mul</a></li><li><a href="#method.ne" title="ne">ne</a></li><li><a href="#method.not" title="not">not</a></li><li><a href="#method.not_between" title="not_between">not_between</a></li><li><a href="#method.not_equals" title="not_equals">not_equals</a></li><li><a href="#method.not_in_subquery" title="not_in_subquery">not_in_subquery</a></li><li><a href="#method.not_like" title="not_like">not_like</a></li><li><a href="#method.or" title="or">or</a></li><li><a href="#method.right_shift" title="right_shift">right_shift</a></li><li><a href="#method.sub" title="sub">sub</a></li></ul><h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In sea_<wbr>query::<wbr>expr</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">sea_query</a>::<wbr><a href="index.html">expr</a></div><h1>Trait <span class="trait">Expr<wbr>Trait</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>pub trait ExprTrait: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 44 methods</span></summary>    // Required methods
+    fn <a href="#tymethod.as_enum" class="fn">as_enum</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where N: <a class="trait" href="../types/trait.IntoIden.html" title="trait sea_query::types::IntoIden">IntoIden</a></span>;
-<span class="item-spacer"></span>    fn <a href="#tymethod.binary" class="fn">binary</a>&lt;O, R&gt;(self, op: O, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where O: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../types/enum.BinOper.html" title="enum sea_query::types::BinOper">BinOper</a>&gt;,
-             R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span>;
-<span class="item-spacer"></span>    fn <a href="#tymethod.cast_as" class="fn">cast_as</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+<span class="item-spacer"></span>    fn <a href="#tymethod.binary" class="fn">binary</a>&lt;O, R&gt;(self, op: O, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where O: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../types/enum.BinOper.html" title="enum sea_query::types::BinOper">BinOper</a>&gt;,
+             R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.cast_as" class="fn">cast_as</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where N: <a class="trait" href="../types/trait.IntoIden.html" title="trait sea_query::types::IntoIden">IntoIden</a></span>;
-<span class="item-spacer"></span>    fn <a href="#tymethod.unary" class="fn">unary</a>(self, o: <a class="enum" href="../types/enum.UnOper.html" title="enum sea_query::types::UnOper">UnOper</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.unary" class="fn">unary</a>(self, o: <a class="enum" href="../types/enum.UnOper.html" title="enum sea_query::types::UnOper">UnOper</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.max" class="fn">max</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.min" class="fn">min</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.sum" class="fn">sum</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.avg" class="fn">avg</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.count" class="fn">count</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.count_distinct" class="fn">count_distinct</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.if_null" class="fn">if_null</a>&lt;V&gt;(self, v: V) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span>;
 
     // Provided methods
-    fn <a href="#method.add" class="fn">add</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.and" class="fn">and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.between" class="fn">between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-             B: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.div" class="fn">div</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.eq" class="fn">eq</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.equals" class="fn">equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+    fn <a href="#method.add" class="fn">add</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.and" class="fn">and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.between" class="fn">between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+             B: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.div" class="fn">div</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.eq" class="fn">eq</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.equals" class="fn">equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where C: <a class="trait" href="../types/trait.IntoColumnRef.html" title="trait sea_query::types::IntoColumnRef">IntoColumnRef</a></span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.gt" class="fn">gt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.gte" class="fn">gte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.in_subquery" class="fn">in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.in_tuples" class="fn">in_tuples</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+<span class="item-spacer"></span>    fn <a href="#method.gt" class="fn">gt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.gte" class="fn">gte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.in_subquery" class="fn">in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.in_tuples" class="fn">in_tuples</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where V: <a class="trait" href="../value/trait.IntoValueTuple.html" title="trait sea_query::value::IntoValueTuple">IntoValueTuple</a>,
-             I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is" class="fn">is</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is_in" class="fn">is_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where V: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-             I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is_not" class="fn">is_not</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is_not_in" class="fn">is_not_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where V: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-             I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is_not_null" class="fn">is_not_null</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.is_null" class="fn">is_null</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.left_shift" class="fn">left_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.like" class="fn">like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+             I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is" class="fn">is</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is_in" class="fn">is_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+             I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is_not" class="fn">is_not</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is_not_in" class="fn">is_not_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+             I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is_not_null" class="fn">is_not_null</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.is_null" class="fn">is_null</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.left_shift" class="fn">left_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.like" class="fn">like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where L: <a class="trait" href="../types/trait.IntoLikeExpr.html" title="trait sea_query::types::IntoLikeExpr">IntoLikeExpr</a></span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.lt" class="fn">lt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.lte" class="fn">lte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.modulo" class="fn">modulo</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.mul" class="fn">mul</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.ne" class="fn">ne</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.not" class="fn">not</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.not_between" class="fn">not_between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-             B: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.not_equals" class="fn">not_equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+<span class="item-spacer"></span>    fn <a href="#method.lt" class="fn">lt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.lte" class="fn">lte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.modulo" class="fn">modulo</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.mul" class="fn">mul</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.ne" class="fn">ne</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.not" class="fn">not</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.not_between" class="fn">not_between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+             B: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.not_equals" class="fn">not_equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where C: <a class="trait" href="../types/trait.IntoColumnRef.html" title="trait sea_query::types::IntoColumnRef">IntoColumnRef</a></span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.not_in_subquery" class="fn">not_in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.not_like" class="fn">not_like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
+<span class="item-spacer"></span>    fn <a href="#method.not_in_subquery" class="fn">not_in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.not_like" class="fn">not_like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
        <span class="where">where L: <a class="trait" href="../types/trait.IntoLikeExpr.html" title="trait sea_query::types::IntoLikeExpr">IntoLikeExpr</a></span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.or" class="fn">or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.right_shift" class="fn">right_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.sub" class="fn">sub</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.bit_and" class="fn">bit_and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-<span class="item-spacer"></span>    fn <a href="#method.bit_or" class="fn">bit_or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>
-       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;</span> { ... }
-</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>“Operator” methods for building complex expressions.</p>
-<h3 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h3>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::<span class="kw-2">*</span>;
+<span class="item-spacer"></span>    fn <a href="#method.or" class="fn">or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.right_shift" class="fn">right_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.sub" class="fn">sub</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bit_and" class="fn">bit_and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bit_or" class="fn">bit_or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;</span> { ... }
+</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>“Operator” methods for building expressions.</p>
+<p>Before <code>sea_query</code> 0.32.0 (<code>sea_orm</code> 1.1.1),
+these methods were awailable only on <a href="enum.Expr.html" title="enum sea_query::expr::Expr"><code>Expr</code></a>/<a href="type.SimpleExpr.html" title="type sea_query::expr::SimpleExpr"><code>SimpleExpr</code></a>
+and you needed to manually construct these types first.</p>
+<p>Now, you can call them directly on any expression type:</p>
 
-<span class="kw">let </span>expr = <span class="number">1_i32</span>.cast_as(Alias::new(<span class="string">"REAL"</span>));
-
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>expr = <span class="number">1_i32</span>.cast_as(<span class="string">"REAL"</span>);
 <span class="kw">let </span>expr = Func::char_length(<span class="string">"abc"</span>).eq(<span class="number">3_i32</span>);
-
-<span class="kw">let </span>expr = Expr::current_date()
-    .cast_as(Alias::new(<span class="string">"TEXT"</span>))
-    .like(<span class="string">"2024%"</span>);</code></pre></div>
-</div></details><h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.as_enum" class="method"><h4 class="code-header">fn <a href="#tymethod.as_enum" class="fn">as_enum</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+<span class="kw">let </span>expr = Expr::current_date().cast_as(<span class="string">"TEXT"</span>).like(<span class="string">"2024%"</span>);</code></pre></div>
+<p>If some methods are missing, look into <a href="../types/enum.BinOper.html#variant.Custom" title="variant sea_query::types::BinOper::Custom"><code>BinOper::Custom</code></a>, <a href="../func/enum.Func.html#method.cust" title="associated function sea_query::func::Func::cust"><code>Func::cust</code></a>,
+or <a href="enum.Expr.html#method.cust_with_values" title="associated function sea_query::expr::Expr::cust_with_values"><code>Expr::cust*</code></a> as a workaround, and consider
+reporting your issue.</p>
+</div></details><h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.as_enum" class="method"><h4 class="code-header">fn <a href="#tymethod.as_enum" class="fn">as_enum</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     N: <a class="trait" href="../types/trait.IntoIden.html" title="trait sea_query::types::IntoIden">IntoIden</a>,</div></h4></section></summary><div class="docblock"><p>Express a <code>AS enum</code> expression.</p>
-<h5 id="examples-1"><a class="doc-anchor" href="#examples-1">§</a>Examples</h5>
+<h5 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::insert()
     .into_table(Char::Table)
     .columns([Char::FontSize])
-    .values_panic([<span class="string">"large"</span>.as_enum(Alias::new(<span class="string">"FontSizeEnum"</span>))])
+    .values_panic([<span class="string">"large"</span>.as_enum(<span class="string">"FontSizeEnum"</span>)])
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"INSERT INTO [character] ([font_size]) VALUES ('large')"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"INSERT INTO `character` (`font_size`) VALUES ('large')"#
 </span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(PostgresQueryBuilder),
-    <span class="string">r#"INSERT INTO "character" ("font_size") VALUES (CAST('large' AS FontSizeEnum))"#
+    <span class="string">r#"INSERT INTO "character" ("font_size") VALUES (CAST('large' AS "FontSizeEnum"))"#
 </span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"INSERT INTO "character" ("font_size") VALUES ('large')"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.binary" class="method"><h4 class="code-header">fn <a href="#tymethod.binary" class="fn">binary</a>&lt;O, R&gt;(self, op: O, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    O: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../types/enum.BinOper.html" title="enum sea_query::types::BinOper">BinOper</a>&gt;,
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Create any binary operation</p>
-<h5 id="examples-2"><a class="doc-anchor" href="#examples-2">§</a>Examples</h5>
+</span>);
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col(Char::FontSize).as_enum(<span class="string">"FontSizeEnum[]"</span>))
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT CAST("font_size" AS "FontSizeEnum"[]) FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.binary" class="method"><h4 class="code-header">fn <a href="#tymethod.binary" class="fn">binary</a>&lt;O, R&gt;(self, op: O, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    O: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="../types/enum.BinOper.html" title="enum sea_query::types::BinOper">BinOper</a>&gt;,
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Create any binary operation</p>
+<h5 id="examples-1"><a class="doc-anchor" href="#examples-1">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -125,6 +147,10 @@
     ])
     .to_owned();
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [size_w] &lt; 10 AND [size_w] &gt; [size_h]"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `size_w` &lt; 10 AND `size_w` &gt; `size_h`"#
 </span>);
@@ -135,16 +161,17 @@
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "size_w" &lt; 10 AND "size_w" &gt; "size_h""#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.cast_as" class="method"><h4 class="code-header">fn <a href="#tymethod.cast_as" class="fn">cast_as</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.cast_as" class="method"><h4 class="code-header">fn <a href="#tymethod.cast_as" class="fn">cast_as</a>&lt;N&gt;(self, type_name: N) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     N: <a class="trait" href="../types/trait.IntoIden.html" title="trait sea_query::types::IntoIden">IntoIden</a>,</div></h4></section></summary><div class="docblock"><p>Express a <code>CAST AS</code> expression.</p>
-<h5 id="examples-3"><a class="doc-anchor" href="#examples-3">§</a>Examples</h5>
+<h5 id="examples-2"><a class="doc-anchor" href="#examples-2">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
-<span class="kw">let </span>query = Query::select()
-    .expr(<span class="string">"1"</span>.cast_as(Alias::new(<span class="string">"integer"</span>)))
-    .to_owned();
+<span class="kw">let </span>query = Query::select().expr(<span class="string">"1"</span>.cast_as(<span class="string">"integer"</span>)).to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT CAST('1' AS integer)"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT CAST('1' AS integer)"#
@@ -156,9 +183,8 @@
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT CAST('1' AS integer)"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.unary" class="method"><h4 class="code-header">fn <a href="#tymethod.unary" class="fn">unary</a>(self, o: <a class="enum" href="../types/enum.UnOper.html" title="enum sea_query::types::UnOper">UnOper</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Apply any unary operator to the expression.</p>
-<h5 id="examples-4"><a class="doc-anchor" href="#examples-4">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.unary" class="method"><h4 class="code-header">fn <a href="#tymethod.unary" class="fn">unary</a>(self, o: <a class="enum" href="../types/enum.UnOper.html" title="enum sea_query::types::UnOper">UnOper</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Apply any unary operator to the expression.</p>
+<h5 id="examples-3"><a class="doc-anchor" href="#examples-3">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -167,6 +193,10 @@
     .and_where(Expr::col((Char::Table, Char::SizeW)).is_null().unary(UnOper::Not))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE NOT [character].[size_w] IS NULL"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE NOT `character`.`size_w` IS NULL"#
@@ -178,10 +208,180 @@
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE NOT "character"."size_w" IS NULL"#
-</span>);</code></pre></div>
-</div></details></div><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.add" class="method"><h4 class="code-header">fn <a href="#method.add" class="fn">add</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic addition operation.</p>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.max" class="method"><h4 class="code-header">fn <a href="#tymethod.max" class="fn">max</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>MAX</code> function.</p>
+<h5 id="examples-4"><a class="doc-anchor" href="#examples-4">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).max())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT MAX([character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT MAX(`character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT MAX("character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT MAX("character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.min" class="method"><h4 class="code-header">fn <a href="#tymethod.min" class="fn">min</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>MIN</code> function.</p>
 <h5 id="examples-5"><a class="doc-anchor" href="#examples-5">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).min())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT MIN([character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT MIN(`character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT MIN("character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT MIN("character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.sum" class="method"><h4 class="code-header">fn <a href="#tymethod.sum" class="fn">sum</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>SUM</code> function.</p>
+<h5 id="examples-6"><a class="doc-anchor" href="#examples-6">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).sum())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT SUM([character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT SUM(`character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT SUM("character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT SUM("character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.avg" class="method"><h4 class="code-header">fn <a href="#tymethod.avg" class="fn">avg</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>AVG</code> (average) function.</p>
+<h5 id="examples-7"><a class="doc-anchor" href="#examples-7">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).avg())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT AVG([character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT AVG(`character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT AVG("character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT AVG("character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.count" class="method"><h4 class="code-header">fn <a href="#tymethod.count" class="fn">count</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>COUNT</code> function.</p>
+<h5 id="examples-8"><a class="doc-anchor" href="#examples-8">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).count())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT COUNT([character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT COUNT(`character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT COUNT("character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT COUNT("character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.count_distinct" class="method"><h4 class="code-header">fn <a href="#tymethod.count_distinct" class="fn">count_distinct</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>COUNT</code> function with the DISTINCT modifier.</p>
+<h5 id="examples-9"><a class="doc-anchor" href="#examples-9">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).count_distinct())
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT COUNT(DISTINCT [character].[size_w]) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT COUNT(DISTINCT `character`.`size_w`) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT COUNT(DISTINCT "character"."size_w") FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT COUNT(DISTINCT "character"."size_w") FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="tymethod.if_null" class="method"><h4 class="code-header">fn <a href="#tymethod.if_null" class="fn">if_null</a>&lt;V&gt;(self, v: V) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IF NULL</code> function.</p>
+<h5 id="examples-10"><a class="doc-anchor" href="#examples-10">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col((Char::Table, Char::SizeW)).if_null(<span class="number">0</span>))
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT ISNULL([character].[size_w], 0) FROM [character]"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT IFNULL(`character`.`size_w`, 0) FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT COALESCE("character"."size_w", 0) FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT IFNULL("character"."size_w", 0) FROM "character""#
+</span>);</code></pre></div></div></details></div><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.add" class="method"><h4 class="code-header">fn <a href="#method.add" class="fn">add</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic addition operation.</p>
+<h5 id="examples-11"><a class="doc-anchor" href="#examples-11">§</a>Examples</h5>
+<p>Adding literal values</p>
+
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -190,6 +390,10 @@
     .and_where(<span class="number">1</span>.add(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 + 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 + 1 = 2"#
@@ -202,11 +406,80 @@
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 + 1 = 2"#
 </span>);</code></pre></div>
-</div></details><section id="method.and" class="method"><h4 class="code-header">fn <a href="#method.and" class="fn">and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section><details class="toggle method-toggle" open><summary><section id="method.between" class="method"><h4 class="code-header">fn <a href="#method.between" class="fn">between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    A: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-    B: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>BETWEEN</code> expression.</p>
-<h5 id="examples-6"><a class="doc-anchor" href="#examples-6">§</a>Examples</h5>
+<p>Adding columns and values</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col(Char::SizeW).add(<span class="number">1</span>))
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT `size_w` + 1 FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "size_w" + 1 FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT "size_w" + 1 FROM "character""#
+</span>);</code></pre></div>
+<p>Adding columns</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .expr(Expr::col(Char::SizeW).add(Expr::col(Char::SizeH)))
+    .from(Char::Table)
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT `size_w` + `size_h` FROM `character`"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "size_w" + "size_h" FROM "character""#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT "size_w" + "size_h" FROM "character""#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.and" class="method"><h4 class="code-header">fn <a href="#method.and" class="fn">and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a logical <code>AND</code> operation.</p>
+<h5 id="examples-12"><a class="doc-anchor" href="#examples-12">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .columns([Char::Character, Char::SizeW, Char::SizeH])
+    .from(Char::Table)
+    .cond_where(<span class="macro">any!</span>[
+        Expr::col(Char::SizeW).eq(<span class="number">1</span>).and(Expr::col(Char::SizeH).eq(<span class="number">2</span>)),
+        Expr::col(Char::SizeW).eq(<span class="number">3</span>).and(Expr::col(Char::SizeH).eq(<span class="number">4</span>)),
+    ])
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE ([size_w] = 1 AND [size_h] = 2) OR ([size_w] = 3 AND [size_h] = 4)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE (`size_w` = 1 AND `size_h` = 2) OR (`size_w` = 3 AND `size_h` = 4)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE ("size_w" = 1 AND "size_h" = 2) OR ("size_w" = 3 AND "size_h" = 4)"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE ("size_w" = 1 AND "size_h" = 2) OR ("size_w" = 3 AND "size_h" = 4)"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.between" class="method"><h4 class="code-header">fn <a href="#method.between" class="fn">between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    A: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    B: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>BETWEEN</code> expression.</p>
+<h5 id="examples-13"><a class="doc-anchor" href="#examples-13">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -226,10 +499,9 @@
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" BETWEEN 1 AND 10"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.div" class="method"><h4 class="code-header">fn <a href="#method.div" class="fn">div</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic division operation.</p>
-<h5 id="examples-7"><a class="doc-anchor" href="#examples-7">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.div" class="method"><h4 class="code-header">fn <a href="#method.div" class="fn">div</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic division operation.</p>
+<h5 id="examples-14"><a class="doc-anchor" href="#examples-14">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -238,6 +510,10 @@
     .and_where(<span class="number">1</span>.div(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 / 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 / 1 = 2"#
@@ -249,20 +525,22 @@
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 / 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.eq" class="method"><h4 class="code-header">fn <a href="#method.eq" class="fn">eq</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an equal (<code>=</code>) expression.</p>
-<h5 id="examples-8"><a class="doc-anchor" href="#examples-8">§</a>Examples</h5>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.eq" class="method"><h4 class="code-header">fn <a href="#method.eq" class="fn">eq</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an equal (<code>=</code>) expression.</p>
+<h5 id="examples-15"><a class="doc-anchor" href="#examples-15">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
     .columns([Char::Character, Char::SizeW, Char::SizeH])
     .from(Char::Table)
-    <span class="comment">// Sometimes, you'll have to qualify the call because of conflicting std traits.
-    </span>.and_where(ExprTrait::eq(<span class="string">"What!"</span>, <span class="string">"Nothing"</span>))
+    .and_where(Expr::val(<span class="string">"What!"</span>).eq(<span class="string">"Nothing"</span>))
     .and_where(Char::Id.into_column_ref().eq(<span class="number">1</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 'What!' = 'Nothing' AND [id] = 1"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 'What!' = 'Nothing' AND `id` = 1"#
@@ -275,10 +553,31 @@
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 'What!' = 'Nothing' AND "id" = 1"#
 </span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.equals" class="method"><h4 class="code-header">fn <a href="#method.equals" class="fn">equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+<p>Note how you should express a string being a literal vs an identifier.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+
+<span class="kw">let </span>query = Query::select()
+    .column(Char::Character)
+    .from(Char::Table)
+    .and_where(Expr::col(<span class="string">"name"</span>).eq(<span class="string">"Something"</span>))
+    .to_owned();
+
+<span class="macro">assert_eq!</span>(
+    query.to_string(MysqlQueryBuilder),
+    <span class="string">r#"SELECT `character` FROM `character` WHERE `name` = 'Something'"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(PostgresQueryBuilder),
+    <span class="string">r#"SELECT "character" FROM "character" WHERE "name" = 'Something'"#
+</span>);
+<span class="macro">assert_eq!</span>(
+    query.to_string(SqliteQueryBuilder),
+    <span class="string">r#"SELECT "character" FROM "character" WHERE "name" = 'Something'"#
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.equals" class="method"><h4 class="code-header">fn <a href="#method.equals" class="fn">equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     C: <a class="trait" href="../types/trait.IntoColumnRef.html" title="trait sea_query::types::IntoColumnRef">IntoColumnRef</a>,</div></h4></section></summary><div class="docblock"><p>Express a equal expression between two table columns,
 you will mainly use this to relate identical value between two table columns.</p>
-<h5 id="examples-9"><a class="doc-anchor" href="#examples-9">§</a>Examples</h5>
+<h5 id="examples-16"><a class="doc-anchor" href="#examples-16">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -287,6 +586,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::FontId).into_column_ref().equals((Font::Table, Font::Id)))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[font_id] = [font].[id]"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`font_id` = `font`.`id`"#
@@ -298,10 +601,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."font_id" = "font"."id""#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.gt" class="method"><h4 class="code-header">fn <a href="#method.gt" class="fn">gt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a greater than (<code>&gt;</code>) expression.</p>
-<h5 id="examples-10"><a class="doc-anchor" href="#examples-10">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.gt" class="method"><h4 class="code-header">fn <a href="#method.gt" class="fn">gt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a greater than (<code>&gt;</code>) expression.</p>
+<h5 id="examples-17"><a class="doc-anchor" href="#examples-17">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -310,6 +612,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().gt(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] &gt; 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` &gt; 2"#
@@ -321,10 +627,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" &gt; 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.gte" class="method"><h4 class="code-header">fn <a href="#method.gte" class="fn">gte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a greater than or equal (<code>&gt;=</code>) expression.</p>
-<h5 id="examples-11"><a class="doc-anchor" href="#examples-11">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.gte" class="method"><h4 class="code-header">fn <a href="#method.gte" class="fn">gte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a greater than or equal (<code>&gt;=</code>) expression.</p>
+<h5 id="examples-18"><a class="doc-anchor" href="#examples-18">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -333,6 +638,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().gte(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] &gt;= 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` &gt;= 2"#
@@ -344,9 +653,8 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" &gt;= 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.in_subquery" class="method"><h4 class="code-header">fn <a href="#method.in_subquery" class="fn">in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> sub-query expression.</p>
-<h5 id="examples-12"><a class="doc-anchor" href="#examples-12">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.in_subquery" class="method"><h4 class="code-header">fn <a href="#method.in_subquery" class="fn">in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> sub-query expression.</p>
+<h5 id="examples-19"><a class="doc-anchor" href="#examples-19">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -360,6 +668,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [size_w] IN (SELECT 3 + 2 * 2)"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `size_w` IN (SELECT 3 + 2 * 2)"#
 </span>);
@@ -370,24 +682,20 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "size_w" IN (SELECT 3 + 2 * 2)"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.in_tuples" class="method"><h4 class="code-header">fn <a href="#method.in_tuples" class="fn">in_tuples</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.in_tuples" class="method"><h4 class="code-header">fn <a href="#method.in_tuples" class="fn">in_tuples</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     V: <a class="trait" href="../value/trait.IntoValueTuple.html" title="trait sea_query::value::IntoValueTuple">IntoValueTuple</a>,
-    I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> sub expression.</p>
-<h5 id="examples-13"><a class="doc-anchor" href="#examples-13">§</a>Examples</h5>
+    I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> sub expression.</p>
+<h5 id="examples-20"><a class="doc-anchor" href="#examples-20">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
     .columns([Char::Character, Char::FontId])
     .from(Char::Table)
     .and_where(
-        ExprTrait::in_tuples(
-            Expr::tuple([
-                Expr::col(Char::Character).into(),
-                Expr::col(Char::FontId).into(),
-            ]),
-            [(<span class="number">1</span>, String::from(<span class="string">"1"</span>)), (<span class="number">2</span>, String::from(<span class="string">"2"</span>))]
-        )
+        Expr::tuple([
+            Expr::col(Char::Character).into(),
+            Expr::col(Char::FontId).into(),
+        ]).in_tuples([(<span class="number">1</span>, String::from(<span class="string">"1"</span>)), (<span class="number">2</span>, String::from(<span class="string">"2"</span>))])
     )
     .to_owned();
 
@@ -404,10 +712,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "font_id" FROM "character" WHERE ("character", "font_id") IN ((1, '1'), (2, '2'))"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is" class="method"><h4 class="code-header">fn <a href="#method.is" class="fn">is</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IS</code> expression.</p>
-<h5 id="examples-14"><a class="doc-anchor" href="#examples-14">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is" class="method"><h4 class="code-header">fn <a href="#method.is" class="fn">is</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IS</code> expression.</p>
+<h5 id="examples-21"><a class="doc-anchor" href="#examples-21">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -416,6 +723,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::Ascii).into_column_ref().is(<span class="bool-val">true</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[ascii] IS 1=1"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`ascii` IS TRUE"#
@@ -427,11 +738,10 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."ascii" IS TRUE"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is_in" class="method"><h4 class="code-header">fn <a href="#method.is_in" class="fn">is_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    V: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-    I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> expression.</p>
-<h5 id="examples-15"><a class="doc-anchor" href="#examples-15">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is_in" class="method"><h4 class="code-header">fn <a href="#method.is_in" class="fn">is_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IN</code> expression.</p>
+<h5 id="examples-22"><a class="doc-anchor" href="#examples-22">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -445,6 +755,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [id] FROM [character] WHERE [character].[size_w] IN (1, 2, 3)"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `id` FROM `character` WHERE `character`.`size_w` IN (1, 2, 3)"#
 </span>);
@@ -456,7 +770,22 @@ you will mainly use this to relate identical value between two table columns.</p
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "id" FROM "character" WHERE "character"."size_w" IN (1, 2, 3)"#
 </span>);</code></pre></div>
-<p>Empty value list</p>
+<p>The same query can be constructed using the <code>raw_query!</code> macro.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::Values;
+
+<span class="kw">let </span>ids: Vec&lt;i32&gt; = <span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="kw">let </span>query = <span class="macro">sea_query::raw_query!</span>(
+    SqliteQueryBuilder,
+    <span class="string">r#"SELECT "id" FROM "character" WHERE "character"."size_w" IN ({..ids})"#
+</span>);
+
+<span class="macro">assert_eq!</span>(
+    query.sql,
+    <span class="string">r#"SELECT "id" FROM "character" WHERE "character"."size_w" IN (?, ?, ?)"#
+</span>);
+<span class="macro">assert_eq!</span>(query.values, Values(<span class="macro">vec!</span>[<span class="number">1</span>.into(), <span class="number">2</span>.into(), <span class="number">3</span>.into()]));</code></pre></div>
+<p>Empty value list is converted to an always false expression due to SQL syntax.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
@@ -471,6 +800,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [id] FROM [character] WHERE 1 = 2"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `id` FROM `character` WHERE 1 = 2"#
 </span>);
@@ -481,10 +814,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "id" FROM "character" WHERE 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is_not" class="method"><h4 class="code-header">fn <a href="#method.is_not" class="fn">is_not</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IS NOT</code> expression.</p>
-<h5 id="examples-16"><a class="doc-anchor" href="#examples-16">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is_not" class="method"><h4 class="code-header">fn <a href="#method.is_not" class="fn">is_not</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>IS NOT</code> expression.</p>
+<h5 id="examples-23"><a class="doc-anchor" href="#examples-23">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -493,6 +825,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::Ascii).into_column_ref().is_not(<span class="bool-val">true</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[ascii] IS NOT 1=1"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`ascii` IS NOT TRUE"#
@@ -504,11 +840,10 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."ascii" IS NOT TRUE"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is_not_in" class="method"><h4 class="code-header">fn <a href="#method.is_not_in" class="fn">is_not_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    V: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-    I: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>NOT IN</code> expression.</p>
-<h5 id="examples-17"><a class="doc-anchor" href="#examples-17">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is_not_in" class="method"><h4 class="code-header">fn <a href="#method.is_not_in" class="fn">is_not_in</a>&lt;V, I&gt;(self, v: I) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    V: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    I: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = V&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>NOT IN</code> expression.</p>
+<h5 id="examples-24"><a class="doc-anchor" href="#examples-24">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -521,6 +856,10 @@ you will mainly use this to relate identical value between two table columns.</p
     )
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [id] FROM [character] WHERE [character].[size_w] NOT IN (1, 2, 3)"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `id` FROM `character` WHERE `character`.`size_w` NOT IN (1, 2, 3)"#
@@ -548,6 +887,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [id] FROM [character] WHERE 1 = 1"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `id` FROM `character` WHERE 1 = 1"#
 </span>);
@@ -558,9 +901,8 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "id" FROM "character" WHERE 1 = 1"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is_not_null" class="method"><h4 class="code-header">fn <a href="#method.is_not_null" class="fn">is_not_null</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Express a <code>IS NOT NULL</code> expression.</p>
-<h5 id="examples-18"><a class="doc-anchor" href="#examples-18">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is_not_null" class="method"><h4 class="code-header">fn <a href="#method.is_not_null" class="fn">is_not_null</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>IS NOT NULL</code> expression.</p>
+<h5 id="examples-25"><a class="doc-anchor" href="#examples-25">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -569,6 +911,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().is_not_null())
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] IS NOT NULL"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` IS NOT NULL"#
@@ -580,9 +926,8 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" IS NOT NULL"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.is_null" class="method"><h4 class="code-header">fn <a href="#method.is_null" class="fn">is_null</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Express a <code>IS NULL</code> expression.</p>
-<h5 id="examples-19"><a class="doc-anchor" href="#examples-19">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.is_null" class="method"><h4 class="code-header">fn <a href="#method.is_null" class="fn">is_null</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>IS NULL</code> expression.</p>
+<h5 id="examples-26"><a class="doc-anchor" href="#examples-26">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -591,6 +936,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().is_null())
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] IS NULL"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` IS NULL"#
@@ -602,10 +951,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" IS NULL"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.left_shift" class="method"><h4 class="code-header">fn <a href="#method.left_shift" class="fn">left_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise left shift.</p>
-<h5 id="examples-20"><a class="doc-anchor" href="#examples-20">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.left_shift" class="method"><h4 class="code-header">fn <a href="#method.left_shift" class="fn">left_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise left shift.</p>
+<h5 id="examples-27"><a class="doc-anchor" href="#examples-27">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -614,6 +962,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where(<span class="number">1</span>.left_shift(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 &lt;&lt; 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 &lt;&lt; 1 = 2"#
@@ -625,10 +977,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 &lt;&lt; 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.like" class="method"><h4 class="code-header">fn <a href="#method.like" class="fn">like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.like" class="method"><h4 class="code-header">fn <a href="#method.like" class="fn">like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     L: <a class="trait" href="../types/trait.IntoLikeExpr.html" title="trait sea_query::types::IntoLikeExpr">IntoLikeExpr</a>,</div></h4></section></summary><div class="docblock"><p>Express a <code>LIKE</code> expression.</p>
-<h5 id="examples-21"><a class="doc-anchor" href="#examples-21">§</a>Examples</h5>
+<h5 id="examples-28"><a class="doc-anchor" href="#examples-28">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -637,6 +988,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::Character).into_column_ref().like(<span class="string">"Ours'%"</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[character] LIKE 'Ours''%'"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`character` LIKE 'Ours\'%'"#
@@ -660,6 +1015,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[character] LIKE '|_Our|_' ESCAPE '|'"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`character` LIKE '|_Our|_' ESCAPE '|'"#
 </span>);
@@ -670,10 +1029,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."character" LIKE '|_Our|_' ESCAPE '|'"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.lt" class="method"><h4 class="code-header">fn <a href="#method.lt" class="fn">lt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a less than (<code>&lt;</code>) expression.</p>
-<h5 id="examples-22"><a class="doc-anchor" href="#examples-22">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.lt" class="method"><h4 class="code-header">fn <a href="#method.lt" class="fn">lt</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a less than (<code>&lt;</code>) expression.</p>
+<h5 id="examples-29"><a class="doc-anchor" href="#examples-29">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -682,6 +1040,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().lt(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] &lt; 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` &lt; 2"#
@@ -693,10 +1055,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" &lt; 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.lte" class="method"><h4 class="code-header">fn <a href="#method.lte" class="fn">lte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a less than or equal (<code>&lt;=</code>) expression.</p>
-<h5 id="examples-23"><a class="doc-anchor" href="#examples-23">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.lte" class="method"><h4 class="code-header">fn <a href="#method.lte" class="fn">lte</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a less than or equal (<code>&lt;=</code>) expression.</p>
+<h5 id="examples-30"><a class="doc-anchor" href="#examples-30">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -705,6 +1066,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().lte(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] &lt;= 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` &lt;= 2"#
@@ -716,10 +1081,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" &lt;= 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.modulo" class="method"><h4 class="code-header">fn <a href="#method.modulo" class="fn">modulo</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic modulo operation.</p>
-<h5 id="examples-24"><a class="doc-anchor" href="#examples-24">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.modulo" class="method"><h4 class="code-header">fn <a href="#method.modulo" class="fn">modulo</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic modulo operation.</p>
+<h5 id="examples-31"><a class="doc-anchor" href="#examples-31">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -728,6 +1092,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where(<span class="number">1</span>.modulo(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 % 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 % 1 = 2"#
@@ -739,10 +1107,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 % 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.mul" class="method"><h4 class="code-header">fn <a href="#method.mul" class="fn">mul</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic multiplication operation.</p>
-<h5 id="examples-25"><a class="doc-anchor" href="#examples-25">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.mul" class="method"><h4 class="code-header">fn <a href="#method.mul" class="fn">mul</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic multiplication operation.</p>
+<h5 id="examples-32"><a class="doc-anchor" href="#examples-32">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -751,6 +1118,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where(<span class="number">1</span>.mul(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 * 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 * 1 = 2"#
@@ -762,10 +1133,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 * 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.ne" class="method"><h4 class="code-header">fn <a href="#method.ne" class="fn">ne</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a not equal (<code>&lt;&gt;</code>) expression.</p>
-<h5 id="examples-26"><a class="doc-anchor" href="#examples-26">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.ne" class="method"><h4 class="code-header">fn <a href="#method.ne" class="fn">ne</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a not equal (<code>&lt;&gt;</code>) expression.</p>
+<h5 id="examples-33"><a class="doc-anchor" href="#examples-33">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -777,6 +1147,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 'Morning' &lt;&gt; 'Good' AND [id] &lt;&gt; 1"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 'Morning' &lt;&gt; 'Good' AND `id` &lt;&gt; 1"#
 </span>);
@@ -787,17 +1161,20 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 'Morning' &lt;&gt; 'Good' AND "id" &lt;&gt; 1"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.not" class="method"><h4 class="code-header">fn <a href="#method.not" class="fn">not</a>(self) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Negates an expression with <code>NOT</code>.</p>
-<h5 id="examples-27"><a class="doc-anchor" href="#examples-27">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.not" class="method"><h4 class="code-header">fn <a href="#method.not" class="fn">not</a>(self) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Negates an expression with <code>NOT</code>.</p>
+<h5 id="examples-34"><a class="doc-anchor" href="#examples-34">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
     .columns([Char::Character, Char::SizeW, Char::SizeH])
     .from(Char::Table)
-    .and_where(ExprTrait::not(Expr::col((Char::Table, Char::SizeW)).is_null()))
+    .and_where(Expr::col((Char::Table, Char::SizeW)).is_null().not())
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE NOT [character].[size_w] IS NULL"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE NOT `character`.`size_w` IS NULL"#
@@ -809,11 +1186,10 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE NOT "character"."size_w" IS NULL"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.not_between" class="method"><h4 class="code-header">fn <a href="#method.not_between" class="fn">not_between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    A: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,
-    B: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>NOT BETWEEN</code> expression.</p>
-<h5 id="examples-28"><a class="doc-anchor" href="#examples-28">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.not_between" class="method"><h4 class="code-header">fn <a href="#method.not_between" class="fn">not_between</a>&lt;A, B&gt;(self, a: A, b: B) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    A: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,
+    B: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a <code>NOT BETWEEN</code> expression.</p>
+<h5 id="examples-35"><a class="doc-anchor" href="#examples-35">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -822,6 +1198,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::SizeW).into_column_ref().not_between(<span class="number">1</span>, <span class="number">10</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[size_w] NOT BETWEEN 1 AND 10"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`size_w` NOT BETWEEN 1 AND 10"#
@@ -833,11 +1213,10 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."size_w" NOT BETWEEN 1 AND 10"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.not_equals" class="method"><h4 class="code-header">fn <a href="#method.not_equals" class="fn">not_equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.not_equals" class="method"><h4 class="code-header">fn <a href="#method.not_equals" class="fn">not_equals</a>&lt;C&gt;(self, col: C) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     C: <a class="trait" href="../types/trait.IntoColumnRef.html" title="trait sea_query::types::IntoColumnRef">IntoColumnRef</a>,</div></h4></section></summary><div class="docblock"><p>Express a not equal expression between two table columns,
 you will mainly use this to relate identical value between two table columns.</p>
-<h5 id="examples-29"><a class="doc-anchor" href="#examples-29">§</a>Examples</h5>
+<h5 id="examples-36"><a class="doc-anchor" href="#examples-36">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -846,6 +1225,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::FontId).into_column_ref().not_equals((Font::Table, Font::Id)))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[font_id] &lt;&gt; [font].[id]"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`font_id` &lt;&gt; `font`.`id`"#
@@ -857,9 +1240,8 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."font_id" &lt;&gt; "font"."id""#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.not_in_subquery" class="method"><h4 class="code-header">fn <a href="#method.not_in_subquery" class="fn">not_in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a></h4></section></summary><div class="docblock"><p>Express a <code>NOT IN</code> sub-query expression.</p>
-<h5 id="examples-30"><a class="doc-anchor" href="#examples-30">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.not_in_subquery" class="method"><h4 class="code-header">fn <a href="#method.not_in_subquery" class="fn">not_in_subquery</a>(self, sel: <a class="struct" href="../query/struct.SelectStatement.html" title="struct sea_query::query::SelectStatement">SelectStatement</a>) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a></h4></section></summary><div class="docblock"><p>Express a <code>NOT IN</code> sub-query expression.</p>
+<h5 id="examples-37"><a class="doc-anchor" href="#examples-37">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -873,6 +1255,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .to_owned();
 
 <span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [size_w] NOT IN (SELECT 3 + 2 * 2)"#
+</span>);
+<span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `size_w` NOT IN (SELECT 3 + 2 * 2)"#
 </span>);
@@ -883,10 +1269,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "size_w" NOT IN (SELECT 3 + 2 * 2)"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.not_like" class="method"><h4 class="code-header">fn <a href="#method.not_like" class="fn">not_like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.not_like" class="method"><h4 class="code-header">fn <a href="#method.not_like" class="fn">not_like</a>&lt;L&gt;(self, like: L) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
     L: <a class="trait" href="../types/trait.IntoLikeExpr.html" title="trait sea_query::types::IntoLikeExpr">IntoLikeExpr</a>,</div></h4></section></summary><div class="docblock"><p>Express a <code>NOT LIKE</code> expression.</p>
-<h5 id="examples-31"><a class="doc-anchor" href="#examples-31">§</a>Examples</h5>
+<h5 id="examples-38"><a class="doc-anchor" href="#examples-38">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{<span class="kw-2">*</span>, tests_cfg::<span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -895,6 +1280,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where((Char::Table, Char::Character).into_column_ref().not_like(<span class="string">"Ours'%"</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE [character].[character] NOT LIKE 'Ours''%'"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE `character`.`character` NOT LIKE 'Ours\'%'"#
@@ -906,10 +1295,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE "character"."character" NOT LIKE 'Ours''%'"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.or" class="method"><h4 class="code-header">fn <a href="#method.or" class="fn">or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a logical <code>OR</code> operation.</p>
-<h5 id="examples-32"><a class="doc-anchor" href="#examples-32">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.or" class="method"><h4 class="code-header">fn <a href="#method.or" class="fn">or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a logical <code>OR</code> operation.</p>
+<h5 id="examples-39"><a class="doc-anchor" href="#examples-39">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -929,10 +1317,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE FALSE OR TRUE"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.right_shift" class="method"><h4 class="code-header">fn <a href="#method.right_shift" class="fn">right_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise right shift.</p>
-<h5 id="examples-33"><a class="doc-anchor" href="#examples-33">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.right_shift" class="method"><h4 class="code-header">fn <a href="#method.right_shift" class="fn">right_shift</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise right shift.</p>
+<h5 id="examples-40"><a class="doc-anchor" href="#examples-40">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -941,6 +1328,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where(<span class="number">1</span>.right_shift(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 &gt;&gt; 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 &gt;&gt; 1 = 2"#
@@ -952,10 +1343,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 &gt;&gt; 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.sub" class="method"><h4 class="code-header">fn <a href="#method.sub" class="fn">sub</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic subtraction operation.</p>
-<h5 id="examples-34"><a class="doc-anchor" href="#examples-34">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.sub" class="method"><h4 class="code-header">fn <a href="#method.sub" class="fn">sub</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express an arithmetic subtraction operation.</p>
+<h5 id="examples-41"><a class="doc-anchor" href="#examples-41">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -964,6 +1354,10 @@ you will mainly use this to relate identical value between two table columns.</p
     .and_where(<span class="number">1</span>.sub(<span class="number">1</span>).eq(<span class="number">2</span>))
     .to_owned();
 
+<span class="macro">assert_eq!</span>(
+    query.to_string(MsSqlQueryBuilder),
+    <span class="string">r#"SELECT [character], [size_w], [size_h] FROM [character] WHERE 1 - 1 = 2"#
+</span>);
 <span class="macro">assert_eq!</span>(
     query.to_string(MysqlQueryBuilder),
     <span class="string">r#"SELECT `character`, `size_w`, `size_h` FROM `character` WHERE 1 - 1 = 2"#
@@ -975,10 +1369,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE 1 - 1 = 2"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.bit_and" class="method"><h4 class="code-header">fn <a href="#method.bit_and" class="fn">bit_and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise AND operation.</p>
-<h5 id="examples-35"><a class="doc-anchor" href="#examples-35">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.bit_and" class="method"><h4 class="code-header">fn <a href="#method.bit_and" class="fn">bit_and</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise AND operation.</p>
+<h5 id="examples-42"><a class="doc-anchor" href="#examples-42">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select().expr(<span class="number">1</span>.bit_and(<span class="number">2</span>).eq(<span class="number">3</span>)).to_owned();
@@ -1005,10 +1398,9 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE (1 &amp; 1) = 1"#
-</span>);</code></pre></div>
-</div></details><details class="toggle method-toggle" open><summary><section id="method.bit_or" class="method"><h4 class="code-header">fn <a href="#method.bit_or" class="fn">bit_or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a><div class="where">where
-    R: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise OR operation.</p>
-<h5 id="examples-36"><a class="doc-anchor" href="#examples-36">§</a>Examples</h5>
+</span>);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.bit_or" class="method"><h4 class="code-header">fn <a href="#method.bit_or" class="fn">bit_or</a>&lt;R&gt;(self, right: R) -&gt; <a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a><div class="where">where
+    R: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Express a bitwise OR operation.</p>
+<h5 id="examples-43"><a class="doc-anchor" href="#examples-43">§</a>Examples</h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>sea_query::{tests_cfg::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
 <span class="kw">let </span>query = Query::select()
@@ -1028,8 +1420,7 @@ you will mainly use this to relate identical value between two table columns.</p
 <span class="macro">assert_eq!</span>(
     query.to_string(SqliteQueryBuilder),
     <span class="string">r#"SELECT "character", "size_w", "size_h" FROM "character" WHERE (1 | 1) = 1"#
-</span>);</code></pre></div>
-</div></details></div><h2 id="object-safety" class="section-header">Object Safety<a href="#object-safety" class="anchor">§</a></h2><div class="object-safety-info">This trait is <b>not</b> <a href="https://doc.rust-lang.org/1.83.0/reference/items/traits.html#object-safety">object safe</a>.</div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><section id="impl-ExprTrait-for-T" class="impl"><a href="#impl-ExprTrait-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="trait.ExprTrait.html" title="trait sea_query::expr::ExprTrait">ExprTrait</a> for T<div class="where">where
-    T: <a class="trait" href="https://doc.rust-lang.org/1.83.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>&gt;,</div></h3></section><div class="docblock"><p>This generic implementation covers all expression types,
-including <a href="../types/enum.ColumnRef.html" title="enum sea_query::types::ColumnRef">ColumnRef</a>, <a href="../value/enum.Value.html" title="enum sea_query::value::Value">Value</a>, <a href="../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a>, <a href="enum.SimpleExpr.html" title="enum sea_query::expr::SimpleExpr">SimpleExpr</a>…</p>
-</div></div><script src="../../trait.impl/sea_query/expr/trait.ExprTrait.js" async></script></section></div></main></body></html>
+</span>);</code></pre></div></div></details></div><h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility" class="anchor">§</a></h2><div class="dyn-compatibility-info"><p>This trait is <b>not</b> <a href="https://doc.rust-lang.org/1.92.0/reference/items/traits.html#dyn-compatibility">dyn compatible</a>.</p><p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not object safe.</i></p></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><section id="impl-ExprTrait-for-T" class="impl"><a href="#impl-ExprTrait-for-T" class="anchor">§</a><h3 class="code-header">impl&lt;T&gt; <a class="trait" href="trait.ExprTrait.html" title="trait sea_query::expr::ExprTrait">ExprTrait</a> for T<div class="where">where
+    T: <a class="trait" href="https://doc.rust-lang.org/1.92.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>&gt;,</div></h3><div class="docblock"><p>This generic implementation covers all expression types,
+including <a href="../types/enum.ColumnRef.html" title="enum sea_query::types::ColumnRef">ColumnRef</a>, <a href="../value/enum.Value.html" title="enum sea_query::value::Value">Value</a>, <a href="../func/struct.FunctionCall.html" title="struct sea_query::func::FunctionCall">FunctionCall</a>, <a href="enum.Expr.html" title="enum sea_query::expr::Expr">Expr</a>…</p>
+</div></section></div><script src="../../trait.impl/sea_query/expr/trait/trait.ExprTrait.js" async></script></section></div></main></body></html>
