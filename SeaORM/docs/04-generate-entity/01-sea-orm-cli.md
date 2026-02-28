@@ -55,7 +55,7 @@ Command line options:
 - `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
 - `--ignore-tables`: skip generating entity file for specified tables (default: `seaql_migrations`)
 - `--compact-format`: generate entity file of [compact format](04-generate-entity/02-entity-format.md) (default: true)
-- `--expanded-format`: generate entity file of [expanded format](12-internal-design/05-expanded-entity-format.md)
+- `--expanded-format`: generate entity file of [expanded format](13-internal-design/05-expanded-entity-format.md)
 - `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
     - `--serde-skip-deserializing-primary-key`: generate entity model with primary key field labeled as `#[serde(skip_deserializing)]`
     - `--serde-skip-hidden-column`: generate entity model with hidden column (column name starts with `_`) field labeled as `#[serde(skip)]`
