@@ -144,6 +144,8 @@
 
     12.1 [Arrow & Parquet](12-data-science/01-arrow-parquet.md)
 
+    12.2 [ClickHouse](12-data-science/02-clickhouse.md)
+
 13. Internal Design
 
     13.1 [Traits and Types](13-internal-design/01-trait-and-type.md)
