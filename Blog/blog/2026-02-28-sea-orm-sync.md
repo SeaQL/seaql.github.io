@@ -137,7 +137,7 @@ pub fn resume(db: &DatabaseConnection, digits: u32) -> Result<Self, DbErr> {
         .sync(db)?;
 
     match state::Entity::find_by_id(digits).one(db)? {
-        Some(s) => Ok(Self::from_state(s)),
+        Some(state) => Ok(Self::from_state(state)),
         None => Ok(Self::new(digits)),
     }
 }
