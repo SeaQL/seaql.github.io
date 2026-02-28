@@ -5,29 +5,29 @@ import { MdCloud, MdCheckCircle, MdFlashOn, MdFlight } from "react-icons/md";
 
 const FeatureList = [
   {
-    title: 'Async',
+    title: 'Native MSSQL Driver',
     icon: <MdFlashOn size={26} />,
     description: (
       <>
-        Relying on SQLx and tiberius, SeaORM X is a new library with async support from day 1.
+        Powered by SQLz with connection pooling, nested transactions via savepoints, and automatic schema rewriting.
       </>
     ),
   },
   {
-    title: 'Dynamic',
-    icon: <MdFlight size={26} />,
+    title: 'Built on SeaORM 2.0',
+    icon: <MdFlashOn size={26} />,
     description: (
       <>
-        Built upon SeaQuery X, SeaORM X allows you to build complex dynamic queries.
+        Every 2.0 feature ships to MSSQL: Entity Loader, Nested ActiveModel, strongly-typed COLUMN, and <code>raw_sql!</code> macro.
       </>
     ),
   },
   {
-    title: 'Testable',
+    title: 'Schema First or Entity First',
     icon: <MdCheckCircle size={26} />,
     description: (
       <>
-        Use mock connections and/or SQLite to write tests for your application logic.
+        Generate entities from existing MSSQL schemas with <code>sea-orm-cli</code>, or define entities in Rust and sync to the database.
       </>
     ),
   },
@@ -36,7 +36,7 @@ const FeatureList = [
     icon: <MdCloud size={26} />,
     description: (
       <>
-        Quickly build services that join, filter, sort and paginate data in REST, GraphQL and gRPC APIs.
+        Build services that join, filter, sort and paginate data in REST, GraphQL and gRPC APIs. Works with Actix, Axum, Loco, Poem, and more.
       </>
     ),
   },

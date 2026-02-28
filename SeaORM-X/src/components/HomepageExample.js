@@ -90,187 +90,55 @@ assert_eq!(
   },
   {
     title: 'Schema Discovery',
-    code: `let options: MsSqlConnectOptions = "mssql://sa:YourStrong()Passw0rd@localhost/AdventureWorksLT2016".parse()?;
+    code: `let options: MsSqlConnectOptions =
+    "mssql://sa:password@localhost/AdventureWorksLT2016".parse()?;
 let connection = MsSqlPool::connect_with(options).await?;
-// Set the target schema: "SalesLT" or None (defaults to "dbo")
 let schema_discovery = SchemaDiscovery::new(connection, Some("SalesLT"));
 
-assert_eq!(
-    schema_discovery.discover().await?,
-    Schema {
-        database: "AdventureWorksLT2016",
-        schema: "SalesLT",
-        version: Version {
-            name: "Microsoft SQL Server 2017",
-            service_pack: "RTM-CU31-GDR",
-            version: "14.0.3465.1",
-            edition: "Developer Edition",
-        },
-        tables: vec![
-            TableDef {
-                name: "Address",
-                columns: vec![
-                    ColumnInfo {
-                        name: "AddressID",
-                        col_type: Int,
-                        null: false,
-                        is_identity: true,
-                        collation: None,
-                        default: None,
-                        comment: Some("Primary key for Address records."),
-                    },
-                    ColumnInfo {
-                        name: "AddressLine1",
-                        col_type: Nvarchar(N(60)),
-                        null: false,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: Some("First street address line."),
-                    },
-                    ColumnInfo {
-                        name: "AddressLine2",
-                        col_type: Nvarchar(N(60)),
-                        null: true,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: Some("Second street address line."),
-                    },
-                    ColumnInfo {
-                        name: "City",
-                        col_type: Nvarchar(N(30)),
-                        null: false,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: Some("Name of the city."),
-                    },
-                    ColumnInfo {
-                        name: "StateProvince",
-                        col_type: Nvarchar(N(50)),
-                        null: false,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: Some("Name of state or province."),
-                    },
-                    ColumnInfo {
-                        name: "CountryRegion",
-                        col_type: Nvarchar(N(50)),
-                        null: false,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: None,
-                    },
-                    ColumnInfo {
-                        name: "PostalCode",
-                        col_type: Nvarchar(N(15)),
-                        null: false,
-                        is_identity: false,
-                        collation: Some(Collation("SQL_Latin1_General_CP1_CI_AS")),
-                        default: None,
-                        comment: Some("Postal code for the street address."),
-                    },
-                    ColumnInfo {
-                        name: "rowguid",
-                        col_type: UniqueIdentifier,
-                        null: false,
-                        is_identity: false,
-                        collation: None,
-                        default: Some(NewId),
-                        comment: Some("ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."),
-                    },
-                    ColumnInfo {
-                        name: "ModifiedDate",
-                        col_type: DateTime,
-                        null: false,
-                        is_identity: false,
-                        collation: None,
-                        default: Some(GetDate),
-                        comment: Some("Date and time the record was last updated."),
-                    },
-                ],
-                indexes: vec![
-                    IndexInfo {
-                        is_primary_key: false,
-                        is_unique: true,
-                        name: "AK_Address_rowguid",
-                        index_type: NonClustered,
-                        parts: vec![
-                            IndexPart { column: "rowguid", order: Ascending },
-                        ],
-                    },
-                    IndexInfo {
-                        is_primary_key: false,
-                        is_unique: false,
-                        name: "IX_Address_AddressLine1_AddressLine2_City_StateProvince_PostalCode_CountryRegion",
-                        index_type: NonClustered,
-                        parts: vec![
-                            IndexPart { column: "AddressLine1", order: Ascending },
-                            IndexPart { column: "AddressLine2", order: Ascending },
-                            IndexPart { column: "City", order: Ascending },
-                            IndexPart { column: "StateProvince", order: Ascending },
-                            IndexPart { column: "PostalCode", order: Ascending },
-                            IndexPart { column: "CountryRegion", order: Ascending },
-                        ],
-                    },
-                    IndexInfo {
-                        is_primary_key: false,
-                        is_unique: false,
-                        name: "IX_Address_StateProvince",
-                        index_type: NonClustered,
-                        parts: vec![
-                            IndexPart { column: "StateProvince", order: Ascending },
-                        ],
-                    },
-                    IndexInfo {
-                        is_primary_key: true,
-                        is_unique: true,
-                        name: "PK_Address_AddressID",
-                        index_type: Clustered,
-                        parts: vec![
-                            IndexPart { column: "AddressID", order: Ascending },
-                        ],
-                    },
-                ],
-                foreign_keys: vec![],
-                comment: Some("Street address information for customers."),
-            },
-            // ...
-        ],
-    }
-);`
+let schema = schema_discovery.discover().await?;
+// Schema {
+//     database: "AdventureWorksLT2016",
+//     schema: "SalesLT",
+//     version: Version { name: "Microsoft SQL Server 2017", .. },
+//     tables: [
+//         TableDef {
+//             name: "Address",
+//             columns: [
+//                 ColumnInfo { name: "AddressID", col_type: Int,
+//                              is_identity: true, .. },
+//                 ColumnInfo { name: "AddressLine1", col_type: Nvarchar(N(60)),
+//                              collation: Some("SQL_Latin1_General_CP1_CI_AS"), .. },
+//                 ColumnInfo { name: "City", col_type: Nvarchar(N(30)), .. },
+//                 ColumnInfo { name: "rowguid", col_type: UniqueIdentifier,
+//                              default: Some(NewId), .. },
+//                 ColumnInfo { name: "ModifiedDate", col_type: DateTime,
+//                              default: Some(GetDate), .. },
+//                 // ...
+//             ],
+//             indexes: [
+//                 IndexInfo { name: "PK_Address_AddressID",
+//                             is_primary_key: true, index_type: Clustered, .. },
+//                 IndexInfo { name: "AK_Address_rowguid",
+//                             is_unique: true, index_type: NonClustered, .. },
+//                 // ...
+//             ],
+//         },
+//         // ... more tables
+//     ],
+// }
+
+// Then generate entities from the discovered schema:
+// sea-orm-cli generate entity \\
+//   --database-url "mssql://sa:password@localhost/AdventureWorksLT2016" \\
+//   --database-schema "SalesLT" --entity-format dense`
   },
   {
-    title: 'Entity Generation',
-    lang: 'shell',
-    code: `# Generate entity file from database schema
-$ sea-orm-cli generate entity --database-url "mssql://sa:YourStrong()Passw0rd@localhost/AdventureWorksLT2016" --database-schema "SalesLT"
+    title: 'Entity Format',
+    code: `// Generated with: sea-orm-cli generate entity --entity-format dense
+// Entities include inline relations and strongly-typed COLUMN constants
 
-Connecting to MSSQL ...
-Discovering schema ...
-... discovered.
-Generating address.rs
-    > Column \`AddressID\`: i32, auto_increment, not_null
-    > Column \`AddressLine1\`: String, not_null
-    > Column \`AddressLine2\`: Option<String>
-    > Column \`City\`: String, not_null
-    > Column \`StateProvince\`: String, not_null
-    > Column \`CountryRegion\`: String, not_null
-    > Column \`PostalCode\`: String, not_null
-    > Column \`rowguid\`: Uuid, not_null, unique
-    > Column \`ModifiedDate\`: DateTime, not_null
-...
-
-
-# Inside the generated entity file
-$ cat address.rs
-
-use sea_orm::entity::prelude::*;
-
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
+#[sea_orm::model]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(schema_name = "SalesLT", table_name = "Address")]
 pub struct Model {
     #[sea_orm(column_name = "AddressID", primary_key)]
@@ -283,189 +151,135 @@ pub struct Model {
     pub city: String,
     #[sea_orm(column_name = "StateProvince")]
     pub state_province: String,
-    #[sea_orm(column_name = "CountryRegion")]
-    pub country_region: String,
-    #[sea_orm(column_name = "PostalCode")]
-    pub postal_code: String,
     #[sea_orm(unique)]
     pub rowguid: Uuid,
     #[sea_orm(column_name = "ModifiedDate")]
     pub modified_date: DateTime,
+    #[sea_orm(has_many)]
+    pub orders: HasMany<super::order::Entity>,
 }
 
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
-
-impl ActiveModelBehavior for ActiveModel {}`
+// Strongly-typed column access with compile-time checks
+address::COLUMN.city.contains("Seattle")       // StringColumn
+address::COLUMN.address_id.between(1, 100)     // NumericColumn
+address::COLUMN.modified_date.gt(some_date)    // DateTimeLikeColumn`
   },
   {
     title: 'CRUD Operations',
-    code: `// Insert
+    code: `// Insert one
 let apple = fruit::ActiveModel {
     name: Set("Apple".to_owned()),
-    ..Default::default() // no need to set primary key
-};
-
-let pear = fruit::ActiveModel {
-    name: Set("Pear".to_owned()),
     ..Default::default()
 };
+let apple: fruit::Model = apple.insert(db).await?;
 
-// Insert one
-let pear = pear.insert(db).await?;
+// Insert many with OUTPUT INSERTED (MSSQL-native RETURNING)
+let models: Vec<fruit::Model> = Fruit::insert_many([apple, pear])
+    .exec_with_returning(db).await?;
 
-// Insert many
-Fruit::insert_many([apple, pear]).exec(db).await?;
-
-
-
-// Find all models
-let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
-
-// Find and filter
+// Find with strongly-typed COLUMN (2.0)
 let chocolate: Vec<cake::Model> = Cake::find()
-    .filter(cake::Column::Name.contains("chocolate"))
-    .all(db)
-    .await?;
-
-// Find one model
-let cheese: Option<cake::Model> = Cake::find_by_id(1).one(db).await?;
-let cheese: cake::Model = cheese.unwrap();
-
-// Find related models (lazy)
-let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
+    .filter(cake::COLUMN.name.contains("chocolate"))
+    .all(db).await?;
 
 // Find related models (eager)
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> =
     Cake::find().find_with_related(Fruit).all(db).await?;
 
-
-
-// Update
+// Update: only changed columns are sent
 let pear: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
 let mut pear: fruit::ActiveModel = pear.unwrap().into();
-
 pear.name = Set("Sweet pear".to_owned());
-
-// Update one
 let pear: fruit::Model = pear.update(db).await?;
 
-// Update many
+// Bulk update with COLUMN
 Fruit::update_many()
-    .col_expr(fruit::Column::CakeId, Expr::value(Value::Int(None)))
-    .filter(fruit::Column::Name.contains("Apple"))
-    .exec(db)
-    .await?;
+    .col_expr(fruit::COLUMN.cake_id, fruit::COLUMN.cake_id.add(2))
+    .filter(fruit::COLUMN.name.contains("Apple"))
+    .exec(db).await?;
 
-
-
-// Save
-let banana = fruit::ActiveModel {
-    id: NotSet,
-    name: Set("Banana".to_owned()),
-    ..Default::default()
+// Save: insert or update based on primary key state
+let mut banana = fruit::ActiveModel {
+    id: NotSet, name: Set("Banana".to_owned()), ..Default::default()
 };
+let banana = banana.save(db).await?; // INSERT (id is NotSet)
 
-// Create, because primary key \`id\` is \`NotSet\`
-let mut banana = banana.save(db).await?;
-
-banana.name = Set("Banana Mongo".to_owned());
-
-// Update, because primary key \`id\` is \`Set\`
-let banana = banana.save(db).await?;
-
-
-
-// Delete one
-let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let orange: fruit::Model = orange.unwrap();
-fruit::Entity::delete(orange.into_active_model())
-    .exec(db)
-    .await?;
-
-// Or simply
-let orange: Option<fruit::Model> = Fruit::find_by_id(1).one(db).await?;
-let orange: fruit::Model = orange.unwrap();
-orange.delete(db).await?;
-
-// Delete many: DELETE FROM "fruit" WHERE "fruit"."name" LIKE 'Orange'
+// Delete
 fruit::Entity::delete_many()
-    .filter(fruit::Column::Name.contains("Orange"))
-    .exec(db)
-    .await?;`
+    .filter(fruit::COLUMN.name.contains("Orange"))
+    .exec(db).await?;`
   },
   {
-    title: 'Identity Insert',
-    code: `// Insert an active model with a specific primary key value.
-// For MSSQL, SeaORM X will automatically enable \`IDENTITY INSERT\` when inserting a row with primary key value,
-// and then disable the \`IDENTITY INSERT\` once the insert finished.
-
-let pear = fruit::ActiveModel {
-    id: Set(1),
-    name: Set("Pear".to_owned()),
-    cake_id: NotSet,
+    title: 'MSSQL Features',
+    code: `// Automatic IDENTITY_INSERT when setting an explicit PK
+let bakery = bakery::ActiveModel {
+    id: Set(1), // triggers SET IDENTITY_INSERT ON/OFF automatically
+    name: Set("SeaSide Bakery".to_owned()),
+    ..Default::default()
 };
+Bakery::insert(bakery).exec(db).await?;
 
-// \`IDENTITY INSERT\` behind the hood
-let pear: fruit::Model = pear.insert(db).await?;`
+// Schema rewriting: all queries are prefixed with the configured schema
+let db = Database::connect(
+    "mssql://user:pass@localhost/my_db?currentSchema=my_schema"
+).await?;
+
+// EXISTS subquery across M-N relations
+let related = cake::Entity::find()
+    .has_related(filling::Entity, filling::COLUMN.name.eq("Marmalade"))
+    .all(db).await?;
+// SELECT [cake].* FROM [my_schema].[cake]
+// WHERE EXISTS(SELECT 1 FROM [my_schema].[filling] ...)
+
+// Tuple IN fallback: automatically expands for MSSQL
+cake::Entity::find()
+    .filter(cake::Entity::column_tuple_in(
+        [cake::Column::Id, cake::Column::Name],
+        &[(1i32, "a").into_value_tuple(), (2i32, "b").into_value_tuple()],
+        DbBackend::MsSql,
+    ).unwrap())
+    .all(db).await?;
+// WHERE ([id] = 1 AND [name] = 'a') OR ([id] = 2 AND [name] = 'b')`
   },
   {
     title: 'Nested Transaction',
-    code: `assert_eq!(Bakery::find().all(txn).await?.len(), 0);
+    code: `// Nested transactions map to MSSQL savepoints automatically:
+//   BEGIN TRAN
+//     SAVE TRAN _sqlz_savepoint_1
+//       SAVE TRAN _sqlz_savepoint_2
+//       ROLLBACK TRAN _sqlz_savepoint_2  (drop without commit)
+//     -- savepoint 1 released on commit
+//   COMMIT TRAN
 
-ctx.db.transaction::<_, _, DbErr>(|txn| {
-    Box::pin(async move {
-        let _ = bakery::ActiveModel {..}.save(txn).await?;
-        let _ = bakery::ActiveModel {..}.save(txn).await?;
-        assert_eq!(Bakery::find().all(txn).await?.len(), 2);
+let txn = db.begin().await?;
 
-        // Try nested transaction committed
-        txn.transaction::<_, _, DbErr>(|txn| {
-            Box::pin(async move {
-                let _ = bakery::ActiveModel {..}.save(txn).await?;
-                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+{
+    let txn = txn.begin().await?;  // SAVE TRAN _sqlz_savepoint_1
+    bakery::ActiveModel { name: Set("Bakery A".into()), .. }
+        .save(&txn).await?;
 
-                // Try nested-nested transaction rollbacked
-                assert!(txn.transaction::<_, _, DbErr>(|txn| {
-                        Box::pin(async move {
-                            let _ = bakery::ActiveModel {..}.save(txn).await?;
-                            assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+    {
+        let txn = txn.begin().await?;  // SAVE TRAN _sqlz_savepoint_2
+        bakery::ActiveModel { name: Set("Bakery B".into()), .. }
+            .save(&txn).await?;
+        // dropped without commit: rolls back to savepoint
+    }
 
-                            Err(DbErr::Query(RuntimeErr::Internal(
-                                "Force Rollback!".to_owned(),
-                            )))
-                        })
-                    })
-                    .await
-                    .is_err()
-                );
+    // Bakery B is gone, Bakery A remains
+    assert_eq!(Bakery::find().all(&txn).await?.len(), 1);
 
-                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+    {
+        let txn = txn.begin().await?;
+        bakery::ActiveModel { name: Set("Bakery C".into()), .. }
+            .save(&txn).await?;
+        txn.commit().await?;  // savepoint released
+    }
 
-                // Try nested-nested transaction committed
-                txn.transaction::<_, _, DbErr>(|txn| {
-                    Box::pin(async move {
-                        let _ = bakery::ActiveModel {..}.save(txn).await?;
-                        assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+    txn.commit().await?;
+}
 
-                        Ok(())
-                    })
-                })
-                .await;
-
-                assert_eq!(Bakery::find().all(txn).await?.len(), 4);
-
-                Ok(())
-            })
-        })
-        .await;
-
-        Ok(())
-    })
-})
-.await;
-
-assert_eq!(Bakery::find().all(txn).await?.len(), 4);`
+assert_eq!(Bakery::find().all(&txn).await?.len(), 2); // A and C
+txn.commit().await?;  // COMMIT TRAN`
   },
 ];
 
@@ -498,7 +312,7 @@ export default function HomepageCompare() {
         <div className="row">
         <div className={clsx('col col--12')}>
             <div className="padding-horiz--md">
-              <h2 className="text--center">A quick taste of SeaORM X</h2>
+              <h2 className="text--center">SeaORM X in action</h2>
               <Tabs
                 className={clsx('aa')}
                 defaultValue={codeBlocks[0].title}
