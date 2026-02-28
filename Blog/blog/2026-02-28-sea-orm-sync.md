@@ -1,6 +1,6 @@
 ---
 slug: 2026-02-28-sea-orm-sync
-title: "Tutorial: let's make a program resumable with SQLite"
+title: "Tutorial: let's make a resumable Pi Spigot with SQLite"
 author: SeaQL Team
 author_title: Chris Tsang
 author_url: https://github.com/SeaQL
@@ -11,17 +11,13 @@ tags: [news]
 
 <img alt="SeaORM 2.0 Banner" src="/blog/img/SeaORM%202.0%20Banner.png"/>
 
-## The Problem
+## The Problem: Durability
 
-You have a program that runs for a long time. A batch job, a simulation, a data pipeline. It runs for hours, and then it crashes. You have to start it again and it begins from zero.
-
-The fix is checkpointing: periodically saving the program's state so it can resume from where it left off. A SQLite database is a natural choice for this. It's a single file, requires no server, and supports transactions (so your checkpoint is atomic).
-
-In this tutorial we'll wire up checkpointing with SeaORM's sync API and rusqlite. The state is defined as a SeaORM entity, persisted transactionally, and reconstructed on restart. No async runtime, no handwritten SQL.
+Long-running programs crash. When they do, you start over from zero. The fix is checkpointing: periodically save state to a database so the program can resume where it left off. In this tutorial we wire up checkpointing with SeaORM Sync and rusqlite. No async runtime, no handwritten SQL.
 
 ## The Workload: Pi Spigot
 
-We need a computation that takes a long time and produces results incrementally. Here we use the Rabinowitz–Wagon pi spigot algorithm as demonstration.
+We need a computation that takes a long time and produces results incrementally. Here we use the Rabinowitz–Wagon pi spigot algorithm[^1] as demonstration.
 
 The algorithm computes decimal digits of pi one at a time, using only integer arithmetic. Each iteration mutates the internal state, and may or may not produce a digit. So "I completed iteration N, therefore I have N digits" is not true.
 
@@ -188,3 +184,5 @@ Sticker Pack Contents:
 [Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
 
 <a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
+
+[^1]: The spigot algorithm is not the fastest way to compute pi. It can take hours to produce 1 million digits.
