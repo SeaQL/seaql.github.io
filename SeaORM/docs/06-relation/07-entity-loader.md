@@ -1,14 +1,16 @@
 # Entity Loader
 
-The Entity Loader intelligently uses join and data loader different relation types, eliminating the N+1 problem even when performing nested queries.
+The Entity Loader uses join and data loader strategies for different relation types, eliminating the N+1 problem in nested queries.
 
-For 1-1 relations, it does a join and select up to three tables together in a single query.
+For 1-1 relations, it does a join and selects up to three tables together in a single query.
 
-For 1-N or M-N relations, it uses the data loader. Note that, it's a single query even for M-N relation, as the junction table will be joined.
+For 1-N or M-N relations, it uses the data loader. It's a single query even for M-N relations, as the junction table is joined.
 
-For nested queries, it uses the data loader. It consolidates the id of all the models in the 2nd query and issue one query for the 3rd.
+For nested queries, it consolidates the IDs of all models in the 2nd query and issues one query for the 3rd.
 
-This is a new feature in 2.0, and is only available to Entities defined with `#[sea_orm::model]` or `#[sea_orm::compact_model]`.
+:::tip Since `2.0.0`
+Requires `#[sea_orm::model]` or `#[sea_orm::compact_model]`.
+:::
 
 ## Using Entity Loader
 
@@ -48,6 +50,23 @@ super_cake
             }],
         }],
     };
+```
+
+## Pagination
+
+The Entity Loader supports pagination with `paginate`:
+
+```rust
+let mut paginator = user::Entity::load()
+    .with(profile::Entity)
+    .order_by_asc(user::COLUMN.id)
+    .paginate(db, 10);
+
+while let Some(users) = paginator.fetch_and_next().await? {
+    for user in users {
+        // user: user::ModelEx with profile loaded
+    }
+}
 ```
 
 ## Under the hood

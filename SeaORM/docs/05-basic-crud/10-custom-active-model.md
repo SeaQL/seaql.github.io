@@ -68,3 +68,37 @@ assert_eq!(
     fruit::ActiveModel { id: NotSet, name: NotSet, cake_id: NotSet }
 );
 ```
+
+## PartialModel to ActiveModel
+
+:::tip Since `1.1.0`
+:::
+
+`DerivePartialModel` can also derive `IntoActiveModel` with the `into_active_model` attribute. This reuses your partial select struct for writes: absent fields become `NotSet`.
+
+```rust
+#[derive(DerivePartialModel)]
+#[sea_orm(entity = "cake::Entity", into_active_model)]
+struct PartialCake {
+    id: i32,
+    name: String,
+}
+
+let partial_cake = PartialCake {
+    id: 12,
+    name: "Lemon Drizzle".to_owned(),
+};
+
+assert_eq!(
+    cake::ActiveModel {
+        ..partial_cake.into_active_model()
+    },
+    cake::ActiveModel {
+        id: Set(12),
+        name: Set("Lemon Drizzle".to_owned()),
+        ..Default::default()
+    }
+);
+```
+
+This is useful when an API endpoint receives a subset of fields and you want to both query and update with the same struct.

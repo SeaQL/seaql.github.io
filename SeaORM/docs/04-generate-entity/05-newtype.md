@@ -14,6 +14,7 @@ You can create new types wrapping any type supported by SeaORM.
 ```rust
 use sea_orm::entity::prelude::*;
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "custom_value_type")]
 pub struct Model {
@@ -21,6 +22,8 @@ pub struct Model {
     pub id: i32,
     pub number: Integer,
 }
+
+impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
 pub struct Integer(i32);
@@ -79,21 +82,25 @@ impl sea_orm::sea_query::Nullable for Integer {
 :::
 
 ```rust
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "custom_value_type")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: Integer,
 }
+
+impl ActiveModelBehavior for ActiveModel {}
 ```
 
-Only for `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64`.
+Supported for `i8` / `i16` / `i32` / `i64` / `u8` / `u16` / `u32` / `u64` wrapper types.
 
 ## Wrapping `Vec<T>` (Postgres only)
 
 ```rust
 use sea_orm::entity::prelude::*;
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "custom_vec_type")]
 pub struct Model {
@@ -101,6 +108,8 @@ pub struct Model {
     pub id: i32,
     pub str_vec: StringVec,
 }
+
+impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Clone, Debug, PartialEq, Eq, DeriveValueType)]
 pub struct StringVec(pub Vec<String>);
@@ -160,6 +169,7 @@ You can also wrap a `Vec<T>` field by serialize / deserialize the object to / fr
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "json_vec_type")]
 pub struct Model {
@@ -167,6 +177,8 @@ pub struct Model {
     pub id: i32,
     pub json_vec: ObjectVec,
 }
+
+impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, FromJsonQueryResult)]
 pub struct ObjectVec(pub Vec<MyObject>);
@@ -229,6 +241,7 @@ use sea_orm::FromJsonQueryResult;
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "json_struct")]
 pub struct Model {
@@ -237,6 +250,8 @@ pub struct Model {
     pub json_value: Metadata,
     pub json_value_opt: Option<Metadata>,
 }
+
+impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, FromJsonQueryResult)]
 pub struct Metadata {

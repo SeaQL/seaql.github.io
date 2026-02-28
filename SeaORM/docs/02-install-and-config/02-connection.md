@@ -16,7 +16,14 @@ If you can't get `localhost` to work, try putting in an IP address and port numb
 
 :::
 
-Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.5/sqlx/struct.Pool.html) is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.DatabaseConnection.html).
+Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.9/sqlx/struct.Pool.html) is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.DatabaseConnection.html).
+
+<details>
+<summary>Changed in 2.0</summary>
+
+`DatabaseConnection` is now a struct wrapping an inner `DatabaseConnectionType` enum. In 1.0 it was an enum directly.
+
+</details>
 
 Each time you call `execute` or `query_one/all` on it, a connection will be acquired and released from the pool.
 

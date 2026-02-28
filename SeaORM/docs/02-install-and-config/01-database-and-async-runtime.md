@@ -57,6 +57,7 @@ Basically, they are in the form of `runtime-ASYNC_RUNTIME[-TLS_LIB]`:
 + `with-uuid` - support [`uuid`](https://crates.io/crates/uuid) types
 + `with-ipnetwork` - support Postgres [`ipnetwork`](https://crates.io/crates/ipnetwork)
 + `postgres-vector` - support Postgres [`pgvector`](https://crates.io/crates/pgvector)
++ `with-arrow` - support [Apache Arrow](https://docs.rs/arrow)
 + `postgres-array` - support array types in Postgres, enabled by default
 <br/>
 + `sqlite-use-returning-for-3_35` - use returning for SQLite, enabled by default

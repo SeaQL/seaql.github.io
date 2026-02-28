@@ -75,6 +75,32 @@ assert_eq!(
 );
 ```
 
+## Has Related
+
+:::tip Since `2.0.0`
+:::
+
+Use `has_related` to filter entities that have (or do not have) related entities matching a condition. This generates an `EXISTS` subquery:
+
+```rust
+let related = cake::Entity::find()
+    .has_related(filling::Entity, filling::Column::Name.eq("Marmalade"))
+    .all(db)
+    .await?;
+```
+
+```sql
+SELECT "cake"."id", "cake"."name" FROM "cake"
+WHERE EXISTS(
+    SELECT 1 FROM "filling"
+    INNER JOIN "cake_filling" ON "cake_filling"."filling_id" = "filling"."id"
+    WHERE "filling"."name" = 'Marmalade'
+    AND "cake"."id" = "cake_filling"."cake_id"
+)
+```
+
+This works across all relation types (1-1, 1-N, M-N). SeaORM resolves the join path automatically based on the declared relations.
+
 ## Fluent conditional query
 
 Apply an operation on the QueryStatement if the given `Option<T>` is `Some(_)`. It keeps your query expression fluent!

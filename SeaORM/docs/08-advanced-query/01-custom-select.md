@@ -230,3 +230,7 @@ User::find()
     .column_as(user::Column::Id, "user_id")
     .column_as(Expr::col(user::Column::Id).add(1), "next_id")
 ```
+
+### Nested Partial Model
+
+`DerivePartialModel` supports `#[sea_orm(nested)]` to compose partial models across joins, with automatic column aliasing. See [Nested Selects](../06-relation/09-nested-selects.md) for full documentation including aliases, Linked relations, three-way joins, and alternative result shapes.

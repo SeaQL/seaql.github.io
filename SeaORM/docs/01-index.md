@@ -40,6 +40,8 @@
 
     4.5 [New Type](04-generate-entity/05-newtype.md)
 
+    4.6 [Entity First Workflow](04-generate-entity/06-entity-first.md)
+
 5. Basic CRUD
 
     5.1 [Basic Schema](05-basic-crud/01-basic-schema.md)
@@ -138,18 +140,22 @@
 
     11.3 [Role Based Access Control](11-sea-orm-pro/03-role-based-access-control.md)
 
-12. Internal Design
+12. Data Science
 
-    12.1 [Traits and Types](12-internal-design/01-trait-and-type.md)
+    12.1 [Arrow & Parquet](12-data-science/01-arrow-parquet.md)
 
-    12.2 [Derive Macros](12-internal-design/02-derive-macro.md)
+13. Internal Design
 
-    12.3 [Architecture](12-internal-design/03-architecture.md)
+    13.1 [Traits and Types](13-internal-design/01-trait-and-type.md)
 
-    12.4 [Compare with Diesel](12-internal-design/04-diesel.md)
+    13.2 [Derive Macros](13-internal-design/02-derive-macro.md)
 
-    12.5 [Expanded Entity Format](12-internal-design/05-expanded-entity-format.md)
+    13.3 [Architecture](13-internal-design/03-architecture.md)
 
-13. What's Next
+    13.4 [Compare with Diesel](13-internal-design/04-diesel.md)
 
-    13.1 [What's Next](13-whats-next/01-whats-next.md)
+    13.5 [Expanded Entity Format](13-internal-design/05-expanded-entity-format.md)
+
+14. What's Next
+
+    14.1 [What's Next](14-whats-next/01-whats-next.md)

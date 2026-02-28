@@ -29,8 +29,81 @@ In addition to retrieving a model by primary key, you can also retrieve one or m
 let chocolate: Vec<cake::Model> = Cake::find()
     .filter(cake::Column::Name.contains("chocolate"))
     .order_by_asc(cake::Column::Name)
-    // shorthand for .order_by(cake::Column::Name, Order::Asc)
     .all(db)
+    .await?;
+```
+
+### Strongly-Typed COLUMN Constant
+
+:::tip Since `2.0.0`
+Requires `#[sea_orm::model]` or `#[sea_orm::compact_model]`.
+:::
+
+SeaORM 2.0 generates a `COLUMN` constant with type-aware methods per column. Instead of using the `Column` enum (which accepts any value type), use `COLUMN` for compile-time type checking:
+
+```rust
+// Column enum: compiles even if the type is wrong
+cake::Column::Name.contains("chocolate")
+
+// COLUMN constant: type-checked, lowercase field names
+cake::COLUMN.name.contains("chocolate")
+
+// compile error: `like` expects a string, not an integer
+cake::COLUMN.name.like(2)
+```
+
+Each column is wrapped in a type-specific struct (`StringColumn`, `NumericColumn`, `DateLikeColumn`, etc.) that exposes only methods relevant to that type:
+
+```rust
+user::COLUMN.name.contains("Bob")           // StringColumn: LIKE '%Bob%'
+user::COLUMN.id.between(1, 100)             // NumericColumn
+user::COLUMN.created_at.gt(some_date)       // DateTimeLikeColumn
+collection::COLUMN.tags.contains(vec!["a"]) // ArrayColumn: @> ARRAY['a']
+```
+
+The `COLUMN` constant is also accessible as `Entity::COLUMN`:
+
+```rust
+user::Entity::find().filter(user::Entity::COLUMN.name.contains("Bob"))
+```
+
+## Find by Unique Key
+
+:::tip Since `2.0.0`
+:::
+
+If an entity has a `#[sea_orm(unique)]` attribute, SeaORM generates `find_by_*` and `filter_by_*` convenience methods:
+
+```rust
+#[sea_orm::model]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "user")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    #[sea_orm(unique)]
+    pub email: String,
+    ..
+}
+```
+
+```rust
+let bob = user::Entity::find_by_email("bob@sea-ql.org").one(db).await?;
+```
+
+For composite unique keys defined with `#[sea_orm(unique_key = "pair")]`, a `find_by_pair` method is generated:
+
+```rust
+let item = composite_a::Entity::find_by_pair((1, 2)).one(db).await?;
+```
+
+These methods are also available on the Entity Loader:
+
+```rust
+let bob = user::Entity::load()
+    .filter_by_email("bob@sea-ql.org")
+    .with(profile::Entity)
+    .one(db)
     .await?;
 ```
 

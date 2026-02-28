@@ -251,7 +251,6 @@ impl ActiveEnum for Category {
 ```rust
 use sea_orm::entity::prelude::*;
 
-// Define the `Category` active enum
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(rs_type = "String", db_type = "String(StringLen::N(1))")]
 pub enum Category {
@@ -261,12 +260,28 @@ pub enum Category {
     Small,
 }
 
+#[sea_orm::model]
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "active_enum")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    // Represents a db column using `Category` active enum
+    pub category: Category,
+    pub category_opt: Option<Category>,
+}
+
+impl ActiveModelBehavior for ActiveModel {}
+```
+
+<details>
+<summary>In SeaORM 1.0, the Relation enum was required even if empty:</summary>
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[sea_orm(table_name = "active_enum")]
+pub struct Model {
+    #[sea_orm(primary_key)]
+    pub id: i32,
     pub category: Category,
     pub category_opt: Option<Category>,
 }
@@ -276,3 +291,4 @@ pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
 ```
+</details>
