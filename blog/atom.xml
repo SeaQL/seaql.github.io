@@ -12,9 +12,9 @@
         <id>https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/</id>
         <link href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/"/>
         <updated>2026-02-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The Problem]]></summary>
+        <summary type="html"><![CDATA[The Problem: Durability]]></summary>
         <content type="html"><![CDATA[<img alt="SeaORM 2.0 Banner" src="https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png">
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-problem">The Problem<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-problem" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-problem-durability">The Problem: Durability<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-problem-durability" class="hash-link" aria-label="Direct link to The Problem: Durability" title="Direct link to The Problem: Durability">​</a></h2>
 <p>Long-running programs crash. When they do, you start over from zero. The fix is checkpointing: periodically save state to a database so the program can resume where it left off. In this tutorial we wire up checkpointing with SeaORM Sync and rusqlite. No async runtime, no handwritten SQL.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-workload-pi-spigot">The Workload: Pi Spigot<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-workload-pi-spigot" class="hash-link" aria-label="Direct link to The Workload: Pi Spigot" title="Direct link to The Workload: Pi Spigot">​</a></h2>
 <p>We need a computation that takes a long time and produces results incrementally. Here we use the Rabinowitz–Wagon pi spigot algorithm<sup><a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#user-content-fn-1-41c823" id="user-content-fnref-1-41c823" data-footnote-ref="true" aria-describedby="footnote-label">1</a></sup> as demonstration.</p>
