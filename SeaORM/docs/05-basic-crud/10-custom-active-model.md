@@ -69,6 +69,86 @@ assert_eq!(
 );
 ```
 
+## Advanced Attributes
+
+:::tip Since `2.0.0`
+:::
+
+### Computed Defaults and Auto-Set Fields
+
+Use `set(field = "expr")` at the container level to inject fields that aren't part of the struct, and `#[sea_orm(default = "expr")]` on `Option<T>` fields to provide a fallback when `None`:
+
+```rust
+const SYSTEM_USER_ID: i32 = 0;
+
+#[derive(DeriveIntoActiveModel)]
+#[sea_orm(
+    active_model = "post::ActiveModel",
+    set(updated_at = "chrono::Utc::now()"),
+    set(version = "1")
+)]
+struct CreatePost {
+    title: String,
+    content: String,
+    #[sea_orm(default = "chrono::Utc::now()")]
+    published_at: Option<chrono::DateTime<chrono::Utc>>,
+    #[sea_orm(default = "SYSTEM_USER_ID")]
+    author_id: Option<i32>,
+}
+```
+
+- `set(field = "expr")` accepts arbitrary Rust expressions: functions, constants, literals. Multiple `set` attributes are merged.
+- `#[sea_orm(default = "expr")]` provides a fallback for `Option<T>` fields: `Some(v)` becomes `Set(v)`, `None` becomes `Set(expr)`.
+- `#[sea_orm(default)]` (bare) uses `Default::default()` as the fallback.
+- `active_model = "..."` specifies the target ActiveModel type explicitly.
+
+### Ignoring Fields
+
+Use `#[sea_orm(ignore)]` to exclude DTO-only fields that have no corresponding column:
+
+```rust
+#[derive(DeriveIntoActiveModel)]
+#[sea_orm(active_model = "account::ActiveModel")]
+struct UpdateAccount {
+    id: i32,
+    name: String,
+    #[sea_orm(ignore)]
+    audit_log: String,
+}
+```
+
+### Exhaustive Mode
+
+Add `exhaustive` to remove the `..Default::default()` spread, forcing every ActiveModel field to be explicitly covered by the struct, `set`, or `default`:
+
+```rust
+#[derive(DeriveIntoActiveModel)]
+#[sea_orm(
+    active_model = "account::ActiveModel",
+    exhaustive,
+    set(updated_at = "chrono::Utc::now()")
+)]
+struct UpdateAccount {
+    id: i32,
+    #[sea_orm(default = "false")]
+    disabled: Option<bool>,
+    #[sea_orm(ignore)]
+    audit_log: String,
+}
+```
+
+This gives you a compile-time guarantee that no field is accidentally left as `NotSet`.
+
+### Summary
+
+| Scenario | Attribute | Result in ActiveModel |
+|---|---|---|
+| Field provided directly | Declare field normally | `Set(value)` |
+| Field not in struct but must be set | `set(field = "expr")` | `Set(expr)` |
+| Optional field with fallback | `Option<T>` + `#[sea_orm(default = "expr")]` | `Some(v)` → `Set(v)`, `None` → `Set(expr)` |
+| DTO-only field, no column | `#[sea_orm(ignore)]` | Excluded |
+| Field not declared, no default | Omit field | `NotSet` |
+
 ## PartialModel to ActiveModel
 
 :::tip Since `1.1.0`
