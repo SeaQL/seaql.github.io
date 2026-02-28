@@ -8,18 +8,16 @@
     <subtitle>SeaQL Blog</subtitle>
     <icon>https://www.sea-ql.org/blog/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Tutorial: let's make a program resumable with SQLite]]></title>
+        <title type="html"><![CDATA[Tutorial: let's make a resumable Pi Spigot with SQLite]]></title>
         <id>https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/</id>
         <link href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/"/>
         <updated>2026-02-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The Problem]]></summary>
         <content type="html"><![CDATA[<img alt="SeaORM 2.0 Banner" src="https://www.sea-ql.org/blog/img/SeaORM%202.0%20Banner.png">
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-problem">The Problem<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-problem" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem">​</a></h2>
-<p>You have a program that runs for a long time. A batch job, a simulation, a data pipeline. It runs for hours, and then it crashes. You have to start it again and it begins from zero.</p>
-<p>The fix is checkpointing: periodically saving the program's state so it can resume from where it left off. A SQLite database is a natural choice for this. It's a single file, requires no server, and supports transactions (so your checkpoint is atomic).</p>
-<p>In this tutorial we'll wire up checkpointing with SeaORM's sync API and rusqlite. The state is defined as a SeaORM entity, persisted transactionally, and reconstructed on restart. No async runtime, no handwritten SQL.</p>
+<p>Long-running programs crash. When they do, you start over from zero. The fix is checkpointing: periodically save state to a database so the program can resume where it left off. In this tutorial we wire up checkpointing with SeaORM Sync and rusqlite. No async runtime, no handwritten SQL.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-workload-pi-spigot">The Workload: Pi Spigot<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-workload-pi-spigot" class="hash-link" aria-label="Direct link to The Workload: Pi Spigot" title="Direct link to The Workload: Pi Spigot">​</a></h2>
-<p>We need a computation that takes a long time and produces results incrementally. Here we use the Rabinowitz–Wagon pi spigot algorithm as demonstration.</p>
+<p>We need a computation that takes a long time and produces results incrementally. Here we use the Rabinowitz–Wagon pi spigot algorithm<sup><a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#user-content-fn-1-41c823" id="user-content-fnref-1-41c823" data-footnote-ref="true" aria-describedby="footnote-label">1</a></sup> as demonstration.</p>
 <p>The algorithm computes decimal digits of pi one at a time, using only integer arithmetic. Each iteration mutates the internal state, and may or may not produce a digit. So "I completed iteration N, therefore I have N digits" is not true.</p>
 <p>This makes it a good test case for checkpointing. You can't just save the digit count and recompute from there: you need the full internal state.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-state-machine-pattern">The State Machine Pattern<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#the-state-machine-pattern" class="hash-link" aria-label="Direct link to The State Machine Pattern" title="Direct link to The State Machine Pattern">​</a></h2>
@@ -63,7 +61,15 @@ Our stickers are made with a premium water-resistant vinyl with a unique matte f
 <li>The Rustacean wordmark</li>
 </ul>
 <p><a href="https://www.sea-ql.org/sticker-pack/" target="_blank" rel="noopener noreferrer">Support SeaQL and get a Sticker Pack!</a></p>
-<a href="https://www.sea-ql.org/sticker-pack/"><img style="border-radius:25px" alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg"></a>]]></content>
+<a href="https://www.sea-ql.org/sticker-pack/"><img style="border-radius:25px" alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg"></a>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorWithStickyNavbar_LWe7 sr-only" id="footnote-label">Footnotes<a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#footnote-label" class="hash-link" aria-label="Direct link to Footnotes" title="Direct link to Footnotes">​</a></h2>
+<ol>
+<li id="user-content-fn-1-41c823">
+<p>The spigot algorithm is not the fastest way to compute pi. It can take hours to produce 1 million digits. <a href="https://www.sea-ql.org/blog/2026-02-28-sea-orm-sync/#user-content-fnref-1-41c823" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content>
         <author>
             <name>SeaQL Team</name>
             <uri>https://github.com/SeaQL</uri>
