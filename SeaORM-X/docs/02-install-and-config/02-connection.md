@@ -1,12 +1,10 @@
 # Database Connection
 
-To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/*/sea_orm/struct.Database.html) interface:
+To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.Database.html) interface:
 
 ```rust
-let db: DatabaseConnection = Database::connect("protocol://username:password@host/database").await?;
+let db: DatabaseConnection = Database::connect("mssql://username:password@host/database").await?;
 ```
-
-`protocol` can be `mssql:`, etc.
 
 `host` is usually `localhost`, a domain name or an IP address.
 
@@ -16,7 +14,7 @@ If you can't get `localhost` to work, try putting in an IP address and port numb
 
 :::
 
-Under the hood, a `sqlz::Pool` is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/*/sea_orm/enum.DatabaseConnection.html).
+Under the hood, a `sqlz::Pool` is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.DatabaseConnection.html).
 
 Each time you call `execute` or `query_one/all` on it, a connection will be acquired and released from the pool.
 
@@ -24,27 +22,23 @@ Multiple queries will execute in parallel as you `await` on them.
 
 ## Connection String
 
-Here are some tips for database specific options:
+### Specify a Schema
 
-### MSSQL
-
-#### Specify a schema
-
-If the schema is `dbo`, simply write:
+If the schema is `dbo` (the default), simply write:
 
 ```
 mssql://username:password@host/database
 ```
 
-Or, specify the schema name by providing an extra `currentSchema` query param.
+To use a non-default schema, provide a `currentSchema` query param. SeaORM X will automatically prefix every outgoing statement with that schema (see [Schema Rewriting](../06-mssql-features/01-mssql-features.md#automatic-schema-rewriting)):
 
 ```
 mssql://username:password@host/database?currentSchema=my_schema
 ```
 
-#### Trust Peer Certificate
+### Trust Peer Certificate
 
-You can trust peer certificate by providing an extra `trustCertificate` query param.
+Trust the server's certificate (useful for development with self-signed certs):
 
 ```
 mssql://username:password@host/database?trustCertificate=true
@@ -52,10 +46,10 @@ mssql://username:password@host/database?trustCertificate=true
 
 ## Connect Options
 
-To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/*/sea_orm/struct.ConnectOptions.html) interface:
+To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.ConnectOptions.html) interface:
 
 ```rust
-let mut opt = ConnectOptions::new("protocol://username:password@host/database");
+let mut opt = ConnectOptions::new("mssql://username:password@host/database");
 opt.max_connections(100)
     .min_connections(5)
     .connect_timeout(Duration::from_secs(8))
@@ -67,6 +61,14 @@ opt.max_connections(100)
 
 let db = Database::connect(opt).await?;
 ```
+
+### Pool Lifecycle Hooks
+
+The SQLz pool supports the same lifecycle hooks as SQLx:
+
+- `after_connect` — initialize a freshly opened connection
+- `before_acquire` — validate an idle connection before handing it out
+- `after_release` — clean up before returning a connection to the pool
 
 ## Checking Connection is Valid
 

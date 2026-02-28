@@ -2,8 +2,9 @@
 
 :::tip Documentation for the base SeaORM
 
-This document only contains the usage and information of the extended support of other database backends such as MSSQL.
-The documentation for the base SeaORM can be found [here](https://www.sea-ql.org/SeaORM/docs/index/).
+This document only covers MSSQL-specific usage and information for SeaORM X.
+The full SeaORM documentation can be found [here](https://www.sea-ql.org/SeaORM/docs/index/).
+All SeaORM 2.0 features (Entity Loader, Nested ActiveModel, COLUMN constant, etc.) are available to MSSQL users.
 
 :::
 
@@ -37,4 +38,8 @@ The documentation for the base SeaORM can be found [here](https://www.sea-ql.org
 
 5. Basic CRUD
 
-    5.1 [INSERT: Model & ActiveModel, insert many](05-basic-crud/01-insert.md)
+    5.1 [INSERT: Identity Insert, OUTPUT clause](05-basic-crud/01-insert.md)
+
+6. MSSQL Features
+
+    6.1 [MSSQL-Specific Features](06-mssql-features/01-mssql-features.md)

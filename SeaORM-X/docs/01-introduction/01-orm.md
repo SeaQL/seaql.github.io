@@ -1,17 +1,15 @@
 # What is SeaORM X
 
-SeaORM X stands for SeaORM eXtended, and is built on top of SeaORM, add support for other database backends. The architecture of SeaORM X remains the same.
+SeaORM X stands for SeaORM eXtended, and is built on top of SeaORM 2.0 with first-class Microsoft SQL Server support. The architecture of SeaORM X remains the same: every improvement in the open-source release ships to MSSQL users too.
 
-The MSSQL (aka SQL Server) backend is based on `tiberius`, and in the future, could be `SQLx Pro`. We have implemented many additional features in our driver library, including: transaction (and nested transaction), connection pooling and multiple async runtime support.
+The MSSQL backend is powered by **SQLz**, a purpose-built SQL Server driver with connection pooling, nested transactions via savepoints, and multiple async runtime support. SQLz is a parallel implementation of SQLx's pool architecture applied to SQL Server.
 
-SeaQuery X extends SeaQuery, adding the support of MSSQL query building and MSSQL specific types, statements and syntax.
+- **SeaQuery X** extends SeaQuery, adding MSSQL query building, types, and syntax (including automatic schema rewriting).
+- **SeaSchema X** extends SeaSchema, adding MSSQL schema discovery, serialization, and reconstruction.
+- **SeaORM X** integrates SeaQuery X and SeaSchema X, offering complete MSSQL support with the full test suite and examples ported.
 
-SeaSchema X extends SeaSchema, adding the support of MSSQL schema definition, discovery, serialization and reconstruction.
+All libraries are supersets of their open-source versions, so you can interop MySQL, PostgreSQL, SQLite, and MSSQL in the same codebase.
 
-SeaORM X extends SeaORM, integrating SeaQuery X and SeaSchema X and offering complete support for MSSQL, and of course, working around the nuances of MSSQL. We aim to offer an experience as good as SeaORM by porting all test cases and examples, complemented by MSSQL specific documentation.
+Because SeaORM X tracks the open-source release, all SeaORM 2.0 features are available to MSSQL users: the new entity format, Entity Loader, Nested ActiveModel, strongly-typed COLUMN constant, `raw_sql!` macro, `DerivePartialModel` with nested selects, and more.
 
-All libraries are supersets of their open-source versions, so it's possible to interop say MySQL and MSSQL in the same codebase.
-
-In the future, we'd also like to include Seaography in the bundle, allowing developers to easily create admin dashboards.
-
-SeaORM X is now in closed-beta, and will be based on SeaORM `1.0`, so the API surface will be stable and supported long term. We offer an Evaluation License and a Production License with two support tiers. If you are interested, please [contact us](https://forms.office.com/r/1MuRPJmYBR) for pricing information.
+SeaORM X is a commercial offering distributed under a commercial license. We offer an Evaluation License and a Production License with support tiers. To evaluate it or discuss access for your team, [request access here](https://forms.office.com/r/1MuRPJmYBR).

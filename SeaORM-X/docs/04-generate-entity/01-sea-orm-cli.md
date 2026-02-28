@@ -50,8 +50,10 @@ Command line options:
 - `-l` / `--lib`: generate index file as `lib.rs` instead of `mod.rs`
 - `--include-hidden-tables`: generate entity files from hidden tables (tables with names starting with an underscore are hidden and ignored by default)
 - `--ignore-tables`: skip generating entity file for specified tables (default: `seaql_migrations`)
-- `--compact-format`: generate entity file of compact format (default: true)
-- `--expanded-format`: generate entity file of expanded format
+- `--entity-format`: entity format to generate (`compact`, `dense`, `expanded`) (default: `compact`)
+  - `dense` (recommended for 2.0): inline relations on the model struct with `#[sea_orm::model]`
+  - `compact`: the classic compact format
+  - `expanded`: fully expanded format with all boilerplate spelled out
 - `--with-serde`: automatically derive serde Serialize / Deserialize traits for the entity (`none`, `serialize`, `deserialize`, `both`) (default: `none`)
     - `--serde-skip-deserializing-primary-key`: generate entity model with primary key field labeled as `#[serde(skip_deserializing)]`
     - `--serde-skip-hidden-column`: generate entity model with hidden column (column name starts with `_`) field labeled as `#[serde(skip)]`
@@ -63,5 +65,62 @@ Command line options:
 
 ```shell
 # Generate entity files of database `bakery` to `entity/src`
-sea-orm-cli generate entity -u protocol://username:password@localhost/bakery -o entity/src
+sea-orm-cli generate entity -u mssql://sa:password@localhost/bakery -o entity/src
+```
+
+### Example: AdventureWorks
+
+```sh
+sea-orm-cli generate entity \
+  --database-url "mssql://sa:YourStrong()Passw0rd@localhost/AdventureWorksLT2016" \
+  --database-schema "SalesLT" \
+  --entity-format dense \
+  -o entity/src
+```
+
+```
+Connecting to MSSQL ...
+Discovering schema ...
+... discovered.
+Generating address.rs
+    > Column `AddressID`: i32, auto_increment, not_null
+    > Column `AddressLine1`: String, not_null
+    > Column `AddressLine2`: Option<String>
+    > Column `City`: String, not_null
+    > Column `StateProvince`: String, not_null
+    > Column `CountryRegion`: String, not_null
+    > Column `PostalCode`: String, not_null
+    > Column `rowguid`: Uuid, not_null, unique
+    > Column `ModifiedDate`: DateTime, not_null
+...
+```
+
+The generated entity file:
+
+```rust title="address.rs"
+use sea_orm::entity::prelude::*;
+
+#[sea_orm::model]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
+#[sea_orm(schema_name = "SalesLT", table_name = "Address")]
+pub struct Model {
+    #[sea_orm(column_name = "AddressID", primary_key)]
+    pub address_id: i32,
+    #[sea_orm(column_name = "AddressLine1")]
+    pub address_line1: String,
+    #[sea_orm(column_name = "AddressLine2")]
+    pub address_line2: Option<String>,
+    #[sea_orm(column_name = "City")]
+    pub city: String,
+    #[sea_orm(column_name = "StateProvince")]
+    pub state_province: String,
+    #[sea_orm(column_name = "CountryRegion")]
+    pub country_region: String,
+    #[sea_orm(column_name = "PostalCode")]
+    pub postal_code: String,
+    #[sea_orm(unique)]
+    pub rowguid: Uuid,
+    #[sea_orm(column_name = "ModifiedDate")]
+    pub modified_date: DateTime,
+}
 ```
