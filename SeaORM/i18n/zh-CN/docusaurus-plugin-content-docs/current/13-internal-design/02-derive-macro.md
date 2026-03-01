@@ -1,4 +1,4 @@
-# Derive 宏
+# 派生宏
 
 ## EntityModel
 

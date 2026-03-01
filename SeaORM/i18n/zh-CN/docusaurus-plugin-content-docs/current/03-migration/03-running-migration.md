@@ -95,7 +95,7 @@ migration::Migrator::up(&db, None).await?;
 
 :::tip SQL Server (MSSQL) backend
 
-在任意 MSSQL schema 上运行迁移的配置请参阅[此处 (英文)](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/)。
+在任意 MSSQL schema 上运行迁移的配置请参阅[此处](https://www.sea-ql.org/SeaORM-X/docs/migration/running-migration/)。
 
 :::
 

@@ -6,7 +6,7 @@
 
 :::tip SQL Server (MSSQL) 后端
 
-MSSQL 的类型映射可在[此处 (英文)](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/)找到。
+MSSQL 的类型映射可在[此处](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/entity-structure/)找到。
 
 :::
 

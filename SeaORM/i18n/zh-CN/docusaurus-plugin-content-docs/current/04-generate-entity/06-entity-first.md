@@ -7,19 +7,19 @@
 
 SeaORM 过去采用 schema 优先方法：即你先设计数据库表并编写迁移脚本，然后从该 schema 生成 entity。
 
-Entity 优先翻转了这一流程：你手写 entity 文件，让 SeaORM 为你生成表和 foreign key。
+Entity 优先翻转了这一流程：你手写 entity 文件，让 SeaORM 为你生成表和外键。
 
 你只需在创建数据库连接后，将以下内容添加到 [`main.rs`](https://github.com/SeaQL/sea-orm/blob/master/examples/quickstart/src/main.rs) 中：
 
 ```rust
 let db = &Database::connect(db_url).await?;
-// synchronizes database schema with entity definitions
+// 将数据库架构与实体定义同步
 db.get_schema_registry("my_crate::entity::*").sync(db).await?;
 ```
 
 这需要两个 feature 标志 `schema-sync` 和 `entity-registry`，我们将解释它们的作用。
 
-## Entity Registry
+## 实体注册
 
 :::tip
 
@@ -33,7 +33,7 @@ name = "my_crate"
 或者，你可以执行以下操作来获取当前 crate：
 
 ```rust
-// This returns the caller's crate
+// 返回调用者的 crate
 db.get_schema_registry(module_path!().split("::").next().unwrap())
 ```
 
@@ -61,11 +61,11 @@ db.get_schema_builder()
 
 ## 解析 Entity 关系
 
-如果你还记得上一篇文章，你会注意到 `comment` 有一个引用 `post` 的 foreign key。由于 SQLite 不允许事后添加 foreign key，`post` 表必须在 `comment` 表之前创建。
+如果你还记得上一篇文章，你会注意到 `comment` 有一个引用 `post` 的外键。由于 SQLite 不允许事后添加外键，`post` 表必须在 `comment` 表之前创建。
 
 这就是 SeaORM 的亮点：它自动从你的 entity 构建依赖图，并确定创建表的正确拓扑顺序，因此你不必在脑海中跟踪它们。
 
-## Schema Sync 实战
+## 架构同步实战
 
 第二个 feature `schema-sync` 将内存中的 entity 定义与实时数据库架构进行比较，检测缺失的表、列和键，并以幂等方式创建它们——无论你运行多少次 `sync`，架构都会收敛到相同状态。
 
@@ -91,7 +91,7 @@ pub mod upvote; // ⬅ new entity module
 CREATE TABLE "upvote" ( "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, .. )
 ```
 
-这将创建表以及任何 foreign key。
+这将创建表以及任何外键。
 
 ### 添加列
 
@@ -124,7 +124,7 @@ ALTER TABLE "profile" ADD COLUMN "date_of_birth" timestamp with time zone
 #[sea_orm(default_value = 0)]
 pub post_count: i32,
 
-// this doesn't work in SQLite
+// 在 SQLite 中不可用
 #[sea_orm(default_expr = "Expr::current_timestamp()")]
 pub updated_at: DateTimeUtc,
 ```
@@ -161,9 +161,9 @@ ALTER TABLE "profile" RENAME COLUMN "date_of_birth" TO "dob"
 
 不错吧？
 
-### 添加 Foreign Key
+### 添加外键
 
-让我们创建一个带有 foreign key 的新表：
+让我们创建一个带外键的新表：
 
 ```rust title="entity/upvote.rs"
 use sea_orm::entity::prelude::*;
@@ -192,7 +192,7 @@ CREATE TABLE "upvote" (
 )
 ```
 
-但是，如果在表已创建之后添加 `post` 关系，则无法为 SQLite 创建 foreign key。关系查询仍然有效，但完全在客户端执行。
+但是，如果在表已创建之后添加 `post` 关系，则无法为 SQLite 创建外键。关系查询仍然有效，但完全在客户端执行。
 
 ### 添加唯一键
 
@@ -251,7 +251,7 @@ DROP INDEX "idx-user-name"
 
 ### 脚注
 
-请注意，通常 schema sync 不会尝试执行任何破坏性操作，即不会对表、列和 foreign key 执行 `DROP`。删除索引是此处的例外。
+请注意，通常架构同步不会尝试执行任何破坏性操作，即不会对表、列和外键执行 `DROP`。删除索引是此处的例外。
 
 每次应用程序启动时，都会执行完整的 schema 发现。这在生产环境中可能不可取，因此 `sync` 由 feature 标志 `schema-sync` 控制，可以根据构建配置关闭。
 

@@ -1,10 +1,10 @@
 # 自定义查询
 
-:::caution We need your support! ⭐
-Thank you for using SeaORM. Please star our [GitHub repo](https://github.com/SeaQL/sea-orm)!
+:::caution 我们需要您的支持！⭐
+感谢使用 SeaORM。请为我们的 [GitHub 仓库](https://github.com/SeaQL/sea-orm) 加星！
 :::
 
-By default, SeaORM will select all columns defined in the `Column` enum. You can override the defaults if you wish to select certain columns only.
+默认情况下，SeaORM 会选择 `Column` 枚举中定义的所有列。若你只想选择某些列，可以覆盖默认行为。
 
 ```rust
 // Selecting all columns
@@ -18,7 +18,7 @@ assert_eq!(
 
 ## 选择部分属性
 
-Clear the default selection by calling the `select_only` method. Then, you can select some of the attributes or custom expressions afterwards.
+通过调用 `select_only` 方法清除默认选择。然后，你可以选择部分属性或自定义表达式。
 
 ```rust
 // Selecting the name column only
@@ -32,7 +32,7 @@ assert_eq!(
 );
 ```
 
-If you want to select multiple attributes at once, you can supply an array.
+若要一次性选择多个属性，可以传入数组。
 
 ```rust
 assert_eq!(
@@ -45,7 +45,7 @@ assert_eq!(
 );
 ```
 
-Advanced example: conditionally select all columns except a specific column.
+进阶示例：按条件选择除某列外的所有列。
 
 ```rust
 assert_eq!(
@@ -63,7 +63,7 @@ assert_eq!(
 
 ### 可选字段
 
-Since 0.12, SeaORM supports for partial select of `Option<T>` model field. A `None` value will be filled when the select result does not contain the `Option<T>` field without throwing an error.
+自 0.12 起，SeaORM 支持对 `Option<T>` 模型字段进行部分选择。当选择结果不包含 `Option<T>` 字段时，会填充为 `None`，而不会抛出错误。
 
 ```rust
 customer::ActiveModel {
@@ -90,7 +90,7 @@ assert_eq!(customers.notes, None);
 
 ## 选择自定义表达式
 
-Select any custom expression with `column_as` / `expr_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
+使用 `column_as` / `expr_as` 方法选择任意自定义表达式，它接受任意 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 和别名。使用 [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) 辅助函数构建 `SimpleExpr`。
 
 ```rust
 use sea_query::{Alias, Expr, Func};
@@ -117,7 +117,7 @@ assert_eq!(
 
 ### 自定义结构体
 
-You can use a custom `struct` derived from the `FromQueryResult` trait to handle the result of a complex query. It is especially useful when dealing with custom columns or multiple joins which cannot directly be converted into models. It may be used to receive the result of any query, even raw SQL.
+你可以使用派生自 `FromQueryResult` 特征的自定义 `struct` 来处理复杂查询的结果。在处理无法直接转换为模型的自定义列或多表 join 时尤其有用。它可用于接收任意查询的结果，包括原生 SQL。
 
 ```rust
 use sea_orm::{FromQueryResult, JoinType, RelationTrait};
@@ -150,7 +150,7 @@ let cake_counts: Vec<CakeAndFillingCount> = cake::Entity::find()
 
 ### 非结构化元组
 
-You can select a tuple (or single value) with the `into_tuple` method.
+你可以使用 `into_tuple` 方法选择元组（或单个值）。
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake, DeriveColumn, EnumIter};
@@ -167,9 +167,9 @@ let res: Vec<(String, i64)> = cake::Entity::find()
 
 ## 选择部分 Model
 
-In `0.12`, we introduced a new trait `PartialModelTrait` and pairing macro `DerivePartialModel` for improving the ergonomic of custom selects.
+在 `0.12` 中，我们引入了新特征 `PartialModelTrait` 和配套宏 `DerivePartialModel`，以改善自定义选择的易用性。
 
-Instead of:
+替代以下写法：
 
 ```rust
 use user::Entity as User;
@@ -189,7 +189,7 @@ let query = User::find()
     .into_model::<PartialUser>();
 ```
 
-You can define a partial model, and the corresponding columns will be automatically selected:
+你可以定义 partial model，对应列将自动被选择：
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -213,7 +213,7 @@ struct PartialUser {
 ```
 :::
 
-Advanced usages include column remap and custom expression:
+进阶用法包括列重映射和自定义表达式：
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -233,4 +233,4 @@ User::find()
 
 ### 嵌套部分 Model
 
-`DerivePartialModel` supports `#[sea_orm(nested)]` to compose partial models across joins, with automatic column aliasing. See [Nested Selects](../06-relation/09-nested-selects.md) for full documentation including aliases, Linked relations, three-way joins, and alternative result shapes.
+`DerivePartialModel` 支持 `#[sea_orm(nested)]`，可在 join 中组合 partial model，并自动进行列别名。完整文档（包括别名、Linked 关联、三路 join 和替代结果形状）请参阅 [嵌套选择](../06-relation/09-nested-selects.md)。

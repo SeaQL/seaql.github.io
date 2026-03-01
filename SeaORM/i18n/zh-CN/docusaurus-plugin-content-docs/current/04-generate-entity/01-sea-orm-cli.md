@@ -8,7 +8,7 @@ cargo install sea-orm-cli@^2.0.0-rc
 
 :::tip SQL Server (MSSQL) 后端
 
-有关支持 MSSQL 的 `sea-orm-cli` 的安装和使用方法，请参阅[此处 (英文)](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/sea-orm-cli/)。
+有关支持 MSSQL 的 `sea-orm-cli` 的安装和使用方法，请参阅[此处](https://www.sea-ql.org/SeaORM-X/docs/generate-entity/sea-orm-cli/)。
 
 :::
 
@@ -56,7 +56,7 @@ sea-orm-cli generate entity -h
 - `--ignore-tables`：跳过为指定表生成 entity 文件（默认：`seaql_migrations`）
 - `--compact-format`：生成[紧凑格式](04-generate-entity/02-entity-format.md)的 entity 文件（默认：true）
 - `--expanded-format`：生成[展开格式](13-internal-design/05-expanded-entity-format.md)的 entity 文件
-- `--with-serde`：自动为 entity 派生 serde 的 Serialize / Deserialize trait（`none`、`serialize`、`deserialize`、`both`）（默认：`none`）
+- `--with-serde`：自动为 entity 派生 serde 的 Serialize / Deserialize 特征（`none`、`serialize`、`deserialize`、`both`）（默认：`none`）
     - `--serde-skip-deserializing-primary-key`：为主键字段生成带有 `#[serde(skip_deserializing)]` 标记的 entity 模型
     - `--serde-skip-hidden-column`：为隐藏列（列名以 `_` 开头）字段生成带有 `#[serde(skip)]` 标记的 entity 模型
 - `--date-time-crate`：用于生成 entity 的 datetime crate（`chrono`、`time`）（默认：`chrono`）

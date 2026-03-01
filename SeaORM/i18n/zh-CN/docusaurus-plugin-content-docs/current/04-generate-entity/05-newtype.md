@@ -1,6 +1,6 @@
 # 新类型
 
-你可以定义 New Type（`T`）并将其用作模型字段。需要实现以下 trait。
+你可以定义 New Type（`T`）并将其用作模型字段。需要实现以下特征。
 
 1. 为 [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html) 实现 `From<T>`
 2. 为 `T` 实现 [`sea_orm::TryGetable`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TryGetable.html)

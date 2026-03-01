@@ -1,13 +1,13 @@
 # Arrow & Parquet
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
 SeaORM 可直接从实体定义派生 [Apache Arrow](https://arrow.apache.org/) 的 Schema。这使你的 ORM 层与列式数据生态无缝衔接：[Parquet](https://parquet.apache.org/)、[DataFusion](https://datafusion.apache.org/)、[Polars](https://pola.rs/)、[DuckDB](https://duckdb.org/) 等。
 
-详细说明请参阅[博客文章 (英文)](https://www.sea-ql.org/blog/2026-02-22-sea-orm-arrow/)。
+详细说明请参阅[博客文章](https://www.sea-ql.org/blog/2026-02-22-sea-orm-arrow/)。
 
-## Setup
+## 设置
 
 通过 `with-arrow` 特性启用 Arrow 支持：
 
@@ -17,7 +17,7 @@ sea-orm = { version = "2.0.0-rc", features = ["with-arrow"] }
 parquet = { version = "57", features = ["arrow"] }
 ```
 
-## Deriving the Arrow Schema
+## 派生 Arrow 架构
 
 在 `#[sea_orm(..)]` 属性中添加 `arrow_schema`：
 
@@ -46,7 +46,7 @@ pub struct Model {
 pub struct Model { .. }
 ```
 
-这会派生 [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.ArrowSchema.html) trait，并暴露三个方法：
+这会派生 [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.ArrowSchema.html) 特征，并暴露三个方法：
 
 ```rust
 use sea_orm::ArrowSchema;
@@ -56,7 +56,7 @@ let batch = measurement::ActiveModel::to_arrow(&models, &schema)?;
 let models = measurement::ActiveModel::from_arrow(&batch)?;
 ```
 
-## Exporting to Parquet
+## 导出到 Parquet
 
 将 ActiveModel 转换为 `RecordBatch`，然后使用 `parquet` crate 写入：
 
@@ -116,7 +116,7 @@ Arrow 的 null 会变为 `Set(None)`，缺失的列会变为 `NotSet`。
 | `NaiveDateTime` | `DateTime` | `Timestamp(Microsecond, None)` |
 | `DateTime<Utc>` | `TimestampWithTimeZone` | `Timestamp(Microsecond, Some("UTC"))` |
 
-## Overriding Timestamp and Decimal Mapping
+## 覆盖时间戳和小数映射
 
 可按字段覆盖时间戳精度或时区：
 

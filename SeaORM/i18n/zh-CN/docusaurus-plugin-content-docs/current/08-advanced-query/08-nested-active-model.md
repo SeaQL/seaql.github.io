@@ -99,7 +99,7 @@ txn.commit().await?;
 
 问题的核心在于弄清 Entity 之间的外键关系并以正确的顺序执行查询。SeaORM 支持以下关系：
 
-### Has One / Belongs To
+### 拥有一 / 属于
 
 User 1-1 Profile
 
@@ -148,7 +148,7 @@ profile::ActiveModel::builder()
     .await?;
 ```
 
-### Has Many
+### 拥有多
 
 User 1-N Post
 
@@ -193,7 +193,7 @@ SELECT FROM post WHERE user_id = bob.id
 DELETE FROM post WHERE id = 2
 ```
 
-### Many to Many
+### 多对多
 
 Post M-N Tag
 
@@ -415,7 +415,7 @@ DELETE FROM post WHERE post.id = 7
 DELETE FROM user WHERE user.id = 4
 ```
 
-### Weak Belongs To
+### 弱属于
 
 还有一种尚未提及的 Belongs To 关系的特殊情况：弱 1-N 关联，其中 Entity 可能有所有者，但不是严格必需的。
 

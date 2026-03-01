@@ -1,5 +1,7 @@
 const versions = require('./versions.json');
 
+const locale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en';
+
 function getNextMinorVersionName() {
   const lastVersion = versions[0];
   let majorVersion = parseInt(lastVersion.split('.')[0]);
@@ -168,7 +170,9 @@ module.exports = {
     },
     announcementBar: {
       id: 'sea-orm-bar',
-      content: '🐚 <a href="https://www.sea-ql.org/sea-orm-pro/">SeaORM Pro</a> is an admin panel for SeaORM! It\'s free to use, and allows you to create professional admin panels easily.',
+      content: locale === 'zh-CN'
+        ? '🐚 <a href="https://www.sea-ql.org/sea-orm-pro/">SeaORM Pro</a> 是 SeaORM 的管理面板！免费使用，轻松创建专业的后台管理界面。'
+        : '🐚 <a href="https://www.sea-ql.org/sea-orm-pro/">SeaORM Pro</a> is an admin panel for SeaORM! It\'s free to use, and allows you to create professional admin panels easily.',
       isCloseable: false,
     },
   },

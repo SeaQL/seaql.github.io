@@ -1,16 +1,16 @@
 # 复杂关联
 
-## Linked
+## 链接关联
 
-`Related` trait 是我们在实体关系图中绘制的箭头（1-1、1-N、M-N）的表示。一个 [`Linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.Linked.html) 由一系列关系组成，在以下情况下很有用：
+`Related` 特征是我们在实体关系图中绘制的箭头（1-1、1-N、M-N）的表示。一个 [`Linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.Linked.html) 由一系列关系组成，在以下情况下很有用：
 
 1. 一对 Entity 之间存在多条 join 路径，无法实现 `Related`
 1. 在关系查询中跨多个 Entity 进行 join
 
-实现 `Linked` trait 是完全可选的，因为 SeaORM 中还有其他方式进行关系查询，这将在后续章节中说明。
+实现 `Linked` 特征是完全可选的，因为 SeaORM 中还有其他方式进行关系查询，这将在后续章节中说明。
 实现 `Linked` 后，可以使用多个 `find_*_linked` 辅助方法，并且可以在一个地方定义关系。
 
-### Defining the Link
+### 定义链接
 
 以[此](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/entity_linked.rs)为例，我们通过中间的 `cake_filling` 表连接 cake 和 filling。
 
@@ -30,7 +30,7 @@ impl Linked for CakeToFilling {
 }
 ```
 
-### Lazy Loading
+### 延迟加载
 
 使用 [`find_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) 方法查找可以填入蛋糕的配料。
 
@@ -56,7 +56,7 @@ assert_eq!(
 );
 ```
 
-### Eager Loading
+### 预先加载
 
 [`find_also_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) 是 `find_also_related` 的对应方法；[`find_with_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) 是 `find_with_related` 的对应方法：
 
@@ -79,7 +79,7 @@ assert_eq!(
 
 ## 自引用关联
 
-### Belongs To
+### 属于
 
 ```rust title="staff.rs"
 use sea_orm::entity::prelude::*;
@@ -137,7 +137,7 @@ pub enum Relation {
 impl ActiveModelBehavior for ActiveModel {}
 ```
 
-#### Entity Loader
+#### 实体批量加载器
 
 ```rust
 let staff = staff_compact::Entity::load()
@@ -164,7 +164,7 @@ assert_eq!(staff[3].reports_to, None);
 assert!(staff[3].manages.is_empty());
 ```
 
-#### Model Loader
+#### 模型加载器
 
 ```rust
 let staff = staff::Entity::find()
@@ -211,7 +211,7 @@ assert_eq!(staff[3].name, "Elle");
 assert_eq!(manages[3].len(), 0);
 ```
 
-### Has Many (M-N)
+### 拥有多 (M-N)
 
 ```rust title="user.rs"
 #[sea_orm::model]
@@ -270,7 +270,7 @@ impl RelatedSelfVia<super::user_follower::Entity> for Entity {
 }
 ```
 
-#### Entity Loader
+#### 实体批量加载器
 
 Join 路径：
 
@@ -295,7 +295,7 @@ assert_eq!(users[1].following.len(), 1);
 assert_eq!(users[1].following[0], alice);
 ```
 
-#### Model Loader
+#### 模型加载器
 
 ```rust
 let users = user::Entity::find().all(db).await?;
@@ -329,7 +329,7 @@ pub struct Model {
 ```
 
 我们如何定义 `Worker` Entity？
-默认情况下，`has_many` 会调用 `Related` trait 来定义关系。
+默认情况下，`has_many` 会调用 `Related` 特征来定义关系。
 因此，我们必须使用 `via_rel` 属性手动指定相关 Entity 的 `Relation` 变体。
 
 ```rust title="worker.rs"

@@ -56,7 +56,7 @@
     "description": "The label for category Internal Design in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.What's Next": {
-    "message": "下一步",
+    "message": "未来",
     "description": "The label for category What's Next in sidebar tutorialSidebar"
   }
 }

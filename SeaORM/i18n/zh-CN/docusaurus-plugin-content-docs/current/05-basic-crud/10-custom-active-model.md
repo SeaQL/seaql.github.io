@@ -2,7 +2,7 @@
 
 创建包含模型部分字段的自定义结构体，实现 `IntoActiveModel`，可通过 `into_active_model` 方法转换为 `ActiveModel`。例如，可用作 REST API 中的表单提交。
 
-`IntoActiveValue` trait 允许通过 `into_active_value` 方法将 `Option<T>` 转换为 `ActiveValue<T>`。
+`IntoActiveValue` 特征允许通过 `into_active_value` 方法将 `Option<T>` 转换为 `ActiveValue<T>`。
 
 ```rust
 // Define regular model as usual
@@ -149,7 +149,7 @@ struct UpdateAccount {
 | 仅 DTO 字段，无对应列 | `#[sea_orm(ignore)]` | 排除 |
 | 字段未声明且无默认值 | 省略字段 | `NotSet` |
 
-## PartialModel to ActiveModel
+## PartialModel 转 ActiveModel
 
 :::tip Since `1.1.0`
 :::

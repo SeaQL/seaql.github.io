@@ -1,4 +1,4 @@
-# 自定义 Join 条件
+# 自定义连接条件
 
 有时你可能希望使用自定义条件 join 另一个表，例如：
 
@@ -14,7 +14,7 @@ FROM
 
 可以通过多种方式实现。
 
-## Relation
+## 关联
 
 将额外的 join 条件直接添加到 relation 枚举。最简单的方式是通过 `on_condition` 过程宏属性提供 `sea_query::SimpleExpr`。
 
@@ -72,7 +72,7 @@ assert_eq!(
 );
 ```
 
-## Linked
+## 链接关联
 
 你也可以在 `Linked` 上定义自定义 join 条件。
 

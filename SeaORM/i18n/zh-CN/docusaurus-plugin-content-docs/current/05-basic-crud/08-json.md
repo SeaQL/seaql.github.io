@@ -67,7 +67,7 @@ let result: Vec<serde_json::Value> = serde_json::Value::find_by_statement(Statem
 
 ## 将 JSON 转换为 ActiveModel
 
-如果希望将用户输入保存到数据库，可以轻松地将 JSON 值转换为 `ActiveModel`。你可能需要[跳过反序列化](https://serde.rs/attr-skip-serializing.html) (英文) 某些不需要的属性。
+如果希望将用户输入保存到数据库，可以轻松地将 JSON 值转换为 `ActiveModel`。你可能需要[跳过反序列化](https://serde.rs/attr-skip-serializing.html) 某些不需要的属性。
 
 :::tip Since `2.0.0`
 

@@ -1,8 +1,8 @@
-# 快速开始
+# 快速入门
 
 ![](https://www.sea-ql.org/sea-orm-pro/assets/images/getting-started-loco-01-login-9ee376c3b4e89721603c668969345f58.png)
 
-## [快速开始 (英文)](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started/)
+## [快速入门](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started/)
 
 SeaORM Pro 是一个基于 Loco 的全栈 Web 框架，具备完整的脚手架，因此你不必从零开始。
 
@@ -14,7 +14,7 @@ SeaORM Pro 是一个基于 Loco 的全栈 Web 框架，具备完整的脚手架�
 2. 生成实体
 3. 启动！
 
-## [使用 Axum 快速开始 (英文)](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-axum/)
+## [使用 Axum 快速入门](https://www.sea-ql.org/sea-orm-pro/docs/install-and-config/getting-started-axum/)
 
 我们以 `axum_example` 示例为基础，它包含基本的 REST API 来处理基本的用户管理，如用户登录和当前会话的用户信息。
 

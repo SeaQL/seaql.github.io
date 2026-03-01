@@ -1,43 +1,43 @@
 # 架构
 
-> Let's dive under the Sea 🤿
+> 让我们潜入海底 🤿
 
 <img width="100%" src="/SeaORM/img/SeaORM Architecture.svg" />
 
-To understand the architecture of SeaORM, let's discuss what is an ORM. ORMs exists to provide abstractions over common operations you would do against a database and hide the implementation details like the actual SQL queries.
+要理解 SeaORM 的架构，先来谈谈什么是 ORM。ORM 的存在是为了对数据库的常见操作提供抽象，并隐藏诸如实际 SQL 查询之类的实现细节。
 
-With a good ORM, you shouldn't bother to look under the API surface. Until you do. I hear you say *'abstraction leaks'*, and yes, it does.
+有了好的 ORM，你通常不必关心 API 表面之下的实现。直到你需要时。我听到你说「抽象泄漏」，是的，确实如此。
 
-The approach SeaORM takes is **'layered abstraction'**, where you'd dig one layer beneath if you want to. That's why we made SeaQuery into a standalone repository. It's useful on its own, and with a public API surface and a separate namespace, it's far more difficult to create confusing internal APIs than a monolithic approach.
+SeaORM 采用的是**「分层抽象」**思路：若你需要，可以往下一层深入。这也是我们将 SeaQuery 做成独立仓库的原因。它本身就有用，而且有了公开 API 和独立命名空间，相比单体架构，更难产生令人困惑的内部 API。
 
-The central idea in SeaORM is nearly everything is runtime configurable. At compile time, entities and query builders does not know what database it is connecting to.
+SeaORM 的核心思想是：几乎所有东西都可在运行时配置。在编译时，实体和查询构建器并不知道要连接的是哪种数据库。
 
-What benefits does database-agnostic bring? For example, you can:
+与数据库无关能带来什么好处？例如，你可以：
 
-1. Make your app work on any database, depending on runtime configuration
-1. Use the same models and transfer them across different databases
-1. Share entities across different projects by creating a 'data structure crate', where the database is chosen by downstream 'application crates'
+1. 根据运行时配置，让应用运行在任意数据库上
+1. 使用相同的模型，并在不同数据库之间迁移
+1. 通过创建「数据结构 crate」在不同项目间共享实体，数据库由下游「应用 crate」选择
 
-The API of SeaORM is not a thin shell, but consist of layers, with each layer underneath being less abstract.
+SeaORM 的 API 不是薄壳，而是由多层组成，越往下越不抽象。
 
-There are different stages when the API is being utilized.
+API 被使用时存在不同阶段。
 
-So there are two dimensions to navigate the SeaORM code base, **'stage'** and **'abstractness'**.
+因此，浏览 SeaORM 代码库有两个维度：**「阶段」**和**「抽象程度」**。
 
-First is the declaration stage. Entities and relations among them are being defined with the `EntityTrait`, `ColumnTrait` & `RelationTrait` etc.
+首先是声明阶段。通过 `EntityTrait`、`ColumnTrait`、`RelationTrait` 等定义实体及其关系。
 
-Second is the query building stage.
+其次是查询构建阶段。
 
-The top most layer is `Entity`'s `find*`, `insert`, `update` & `delete` methods, where you can intuitively perform basic CRUD operations.
+最顶层是 `Entity` 的 `find*`、`insert`、`update` 和 `delete` 方法，你可以直观地执行基本 CRUD 操作。
 
-One layer down, is the `Select`, `Insert`, `Update` & `Delete` structs, where they each have their own API for more advanced operations.
+往下一层是 `Select`、`Insert`、`Update` 和 `Delete` 结构体，各自有更高级操作的 API。
 
-One layer down, is the SeaQuery `SelectStatement`, `InsertStatement`, `UpdateStatement` & `DeleteStatement`, where they have a rich API for you to fiddle with the SQL syntax tree.
+再往下一层是 SeaQuery 的 `SelectStatement`、`InsertStatement`、`UpdateStatement` 和 `DeleteStatement`，提供丰富的 API 供你操作 SQL 语法树。
 
-Third is the execution stage. A separate set of structs, `Selector`, `Inserter`, `Updater` & `Deleter`, are responsible for executing the statements against a database connection.
+第三是执行阶段。一组独立的结构体 `Selector`、`Inserter`、`Updater` 和 `Deleter` 负责通过数据库连接执行语句。
 
-Finally is the resolution stage, when query results are converted into Rust types and shoved into structs. Subsequently, if it is a relational query, the structs will be pieced together according to their relations.
+最后是解析阶段，查询结果被转换为 Rust 类型并填入结构体。若为关系查询，随后会按关系将结构体组装起来。
 
-Because only the execution and resolution stages are database specific, we have the possibility to use a different driver by replacing those.
+由于只有执行和解析阶段与数据库相关，我们有可能通过替换这些部分来使用不同的驱动。
 
-I imagine some day, we will support a number of databases, with a matrix of different syntaxes, protocols and form-factors.
+我想总有一天，我们会支持多种数据库，涵盖不同的语法、协议和形态。

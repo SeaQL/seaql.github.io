@@ -25,7 +25,7 @@ sea-orm = { version = "2.0.0-rc", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME
 
 :::tip SQL Server (MSSQL) backend
 
-MSSQL 驱动的安装和配置请参阅[此处 (英文)](https://www.sea-ql.org/SeaORM-X/docs/install-and-config/database-and-async-runtime/)。
+MSSQL 驱动的安装和配置请参阅[此处](https://www.sea-ql.org/SeaORM-X/docs/install-and-config/database-and-async-runtime/)。
 
 :::
 

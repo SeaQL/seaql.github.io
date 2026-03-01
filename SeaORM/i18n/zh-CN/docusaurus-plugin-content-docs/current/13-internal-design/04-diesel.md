@@ -53,7 +53,7 @@ SeaORM 的 Entity API 是后端泛型门面，在编译时不需要数据库后�
 
 SeaORM 在合理的地方尝试提供跨数据库特性的抽象。初创公司可以构建数据库无关的产品。事实上，[RisingWave](https://docs.risingwave.com/get-started/architecture) 就是这样实现其数据存储以支持 Postgres、MySQL 和 SQLite 的。
 
-Diesel 最近提供了一些编写多数据库泛型代码的能力，但你仍然需要自己处理跨数据库差异。但从根本上讲，在 SeaORM 中你只需编译一次：业务逻辑是一次编译的（即非 trait 基于），差异由后端的 `match` 语句处理。相比之下，Diesel 的代码必须为每个后端单独单态化。
+Diesel 最近提供了一些编写多数据库泛型代码的能力，但你仍然需要自己处理跨数据库差异。但从根本上讲，在 SeaORM 中你只需编译一次：业务逻辑是一次编译的（即非特征基于），差异由后端的 `match` 语句处理。相比之下，Diesel 的代码必须为每个后端单独单态化。
 
 ## 基于 Entity 的关系模型
 
@@ -225,8 +225,8 @@ let cake: Option<CakeWithBakery> = CakeWithBakery::find_by_statement(raw_sql!(
 
 为什么 Diesel 中复杂的 schema 编译如此缓慢？以下是高层解释：
 
-+ Diesel 的 `table!` 宏生成大量代码：每表一个模块、每列一个结构体、用于 join 的 trait 等。这提供了类型安全的查询构建器，但也意味着在底层生成了数千种不同的类型
-+ Diesel 将 SQL 查询编码到 Rust 类型中。这意味着你写的每个查询都会产生一个唯一的、深层嵌套的类型。类型推断和 trait 解析会变得非常重
++ Diesel 的 `table!` 宏生成大量代码：每表一个模块、每列一个结构体、用于 join 的特征等。这提供了类型安全的查询构建器，但也意味着在底层生成了数千种不同的类型
++ Diesel 将 SQL 查询编码到 Rust 类型中。这意味着你写的每个查询都会产生一个唯一的、深层嵌套的类型。类型推断和特征解析会变得非常重
 + 所有东西都必须在一个大 crate 中，所以 rustc 无法有效并行编译
 
 最糟糕的是：[`allow_tables_to_appear_in_same_query` 具有 O(N^2) 复杂度](https://github.com/diesel-rs/diesel/issues/4333)

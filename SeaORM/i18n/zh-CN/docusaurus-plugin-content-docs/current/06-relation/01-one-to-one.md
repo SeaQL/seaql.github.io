@@ -55,7 +55,7 @@ impl Related<super::fruit::Entity> for Entity {
 定义反向关系：
 1. 在 fruit `Model` 中添加新字段 `cake`。
 1. 使用 `belongs_to` 注解该关系。
-1. 实现 `Related<cake::Entity>` trait。
+1. 实现 `Related<cake::Entity>` 特征。
 
 ```rust {9,10} title="entity/fruit.rs"
 #[sea_orm::model]

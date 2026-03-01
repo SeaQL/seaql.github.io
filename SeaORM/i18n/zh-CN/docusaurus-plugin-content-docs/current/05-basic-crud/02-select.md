@@ -111,11 +111,11 @@ let bob = user::Entity::load()
 
 > 更多内容请参阅 [Relation](06-relation/01-one-to-one.md) 章节。
 
-### Lazy Loading
+### 延迟加载
 
 使用 [`find_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ModelTrait.html#method.find_related) 方法。
 
-相关模型在请求时按需加载，适用于根据某些应用逻辑加载相关模型的场景。注意，与 eager loading 相比，lazy loading 会增加数据库往返次数。
+相关模型在请求时按需加载，适用于根据某些应用逻辑加载相关模型的场景。注意，与预先加载相比，延迟加载会增加数据库往返次数。
 
 ```rust
 // Find a cake model first
@@ -126,11 +126,11 @@ let cheese: cake::Model = cheese.unwrap();
 let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 ```
 
-### Eager Loading
+### 预先加载
 
 所有相关模型通过 join 在同一查询中加载。
 
-#### One to One
+#### 一对一
 
 使用 [`find_also_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/struct.Select.html#method.find_also_related) 方法。
 
@@ -149,12 +149,12 @@ let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
     .await?;
 ```
 
-### Entity Loader
+### 实体批量加载器
 
 可以将相关 Entity 加载到名为 `ModelEx` 的嵌套结构体中。
 
 :::tip Since `2.0.0`
-需要在 entity 定义上使用 `#[sea_orm::model]` 或 `#[sea_orm::compact_model]` 宏。详情请参阅 [SeaORM 2.0 博客文章](https://www.sea-ql.org/blog/2025-10-20-sea-orm-2.0/) (英文)。
+需要在 entity 定义上使用 `#[sea_orm::model]` 或 `#[sea_orm::compact_model]` 宏。详情请参阅 [SeaORM 2.0 博客文章](https://www.sea-ql.org/blog/2025-10-20-sea-orm-2.0/)。
 :::
 
 ```rust
@@ -182,13 +182,13 @@ super_cake
     };
 ```
 
-### Model Loader
+### 模型加载器
 
 使用 [LoaderTrait](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html) 批量加载相关 Entity。
 
-与 eager loading 相比，它节省带宽（考虑一对多的情况，一方行可能会重复），代价是多一次数据库查询。
+与预先加载相比，它节省带宽（考虑一对多的情况，一方行可能会重复），代价是多一次数据库查询。
 
-#### One to One
+#### 一对一
 
 使用 [load_one](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) 方法。
 
@@ -197,7 +197,7 @@ let fruits: Vec<fruit::Model> = Fruit::find().all(db).await?;
 let cakes: Vec<Option<cake::Model>> = fruits.load_one(Cake, db).await?;
 ```
 
-#### One to Many
+#### 一对多
 
 使用 [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
 
@@ -206,7 +206,7 @@ let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
 let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 ```
 
-#### Many to Many
+#### 多对多
 
 使用相同的 [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
 

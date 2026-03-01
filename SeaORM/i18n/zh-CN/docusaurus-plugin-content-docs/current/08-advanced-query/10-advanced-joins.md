@@ -1,4 +1,4 @@
-# 高级 Join
+# 高级连接
 
 :::tip 自 `2.0.0` 起
 以下大部分需求已在 2.0 中通过 nested select 和 entity loader 解决。当你需要自己编写复杂查询时，本文仍是很好的参考。
@@ -6,7 +6,7 @@
 
 一个具有多个 join 和自定义 select 的复杂关系查询案例研究。
 
-## Schema
+## 架构
 
 假设我们有 `BaseProduct` -> `ComplexProduct`、`BaseProduct` -> `ProductTypes` 的 schema 设计。
 

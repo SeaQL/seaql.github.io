@@ -1,14 +1,14 @@
 # 使用 SQLite
 
-If you want to test high level application domain logic that's not tied to database specific features, you can use SQLite in integration tests.
+若要测试不依赖数据库特定功能的高层应用领域逻辑，可以在集成测试中使用 SQLite。
 
-Of course, it is not a substitute to integration testing against the target database, but a supplement: SQLite runs in memory, and is quick to run and easy to write tests. You don't have to setup Docker container for executing them, so you can have more comprehensive tests on every layer of the application.
+当然，它不能替代针对目标数据库的集成测试，而是补充：SQLite 在内存中运行，执行快速且易于编写测试。你无需设置 Docker 容器即可执行它们，因此可以在应用的每一层进行更全面的测试。
 
-Check out a simple example [here](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs).
+查看简单示例[此处](https://github.com/SeaQL/sea-orm/blob/master/tests/basic.rs)。
 
 ## 集成测试
 
-It is recommended to execute more complex test cases in [integration tests](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html). The following code snippet illustrates the steps of connecting to a database, setting up schema and performing tests.
+建议在[集成测试](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html)中执行更复杂的测试用例。以下代码片段展示了连接数据库、设置 schema 和执行测试的步骤。
 
 ```rust
 async fn main() -> Result<(), DbErr> {
@@ -27,7 +27,7 @@ async fn main() -> Result<(), DbErr> {
 
 ## 设置数据库架构
 
-To create tables in SQLite database for testing, instead of writing [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html) manually, you can construct a complex schema using [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.11/sea_orm/schema/struct.SchemaBuilder.html).
+要在 SQLite 数据库中创建用于测试的表，可以不必手动编写 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html)，而使用 [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.11/sea_orm/schema/struct.SchemaBuilder.html) 构建复杂 schema。
 
 ```rust
 async fn setup_schema(db: &DbConn) -> Result<()> {
@@ -56,7 +56,7 @@ async fn setup_schema(db: &DbConn) -> Result<()> {
 
 ## 执行测试
 
-Execute test cases and assert against the results. Here is a simple function that demonstrates the whole setup neatly:
+执行测试用例并对结果进行断言。以下是一个简洁展示完整设置的简单函数：
 
 ```rust
 #[tokio::test]
@@ -148,4 +148,4 @@ async fn main() {
 }
 ```
 
-Here `unwrap` is used, because in case the test fails, it tells you exactly where.
+这里使用 `unwrap`，因为若测试失败，它会准确告诉你失败位置。

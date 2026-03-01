@@ -1,16 +1,16 @@
-# Traits 与类型
+# 特征与类型
 
 ## Entity
 
 实现 [`EntityTrait`](#) 的单元结构体，代表数据库中的一张表。
 
-该 trait 包含实体的属性，包括
+该特征包含实体的属性，包括
 - 表名（实现 [`EntityName`](#)）
 - 列（实现 [`ColumnTrait`](#)）
 - 关系（实现 [`RelationTrait`](#)）
 - 主键（实现 [`PrimaryKeyTrait`](#) 和 [`PrimaryKeyToColumn`](#)）
 
-该 trait 还提供 CRUD 操作的 API
+该特征还提供 CRUD 操作的 API
 - 查询：`find`、`find_*`
 - 插入：`insert`、`insert_*`
 - 更新：`update`、`update_*`
@@ -57,10 +57,10 @@
 它还实现
 - [`Iterable`](#) 允许 SeaORM 核心遍历所有关系成员
 
-## Related
+## 关联实体
 
-泛型 trait [`Related`](#) 定义连接路径，帮助你一起查询相关实体，在多对多关系中尤其有用。
+泛型特征 [`Related`](#) 定义连接路径，帮助你一起查询相关实体，在多对多关系中尤其有用。
 
-## Linked
+## 链接关联
 
-trait [`Linked`](#) 定义复杂的连接路径，包括链式关系、自引用关系以及两个实体之间的多重关系。
+特征 [`Linked`](#) 定义复杂的连接路径，包括链式关系、自引用关系以及两个实体之间的多重关系。

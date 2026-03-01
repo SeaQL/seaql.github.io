@@ -53,7 +53,7 @@ assert_eq!(
 
 ## 嵌套模型
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 
 ```rust
 #[derive(DerivePartialModel)]
@@ -107,9 +107,9 @@ LEFT JOIN "bakery" ON "cake"."bakery_id" = "bakery"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
-### Regular Models can be nested!
+### 常规模型也可以嵌套！
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
 所以前面的示例也可以是：
@@ -127,9 +127,9 @@ struct Cake {
 
 其中会选择嵌套模型的所有列。
 
-### Use with Linked
+### 与 Linked 一起使用
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
 你也可以使用 `Linked` 关系选择 局部模型，但必须应用与底层查询匹配的别名。以下与前面的示例等效。
@@ -165,7 +165,7 @@ let cake: Cake = cake::Entity::find()
     .unwrap();
 ```
 
-### Join with alias
+### 使用别名联结
 
 当同一张表在同一查询中被 join 多次时，必须使用别名。你可以使用 `alias` 属性从别名中选择列。
 
@@ -213,7 +213,7 @@ LEFT JOIN "bakery" AS "factory" ON "cake"."bakery_id" = "factory"."id"
 ORDER BY "cake"."id" ASC LIMIT 1
 ```
 
-### Multiple Aliases
+### 多个别名
 
 你可以通过两个关系在同一查询中 join 同一 Entity 两次，并为每个使用不同的别名。
 
@@ -242,9 +242,9 @@ let bakery: Bakery = bakery::Entity::find()
     ..
 ```
 
-## 三表 Join
+## 三表联结
 
-我们的 join 计划从 Order 开始：
+我们的联结计划从 Order 开始：
 
 ```rust
 Order -> Customer
@@ -316,11 +316,11 @@ assert_eq!(
 );
 ```
 
-由于 Cake 是 LineItem 的相关 Entity，而不是 Order，它不满足 `left_join` 的 trait 约束。因此有必要使用更灵活的 `join` 方法。
+由于 Cake 是 LineItem 的相关 Entity，而不是 Order，它不满足 `left_join` 的特征约束。因此有必要使用更灵活的 `join` 方法。
 
-### Alternative shape
+### 替代结构
 
-在上面的示例中，我们使嵌套结构与 join 计划的拓扑结构相一致。
+在上面的示例中，我们使嵌套结构与联结计划的拓扑结构相一致。
 但没有限制。实际上，SQL 将选择扁平化为平面表，因此只要可以找到所有列，
 我们就可以自由安排结果数据结构。
 

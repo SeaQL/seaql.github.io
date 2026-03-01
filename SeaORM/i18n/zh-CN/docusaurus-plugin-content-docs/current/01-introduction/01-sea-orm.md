@@ -18,7 +18,7 @@ SeaORM 致力于帮助你享受以上优势，同时避免 Rust 编程中的常�
 
 每个表对应 SeaORM 中的一个 [`Entity`](04-generate-entity/02-entity-format.md#entity)，用于对相关表执行 `CRUD`（创建、读取、更新、删除）操作。
 
-`Entity` trait 提供了一组 API，让你在运行时检查其属性：[`Column`](04-generate-entity/02-entity-format.md#column)、[`Relation`](04-generate-entity/02-entity-format.md#relation) 和 [`PrimaryKey`](04-generate-entity/02-entity-format.md#primary-key)。
+`Entity` 特征提供了一组 API，让你在运行时检查其属性：[`Column`](04-generate-entity/02-entity-format.md#column)、[`Relation`](04-generate-entity/02-entity-format.md#relation) 和 [`PrimaryKey`](04-generate-entity/02-entity-format.md#primary-key)。
 
 每个表有多个列，在 SeaORM 中称为字段（field）。
 

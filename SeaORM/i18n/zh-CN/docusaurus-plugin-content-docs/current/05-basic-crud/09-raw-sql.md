@@ -6,7 +6,7 @@
 
 特别是可以使用 `({..ids})` 将数组展开为 `(?, ?, ?)`。
 
-详情请参阅 [SeaQuery just made writing raw SQL more enjoyable](https://www.sea-ql.org/blog/2025-08-15-sea-query-raw-sql/) (英文)。
+详情请参阅 [SeaQuery just made writing raw SQL more enjoyable](https://www.sea-ql.org/blog/2025-08-15-sea-query-raw-sql/)。
 
 :::
 
@@ -92,7 +92,7 @@ assert_eq!(
 );
 ```
 
-## 使用 Raw Query 与 Execute 接口
+## 使用原生查询与执行接口
 
 ### 使用 `query_one` 和 `query_all` 方法获取自定义结果
 

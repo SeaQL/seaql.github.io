@@ -1,14 +1,14 @@
 # 多对多
 
-A standout feature of SeaORM is its ability to model many-to-many relationships directly at the Entity level. The intermediate junction table is abstracted away, so traversing an M-N relation feels just like a simple 1-N: a single method call instead of multiple joins.
+SeaORM 的一大特色是能够在 Entity 层面直接建模多对多关系。中间的连接表被抽象掉了，因此遍历 M-N 关系就像简单的 1-N 一样：一次方法调用即可，无需多次 join。
 
-A many-to-many relation is formed by three tables, where two tables are related via a junction table. As an example, a `Cake` has many `Filling` and `Filling` are shared by many `Cake` via an intermediate entity `CakeFilling`.
+多对多关系由三张表组成，其中两张表通过连接表关联。例如，一个 `Cake` 拥有多个 `Filling`，而 `Filling` 通过中间实体 `CakeFilling` 被多个 `Cake` 共享。
 
 ## 定义关联
 
-On the `Cake` entity, to define the relation:
-1. Add a new field `filling` to the `Model`.
-1. Annotate it with `has_many`, and specify the junction table with `via`.
+在 `Cake` Entity 上定义该关系：
+1. 在 `Model` 中添加新字段 `filling`。
+1. 使用 `has_many` 标注，并通过 `via` 指定连接表。
 
 ```rust {10,11} title="entity/cake.rs"
 #[sea_orm::model]
@@ -65,11 +65,11 @@ pub struct Model {
 
 ## 定义中间表
 
-On the `CakeFilling` entity, its `cake_id` attribute is referencing the primary key of `Cake` entity, and its `filling_id` attribute is referencing the primary key of `Filling` entity.
+在 `CakeFilling` Entity 上，其 `cake_id` 属性引用 `Cake` Entity 的主键，`filling_id` 属性引用 `Filling` Entity 的主键。
 
-To define the inverse relation:
-1. Add two new fields `cake` and `filling` to the `Model`.
-1. Define both relations with `belongs_to`.
+定义反向关系：
+1. 在 `Model` 中添加两个新字段 `cake` 和 `filling`。
+1. 使用 `belongs_to` 定义两个关系。
 
 ```rust {9-12} title="entity/cake_filling.rs"
 #[sea_orm::model]
@@ -111,7 +111,7 @@ pub enum Relation {
 
 ## 代码生成的限制
 
-通常，`Related` trait 的实现会自动生成。但是，如果存在多个指向同一相关 Entity 的关系，则不会生成。
+通常，`Related` 特征的实现会自动生成。但是，如果存在多个指向同一相关 Entity 的关系，则不会生成。
 
 关系枚举成员仍会生成，因此可以在 join 中使用。
 
@@ -141,4 +141,4 @@ pub enum Relation {
 }
 ```
 
-The solution is to define relations with the `Linked` which will be described in the next chapter.
+解决方案是使用 `Linked` 定义关系，这将在下一章中介绍。

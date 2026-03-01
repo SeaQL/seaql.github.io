@@ -1,24 +1,24 @@
 # 模拟接口
 
-To unit test more complex application logic with asynchronous interface and multiple underlying queries, you can use the mock database interface.
+要对具有异步接口和多个底层查询的更复杂应用逻辑进行单元测试，可以使用模拟数据库接口。
 
 :::info
-You need to enable the `mock` feature flag in Cargo.toml.
+你需要在 Cargo.toml 中启用 `mock` feature 标志。
 :::
 
-The mock database has no data in it, so you have to define the expected data to be returned when CRUD operations are performed.
-- The query result should be provided to support select operations
-- The exec result should be provided to support insert, update, and delete operations
+模拟数据库中没有数据，因此你必须定义执行 CRUD 操作时返回的预期数据。
+- 需要提供查询结果以支持 select 操作
+- 需要提供 exec 结果以支持 insert、update 和 delete 操作
 
-To ensure the correctness of your application logic, you can also validate the transaction log in the mock database.
+为确保应用逻辑的正确性，你还可以验证模拟数据库中的事务日志。
 
-Check out how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L250).
+查看我们如何使用模拟连接编写单元测试[此处](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L250)。
 
 ## 模拟查询结果
 
-We create a mock database for PostgreSQL with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using the `append_query_results` method. Note that we pass a vector of vectors to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
+我们使用 `MockDatabase::new(DatabaseBackend::Postgres)` 为 PostgreSQL 创建模拟数据库。然后，使用 `append_query_results` 方法准备查询结果。注意我们向其传递向量的向量，表示多个查询结果，每个结果包含多个 model。最后，我们将其转换为连接，并像普通实时连接一样用它执行 CRUD 操作。
 
-One special thing about `MockDatabase` is that you can check the transaction log of it. Any SQL query run on the mock database will be recorded; you can validate each of the log to ensure the correctness of your application logic.
+`MockDatabase` 的一个特别之处在于你可以检查其事务日志。在模拟数据库上运行的任何 SQL 查询都会被记录；你可以验证每条日志以确保应用逻辑的正确性。
 
 ```rust
 #[cfg(test)]
@@ -140,7 +140,7 @@ mod tests {
 
 ## 模拟执行结果
 
-This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update, and delete operations here in the unit test. The `append_exec_results` method takes a vector of `MockExecResult`, each representing the exec result of the corresponding operation.
+这与模拟查询结果非常相似，区别在于这里我们使用 `append_exec_results` 方法，并在单元测试中执行 insert、update 和 delete 操作。`append_exec_results` 方法接受 `MockExecResult` 的向量，每个元素表示对应操作的 exec 结果。
 
 ```rust
 #[cfg(test)]

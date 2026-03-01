@@ -25,8 +25,8 @@
 
 了解更多关于 Seaography：
 
-+ [Seaography 2.0 概述](https://www.sea-ql.org/blog/2025-10-08-seaography/) (英文)
-+ [Seaography 完整文档](https://www.sea-ql.org/Seaography/docs/index/) (英文)
++ [Seaography 2.0 概述](https://www.sea-ql.org/blog/2025-10-08-seaography/)
++ [Seaography 完整文档](https://www.sea-ql.org/Seaography/docs/index/)
 
 支持的 Web 框架：
 

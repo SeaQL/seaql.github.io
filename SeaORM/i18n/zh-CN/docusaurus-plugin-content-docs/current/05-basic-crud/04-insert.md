@@ -156,7 +156,7 @@ let res = Entity::insert_many([..])
 assert!(matches!(res, Ok(TryInsertResult::Conflicted)));
 ```
 
-### MySQL support
+### MySQL 支持
 
 在主键上设置 `ON CONFLICT` 为 `DO NOTHING`，但使用 MySQL 特定的 polyfill。
 

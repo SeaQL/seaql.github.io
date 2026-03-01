@@ -1,10 +1,10 @@
 # 事务
 
-A transaction is a group of SQL statements executed with ACID guarantee. There are two transaction APIs supported in SeaORM, and you can pick one best suited to your programming paradigm.
+事务是一组以 ACID 保证执行的 SQL 语句。SeaORM 支持两种事务 API，你可以选择最适合你编程范式的一种。
 
 ## 使用闭包
 
-Perform a [transaction with a closure](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
+使用[闭包执行事务](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction)。若闭包返回 `Ok` 则提交事务，返回 `Err` 则回滚。第 2 和第 3 个类型参数分别为 Ok 和 Err 类型。由于 `async_closure` 尚未稳定，你必须使用 `Pin<Box<_>>`。
 
 ```rust
 use sea_orm::TransactionTrait;
@@ -34,11 +34,11 @@ db.transaction::<_, (), DbErr>(|txn| {
 .await;
 ```
 
-This is the preferred way for most cases. However, if you happen to run into an *impossible lifetime* while trying to capture a reference in the async block, then the following API is the solution.
+这是大多数情况下的首选方式。然而，若在 async 块中尝试捕获引用时遇到*不可能的生命周期*，则以下 API 是解决方案。
 
-## `begin` & `commit`
+## `begin` 与 `commit`
 
-[`begin`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin) the transaction followed by a `commit` or `rollback`. If `txn` goes out of scope, the transaction is automatically rollbacked.
+[`begin`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin) 开始事务，随后执行 `commit` 或 `rollback`。若 `txn` 超出作用域，事务将自动回滚。
 
 ```rust
 let txn = db.begin().await?;
@@ -62,13 +62,13 @@ bakery::ActiveModel {
 txn.commit().await?;
 ```
 
-## Nested transaction
+## 嵌套事务
 
-Nested transaction is implemented with database's `SAVEPOINT`.
+嵌套事务通过数据库的 `SAVEPOINT` 实现。
 
-### With Closures
+### 使用闭包
 
-The example below illustrates the behavior with the closure API.
+以下示例说明使用闭包 API 时的行为。
 
 ```rust
 assert_eq!(Bakery::find().all(db).await?.len(), 0);
@@ -128,7 +128,7 @@ ctx.db.transaction::<_, _, DbErr>(|txn| {
 assert_eq!(Bakery::find().all(db).await?.len(), 4);
 ```
 
-### `begin` & `commit`
+### `begin` 与 `commit`
 
 ```rust
 assert_eq!(Bakery::find().all(db).await?.len(), 0);
@@ -178,24 +178,24 @@ txn.commit().await?;
 assert_eq!(Bakery::find().all(db).await?.len(), 3);
 ```
 
-## Isolation Level and Access Mode
+## 隔离级别与访问模式
 
-Introduced in `0.10.5`, [`transaction_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) and [`begin_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) allows you to specify the [IsolationLevel](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.IsolationLevel.html) and [AccessMode](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.AccessMode.html).
+自 `0.10.5` 起，[`transaction_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) 和 [`begin_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) 允许你指定 [IsolationLevel](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.IsolationLevel.html) 和 [AccessMode](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.AccessMode.html)。
 
-For now, they are only implemented for MySQL and Postgres. In order to align their semantic difference, MySQL will execute `SET TRANSACTION` commands before begin transaction, while Postgres will execute `SET TRANSACTION` commands after begin transaction.
+目前仅对 MySQL 和 Postgres 实现。为对齐语义差异，MySQL 将在 begin transaction 之前执行 `SET TRANSACTION` 命令，而 Postgres 将在 begin transaction 之后执行 `SET TRANSACTION` 命令。
 
-### IsolationLevel
+### 隔离级别
 
-`RepeatableRead`: Consistent reads within the same transaction read the snapshot established by the first read.
+`RepeatableRead`（可重复读）：同一事务内的快照读读取由首次读建立的快照。
 
-`ReadCommitted`: Each consistent read, even within the same transaction, sets and reads its own fresh snapshot.
+`ReadCommitted`（读已提交）：每次快照读，即使在同一事务内，都会设置并读取自己的新快照。
 
-`ReadUncommitted`: SELECT statements are performed in a nonlocking fashion, but a possible earlier version of a row might be used.
+`ReadUncommitted`（读未提交）：SELECT 语句以非锁定方式执行，但可能使用行的较早版本。
 
-`Serializable`: All statements of the current transaction can only see rows committed before the first query or data-modification statement was executed in this transaction.
+`Serializable`（可串行化）：当前事务的所有语句只能看到在本事务中首次执行查询或数据修改语句之前已提交的行。
 
-### AccessMode
+### 访问模式
 
-`ReadOnly`: Data can’t be modified in this transaction
+`ReadOnly`：此事务中不能修改数据
 
-`ReadWrite`: Data can be modified in this transaction (default)
+`ReadWrite`：此事务中可以修改数据（默认）

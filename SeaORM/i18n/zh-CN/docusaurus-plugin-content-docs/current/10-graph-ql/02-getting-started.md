@@ -1,4 +1,4 @@
-# 快速开始
+# 快速入门
 
 我们从使用简化版 Bakery schema 的 [Seaography 示例](https://github.com/SeaQL/sea-orm/tree/master/examples/seaography_example) 开始。
 
@@ -221,4 +221,4 @@ Visit GraphQL Playground at http://localhost:8000
 
 Seaography 涵盖构建复杂应用的所有需求——从数据访问、访问控制到[前端集成](https://www.sea-ql.org/sea-orm-pro)。
 
-在 [Seaography 完整文档](https://www.sea-ql.org/Seaography/docs/index/) (英文) 中了解更多关于添加自定义 GraphQL 端点和自定义 resolver 的内容。
+在 [Seaography 完整文档](https://www.sea-ql.org/Seaography/docs/index/) 中了解更多关于添加自定义 GraphQL 端点和自定义 resolver 的内容。

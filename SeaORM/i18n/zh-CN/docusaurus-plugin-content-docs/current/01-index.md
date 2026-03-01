@@ -76,11 +76,11 @@
 
     6.4 [复杂关联](06-relation/04-complex-relations.md)
 
-    6.5 [Model Loader](06-relation/06-model-loader.md)
+    6.5 [模型加载器](06-relation/06-model-loader.md)
 
-    6.6 [Entity Loader](06-relation/07-entity-loader.md)
+    6.6 [实体批量加载器](06-relation/07-entity-loader.md)
 
-    6.7 [烘焙店 Schema 示例](06-relation/08-bakery-schema.md)
+    6.7 [烘焙店架构示例](06-relation/08-bakery-schema.md)
 
     6.8 [嵌套查询](06-relation/09-nested-selects.md)
 
@@ -104,7 +104,7 @@
 
     8.3 [聚合函数](08-advanced-query/03-aggregate-function.md)
 
-    8.4 [自定义 Join 条件](08-advanced-query/04-custom-join-condition.md)
+    8.4 [自定义连接条件](08-advanced-query/04-custom-join-condition.md)
 
     8.5 [子查询](08-advanced-query/05-subquery.md)
 
@@ -116,7 +116,7 @@
 
     8.9 [错误处理](08-advanced-query/09-error-handling.md)
 
-    8.10 [高级 Join](08-advanced-query/10-advanced-joins.md)
+    8.10 [高级连接](08-advanced-query/10-advanced-joins.md)
 
 9. 模式语句
 
@@ -130,13 +130,13 @@
 
     10.1 [🧭 Seaography](10-graph-ql/01-seaography-intro.md)
 
-    10.2 [快速开始](10-graph-ql/02-getting-started.md)
+    10.2 [快速入门](10-graph-ql/02-getting-started.md)
 
 11. 管理面板
 
     11.1 [🖥️ SeaORM Pro](11-sea-orm-pro/01-sea-orm-pro-intro.md)
 
-    11.2 [快速开始](11-sea-orm-pro/02-getting-started.md)
+    11.2 [快速入门](11-sea-orm-pro/02-getting-started.md)
 
     11.3 [基于角色的访问控制](11-sea-orm-pro/03-role-based-access-control.md)
 
@@ -148,7 +148,7 @@
 
 13. 内部设计
 
-    13.1 [Trait 与类型](13-internal-design/01-trait-and-type.md)
+    13.1 [特征与类型](13-internal-design/01-trait-and-type.md)
 
     13.2 [派生宏](13-internal-design/02-derive-macro.md)
 
@@ -158,6 +158,6 @@
 
     13.5 [展开的 Entity 格式](13-internal-design/05-expanded-entity-format.md)
 
-14. 下一步
+14. 未来
 
-    14.1 [下一步](14-whats-next/01-whats-next.md)
+    14.1 [未来](14-whats-next/01-whats-next.md)

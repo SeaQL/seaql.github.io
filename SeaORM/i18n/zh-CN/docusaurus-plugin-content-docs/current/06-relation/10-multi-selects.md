@@ -33,14 +33,14 @@ order::Entity::find()
     .find_also_related(lineitem::Entity)
 ```
 
-### Consolidate results
+### 整合结果
 
 你可以在三个模型选择上合并查询结果。输出形状取决于 join 的拓扑结构。
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
-#### Chain
+#### 链式
 
 ```rust
 Order -> LineItem -> Cake
@@ -103,7 +103,7 @@ vec![(
 )]
 ```
 
-#### Star
+#### 星型
 
 ```rust
 Order -> Customer
@@ -152,7 +152,7 @@ assert_eq!(
 
 ## 查询最多六个模型
 
-:::tip Since `2.0.0`
+:::tip 自 `2.0.0` 起
 :::
 
 ```rust

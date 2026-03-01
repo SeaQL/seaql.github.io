@@ -39,7 +39,7 @@ cargo install sea-orm-cli@^2.0.0-rc
 
 :::tip SQL Server (MSSQL) backend
 
-支持 MSSQL 的 `sea-orm-cli` 安装说明请参阅[此处 (英文)](https://www.sea-ql.org/SeaORM-X/docs/migration/setting-up-migration/)。
+支持 MSSQL 的 `sea-orm-cli` 安装说明请参阅[此处](https://www.sea-ql.org/SeaORM-X/docs/migration/setting-up-migration/)。
 
 :::
 

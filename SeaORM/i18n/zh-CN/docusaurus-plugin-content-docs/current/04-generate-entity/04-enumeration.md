@@ -166,15 +166,15 @@ manager
     .await?;
 ```
 
-另请参阅 [Schema Creation Methods (英文)](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)。
+另请参阅 [Schema Creation Methods](https://www.sea-ql.org/SeaORM/docs/migration/writing-migration/#schema-creation-methods)。
 
 ### SQLite
 
 在 SQLite 上，枚举将映射为字符串。
 
-## `ActiveEnum` trait
+## `ActiveEnum` 特征
 
-[`DeriveActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/derive.DeriveActiveEnum.html) 宏在底层实现了 [`ActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveEnum.html) trait。
+[`DeriveActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/derive.DeriveActiveEnum.html) 宏在底层实现了 [`ActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveEnum.html) 特征。
 
 ```rust
 use sea_orm::entity::prelude::*;

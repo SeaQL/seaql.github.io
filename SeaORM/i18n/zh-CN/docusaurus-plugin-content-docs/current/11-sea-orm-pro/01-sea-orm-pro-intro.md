@@ -10,4 +10,4 @@ SeaORM Pro 是一个管理面板解决方案，让你能够快速轻松地为应
 
 SeaORM Pro 旨在弥合这一差距，提供既快速实现又可靠长期使用的解决方案。
 
-在[此处 (英文)](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro/)了解更多关于 SeaORM Pro 的信息。
+在[此处](https://www.sea-ql.org/sea-orm-pro/docs/introduction/sea-orm-pro/)了解更多关于 SeaORM Pro 的信息。

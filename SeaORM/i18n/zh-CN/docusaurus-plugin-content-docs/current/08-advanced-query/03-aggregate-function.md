@@ -22,7 +22,7 @@ let sum_order_total: Decimal = order::Entity::find()
     .unwrap();
 ```
 
-### 带 group by 的求和
+### 带分组的求和
 
 ```rust
 let (customer, total_spent): (String, Decimal) = customer::Entity::find()
@@ -67,7 +67,7 @@ assert_eq!(
 );
 ```
 
-### 将 group by 与聚合函数结合使用
+### 将分组与聚合函数结合使用
 
 ```rust
 #[derive(Debug, FromQueryResult)]
