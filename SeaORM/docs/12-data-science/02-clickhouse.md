@@ -1,6 +1,6 @@
 # ClickHouse
 
-[`sea-clickhouse`](https://docs.rs/sea-clickhouse) is a ClickHouse client that integrates with the SeaQL ecosystem. It is a soft fork of [`clickhouse-rs`](https://github.com/ClickHouse/clickhouse-rs), 100% compatible with all upstream features, and continually rebased on upstream.
+[`sea-clickhouse`](https://github.com/SeaQL/clickhouse-rs) is a ClickHouse client that integrates with the SeaQL ecosystem. It is a soft fork of [`clickhouse-rs`](https://github.com/ClickHouse/clickhouse-rs), 100% compatible with all upstream features, and continually rebased on upstream.
 
 Query results are decoded into `sea_query::Value`, giving you first-class support for `DateTime`, `Decimal`, `BigDecimal`, `Json`, arrays, and more without defining any schema structs. Apache Arrow is also supported: stream query results directly into `RecordBatch`es, or insert Arrow batches back into ClickHouse.
 
@@ -134,7 +134,7 @@ let models: Vec<measurement::ActiveModel> = vec![..];
 let schema = measurement::Entity::arrow_schema();
 let batch = measurement::ActiveModel::to_arrow(&models, &schema)?;
 
-let mut insert = client.insert_arrow("measurement", &batch).await?;
+let mut insert = client.insert_arrow("measurement", &batch.schema()).await?;
 insert.write_batch(&batch).await?;
 insert.end().await?;
 ```

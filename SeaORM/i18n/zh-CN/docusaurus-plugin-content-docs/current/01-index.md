@@ -12,9 +12,9 @@
 
 2. 安装与配置
 
-    2.1 [选择数据库与异步执行环境](02-install-and-config/01-database-and-async-runtime.md)
+    2.1 [数据库与异步执行环境](02-install-and-config/01-database-and-async-runtime.md)
 
-    2.2 [连接池](02-install-and-config/02-connection.md)
+    2.2 [数据库连接](02-install-and-config/02-connection.md)
 
     2.3 [调试日志](02-install-and-config/03-debug-log.md)
 
@@ -32,7 +32,7 @@
 
     4.1 [使用 `sea-orm-cli`](04-generate-entity/01-sea-orm-cli.md)
 
-    4.2 [实体结构](04-generate-entity/02-entity-format.md)
+    4.2 [Entity 格式](04-generate-entity/02-entity-format.md)
 
     4.3 [列类型](04-generate-entity/03-column-types.md)
 
@@ -46,21 +46,21 @@
 
     5.1 [基本 Schema](05-basic-crud/01-basic-schema.md)
 
-    5.2 [SELECT：查询、过滤、排序、分页](05-basic-crud/02-select.md)
+    5.2 [查询](05-basic-crud/02-select.md)
 
-    5.3 [ActiveModel 与 ActiveValue](05-basic-crud/03-active-model.md)
+    5.3 [ActiveModel](05-basic-crud/03-active-model.md)
 
-    5.4 [INSERT：插入一条与批量插入](05-basic-crud/04-insert.md)
+    5.4 [插入](05-basic-crud/04-insert.md)
 
-    5.5 [UPDATE：查找并保存、批量更新](05-basic-crud/05-update.md)
+    5.5 [更新](05-basic-crud/05-update.md)
 
-    5.6 [SAVE：插入或更新](05-basic-crud/06-save.md)
+    5.6 [保存](05-basic-crud/06-save.md)
 
-    5.7 [DELETE：删除一条与批量删除](05-basic-crud/07-delete.md)
+    5.7 [删除](05-basic-crud/07-delete.md)
 
     5.8 [JSON](05-basic-crud/08-json.md)
 
-    5.9 [原始 SQL 查询](05-basic-crud/09-raw-sql.md)
+    5.9 [原始 SQL](05-basic-crud/09-raw-sql.md)
 
     5.10 [自定义 ActiveModel](05-basic-crud/10-custom-active-model.md)
 
@@ -80,7 +80,7 @@
 
     6.6 [实体批量加载器](06-relation/07-entity-loader.md)
 
-    6.7 [烘焙店架构示例](06-relation/08-bakery-schema.md)
+    6.7 [烘焙店 Schema](06-relation/08-bakery-schema.md)
 
     6.8 [嵌套查询](06-relation/09-nested-selects.md)
 
@@ -90,7 +90,7 @@
 
 7. 编写测试
 
-    7.1 [健壮与正确](07-write-test/01-testing.md)
+    7.1 [编写测试](07-write-test/01-testing.md)
 
     7.2 [模拟接口](07-write-test/02-mock.md)
 
@@ -160,4 +160,4 @@
 
 14. 未来
 
-    14.1 [未来](14-whats-next/01-whats-next.md)
+    14.1 [SeaORM 的未来？](14-whats-next/01-whats-next.md)
