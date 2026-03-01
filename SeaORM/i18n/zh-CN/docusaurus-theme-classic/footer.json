@@ -1,0 +1,58 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Community": {
+    "message": "Community",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.More": {
+    "message": "More",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label of footer link with label=Getting Started linking to /docs/index"
+  },
+  "link.item.label.SeaORM Tutorial": {
+    "message": "SeaORM Tutorial",
+    "description": "The label of footer link with label=SeaORM Tutorial linking to https://www.sea-ql.org/sea-orm-tutorial/"
+  },
+  "link.item.label.SeaORM Cookbook": {
+    "message": "SeaORM Cookbook",
+    "description": "The label of footer link with label=SeaORM Cookbook linking to https://www.sea-ql.org/sea-orm-cookbook/"
+  },
+  "link.item.label.API Reference": {
+    "message": "API Reference",
+    "description": "The label of footer link with label=API Reference linking to https://docs.rs/sea-orm/latest/sea_orm/"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/SeaQL/sea-orm/discussions"
+  },
+  "link.item.label.Discord": {
+    "message": "Discord",
+    "description": "The label of footer link with label=Discord linking to https://discord.com/invite/uCPdDXzbdv"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/sea_ql"
+  },
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to https://www.sea-ql.org/blog/"
+  },
+  "link.item.label.About Us": {
+    "message": "About Us",
+    "description": "The label of footer link with label=About Us linking to /about-us"
+  },
+  "link.item.label.Seaography": {
+    "message": "Seaography",
+    "description": "The label of footer link with label=Seaography linking to https://www.sea-ql.org/Seaography/"
+  },
+  "copyright": {
+    "message": "<br/><a href=\"https://github.com/SeaQL/sea-orm/stargazers/\" target=\"_blank\"><img src=\"https://img.shields.io/github/stars/SeaQL/sea-orm.svg?style=social&label=Star\"/></a><br/>Every ⭐ counts!<br/>SeaQL.org © 2026 🇬🇧",
+    "description": "The footer copyright"
+  }
+}

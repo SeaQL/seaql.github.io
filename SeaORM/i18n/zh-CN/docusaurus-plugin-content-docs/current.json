@@ -1,0 +1,62 @@
+{
+  "version.label": {
+    "message": "2.0.x",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Introduction": {
+    "message": "简介",
+    "description": "The label for category Introduction in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Installation & Configuration": {
+    "message": "安装与配置",
+    "description": "The label for category Installation & Configuration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Migration": {
+    "message": "迁移",
+    "description": "The label for category Migration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Generating Entities": {
+    "message": "生成实体",
+    "description": "The label for category Generating Entities in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Basic CRUD": {
+    "message": "基本 CRUD",
+    "description": "The label for category Basic CRUD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Relations": {
+    "message": "关联关系",
+    "description": "The label for category Relations in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Writing Tests": {
+    "message": "编写测试",
+    "description": "The label for category Writing Tests in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced Queries": {
+    "message": "高级查询",
+    "description": "The label for category Advanced Queries in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Schema Statement": {
+    "message": "模式语句",
+    "description": "The label for category Schema Statement in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.GraphQL Support": {
+    "message": "GraphQL 支持",
+    "description": "The label for category GraphQL Support in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Admin Panel": {
+    "message": "管理面板",
+    "description": "The label for category Admin Panel in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Data Science": {
+    "message": "数据科学",
+    "description": "The label for category Data Science in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Internal Design": {
+    "message": "内部设计",
+    "description": "The label for category Internal Design in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.What's Next": {
+    "message": "下一步",
+    "description": "The label for category What's Next in sidebar tutorialSidebar"
+  }
+}
