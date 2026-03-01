@@ -1,7 +1,7 @@
 # 一对一
 
 :::tip SeaQL 的 Rust 贴纸包 🦀
-[我们的贴纸](https://www.sea-ql.org/sticker-pack/)由优质防水 PVC 制成，具有独特的哑光表面，非常适合粘贴在笔记本电脑或其他小工具的背面！
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/cn/)由优质防水 PVC 制成，具有独特的哑光表面，非常适合粘贴在笔记本电脑或其他小工具的背面！
 :::
 
 一对一关系是最基本的数据库关系类型。假设一个 `Cake` Entity 最多有一个 `Fruit` 配料。

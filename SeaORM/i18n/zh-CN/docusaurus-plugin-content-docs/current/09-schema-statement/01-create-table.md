@@ -1,7 +1,7 @@
 # 创建表
 
 :::tip Rustacean 贴纸包 🦀
-[我们的贴纸](https://www.sea-ql.org/sticker-pack/)采用优质防水乙烯基制成，具有独特的哑光效果。
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/cn/)采用优质防水乙烯基制成，具有独特的哑光效果。
 将它们贴在笔记本电脑、笔记本或任何小工具上，展示你对 Rust 的热爱！
 :::
 

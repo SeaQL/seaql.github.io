@@ -1,7 +1,7 @@
 # 设置迁移
 
 :::tip SeaQL 的 Rust 贴纸包 🦀
-[我们的贴纸](https://www.sea-ql.org/sticker-pack/)由优质防水 PVC 制成，具有独特的哑光表面，非常适合粘贴在笔记本电脑或其他小工具的背面！
+[我们的贴纸](https://www.sea-ql.org/sticker-pack/cn/)由优质防水 PVC 制成，具有独特的哑光表面，非常适合粘贴在笔记本电脑或其他小工具的背面！
 :::
 
 SeaORM 提供强大的迁移系统，让你可以使用 SeaQuery 语句或原生 SQL 来创建表、修改 schema 以及填充数据。

@@ -92,7 +92,7 @@
 
     7.1 [健壮与正确](07-write-test/01-testing.md)
 
-    7.2 [Mock 接口](07-write-test/02-mock.md)
+    7.2 [模拟接口](07-write-test/02-mock.md)
 
     7.3 [使用 SQLite](07-write-test/03-sqlite.md)
 

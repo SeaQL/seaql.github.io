@@ -1,10 +1,10 @@
 # 嵌套 ActiveModel
 
-在 SeaORM 2.0 中，我们引入了 [Smart Entity Loader](https://www.sea-ql.org/blog/2025-10-20-sea-orm-2.0/)（英文），使查询多路径关系到嵌套模型变得简单高效。这解决了读取端的问题。
+在 SeaORM 2.0 中，我们引入了 [Smart Entity Loader](https://www.sea-ql.org/blog/2025-10-20-sea-orm-2.0/)，使查询多路径关系到嵌套模型变得简单高效。这解决了读取端的问题。
 
-有了 nested ActiveModel，你现在可以做相反的事：在一次操作中将嵌套对象持久化回数据库。SeaORM 遍历树、检测变更、构建 insert 和 update 语句，并以正确的顺序执行它们以遵守外键依赖。
+有了 nested ActiveModel，你现在可以做相反的事：在一次操作中将嵌套对象回写数据库。SeaORM 遍历树、检测变更、构建 insert 和 update 语句，并以正确的顺序执行它们以遵守外键依赖。
 
-你可以在此页面的 [quickstart 示例](https://github.com/SeaQL/sea-orm/blob/master/examples/quickstart/src/main.rs)中找到本文描述的所有技术。
+你可以在此页面的 [快速入门示例](https://github.com/SeaQL/sea-orm/blob/master/examples/quickstart/src/main.rs)中找到本文描述的所有技术。
 
 ## 概要
 
@@ -50,7 +50,7 @@ user::ActiveModelEx {
 .await?
 ```
 
-.. 等价于手动执行以下操作：
+.. 等于手动执行以下操作：
 
 ```rust
 let txn = db.begin().await?;

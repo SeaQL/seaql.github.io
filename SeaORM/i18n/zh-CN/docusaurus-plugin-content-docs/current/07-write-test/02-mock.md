@@ -1,4 +1,4 @@
-# Mock 接口
+# 模拟接口
 
 To unit test more complex application logic with asynchronous interface and multiple underlying queries, you can use the mock database interface.
 
@@ -14,7 +14,7 @@ To ensure the correctness of your application logic, you can also validate the t
 
 Check out how we write unit tests using mock connection [here](https://github.com/SeaQL/sea-orm/blob/master/src/executor/paginator.rs#L250).
 
-## Mock 查询结果
+## 模拟查询结果
 
 We create a mock database for PostgreSQL with `MockDatabase::new(DatabaseBackend::Postgres)`. Then, query results are prepared using the `append_query_results` method. Note that we pass a vector of vectors to it, representing multiple query results, each with more than one model. Finally, we convert it into a connection and use it to perform CRUD operations just like a normal live connection.
 
@@ -138,7 +138,7 @@ mod tests {
 }
 ```
 
-## Mock 执行结果
+## 模拟执行结果
 
 This is very similar to mocking query result, the differences are that we use the `append_exec_results` method here and we perform insert, update, and delete operations here in the unit test. The `append_exec_results` method takes a vector of `MockExecResult`, each representing the exec result of the corresponding operation.
 
