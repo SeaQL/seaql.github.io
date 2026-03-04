@@ -134,7 +134,7 @@ let models: Vec<measurement::ActiveModel> = vec![..];
 let schema = measurement::Entity::arrow_schema();
 let batch = measurement::ActiveModel::to_arrow(&models, &schema)?;
 
-let mut insert = client.insert_arrow("measurement", &batch).await?;
+let mut insert = client.insert_arrow("measurement", &schema).await?;
 insert.write_batch(&batch).await?;
 insert.end().await?;
 ```
