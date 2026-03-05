@@ -1,5 +1,5 @@
 ---
-slug: 2026-03-04-sea-clickhouse
+slug: 2026-03-08-sea-clickhouse
 title: 'ClickHouse meets SeaORM: Arrow-powered data pipeline'
 author: SeaQL Team
 author_title: Chris Tsang
