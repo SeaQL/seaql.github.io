@@ -18,14 +18,17 @@ In this blog post we cover:
 - **Dynamic rows with `try_get`**: fetch query results without defining any schema struct
 - **Arrow RecordBatch streaming**: stream query results as `RecordBatch`es and insert them back into ClickHouse
 - **SeaORM to ClickHouse**: convert SeaORM entities to Arrow and insert into ClickHouse
-- **Schema DDL from Arrow**: derive `CREATE TABLE` DDL from an Arrow schema, no hand-written SQL
+- **Arrow Schema to ClickHouse DDL**: derive `CREATE TABLE` DDL from an Arrow schema, no hand-written SQL
+
+## Quick Install
 
 ```toml
 [dependencies]
-sea-clickhouse = { version = "0.14", features = ["arrow"] }
+# a drop-in replacement of clickhouse
+sea-clickhouse = { version = "0.14", features = ["arrow", "chrono", "rust_decimal"] }
 ```
 
-## The Problem with Typed Rows
+## Ergonomic dynamic column type with `try_get`
 
 The native `clickhouse-rs` client requires you to define a `#[derive(Row)]` struct whose field types match the query output exactly:
 
@@ -67,20 +70,18 @@ let client = Client::default().with_url("http://localhost:18123");
 
 let sql = r#"
     SELECT
-        toUInt64(number) + 1                                      AS id,
-        toDateTime64('2026-01-01', 6)
-            + toIntervalSecond(rand() % 86400)
-            + toIntervalMillisecond(rand() % 1000)                AS recorded_at,
-        toInt32(100 + rand() % 10)                                AS sensor_id,
-        -10.0 + randUniform(0.0, 50.0)                            AS temperature,
-        toDecimal128(3.0 + toFloat64(rand() % 5000) / 10000.0, 4) AS voltage
-    FROM system.numbers
-    LIMIT 20
+        toUInt64(id)                   AS id,
+        toDateTime64(recorded_at, 6)   AS recorded_at,
+        toInt32(sensor_id)             AS sensor_id,
+        toFloat64(temperature)         AS temperature,
+        toDecimal128(voltage, 4)       AS voltage
+    FROM sensor_data
+    LIMIT 1000
 "#;
 
 let mut cursor = client.query(sql).fetch_rows()?;
 let mut batches: Vec<RecordBatch> = Vec::new();
-while let Some(batch) = cursor.next_arrow_batch(10).await? {
+while let Some(batch) = cursor.next_arrow_batch(100).await? {
     batches.push(batch);
 }
 pretty::print_batches(&batches).unwrap();
@@ -102,7 +103,7 @@ pretty::print_batches(&batches).unwrap();
 Those batches can be inserted back into ClickHouse directly:
 
 ```rust
-let mut insert = client.insert_arrow("sensor_data", &batches[0].schema()).await?;
+let mut insert = client.insert_arrow("sensor_data_processed", &batches[0].schema()).await?;
 for batch in &batches {
     insert.write_batch(batch).await?;
 }
@@ -147,7 +148,7 @@ insert.write_batch(&batch).await?;
 insert.end().await?;
 ```
 
-[`arrow_schema`](https://docs.rs/sea-orm/2.0.0-rc.36/sea_orm/entity/trait.ArrowSchema.html#tymethod.arrow_schema) on the entity [derives the Arrow schema](https://www.sea-ql.org/blog/2026-02-22-sea-orm-arrow/) at compile time. `to_arrow` converts a slice of `ActiveModel`s into a `RecordBatch`. From there, [`insert_arrow`](https://docs.rs/sea-clickhouse/latest/clickhouse/struct.Client.html#method.insert_arrow) streams the batch into ClickHouse over HTTP. See the full [working example](https://github.com/SeaQL/clickhouse-rs/blob/main/sea-orm-arrow-example/src/main.rs).
+[`arrow_schema`](https://docs.rs/sea-orm/2.0.0-rc.36/sea_orm/entity/trait.ArrowSchema.html#tymethod.arrow_schema) on the entity [derives the Arrow schema](https://www.sea-ql.org/blog/2026-02-22-sea-orm-arrow/) at compile time. [`to_arrow`](https://docs.rs/sea-orm/2.0.0-rc.36/sea_orm/entity/trait.ActiveModelTrait.html#method.to_arrow) converts a slice of `ActiveModel`s into a `RecordBatch`. From there, [`insert_arrow`](https://docs.rs/sea-clickhouse/latest/clickhouse/struct.Client.html#method.insert_arrow) streams the batch into ClickHouse over HTTP. See the full [working example](https://github.com/SeaQL/clickhouse-rs/blob/main/sea-orm-arrow-example/src/main.rs).
 
 ## Arrow Schema to ClickHouse DDL
 
@@ -180,4 +181,18 @@ CREATE TABLE sensor_readings (
 PRIMARY KEY (recorded_at, device)
 ```
 
-The full workflow: Arrow -> derive DDL -> create table -> insert batches. Zero hand-written ClickHouse DDL. All examples shown here are available as [runnable examples](https://github.com/SeaQL/clickhouse-rs/tree/main?tab=readme-ov-file#examples) in the repository.
+The full workflow: Arrow -> derive DDL -> create table -> insert batches. Zero hand-written ClickHouse SQL. All examples shown here are available as [runnable examples](https://github.com/SeaQL/clickhouse-rs/tree/main?tab=readme-ov-file#examples) in the repository.
+
+## 🦀 Rustacean Sticker Pack
+
+The Rustacean Sticker Pack is the perfect way to express your passion for Rust.
+Our stickers are made with a premium water-resistant vinyl with a unique matte finish.
+
+Sticker Pack Contents:
+- Logo of SeaQL projects: SeaQL, SeaORM, SeaQuery, Seaography
+- Mascots: Ferris the Crab x 3, Terres the Hermit Crab
+- The Rustacean wordmark
+
+[Support SeaQL and get a Sticker Pack!](https://www.sea-ql.org/sticker-pack/)
+
+<a href="https://www.sea-ql.org/sticker-pack/"><img style={{borderRadius: "25px"}} alt="Rustacean Sticker Pack by SeaQL" src="https://www.sea-ql.org/static/sticker-pack-1s.jpg" /></a>
