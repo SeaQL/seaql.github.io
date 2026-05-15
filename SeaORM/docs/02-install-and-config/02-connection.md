@@ -33,7 +33,7 @@ Multiple queries will execute in parallel as you `await` on them.
 
 Here are some tips for database specific options:
 
-### MySQL
+### MySQL and MariaDB
 
 ```
 mysql://username:password@host/database
