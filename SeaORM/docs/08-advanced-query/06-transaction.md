@@ -4,32 +4,28 @@ A transaction is a group of SQL statements executed with ACID guarantee. There a
 
 ## With a Closure
 
-Perform a [transaction with a closure](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively. Since `async_closure` is not yet stabilized, you have to `Pin<Box<_>>` it.
+Perform a [transaction with a closure](https://docs.rs/sea-orm/2.0.0-rc.40/sea_orm/struct.DatabaseConnection.html#method.transaction_async). The transaction will be committed if the closure returned `Ok`, rollbacked if returned `Err`. The 2nd and 3rd type parameters are the Ok and Err types respectively.
 
 ```rust
-use sea_orm::TransactionTrait;
-
 // <Fn, A, B> -> Result<A, B>
-db.transaction::<_, (), DbErr>(|txn| {
-    Box::pin(async move {
-        bakery::ActiveModel {
-            name: Set("SeaSide Bakery".to_owned()),
-            profit_margin: Set(10.4),
-            ..Default::default()
-        }
-        .save(txn)
-        .await?;
+db.transaction_async::<_, (), DbErr>(async|txn| {
+    bakery::ActiveModel {
+        name: Set("SeaSide Bakery".to_owned()),
+        profit_margin: Set(10.4),
+        ..Default::default()
+    }
+    .save(txn)
+    .await?;
 
-        bakery::ActiveModel {
-            name: Set("Top Bakery".to_owned()),
-            profit_margin: Set(15.0),
-            ..Default::default()
-        }
-        .save(txn)
-        .await?;
+    bakery::ActiveModel {
+        name: Set("Top Bakery".to_owned()),
+        profit_margin: Set(15.0),
+        ..Default::default()
+    }
+    .save(txn)
+    .await?;
 
-        Ok(())
-    })
+    Ok(())
 })
 .await;
 ```
@@ -73,55 +69,47 @@ The example below illustrates the behavior with the closure API.
 ```rust
 assert_eq!(Bakery::find().all(db).await?.len(), 0);
 
-ctx.db.transaction::<_, _, DbErr>(|txn| {
-    Box::pin(async move {
-        let _ = bakery::ActiveModel {..}.save(txn).await?;
-        let _ = bakery::ActiveModel {..}.save(txn).await?;
-        assert_eq!(Bakery::find().all(txn).await?.len(), 2);
+ctx.db.transaction_async::<_, _, DbErr>(async |txn| {
+    let _ = bakery::ActiveModel {..}.save(txn).await?;
+    let _ = bakery::ActiveModel {..}.save(txn).await?;
+    assert_eq!(Bakery::find().all(txn).await?.len(), 2);
 
-        // Try nested transaction committed
-        txn.transaction::<_, _, DbErr>(|txn| {
-            Box::pin(async move {
+    // Try nested transaction committed
+    txn.transaction_async::<_, _, DbErr>(async |txn| {
+        let _ = bakery::ActiveModel {..}.save(txn).await?;
+        assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+
+        // Try nested-nested transaction rollbacked
+        assert!(txn.transaction_async::<_, _, DbErr>(async |txn| {
                 let _ = bakery::ActiveModel {..}.save(txn).await?;
-                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
-
-                // Try nested-nested transaction rollbacked
-                assert!(txn.transaction::<_, _, DbErr>(|txn| {
-                        Box::pin(async move {
-                            let _ = bakery::ActiveModel {..}.save(txn).await?;
-                            assert_eq!(Bakery::find().all(txn).await?.len(), 4);
-
-                            Err(DbErr::Query(RuntimeErr::Internal(
-                                "Force Rollback!".to_owned(),
-                            )))
-                        })
-                    })
-                    .await
-                    .is_err()
-                );
-
-                assert_eq!(Bakery::find().all(txn).await?.len(), 3);
-
-                // Try nested-nested transaction committed
-                txn.transaction::<_, _, DbErr>(|txn| {
-                    Box::pin(async move {
-                        let _ = bakery::ActiveModel {..}.save(txn).await?;
-                        assert_eq!(Bakery::find().all(txn).await?.len(), 4);
-
-                        Ok(())
-                    })
-                })
-                .await;
-
                 assert_eq!(Bakery::find().all(txn).await?.len(), 4);
 
-                Ok(())
+                Err(DbErr::Query(RuntimeErr::Internal(
+                    "Force Rollback!".to_owned(),
+                )))
             })
+            .await
+            .is_err()
+        );
+
+        assert_eq!(Bakery::find().all(txn).await?.len(), 3);
+
+        // Try nested-nested transaction committed
+        txn.transaction_async::<_, _, DbErr>(async |txn| {
+            let _ = bakery::ActiveModel {..}.save(txn).await?;
+             assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+
+            Ok(())
         })
         .await;
 
+        assert_eq!(Bakery::find().all(txn).await?.len(), 4);
+
         Ok(())
     })
+    .await;
+
+    Ok(())
 })
 .await;
 
