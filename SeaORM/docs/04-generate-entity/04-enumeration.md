@@ -88,7 +88,7 @@ pub enum Color {
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+#[sea_orm(rs_type = "Enum", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
@@ -96,6 +96,41 @@ pub enum Tea {
     BreakfastTea,
 }
 ```
+
+:::tip Since `2.0.0`
+Native database enums now use `rs_type = "Enum"` (previously `rs_type = "String"`). This is a breaking change from SeaORM 1.x.
+
+The associated `ActiveEnum::Value` type is [`sea_query::Enum`](https://docs.rs/sea-query/1/sea_query/struct.Enum.html) instead of `String`, so that the value can carry the enum's type name as metadata. As a result, [`to_value`](https://docs.rs/sea-orm/2/sea_orm/entity/trait.ActiveEnum.html#tymethod.to_value) returns a `sea_query::Enum`, and [`try_from_value`](https://docs.rs/sea-orm/2/sea_orm/entity/trait.ActiveEnum.html#tymethod.try_from_value) expects a `&sea_query::Enum`.
+
+The `sea_query::Enum` struct is:
+
+```rust
+pub struct Enum {
+    pub type_name: EnumTypeName, // RcOrArc<str>
+    pub value: Cow<'static, str>,
+}
+```
+
+To convert a native enum variant **to** a `String`, read the `value` field:
+
+```rust
+let s: String = tea.to_value().value.into();
+```
+
+To convert a `String` **into** a native enum variant, construct a `sea_query::Enum` first:
+
+```rust
+use sea_orm::sea_query;
+
+let value = sea_query::Enum {
+    type_name: Tea::name().inner().into(),
+    value: input_string.into(),
+};
+let tea = Tea::try_from_value(&value)?;
+```
+
+String-backed (`rs_type = "String"`) and integer-backed (`rs_type = "i32"`) enums are unaffected: their `Value` type remains `String` / `i32`.
+:::
 
 ### MySQL
 
@@ -142,7 +177,7 @@ manager
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+#[sea_orm(rs_type = "Enum", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
