@@ -13,7 +13,7 @@ Enable Arrow support with the `with-arrow` feature flag:
 
 ```toml
 [dependencies]
-sea-orm = { version = "2.0.0-rc", features = ["with-arrow"] }
+sea-orm = { version = "2.0.0", features = ["with-arrow"] }
 parquet = { version = "57", features = ["arrow"] }
 ```
 
@@ -46,7 +46,7 @@ For compact entities, use `DeriveArrowSchema` as an extra derive:
 pub struct Model { .. }
 ```
 
-This derives the [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.ArrowSchema.html) trait, exposing three methods:
+This derives the [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.ArrowSchema.html) trait, exposing three methods:
 
 ```rust
 use sea_orm::ArrowSchema;

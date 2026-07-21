@@ -4,7 +4,7 @@ You can group results with the `group_by` method. If you wish to further restric
 
 :::info
 
-Aggregation functions including `max`, `min`, `sum`, `avg`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ColumnTrait.html).
+Aggregation functions including `max`, `min`, `sum`, `avg`, `count` are available in [`ColumnTrait`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ColumnTrait.html).
 
 :::
 
@@ -42,7 +42,7 @@ assert_eq!(total_spent, 25.into());
 
 ## Group By
 
-The `group_by` method can take a column of the entity or a complex [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html).
+The `group_by` method can take a column of the entity or a complex [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html).
 
 ```rust
 assert_eq!(

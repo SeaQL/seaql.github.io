@@ -90,10 +90,10 @@ assert_eq!(customers.notes, None);
 
 ## Select Custom Expressions
 
-Select any custom expression with `column_as` / `expr_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) helper to build `SimpleExpr`.
+Select any custom expression with `column_as` / `expr_as` method, it takes any [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html) and an alias. Use [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/enum.Expr.html) helper to build `SimpleExpr`.
 
 ```rust
-use sea_query::{Alias, Expr, Func};
+use sea_query::{Alias, Expr, ExprTrait, Func};
 
 assert_eq!(
     cake::Entity::find()

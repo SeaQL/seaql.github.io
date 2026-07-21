@@ -1,10 +1,10 @@
 # Error Handling
 
-All runtime errors in SeaORM are represented by [`DbErr`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/error/enum.DbErr.html).
+All runtime errors in SeaORM are represented by [`DbErr`](https://docs.rs/sea-orm/2.0.0/sea_orm/error/enum.DbErr.html).
 
 ## Handling Common SQL Errors
 
-Use `DbErr::sql_err()` to convert SQL-related errors into common database errors [`SqlErr`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/error/enum.SqlErr.html), such as unique constraint or foreign key violation errors.
+Use `DbErr::sql_err()` to convert SQL-related errors into common database errors [`SqlErr`](https://docs.rs/sea-orm/2.0.0/sea_orm/error/enum.SqlErr.html), such as unique constraint or foreign key violation errors.
 
 ```rust
 assert!(matches!(

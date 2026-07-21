@@ -68,7 +68,7 @@ pub struct Model {
     #[sea_orm(unique)]
     pub cake_id: Option<i32>,
     #[sea_orm(belongs_to, from = "cake_id", to = "id")]
-    pub cake: HasOne<super::cake::Entity>,
+    pub cake: BelongsTo<Option<super::cake::Entity>>,
 }
 ```
 

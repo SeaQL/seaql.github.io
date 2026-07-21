@@ -50,7 +50,7 @@ pub struct Model {
     // without unique
     pub cake_id: Option<i32>,
     #[sea_orm(belongs_to, from = "cake_id", to = "id")]
-    pub cake: HasOne<super::cake::Entity>,
+    pub cake: BelongsTo<Option<super::cake::Entity>>,
 }
 ```
 
@@ -104,7 +104,7 @@ pub struct Model {
     pub left_id: i32,
     pub right_id: i32,
     #[sea_orm(belongs_to, from = "(left_id, right_id)", to = "(left_id, right_id)")]
-    pub a: Option<super::composite_a::Entity>,
+    pub a: BelongsTo<super::composite_a::Entity>,
 }
 ```
 

@@ -46,19 +46,16 @@ let orange = fruit::ActiveModel {
     ..Default::default()
 };
 
-let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
-assert_eq!(res.last_insert_id, 30)
+let res: InsertManyResult = Fruit::insert_many([apple, orange]).exec(db).await?;
+assert_eq!(res.last_insert_id, Some(30))
 ```
 
-Supplying an empty set to `insert_many` method will result in an error. However, you can change the behaviour with `on_empty_do_nothing` which wraps the `InsertResult` with a `TryInsertResult`.
+Since SeaORM 2.0, `insert_many` returns an [`InsertManyResult`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.InsertManyResult.html) whose `last_insert_id` is an `Option`. Supplying an empty set is no longer an error; it simply inserts nothing and returns `last_insert_id: None`.
 
 ```rust
-let res = Bakery::insert_many(std::iter::empty())
-    .on_empty_do_nothing()
-    .exec(db)
-    .await;
+let res: InsertManyResult = Bakery::insert_many(std::iter::empty()).exec(db).await?;
 
-assert!(matches!(res, Ok(TryInsertResult::Empty)));
+assert_eq!(res.last_insert_id, None);
 ```
 
 ## On Conflict
@@ -114,7 +111,7 @@ let res = Entity::insert_many([
 .exec(db)
 .await;
 
-assert_eq!(res?.last_insert_id, 3);
+assert_eq!(res?.last_insert_id, Some(3));
 
 // Insert `4` into the table together with the previous 3 rows
 let res = Entity::insert_many([
@@ -127,7 +124,7 @@ let res = Entity::insert_many([
 .exec(db)
 .await;
 
-assert_eq!(res?.last_insert_id, 4);
+assert_eq!(res?.last_insert_id, Some(4));
 
 // Repeat last insert. Since all 4 rows already exist, this essentially did nothing.
 // A `DbErr::RecordNotInserted` error will be thrown.
@@ -144,12 +141,12 @@ let res = Entity::insert_many([
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
 
-If you want `RecordNotInserted` to be an `Ok` instead of an error, call `.do_nothing()`:
+If you want `RecordNotInserted` to be an `Ok` instead of an error, call `.try_insert()`, which converts it into a `TryInsertResult` (alternatively, use one of the `on_conflict_do_nothing*` methods):
 
 ```rust
 let res = Entity::insert_many([..])
     .on_conflict(on_conflict)
-    .do_nothing()
+    .try_insert()
     .exec(db)
     .await;
 

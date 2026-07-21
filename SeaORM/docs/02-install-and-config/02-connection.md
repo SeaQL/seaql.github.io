@@ -1,6 +1,6 @@
 # Database Connection
 
-To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.Database.html) interface:
+To obtain a database connection, use the [`Database`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.Database.html) interface:
 
 ```rust
 let db: DatabaseConnection = Database::connect("protocol://username:password@host/database").await?;
@@ -16,7 +16,7 @@ If you can't get `localhost` to work, try putting in an IP address and port numb
 
 :::
 
-Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.9/sqlx/struct.Pool.html) is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.DatabaseConnection.html).
+Under the hood, a [`sqlx::Pool`](https://docs.rs/sqlx/0.9/sqlx/struct.Pool.html) is created and owned by [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.DatabaseConnection.html).
 
 <details>
 <summary>Changed in 2.0</summary>
@@ -69,7 +69,7 @@ sqlite://path/to/db.sqlite?mode=ro
 
 ## Connect Options
 
-To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.ConnectOptions.html) interface:
+To configure the connection, use the [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.ConnectOptions.html) interface:
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database");

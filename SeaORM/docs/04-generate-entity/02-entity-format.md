@@ -62,6 +62,8 @@ pub struct Model { ... }
 
 ## Column
 
+Deriving `DeriveEntityModel` generates a `Column` enum with one variant per column. Since `2.0.0`, it additionally generates a strongly-typed `COLUMN` constant (with a type-specific struct per column) for compile-time type checking in queries — see [Strongly-Typed COLUMN Constant](../05-basic-crud/02-select.md#strongly-typed-column-constant).
+
 ### Column Name
 
 You can override the column name by specifying the `column_name` attribute.

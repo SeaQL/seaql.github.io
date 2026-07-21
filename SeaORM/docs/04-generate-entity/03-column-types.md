@@ -12,7 +12,7 @@ The type mappings of MSSQL can be found [here](https://www.sea-ql.org/SeaORM-X/d
 
 For the mappings of Rust primitive data types:
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | char | char | char |
 | `String` | String | varchar | varchar | varchar |
@@ -31,7 +31,7 @@ For the mappings of Rust primitive data types:
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | date_text | date | date |
 | `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | time_text | time | time |
@@ -43,6 +43,7 @@ For the mappings of Rust non-primitive data types. You can check [`entity/prelud
 | `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 | `PgVector`: pgvector::Vector | Vector | N/A | N/A | vector |
 | `IpNetwork`: ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
+| `ChronoUnixTimestamp` / `ChronoUnixTimestampMillis` <br/> `TimeUnixTimestamp` / `TimeUnixTimestampMillis` <br/> (see [Unix Timestamp](#unix-timestamp)) | BigInteger | integer | bigint | bigint |
 
 You can override the default mappings between a Rust type and `ColumnType` with the `column_type` attribute.
 
@@ -162,9 +163,9 @@ Since `2.0.0`, several new wrapper types are added to map chrono / time datetime
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    pub ts: ChronoUnixTimestamp,
-    pub ms: ChronoUnixTimestampMillis,
-    pub ts: TimeUnixTimestamp,
-    pub ms: TimeUnixTimestampMillis,
+    pub chrono_ts: ChronoUnixTimestamp,
+    pub chrono_ms: ChronoUnixTimestampMillis,
+    pub time_ts: TimeUnixTimestamp,
+    pub time_ms: TimeUnixTimestampMillis,
 }
 ```

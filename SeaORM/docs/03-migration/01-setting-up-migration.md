@@ -35,7 +35,7 @@ impl MigratorTrait for Migrator {
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-cargo install sea-orm-cli@^2.0.0-rc
+cargo install sea-orm-cli@^2.0
 ```
 
 :::tip SQL Server (MSSQL) backend
@@ -88,7 +88,7 @@ Import the [`sea-orm-migration`](https://crates.io/crates/sea-orm-migration) and
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [dependencies.sea-orm-migration]
-version = "~2.0.0-rc" # sea-orm-migration version
+version = "2.0" # sea-orm-migration version
 features = [
   # Enable following runtime and db backend features if you want to run migration via CLI
   # "runtime-tokio-native-tls",
@@ -134,7 +134,7 @@ members = [".", "migration"]
 migration = { path = "migration" }
 
 [dependencies]
-sea-orm = { version = "2.0.0-rc", features = [..] }
+sea-orm = { version = "2.0.0", features = [..] }
 ```
 
 In your app, you can then run the migrator on startup.

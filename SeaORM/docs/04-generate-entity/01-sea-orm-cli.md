@@ -3,7 +3,7 @@
 First, install `sea-orm-cli` with `cargo`.
 
 ```shell
-cargo install sea-orm-cli@^2.0.0-rc
+cargo install sea-orm-cli@^2.0
 ```
 
 :::tip SQL Server (MSSQL) backend
@@ -80,7 +80,11 @@ since 2.0.0:
     - `dense`: the new entity format
     - `compact`: the entity format in 1.0
     - `expanded`: the entity format in 0.x
+    - `frontend`: the frontend entity format
 - `--big-integer-type`: uses `i32` or `i64` for `bigint`, intended for SQLite
+- `--column-extra-derives`: append extra derive macros to the generated column enum, e.g. `--column-extra-derives async_graphql::Enum`
+- `--experimental-preserve-user-modifications`: preserve manual edits to generated entity files (extra derives/attributes on `Model` and `Relation`, and `ActiveModelBehavior` impl blocks). Deprecated alias: `--preserve-user-modifications`
+- `--er-diagram`: also generate a Mermaid ER diagram as `entities.mermaid` in the output directory
 
 ```shell
 # Generate entity files of database `bakery` to `./src/entity`

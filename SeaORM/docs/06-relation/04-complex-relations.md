@@ -2,7 +2,7 @@
 
 ## Linked
 
-The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
+The `Related` trait is a representation of the arrows (1-1, 1-N, M-N) we draw on Entity Relationship Diagrams. A [`Linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.Linked.html) is composed of a chain of relations, and is useful when:
 
 1. there exist multiple join paths between a pair of entities, making it impossible to impl `Related`
 1. joining across multiple entities in a relational query
@@ -32,7 +32,7 @@ impl Linked for CakeToFilling {
 
 ### Lazy Loading
 
-Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
+Find fillings that can be filled into a cake with the [`find_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) method.
 
 ```rust
 let cake_model = cake::Model {
@@ -58,7 +58,7 @@ assert_eq!(
 
 ### Eager Loading
 
-[`find_also_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
+[`find_also_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) is a dual of `find_also_related`; [`find_with_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) is a dual of `find_with_related`; :
 
 ```rust
 assert_eq!(
@@ -99,7 +99,7 @@ pub struct Model {
         from = "reports_to_id",
         to = "id"
     )]
-    pub reports_to: HasOne<Entity>,
+    pub reports_to: BelongsTo<Option<Entity>>,
     #[sea_orm(self_ref, relation_enum = "Manages", relation_reverse = "ReportsTo")]
     pub manages: HasMany<Entity>,
 }
@@ -121,7 +121,7 @@ pub struct Model {
     pub name: String,
     pub reports_to_id: Option<i32>,
     #[sea_orm(self_ref, relation_enum = "ReportsTo")]
-    pub reports_to: HasOne<Entity>,
+    pub reports_to: BelongsTo<Option<Entity>>,
     #[sea_orm(self_ref, relation_enum = "Manages")]
     pub manages: HasMany<Entity>,
 }
@@ -147,7 +147,7 @@ let staff = staff_compact::Entity::load()
     .await?;
 
 assert_eq!(staff[0].name, "Alan");
-assert_eq!(staff[0].reports_to, None);
+assert!(staff[0].reports_to.is_unloaded_or_not_found());
 assert_eq!(staff[0].manages[0].name, "Ben");
 assert_eq!(staff[0].manages[1].name, "Alice");
 
@@ -156,11 +156,11 @@ assert_eq!(staff[1].reports_to.as_ref().unwrap().name, "Alan");
 assert!(staff[1].manages.is_empty());
 
 assert_eq!(staff[2].name, "Alice");
-assert_eq!(staff[1].reports_to.as_ref().unwrap().name, "Alan");
+assert_eq!(staff[2].reports_to.as_ref().unwrap().name, "Alan");
 assert!(staff[2].manages.is_empty());
 
 assert_eq!(staff[3].name, "Elle");
-assert_eq!(staff[3].reports_to, None);
+assert!(staff[3].reports_to.is_unloaded_or_not_found());
 assert!(staff[3].manages.is_empty());
 ```
 
@@ -238,9 +238,9 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub follower_id: i32,
     #[sea_orm(belongs_to, from = "user_id", to = "id")]
-    pub user: Option<super::user::Entity>,
+    pub user: BelongsTo<super::user::Entity>,
     #[sea_orm(belongs_to, relation_enum = "Follower", from = "follower_id", to = "id")]
-    pub follower: Option<super::user::Entity>,
+    pub follower: BelongsTo<super::user::Entity>,
 }
 ```
 
@@ -322,9 +322,9 @@ pub struct Model {
     pub manager_id: i32,
     pub cashier_id: i32,
     #[sea_orm(belongs_to, relation_enum = "Manager", from = "manager_id", to = "id")]
-    pub manager: HasOne<super::worker::Entity>,
+    pub manager: BelongsTo<super::worker::Entity>,
     #[sea_orm(belongs_to, relation_enum = "Cashier", from = "cashier_id", to = "id")]
-    pub cashier: HasOne<super::worker::Entity>,
+    pub cashier: BelongsTo<super::worker::Entity>,
 }
 ```
 

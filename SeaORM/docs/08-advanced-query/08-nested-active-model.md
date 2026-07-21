@@ -32,13 +32,13 @@ This builder pattern constructs the following object tree:
 user::ActiveModelEx {
     name: Set("Bob".into()),
     email: Set("bob@sea-ql.org".into()),
-    profile: HasOneModel::Set(profile::ActiveModelEx {
+    profile: ActiveHasOne::Set(profile::ActiveModelEx {
         picture: Set("image.jpg".into()),
         ..Default::default()
     }),
-    posts: HasManyModel::Append(post::ActiveModelEx {
+    posts: ActiveHasMany::Append(post::ActiveModelEx {
         title: Set("Nice weather".into()),
-        tags: HasManyModel::Append(tag::ActiveModel {
+        tags: ActiveHasMany::Append(tag::ActiveModel {
             tag: Set("sunny".into()),
             ..Default::default()
         }),
@@ -126,7 +126,7 @@ pub struct Model {
     #[sea_orm(unique)]
     pub user_id: i32,
     #[sea_orm(belongs_to, from = "user_id", to = "id")]
-    pub user: HasOne<super::user::Entity>,
+    pub user: BelongsTo<super::user::Entity>,
     ..
 }
 ```
@@ -159,7 +159,7 @@ User 1-N Post
 pub struct Model {
     pub user_id: i32,
     #[sea_orm(belongs_to, from = "user_id", to = "id")]
-    pub author: HasOne<super::user::Entity>,
+    pub author: BelongsTo<super::user::Entity>,
     ..
 }
 ```
@@ -223,9 +223,9 @@ pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)] // ⬅ composite key
     pub tag_id: i32,
     #[sea_orm(belongs_to, from = "post_id", to = "id")] // ⬅ belongs to both
-    pub post: Option<super::post::Entity>,
+    pub post: BelongsTo<super::post::Entity>,
     #[sea_orm(belongs_to, from = "tag_id", to = "id")] // ⬅ belongs to both
-    pub tag: Option<super::tag::Entity>,
+    pub tag: BelongsTo<super::tag::Entity>,
 }
 ```
 
@@ -296,9 +296,9 @@ pub struct Model {
     #[sea_orm(unique_key = "film_actor")] // ⬅ unique key
     pub actor_id: i32,
     #[sea_orm(belongs_to, from = "film_id", to = "id")]
-    pub film: HasOne<super::film::Entity>,
+    pub film: BelongsTo<super::film::Entity>,
     #[sea_orm(belongs_to, from = "actor_id", to = "id")]
-    pub actor: HasOne<super::actor::Entity>,
+    pub actor: BelongsTo<super::actor::Entity>,
 }
 ```
 
@@ -312,7 +312,7 @@ pub struct ModelEx {
     pub id: i32,
     pub user_id: i32,
     pub title: String,
-    pub author: HasOne<super::user::Entity>,
+    pub author: BelongsTo<super::user::Entity>,
     pub tags: HasMany<super::tag::Entity>,
 }
 
@@ -322,8 +322,8 @@ pub struct ActiveModelEx {
     pub id: ActiveValue<i32>,
     pub user_id: ActiveValue<i32>,
     pub title: ActiveValue<String>,
-    pub author: HasOneModel<super::user::Entity>,
-    pub tags: HasManyModel<super::tag::Entity>,
+    pub author: ActiveBelongsTo<super::user::Entity>,
+    pub tags: ActiveHasMany<super::tag::Entity>,
 }
 ```
 
@@ -431,7 +431,7 @@ pub struct Model {
     pub post_id: Option<i32>, // this is nullable
     pub file: String,
     #[sea_orm(belongs_to, from = "post_id", to = "id")]
-    pub post: HasOne<super::post::Entity>,
+    pub post: BelongsTo<Option<super::post::Entity>>,
 }
 ```
 
@@ -465,6 +465,6 @@ Keeping track of whether to use `insert` or `update` can be hard, unless the int
 
 ## Backwards Compatibility
 
-All the 2.0 features introduced in this post are fully backwards compatible with 1.0, since only new types and methods have been added: `ActiveModelEx`, `HasOneModel`, `HasManyModel` and a few methods. `ActiveModel` continues to behave exactly as before.
+All the 2.0 features introduced in this post are fully backwards compatible with 1.0, since only new types and methods have been added: `ActiveModelEx`, `ActiveBelongsTo`, `ActiveHasOne`, `ActiveHasMany` and a few methods. `ActiveModel` continues to behave exactly as before.
 
 However, due to the macros needing the relations' attributes to generate the implementations, these features are only available to `#[sea_orm::model]`, but not `#[sea_orm::compact_model]`.
