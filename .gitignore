@@ -1,4 +1,5 @@
 .vscode
+.env
 .yarn
 .yarnrc.yml
 .pnp.*
