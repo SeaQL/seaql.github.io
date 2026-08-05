@@ -23,11 +23,13 @@ Rust 基本数据类型的映射：
 | `i32` | Integer | integer | int | integer |
 | `u32` | Unsigned | integer | int unsigned | N/A |
 | `i64` | BigInteger | integer | bigint | bigint |
-| `u64` | BigUnsigned | integer | bigint unsigned | N/A |
+| `u64` | BigUnsigned | 不支持¹ | bigint unsigned | N/A |
 | `f32` | Float | float | float | real |
 | `f64` | Double | double | double | double precision |
 | `bool` | Boolean | boolean | bool | bool |
 | `Vec<u8>` | Binary | blob | blob | bytea |
+
+> ¹ SQLite 不支持 `u64`。SQLite 仅存储 64 位*有符号*整数，且底层 `sqlx` SQLite 驱动无法编码 `u64`（无法表示大于 `i64::MAX` 的值）。请改用 `i64`，或将较大的无符号值存储为 `String` / `Vec<u8>`。参见 [#1400](https://github.com/SeaQL/sea-orm/issues/1400)。
 
 Rust 非基本数据类型的映射。你可以查看 [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) 了解所有重新导出的类型。
 
