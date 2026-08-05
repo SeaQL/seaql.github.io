@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ColumnDefault","ForeignKeyAction","IndexOrder","IndexType","StringLen","Type"],"struct":["Collation","ColumnExpression","ColumnInfo","FloatAttr","ForeignKeyInfo","IndexInfo","IndexPart","NumericAttr","Schema","TableDef","TableInfo","TimeAttr","Version","ViewDef"],"type":["ColumnType"]};

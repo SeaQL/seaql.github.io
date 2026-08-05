@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Expr"],"trait":["ExprTrait"],"type":["SimpleExpr"]};

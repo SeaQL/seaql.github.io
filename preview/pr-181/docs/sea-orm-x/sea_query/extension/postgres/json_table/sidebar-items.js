@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["QuotesKind"],"struct":["Builder","ColumnBuilder","ExistsColumnBuilder","NestedPathBuilder"]};

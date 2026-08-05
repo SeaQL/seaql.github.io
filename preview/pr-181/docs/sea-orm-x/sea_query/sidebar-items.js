@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"attr":["enum_def"],"derive":["Iden","IdenStatic"],"macro":["all","any","raw_query","raw_sql"],"mod":["backend","error","expr","extension","foreign_key","func","index","prepare","query","raw_sql","schema","table","token","types","value"]};

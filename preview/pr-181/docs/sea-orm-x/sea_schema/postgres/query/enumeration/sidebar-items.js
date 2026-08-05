@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PgCatalog","PgEnum","PgType"],"struct":["EnumQueryResult"]};

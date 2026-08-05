@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["ChronoUnixTimestamp","ChronoUnixTimestampMillis","TextUuid","TimeUnixTimestamp","TimeUnixTimestampMillis"],"trait":["DefaultActiveValue","DefaultActiveValueNone","DefaultActiveValueNotSet"]};

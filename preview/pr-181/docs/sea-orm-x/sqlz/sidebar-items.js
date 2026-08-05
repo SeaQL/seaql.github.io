@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["arguments","column","connection","database","error","executor","mssql","pool","query","row","transaction","type_info"]};

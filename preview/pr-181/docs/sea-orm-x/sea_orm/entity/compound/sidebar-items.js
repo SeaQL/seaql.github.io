@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["HasMany","HasOne","LoadTarget"],"struct":["EntityLoaderPaginator","EntityLoaderWithSelf","EntityLoaderWithSelfRev","HasManyIter"],"trait":["EntityLoaderTrait","EntityReverse"]};

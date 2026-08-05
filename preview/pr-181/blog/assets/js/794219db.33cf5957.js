@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksea_ql_blog=self.webpackChunksea_ql_blog||[]).push([[8601],{4284:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/preview/pr-181/blog/","page":1,"postsPerPage":12,"totalPages":6,"totalCount":70,"nextPage":"/preview/pr-181/blog/page/2","blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

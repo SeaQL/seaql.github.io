@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PgAttribute","PgClass","PgIndex","PgIndexes","PgNamespace"],"struct":["UniqueIndexQueryResult"]};

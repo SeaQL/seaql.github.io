@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SqlzErrorKind"],"mod":["mssql"],"struct":["MsSqlPool"],"trait":["SqlzRow"]};
