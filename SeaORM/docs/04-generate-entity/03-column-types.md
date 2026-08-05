@@ -23,11 +23,13 @@ For the mappings of Rust primitive data types:
 | `i32` | Integer | integer | int | integer |
 | `u32` | Unsigned | integer | int unsigned | N/A |
 | `i64` | BigInteger | integer | bigint | bigint |
-| `u64` | BigUnsigned | integer | bigint unsigned | N/A |
+| `u64` | BigUnsigned | unsupported[^u64-sqlite] | bigint unsigned | N/A |
 | `f32` | Float | float | float | real |
 | `f64` | Double | double | double | double precision |
 | `bool` | Boolean | boolean | bool | bool |
 | `Vec<u8>` | Binary | blob | blob | bytea |
+
+[^u64-sqlite]: `u64` is not supported on SQLite. SQLite stores only 64-bit *signed* integers, and the underlying `sqlx` SQLite driver does not encode `u64` (values above `i64::MAX` cannot be represented). Use `i64`, or store large unsigned values as `String` / `Vec<u8>`. See [#1400](https://github.com/SeaQL/sea-orm/issues/1400).
 
 For the mappings of Rust non-primitive data types. You can check [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) for all of the reexported types.
 
