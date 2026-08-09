@@ -10,7 +10,7 @@
 
 ## 实体
 
-通过实现 [`EntityTrait`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html)，你可以对给定表执行 CRUD 操作。
+通过实现 [`EntityTrait`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.EntityTrait.html)，你可以对给定表执行 CRUD 操作。
 
 ```rust
 #[derive(Copy, Clone, Default, Debug, DeriveEntity)]
@@ -61,7 +61,7 @@ pub enum Column {
 }
 ```
 
-要指定每列的数据类型，可使用 [`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html) 枚举。
+要指定每列的数据类型，可使用 [`ColumnType`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ColumnType.html) 枚举。
 
 ### 附加属性
 
@@ -106,7 +106,7 @@ impl ColumnTrait for Column {
 
 表示此表主键的枚举。复合主键由具有多个变体的枚举表示。
 
-`ValueType` 定义 [`InsertResult`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.InsertResult.html) 中 last_insert_id 的类型。
+`ValueType` 定义 [`InsertResult`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.InsertResult.html) 中 last_insert_id 的类型。
 
 `auto_increment` 定义主键是否具有自动生成的值。
 
@@ -168,7 +168,7 @@ pub struct Model {
 
 ## ActiveModel
 
-`ActiveModel` 拥有其对应 `Model` 的所有属性，但所有属性都包装在 [`ActiveValue`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ActiveValue.html) 中。
+`ActiveModel` 拥有其对应 `Model` 的所有属性，但所有属性都包装在 [`ActiveValue`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html) 中。
 
 ```rust
 #[derive(Clone, Debug, PartialEq)]

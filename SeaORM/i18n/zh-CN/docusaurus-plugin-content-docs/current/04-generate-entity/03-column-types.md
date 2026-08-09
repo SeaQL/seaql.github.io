@@ -12,7 +12,7 @@ MSSQL 的类型映射可在[此处](https://www.sea-ql.org/SeaORM-X/docs/generat
 
 Rust 基本数据类型的映射：
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `String` | Char | char | char | char |
 | `String` | String | varchar | varchar | varchar |
@@ -33,7 +33,7 @@ Rust 基本数据类型的映射：
 
 Rust 非基本数据类型的映射。你可以查看 [`entity/prelude.rs`](https://github.com/SeaQL/sea-orm/blob/master/src/entity/prelude.rs) 了解所有重新导出的类型。
 
-| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
+| Rust type | Database Type <br/> ([`ColumnType`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ColumnType.html)) | SQLite <br/> datatype | MySQL <br/> datatype | PostgreSQL <br/> datatype |
 | --------- | --------- | --------- | --------- | --------- |
 | `Date`: chrono::NaiveDate <br/>`TimeDate`: time::Date | Date | date_text | date | date |
 | `Time`: chrono::NaiveTime <br/>`TimeTime`: time::Time | Time | time_text | time | time |
@@ -45,6 +45,7 @@ Rust 非基本数据类型的映射。你可以查看 [`entity/prelude.rs`](http
 | `Decimal`: rust_decimal::Decimal | Decimal | real | decimal | decimal |
 | `PgVector`: pgvector::Vector | Vector | N/A | N/A | vector |
 | `IpNetwork`: ipnetwork::IpNetwork | Inet | N/A | N/A | inet |
+| `ChronoUnixTimestamp` / `ChronoUnixTimestampMillis` <br/> `TimeUnixTimestamp` / `TimeUnixTimestampMillis` <br/> （参见 [Unix 时间戳](#unix-timestamp)） | BigInteger | integer | bigint | bigint |
 
 你可以使用 `column_type` 属性覆盖 Rust 类型与 `ColumnType` 之间的默认映射。
 
@@ -164,9 +165,9 @@ pub struct Model {
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
-    pub ts: ChronoUnixTimestamp,
-    pub ms: ChronoUnixTimestampMillis,
-    pub ts: TimeUnixTimestamp,
-    pub ms: TimeUnixTimestampMillis,
+    pub chrono_ts: ChronoUnixTimestamp,
+    pub chrono_ms: ChronoUnixTimestampMillis,
+    pub time_ts: TimeUnixTimestamp,
+    pub time_ms: TimeUnixTimestampMillis,
 }
 ```

@@ -1,10 +1,10 @@
 # 错误处理
 
-SeaORM 中的所有运行时错误由 [`DbErr`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/error/enum.DbErr.html) 表示。
+SeaORM 中的所有运行时错误由 [`DbErr`](https://docs.rs/sea-orm/2.0.0/sea_orm/error/enum.DbErr.html) 表示。
 
 ## 处理常见 SQL 错误
 
-使用 `DbErr::sql_err()` 将 SQL 相关错误转换为常见数据库错误 [`SqlErr`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/error/enum.SqlErr.html)，例如唯一约束或外键违反错误。
+使用 `DbErr::sql_err()` 将 SQL 相关错误转换为常见数据库错误 [`SqlErr`](https://docs.rs/sea-orm/2.0.0/sea_orm/error/enum.SqlErr.html)，例如唯一约束或外键违反错误。
 
 ```rust
 assert!(matches!(

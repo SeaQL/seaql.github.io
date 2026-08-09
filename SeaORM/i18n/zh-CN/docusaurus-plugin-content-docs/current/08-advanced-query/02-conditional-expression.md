@@ -4,7 +4,7 @@
 
 ## AND 条件
 
-使用 `Condition::all` 方法构建 AND 条件表达式，并使用 `add` 方法添加以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 表示的任何条件。
+使用 `Condition::all` 方法构建 AND 条件表达式，并使用 `add` 方法添加以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html) 表示的任何条件。
 
 ```rust
 assert_eq!(
@@ -25,7 +25,7 @@ assert_eq!(
 
 ## OR 条件
 
-使用 `Condition::any` 方法构建 OR 条件表达式，并使用 `add` 方法添加以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 表示的任何条件。
+使用 `Condition::any` 方法构建 OR 条件表达式，并使用 `add` 方法添加以 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html) 表示的任何条件。
 
 ```rust
 assert_eq!(

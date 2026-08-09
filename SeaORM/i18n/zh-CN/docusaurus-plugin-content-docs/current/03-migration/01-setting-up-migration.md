@@ -34,7 +34,7 @@ impl MigratorTrait for Migrator {
 首先，使用 `cargo` 安装 `sea-orm-cli`。
 
 ```shell
-cargo install sea-orm-cli@^2.0.0-rc
+cargo install sea-orm-cli@^2.0
 ```
 
 :::tip SQL Server (MSSQL) backend
@@ -87,7 +87,7 @@ migration
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [dependencies.sea-orm-migration]
-version = "~2.0.0-rc" # sea-orm-migration version
+version = "2.0" # sea-orm-migration version
 features = [
   # Enable following runtime and db backend features if you want to run migration via CLI
   # "runtime-tokio-native-tls",
@@ -133,7 +133,7 @@ members = [".", "migration"]
 migration = { path = "migration" }
 
 [dependencies]
-sea-orm = { version = "2.0.0-rc", features = [..] }
+sea-orm = { version = "2.0.0", features = [..] }
 ```
 
 在应用中，你可以在启动时运行迁移。

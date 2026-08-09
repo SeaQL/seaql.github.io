@@ -3,7 +3,7 @@
 你可以定义 New Type（`T`）并将其用作模型字段。需要实现以下特征。
 
 1. 为 [`sea_query::Value`](https://docs.rs/sea-query/*/sea_query/value/enum.Value.html) 实现 `From<T>`
-2. 为 `T` 实现 [`sea_orm::TryGetable`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TryGetable.html)
+2. 为 `T` 实现 [`sea_orm::TryGetable`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.TryGetable.html)
 3. 为 `T` 实现 [`sea_query::ValueType`](https://docs.rs/sea-query/*/sea_query/value/trait.ValueType.html)
 4. 为 `T` 实现 [`sea_query::Nullable`](https://docs.rs/sea-query/*/sea_query/value/trait.Nullable.html)
 
@@ -153,7 +153,7 @@ impl sea_orm::sea_query::ValueType for StringVec {
 }
 
 #[automatically_derived]
-impl sea_orm::sea_query::Nullable for Integer {
+impl sea_orm::sea_query::Nullable for StringVec {
     fn null() -> sea_orm::Value {
         <Vec<String> as sea_orm::sea_query::Nullable>::null()
     }

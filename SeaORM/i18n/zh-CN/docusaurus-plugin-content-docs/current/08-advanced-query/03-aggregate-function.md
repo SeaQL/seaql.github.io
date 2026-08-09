@@ -4,7 +4,7 @@
 
 :::info
 
-包括 `max`、`min`、`sum`、`avg`、`count` 在内的聚合函数可在 [`ColumnTrait`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ColumnTrait.html) 中使用。
+包括 `max`、`min`、`sum`、`avg`、`count` 在内的聚合函数可在 [`ColumnTrait`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ColumnTrait.html) 中使用。
 
 :::
 
@@ -42,7 +42,7 @@ assert_eq!(total_spent, 25.into());
 
 ## 分组
 
-`group_by` 方法可以接受 Entity 的列或复杂的 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html)。
+`group_by` 方法可以接受 Entity 的列或复杂的 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html)。
 
 ```rust
 assert_eq!(

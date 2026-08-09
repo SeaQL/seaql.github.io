@@ -2,7 +2,7 @@
 
 ## 链接关联
 
-`Related` 特征是我们在实体关系图中绘制的箭头（1-1、1-N、M-N）的表示。一个 [`Linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.Linked.html) 由一系列关系组成，在以下情况下很有用：
+`Related` 特征是我们在实体关系图中绘制的箭头（1-1、1-N、M-N）的表示。一个 [`Linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.Linked.html) 由一系列关系组成，在以下情况下很有用：
 
 1. 一对 Entity 之间存在多条 join 路径，无法实现 `Related`
 1. 在关系查询中跨多个 Entity 进行 join
@@ -32,7 +32,7 @@ impl Linked for CakeToFilling {
 
 ### 延迟加载
 
-使用 [`find_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) 方法查找可以填入蛋糕的配料。
+使用 [`find_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/trait.ModelTrait.html#method.find_linked) 方法查找可以填入蛋糕的配料。
 
 ```rust
 let cake_model = cake::Model {
@@ -58,7 +58,7 @@ assert_eq!(
 
 ### 预先加载
 
-[`find_also_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) 是 `find_also_related` 的对应方法；[`find_with_linked`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) 是 `find_with_related` 的对应方法：
+[`find_also_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/struct.Select.html#method.find_also_linked) 是 `find_also_related` 的对应方法；[`find_with_linked`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/struct.Select.html#method.find_with_linked) 是 `find_with_related` 的对应方法：
 
 ```rust
 assert_eq!(
@@ -99,7 +99,7 @@ pub struct Model {
         from = "reports_to_id",
         to = "id"
     )]
-    pub reports_to: HasOne<Entity>,
+    pub reports_to: BelongsTo<Option<Entity>>,
     #[sea_orm(self_ref, relation_enum = "Manages", relation_reverse = "ReportsTo")]
     pub manages: HasMany<Entity>,
 }
@@ -121,7 +121,7 @@ pub struct Model {
     pub name: String,
     pub reports_to_id: Option<i32>,
     #[sea_orm(self_ref, relation_enum = "ReportsTo")]
-    pub reports_to: HasOne<Entity>,
+    pub reports_to: BelongsTo<Option<Entity>>,
     #[sea_orm(self_ref, relation_enum = "Manages")]
     pub manages: HasMany<Entity>,
 }
@@ -147,7 +147,7 @@ let staff = staff_compact::Entity::load()
     .await?;
 
 assert_eq!(staff[0].name, "Alan");
-assert_eq!(staff[0].reports_to, None);
+assert!(staff[0].reports_to.is_unloaded_or_not_found());
 assert_eq!(staff[0].manages[0].name, "Ben");
 assert_eq!(staff[0].manages[1].name, "Alice");
 
@@ -156,11 +156,11 @@ assert_eq!(staff[1].reports_to.as_ref().unwrap().name, "Alan");
 assert!(staff[1].manages.is_empty());
 
 assert_eq!(staff[2].name, "Alice");
-assert_eq!(staff[1].reports_to.as_ref().unwrap().name, "Alan");
+assert_eq!(staff[2].reports_to.as_ref().unwrap().name, "Alan");
 assert!(staff[2].manages.is_empty());
 
 assert_eq!(staff[3].name, "Elle");
-assert_eq!(staff[3].reports_to, None);
+assert!(staff[3].reports_to.is_unloaded_or_not_found());
 assert!(staff[3].manages.is_empty());
 ```
 
@@ -238,9 +238,9 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub follower_id: i32,
     #[sea_orm(belongs_to, from = "user_id", to = "id")]
-    pub user: Option<super::user::Entity>,
+    pub user: BelongsTo<super::user::Entity>,
     #[sea_orm(belongs_to, relation_enum = "Follower", from = "follower_id", to = "id")]
-    pub follower: Option<super::user::Entity>,
+    pub follower: BelongsTo<super::user::Entity>,
 }
 ```
 
@@ -322,9 +322,9 @@ pub struct Model {
     pub manager_id: i32,
     pub cashier_id: i32,
     #[sea_orm(belongs_to, relation_enum = "Manager", from = "manager_id", to = "id")]
-    pub manager: HasOne<super::worker::Entity>,
+    pub manager: BelongsTo<super::worker::Entity>,
     #[sea_orm(belongs_to, relation_enum = "Cashier", from = "cashier_id", to = "id")]
-    pub cashier: HasOne<super::worker::Entity>,
+    pub cashier: BelongsTo<super::worker::Entity>,
 }
 ```
 

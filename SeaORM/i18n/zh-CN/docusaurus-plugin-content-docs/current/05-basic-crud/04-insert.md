@@ -46,19 +46,16 @@ let orange = fruit::ActiveModel {
     ..Default::default()
 };
 
-let res: InsertResult = Fruit::insert_many([apple, orange]).exec(db).await?;
-assert_eq!(res.last_insert_id, 30)
+let res: InsertManyResult = Fruit::insert_many([apple, orange]).exec(db).await?;
+assert_eq!(res.last_insert_id, Some(30))
 ```
 
-向 `insert_many` 方法提供空集合会导致错误。但是，可以使用 `on_empty_do_nothing` 改变此行为，它会将 `InsertResult` 包装为 `TryInsertResult`。
+自 SeaORM 2.0 起，`insert_many` 返回一个 [`InsertManyResult`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.InsertManyResult.html)，其 `last_insert_id` 是一个 `Option`。提供空集合不再是错误；它只是不插入任何内容，并返回 `last_insert_id: None`。
 
 ```rust
-let res = Bakery::insert_many(std::iter::empty())
-    .on_empty_do_nothing()
-    .exec(db)
-    .await;
+let res: InsertManyResult = Bakery::insert_many(std::iter::empty()).exec(db).await?;
 
-assert!(matches!(res, Ok(TryInsertResult::Empty)));
+assert_eq!(res.last_insert_id, None);
 ```
 
 ## 冲突处理
@@ -114,7 +111,7 @@ let res = Entity::insert_many([
 .exec(db)
 .await;
 
-assert_eq!(res?.last_insert_id, 3);
+assert_eq!(res?.last_insert_id, Some(3));
 
 // Insert `4` into the table together with the previous 3 rows
 let res = Entity::insert_many([
@@ -127,7 +124,7 @@ let res = Entity::insert_many([
 .exec(db)
 .await;
 
-assert_eq!(res?.last_insert_id, 4);
+assert_eq!(res?.last_insert_id, Some(4));
 
 // Repeat last insert. Since all 4 rows already exist, this essentially did nothing.
 // A `DbErr::RecordNotInserted` error will be thrown.
@@ -144,12 +141,12 @@ let res = Entity::insert_many([
 assert_eq!(res.err(), Some(DbErr::RecordNotInserted));
 ```
 
-如果希望 `RecordNotInserted` 返回 `Ok` 而不是错误，请调用 `.do_nothing()`：
+如果希望 `RecordNotInserted` 返回 `Ok` 而不是错误，请调用 `.try_insert()`，它会将其转换为 `TryInsertResult`（或者，使用 `on_conflict_do_nothing*` 方法之一）：
 
 ```rust
 let res = Entity::insert_many([..])
     .on_conflict(on_conflict)
-    .do_nothing()
+    .try_insert()
     .exec(db)
     .await;
 

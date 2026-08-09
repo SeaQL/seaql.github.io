@@ -1,6 +1,6 @@
 # 创建索引
 
-你可以使用 [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/schema/struct.Schema.html#method.create_index_from_entity) 从 Entity 创建 index，或手动构建 [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html)。
+你可以使用 [`Schema::create_index_from_entity`](https://docs.rs/sea-orm/2.0.0/sea_orm/schema/struct.Schema.html#method.create_index_from_entity) 从 Entity 创建 index，或手动构建 [`IndexCreateStatement`](https://docs.rs/sea-query/*/sea_query/index/struct.IndexCreateStatement.html)。
 
 示例 [`Indexes`](https://github.com/SeaQL/sea-orm/blob/master/src/tests_cfg/indexes.rs) entity：
 

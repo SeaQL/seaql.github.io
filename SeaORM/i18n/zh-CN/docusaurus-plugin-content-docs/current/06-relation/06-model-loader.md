@@ -1,6 +1,6 @@
 # 模型加载器
 
-[LoaderTrait](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html) 提供了批量加载关联实体的 API。
+[LoaderTrait](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.LoaderTrait.html) 提供了批量加载关联实体的 API。
 
 考虑以下一对多关系：
 

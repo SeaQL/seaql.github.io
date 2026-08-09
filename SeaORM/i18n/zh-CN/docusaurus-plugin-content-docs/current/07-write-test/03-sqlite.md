@@ -27,7 +27,7 @@ async fn main() -> Result<(), DbErr> {
 
 ## 设置数据库架构
 
-要在 SQLite 数据库中创建用于测试的表，可以不必手动编写 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html)，而使用 [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0-rc.11/sea_orm/schema/struct.SchemaBuilder.html) 构建复杂 schema。
+要在 SQLite 数据库中创建用于测试的表，可以不必手动编写 [`TableCreateStatement`](https://docs.rs/sea-query/*/sea_query/table/struct.TableCreateStatement.html)，而使用 [`SchemaBuilder`](https://docs.rs/sea-orm/2.0.0/sea_orm/schema/struct.SchemaBuilder.html) 构建复杂 schema。
 
 ```rust
 async fn setup_schema(db: &DbConn) -> Result<()> {

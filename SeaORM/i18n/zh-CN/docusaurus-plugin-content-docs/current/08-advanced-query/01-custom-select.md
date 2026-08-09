@@ -90,10 +90,10 @@ assert_eq!(customers.notes, None);
 
 ## 选择自定义表达式
 
-使用 `column_as` / `expr_as` 方法选择任意自定义表达式，它接受任意 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/enum.SimpleExpr.html) 和别名。使用 [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/struct.Expr.html) 辅助函数构建 `SimpleExpr`。
+使用 `column_as` / `expr_as` 方法选择任意自定义表达式，它接受任意 [`sea_query::SimpleExpr`](https://docs.rs/sea-query/*/sea_query/expr/type.SimpleExpr.html) 和别名。使用 [`sea_query::Expr`](https://docs.rs/sea-query/*/sea_query/expr/enum.Expr.html) 辅助函数构建 `SimpleExpr`。
 
 ```rust
-use sea_query::{Alias, Expr, Func};
+use sea_query::{Alias, Expr, ExprTrait, Func};
 
 assert_eq!(
     cake::Entity::find()

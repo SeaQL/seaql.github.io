@@ -28,7 +28,7 @@ pub struct Model {
 <details>
     <summary>展开后：</summary>
 
-SeaORM 中的 `Relation` 是一个箭头：它有 `from` 和 `to`。`cake_filling::Relation::Cake` 定义 `CakeFilling -> Cake`。调用 [`rev`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) 会将其反转为 `Cake -> CakeFilling`。
+SeaORM 中的 `Relation` 是一个箭头：它有 `from` 和 `to`。`cake_filling::Relation::Cake` 定义 `CakeFilling -> Cake`。调用 [`rev`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/struct.RelationDef.html#method.rev) 会将其反转为 `Cake -> CakeFilling`。
 
 将其与 `cake_filling::Relation::Filling`（定义 `CakeFilling -> Filling`）链接，得到 `Cake -> CakeFilling -> Filling`。
 
@@ -81,9 +81,9 @@ pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub filling_id: i32,
     #[sea_orm(belongs_to, from = "cake_id", to = "id")]
-    pub cake: Option<super::cake::Entity>,
+    pub cake: BelongsTo<super::cake::Entity>,
     #[sea_orm(belongs_to, from = "filling_id", to = "id")]
-    pub filling: Option<super::filling::Entity>,
+    pub filling: BelongsTo<super::filling::Entity>,
 }
 ```
 
@@ -125,9 +125,9 @@ pub struct Model {
     pub fruit_id1: i32,
     pub fruit_id2: i32,
     #[sea_orm(belongs_to, relation_enum = "Fruit1", from = "fruit_id1", to = "id")]
-    pub fruit_1: HasOne<super::fruit::Entity>,
+    pub fruit_1: BelongsTo<super::fruit::Entity>,
     #[sea_orm(belongs_to, relation_enum = "Fruit2", from = "fruit_id2", to = "id")]
-    pub fruit_2: HasOne<super::fruit::Entity>,
+    pub fruit_2: BelongsTo<super::fruit::Entity>,
 }
 
 // expands to:

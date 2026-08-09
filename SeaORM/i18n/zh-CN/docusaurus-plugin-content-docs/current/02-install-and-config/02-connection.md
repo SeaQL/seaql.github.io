@@ -1,6 +1,6 @@
 # 数据库连接
 
-要获取数据库连接，请使用 [`Database`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.Database.html) 接口：
+要获取数据库连接，请使用 [`Database`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.Database.html) 接口：
 
 ```rust
 let db: DatabaseConnection = Database::connect("protocol://username:password@host/database").await?;
@@ -16,7 +16,7 @@ let db: DatabaseConnection = Database::connect("protocol://username:password@hos
 
 :::
 
-在底层，会创建一个 [`sqlx::Pool`](https://docs.rs/sqlx/0.9/sqlx/struct.Pool.html)，并由 [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.DatabaseConnection.html) 持有。
+在底层，会创建一个 [`sqlx::Pool`](https://docs.rs/sqlx/0.9/sqlx/struct.Pool.html)，并由 [`DatabaseConnection`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.DatabaseConnection.html) 持有。
 
 <details>
 <summary>2.0 中的变更</summary>
@@ -69,7 +69,7 @@ sqlite://path/to/db.sqlite?mode=ro
 
 ## 连接选项
 
-要配置连接，请使用 [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.ConnectOptions.html) 接口：
+要配置连接，请使用 [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.ConnectOptions.html) 接口：
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database");

@@ -4,7 +4,7 @@
 
 ## 使用闭包
 
-使用[闭包执行事务](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction)。若闭包返回 `Ok` 则提交事务，返回 `Err` 则回滚。第 2 和第 3 个类型参数分别为 Ok 和 Err 类型。由于 `async_closure` 尚未稳定，你必须使用 `Pin<Box<_>>`。
+使用[闭包执行事务](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.TransactionTrait.html#tymethod.transaction)。若闭包返回 `Ok` 则提交事务，返回 `Err` 则回滚。第 2 和第 3 个类型参数分别为 Ok 和 Err 类型。由于 `async_closure` 尚未稳定，你必须使用 `Pin<Box<_>>`。
 
 ```rust
 use sea_orm::TransactionTrait;
@@ -38,7 +38,7 @@ db.transaction::<_, (), DbErr>(|txn| {
 
 ## `begin` 与 `commit`
 
-[`begin`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin) 开始事务，随后执行 `commit` 或 `rollback`。若 `txn` 超出作用域，事务将自动回滚。
+[`begin`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.TransactionTrait.html#tymethod.begin) 开始事务，随后执行 `commit` 或 `rollback`。若 `txn` 超出作用域，事务将自动回滚。
 
 ```rust
 let txn = db.begin().await?;
@@ -180,7 +180,7 @@ assert_eq!(Bakery::find().all(db).await?.len(), 3);
 
 ## 隔离级别与访问模式
 
-自 `0.10.5` 起，[`transaction_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) 和 [`begin_with_config`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) 允许你指定 [IsolationLevel](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.IsolationLevel.html) 和 [AccessMode](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/enum.AccessMode.html)。
+自 `0.10.5` 起，[`transaction_with_config`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.TransactionTrait.html#tymethod.transaction_with_config) 和 [`begin_with_config`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.TransactionTrait.html#tymethod.begin_with_config) 允许你指定 [IsolationLevel](https://docs.rs/sea-orm/2.0.0/sea_orm/enum.IsolationLevel.html) 和 [AccessMode](https://docs.rs/sea-orm/2.0.0/sea_orm/enum.AccessMode.html)。
 
 目前仅对 MySQL 和 Postgres 实现。为对齐语义差异，MySQL 将在 begin transaction 之前执行 `SET TRANSACTION` 命令，而 Postgres 将在 begin transaction 之后执行 `SET TRANSACTION` 命令。
 

@@ -174,7 +174,7 @@ manager
 
 ## `ActiveEnum` 特征
 
-[`DeriveActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/derive.DeriveActiveEnum.html) 宏在底层实现了 [`ActiveEnum`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveEnum.html) 特征。
+[`DeriveActiveEnum`](https://docs.rs/sea-orm/2.0.0/sea_orm/derive.DeriveActiveEnum.html) 宏在底层实现了 [`ActiveEnum`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ActiveEnum.html) 特征。
 
 ```rust
 use sea_orm::entity::prelude::*;

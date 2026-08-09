@@ -11,9 +11,9 @@
 - `Set` - 由应用程序显式设置并发送到数据库的 `Value`。
     用于 insert 或设置特定值。
 
-    编辑现有值时，可以使用 [`set_if_not_equal`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
+    编辑现有值时，可以使用 [`set_if_not_equal`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
     在新值与旧值相同时保留 `Unchanged` 状态。
-    然后可以有意义地使用 [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed) 等方法。
+    然后可以有意义地使用 [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed) 等方法。
 - `Unchanged` - 数据库中已有的、未更改的 `Value`。
 
     当你从数据库查询现有的 `Model`
@@ -85,7 +85,7 @@ assert_eq!(active_model.name, ActiveValue::unchanged("Cheese Cake".to_owned()));
 
 ### 检查 ActiveModel 是否已更改
 
-可以使用 [`is_changed`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) 方法检查 `ActiveModel` 中的任何字段是否为 `Set`。
+可以使用 [`is_changed`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/prelude/trait.ActiveModelTrait.html#method.is_changed) 方法检查 `ActiveModel` 中的任何字段是否为 `Set`。
 
 ```rust
 let mut fruit: fruit::ActiveModel = Default::default();
@@ -97,7 +97,7 @@ assert!(fruit.is_changed());
 
 ### 将 ActiveModel 转换回模型
 
-使用 [`try_into_model`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) 方法可以将 ActiveModel 转换回模型。
+使用 [`try_into_model`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.TryIntoModel.html#tymethod.try_into_model) 方法可以将 ActiveModel 转换回模型。
 
 ```rust
 assert_eq!(
@@ -128,7 +128,7 @@ assert_eq!(
 
 如果 ActiveModel 的任何字段为 `NotSet`，转换将失败。
 
-如果希望使用 `Default::default()` 自动填充剩余字段（或在其没有默认值时回退到 `NotSet`），可以使用 [`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) 方法。
+如果希望使用 `Default::default()` 自动填充剩余字段（或在其没有默认值时回退到 `NotSet`），可以使用 [`ActiveModelTrait::default_values()`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ActiveModelTrait.html#tymethod.default_values) 方法。
 
 这对于快速创建用于测试的 mock 模型很有用。
 

@@ -13,7 +13,7 @@ SeaORM 可直接从实体定义派生 [Apache Arrow](https://arrow.apache.org/) 
 
 ```toml
 [dependencies]
-sea-orm = { version = "2.0.0-rc", features = ["with-arrow"] }
+sea-orm = { version = "2.0.0", features = ["with-arrow"] }
 parquet = { version = "57", features = ["arrow"] }
 ```
 
@@ -46,7 +46,7 @@ pub struct Model {
 pub struct Model { .. }
 ```
 
-这会派生 [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.ArrowSchema.html) 特征，并暴露三个方法：
+这会派生 [`ArrowSchema`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.ArrowSchema.html) 特征，并暴露三个方法：
 
 ```rust
 use sea_orm::ArrowSchema;

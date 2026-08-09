@@ -8,7 +8,7 @@ SeaORM 通过 [`tracing`](https://crates.io/crates/tracing) crate 记录 debug �
 
 ```toml
 [dependencies.sea-orm]
-version = "2.0.0-rc"
+version = "2.0.0"
 features = ["debug-print"]
 ```
 
@@ -39,7 +39,7 @@ SELECT "cake"."name" FROM "cake" WHERE "cake"."id" = 101
 
 ## SQLx 日志
 
-SQLx 默认也会记录日志。如果您已开启 SeaORM 的 `debug-print`，可以通过将 [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.ConnectOptions.html) 传递给 `connect()` 来禁用 SQLx 的日志。
+SQLx 默认也会记录日志。如果您已开启 SeaORM 的 `debug-print`，可以通过将 [`ConnectOptions`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.ConnectOptions.html) 传递给 `connect()` 来禁用 SQLx 的日志。
 
 ```rust
 let mut opt = ConnectOptions::new("protocol://username:password@host/database".to_owned());

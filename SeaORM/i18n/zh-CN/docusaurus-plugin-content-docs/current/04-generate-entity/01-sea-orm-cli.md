@@ -3,7 +3,7 @@
 首先，使用 `cargo` 安装 `sea-orm-cli`。
 
 ```shell
-cargo install sea-orm-cli@^2.0.0-rc
+cargo install sea-orm-cli@^2.0
 ```
 
 :::tip SQL Server (MSSQL) 后端
@@ -80,7 +80,11 @@ sea-orm-cli generate entity -h
     - `dense`：新的 entity 格式
     - `compact`：1.0 中的 entity 格式
     - `expanded`：0.x 中的 entity 格式
+    - `frontend`：前端 entity 格式
 - `--big-integer-type`：对 `bigint` 使用 `i32` 或 `i64`，适用于 SQLite
+- `--column-extra-derives`：为生成的 column 枚举追加额外的 derive 宏，例如 `--column-extra-derives async_graphql::Enum`
+- `--experimental-preserve-user-modifications`：保留对生成的 entity 文件的手动修改（`Model` 和 `Relation` 上的额外 derive/属性，以及 `ActiveModelBehavior` impl 块）。已弃用的别名：`--preserve-user-modifications`
+- `--er-diagram`：同时在输出目录中生成一个 Mermaid ER 图，文件名为 `entities.mermaid`
 
 ```shell
 # Generate entity files of database `bakery` to `./src/entity`

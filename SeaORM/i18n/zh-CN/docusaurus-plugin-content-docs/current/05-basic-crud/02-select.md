@@ -6,7 +6,7 @@
 
 ## 按主键查找
 
-通过主键查找模型，可以是单主键或复合主键。我们首先在 [`Entity`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html) 上调用 [`find_by_id`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html#method.find_by_id)，它会自动帮你构建 SELECT 查询和条件。然后，使用 `one` 方法从数据库中获取单个模型。
+通过主键查找模型，可以是单主键或复合主键。我们首先在 [`Entity`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.EntityTrait.html) 上调用 [`find_by_id`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.EntityTrait.html#method.find_by_id)，它会自动帮你构建 SELECT 查询和条件。然后，使用 `one` 方法从数据库中获取单个模型。
 
 ```rust
 use super::cake::Entity as Cake;
@@ -21,7 +21,7 @@ let vanilla: Option<cake_filling::Model> = CakeFilling::find_by_id((6, 8)).one(d
 
 ## 条件查询与排序
 
-除了通过主键检索模型外，还可以按特定条件和顺序检索一个或多个模型。[`find`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.EntityTrait.html#method.find) 方法让你可以访问 SeaORM 的查询构建器。它支持构建所有常见的 select 表达式，如 `where` 和 `order by`。可以分别使用 [`filter`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.QueryFilter.html#method.filter) 和 [`order_by_*`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.QueryOrder.html#method.order_by) 方法来构建。
+除了通过主键检索模型外，还可以按特定条件和顺序检索一个或多个模型。[`find`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.EntityTrait.html#method.find) 方法让你可以访问 SeaORM 的查询构建器。它支持构建所有常见的 select 表达式，如 `where` 和 `order by`。可以分别使用 [`filter`](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.QueryFilter.html#method.filter) 和 [`order_by_*`](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.QueryOrder.html#method.order_by) 方法来构建。
 
 > 更多关于[条件表达式](08-advanced-query/02-conditional-expression.md)的内容。
 
@@ -33,7 +33,7 @@ let chocolate: Vec<cake::Model> = Cake::find()
     .await?;
 ```
 
-### 强类型 COLUMN 常量
+### 强类型 COLUMN 常量 {#strongly-typed-column-constant}
 
 :::tip Since `2.0.0`
 需要 `#[sea_orm::model]` 或 `#[sea_orm::compact_model]`。
@@ -113,7 +113,7 @@ let bob = user::Entity::load()
 
 ### 延迟加载
 
-使用 [`find_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/entity/trait.ModelTrait.html#method.find_related) 方法。
+使用 [`find_related`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ModelTrait.html#method.find_related) 方法。
 
 相关模型在请求时按需加载，适用于根据某些应用逻辑加载相关模型的场景。注意，与预先加载相比，延迟加载会增加数据库往返次数。
 
@@ -132,7 +132,7 @@ let fruits: Vec<fruit::Model> = cheese.find_related(Fruit).all(db).await?;
 
 #### 一对一
 
-使用 [`find_also_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/struct.Select.html#method.find_also_related) 方法。
+使用 [`find_also_related`](https://docs.rs/sea-orm/2.0.0/sea_orm/query/struct.Select.html#method.find_also_related) 方法。
 
 ```rust
 let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().find_also_related(Cake).all(db).await?;
@@ -140,7 +140,7 @@ let fruits_and_cakes: Vec<(fruit::Model, Option<cake::Model>)> = Fruit::find().f
 
 #### One to Many / Many to Many
 
-使用 [`find_with_related`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/struct.Select.html#method.find_with_related) 方法，相关模型会按父模型分组。该方法同时处理 1-N 和 M-N 情况，当涉及关联表时会执行 2 次 join。
+使用 [`find_with_related`](https://docs.rs/sea-orm/2.0.0/sea_orm/query/struct.Select.html#method.find_with_related) 方法，相关模型会按父模型分组。该方法同时处理 1-N 和 M-N 情况，当涉及关联表时会执行 2 次 join。
 
 ```rust
 let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> = Cake::find()
@@ -184,13 +184,13 @@ super_cake
 
 ### 模型加载器
 
-使用 [LoaderTrait](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html) 批量加载相关 Entity。
+使用 [LoaderTrait](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.LoaderTrait.html) 批量加载相关 Entity。
 
 与预先加载相比，它节省带宽（考虑一对多的情况，一方行可能会重复），代价是多一次数据库查询。
 
 #### 一对一
 
-使用 [load_one](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) 方法。
+使用 [load_one](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.LoaderTrait.html#tymethod.load_one) 方法。
 
 ```rust
 let fruits: Vec<fruit::Model> = Fruit::find().all(db).await?;
@@ -199,7 +199,7 @@ let cakes: Vec<Option<cake::Model>> = fruits.load_one(Cake, db).await?;
 
 #### 一对多
 
-使用 [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
+使用 [load_many](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
 
 ```rust
 let cakes: Vec<cake::Model> = Cake::find().all(db).await?;
@@ -208,7 +208,7 @@ let fruits: Vec<Vec<fruit::Model>> = cakes.load_many(Fruit, db).await?;
 
 #### 多对多
 
-使用相同的 [load_many](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
+使用相同的 [load_many](https://docs.rs/sea-orm/2.0.0/sea_orm/query/trait.LoaderTrait.html#tymethod.load_many) 方法。
 
 :::tip Since `2.0.0`
 不需要提供中间表 Entity。这正是 SeaORM 的亮点！
@@ -221,7 +221,7 @@ let fillings: Vec<Vec<filling::Model>> = cakes.load_many(Filling, db).await?;
 
 ## 分页结果
 
-将任何 SeaORM select 转换为具有自定义页面大小的 [paginator](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.Paginator.html)。
+将任何 SeaORM select 转换为具有自定义页面大小的 [paginator](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.Paginator.html)。
 
 ```rust
 use sea_orm::{entity::*, query::*, tests_cfg::cake};

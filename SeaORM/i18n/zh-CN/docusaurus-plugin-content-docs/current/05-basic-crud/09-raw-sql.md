@@ -57,7 +57,7 @@ let cake: Option<Cake> = Cake::find_by_statement(raw_sql!(
 
 ## 原始 SQL 查询分页
 
-可以对 [`SelectorRaw`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/struct.SelectorRaw.html) 进行分页并批量获取模型。
+可以对 [`SelectorRaw`](https://docs.rs/sea-orm/2.0.0/sea_orm/struct.SelectorRaw.html) 进行分页并批量获取模型。
 
 ```rust
 let ids = vec![1, 2, 3, 4];
@@ -128,7 +128,7 @@ assert_eq!(exec_res.rows_affected(), 1);
 
 ## 执行未预处理的 SQL 语句
 
-可以使用 [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/2.0.0-rc.25/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared) 执行未准备的 SQL 语句。
+可以使用 [`ConnectionTrait::execute_unprepared`](https://docs.rs/sea-orm/2.0.0/sea_orm/trait.ConnectionTrait.html#tymethod.execute_unprepared) 执行未准备的 SQL 语句。
 
 ```rust
 let exec_res: ExecResult =

@@ -7,7 +7,7 @@
 首先，将 `sea-orm` 添加到 `Cargo.toml` 的 `[dependencies]` 部分。
 
 ```toml title="Cargo.toml"
-sea-orm = { version = "2.0.0-rc", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
+sea-orm = { version = "2.0.0", features = [ <DATABASE_DRIVER>, <ASYNC_RUNTIME>, "macros" ] }
 ```
 
 您必须选择一个 `DATABASE_DRIVER` 和一个 `ASYNC_RUNTIME`。如果您使用 SeaORM 生成的实体（大多数情况下会使用），则需要 `macros`。
@@ -58,7 +58,7 @@ MSSQL 驱动的安装和配置请参阅[此处](https://www.sea-ql.org/SeaORM-X/
 + `with-ipnetwork` - 支持 Postgres [`ipnetwork`](https://crates.io/crates/ipnetwork)
 + `postgres-vector` - 支持 Postgres [`pgvector`](https://crates.io/crates/pgvector)
 + `with-arrow` - 支持 [Apache Arrow](https://docs.rs/arrow)
-+ `postgres-array` - 支持 Postgres 中的数组类型，默认启用
++ `postgres-array` - 支持 Postgres 中的数组类型
 <br/>
 + `sqlite-use-returning-for-3_35` - 为 SQLite 使用 returning，默认启用
 + `mariadb-use-returning` - 为 MariaDB 使用 returning

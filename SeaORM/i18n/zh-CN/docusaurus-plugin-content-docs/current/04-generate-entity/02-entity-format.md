@@ -63,6 +63,8 @@ pub struct Model { ... }
 
 ## Column
 
+派生 `DeriveEntityModel` 会生成一个 `Column` 枚举，每个列对应一个变体。自 `2.0.0` 起，它还会额外生成一个强类型的 `COLUMN` 常量（为每个列提供一个特定类型的结构体），用于在查询中进行编译期类型检查——参见[强类型 COLUMN 常量](../05-basic-crud/02-select.md#strongly-typed-column-constant)。
+
 ### 列名
 
 你可以通过指定 `column_name` 属性来覆盖列名。
