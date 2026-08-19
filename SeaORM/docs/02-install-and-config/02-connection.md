@@ -94,7 +94,7 @@ Checks if a connection to the database is still valid.
 async fn check(db: DatabaseConnection) {
     assert!(db.ping().await.is_ok());
     db.clone().close().await;
-    assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire)));
+    assert!(matches!(db.ping().await, Err(DbErr::ConnectionAcquire(_))));
 }
 ```
 
