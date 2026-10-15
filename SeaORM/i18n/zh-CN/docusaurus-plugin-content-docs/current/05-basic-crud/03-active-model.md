@@ -11,7 +11,7 @@
 - `Set` - 由应用程序显式设置并发送到数据库的 `Value`。
     用于 insert 或设置特定值。
 
-    编辑现有值时，可以使用 [`set_if_not_equal`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
+    编辑现有值时，可以使用 [`set_if_not_equals`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
     在新值与旧值相同时保留 `Unchanged` 状态。
     然后可以有意义地使用 [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed) 等方法。
 - `Unchanged` - 数据库中已有的、未更改的 `Value`。
