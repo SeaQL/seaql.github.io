@@ -11,7 +11,7 @@ There are three possible states represented by three enum variants:
 - `Set` - A `Value` that's explicitly set by the application and sent to the database.
     Use this to insert or set a specific value.
 
-    When editing an existing value, you can use [`set_if_not_equal`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
+    When editing an existing value, you can use [`set_if_not_equals`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/enum.ActiveValue.html#method.set_if_not_equals)
     to preserve the `Unchanged` state when the new value is the same as the old one.
     Then you can meaningfully use methods like [`ActiveModelTrait::is_changed`](https://docs.rs/sea-orm/2.0.0/sea_orm/entity/trait.ActiveModelTrait.html#method.is_changed).
 - `Unchanged` - An existing, unchanged `Value` from the database.
