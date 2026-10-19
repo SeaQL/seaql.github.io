@@ -88,7 +88,7 @@ pub enum Color {
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+#[sea_orm(rs_type = "Enum", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
@@ -96,6 +96,18 @@ pub enum Tea {
     BreakfastTea,
 }
 ```
+
+With `rs_type = "Enum"` (the default when `rs_type` is omitted, and what `sea-orm-cli` generates), `ActiveEnum::Value` is [`sea_query::Enum`](https://docs.rs/sea-query/1/sea_query/value/struct.Enum.html), which carries the enum type name along with the string value. To convert from and to a string:
+
+```rust
+// &str -> Tea
+let tea = Tea::try_from("EverydayTea")?;
+
+// Tea -> String
+let s: String = tea.to_value().value.into_owned();
+```
+
+`rs_type = "String"` is also supported, in which case `ActiveEnum::Value` is `String`.
 
 ### MySQL
 
@@ -142,7 +154,7 @@ manager
 
 ```rust
 #[derive(EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+#[sea_orm(rs_type = "Enum", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
