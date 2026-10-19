@@ -121,11 +121,7 @@ pub enum Tea {
 }
 ```
 
-Note the `rs_type = "Enum"`, `db_type = "Enum"` and extra `enum_name` attributes.
-
-:::tip Since `2.0.0`
-Native database enums use `rs_type = "Enum"` (previously `rs_type = "String"`). See [ActiveEnum → Native Database Enum](../04-generate-entity/04-enumeration.md#native-database-enum) for details on the new `sea_query::Enum` value type.
-:::
+Note the `rs_type`, `db_type` and extra `enum_name` attributes.
 
 ### PostgreSQL
 
