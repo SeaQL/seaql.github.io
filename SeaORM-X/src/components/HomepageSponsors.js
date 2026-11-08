@@ -14,24 +14,15 @@ export default function HomepageProducts() {
         <div className="row">
           <div className="col col--12">
             <div className="row">
-              <div className="col col--2"></div>
-              <div className="col col--2"></div>
-              <div className="col col--2">
-                <p className="text--center">
-                  <a href="https://www.digitalocean.com/" target="_blank">
-                    <img src="https://www.sea-ql.org/static/sponsors/DigitalOcean.svg" width="148" />
-                  </a>
-                </p>
-              </div>
-              <div className="col col--2">
+              <div className="col col--4"></div>
+              <div className="col col--4">
                 <p className="text--center">
                   <a href="https://www.jetbrains.com/" target="_blank">
                     <img src="https://www.sea-ql.org/static/sponsors/JetBrains.svg" width="148" />
                   </a>
                 </p>
               </div>
-              <div className="col col--2"></div>
-              <div className="col col--2"></div>
+              <div className="col col--4"></div>
             </div>
           </div>
         </div>
