@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import Slider from 'react-slick';
 import styles from './HomepageProducts.module.css';
 import { useColorMode } from '@docusaurus/theme-common';
 
