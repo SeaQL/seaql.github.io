@@ -11,7 +11,7 @@ For string enums, in addition to being able to specify the string value for each
 #[sea_orm(rs_type = "String", db_type = "String(StringLen::None)", rename_all = "camelCase")]
 pub enum Category {
     BigTask,
-    SmallWork,
+    SmallBreak,
 }
 ```
 
@@ -24,7 +24,7 @@ pub enum Category {
     #[sea_orm(string_value = "bigTask")]
     BigTask,
     #[sea_orm(string_value = "smallBreak")]
-    SmallWork,
+    SmallBreak,
 }
 ```
 
@@ -56,7 +56,7 @@ You have to provide custom `from_str` and `to_str` implementations.
 #[sea_orm(value_type = "String")]
 pub enum Category {
     BigTask,
-    SmallWork,
+    SmallBreak,
 }
 ```
 
