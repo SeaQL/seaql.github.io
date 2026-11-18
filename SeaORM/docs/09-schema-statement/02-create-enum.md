@@ -112,7 +112,7 @@ pub struct Model {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "tea")]
+#[sea_orm(rs_type = "Enum", db_type = "Enum", enum_name = "tea")]
 pub enum Tea {
     #[sea_orm(string_value = "EverydayTea")]
     EverydayTea,
@@ -121,7 +121,7 @@ pub enum Tea {
 }
 ```
 
-Note the `db_type` and extra `enum_name` attributes.
+Note the `rs_type`, `db_type` and extra `enum_name` attributes.
 
 ### PostgreSQL
 
