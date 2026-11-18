@@ -384,3 +384,60 @@ impl std::str::FromStr for Tag3 {
     }
 }
 ```
+
+## Binary-like newtypes
+
+It's also possible to use binary newtypes in your models. Even though there is no `DeriveValueType` for those, you can implement the traits directly. Here's an example implementation for a `Bin` newtype that implements `TryFrom<Vec<u8>>` and `Into<Vec<u8>>`:
+
+```rust
+impl From<Bin> for sea_orm::sea_query::Value {
+    fn from(t: Bin) -> Self {
+        Value::Bytes(Some(t.into()))
+    }
+}
+
+impl sea_orm::TryGetable for Bin {
+    fn try_get_by<I: sea_orm::ColIdx>(
+        res: &sea_orm::QueryResult,
+        index: I,
+    ) -> Result<Self, sea_orm::error::TryGetError> {
+        let val = <Vec<u8> as sea_orm::TryGetable>::try_get_by(res, index)?;
+        Bin::try_from(val).map_err(|e| {
+            sea_orm::error::TryGetError::DbErr(sea_orm::DbErr::TryIntoErr {
+                from: "Bytes",
+                into: "TorrentFile",
+                source: std::sync::Arc::new(e),
+            })
+        })
+    }
+}
+
+impl sea_orm::sea_query::ValueType for Bin {
+    fn try_from(v: sea_orm::Value) -> Result<Self, sea_orm::sea_query::ValueTypeErr> {
+        match v {
+            sea_orm::Value::Bytes(Some(s)) => {
+                Bin::try_from(s).map_err(|_e| sea_orm::sea_query::ValueTypeErr)
+            }
+            _ => Err(sea_orm::sea_query::ValueTypeErr),
+        }
+    }
+
+    fn type_name() -> String {
+        "Bin".to_string()
+    }
+
+    fn array_type() -> sea_orm::sea_query::ArrayType {
+        sea_orm::sea_query::ArrayType::Bytes
+    }
+
+    fn column_type() -> sea_orm::sea_query::ColumnType {
+        sea_orm::sea_query::ColumnType::VarBinary(StringLen::None)
+    }
+}
+
+impl sea_orm::sea_query::Nullable for Bin {
+    fn null() -> sea_orm::sea_query::Value {
+        sea_orm::sea_query::Value::Bytes(None)
+    }
+}
+```
